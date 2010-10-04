@@ -137,6 +137,10 @@ struct apparmor_audit_data {
 			u32 denied;
 			uid_t ouid;
 		} fs;
+		struct {
+			int type, protocol;
+			struct sock *sk;
+		} net;
 	};
 };
 
