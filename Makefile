@@ -1075,6 +1075,7 @@ headers_install: __headers
 	$(error Headers not exportable for the $(SRCARCH) architecture))
 	$(Q)$(MAKE) $(hdr-inst)=include
 	$(Q)$(MAKE) $(hdr-inst)=arch/$(hdr-arch)/include/asm $(hdr-dst)
+	$(Q)$(MAKE) $(hdr-inst)=ubuntu/include dst=include oldheaders=
 
 PHONY += headers_check_all
 headers_check_all: headers_install_all
@@ -1084,6 +1085,7 @@ PHONY += headers_check
 headers_check: headers_install
 	$(Q)$(MAKE) $(hdr-inst)=include HDRCHECK=1
 	$(Q)$(MAKE) $(hdr-inst)=arch/$(hdr-arch)/include/asm $(hdr-dst) HDRCHECK=1
+	$(Q)$(MAKE) $(hdr-inst)=ubuntu/include dst=include oldheaders= HDRCHECK=1
 
 # ---------------------------------------------------------------------------
 # Modules
