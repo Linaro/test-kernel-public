@@ -929,6 +929,13 @@ config VIDEO_OMAP1
 	---help---
 	  This is a v4l2 driver for the TI OMAP1 camera interface
 
+config VIDEO_OMAP4
+	tristate "OMAP4 Interface driver"
+	depends on VIDEO_DEV && ARCH_OMAP4 && SOC_CAMERA
+	select VIDEOBUF2_DMA_CONTIG
+	---help---
+	  This is a v4l2 driver for the OMAP4 CSI2 Interface
+
 config VIDEO_OMAP2
 	tristate "OMAP2 Camera Capture Interface driver"
 	depends on VIDEO_DEV && ARCH_OMAP2

@@ -1,0 +1,57 @@
+                              OMAP4 Camera Host Driver
+                              ========================
+
+Introduction
+------------
+
+The OMAP44XX family of chips contains the Imaging SubSystem (a.k.a. ISS),
+Which contains several components that can be categorized in 3 big groups:
+
+- Interfaces (2 Interfaces: CSI2-A & CSI2-B/CCP2)
+- ISP (Image Signal Processor)
+- SIMCOP (Still Image Coprocessor)
+
+For more information, please look in [1] for latest version of:
+	"OMAP4430 Multimedia Device Silicon Revision 2.x"
+
+As of Revision L, the ISS is described in detail in section 8.
+
+This host driver is supporting _only_ the CSI2-A interface for now.
+
+Currently, it makes use of the Soc-Camera Subsystem, described in:
+Documentation/video4linux/soc-camera.txt
+
+Supports usage of MMAP buffers only (for now).
+
+Tested platforms
+----------------
+
+- OMAP4430SDP, w/ ES2.1 GP & SEVM4430-CAM-V1-0 (Contains IMX060 & OV5640, in
+  which only the last one is supported, outputting YUV422 frames).
+
+- PandaBoard, Rev. A2, w/ OMAP4430 ES2.1 GP & OV adapter board, tested with
+  following sensors:
+  * OV3640
+  * OV5640
+  * OV5650
+
+- Tested on mainline kernel:
+
+	http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=summary
+
+  Tag: v2.6.39 (commit 61c4f2c81c61f73549928dfd9f3e8f26aa36a8cf)
+
+File list
+---------
+drivers/media/video/omap4_camera.c
+drivers/media/video/omap4_camera_regs.h
+include/media/omap4_camera.h
+
+References
+----------
+
+[1] http://focus.ti.com/general/docs/wtbu/wtbudocumentcenter.tsp?navigationId=12037&templateId=6123#62
+--
+Author: Sergio Aguirre <saaguirre@ti.com>
+Copyright (C) 2011, Texas Instruments
+
