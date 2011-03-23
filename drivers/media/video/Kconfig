@@ -848,6 +848,27 @@ config SOC_CAMERA_OV2640
 	help
 	  This is a ov2640 camera driver
 
+config SOC_CAMERA_OV3640
+	tristate "ov3640 camera support"
+	depends on SOC_CAMERA && I2C
+	help
+	  This is a ov3640 camera driver
+
+config SOC_CAMERA_OV3640_CSI2
+	bool "CSI2 bus support for OmniVision ov3640 sensor"
+	depends on SOC_CAMERA_OV3640
+	default y
+	---help---
+	  This enables the use of the CSI2 serial bus for the ov3640
+	  camera.
+
+config SOC_CAMERA_OV3640_ISP
+	bool "Internal ISP support for OmniVision ov3640 sensor"
+	depends on SOC_CAMERA_OV3640
+	---help---
+	  This enables the use of the internal ISP in the ov3640
+	  camera. This enables YUYV output from sensor.
+
 config SOC_CAMERA_OV5640
 	tristate "ov5640 camera support"
 	depends on SOC_CAMERA && I2C
