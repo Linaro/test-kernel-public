@@ -342,6 +342,33 @@ static char const *smdkv310_dt_compat[] __initdata = {
 static void __init exynos4_reserve_cma(void)
 {
 	static struct cma_region regions[] = {
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC0
+		{
+			.name = "fimc0",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC0 * SZ_1K,
+		},
+#endif
+
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC1
+		{
+			.name = "fimc1",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC1 * SZ_1K,
+		},
+#endif
+
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC2
+		{
+			.name = "fimc2",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC2 * SZ_1K,
+		},
+#endif
+
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC3
+		{
+			.name = "fimc3",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC3 * SZ_1K,
+		},
+#endif
 		{
 			.name = "common",
 			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
@@ -349,7 +376,13 @@ static void __init exynos4_reserve_cma(void)
 		},
 		{}
 	};
-	static const char map[] __initconst = "*=common";
+	static const char map[] __initconst = 
+#if defined (CONFIG_VIDEO_FIMC)
+		"s3c-fimc.0=fimc0;s3c-fimc.1=fimc1;"
+		"s3c-fimc.2=fimc2;s3c-fimc.3=fimc3;"
+#endif
+		"*=common";
+
 	int i = 0;
 	unsigned int bank0_end = meminfo.bank[0].start +
 					meminfo.bank[0].size;
