@@ -21,6 +21,8 @@
 #endif
 #include <linux/input.h>
 #include <linux/clk.h>
+#include <linux/regulator/machine.h>
+#include <linux/regulator/max8649.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
@@ -164,6 +166,75 @@ static struct platform_device smdkv310_smsc911x = {
 		.platform_data	= &smsc9215_config,
 	},
 };
+static struct regulator_consumer_supply max8952_supply[] = {
+	REGULATOR_SUPPLY("vdd_arm", NULL),
+};
+
+static struct regulator_consumer_supply max8649a_supply[] = {
+	REGULATOR_SUPPLY("vdd_g3d", NULL),
+};
+
+static struct regulator_init_data max8952_init_data = {
+	.constraints	= {
+		.name		= "vdd_arm range",
+		.min_uV		= 770000,
+		.max_uV		= 1400000,
+		.always_on	= 1,
+		.boot_on	= 1,
+		.valid_ops_mask	= REGULATOR_CHANGE_VOLTAGE,
+		.state_mem	= {
+			.uV		= 1200000,
+			.disabled	= 1,
+		},
+	},
+	.num_consumer_supplies	= 1,
+	.consumer_supplies	= &max8952_supply[0],
+};
+
+static struct regulator_init_data max8649a_init_data = {
+	.constraints	= {
+		.name		= "vdd_g3d range",
+		.min_uV		= 750000,
+		.max_uV		= 1380000,
+		.always_on	= 0,
+		.boot_on	= 0,
+		.valid_ops_mask	= REGULATOR_CHANGE_VOLTAGE,
+		.state_mem	= {
+			.uV		= 1200000,
+			.disabled	= 1,
+		},
+	},
+	.num_consumer_supplies	= 1,
+	.consumer_supplies	= &max8649a_supply[0],
+};
+
+static struct max8649_platform_data smdkv310_max8952_info = {
+	.mode		= 3,	/* VID1 = 1, VID0 = 1 */
+	.extclk		= 0,
+	.ramp_timing	= MAX8649_RAMP_32MV,
+	.regulator	= &max8952_init_data,
+};
+
+static struct max8649_platform_data smdkv310_max8649a_info = {
+	.mode		= 2,	/* VID1 = 1, VID0 = 0 */
+	.extclk		= 0,
+	.ramp_timing	= MAX8649_RAMP_32MV,
+	.regulator	= &max8649a_init_data,
+};
+#ifdef CONFIG_I2C_S3C2410
+/* I2C0 */
+static struct i2c_board_info i2c_devs0[] __initdata = {
+	{ I2C_BOARD_INFO("24c128", 0x50), },	 /* Samsung S524AD0XD1 */
+	{ I2C_BOARD_INFO("24c128", 0x52), },	 /* Samsung S524AD0XD1 */
+	{
+		I2C_BOARD_INFO("max8952", 0x60),
+		.platform_data	= &smdkv310_max8952_info,
+	}, {
+		I2C_BOARD_INFO("max8649", 0x62),
+		.platform_data	= &smdkv310_max8649a_info,
+	},
+};
+#endif
 #ifdef CONFIG_FB_S3C_AMS369FG06
 
 static struct s3c_platform_fb ams369fg06_data __initdata = {
@@ -221,6 +292,9 @@ static struct i2c_board_info i2c_devs1[] __initdata = {
 static struct platform_device *smdkv310_devices[] __initdata = {
 #ifdef CONFIG_FB_S3C
 	&s3c_device_fb,
+#endif
+#ifdef CONFIG_I2C_S3C2410
+	&s3c_device_i2c0,
 #endif
 #ifdef CONFIG_FB_S3C_AMS369FG06
 	&exynos4_device_spi1,
@@ -286,6 +360,10 @@ static void __init smdkv310_machine_init(void)
 	struct clk *sclk = NULL;
 	struct clk *prnt = NULL;
 	struct device *spi_dev = &exynos4_device_spi1.dev;
+#endif
+#ifdef CONFIG_I2C_S3C2410
+	s3c_i2c0_set_platdata(NULL);
+	i2c_register_board_info(0, i2c_devs0, ARRAY_SIZE(i2c_devs0));
 #endif
 
 	s3c_i2c1_set_platdata(NULL);
