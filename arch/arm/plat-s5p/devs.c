@@ -31,6 +31,7 @@
 #include <plat/gpio-cfg.h>
 #include <plat/irqs.h>
 #include <plat/fb.h>
+#include <plat/fimc.h>
 
 /* OneNAND Controller */
 #ifdef CONFIG_FB_S3C
@@ -112,4 +113,204 @@ void __init s3cfb_set_platdata(struct s3c_platform_fb *pd)
 		s3c_device_fb.dev.platform_data = npd;
 	}
 }
+#endif
+#ifdef CONFIG_VIDEO_FIMC
+static struct resource s3c_fimc0_resource[] = {
+	[0] = {
+		.start	= S5P_PA_FIMC0,
+		.end	= S5P_PA_FIMC0 + S5P_SZ_FIMC0 - 1,
+		.flags	= IORESOURCE_MEM,
+	},
+	[1] = {
+		.start	= IRQ_FIMC0,
+		.end	= IRQ_FIMC0,
+		.flags	= IORESOURCE_IRQ,
+	},
+};
+
+struct platform_device s3c_device_fimc0 = {
+	.name		= "s3c-fimc",
+	.id		= 0,
+	.num_resources	= ARRAY_SIZE(s3c_fimc0_resource),
+	.resource	= s3c_fimc0_resource,
+};
+
+static struct s3c_platform_fimc default_fimc0_data __initdata = {
+	.default_cam	= CAMERA_PAR_A,
+};
+
+void __init s3c_fimc0_set_platdata(struct s3c_platform_fimc *pd)
+{
+	struct s3c_platform_fimc *npd;
+
+	if (!pd)
+		pd = &default_fimc0_data;
+
+	npd = kmemdup(pd, sizeof(struct s3c_platform_fimc), GFP_KERNEL);
+	if (!npd)
+		printk(KERN_ERR "%s: no memory for platform data\n", __func__);
+	else {
+		if (!npd->cfg_gpio)
+			npd->cfg_gpio = s3c_fimc0_cfg_gpio;
+
+		if (!npd->clk_on)
+			npd->clk_on = s3c_fimc_clk_on;
+
+		if (!npd->clk_off)
+			npd->clk_off = s3c_fimc_clk_off;
+		
+		s3c_device_fimc0.dev.platform_data = npd;
+	}
+}
+
+#if !defined(CONFIG_CPU_S5P6450)
+static struct resource s3c_fimc1_resource[] = {
+	[0] = {
+		.start	= S5P_PA_FIMC1,
+		.end	= S5P_PA_FIMC1 + S5P_SZ_FIMC1 - 1,
+		.flags	= IORESOURCE_MEM,
+	},
+	[1] = {
+		.start	= IRQ_FIMC1,
+		.end	= IRQ_FIMC1,
+		.flags	= IORESOURCE_IRQ,
+	},
+};
+
+struct platform_device s3c_device_fimc1 = {
+	.name		= "s3c-fimc",
+	.id		= 1,
+	.num_resources	= ARRAY_SIZE(s3c_fimc1_resource),
+	.resource	= s3c_fimc1_resource,
+};
+
+static struct s3c_platform_fimc default_fimc1_data __initdata = {
+	.default_cam	= CAMERA_PAR_A,
+};
+
+void __init s3c_fimc1_set_platdata(struct s3c_platform_fimc *pd)
+{
+	struct s3c_platform_fimc *npd;
+
+	if (!pd)
+		pd = &default_fimc1_data;
+
+	npd = kmemdup(pd, sizeof(struct s3c_platform_fimc), GFP_KERNEL);
+	if (!npd)
+		printk(KERN_ERR "%s: no memory for platform data\n", __func__);
+	else {
+		if (!npd->cfg_gpio)
+			npd->cfg_gpio = s3c_fimc1_cfg_gpio;
+
+		if (!npd->clk_on)
+			npd->clk_on = s3c_fimc_clk_on;
+
+		if (!npd->clk_off)
+			npd->clk_off = s3c_fimc_clk_off;
+
+		s3c_device_fimc1.dev.platform_data = npd;
+	}
+}
+
+static struct resource s3c_fimc2_resource[] = {
+	[0] = {
+		.start	= S5P_PA_FIMC2,
+		.end	= S5P_PA_FIMC2 + S5P_SZ_FIMC2 - 1,
+		.flags	= IORESOURCE_MEM,
+	},
+	[1] = {
+		.start	= IRQ_FIMC2,
+		.end	= IRQ_FIMC2,
+		.flags	= IORESOURCE_IRQ,
+	},
+};
+
+struct platform_device s3c_device_fimc2 = {
+	.name		= "s3c-fimc",
+	.id		= 2,
+	.num_resources	= ARRAY_SIZE(s3c_fimc2_resource),
+	.resource	= s3c_fimc2_resource,
+};
+
+static struct s3c_platform_fimc default_fimc2_data __initdata = {
+	.default_cam	= CAMERA_PAR_A,
+};
+
+void __init s3c_fimc2_set_platdata(struct s3c_platform_fimc *pd)
+{
+	struct s3c_platform_fimc *npd;
+
+	if (!pd)
+		pd = &default_fimc2_data;
+
+	npd = kmemdup(pd, sizeof(struct s3c_platform_fimc), GFP_KERNEL);
+	if (!npd)
+		printk(KERN_ERR "%s: no memory for platform data\n", __func__);
+	else {
+		if (!npd->cfg_gpio)
+			npd->cfg_gpio = s3c_fimc2_cfg_gpio;
+
+		if (!npd->clk_on)
+			npd->clk_on = s3c_fimc_clk_on;
+
+		if (!npd->clk_off)
+			npd->clk_off = s3c_fimc_clk_off;
+
+		s3c_device_fimc2.dev.platform_data = npd;
+	}
+}
+
+#endif
+#if defined(CONFIG_CPU_EXYNOS4210)
+static struct resource s3c_fimc3_resource[] = {
+	[0] = {
+		.start	= S5P_PA_FIMC3,
+		.end	= S5P_PA_FIMC3 + S5P_SZ_FIMC3 - 1,
+		.flags	= IORESOURCE_MEM,
+	},
+	[1] = {
+		.start	= IRQ_FIMC3,
+		.end	= IRQ_FIMC3,
+		.flags	= IORESOURCE_IRQ,
+	},
+};
+
+struct platform_device s3c_device_fimc3 = {
+	.name		= "s3c-fimc",
+	.id		= 3,
+	.num_resources	= ARRAY_SIZE(s3c_fimc3_resource),
+	.resource	= s3c_fimc3_resource,
+};
+
+static struct s3c_platform_fimc default_fimc3_data __initdata = {
+	.default_cam	= CAMERA_PAR_A,
+};
+
+void __init s3c_fimc3_set_platdata(struct s3c_platform_fimc *pd)
+{
+	struct s3c_platform_fimc *npd;
+
+	if (!pd)
+		pd = &default_fimc3_data;
+
+	npd = kmemdup(pd, sizeof(struct s3c_platform_fimc), GFP_KERNEL);
+	if (!npd)
+		printk(KERN_ERR "%s: no memory for platform data\n", __func__);
+	else {
+		if (!npd->cfg_gpio)
+			npd->cfg_gpio = s3c_fimc3_cfg_gpio;
+
+		if (!npd->clk_on)
+			npd->clk_on = s3c_fimc_clk_on;
+
+		if (!npd->clk_off)
+			npd->clk_off = s3c_fimc_clk_off;
+
+		s3c_device_fimc3.dev.platform_data = npd;
+	}
+}
+#endif
+
+
+
 #endif
