@@ -175,4 +175,8 @@
 #define S5P_PA_LCD0                     EXYNOS4_PA_LCD0
 #define EXYNOS4_SZ_LCD0                 SZ_1M
 #define S5P_SZ_LCD0                     EXYNOS4_SZ_LCD0
+#define S5P_SZ_FIMC0			SZ_64K
+#define S5P_SZ_FIMC1			SZ_64K
+#define S5P_SZ_FIMC2			SZ_64K
+#define S5P_SZ_FIMC3			SZ_64K
 #endif /* __ASM_ARCH_MAP_H */

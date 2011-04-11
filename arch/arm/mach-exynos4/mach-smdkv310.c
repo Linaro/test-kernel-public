@@ -41,6 +41,7 @@
 #include <plat/s3c64xx-spi.h>
 #include <plat/gpio-cfg.h>
 #include <plat/ts.h>
+#include <plat/fimc.h>
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-mem.h>
@@ -93,6 +94,20 @@ static struct s3c2410_uartcfg smdkv310_uartcfgs[] __initdata = {
 		.ufcon		= SMDKV310_UFCON_DEFAULT,
 	},
 };
+#ifdef CONFIG_VIDEO_FIMC
+static struct s3c_platform_fimc fimc_plat = {
+#ifdef CONFIG_ITU_A
+	.default_cam	= CAMERA_PAR_A,
+#endif
+	.camera		= {
+	},
+#ifdef CONFIG_CPU_S5PV310_EVT1
+	.hw_ver		= 0x52,
+#else
+ 	.hw_ver		= 0x51,
+#endif
+};
+#endif
 
 static struct s3c_sdhci_platdata smdkv310_hsmmc0_pdata __initdata = {
 	.cd_type		= S3C_SDHCI_CD_INTERNAL,
@@ -322,6 +337,11 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 	&exynos4_device_sysmmu,
 	&samsung_asoc_dma,
 	&smdkv310_smsc911x,
+#ifdef CONFIG_VIDEO_FIMC
+	&s3c_device_fimc0,
+	&s3c_device_fimc1,
+	&s3c_device_fimc2,
+#endif
 };
 
 static void __init smdkv310_smsc911x_init(void)
@@ -380,6 +400,12 @@ static void __init smdkv310_machine_init(void)
 	s3c_sdhci3_set_platdata(&smdkv310_hsmmc3_pdata);
 
 	samsung_keypad_set_platdata(&smdkv310_keypad_data);
+#ifdef CONFIG_VIDEO_FIMC
+	/* fimc */
+	s3c_fimc0_set_platdata(&fimc_plat);
+	s3c_fimc1_set_platdata(&fimc_plat);
+	s3c_fimc2_set_platdata(&fimc_plat);
+#endif
 #ifdef CONFIG_FB_S3C
 #ifdef CONFIG_FB_S3C_AMS369FG06
 #else
