@@ -48,6 +48,10 @@ obj-$(CONFIG_EXYNOS4_DEV_SYSMMU)	+= dev-sysmmu.o
 
 obj-$(CONFIG_EXYNOS4_SETUP_FB_S3C)      += setup-fb.o
 obj-$(CONFIG_EXYNOS4_SETUP_FIMC)	+= setup-fimc.o
+obj-$(CONFIG_EXYNOS4_SETUP_FIMC0)	+= setup-fimc0.o
+obj-$(CONFIG_EXYNOS4_SETUP_FIMC1)	+= setup-fimc1.o
+obj-$(CONFIG_EXYNOS4_SETUP_FIMC2)	+= setup-fimc2.o
+obj-$(CONFIG_EXYNOS4_SETUP_FIMC3)	+= setup-fimc3.o
 obj-$(CONFIG_EXYNOS4_SETUP_I2C1)	+= setup-i2c1.o
 obj-$(CONFIG_EXYNOS4_SETUP_I2C2)	+= setup-i2c2.o
 obj-$(CONFIG_EXYNOS4_SETUP_I2C3)	+= setup-i2c3.o
