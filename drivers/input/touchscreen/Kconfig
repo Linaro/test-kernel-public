@@ -204,7 +204,7 @@ config TOUCHSCREEN_S3C2410
 
 config TOUCHSCREEN_EXYNOS4
         tristate "Samsung EXYNOS4/generic touchscreen input driver"
-        depends on ARCH_EXYNOS4 || SAMSUNG_DEV_TS
+        depends on (ARCH_EXYNOS4 || SAMSUNG_DEV_TS) && FB_S3C_AMS369FG06
         select S3C_ADC
         help
           Say Y here if you have the EXYNOS4 touchscreen.
@@ -213,6 +213,14 @@ config TOUCHSCREEN_EXYNOS4
 
           To compile this driver as a module, choose M here: the
           module will be called exynos4_ts.
+
+config TOUCHSCREEN_EXYNOS4_MT
+        tristate "Samsung EXYNOS4 touchscreen driver for 10.1 inch screen"
+	depends on (ARCH_EXYNOS4 || SAMSUNG_DEV_TS) && FB_S3C_WA101S
+	help
+	  Say Y here if you have the EXYNOS4 multi-touch touchsecreen.
+
+	  If unsure, say N.
 
 choice
         prompt "Select touch screen port"
