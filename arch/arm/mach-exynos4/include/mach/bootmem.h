@@ -13,13 +13,12 @@
 #ifndef _EXYNOS4_BOOTMEM_H
 #define _EXYNOS4_BOOTMEM_H
 
-#define	S5P_MDEV_JPEG		0
 #define	S5P_MDEV_MFC		1
 #define	S5P_MDEV_FIMD		2
 #define	S5P_MDEV_FIMC0		3
 #define	S5P_MDEV_FIMC1		4
 #define	S5P_MDEV_FIMC2		5
 #define	S5P_MDEV_FIMC3		6
-
+#define	S5P_MDEV_JPEG		7
 #endif /* _EXYNOS4_BOOTMEM_H */
 
