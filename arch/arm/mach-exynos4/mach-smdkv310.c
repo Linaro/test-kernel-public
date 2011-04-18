@@ -425,6 +425,9 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 	&s3c_device_fimc1,
 	&s3c_device_fimc2,
 #endif
+#ifdef CONFIG_VIDEO_JPEG
+	&s5p_device_jpeg,
+#endif
 };
 
 static void __init smdkv310_smsc911x_init(void)
@@ -525,10 +528,16 @@ static char const *smdkv310_dt_compat[] __initdata = {
 };
 
 #if defined(CONFIG_S5P_MEM_CMA)
-
 static void __init exynos4_reserve_cma(void)
 {
 	static struct cma_region regions[] = {
+#if defined(CONFIG_VIDEO_SAMSUNG_MEMSIZE_JPEG) && !defined(CONFIG_VIDEO_UMP)
+		{
+			.name = "jpeg",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_JPEG * SZ_1K,
+			.start = 0
+		},
+#endif
 #ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC0
 		{
 			.name = "fimc0",
@@ -567,6 +576,9 @@ static void __init exynos4_reserve_cma(void)
 #if defined (CONFIG_VIDEO_FIMC)
 		"s3c-fimc.0=fimc0;s3c-fimc.1=fimc1;"
 		"s3c-fimc.2=fimc2;s3c-fimc.3=fimc3;"
+#endif
+#if defined(CONFIG_VIDEO_JPEG) && !defined(CONFIG_VIDEO_UMP)
+	        "s5p-jpeg=jpeg;"
 #endif
 		"*=common";
 
