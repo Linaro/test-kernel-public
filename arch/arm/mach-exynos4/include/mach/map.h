@@ -179,4 +179,8 @@
 #define S5P_SZ_FIMC1			SZ_64K
 #define S5P_SZ_FIMC2			SZ_64K
 #define S5P_SZ_FIMC3			SZ_64K
+/* JPEG */
+#define EXYNOS4_PA_JPEG			(0x11840000)
+#define S5P_PA_JPEG			EXYNOS4_PA_JPEG
+#define S5P_SZ_JPEG			SZ_64K
 #endif /* __ASM_ARCH_MAP_H */
