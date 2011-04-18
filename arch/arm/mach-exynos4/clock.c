@@ -433,6 +433,11 @@ static struct clk init_clocks_off[] = {
 		.enable		= exynos4_clk_ip_cam_ctrl,
 		.ctrlbit	= (1 << 3),
 	}, {
+		.name		= "jpeg",
+		.id		= -1,
+		.enable		= exynos4_clk_ip_cam_ctrl,
+		.ctrlbit	= (1 << 6),
+	}, {
 		.name		= "fimd0",
 		.id		= -1,
 		.enable		= exynos4_clk_ip_lcd0_ctrl,
