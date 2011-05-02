@@ -126,6 +126,20 @@ static int __devinit s5p_tvout_probe(struct platform_device *pdev)
 		printk(KERN_ERR "[s5p_tvout.c] s5p_tvout_fb_register_framebuffer error\n");
 		return -ENODEV;
 	}
+
+#if HDMI_LCD_DISPLAY
+	/* Associate LCD FB memory with the HDMI FB memory */
+	if (s5p_tvout_fb_setup_framebuffer(&pdev->dev)) {
+		printk(KERN_ERR "[S5P-TVOUT] Failed to setup FB memory\n");
+		return -ENODEV;
+	}
+
+	/* Enable the HDMI/FB to start displaying */
+	if (s5p_tvout_fb_ctrl_enable(1) < 0) {
+		printk(KERN_ERR "[S5P-TVOUT] Failed to enable the HDMI display\n");
+		return -ENODEV;
+	}
+#endif
 	return 0;
 }
 

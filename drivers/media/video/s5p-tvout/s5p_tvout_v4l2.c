@@ -699,6 +699,10 @@ long s5p_tvout_tvif_ioctl(struct file *file, unsigned int cmd,
 
 static int s5p_tvout_tvif_open(struct file *file)
 {
+/* Disable the below code, as some application should
+ * not succeed in opening this driver again
+ */
+#if !(HDMI_LCD_DISPLAY)
 	mutex_lock(&s5p_tvout_tvif_mutex);
 
 	atomic_inc(&s5p_tvout_v4l2_private.tvif_use);
@@ -708,6 +712,9 @@ static int s5p_tvout_tvif_open(struct file *file)
 	tvout_dbg("count=%d\n", atomic_read(&s5p_tvout_v4l2_private.tvif_use));
 
 	return 0;
+#else
+	return -1;
+#endif
 }
 
 static int s5p_tvout_tvif_release(struct file *file)
@@ -993,6 +1000,10 @@ const struct v4l2_ioctl_ops s5p_tvout_vo_ioctl_ops = {
 
 static int s5p_tvout_vo_open(struct file *file)
 {
+/* Disable the below code, as some application should
+ * not succeed in opening this driver again
+ */
+#if !(HDMI_LCD_DISPLAY)
 	int ret = 0;
 
 	tvout_dbg("\n");
@@ -1008,6 +1019,9 @@ static int s5p_tvout_vo_open(struct file *file)
 	mutex_unlock(&s5p_tvout_vo_mutex);
 
 	return ret;
+#else
+	return -1;
+#endif
 }
 
 static int s5p_tvout_vo_release(struct file *file)

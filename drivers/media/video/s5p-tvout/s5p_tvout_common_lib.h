@@ -22,6 +22,7 @@
  * All files in TVOUT driver can access function or definition in this file.
  */
 
+#define HDMI_LCD_DISPLAY	1
 #define DRV_NAME	"S5P-TVOUT"
 
 #define tvout_err(fmt, ...)					\
@@ -88,14 +89,14 @@ enum s5p_mixer_burst_mode {
 };
 
 enum s5ptvfb_data_path_t {
-	DATA_PATH_FIFO,
-	DATA_PATH_DMA,
+	TVFB_DATA_PATH_FIFO = 0,
+	TVFB_DATA_PATH_DMA = 1,
 };
 
 enum s5ptvfb_alpha_t {
-	LAYER_BLENDING,
-	PIXEL_BLENDING,
-	NONE_BLENDING,
+	TVFB_LAYER_BLENDING,
+	TVFB_PIXEL_BLENDING,
+	TVFB_NONE_BLENDING,
 };
 
 enum s5ptvfb_ver_scaling_t {

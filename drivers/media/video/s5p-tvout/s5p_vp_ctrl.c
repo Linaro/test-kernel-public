@@ -416,7 +416,7 @@ void s5p_vp_ctrl_set_dest_win_blend(bool enable)
 
 	if (s5p_vp_ctrl_private.running)
 		s5p_mixer_ctrl_set_blend_mode(MIXER_VIDEO_LAYER, \
-						LAYER_BLENDING);
+				TVFB_LAYER_BLENDING);
 }
 
 void s5p_vp_ctrl_set_dest_win_priority(u32 prio)
