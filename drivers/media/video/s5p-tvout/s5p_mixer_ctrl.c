@@ -572,13 +572,13 @@ int s5p_mixer_ctrl_set_blend_mode(enum s5p_mixer_layer layer,
 		return -1;
 	}
 
-	if ((layer == MIXER_VIDEO_LAYER) && (mode == PIXEL_BLENDING)) {
+	if ((layer == MIXER_VIDEO_LAYER) && (mode == TVFB_PIXEL_BLENDING)) {
 		tvout_err("video layer doesn't support pixel blending\n");
 		return -1;
 	}
 
 	switch (mode) {
-	case PIXEL_BLENDING:
+	case TVFB_PIXEL_BLENDING:
 		tvout_dbg("pixel blending\n");
 
 		s5p_mixer_ctrl_private.layer[layer].pixel_blend = true;
@@ -587,7 +587,7 @@ int s5p_mixer_ctrl_set_blend_mode(enum s5p_mixer_layer layer,
 			s5p_mixer_set_pixel_blend(layer, true);
 		break;
 
-	case LAYER_BLENDING:
+	case TVFB_LAYER_BLENDING:
 		tvout_dbg("layer blending\n");
 
 		if (layer == MIXER_VIDEO_LAYER)
@@ -599,7 +599,7 @@ int s5p_mixer_ctrl_set_blend_mode(enum s5p_mixer_layer layer,
 			s5p_mixer_set_layer_blend(layer, true);
 		break;
 
-	case NONE_BLENDING:
+	case TVFB_NONE_BLENDING:
 		tvout_dbg("alpha blending off\n");
 
 		if (layer == MIXER_VIDEO_LAYER) {
@@ -637,7 +637,7 @@ int s5p_mixer_ctrl_set_alpha_blending(enum s5p_mixer_layer layer,
 	}
 
 	switch (blend_mode) {
-	case PIXEL_BLENDING:
+	case TVFB_PIXEL_BLENDING:
 		tvout_dbg("pixel blending\n");
 
 		s5p_mixer_ctrl_private.layer[layer].pixel_blend = true;
@@ -646,7 +646,7 @@ int s5p_mixer_ctrl_set_alpha_blending(enum s5p_mixer_layer layer,
 			s5p_mixer_set_pixel_blend(layer, true);
 		break;
 
-	case LAYER_BLENDING:
+	case TVFB_LAYER_BLENDING:
 		tvout_dbg("layer blending : alpha value = 0x%x\n", alpha);
 
 		s5p_mixer_ctrl_private.layer[layer].layer_blend = true;
@@ -658,7 +658,7 @@ int s5p_mixer_ctrl_set_alpha_blending(enum s5p_mixer_layer layer,
 		}
 		break;
 
-	case NONE_BLENDING:
+	case TVFB_NONE_BLENDING:
 		tvout_dbg("alpha blending off\n");
 		s5p_mixer_ctrl_private.layer[layer].pixel_blend = false;
 		s5p_mixer_ctrl_private.layer[layer].layer_blend = false;
