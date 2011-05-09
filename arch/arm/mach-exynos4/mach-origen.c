@@ -20,9 +20,13 @@
 #include <linux/regulator/machine.h>
 #include <linux/mfd/max8997.h>
 #include <linux/lcd.h>
+#if defined(CONFIG_S5P_MEM_CMA)
+#include <linux/cma.h>
+#endif
 
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
+#include <asm/setup.h>
 
 #include <video/platform_lcd.h>
 
@@ -706,9 +710,48 @@ static void __init origen_power_init(void)
 	s3c_gpio_setpull(EXYNOS4_GPX0(4), S3C_GPIO_PULL_NONE);
 }
 
+#if defined(CONFIG_S5P_MEM_CMA)
+static void __init exynos4_reserve_cma(void)
+{
+	static struct cma_region regions[] = {
+		{
+			.name = "common",
+			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
+			.start = 0
+		},
+		{}
+	};
+	static const char map[] __initconst =
+		"*=common";
+	int i = 0;
+	unsigned int bank0_end = meminfo.bank[0].start +
+					meminfo.bank[0].size;
+	unsigned int bank1_end = meminfo.bank[1].start +
+					meminfo.bank[1].size;
+
+	for (; i < ARRAY_SIZE(regions) ; i++) {
+		if (regions[i].start == 0) {
+			regions[i].start = bank0_end - regions[i].size;
+			bank0_end = regions[i].start;
+		} else if (regions[i].start == 1) {
+			regions[i].start = bank1_end - regions[i].size;
+			bank1_end = regions[i].start;
+		}
+		pr_err("CMA reserve : %s, addr is 0x%x, size is 0x%x\n",
+			regions[i].name, regions[i].start, regions[i].size);
+	}
+
+	cma_set_defaults(regions, map);
+	cma_early_regions_reserve(NULL);
+}
+#else
+static void __init exynos4_reserve_cma(void) {}
+#endif
+
 static void __init origen_reserve(void)
 {
 	s5p_mfc_reserve_mem(0x43000000, 8 << 20, 0x51000000, 8 << 20);
+	exynos4_reserve_cma();
 }
 
 static void __init origen_machine_init(void)
