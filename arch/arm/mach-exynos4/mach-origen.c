@@ -14,6 +14,9 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 #include <linux/input.h>
+#if defined(CONFIG_S5P_MEM_CMA)
+#include <linux/cma.h>
+#endif
 
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
@@ -24,8 +27,10 @@
 #include <plat/devs.h>
 #include <plat/sdhci.h>
 #include <plat/iic.h>
+#include <plat/bootmem.h>
 
 #include <mach/map.h>
+#include <mach/bootmem.h>
 
 /* Following are default values for UCON, ULCON and UFCON UART registers */
 #define ORIGEN_UCON_DEFAULT	(S3C2410_UCON_TXILEVEL |	\
@@ -97,6 +102,41 @@ static void __init origen_machine_init(void)
 	s3c_sdhci2_set_platdata(&origen_hsmmc2_pdata);
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 }
+#if defined(CONFIG_S5P_MEM_CMA)
+static void __init exynos4_reserve_cma(void)
+{
+	static struct cma_region regions[] = {
+		{
+			.name = "common",
+			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
+			.start = 0
+		},
+		{}
+	};
+	static const char map[] __initconst =
+		"*=common";
+	int i = 0;
+	unsigned int bank0_end = meminfo.bank[0].start +
+					meminfo.bank[0].size;
+	unsigned int bank1_end = meminfo.bank[1].start +
+					meminfo.bank[1].size;
+
+	for (; i < ARRAY_SIZE(regions) ; i++) {
+		if (regions[i].start == 0) {
+			regions[i].start = bank0_end - regions[i].size;
+			bank0_end = regions[i].start;
+		} else if (regions[i].start == 1) {
+			regions[i].start = bank1_end - regions[i].size;
+			bank1_end = regions[i].start;
+		}
+		printk(KERN_ERR "CMA reserve : %s, addr is 0x%x, size is 0x%x\n",
+			regions[i].name, regions[i].start, regions[i].size);
+	}
+
+	cma_set_defaults(regions, map);
+	cma_early_regions_reserve(NULL);
+}
+#endif
 
 MACHINE_START(ORIGEN, "ORIGEN")
        /* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
@@ -105,4 +145,9 @@ MACHINE_START(ORIGEN, "ORIGEN")
 	.map_io		= origen_map_io,
 	.init_machine	= origen_machine_init,
 	.timer		= &exynos4_timer,
+#if defined(CONFIG_S5P_MEM_CMA)
+	.reserve	= &exynos4_reserve_cma,
+#else
+	.reserve	= &s5p_reserve_bootmem,
+#endif
 MACHINE_END
