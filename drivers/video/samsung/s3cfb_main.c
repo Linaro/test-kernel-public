@@ -178,7 +178,8 @@ static int s3cfb_probe(struct platform_device *pdev)
 
 		fbdev[i]->dev = &pdev->dev;
 
-#if defined(CONFIG_FB_S3C_WA101S) || (CONFIG_FB_S3C_AMS369FG06)
+#if defined(CONFIG_FB_S3C_WA101S) || defined(CONFIG_FB_S3C_AMS369FG06) \
+		|| defined(CONFIG_FB_S3C_LTE480WV)
 		s3cfb_set_lcd_info(fbdev[i]);
 #else
 		printk(KERN_ALERT "panel flag not defined");
