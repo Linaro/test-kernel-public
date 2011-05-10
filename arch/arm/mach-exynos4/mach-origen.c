@@ -14,10 +14,12 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 #include <linux/input.h>
+#include <linux/i2c.h>
 #if defined(CONFIG_S5P_MEM_CMA)
 #include <linux/cma.h>
 #endif
-
+#include <linux/regulator/machine.h>
+#include <linux/regulator/fixed.h>
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
@@ -31,6 +33,8 @@
 
 #include <mach/map.h>
 #include <mach/bootmem.h>
+
+extern struct max8997_platform_data max8997_pdata;
 
 /* Following are default values for UCON, ULCON and UFCON UART registers */
 #define ORIGEN_UCON_DEFAULT	(S3C2410_UCON_TXILEVEL |	\
@@ -77,6 +81,20 @@ static struct s3c2410_uartcfg origen_uartcfgs[] __initdata = {
 	},
 };
 
+/* I2C0 */
+static struct i2c_board_info i2c_devs0[] __initdata = {
+	{
+		/* The address is 0xCC used since SRAD = 0 */
+		I2C_BOARD_INFO("max8997", (0xCC >> 1)),
+		.platform_data = &max8997_pdata,
+	},
+};
+
+/* I2C1 */
+static struct i2c_board_info i2c_devs1[] __initdata = {
+	{ },
+};
+
 static struct s3c_sdhci_platdata origen_hsmmc2_pdata __initdata = {
 	.cd_type		= S3C_SDHCI_CD_GPIO,
 	.ext_cd_gpio		= EXYNOS4_GPK2(2),
@@ -85,6 +103,8 @@ static struct s3c_sdhci_platdata origen_hsmmc2_pdata __initdata = {
 };
 
 static struct platform_device *origen_devices[] __initdata = {
+	&s3c_device_i2c0,
+	&s3c_device_i2c1,
 	&s3c_device_hsmmc2,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
@@ -99,6 +119,10 @@ static void __init origen_map_io(void)
 
 static void __init origen_machine_init(void)
 {
+	s3c_i2c0_set_platdata(NULL);
+	s3c_i2c1_set_platdata(NULL);
+	i2c_register_board_info(0, i2c_devs0, ARRAY_SIZE(i2c_devs0));
+	i2c_register_board_info(1, i2c_devs1, ARRAY_SIZE(i2c_devs1));
 	s3c_sdhci2_set_platdata(&origen_hsmmc2_pdata);
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 }
