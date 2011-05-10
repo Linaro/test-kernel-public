@@ -42,6 +42,7 @@
 #include <plat/fb.h>
 #include <plat/mfc.h>
 #include <plat/otg.h>
+#include <plat/fimg2d.h>
 
 #include <mach/map.h>
 
@@ -625,6 +626,16 @@ static struct s3c_fb_platdata origen_lcd_pdata __initdata = {
 	.setup_gpio	= exynos4_fimd0_gpio_setup_24bpp,
 };
 
+#ifdef CONFIG_VIDEO_FIMG2D
+static struct fimg2d_platdata fimg2d_data __initdata = {
+	.hw_ver = 30,
+	.parent_clkname = "mout_mpll",
+	.clkname = "sclk_fimg2d",
+	.gate_clkname = "fimg2d",
+	.clkrate = 250 * 1000000,
+};
+#endif
+
 static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_hsmmc2,
 	&s3c_device_hsmmc0,
@@ -640,6 +651,9 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s5p_device_fimc2,
 	&s5p_device_fimc3,
 	&s5p_device_fimd0,
+#ifdef CONFIG_VIDEO_FIMG2D
+	&s5p_device_fimg2d,
+#endif
 	&s5p_device_hdmi,
 	&s5p_device_i2c_hdmiphy,
 	&s5p_device_mfc,
@@ -723,9 +737,16 @@ static void __init origen_machine_init(void)
 
 	s5p_fimd0_set_platdata(&origen_lcd_pdata);
 
+#ifdef CONFIG_VIDEO_FIMG2D
+	s5p_fimg2d_set_platdata(&fimg2d_data);
+#endif
+
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 
 	s5p_device_fimd0.dev.parent = &exynos4_device_pd[PD_LCD0].dev;
+#ifdef CONFIG_VIDEO_FIMG2D
+	s5p_device_fimg2d.dev.parent = &exynos4_device_pd[PD_LCD0].dev;
+#endif
 
 	s5p_device_hdmi.dev.parent = &exynos4_device_pd[PD_TV].dev;
 	s5p_device_mixer.dev.parent = &exynos4_device_pd[PD_TV].dev;
