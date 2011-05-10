@@ -29,7 +29,7 @@
 
 struct platform_device; /* don't need the contents */
 
-#if defined(CONFIG_FB_S3C_WA101S)
+#if defined(CONFIG_FB_S3C_WA101S) || defined(CONFIG_FB_S3C_LTE480WV)
 void s3cfb_cfg_gpio(struct platform_device *pdev)
 {
 	int i;
@@ -254,6 +254,53 @@ int s3cfb_lcd_off(struct platform_device *pdev)
 	return 0;
 }
 
+#elif defined(CONFIG_FB_S3C_LTE480WV)
+int s3cfb_backlight_on(struct platform_device *pdev)
+{
+#if !defined(CONFIG_BACKLIGHT_PWM)
+	int err;
+
+	err = gpio_request(EXYNOS4_GPD0(0), "GPD0");
+	if (err) {
+		printk(KERN_ERR "failed to request GPD0 for "
+				"lcd backlight control\n");
+		return err;
+	}
+
+	gpio_direction_output(EXYNOS4_GPD0(0), 1);
+	gpio_free(EXYNOS4_GPD0(0));
+#endif
+	printk("LTE480VW: Backlight enabled\n");
+	return 0;
+}
+
+int s3cfb_backlight_off(struct platform_device *pdev)
+{
+#if !defined(CONFIG_BACKLIGHT_PWM)
+	int err;
+
+	err = gpio_request(EXYNOS4_GPD0(0), "GPD0");
+	if (err) {
+		printk(KERN_ERR "failed to request GPD0 for "
+				"lcd backlight control\n");
+		return err;
+	}
+
+	gpio_direction_output(EXYNOS4_GPD0(0), 0);
+	gpio_free(EXYNOS4_GPD0(0));
+#endif
+	return 0;
+}
+
+int s3cfb_lcd_on(struct platform_device *pdev)
+{
+	return 0;
+}
+
+int s3cfb_lcd_off(struct platform_device *pdev)
+{
+	return 0;
+}
 #else
 int s3cfb_backlight_on(struct platform_device *pdev)
 {
