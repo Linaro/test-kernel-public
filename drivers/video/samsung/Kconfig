@@ -91,6 +91,11 @@ choice
 depends on FB_S3C
 prompt "Select LCD Type"
 default FB_S3C_AMS369FG06
+config FB_S3C_LTE480WV
+	bool "LTE480WV"
+	depends on MACH_SMDKV310 || MACH_SMDKC210 || MACH_SMDKV210 || MACH_SMDKC110 || MACH_ORIGEN
+	help
+	  This enables support for Samsung LTE480WV 4.8" WVGA LCD panel
 
 config FB_S3C_WA101S
 	bool "WA101S"
