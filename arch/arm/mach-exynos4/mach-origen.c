@@ -31,6 +31,7 @@
 #include <plat/iic.h>
 #include <plat/bootmem.h>
 #include <plat/fb.h>
+#include <plat/fimg2d.h>
 
 #include <mach/map.h>
 #include <mach/bootmem.h>
@@ -102,7 +103,15 @@ static struct s3c_sdhci_platdata origen_hsmmc2_pdata __initdata = {
 	.ext_cd_gpio_invert	= 1,
 	.clk_type		= S3C_SDHCI_CLK_DIV_EXTERNAL,
 };
-
+#ifdef CONFIG_VIDEO_FIMG2D
+static struct fimg2d_platdata fimg2d_data __initdata = {
+	.hw_ver = 30,
+	.parent_clkname = "mout_mpll",
+	.clkname = "sclk_fimg2d",
+	.gate_clkname = "fimg2d",
+	.clkrate = 250 * 1000000,
+};
+#endif
 static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fb,
 	&s3c_device_i2c0,
@@ -111,6 +120,9 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_rtc,
 	&s3c_device_wdt,
 	&exynos4_device_sysmmu,
+#ifdef CONFIG_VIDEO_FIMG2D
+	&s5p_device_fimg2d,
+#endif
 };
 
 static void __init origen_map_io(void)
@@ -128,6 +140,9 @@ static void __init origen_machine_init(void)
 	i2c_register_board_info(1, i2c_devs1, ARRAY_SIZE(i2c_devs1));
 	s3cfb_set_platdata(NULL);
 	s3c_sdhci2_set_platdata(&origen_hsmmc2_pdata);
+#ifdef CONFIG_VIDEO_FIMG2D
+	s5p_fimg2d_set_platdata(&fimg2d_data);
+#endif
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 }
 #if defined(CONFIG_S5P_MEM_CMA)
