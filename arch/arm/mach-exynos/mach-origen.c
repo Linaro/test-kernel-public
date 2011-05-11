@@ -788,6 +788,9 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s5p_device_g2d,
 	&s5p_device_hdmi,
 	&s5p_device_i2c_hdmiphy,
+#ifdef CONFIG_VIDEO_JPEG
+	&s5p_device_jpeg,
+#endif
 	&s5p_device_mfc,
 	&s5p_device_mfc_l,
 	&s5p_device_mfc_r,
@@ -852,9 +855,59 @@ static void __init origen_power_init(void)
 	s3c_gpio_setpull(EXYNOS4_GPX0(4), S3C_GPIO_PULL_NONE);
 }
 
+#if defined(CONFIG_S5P_MEM_CMA)
+static void __init exynos4_reserve_cma(void)
+{
+	static struct cma_region regions[] = {
+#if defined(CONFIG_VIDEO_JPEG)
+		{
+			.name = "jpeg",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_JPEG * SZ_1K,
+			.start = 0
+		},
+#endif
+		{
+			.name = "common",
+			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
+			.start = 0
+		},
+		{}
+	};
+	static const char map[] __initconst =
+#if defined(CONFIG_VIDEO_JPEG)
+		"s5p-jpeg=jpeg;"
+#endif
+		"*=common";
+
+	int i = 0;
+	unsigned int bank0_end = meminfo.bank[0].start +
+					meminfo.bank[0].size;
+	unsigned int bank1_end = meminfo.bank[1].start +
+					meminfo.bank[1].size;
+
+	for (; i < ARRAY_SIZE(regions) ; i++) {
+		if (regions[i].start == 0) {
+			regions[i].start = bank0_end - regions[i].size;
+			bank0_end = regions[i].start;
+		} else if (regions[i].start == 1) {
+			regions[i].start = bank1_end - regions[i].size;
+			bank1_end = regions[i].start;
+		}
+		pr_err("CMA reserve : %s, addr is 0x%x, size is 0x%x\n",
+			regions[i].name, regions[i].start, regions[i].size);
+	}
+
+	cma_set_defaults(regions, map);
+	cma_early_regions_reserve(NULL);
+}
+#else
+static void __init exynos4_reserve_cma(void) {}
+#endif
+
 static void __init origen_reserve(void)
 {
 	s5p_mfc_reserve_mem(0x43000000, 8 << 20, 0x51000000, 8 << 20);
+	exynos4_reserve_cma();
 }
 
 static void __init origen_machine_init(void)
