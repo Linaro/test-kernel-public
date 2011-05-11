@@ -181,10 +181,24 @@ static void __init exynos4_reserve_cma(void)
 }
 #endif
 
+static void __init origen_fixup(struct machine_desc *desc,
+				struct tag *tags, char **cmdline,
+				struct meminfo *mi)
+{
+	mi->bank[0].start = 0x40000000;
+	mi->bank[0].size = 512 * SZ_1M;
+
+	mi->bank[1].start = 0x60000000;
+	mi->bank[1].size = 512 * SZ_1M;
+
+	mi->nr_banks = 2;
+}
+
 MACHINE_START(ORIGEN, "ORIGEN")
        /* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
 	.boot_params	= S5P_PA_SDRAM + 0x100,
 	.init_irq	= exynos4_init_irq,
+	.fixup		= origen_fixup,
 	.map_io		= origen_map_io,
 	.init_machine	= origen_machine_init,
 	.timer		= &exynos4_timer,
