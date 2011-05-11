@@ -32,6 +32,7 @@
 #include <plat/bootmem.h>
 #include <plat/fb.h>
 #include <plat/fimg2d.h>
+#include <plat/fimc.h>
 
 #include <mach/map.h>
 #include <mach/bootmem.h>
@@ -112,6 +113,22 @@ static struct fimg2d_platdata fimg2d_data __initdata = {
 	.clkrate = 250 * 1000000,
 };
 #endif
+
+#ifdef CONFIG_VIDEO_FIMC
+static struct s3c_platform_fimc fimc_plat = {
+#ifdef CONFIG_ITU_A
+	.default_cam	= CAMERA_PAR_A,
+#endif
+	.camera		= {
+	},
+#ifdef CONFIG_CPU_S5PV310_EVT1
+	.hw_ver		= 0x52,
+#else
+	.hw_ver		= 0x51,
+#endif
+};
+#endif
+
 static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fb,
 	&s3c_device_i2c0,
@@ -125,6 +142,11 @@ static struct platform_device *origen_devices[] __initdata = {
 #endif
 #ifdef CONFIG_VIDEO_JPEG
 	&s5p_device_jpeg,
+#endif
+#ifdef CONFIG_VIDEO_FIMC
+	&s3c_device_fimc0,
+	&s3c_device_fimc1,
+	&s3c_device_fimc2,
 #endif
 };
 
@@ -146,6 +168,12 @@ static void __init origen_machine_init(void)
 #ifdef CONFIG_VIDEO_FIMG2D
 	s5p_fimg2d_set_platdata(&fimg2d_data);
 #endif
+#ifdef CONFIG_VIDEO_FIMC
+	/* fimc */
+	s3c_fimc0_set_platdata(&fimc_plat);
+	s3c_fimc1_set_platdata(&fimc_plat);
+	s3c_fimc2_set_platdata(&fimc_plat);
+#endif
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 }
 #if defined(CONFIG_S5P_MEM_CMA)
@@ -159,6 +187,30 @@ static void __init exynos4_reserve_cma(void)
 			.start = 0
 		},
 #endif
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC0
+		{
+			.name = "fimc0",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC0 * SZ_1K,
+		},
+#endif
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC1
+		{
+			.name = "fimc1",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC1 * SZ_1K,
+		},
+#endif
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC2
+		{
+			.name = "fimc2",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC2 * SZ_1K,
+		},
+#endif
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC3
+		{
+			.name = "fimc3",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC3 * SZ_1K,
+		},
+#endif
 		{
 			.name = "common",
 			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
@@ -169,6 +221,10 @@ static void __init exynos4_reserve_cma(void)
 	static const char map[] __initconst =
 #if defined(CONFIG_VIDEO_JPEG) && !defined(CONFIG_VIDEO_UMP)
 		"s5p-jpeg=jpeg;"
+#endif
+#if defined(CONFIG_VIDEO_FIMC)
+		"s3c-fimc.0=fimc0;s3c-fimc.1=fimc1;"
+		"s3c-fimc.2=fimc2;s3c-fimc.3=fimc3;"
 #endif
 		"*=common";
 	int i = 0;
