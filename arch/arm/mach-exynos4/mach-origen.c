@@ -123,6 +123,9 @@ static struct platform_device *origen_devices[] __initdata = {
 #ifdef CONFIG_VIDEO_FIMG2D
 	&s5p_device_fimg2d,
 #endif
+#ifdef CONFIG_VIDEO_JPEG
+	&s5p_device_jpeg,
+#endif
 };
 
 static void __init origen_map_io(void)
@@ -149,6 +152,13 @@ static void __init origen_machine_init(void)
 static void __init exynos4_reserve_cma(void)
 {
 	static struct cma_region regions[] = {
+#if defined(CONFIG_VIDEO_SAMSUNG_MEMSIZE_JPEG) && !defined(CONFIG_VIDEO_UMP)
+		{
+			.name = "jpeg",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_JPEG * SZ_1K,
+			.start = 0
+		},
+#endif
 		{
 			.name = "common",
 			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
@@ -157,6 +167,9 @@ static void __init exynos4_reserve_cma(void)
 		{}
 	};
 	static const char map[] __initconst =
+#if defined(CONFIG_VIDEO_JPEG) && !defined(CONFIG_VIDEO_UMP)
+		"s5p-jpeg=jpeg;"
+#endif
 		"*=common";
 	int i = 0;
 	unsigned int bank0_end = meminfo.bank[0].start +
