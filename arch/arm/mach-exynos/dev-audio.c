@@ -24,7 +24,7 @@
 #include <mach/regs-audss.h>
 
 static const char *rclksrc[] = {
-	[0] = "busclk",
+	[0] = "i2sclk",
 	[1] = "i2sclk",
 };
 
