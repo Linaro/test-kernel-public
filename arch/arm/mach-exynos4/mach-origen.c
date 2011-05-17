@@ -463,6 +463,13 @@ static struct i2c_board_info i2c0_devs[] __initdata = {
 	},
 };
 
+/* I2C1 */
+static struct i2c_board_info i2c_devs1[] __initdata = {
+	{
+		I2C_BOARD_INFO("rt5625", 0x1e),
+	},
+};
+
 static struct s3c_sdhci_platdata origen_hsmmc0_pdata __initdata = {
 	.cd_type		= S3C_SDHCI_CD_INTERNAL,
 	.clk_type		= S3C_SDHCI_CLK_DIV_EXTERNAL,
@@ -615,6 +622,8 @@ static struct platform_device *origen_devices[] __initdata = {
 	&exynos4_device_pd[PD_MFC],
 	&origen_device_gpiokeys,
 	&origen_lcd_hv070wsa,
+	&exynos4_device_i2s0,
+	&samsung_asoc_dma,
 };
 
 /* LCD Backlight data */
