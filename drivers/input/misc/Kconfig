@@ -478,4 +478,13 @@ config INPUT_XEN_KBDDEV_FRONTEND
 	  To compile this driver as a module, choose M here: the
 	  module will be called xen-kbdfront.
 
+config INPUT_ORIGEN
+	tristate "Support Origen Buttons"
+	depends on ARCH_EXYNOS4
+	help
+	  Say Y here if you want to use Origen Button input driver
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called origen_button.
+
 endif
