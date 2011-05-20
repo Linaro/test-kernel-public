@@ -466,7 +466,7 @@ static struct i2c_board_info i2c0_devs[] __initdata = {
 };
 
 /* I2C1 */
-static struct i2c_board_info i2c_devs1[] __initdata = {
+static struct i2c_board_info i2c1_devs[] __initdata = {
 	{
 		I2C_BOARD_INFO("rt5625", 0x1e),
 	},
@@ -601,6 +601,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_hsmmc2,
 	&s3c_device_hsmmc0,
 	&s3c_device_i2c0,
+	&s3c_device_i2c1,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
 	&s5p_device_ehci,
@@ -673,6 +674,8 @@ static void __init origen_machine_init(void)
 	s3c_i2c0_set_platdata(NULL);
 	i2c_register_board_info(0, i2c0_devs, ARRAY_SIZE(i2c0_devs));
 
+	s3c_i2c1_set_platdata(NULL);
+	i2c_register_board_info(1, i2c1_devs, ARRAY_SIZE(i2c1_devs));
 	/*
 	 * Since sdhci instance 2 can contain a bootable media,
 	 * sdhci instance 0 is registered after instance 2.

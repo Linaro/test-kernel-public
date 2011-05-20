@@ -225,6 +225,7 @@ config MACH_ORIGEN
 	select S3C_DEV_WDT
 	select S3C_DEV_HSMMC
 	select S3C_DEV_HSMMC2
+	select S3C_DEV_I2C1
 	select S5P_DEV_FIMC0
 	select S5P_DEV_FIMC1
 	select S5P_DEV_FIMC2
@@ -238,6 +239,7 @@ config MACH_ORIGEN
 	select SAMSUNG_DEV_PWM
 	select EXYNOS4_DEV_PD
 	select EXYNOS4_SETUP_FIMD0
+	select EXYNOS4_SETUP_I2C1
 	select EXYNOS4_SETUP_SDHCI
 	select EXYNOS4_SETUP_USB_PHY
 	help
