@@ -442,6 +442,7 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 
 	&s5p_device_fimg2d,
 #endif
+	&exynos4_device_ahci,
 };
 
 static void __init smdkv310_smsc911x_init(void)
