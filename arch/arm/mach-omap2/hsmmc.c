@@ -316,7 +316,7 @@ static int omap_hsmmc_pdata_init(struct omap2_hsmmc_info *c,
 	mmc->slots[0].pm_caps = c->pm_caps;
 	mmc->slots[0].internal_clock = !c->ext_clock;
 	mmc->dma_mask = 0xffffffff;
-	if (cpu_is_omap44xx())
+	if (cpu_is_omap44xx() || cpu_is_omap54xx())
 		mmc->reg_offset = OMAP4_MMC_REG_OFFSET;
 	else
 		mmc->reg_offset = 0;
@@ -367,14 +367,15 @@ static int omap_hsmmc_pdata_init(struct omap2_hsmmc_info *c,
 	if (!cpu_is_omap3517() && !cpu_is_omap3505())
 		mmc->slots[0].features |= HSMMC_HAS_PBIAS;
 
-	if (cpu_is_omap44xx() && (omap_rev() > OMAP4430_REV_ES1_0))
+	if ((cpu_is_omap44xx() && (omap_rev() > OMAP4430_REV_ES1_0)) ||
+							cpu_is_omap54xx())
 		mmc->slots[0].features |= HSMMC_HAS_UPDATED_RESET;
 
 	switch (c->mmc) {
 	case 1:
 		if (mmc->slots[0].features & HSMMC_HAS_PBIAS) {
 			/* on-chip level shifting via PBIAS0/PBIAS1 */
-			if (cpu_is_omap44xx()) {
+			if (cpu_is_omap54xx() || cpu_is_omap44xx()) {
 				mmc->slots[0].before_set_reg =
 						omap4_hsmmc1_before_set_reg;
 				mmc->slots[0].after_set_reg =
@@ -497,7 +498,7 @@ void omap2_hsmmc_init(struct omap2_hsmmc_info *controllers)
 
 	omap_hsmmc_done = 1;
 
-	if (!cpu_is_omap44xx()) {
+	if (!(cpu_is_omap44xx() || cpu_is_omap54xx())) {
 		if (cpu_is_omap2430()) {
 			control_pbias_offset = OMAP243X_CONTROL_PBIAS_LITE;
 			control_devconf1_offset = OMAP243X_CONTROL_DEVCONF1;
@@ -505,7 +506,7 @@ void omap2_hsmmc_init(struct omap2_hsmmc_info *controllers)
 			control_pbias_offset = OMAP343X_CONTROL_PBIAS_LITE;
 			control_devconf1_offset = OMAP343X_CONTROL_DEVCONF1;
 		}
-	} else {
+	} else if (cpu_is_omap44xx()) {
 		control_pbias_offset =
 			OMAP4_CTRL_MODULE_PAD_CORE_CONTROL_PBIASLITE;
 		control_mmc1 = OMAP4_CTRL_MODULE_PAD_CORE_CONTROL_MMC1;
@@ -518,6 +519,9 @@ void omap2_hsmmc_init(struct omap2_hsmmc_info *controllers)
 			OMAP4_SDMMC1_DR1_SPEEDCTRL_MASK |
 			OMAP4_SDMMC1_DR2_SPEEDCTRL_MASK);
 		omap4_ctrl_pad_writel(reg, control_mmc1);
+	} else if (cpu_is_omap54xx()) {
+		control_pbias_offset =
+			OMAP4_CTRL_MODULE_PAD_CORE_CONTROL_PBIASLITE;
 	}
 
 	for (; controllers->mmc; controllers++)
