@@ -185,11 +185,14 @@ static void s5p_vp_ctrl_set_src_dst_win(struct s5p_vp_ctrl_rect src_win,
 					enum s5p_vp_src_color color_t,
 					bool ipc)
 {
-	src_win.y /= 2;
-	src_win.h /= 2;
 	if (s5p_vp_ctrl_get_dest_scan_mode(disp, out) == INTERLACED) {
+		src_win.y /= 2;
+		src_win.h /= 2;
 		dst_win.y /= 2;
 		dst_win.h /= 2;
+	} else if (s5p_vp_ctrl_get_src_scan_mode() == INTERLACED) {
+		src_win.y /= 2;
+		src_win.h /= 2;
 	}
 	s5p_vp_set_src_position(src_win.x, 0, src_win.y);
 	s5p_vp_set_dest_position(dst_win.x, dst_win.y);
