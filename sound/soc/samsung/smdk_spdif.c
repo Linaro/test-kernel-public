@@ -40,7 +40,11 @@ static int set_audio_clock_heirachy(struct platform_device *pdev)
 		goto out1;
 	}
 
+#ifdef CONFIG_MACH_SMDKV310
+	sclk_audio0 = clk_get(&pdev->dev, "audio-bus");
+#else
 	sclk_audio0 = clk_get(&pdev->dev, "sclk_audio");
+#endif
 	if (IS_ERR(sclk_audio0)) {
 		printk(KERN_WARNING "%s: Cannot find sclk_audio.\n",
 				__func__);
@@ -178,7 +182,11 @@ static int __init smdk_init(void)
 	if (ret)
 		goto err1;
 
+#ifdef CONFIG_MACH_SMDKV310
+	smdk_snd_spdif_device = platform_device_alloc("soc-audio", 0);
+#else
 	smdk_snd_spdif_device = platform_device_alloc("soc-audio", -1);
+#endif
 	if (!smdk_snd_spdif_device) {
 		ret = -ENOMEM;
 		goto err2;
