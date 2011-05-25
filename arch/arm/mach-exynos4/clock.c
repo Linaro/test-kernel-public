@@ -597,6 +597,21 @@ static struct clk init_clocks_off[] = {
 		.enable		= exynos4_clk_ip_peril_ctrl,
 		.ctrlbit	= (1 << 27),
 	}, {
+		.name		= "pcm",
+		.id		= 0,
+		.enable		= exynos4_clk_audss_ctrl,
+		.ctrlbit	= S5P_AUDSS_CLKGATE_PCMSPECIAL,
+	}, {
+		.name		= "pcm",
+		.id		= 1,
+		.enable		= exynos4_clk_ip_peril_ctrl,
+		.ctrlbit	= (1 << 22),
+	}, {
+		.name		= "pcm",
+		.id		= 2,
+		.enable		= exynos4_clk_ip_peril_ctrl,
+		.ctrlbit	= (1 << 23),
+	}, {
 		.name		= "fimg2d",
 		.id		= -1,
 		.enable		= exynos4_clk_ip_image_ctrl,
@@ -1186,7 +1201,14 @@ static struct clksrc_clk clksrcs[] = {
 			.ctrlbit	= (1 << 16),
 		},
 		.reg_div = { .reg = S5P_CLKDIV_FSYS3, .shift = 8, .size = 8 },
-	}
+	}, {
+		.clk		= {
+			.name		= "sclk_pcm",
+			.id		= 0,
+			.parent		= &clk_sclk_audio0.clk,
+		},
+		.reg_div = { .reg = S5P_CLKDIV_MAUDIO, .shift = 4, .size = 8 },
+	},
 };
 
 /* Clock initialization code */
