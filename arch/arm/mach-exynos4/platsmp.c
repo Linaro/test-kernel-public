@@ -101,6 +101,12 @@ int __cpuinit boot_secondary(unsigned int cpu, struct task_struct *idle)
 	write_pen_release(cpu);
 
 	/*
+	* After wake-up, the system-wide flags register loses its value.
+	* Hence, write the address of secondary startup function again.
+	*/ 
+	__raw_writel(BSYM(virt_to_phys(exynos4_secondary_startup)), S5P_VA_SYSRAM);
+
+	/*
 	 * Send the secondary CPU a soft interrupt, thereby causing
 	 * the boot monitor to read the system wide flags register,
 	 * and branch to the address found there.
