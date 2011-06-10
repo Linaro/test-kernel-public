@@ -324,8 +324,9 @@ static void exynos4_pm_prepare(void)
 {
 	u32 tmp;
 
-	s3c_pm_do_save(exynos4_core_save, ARRAY_SIZE(exynos4_core_save));
+#ifdef CONFIG_CACHE_L2X0
 	s3c_pm_do_save(exynos4_l2cc_save, ARRAY_SIZE(exynos4_l2cc_save));
+#endif
 
 	tmp = __raw_readl(S5P_INFORM1);
 
@@ -410,15 +411,26 @@ static void exynos4_pm_resume(void)
 	exynos4_scu_enable(S5P_VA_SCU);
 
 #ifdef CONFIG_CACHE_L2X0
-	s3c_pm_do_restore_core(exynos4_l2cc_save, ARRAY_SIZE(exynos4_l2cc_save));
-	outer_inv_all();
-	/* enable L2X0*/
-	writel_relaxed(1, S5P_VA_L2CC + L2X0_CTRL);
+	/* Restore the cache controller registers only if it is not enabled already*/
+	if(!(__raw_readl(S5P_VA_L2CC + L2X0_CTRL)&1)) {
+
+		s3c_pm_do_restore_core(exynos4_l2cc_save, ARRAY_SIZE(exynos4_l2cc_save));
+		outer_inv_all();
+		/* enable L2X0*/
+		writel_relaxed(1, S5P_VA_L2CC + L2X0_CTRL);
+	}
 #endif
+}
+
+static int exynos4_pm_suspend(void)
+{
+	s3c_pm_do_save(exynos4_core_save, ARRAY_SIZE(exynos4_core_save));
+	return 0;
 }
 
 static struct syscore_ops exynos4_pm_syscore_ops = {
 	.resume		= exynos4_pm_resume,
+	.suspend	= exynos4_pm_suspend,
 };
 
 static __init int exynos4_pm_syscore_init(void)
