@@ -1270,7 +1270,6 @@ static inline void __devexit omap34xx_device_exit(struct omap_mcbsp *mcbsp)
 	if (cpu_is_omap34xx())
 		if (mcbsp->id == 2 || mcbsp->id == 3)
 			omap_st_remove(mcbsp);
->>>>>>> patched
 }
 
 /*

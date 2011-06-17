@@ -69,14 +69,15 @@ static int omap2_mcbsp1_mux_rx_clk(struct device *dev, const char *signal,
 static int omap2_mcbsp_set_clk_src(struct device *dev, struct clk *clk,
 				   const char *src)
 {
+	struct omap_mcbsp_platform_data *pdata = dev->platform_data;
 	struct clk *fck_src;
 	char *fck_src_name;
 	int r;
 
 	if (!strcmp(src, "clks_ext"))
-		fck_src_name = "pad_fck";
+		fck_src_name = pdata->clks_pad_src;
 	else if (!strcmp(src, "clks_fclk"))
-		fck_src_name = "prcm_fck";
+		fck_src_name = pdata->clks_prcm_src;
 	else
 		return -EINVAL;
 
@@ -150,6 +151,8 @@ static int omap_init_mcbsp(struct omap_hwmod *oh, void *unused)
 		pdata->mux_signal = omap2_mcbsp1_mux_rx_clk;
 
 	if (oh->class->rev == MCBSP_CONFIG_TYPE3) {
+		strcpy(pdata->clks_pad_src, "pad_clks_ck");
+		strcpy(pdata->clks_prcm_src, "mcbsp2_sync_mux_ck");
 		if (id == 2)
 			/* The FIFO has 1024 + 256 locations */
 			pdata->buffer_size = 0x500;
@@ -157,6 +160,8 @@ static int omap_init_mcbsp(struct omap_hwmod *oh, void *unused)
 			/* The FIFO has 128 locations */
 			pdata->buffer_size = 0x80;
 	} else if (oh->class->rev == MCBSP_CONFIG_TYPE4) {
+		strcpy(pdata->clks_pad_src, "pad_clks_ck");
+		strcpy(pdata->clks_prcm_src, "mcbsp2_sync_mux_ck");
 		/* The FIFO has 128 locations for all instances */
 		pdata->buffer_size = 0x80;
 	}
