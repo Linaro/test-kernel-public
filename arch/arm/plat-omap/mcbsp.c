@@ -68,17 +68,18 @@ static int omap_mcbsp_st_read(struct omap_mcbsp *mcbsp, u16 reg)
 	return __raw_readl(mcbsp->st_data->io_base_st + reg);
 }
 
+#define MCBSP_ST_READ(mcbsp, reg) \
+			omap_mcbsp_st_read(mcbsp, OMAP_ST_REG_##reg)
+#define MCBSP_ST_WRITE(mcbsp, reg, val) \
+			omap_mcbsp_st_write(mcbsp, OMAP_ST_REG_##reg, val)
+#endif
+
 #define MCBSP_READ(mcbsp, reg) \
 		omap_mcbsp_read(mcbsp, OMAP_MCBSP_REG_##reg, 0)
 #define MCBSP_WRITE(mcbsp, reg, val) \
 		omap_mcbsp_write(mcbsp, OMAP_MCBSP_REG_##reg, val)
 #define MCBSP_READ_CACHE(mcbsp, reg) \
 		omap_mcbsp_read(mcbsp, OMAP_MCBSP_REG_##reg, 1)
-
-#define MCBSP_ST_READ(mcbsp, reg) \
-			omap_mcbsp_st_read(mcbsp, OMAP_ST_REG_##reg)
-#define MCBSP_ST_WRITE(mcbsp, reg, val) \
-			omap_mcbsp_st_write(mcbsp, OMAP_ST_REG_##reg, val)
 
 static void omap_mcbsp_dump_reg(u8 id)
 {
@@ -249,6 +250,16 @@ int omap_mcbsp_dma_reg_params(unsigned int id, unsigned int stream)
 }
 EXPORT_SYMBOL(omap_mcbsp_dma_reg_params);
 
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
+static struct omap_device *find_omap_device_by_dev(struct device *dev)
+{
+	struct platform_device *pdev = container_of(dev,
+					struct platform_device, dev);
+	return container_of(pdev, struct omap_device, pdev);
+}
+#endif
+
+#ifdef CONFIG_ARCH_OMAP3
 static void omap_st_on(struct omap_mcbsp *mcbsp)
 {
 	unsigned int w;
@@ -481,7 +492,12 @@ int omap_st_is_enabled(unsigned int id)
 	return st_data->enabled;
 }
 EXPORT_SYMBOL(omap_st_is_enabled);
+#else
+static inline void omap_st_start(struct omap_mcbsp *mcbsp) {}
+static inline void omap_st_stop(struct omap_mcbsp *mcbsp) {}
+#endif
 
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
 /*
  * omap_mcbsp_set_rx_threshold configures the transmit threshold in words.
  * The threshold parameter is 1 based, and it is converted (threshold - 1)
@@ -650,6 +666,44 @@ int omap_mcbsp_get_dma_op_mode(unsigned int id)
 	return dma_op_mode;
 }
 EXPORT_SYMBOL(omap_mcbsp_get_dma_op_mode);
+
+static inline void omap34xx_mcbsp_request(struct omap_mcbsp *mcbsp)
+{
+	struct omap_device *od;
+
+	od = find_omap_device_by_dev(mcbsp->dev);
+	/*
+	 * Enable wakup behavior, smart idle and all wakeups
+	 * REVISIT: some wakeups may be unnecessary
+	 */
+	if (cpu_is_omap34xx() || cpu_is_omap44xx()) {
+		MCBSP_WRITE(mcbsp, WAKEUPEN, XRDYEN | RRDYEN);
+	}
+}
+
+static inline void omap34xx_mcbsp_free(struct omap_mcbsp *mcbsp)
+{
+	struct omap_device *od;
+
+	od = find_omap_device_by_dev(mcbsp->dev);
+
+	/*
+	 * Disable wakup behavior, smart idle and all wakeups
+	 */
+	if (cpu_is_omap34xx() || cpu_is_omap44xx()) {
+		/*
+		 * HW bug workaround - If no_idle mode is taken, we need to
+		 * go to smart_idle before going to always_idle, or the
+		 * device will not hit retention anymore.
+		 */
+
+		MCBSP_WRITE(mcbsp, WAKEUPEN, 0);
+	}
+}
+#else
+static inline void omap34xx_mcbsp_request(struct omap_mcbsp *mcbsp) {}
+static inline void omap34xx_mcbsp_free(struct omap_mcbsp *mcbsp) {}
+#endif
 
 int omap_mcbsp_request(unsigned int id)
 {
@@ -958,6 +1012,7 @@ void omap2_mcbsp1_mux_fsr_src(u8 mux)
 }
 EXPORT_SYMBOL(omap2_mcbsp1_mux_fsr_src);
 
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
 #define max_thres(m)			(mcbsp->pdata->buffer_size)
 #define valid_threshold(m, val)		((val) <= max_thres(m))
 #define THRESHOLD_PROP_BUILDER(prop)					\
@@ -1059,6 +1114,18 @@ static const struct attribute_group additional_attr_group = {
 	.attrs = (struct attribute **)additional_attrs,
 };
 
+static inline int __devinit omap_additional_add(struct device *dev)
+{
+	return sysfs_create_group(&dev->kobj, &additional_attr_group);
+}
+
+static inline void __devexit omap_additional_remove(struct device *dev)
+{
+	sysfs_remove_group(&dev->kobj, &additional_attr_group);
+}
+#endif
+
+#ifdef CONFIG_ARCH_OMAP3
 static ssize_t st_taps_show(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 {
@@ -1164,9 +1231,60 @@ static void __devexit omap_st_remove(struct omap_mcbsp *mcbsp)
 {
 	struct omap_mcbsp_st_data *st_data = mcbsp->st_data;
 
-	sysfs_remove_group(&mcbsp->dev->kobj, &sidetone_attr_group);
-	iounmap(st_data->io_base_st);
-	kfree(st_data);
+	if (st_data) {
+		sysfs_remove_group(&mcbsp->dev->kobj, &sidetone_attr_group);
+		iounmap(st_data->io_base_st);
+		kfree(st_data);
+	}
+}
+#else
+static inline int __devinit omap_st_add(struct omap_mcbsp *mcbsp) { return 0; }
+static inline void __devexit omap_st_remove(struct omap_mcbsp *mcbsp) {}
+#endif
+
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
+static inline void __devinit omap34xx_device_init(struct omap_mcbsp *mcbsp)
+{
+	mcbsp->dma_op_mode = MCBSP_DMA_MODE_ELEMENT;
+	if (cpu_is_omap34xx() || cpu_is_omap44xx()) {
+		/*
+		 * Initially configure the maximum thresholds to a safe value.
+		 * The McBSP FIFO usage with these values should not go under
+		 * 16 locations.
+		 * If the whole FIFO without safety buffer is used, than there
+		 * is a possibility that the DMA will be not able to push the
+		 * new data on time, causing channel shifts in runtime.
+		 */
+		mcbsp->max_tx_thres = max_thres(mcbsp) - 0x10;
+		mcbsp->max_rx_thres = max_thres(mcbsp) - 0x10;
+		/*
+		 * REVISIT: Set dmap_op_mode to THRESHOLD as default
+		 * for mcbsp2 instances.
+		 */
+		if (omap_additional_add(mcbsp->dev))
+			dev_warn(mcbsp->dev,
+				"Unable to create additional controls\n");
+	} else {
+		mcbsp->max_tx_thres = -EINVAL;
+		mcbsp->max_rx_thres = -EINVAL;
+	}
+
+	if (cpu_is_omap34xx()) {
+		if (mcbsp->id == 2 || mcbsp->id == 3)
+			if (omap_st_add(mcbsp))
+				dev_warn(mcbsp->dev,
+				 "Unable to create sidetone controls\n");
+	}
+}
+
+static inline void __devexit omap34xx_device_exit(struct omap_mcbsp *mcbsp)
+{
+	if (cpu_is_omap34xx() || cpu_is_omap44xx())
+		omap_additional_remove(mcbsp->dev);
+	if (cpu_is_omap34xx())
+		if (mcbsp->id == 2 || mcbsp->id == 3)
+			omap_st_remove(mcbsp);
+>>>>>>> patched
 }
 
 /*
