@@ -116,6 +116,9 @@ static void arm_dma_sync_single_for_device(struct device *dev,
 static int arm_dma_set_mask(struct device *dev, u64 dma_mask);
 
 struct dma_map_ops arm_dma_ops = {
+	.alloc			= arm_dma_alloc,
+	.free			= arm_dma_free,
+	.mmap			= arm_dma_mmap,
 	.map_page		= arm_dma_map_page,
 	.unmap_page		= arm_dma_unmap_page,
 	.map_sg			= arm_dma_map_sg,
@@ -665,37 +668,34 @@ static void *__dma_alloc(struct device *dev, size_t size, dma_addr_t *handle,
  * Allocate DMA-coherent memory space and return both the kernel remapped
  * virtual and bus address for that space.
  */
-void *dma_alloc_coherent(struct device *dev, size_t size, dma_addr_t *handle,
-			 gfp_t gfp)
+void *arm_dma_alloc(struct device *dev, size_t size, dma_addr_t *handle,
+		    gfp_t gfp, struct dma_attrs *attrs)
 {
+	pgprot_t prot = dma_get_attr(DMA_ATTR_WRITE_COMBINE, attrs) ?
+			pgprot_writecombine(pgprot_kernel) :
+			pgprot_dmacoherent(pgprot_kernel);
 	void *memory;
 
 	if (dma_alloc_from_coherent(dev, size, handle, &memory))
 		return memory;
 
-	return __dma_alloc(dev, size, handle, gfp,
-			   pgprot_dmacoherent(pgprot_kernel));
+	return __dma_alloc(dev, size, handle, gfp, prot);
 }
-EXPORT_SYMBOL(dma_alloc_coherent);
 
 /*
- * Allocate a writecombining region, in much the same way as
- * dma_alloc_coherent above.
+ * Create userspace mapping for the DMA-coherent memory.
  */
-void *
-dma_alloc_writecombine(struct device *dev, size_t size, dma_addr_t *handle, gfp_t gfp)
-{
-	return __dma_alloc(dev, size, handle, gfp,
-			   pgprot_writecombine(pgprot_kernel));
-}
-EXPORT_SYMBOL(dma_alloc_writecombine);
-
-static int dma_mmap(struct device *dev, struct vm_area_struct *vma,
-		    void *cpu_addr, dma_addr_t dma_addr, size_t size)
+int arm_dma_mmap(struct device *dev, struct vm_area_struct *vma,
+		 void *cpu_addr, dma_addr_t dma_addr, size_t size,
+		 struct dma_attrs *attrs)
 {
 	int ret = -ENXIO;
 #ifdef CONFIG_MMU
 	unsigned long pfn = dma_to_pfn(dev, dma_addr);
+	vma->vm_page_prot = dma_get_attr(DMA_ATTR_WRITE_COMBINE, attrs) ?
+			    pgprot_writecombine(vma->vm_page_prot) :
+			    pgprot_dmacoherent(vma->vm_page_prot);
+
 	ret = remap_pfn_range(vma, vma->vm_start,
 			      pfn + vma->vm_pgoff,
 			      vma->vm_end - vma->vm_start,
@@ -705,27 +705,12 @@ static int dma_mmap(struct device *dev, struct vm_area_struct *vma,
 	return ret;
 }
 
-int dma_mmap_coherent(struct device *dev, struct vm_area_struct *vma,
-		      void *cpu_addr, dma_addr_t dma_addr, size_t size)
-{
-	vma->vm_page_prot = pgprot_dmacoherent(vma->vm_page_prot);
-	return dma_mmap(dev, vma, cpu_addr, dma_addr, size);
-}
-EXPORT_SYMBOL(dma_mmap_coherent);
-
-int dma_mmap_writecombine(struct device *dev, struct vm_area_struct *vma,
-			  void *cpu_addr, dma_addr_t dma_addr, size_t size)
-{
-	vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
-	return dma_mmap(dev, vma, cpu_addr, dma_addr, size);
-}
-EXPORT_SYMBOL(dma_mmap_writecombine);
-
 
 /*
  * Free a buffer as defined by the above mapping.
  */
-void dma_free_coherent(struct device *dev, size_t size, void *cpu_addr, dma_addr_t handle)
+void arm_dma_free(struct device *dev, size_t size, void *cpu_addr,
+		  dma_addr_t handle, struct dma_attrs *attrs)
 {
 	struct page *page = pfn_to_page(dma_to_pfn(dev, handle));
 
@@ -749,7 +734,6 @@ void dma_free_coherent(struct device *dev, size_t size, void *cpu_addr, dma_addr
 		__free_from_contiguous(dev, page, size);
 	}
 }
-EXPORT_SYMBOL(dma_free_coherent);
 
 static void dma_cache_maint_page(struct page *page, unsigned long offset,
 	size_t size, enum dma_data_direction dir,
