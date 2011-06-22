@@ -253,7 +253,7 @@ static struct resource smdkv310_smsc911x_resources[] = {
 static struct smsc911x_platform_config smsc9215_config = {
 	.irq_polarity	= SMSC911X_IRQ_POLARITY_ACTIVE_LOW,
 	.irq_type	= SMSC911X_IRQ_TYPE_PUSH_PULL,
-	.flags		= SMSC911X_USE_16BIT | SMSC911X_FORCE_INTERNAL_PHY,
+	.flags		= SMSC911X_USE_32BIT | SMSC911X_FORCE_INTERNAL_PHY,
 	.phy_interface	= PHY_INTERFACE_MODE_MII,
 	.mac		= {0x00, 0x80, 0x00, 0x23, 0x45, 0x67},
 };
