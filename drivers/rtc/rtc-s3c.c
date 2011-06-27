@@ -577,6 +577,10 @@ static int s3c_rtc_resume(struct platform_device *pdev)
 {
 	unsigned int tmp;
 
+	/* Clear RTC Alarm pending interrupt if resuming due to ALARM interrupt */
+	if (readb(s3c_rtc_base + S3C2410_INTP) & S3C2410_INTP_ALM)
+		writeb(S3C2410_INTP_ALM, s3c_rtc_base + S3C2410_INTP);
+	
 	s3c_rtc_enable(pdev, 1);
 	writeb(ticnt_save, s3c_rtc_base + S3C2410_TICNT);
 	if (s3c_rtc_cpu_type == TYPE_S3C64XX && ticnt_en_save) {
