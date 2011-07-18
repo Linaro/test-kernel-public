@@ -325,7 +325,7 @@ int s3cfb_map_default_video_memory(struct s3cfb_global *fbdev,
 	reserved_size = mem_info.total_size;
 	fix->smem_start = (dma_addr_t)cma_alloc
 		(fbdev->dev, "fimd", (size_t)reserved_size, 0);
-	fb->screen_base = phys_to_virt(fix->smem_start);
+	fb->screen_base = cma_get_virt(fix->smem_start, reserved_size, 1);
 #elif defined(CONFIG_S5P_MEM_BOOTMEM)
 	fix->smem_start = s5p_get_media_memory_bank(S5P_MDEV_FIMD, 0);
 	fix->smem_len = s5p_get_media_memsize_bank(S5P_MDEV_FIMD, 0);
