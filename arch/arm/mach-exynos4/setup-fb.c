@@ -132,6 +132,8 @@ int s3cfb_clk_on(struct platform_device *pdev, struct clk **s3cfb_clk)
 
 	clk_set_parent(sclk0, mout_mpll);
 
+	rate = clk_round_rate(sclk0, 134000000);
+	dev_dbg(&pdev->dev, "set fimd sclk rate to %d\n", rate);
 	if (!rate)
 		rate = 134000000;
 
