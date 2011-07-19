@@ -94,3 +94,9 @@ config S5P_SETUP_MIPIPHY
 	bool
 	help
 	  Compile in common setup code for MIPI-CSIS and MIPI-DSIM devices
+
+config S5P_MEM_BOOTMEM
+	bool "Fixed memory through Bootmem"
+	depends on ARCH_EXYNOS4
+	help
+	  Use bootmem to reserve machine specific memory.
