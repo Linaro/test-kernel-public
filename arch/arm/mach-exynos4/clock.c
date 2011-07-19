@@ -1385,7 +1385,6 @@ static struct clksrc_clk *sysclks[] = {
 	&clk_sclk_audio1,
 	&clk_sclk_audio2,
 	&clk_sclk_spdif,
-	&clk_sclk_dac,
 };
 
 static u32 epll_div[][6] = {
@@ -1546,10 +1545,6 @@ void __init_or_cpufreq exynos4_setup_clocks(void)
 	clk_set_parent(&clk_mout_audss.clk, &clk_fout_epll);
 	clk_set_parent(&clk_sclk_audio0.clk, &clk_mout_epll.clk);
 	clk_set_parent(&clk_mout_epll.clk, &clk_fout_epll);
-	
-	clk_fout_vpll.enable = exynos4_clk_vpll_ctrl;
-        clk_fout_vpll.ops = &exynos4_vpll_ops;
-
 }
 
 static struct clk *clks[] __initdata = {
