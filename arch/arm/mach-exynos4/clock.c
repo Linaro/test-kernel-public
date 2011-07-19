@@ -63,6 +63,21 @@ static struct clk clk_audiocdclk0 = {
 	.id		= 0,
 };
 
+static struct clk clk_audiocdclk1 = {
+	.name       = "audiocdclk",
+	.id     = 0,
+};
+
+static struct clk clk_audiocdclk2 = {
+	.name       = "audiocdclk",
+	.id     = -1,
+};
+
+static struct clk clk_spdifcdclk = {
+	.name		= "spdifcdclk",
+	.id		= -1,
+};
+
 static int exynos4_clksrc_mask_top_ctrl(struct clk *clk, int enable)
 {
 	return s5p_gatectrl(S5P_CLKSRC_MASK_TOP, clk, enable);
@@ -612,6 +627,11 @@ static struct clk init_clocks_off[] = {
 		.enable		= exynos4_clk_ip_peril_ctrl,
 		.ctrlbit	= (1 << 23),
 	}, {
+		.name		= "spdif",
+		.id		= -1,
+		.enable		= exynos4_clk_ip_peril_ctrl,
+		.ctrlbit	= (1 << 26),
+	}, {
 		.name		= "fimg2d",
 		.id		= -1,
 		.enable		= exynos4_clk_ip_image_ctrl,
@@ -800,6 +820,63 @@ static struct clksrc_clk clk_sclk_audio0 = {
 	.reg_div = { .reg = S5P_CLKDIV_MAUDIO, .shift = 0, .size = 4 },
 };
 
+static struct clk *clkset_sclk_audio1_list[] = {
+	[0] = &clk_audiocdclk1,
+	[1] = NULL,
+	[2] = &clk_sclk_hdmi27m,
+	[3] = &clk_sclk_usbphy0,
+	[4] = &clk_sclk_xxti,
+	[5] = &clk_sclk_xusbxti,
+	[6] = &clk_mout_mpll.clk,
+	[7] = &clk_mout_epll.clk,
+	[8] = &clk_sclk_vpll.clk,
+};
+
+static struct clksrc_sources clkset_sclk_audio1 = {
+	.sources	= clkset_sclk_audio1_list,
+	.nr_sources	= ARRAY_SIZE(clkset_sclk_audio1_list),
+};
+
+static struct clksrc_clk clk_sclk_audio1 = {
+		.clk		= {
+		.name		= "audio-bus",
+		.id		= 1,
+		.enable		= exynos4_clksrc_mask_peril1_ctrl,
+		.ctrlbit	= (1 << 0),
+	},
+	.sources = &clkset_sclk_audio1,
+	.reg_src = { .reg = S5P_CLKSRC_PERIL1, .shift = 0, .size = 4 },
+	.reg_div = { .reg = S5P_CLKDIV_PERIL4, .shift = 4, .size = 8 },
+};
+
+static struct clk *clkset_sclk_audio2_list[] = {
+	[0] = &clk_audiocdclk2,
+	[1] = NULL,
+	[2] = &clk_sclk_hdmi27m,
+	[3] = &clk_sclk_usbphy0,
+	[4] = &clk_sclk_xxti,
+	[5] = &clk_sclk_xusbxti,
+	[6] = &clk_mout_mpll.clk,
+	[7] = &clk_mout_epll.clk,
+	[8] = &clk_sclk_vpll.clk,
+};
+
+static struct clksrc_sources clkset_sclk_audio2 = {
+	.sources	= clkset_sclk_audio2_list,
+	.nr_sources	= ARRAY_SIZE(clkset_sclk_audio2_list),
+};
+
+static struct clksrc_clk clk_sclk_audio2 = {
+	.clk	= {
+		.name		= "audio-bus",
+		.id		= 2,
+		.enable		= exynos4_clksrc_mask_peril1_ctrl,
+		.ctrlbit	= (1 << 4),
+	},
+	.sources = &clkset_sclk_audio2,
+	.reg_src = { .reg = S5P_CLKSRC_PERIL1, .shift = 4, .size = 4 },
+	.reg_div = { .reg = S5P_CLKDIV_PERIL4, .shift = 16, .size = 4 },
+};
 static struct clk *clkset_mout_audss_list[] = {
 	NULL,
 	&clk_fout_epll,
@@ -840,6 +917,65 @@ static struct clksrc_clk clk_sclk_audss = {
 	.sources	= &clkset_sclk_audss,
 	.reg_src	= { .reg = S5P_CLKSRC_AUDSS, .shift = 2, .size = 2 },
 	.reg_div	= { .reg = S5P_CLKDIV_AUDSS, .shift = 4, .size = 8 },
+};
+
+static struct clk *clkset_sclk_spdif_list[] = {
+	[0] = &clk_sclk_audio0.clk,
+	[1] = &clk_sclk_audio1.clk,
+	[2] = &clk_sclk_audio2.clk,
+	[3] = &clk_spdifcdclk,
+};
+
+static struct clksrc_sources clkset_sclk_spdif = {
+	.sources	= clkset_sclk_spdif_list,
+	.nr_sources	= ARRAY_SIZE(clkset_sclk_spdif_list),
+};
+
+static int exynos4_spdif_set_rate(struct clk *clk, unsigned long rate)
+{
+	struct clk *pclk;
+	int ret;
+
+	pclk = clk_get_parent(clk);
+	if (IS_ERR(pclk))
+		return -EINVAL;
+
+	ret = pclk->ops->set_rate(pclk, rate);
+	clk_put(pclk);
+
+	return ret;
+}
+
+static unsigned long exynos4_spdif_get_rate(struct clk *clk)
+{
+	struct clk *pclk;
+	int rate;
+
+	pclk = clk_get_parent(clk);
+	if (IS_ERR(pclk))
+		return -EINVAL;
+
+	rate = pclk->ops->get_rate(clk);
+	clk_put(pclk);
+
+	return rate;
+}
+
+static struct clk_ops exynos4_sclk_spdif_ops = {
+	.set_rate	= exynos4_spdif_set_rate,
+	.get_rate	= exynos4_spdif_get_rate,
+};
+
+static struct clksrc_clk clk_sclk_spdif = {
+	.clk	= {
+		.name		= "sclk_spdif",
+		.id		= -1,
+		.enable		= exynos4_clksrc_mask_peril1_ctrl,
+		.ctrlbit	= (1 << 8),
+		.ops		= &exynos4_sclk_spdif_ops,
+	},
+	.sources = &clkset_sclk_spdif,
+	.reg_src = { .reg = S5P_CLKSRC_PERIL1, .shift = 8, .size = 2 },
 };
 
 static struct clk *clkset_group_list[] = {
@@ -1246,6 +1382,10 @@ static struct clksrc_clk *sysclks[] = {
 	&clk_dout_mmc4,
 	&clk_mout_g2d0,
 	&clk_mout_g2d1,
+	&clk_sclk_audio1,
+	&clk_sclk_audio2,
+	&clk_sclk_spdif,
+	&clk_sclk_dac,
 };
 
 static u32 epll_div[][6] = {
