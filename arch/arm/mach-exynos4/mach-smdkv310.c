@@ -24,6 +24,7 @@
 #include <plat/regs-srom.h>
 #include <plat/exynos4.h>
 #include <plat/cpu.h>
+#include <plat/fb.h>
 #include <plat/devs.h>
 #include <plat/keypad.h>
 #include <plat/sdhci.h>
@@ -164,6 +165,9 @@ static struct i2c_board_info i2c_devs1[] __initdata = {
 };
 
 static struct platform_device *smdkv310_devices[] __initdata = {
+#ifdef CONFIG_FB_S3C
+	&s3c_device_fb,
+#endif
 	&s3c_device_hsmmc0,
 	&s3c_device_hsmmc1,
 	&s3c_device_hsmmc2,
