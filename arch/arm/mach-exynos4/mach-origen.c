@@ -156,6 +156,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fimc1,
 	&s3c_device_fimc2,
 #endif
+	&origen_device_button,
 };
 
 static void __init origen_map_io(void)
