@@ -57,4 +57,6 @@
 #define S3C_UART_OFFSET		(0x400)
 #endif
 
+#define S5P_VA_AUDSS		S3C_ADDR(0X02A00000)
+
 #endif /* __ASM_PLAT_MAP_S5P_H */
