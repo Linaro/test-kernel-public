@@ -82,6 +82,11 @@ config EXYNOS4_SETUP_KEYPAD
 	help
 	  Common setup code for keypad.
 
+config EXYNOS4_DEV_TS
+        bool
+        help
+           Common setup code for touch screen.
+
 config EXYNOS4_SETUP_SDHCI
 	bool
 	select EXYNOS4_SETUP_SDHCI_GPIO
@@ -135,10 +140,12 @@ config MACH_SMDKV310
 	select S3C_DEV_HSMMC2
 	select S3C_DEV_HSMMC3
 	select SAMSUNG_DEV_KEYPAD
+	select SAMSUNG_DEV_TS
 	select EXYNOS4_DEV_PD
 	select EXYNOS4_DEV_SYSMMU
 	select EXYNOS4_SETUP_I2C1
 	select EXYNOS4_SETUP_KEYPAD
+	select EXYNOS4_SETUP_TS
 	select EXYNOS4_SETUP_SDHCI
 	help
 	  Machine support for Samsung SMDKV310
