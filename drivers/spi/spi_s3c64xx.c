@@ -86,6 +86,7 @@
 #define S3C64XX_SPI_INT_RX_FIFORDY_EN		(1<<1)
 #define S3C64XX_SPI_INT_TX_FIFORDY_EN		(1<<0)
 
+#define S3C64XX_SPI_ST_TX_DONE			(1<<25)
 #define S3C64XX_SPI_ST_RX_OVERRUN_ERR		(1<<5)
 #define S3C64XX_SPI_ST_RX_UNDERRUN_ERR	(1<<4)
 #define S3C64XX_SPI_ST_TX_OVERRUN_ERR		(1<<3)
@@ -116,7 +117,7 @@
 					(((i)->fifo_lvl_mask + 1))) \
 					? 1 : 0)
 
-#define S3C64XX_SPI_ST_TX_DONE(v, i) (((v) & (1 << (i)->tx_st_done)) ? 1 : 0)
+#define S3C64XX_SPI_TX_DONE(v) (((v) & S3C64XX_SPI_ST_TX_DONE) ? 1 : 0)
 #define TX_FIFO_LVL(v, i) (((v) >> 6) & (i)->fifo_lvl_mask)
 #define RX_FIFO_LVL(v, i) (((v) >> (i)->rx_lvl_offset) & (i)->fifo_lvl_mask)
 
@@ -364,7 +365,7 @@ static int wait_for_xfer(struct s3c64xx_spi_driver_data *sdd,
 			val = msecs_to_loops(10);
 			status = readl(regs + S3C64XX_SPI_STATUS);
 			while ((TX_FIFO_LVL(status, sci)
-				|| !S3C64XX_SPI_ST_TX_DONE(status, sci))
+				|| !S3C64XX_SPI_TX_DONE(status))
 					&& --val) {
 				cpu_relax();
 				status = readl(regs + S3C64XX_SPI_STATUS);
