@@ -16,6 +16,9 @@
 #include <linux/smsc911x.h>
 #include <linux/io.h>
 #include <linux/i2c.h>
+#if defined(CONFIG_S5P_MEM_CMA)
+#include <linux/cma.h>
+#endif
 #include <linux/input.h>
 #include <linux/clk.h>
 
@@ -334,6 +337,42 @@ static char const *smdkv310_dt_compat[] __initdata = {
 	NULL
 };
 
+#if defined(CONFIG_S5P_MEM_CMA)
+
+static void __init exynos4_reserve_cma(void)
+{
+	static struct cma_region regions[] = {
+		{
+			.name = "common",
+			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
+			.start = 0
+		},
+		{}
+	};
+	static const char map[] __initconst = "*=common";
+	int i = 0;
+	unsigned int bank0_end = meminfo.bank[0].start +
+					meminfo.bank[0].size;
+	unsigned int bank1_end = meminfo.bank[1].start +
+					meminfo.bank[1].size;
+
+	for (; i < ARRAY_SIZE(regions) ; i++) {
+		if (regions[i].start == 0) {
+			regions[i].start = bank0_end - regions[i].size;
+			bank0_end = regions[i].start;
+		} else if (regions[i].start == 1) {
+			regions[i].start = bank1_end - regions[i].size;
+			bank1_end = regions[i].start;
+		}
+		printk(KERN_ERR "CMA reserve : %s, addr is 0x%x, size is 0x%x\n",
+			regions[i].name, regions[i].start, regions[i].size);
+	}
+
+	cma_set_defaults(regions, map);
+	cma_early_regions_reserve(NULL);
+}
+#endif
+
 MACHINE_START(SMDKV310, "SMDKV310")
 	/* Maintainer: Kukjin Kim <kgene.kim@samsung.com> */
 	/* Maintainer: Changhwan Youn <chaos.youn@samsung.com> */
@@ -343,5 +382,9 @@ MACHINE_START(SMDKV310, "SMDKV310")
 	.init_machine	= smdkv310_machine_init,
 	.timer		= &exynos4_timer,
 	.dt_compat	= smdkv310_dt_compat,
+#if defined(CONFIG_S5P_MEM_CMA)
+	.reserve    = &exynos4_reserve_cma,
+#else
 	.reserve	= &s5p_reserve_bootmem,
+#endif
 MACHINE_END
