@@ -13,7 +13,6 @@
 #include <linux/poll.h>
 #include <linux/dma-mapping.h>
 #include <linux/platform_device.h>
-#include <linux/dma-mapping.h>
 #include <asm/cacheflush.h>
 #include "s3cfb.h"
 
