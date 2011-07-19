@@ -42,5 +42,14 @@ struct s5p_media_device media_devs[] = {
 		.paddr = 0,
 	},
 #endif
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMG2D
+    {
+        .id = S5P_MDEV_FIMG2D,
+        .name = "fimg2d",
+        .bank = 0,
+        .memsize = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMD0 * SZ_1K,
+        .paddr = 0,
+    },
+#endif
 };
 int nr_media_devs = (sizeof(media_devs) / sizeof(media_devs[0]));
