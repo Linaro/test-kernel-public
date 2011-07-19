@@ -33,6 +33,7 @@
 #include <plat/fb.h>
 #include <plat/fimg2d.h>
 #include <plat/fimc.h>
+#include <plat/pd.h>
 
 #include <mach/map.h>
 #include <mach/bootmem.h>
@@ -136,6 +137,13 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_hsmmc2,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
+	&exynos4_device_pd[PD_MFC],
+	&exynos4_device_pd[PD_G3D],
+	&exynos4_device_pd[PD_LCD0],
+	&exynos4_device_pd[PD_LCD1],
+	&exynos4_device_pd[PD_CAM],
+	&exynos4_device_pd[PD_TV],
+	&exynos4_device_pd[PD_GPS],
 	&exynos4_device_sysmmu,
 #ifdef CONFIG_VIDEO_FIMG2D
 	&s5p_device_fimg2d,
