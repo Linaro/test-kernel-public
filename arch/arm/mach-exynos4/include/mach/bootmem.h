@@ -20,5 +20,6 @@
 #define	S5P_MDEV_FIMC2		5
 #define	S5P_MDEV_FIMC3		6
 #define	S5P_MDEV_JPEG		7
+#define S5P_MDEV_FIMG2D		8
 #endif /* _EXYNOS4_BOOTMEM_H */
 

@@ -1117,6 +1117,8 @@ static struct clksrc_clk *sysclks[] = {
 	&clk_dout_mmc2,
 	&clk_dout_mmc3,
 	&clk_dout_mmc4,
+	&clk_mout_g2d0,
+	&clk_mout_g2d1,
 };
 
 static int xtal_rate;
