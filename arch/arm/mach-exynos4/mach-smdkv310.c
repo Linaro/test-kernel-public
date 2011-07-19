@@ -24,6 +24,8 @@
 #include <plat/fimg2d.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/max8649.h>
+#include <linux/regulator/fixed.h>
+#include <linux/mfd/wm8994/pdata.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
@@ -274,6 +276,21 @@ static struct fimg2d_platdata fimg2d_data __initdata = {
     .clkrate = 250 * 1000000,
 };
 #endif
+
+#if defined(CONFIG_SND_SOC_WM8994) || defined(CONFIG_SND_SOC_WM8994_MODULE)
+static struct wm8994_pdata wm8994_platform_data = {
+	/* configure gpio1 function: 0x0001(Logic level input/output) */
+	.gpio_defaults[0] = 0x0001,
+	/* configure gpio3/4/5/7 function for AIF2 voice */
+	.gpio_defaults[2] = 0x8100,/*BCLK2 in*/
+	.gpio_defaults[3] = 0x8100,/*LRCLK2 in*/
+	.gpio_defaults[4] = 0x8100,/*DACDAT2 in*/
+	/* configure gpio6 function: 0x0001(Logic level input/output) */
+	.gpio_defaults[5] = 0x0001,
+	.gpio_defaults[6] = 0x0100,/*ADCDAT2 out*/
+};
+#endif
+
 static struct regulator_consumer_supply max8952_supply[] = {
 	REGULATOR_SUPPLY("vdd_arm", NULL),
 };
@@ -394,7 +411,11 @@ static struct samsung_keypad_platdata smdkv310_keypad_data __initdata = {
 };
 
 static struct i2c_board_info i2c_devs1[] __initdata = {
-	{I2C_BOARD_INFO("wm8994", 0x1a),},
+	{I2C_BOARD_INFO("wm8994", 0x1a),
+#if defined(CONFIG_SND_SOC_WM8994) || defined(CONFIG_SND_SOC_WM8994_MODULE)
+		.platform_data  = &wm8994_platform_data,
+#endif
+	},
 };
 
 static struct platform_device *smdkv310_devices[] __initdata = {
