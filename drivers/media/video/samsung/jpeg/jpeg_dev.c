@@ -30,7 +30,6 @@
 #include <linux/time.h>
 #include <linux/clk.h>
 #include <linux/semaphore.h>
-#include <linux/vmalloc.h>
 #include <linux/sched.h>
 #include <asm/page.h>
 
