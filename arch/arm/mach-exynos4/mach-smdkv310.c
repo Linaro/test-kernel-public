@@ -35,6 +35,7 @@
 #include <plat/bootmem.h>
 #include <plat/s3c64xx-spi.h>
 #include <plat/gpio-cfg.h>
+#include <plat/ts.h>
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-mem.h>
@@ -119,6 +120,16 @@ static struct s3c_sdhci_platdata smdkv310_hsmmc3_pdata __initdata = {
 	.ext_cd_gpio_invert	= 1,
 	.clk_type		= S3C_SDHCI_CLK_DIV_EXTERNAL,
 };
+
+#ifdef CONFIG_TOUCHSCREEN_EXYNOS4
+static struct s3c_ts_mach_info s3c_ts_platform __initdata = {
+	.delay                  = 10000,
+	.presc                  = 49,
+	.oversampling_shift     = 2,
+	.resol_bit              = 12,
+	.s3c_adc_con            = ADC_TYPE_2,
+};
+#endif
 
 static struct resource smdkv310_smsc911x_resources[] = {
 	[0] = {
@@ -211,6 +222,9 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 #ifdef CONFIG_FB_S3C_AMS369FG06
 	&exynos4_device_spi1,
 #endif
+#ifdef CONFIG_TOUCHSCREEN_EXYNOS4
+	&s3c_device_ts,
+#endif
 	&s3c_device_hsmmc0,
 	&s3c_device_hsmmc1,
 	&s3c_device_hsmmc2,
@@ -276,6 +290,9 @@ static void __init smdkv310_machine_init(void)
 
 	smdkv310_smsc911x_init();
 
+#ifdef CONFIG_TOUCHSCREEN_EXYNOS4
+	s3c_ts_set_platdata(&s3c_ts_platform);
+#endif
 	s3c_sdhci0_set_platdata(&smdkv310_hsmmc0_pdata);
 	s3c_sdhci1_set_platdata(&smdkv310_hsmmc1_pdata);
 	s3c_sdhci2_set_platdata(&smdkv310_hsmmc2_pdata);
