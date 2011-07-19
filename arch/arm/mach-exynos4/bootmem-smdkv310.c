@@ -24,5 +24,14 @@
 #include <mach/bootmem.h>
 
 struct s5p_media_device media_devs[] = {
+#ifdef CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMD0
+	{
+		.id = S5P_MDEV_FIMD,
+		.name = "fimd",
+		.bank = 0,
+		.memsize = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMD0 * SZ_1K,
+		.paddr = 0,
+	},
+#endif
 };
 int nr_media_devs = (sizeof(media_devs) / sizeof(media_devs[0]));

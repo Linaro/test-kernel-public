@@ -196,7 +196,6 @@ extern inline struct s3cfb_global	*get_fimd_global(int id);
 /* S3CFB */
 extern struct s3c_platform_fb *to_fb_plat(struct device *dev);
 extern int s3cfb_draw_logo(struct fb_info *fb);
-extern int s3cfb_draw_rectangle(struct fb_info *fb);
 extern int s3cfb_enable_window(struct s3cfb_global *fbdev, int id);
 extern int s3cfb_disable_window(struct s3cfb_global *fbdev, int id);
 extern int s3cfb_update_power_state(struct s3cfb_global *fbdev, int id,
