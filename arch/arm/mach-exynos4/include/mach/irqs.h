@@ -76,6 +76,11 @@
 #define IRQ_LCD0		COMBINER_IRQ(11, 0)
 #define IRQ_LCD1		COMBINER_IRQ(11, 1)
 
+#define IRQ_ADC0			COMBINER_IRQ(19, 0)
+#define IRQ_PEN0			COMBINER_IRQ(19, 1)
+#define IRQ_ADC1			COMBINER_IRQ(19, 2)
+#define IRQ_PEN1			COMBINER_IRQ(19, 3)
+
 #define IRQ_PDMA0		COMBINER_IRQ(21, 0)
 #define IRQ_PDMA1		COMBINER_IRQ(21, 1)
 
@@ -163,5 +168,13 @@
 
 /* Set the default NR_IRQS */
 #define NR_IRQS			(IRQ_GPIO_END)
+
+#if defined(CONFIG_S3C_DEV_ADC)
+#define IRQ_ADC                 IRQ_ADC0
+#define IRQ_TC                  IRQ_PEN0
+#else
+#define IRQ_ADC                 IRQ_ADC1
+#define IRQ_TC                  IRQ_PEN1
+#endif
 
 #endif /* __ASM_ARCH_IRQS_H */
