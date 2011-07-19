@@ -10,12 +10,14 @@
 
 #include <linux/serial_core.h>
 #include <linux/gpio.h>
+#include <linux/spi/spi.h>
 #include <linux/mmc/host.h>
 #include <linux/platform_device.h>
 #include <linux/smsc911x.h>
 #include <linux/io.h>
 #include <linux/i2c.h>
 #include <linux/input.h>
+#include <linux/clk.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
@@ -31,7 +33,13 @@
 #include <plat/iic.h>
 #include <plat/pd.h>
 #include <plat/bootmem.h>
+#include <plat/s3c64xx-spi.h>
+#include <plat/gpio-cfg.h>
 
+#include <mach/regs-gpio.h>
+#include <mach/regs-mem.h>
+#include <mach/gpio.h>
+#include <mach/spi-clocks.h>
 #include <mach/map.h>
 #include <mach/bootmem.h>
 
@@ -142,6 +150,36 @@ static struct platform_device smdkv310_smsc911x = {
 		.platform_data	= &smsc9215_config,
 	},
 };
+#ifdef CONFIG_FB_S3C_AMS369FG06
+
+static struct s3c_platform_fb ams369fg06_data __initdata = {
+	.hw_ver = 0x70,
+	.clk_name = "sclk_lcd",
+	.nr_wins = 5,
+	.default_win = CONFIG_FB_S3C_DEFAULT_WINDOW,
+	.swap = FB_SWAP_HWORD | FB_SWAP_WORD,
+};
+
+#define         LCD_BUS_NUM     1
+static struct s3c64xx_spi_csinfo spi1_csi[] = {
+	[0] = {
+		.line = EXYNOS4_GPB(5),
+		.set_level = gpio_set_value,
+	},
+};
+
+static struct spi_board_info spi_board_info[] __initdata = {
+	{
+		.modalias       = "ams369fg06",
+		.platform_data  = NULL,
+		.max_speed_hz   = 1200000,
+		.bus_num        = LCD_BUS_NUM,
+		.chip_select    = 0,
+		.mode           = SPI_MODE_3,
+		.controller_data = &spi1_csi[0],
+	}
+};
+#endif
 
 static uint32_t smdkv310_keymap[] __initdata = {
 	/* KEY(row, col, keycode) */
@@ -169,6 +207,9 @@ static struct i2c_board_info i2c_devs1[] __initdata = {
 static struct platform_device *smdkv310_devices[] __initdata = {
 #ifdef CONFIG_FB_S3C
 	&s3c_device_fb,
+#endif
+#ifdef CONFIG_FB_S3C_AMS369FG06
+	&exynos4_device_spi1,
 #endif
 	&s3c_device_hsmmc0,
 	&s3c_device_hsmmc1,
@@ -224,6 +265,12 @@ static void __init smdkv310_map_io(void)
 
 static void __init smdkv310_machine_init(void)
 {
+#ifdef CONFIG_FB_S3C_AMS369FG06
+	struct clk *sclk = NULL;
+	struct clk *prnt = NULL;
+	struct device *spi_dev = &exynos4_device_spi1.dev;
+#endif
+
 	s3c_i2c1_set_platdata(NULL);
 	i2c_register_board_info(1, i2c_devs1, ARRAY_SIZE(i2c_devs1));
 
@@ -235,8 +282,34 @@ static void __init smdkv310_machine_init(void)
 	s3c_sdhci3_set_platdata(&smdkv310_hsmmc3_pdata);
 
 	samsung_keypad_set_platdata(&smdkv310_keypad_data);
+#ifdef CONFIG_FB_S3C
+#ifdef CONFIG_FB_S3C_AMS369FG06
+#else
+	s3cfb_set_platdata(NULL);
+#endif
+#endif
 
 	platform_add_devices(smdkv310_devices, ARRAY_SIZE(smdkv310_devices));
+#ifdef CONFIG_FB_S3C_AMS369FG06
+	sclk = clk_get(spi_dev, "sclk_spi");
+	if (IS_ERR(sclk))
+		dev_err(spi_dev, "failed to get sclk for SPI-1\n");
+	prnt = clk_get(spi_dev, "mout_mpll");
+	if (IS_ERR(prnt))
+		dev_err(spi_dev, "failed to get prnt\n");
+	clk_set_parent(sclk, prnt);
+	clk_put(prnt);
+
+	if (!gpio_request(EXYNOS4_GPB(5), "LCD_CS")) {
+		gpio_direction_output(EXYNOS4_GPB(5), 1);
+		s3c_gpio_cfgpin(EXYNOS4_GPB(5), S3C_GPIO_SFN(1));
+		s3c_gpio_setpull(EXYNOS4_GPB(5), S3C_GPIO_PULL_UP);
+		exynos4_spi_set_info(LCD_BUS_NUM, EXYNOS4_SPI_SRCCLK_SCLK,
+			ARRAY_SIZE(spi1_csi));
+	}
+	spi_register_board_info(spi_board_info, ARRAY_SIZE(spi_board_info));
+	s3cfb_set_platdata(&ams369fg06_data);
+#endif
 }
 
 static char const *smdkv310_dt_compat[] __initdata = {
