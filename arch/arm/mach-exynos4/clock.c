@@ -22,6 +22,7 @@
 #include <plat/clock-clksrc.h>
 
 #include <mach/map.h>
+#include <mach/regs-audss.h>
 #include <mach/regs-clock.h>
 #include <mach/sysmmu.h>
 
@@ -41,6 +42,21 @@ static struct clk clk_sclk_usbphy0 = {
 
 static struct clk clk_sclk_usbphy1 = {
 	.name		= "sclk_usbphy1",
+};
+
+static struct clk clk_sclk_xxti = {
+	.name		= "sclk_usbphy1",
+	.id		= -1,
+};
+
+static struct clk clk_sclk_xusbxti = {
+	.name		= "sclk_usbphy1",
+	.id		= -1,
+};
+
+static struct clk clk_audiocdclk0 = {
+	.name		= "audiocdclk",
+	.id		= 0,
 };
 
 static int exynos4_clksrc_mask_top_ctrl(struct clk *clk, int enable)
@@ -136,6 +152,16 @@ static int exynos4_clk_hdmiphy_ctrl(struct clk *clk, int enable)
 static int exynos4_clk_dac_ctrl(struct clk *clk, int enable)
 {
 	return s5p_gatectrl(S5P_DAC_PHY_CONTROL, clk, enable);
+}
+
+static int exynos4_clksrc_mask_maudio_ctrl(struct clk *clk, int enable)
+{
+	return s5p_gatectrl(S5P_CLKSRC_MASK_MAUDIO, clk, enable);
+}
+
+static int exynos4_clk_audss_ctrl(struct clk *clk, int enable)
+{
+	return s5p_gatectrl(S5P_CLKGATE_AUDSS, clk, enable);
 }
 
 /* Core list of CMU_CPU side */
@@ -724,6 +750,77 @@ static struct clk init_clocks[] = {
 	}
 };
 
+static struct clk *clkset_sclk_audio0_list[] = {
+	[0] = &clk_audiocdclk0,
+	[1] = NULL,
+	[2] = &clk_sclk_hdmi27m,
+	[3] = &clk_sclk_usbphy0,
+	[4] = &clk_sclk_xxti,
+	[5] = &clk_sclk_xusbxti,
+	[6] = &clk_mout_mpll.clk,
+	[7] = &clk_mout_epll.clk,
+	[8] = &clk_sclk_vpll.clk,
+};
+
+static struct clksrc_sources clkset_sclk_audio0 = {
+	.sources	= clkset_sclk_audio0_list,
+	.nr_sources	= ARRAY_SIZE(clkset_sclk_audio0_list),
+};
+
+static struct clksrc_clk clk_sclk_audio0 = {
+	.clk		= {
+		.name		= "audio-bus",
+		.id		= 0,
+		.enable		= exynos4_clksrc_mask_maudio_ctrl,
+		.ctrlbit	= (1 << 0),
+	},
+	.sources = &clkset_sclk_audio0,
+	.reg_src = { .reg = S5P_CLKSRC_MAUDIO, .shift = 0, .size = 4 },
+	.reg_div = { .reg = S5P_CLKDIV_MAUDIO, .shift = 0, .size = 4 },
+};
+
+static struct clk *clkset_mout_audss_list[] = {
+	NULL,
+	&clk_fout_epll,
+};
+
+static struct clksrc_sources clkset_mout_audss = {
+	.sources	= clkset_mout_audss_list,
+	.nr_sources	= ARRAY_SIZE(clkset_mout_audss_list),
+};
+
+static struct clksrc_clk clk_mout_audss = {
+	.clk		= {
+		.name		= "mout_audss",
+		.id		= -1,
+	},
+	.sources	= &clkset_mout_audss,
+	.reg_src	= { .reg = S5P_CLKSRC_AUDSS, .shift = 0, .size = 1 },
+};
+
+static struct clk *clkset_sclk_audss_list[] = {
+	&clk_mout_audss.clk,
+	&clk_audiocdclk0,
+	&clk_sclk_audio0.clk,
+};
+
+static struct clksrc_sources clkset_sclk_audss = {
+	.sources	= clkset_sclk_audss_list,
+	.nr_sources	= ARRAY_SIZE(clkset_sclk_audss_list),
+};
+
+static struct clksrc_clk clk_sclk_audss = {
+	.clk		= {
+		.name		= "i2sclk",
+		.id		= -1,
+		.enable		= exynos4_clk_audss_ctrl,
+		.ctrlbit	= S5P_AUDSS_CLKGATE_I2SBUS,
+	},
+	.sources	= &clkset_sclk_audss,
+	.reg_src	= { .reg = S5P_CLKSRC_AUDSS, .shift = 2, .size = 2 },
+	.reg_div	= { .reg = S5P_CLKDIV_AUDSS, .shift = 4, .size = 8 },
+};
+
 static struct clk *clkset_group_list[] = {
 	[0] = &clk_ext_xtal_mux,
 	[1] = &clk_xusbxti,
@@ -1227,6 +1324,9 @@ static struct clksrc_clk *sysclks[] = {
 	&clk_aclk_100,
 	&clk_aclk_160,
 	&clk_aclk_133,
+	&clk_mout_audss,
+	&clk_sclk_audss,
+	&clk_sclk_audio0,
 	&clk_dout_mmc0,
 	&clk_dout_mmc1,
 	&clk_dout_mmc2,
@@ -1235,6 +1335,79 @@ static struct clksrc_clk *sysclks[] = {
 	&clk_mout_mfc0,
 	&clk_mout_mfc1,
 };
+
+static u32 epll_div[][6] = {
+	{  48000000, 0, 48, 3, 3, 0 },
+	{  96000000, 0, 48, 3, 2, 0 },
+	{ 144000000, 1, 72, 3, 2, 0 },
+	{ 192000000, 0, 48, 3, 1, 0 },
+	{ 288000000, 1, 72, 3, 1, 0 },
+	{  84000000, 0, 42, 3, 2, 0 },
+	{  50000000, 0, 50, 3, 3, 0 },
+	{  80000000, 1, 80, 3, 3, 0 },
+	{  32750000, 1, 65, 3, 4, 35127 },
+	{  32768000, 1, 65, 3, 4, 35127 },
+	{  49152000, 0, 49, 3, 3, 9961 },
+	{  67737600, 1, 67, 3, 3, 48366 },
+	{  73728000, 1, 73, 3, 3, 47710 },
+	{  45158400, 0, 45, 3, 3, 10381 },
+	{  45000000, 0, 45, 3, 3, 10355 },
+	{  45158000, 0, 45, 3, 3, 10355 },
+	{  49125000, 0, 49, 3, 3, 9961 },
+	{  67738000, 1, 67, 3, 3, 48366 },
+	{  73800000, 1, 73, 3, 3, 47710 },
+	{  36000000, 1, 32, 3, 4, 0 },
+	{  60000000, 1, 60, 3, 3, 0 },
+	{  72000000, 1, 72, 3, 3, 0 },
+	{ 191923200, 0, 47, 3, 1, 64278 },
+	{ 180633600, 0, 45, 3, 1, 10381 },
+};
+
+static int exynos4_epll_set_rate(struct clk *clk, unsigned long rate)
+{
+	unsigned int epll_con, epll_con_k;
+	unsigned int i;
+
+	/* Return if nothing changed */
+	if (clk->rate == rate)
+		return 0;
+
+	epll_con = __raw_readl(S5P_EPLL_CON0);
+	epll_con &= ~(0x1 << 27 | \
+			PLL46XX_MDIV_MASK << PLL46XX_MDIV_SHIFT |   \
+			PLL46XX_PDIV_MASK << PLL46XX_PDIV_SHIFT | \
+			PLL46XX_SDIV_MASK << PLL46XX_SDIV_SHIFT);
+
+	for (i = 0; i < ARRAY_SIZE(epll_div); i++) {
+		if (epll_div[i][0] == rate) {
+			epll_con_k = epll_div[i][5] << 0;
+			epll_con |= epll_div[i][1] << 27;
+			epll_con |= epll_div[i][2] << PLL46XX_MDIV_SHIFT;
+			epll_con |= epll_div[i][3] << PLL46XX_PDIV_SHIFT;
+			epll_con |= epll_div[i][4] << PLL46XX_SDIV_SHIFT;
+			break;
+		}
+	}
+
+	if (i == ARRAY_SIZE(epll_div)) {
+		printk(KERN_ERR "%s: Invalid Clock EPLL Frequency\n",
+				__func__);
+		return -EINVAL;
+	}
+
+	__raw_writel(epll_con, S5P_EPLL_CON0);
+	__raw_writel(epll_con_k, S5P_EPLL_CON1);
+
+	clk->rate = rate;
+
+	return 0;
+}
+
+static struct clk_ops exynos4_epll_ops = {
+	.get_rate = s5p_epll_get_rate,
+	.set_rate = exynos4_epll_set_rate,
+};
+
 
 static int xtal_rate;
 
@@ -1379,6 +1552,14 @@ void __init_or_cpufreq exynos4_setup_clocks(void)
 
 	for (ptr = 0; ptr < ARRAY_SIZE(clksrcs); ptr++)
 		s3c_set_clksrc(&clksrcs[ptr], true);
+
+	clk_fout_epll.enable = s5p_epll_enable;
+	clk_fout_epll.ops = &exynos4_epll_ops;
+
+	clk_set_parent(&clk_sclk_audss.clk, &clk_mout_audss.clk);
+	clk_set_parent(&clk_mout_audss.clk, &clk_fout_epll);
+	clk_set_parent(&clk_sclk_audio0.clk, &clk_mout_epll.clk);
+	clk_set_parent(&clk_mout_epll.clk, &clk_fout_epll);
 }
 
 static struct clk *clks[] __initdata = {
