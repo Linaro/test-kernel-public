@@ -99,7 +99,7 @@ static void __init origen_machine_init(void)
 }
 
 MACHINE_START(ORIGEN, "ORIGEN")
-	/* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
+       /* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
 	.boot_params	= S5P_PA_SDRAM + 0x100,
 	.init_irq	= exynos4_init_irq,
 	.map_io		= origen_map_io,
