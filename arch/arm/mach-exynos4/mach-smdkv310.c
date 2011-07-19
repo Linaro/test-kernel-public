@@ -21,6 +21,7 @@
 #endif
 #include <linux/input.h>
 #include <linux/clk.h>
+#include <plat/fimg2d.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/max8649.h>
 
@@ -264,6 +265,15 @@ static struct platform_device smdkv310_smsc911x = {
 		.platform_data	= &smsc9215_config,
 	},
 };
+#ifdef CONFIG_VIDEO_FIMG2D
+static struct fimg2d_platdata fimg2d_data __initdata = {
+    .hw_ver = 30,
+    .parent_clkname = "mout_mpll",
+    .clkname = "sclk_fimg2d",
+    .gate_clkname = "fimg2d",
+    .clkrate = 250 * 1000000,
+};
+#endif
 static struct regulator_consumer_supply max8952_supply[] = {
 	REGULATOR_SUPPLY("vdd_arm", NULL),
 };
@@ -428,6 +438,10 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 #ifdef CONFIG_VIDEO_JPEG
 	&s5p_device_jpeg,
 #endif
+#ifdef CONFIG_VIDEO_FIMG2D
+
+	&s5p_device_fimg2d,
+#endif
 };
 
 static void __init smdkv310_smsc911x_init(void)
@@ -476,6 +490,9 @@ static void __init smdkv310_machine_init(void)
 	i2c_register_board_info(1, i2c_devs1, ARRAY_SIZE(i2c_devs1));
 
 	smdkv310_smsc911x_init();
+#ifdef CONFIG_VIDEO_FIMG2D
+	s5p_fimg2d_set_platdata(&fimg2d_data);
+#endif
 
 #ifdef CONFIG_TOUCHSCREEN_EXYNOS4
 	s3c_ts_set_platdata(&s3c_ts_platform);
