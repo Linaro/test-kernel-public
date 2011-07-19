@@ -377,6 +377,11 @@ config VIDEO_VPX3220
 	  To compile this driver as a module, choose M here: the
 	  module will be called vpx3220.
 
+config VIDEO_S5K4BA
+	tristate "S5K4BA supporting camera driver"
+	depends on I2C && VIDEO_V4L2
+	---help---
+	  This driver supports s5k4ba SoC camera module
 comment "Video and audio decoders"
 
 config VIDEO_SAA717X

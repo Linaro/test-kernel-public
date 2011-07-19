@@ -49,6 +49,7 @@
 #include <mach/spi-clocks.h>
 #include <mach/map.h>
 #include <mach/bootmem.h>
+#include <media/s5k4ba_platform.h>
 
 /* Following are default values for UCON, ULCON and UFCON UART registers */
 #define SMDKV310_UCON_DEFAULT	(S3C2410_UCON_TXILEVEL |	\
@@ -95,11 +96,93 @@ static struct s3c2410_uartcfg smdkv310_uartcfgs[] __initdata = {
 	},
 };
 #ifdef CONFIG_VIDEO_FIMC
+/*
+ * External camera reset
+ * Because the most of cameras take i2c bus signal, so that
+ * you have to reset at the boot time for other i2c slave devices.
+ * This function also called at fimc_init_camera()
+ * Do optimization for cameras on your platform.
+*/
+#ifdef CONFIG_ITU_A
+static int exynos4_cam0_reset(int dummy)
+{
+	int err;
+	/* Camera A */
+	err = gpio_request(EXYNOS4_GPX1(2), "GPX1");
+	if (err)
+		printk(KERN_ERR "smdkv310_cam0_reset():failed to request GPX1_2");
+
+	s3c_gpio_setpull(EXYNOS4_GPX1(2), S3C_GPIO_PULL_NONE);
+	gpio_direction_output(EXYNOS4_GPX1(2), 0);
+	gpio_direction_output(EXYNOS4_GPX1(2), 1);
+	gpio_free(EXYNOS4_GPX1(2));
+	printk("\n CAM0 RESET done \n");
+
+	return 0;
+}
+#endif
+#ifdef CONFIG_VIDEO_S5K4BA
+static struct s5k4ba_platform_data s5k4ba_plat = {
+	.default_width = 800,
+	.default_height = 600,
+	.pixelformat = V4L2_PIX_FMT_UYVY,
+	.freq = 24000000,
+	.is_mipi = 0,
+};
+
+static struct i2c_board_info  s5k4ba_i2c_info = {
+	I2C_BOARD_INFO("S5K4BA", 0x2d),
+	.platform_data = &s5k4ba_plat,
+};
+
+static struct s3c_platform_camera s5k4ba = {
+#ifdef CONFIG_ITU_A
+	.id		= CAMERA_PAR_A,
+	.clk_name	= "sclk_cam0",
+	.i2c_busnum	= 0,
+	.cam_power	= exynos4_cam0_reset,
+#endif
+#ifdef CONFIG_ITU_B
+	.id		= CAMERA_PAR_B,
+	.clk_name	= "sclk_cam1",
+	.i2c_busnum	= 1,
+	.cam_power	= exynos4_cam1_reset,
+#endif
+	.type		= CAM_TYPE_ITU,
+	.fmt		= ITU_601_YCBCR422_8BIT,
+	.order422	= CAM_ORDER422_8BIT_CBYCRY,
+	.info		= &s5k4ba_i2c_info,
+	.pixelformat	= V4L2_PIX_FMT_UYVY,
+	.srclk_name	= "xusbxti",
+	.clk_rate	= 24000000,
+	.line_length	= 1920,
+	.width		= 1600,
+	.height		= 1200,
+	.window		= {
+		.left	= 0,
+		.top	= 0,
+		.width	= 800,
+		.height	= 600,
+	},
+
+	/* Polarity */
+	.inv_pclk	= 0,
+	.inv_vsync	= 1,
+	.inv_href	= 0,
+	.inv_hsync	= 0,
+
+	.initialized	= 0,
+};
+#endif
+/* Interface setting */
 static struct s3c_platform_fimc fimc_plat = {
 #ifdef CONFIG_ITU_A
 	.default_cam	= CAMERA_PAR_A,
 #endif
 	.camera		= {
+#ifdef CONFIG_VIDEO_S5K4BA
+		&s5k4ba,
+#endif
 	},
 #ifdef CONFIG_CPU_S5PV310_EVT1
 	.hw_ver		= 0x52,
