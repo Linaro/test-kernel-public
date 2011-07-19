@@ -202,6 +202,44 @@ config TOUCHSCREEN_S3C2410
 	  To compile this driver as a module, choose M here: the
 	  module will be called s3c2410_ts.
 
+config TOUCHSCREEN_EXYNOS4
+        tristate "Samsung EXYNOS4/generic touchscreen input driver"
+        depends on ARCH_EXYNOS4 || SAMSUNG_DEV_TS
+        select S3C_ADC
+        help
+          Say Y here if you have the EXYNOS4 touchscreen.
+
+          If unsure, say N.
+
+          To compile this driver as a module, choose M here: the
+          module will be called exynos4_ts.
+
+choice
+        prompt "Select touch screen port"
+        depends on TOUCHSCREEN_EXYNOS4
+        default TOUCH_LCD_A
+
+        config TOUCH_LCD_A
+        bool "Touch LCD A port"
+        depends on TOUCHSCREEN_EXYNOS4
+        help
+          Say Y here if you want to use the S3C SMDK Touch LCD A.
+
+        config TOUCH_LCD_B
+        bool "Touch LCD B port"
+        depends on TOUCHSCREEN_EXYNOS4
+        help
+          Say Y here if you want to use the S3C SMDK Touch LCD B.
+
+endchoice
+
+config TOUCHSCREEN_S3C_DEBUG
+        bool "Print debug messages for EXYNOS4 Touch screen"
+        depends on TOUCHSCREEN_EXYNOS4
+        default n
+        help
+          Say Y here if you want to print debug messages for touch screen.
+
 config TOUCHSCREEN_GUNZE
 	tristate "Gunze AHL-51S touchscreen"
 	select SERIO
