@@ -28,8 +28,8 @@
 #include <linux/io.h>
 #include <linux/memory.h>
 #include <plat/clock.h>
-#include <plat/media.h>
-#include <mach/media.h>
+#include <plat/bootmem.h>
+#include <mach/bootmem.h>
 #include "s3cfb.h"
 
 struct s3cfb_fimd_desc		*fbfimd;
@@ -88,6 +88,7 @@ int s3cfb_register_framebuffer(struct s3cfb_global *fbdev)
 			s3cfb_check_var_window(fbdev, &fbdev->fb[i]->var,
 					fbdev->fb[i]);
 			s3cfb_set_par_window(fbdev, fbdev->fb[i]);
+			s3cfb_draw_logo(fbdev->fb[i]);
 		}
 #endif
 	}

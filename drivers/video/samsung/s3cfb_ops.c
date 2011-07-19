@@ -20,8 +20,8 @@
 #if defined(CONFIG_S5P_MEM_CMA)
 #include <linux/cma.h>
 #elif defined(CONFIG_S5P_MEM_BOOTMEM)
-#include <mach/media.h>
-#include <plat/media.h>
+#include <mach/bootmem.h>
+#include <plat/bootmem.h>
 #endif
 
 #if MALI_USE_UNIFIED_MEMORY_PROVIDER
