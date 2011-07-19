@@ -15,11 +15,7 @@
 #include <linux/irq.h>
 #include <linux/slab.h>
 #include <linux/platform_device.h>
-
 #include <linux/gpio.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-
 #include <plat/map-base.h>
 #include <plat/gpio-cfg.h>
 #include <plat/button.h>
