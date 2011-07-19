@@ -30,8 +30,10 @@
 #include <plat/sdhci.h>
 #include <plat/iic.h>
 #include <plat/pd.h>
+#include <plat/bootmem.h>
 
 #include <mach/map.h>
+#include <mach/bootmem.h>
 
 /* Following are default values for UCON, ULCON and UFCON UART registers */
 #define SMDKV310_UCON_DEFAULT	(S3C2410_UCON_TXILEVEL |	\
@@ -251,4 +253,5 @@ MACHINE_START(SMDKV310, "SMDKV310")
 	.init_machine	= smdkv310_machine_init,
 	.timer		= &exynos4_timer,
 	.dt_compat	= smdkv310_dt_compat,
+	.reserve	= &s5p_reserve_bootmem,
 MACHINE_END

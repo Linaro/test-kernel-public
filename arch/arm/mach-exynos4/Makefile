@@ -28,6 +28,7 @@ obj-$(CONFIG_LOCAL_TIMERS)	+= localtimer.o
 endif
 
 obj-$(CONFIG_HOTPLUG_CPU)	+= hotplug.o
+obj-$(CONFIG_S5P_MEM_BOOTMEM)   += bootmem-smdkv310.o
 
 # machine support
 
