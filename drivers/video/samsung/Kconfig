@@ -87,7 +87,25 @@ config SUPPORT_UMP
 	depends on FB_S3C && VIDEO_UMP
 	default y
 
+choice
+depends on FB_S3C
+prompt "Select LCD Type"
+default FB_S3C_AMS369FG06
 
+config FB_S3C_WA101S
+	bool "WA101S"
+	depends on MACH_SMDKV310 || MACH_SMDKC210
+	help
+	  This enables support for 10.1" 1366*768 LCD panel
+
+config FB_S3C_AMS369FG06
+	bool "AMS369FG06"
+	depends on MACH_SMDKV310 || MACH_SMDKC210
+	select SPI
+	select SPI_S3C64XX
+	help
+	  This enables support for Samsung AMS369FG06 3.7" WVGA AMOLED panel
+endchoice
 
 config FB_S3C_V2
 	tristate "S3C Framebuffer version 2 support"
