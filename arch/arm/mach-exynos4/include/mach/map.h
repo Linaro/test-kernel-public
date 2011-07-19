@@ -166,4 +166,8 @@
 
 #define S5P_SZ_UART			SZ_256
 
+#define EXYNOS4_PA_LCD0                 0x11C00000
+#define S5P_PA_LCD0                     EXYNOS4_PA_LCD0
+#define EXYNOS4_SZ_LCD0                 SZ_1M
+#define S5P_SZ_LCD0                     EXYNOS4_SZ_LCD0
 #endif /* __ASM_ARCH_MAP_H */
