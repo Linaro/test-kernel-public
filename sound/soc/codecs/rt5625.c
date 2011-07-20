@@ -52,6 +52,11 @@ static struct rt5625_init_reg rt5625_init_list[] = {
 	{RT5625_GEN_CTRL_REG1		, 0x0c0a},	//speaker vdd ratio is 1
 	{RT5625_ADC_REC_GAIN		, 0xd5d5},	//gain 15db of ADC by default
 
+	/* Audio Record settings */
+	{RT5625_LINE_IN_VOL, 0xFF1F},
+	{RT5625_ADC_REC_MIXER, 0xEFEF},
+	{RT5625_PD_CTRL_STAT, 0x00C0},
+	{RT5625_PWR_MANAG_ADD3, 0x80C2},
 };
 
 #define RT5625_INIT_REG_NUM ARRAY_SIZE(rt5625_init_list)
