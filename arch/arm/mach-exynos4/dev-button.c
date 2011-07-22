@@ -40,12 +40,14 @@ static int origen_cfg_button(int enable)
 					goto error;
 				}
 			}
-			s3c_gpio_cfgrange_nopull(EXYNOS4_GPX1(5), 3, 0xF);
-			s3c_gpio_cfgrange_nopull(EXYNOS4_GPX2(0), 2, 0xF);
+			s3c_gpio_cfgrange_nopull(EXYNOS4_GPX1(5), 3,
+					S3C_GPIO_SFN(0xF));
+			s3c_gpio_cfgrange_nopull(EXYNOS4_GPX2(0), 2,
+					S3C_GPIO_SFN(0xF));
 			return 0;
 			error:
 			return -1;
-	case 2:
+		case 0:
 			for(i = 5; i < 8; i++)
 				gpio_free(EXYNOS4_GPX1(5));
 			for(i = 0; i < 2; i++)
