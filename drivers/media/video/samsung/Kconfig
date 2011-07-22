@@ -45,9 +45,4 @@ config VIDEO_SAMSUNG_MEMSIZE_JPEG
 	int "Memory size in kbytes for JPEG"
 	depends on VIDEO_JPEG
 	default "24576"
-
-config VIDEO_SAMSUNG_MEMSIZE_FIMG2D
-	int "Memory size in kbytes for FIMG2D"
-	depends on VIDEO_FIMG2D
-	default "10240"
 endif
