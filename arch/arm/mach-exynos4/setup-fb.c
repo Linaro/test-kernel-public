@@ -294,6 +294,9 @@ int s3cfb_backlight_off(struct platform_device *pdev)
 
 int s3cfb_lcd_on(struct platform_device *pdev)
 {
+	s3c_gpio_cfgpin(EXYNOS4_GPE3(4), S3C_GPIO_SFN(1));
+	gpio_set_value(EXYNOS4_GPE3(4), 1);
+
 	return 0;
 }
 
