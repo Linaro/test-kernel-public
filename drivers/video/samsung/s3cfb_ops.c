@@ -429,6 +429,7 @@ int s3cfb_set_bitfield(struct fb_var_screeninfo *var)
 		var->blue.offset = 0;
 		var->blue.length = 8;
 		var->transp.offset = 24;
+		var->transp.length = 8;
 		break;
 	}
 
