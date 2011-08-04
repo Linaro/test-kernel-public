@@ -23,6 +23,7 @@ extern void exynos4_init_irq(void);
 extern void exynos4_map_io(void);
 extern void exynos4_init_clocks(int xtal);
 extern struct sys_timer exynos4_timer;
+extern int exynos4_subrev(void);
 
 #define exynos4_init_uarts exynos4_common_init_uarts
 

@@ -29,7 +29,11 @@
 #include <mach/hardware.h>
 #include <mach/regs-clock.h>
 
+#include <plat/exynos4.h>
+
 extern void exynos4_secondary_startup(void);
+
+#define CPU1_BOOT_REG (exynos4_subrev() == 0 ? S5P_VA_SYSRAM : S5P_INFORM5)
 
 /*
  * control for which core is the next to come out of the secondary
@@ -104,10 +108,11 @@ int __cpuinit boot_secondary(unsigned int cpu, struct task_struct *idle)
 	* After wake-up, the system-wide flags register loses its value.
 	* Hence, write the address of secondary startup function again.
 	*/ 
-	__raw_writel(BSYM(virt_to_phys(exynos4_secondary_startup)), S5P_VA_SYSRAM);
+	__raw_writel(BSYM(virt_to_phys(exynos4_secondary_startup)),\
+							CPU1_BOOT_REG);
 
 	/*
-	 * Send the secondary CPU a soft interrupt, thereby causing
+	 a send the secondary CPU a soft interrupt, thereby causing
 	 * the boot monitor to read the system wide flags register,
 	 * and branch to the address found there.
 	 */
@@ -169,5 +174,6 @@ void __init platform_smp_prepare_cpus(unsigned int max_cpus)
 	 * until it receives a soft interrupt, and then the
 	 * secondary CPU branches to this address.
 	 */
-	__raw_writel(BSYM(virt_to_phys(exynos4_secondary_startup)), S5P_VA_SYSRAM);
+	__raw_writel(BSYM(virt_to_phys(exynos4_secondary_startup)),\
+							CPU1_BOOT_REG);
 }

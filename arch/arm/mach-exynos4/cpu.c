@@ -166,6 +166,16 @@ void __init exynos4_init_clocks(int xtal)
 	exynos4_setup_clocks();
 }
 
+int exynos4_subrev(void)
+{
+	static int subrev = -1;
+
+	if (unlikely(subrev < 0))
+		subrev = __raw_readl(S5P_VA_CHIPID) & 0xf;
+
+	return subrev;
+}
+
 void __init exynos4_init_irq(void)
 {
 	int irq;
