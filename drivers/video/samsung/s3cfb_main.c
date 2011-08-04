@@ -74,21 +74,24 @@ static irqreturn_t s3cfb_irq_fifo(int irq, void *dev_id)
 int s3cfb_register_framebuffer(struct s3cfb_global *fbdev)
 {
 	struct s3c_platform_fb *pdata = to_fb_plat(fbdev->dev);
-	int ret, i;
-
-	for (i = 0; i < pdata->nr_wins; i++) {
-		ret = register_framebuffer(fbdev->fb[i]);
+	int ret, i, j;
+	/* on registering framebuffer, framebuffer of default \
+					window is registered at first. */
+	for (i = pdata->default_win; i < pdata->nr_wins + \
+					pdata->default_win; i++) {
+		j = i % pdata->nr_wins;
+		ret = register_framebuffer(fbdev->fb[j]);
 		if (ret) {
 			dev_err(fbdev->dev, "failed to register	\
 				framebuffer device\n");
 			return -EINVAL;
 		}
 #ifndef CONFIG_FRAMEBUFFER_CONSOLE
-		if (i == pdata->default_win) {
-			s3cfb_check_var_window(fbdev, &fbdev->fb[i]->var,
-					fbdev->fb[i]);
-			s3cfb_set_par_window(fbdev, fbdev->fb[i]);
-			s3cfb_draw_logo(fbdev->fb[i]);
+		if (j == pdata->default_win) {
+			s3cfb_check_var_window(fbdev, &fbdev->fb[j]->var,
+					fbdev->fb[j]);
+			s3cfb_set_par_window(fbdev, fbdev->fb[j]);
+			s3cfb_draw_logo(fbdev->fb[j]);
 		}
 #endif
 	}
