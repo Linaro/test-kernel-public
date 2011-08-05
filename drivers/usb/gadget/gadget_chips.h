@@ -47,6 +47,7 @@
 #define gadget_is_pxa27x(g)		(!strcmp("pxa27x_udc", (g)->name))
 #define gadget_is_r8a66597(g)		(!strcmp("r8a66597_udc", (g)->name))
 #define gadget_is_renesas_usbhs(g)	(!strcmp("renesas_usbhs_udc", (g)->name))
+#define gadget_is_s3c(g)		(!strcmp("s3c-udc", (g)->name))
 #define gadget_is_s3c2410(g)		(!strcmp("s3c2410_udc", (g)->name))
 #define gadget_is_s3c_hsotg(g)		(!strcmp("s3c-hsotg", (g)->name))
 #define gadget_is_s3c_hsudc(g)		(!strcmp("s3c-hsudc", (g)->name))
@@ -118,6 +119,8 @@ static inline int usb_gadget_controller_number(struct usb_gadget *gadget)
 		return 0x31;
 	else if (gadget_is_dwc3(gadget))
 		return 0x32;
+	else if (gadget_is_s3c(gadget))
+		return 0x33;
 
 	return -ENOENT;
 }
