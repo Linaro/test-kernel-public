@@ -303,6 +303,21 @@ config USB_PXA_U2O
 	  PXA9xx Processor series include a high speed USB2.0 device
 	  controller, which support high speed and full speed USB peripheral.
 
+config USB_GADGET_S3C_OTGD
+	boolean "S3C HS USB OTG Device"
+	depends on (PLAT_S5P)
+	help
+	  Samsung's S3C64XX processors include high speed USB OTG2.0
+	  controller. It has 15 configurable endpoints, as well as
+	  endpoint zero (for control transfers).
+
+	  This driver has been tested on the S3C6410, S5P6440, S5PC100
+	  processor.
+
+	  Say "y" to link the driver statically, or "m" to build a
+	  dynamically linked module called "s3c-udc-otg" and force all
+	  gadget drivers to also be dynamically linked.
+
 #
 # Controllers available in both integrated and discrete versions
 #
@@ -513,6 +528,42 @@ config USB_DUMMY_HCD
 
 endchoice
 
+comment "NOTE: S3C OTG device role enables the controller driver below"
+        depends on USB_GADGET_S3C_OTGD
+
+config USB_S3C_OTGD
+	tristate "S3C high speed(2.0, dual-speed) USB OTG device"
+	depends on USB_GADGET && USB_GADGET_S3C_OTGD && !(USB_S3C_OTG_HOST)
+	default y
+	default USB_GADGET
+	select USB_GADGET_SELECTED
+	select USB_GADGET_DUALSPEED
+	help
+	  Say "y" to link the driver statically, or "m" to build a
+	  dynamically linked module called "s3c-udc-otg-hs" and force all
+	  gadget drivers to also be dynamically linked.
+
+choice
+	prompt "S3C OTGD transfer mode"
+	depends on USB_S3C_OTGD
+	default y
+	help
+	  S3C USB OTG controller supports DMA mode and Slave mode
+	  for the data transfer. You must slect one for the core
+	  operation mode.
+
+config USB_GADGET_S3C_OTGD_DMA_MODE
+	bool "enabled DMA MODE"
+	depends on USB_GADGET_S3C_OTGD
+	help
+	  Say "y" for S3C OTG core operation in DMA mode.
+config USB_GADGET_S3C_OTGD_SLAVE_MODE
+	bool "enabled Slave MODE"
+	depends on USB_GADGET_S3C_OTGD
+	help
+	  Say "y" for S3C USB OTG core operation in Slave mode.
+endchoice
+
 # Selected by UDC drivers that support high-speed operation.
 config USB_GADGET_DUALSPEED
 	bool
@@ -605,7 +656,7 @@ config USB_ETH
 	help
 	  This driver implements Ethernet style communication, in one of
 	  several ways:
-	  
+
 	   - The "Communication Device Class" (CDC) Ethernet Control Model.
 	     That protocol is often avoided with pure Ethernet adapters, in
 	     favor of simpler vendor-specific hardware, but is widely
@@ -645,7 +696,7 @@ config USB_ETH_RNDIS
 	   If you say "y" here, the Ethernet gadget driver will try to provide
 	   a second device configuration, supporting RNDIS to talk to such
 	   Microsoft USB hosts.
-	   
+
 	   To make MS-Windows work with this, use Documentation/usb/linux.inf
 	   as the "driver info file".  For versions of MS-Windows older than
 	   XP, you'll need to download drivers from Microsoft's website; a URL
