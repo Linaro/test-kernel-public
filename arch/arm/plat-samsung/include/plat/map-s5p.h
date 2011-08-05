@@ -56,6 +56,8 @@
 #define S3C_UART_OFFSET		(0x400)
 #endif
 
+#define S3C_VA_HSDEVICE		S3C_ADDR(0x02B00000)
+
 #include <plat/map-s3c.h>
 
 #endif /* __ASM_PLAT_MAP_S5P_H */
