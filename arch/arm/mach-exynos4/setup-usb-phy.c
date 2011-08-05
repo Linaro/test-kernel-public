@@ -23,7 +23,7 @@
 
 static int exynos4_usb_phy1_init(struct platform_device *pdev, int type)
 {
-	struct clk *otg_clk;
+	struct clk *otg_clk, *usbhost_clk;
 	struct clk *xusbxti_clk;
 	u32 phyclk;
 	u32 rstcon;
@@ -64,6 +64,19 @@ static int exynos4_usb_phy1_init(struct platform_device *pdev, int type)
 	writel(phyclk, EXYNOS4_PHYCLK);
 
 	if (type == S5P_USB_PHY_HOST) {
+		usbhost_clk = clk_get(&pdev->dev, "usbhost");
+
+		if (IS_ERR(usbhost_clk)) {
+			dev_err(&pdev->dev, "Failed to get usbhost clock\n");
+			return PTR_ERR(usbhost_clk);
+		}
+
+		err = clk_enable(usbhost_clk);
+		if (err) {
+			clk_put(usbhost_clk);
+			return err;
+		}
+
 		writel(readl(S5P_USBHOST_PHY_CONTROL) | S5P_USBHOST_PHY_ENABLE,
 			S5P_USBHOST_PHY_CONTROL);
 
@@ -99,18 +112,19 @@ static int exynos4_usb_phy1_init(struct platform_device *pdev, int type)
 		writel(readl(EXYNOS4_RSTCON) & ~(0x7<<0),
 				EXYNOS4_RSTCON);
 	}
-
 	udelay(50);
 
 	clk_disable(otg_clk);
 	clk_put(otg_clk);
+	if (type == S5P_USB_PHY_HOST)
+		clk_put(usbhost_clk);
 
 	return 0;
 }
 
 static int exynos4_usb_phy1_exit(struct platform_device *pdev, int type)
 {
-	struct clk *otg_clk;
+	struct clk *otg_clk, *usbhost_clk;
 	int err;
 
 	otg_clk = clk_get(&pdev->dev, "otg");
@@ -126,22 +140,38 @@ static int exynos4_usb_phy1_exit(struct platform_device *pdev, int type)
 	}
 
 	if (type == S5P_USB_PHY_HOST) {
+
+		usbhost_clk = clk_get(&pdev->dev, "usbhost");
+
+		if (IS_ERR(usbhost_clk)) {
+			dev_err(&pdev->dev, "Failed to get usbhost clock\n");
+			return PTR_ERR(usbhost_clk);
+		}
+
+		err = clk_enable(usbhost_clk);
+		if (err) {
+			clk_put(usbhost_clk);
+			return err;
+		}
+
 		writel((readl(EXYNOS4_PHYPWR) | PHY1_STD_ANALOG_POWERDOWN),
 				EXYNOS4_PHYPWR);
 
 		writel(readl(S5P_USBHOST_PHY_CONTROL) & ~S5P_USBHOST_PHY_ENABLE,
 				S5P_USBHOST_PHY_CONTROL);
+
 	} else if (type == S5P_USB_PHY_DEVICE) {
 		writel(readl(EXYNOS4_PHYPWR) | (0x3<<3),
 				EXYNOS4_PHYPWR);
 
 		writel(readl(S5P_USBDEVICE_PHY_CONTROL) & ~(1<<0),
 				S5P_USBDEVICE_PHY_CONTROL);
-
 	}
 
 	clk_disable(otg_clk);
 	clk_put(otg_clk);
+	if (type == S5P_USB_PHY_HOST)
+		clk_put(usbhost_clk);
 
 	return 0;
 }

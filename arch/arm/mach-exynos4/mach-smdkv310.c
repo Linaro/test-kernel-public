@@ -46,6 +46,8 @@
 #include <plat/ts.h>
 #include <plat/fimc.h>
 #include <plat/otg.h>
+#include <plat/ohci.h>
+#include <plat/clock.h>
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-mem.h>
@@ -428,6 +430,16 @@ static void __init smdkv310_otg_init(void)
 	s5p_otg_set_platdata(pdata);
 }
 
+/*USB OHCI*/
+static struct s5p_ohci_platdata smdkv310_ohci_pdata;
+
+static void __init smdkv310_ohci_init(void)
+{
+	struct s5p_ohci_platdata *pdata = &smdkv310_ohci_pdata;
+
+	s5p_ohci_set_platdata(pdata);
+}
+
 static struct platform_device *smdkv310_devices[] __initdata = {
 #ifdef CONFIG_FB_S3C
 	&s3c_device_fb,
@@ -448,6 +460,7 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 	&s3c_device_i2c1,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
+	&s5p_device_ohci,
 	&exynos4_device_ac97,
 	&exynos4_device_i2s0,
 	&exynos4_device_pcm0,
@@ -554,6 +567,9 @@ static void __init smdkv310_machine_init(void)
 	s3cfb_set_platdata(NULL);
 #endif
 #endif
+	smdkv310_ohci_init();
+
+	clk_xusbxti.rate = 24000000;
 
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	smdkv310_otg_init();
