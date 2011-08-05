@@ -39,3 +39,4 @@ obj-$(CONFIG_S5P_DEV_TV)	+= dev-tv.o
 obj-$(CONFIG_S5P_DEV_USB_EHCI)	+= dev-ehci.o
 obj-$(CONFIG_S5P_DEV_USB_OHCI)  += dev-ohci.o
 obj-$(CONFIG_S5P_SETUP_MIPIPHY)	+= setup-mipiphy.o
+obj-$(CONFIG_S5P_DEV_USB_HSDEVICE) += dev-hsdevice.o
