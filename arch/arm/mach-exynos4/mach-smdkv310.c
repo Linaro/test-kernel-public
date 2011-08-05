@@ -45,6 +45,7 @@
 #include <plat/gpio-cfg.h>
 #include <plat/ts.h>
 #include <plat/fimc.h>
+#include <plat/otg.h>
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-mem.h>
@@ -418,6 +419,15 @@ static struct i2c_board_info i2c_devs1[] __initdata = {
 	},
 };
 
+static struct s5p_otg_platdata smdkv310_otg_pdata;
+
+static void __init smdkv310_otg_init(void)
+{
+	struct s5p_otg_platdata *pdata = &smdkv310_otg_pdata;
+
+	s5p_otg_set_platdata(pdata);
+}
+
 static struct platform_device *smdkv310_devices[] __initdata = {
 #ifdef CONFIG_FB_S3C
 	&s3c_device_fb,
@@ -468,6 +478,9 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 	&s5p_device_fimg2d,
 #endif
 	&exynos4_device_ahci,
+#ifdef CONFIG_USB_GADGET_S3C_OTGD
+	&s3c_device_usbgadget,
+#endif
 };
 
 static void __init smdkv310_smsc911x_init(void)
@@ -540,6 +553,10 @@ static void __init smdkv310_machine_init(void)
 #else
 	s3cfb_set_platdata(NULL);
 #endif
+#endif
+
+#ifdef CONFIG_USB_GADGET_S3C_OTGD
+	smdkv310_otg_init();
 #endif
 
 	platform_add_devices(smdkv310_devices, ARRAY_SIZE(smdkv310_devices));
