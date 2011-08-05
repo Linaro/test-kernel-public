@@ -162,6 +162,7 @@ config MACH_SMDKV310
 	select S3C_DEV_HSMMC1
 	select S3C_DEV_HSMMC2
 	select S3C_DEV_HSMMC3
+	select S5P_DEV_USB_HSDEVICE
 	select EXYNOS4_DEV_AHCI
 	select SAMSUNG_DEV_KEYPAD
 	select SAMSUNG_DEV_TS
@@ -171,6 +172,7 @@ config MACH_SMDKV310
 	select EXYNOS4_SETUP_KEYPAD
 	select EXYNOS4_SETUP_TS
 	select EXYNOS4_SETUP_SDHCI
+	select EXYNOS4_SETUP_USB_PHY
 	help
 	  Machine support for Samsung SMDKV310
 
@@ -243,6 +245,8 @@ config MACH_ORIGEN
 	select EXYNOS4_SETUP_SDHCI
 	select EXYNOS4_SETUP_I2C0
 	select EXYNOS4_SETUP_I2C1
+	select S5P_DEV_USB_HSDEVICE
+	select EXYNOS4_SETUP_USB_PHY
 	help
 	  Machine support for ORIGEN based on Samsung EXYNOS4210
 
