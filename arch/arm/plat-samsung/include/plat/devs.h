@@ -152,6 +152,7 @@ extern struct platform_device s5p_device_mipi_csis0;
 extern struct platform_device s5p_device_mipi_csis1;
 
 extern struct platform_device s5p_device_ehci;
+extern struct platform_device s5p_device_ohci;
 
 extern struct platform_device exynos4_device_sysmmu;
 
