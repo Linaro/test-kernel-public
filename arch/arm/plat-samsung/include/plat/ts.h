@@ -10,6 +10,8 @@
 #ifndef __ASM_ARM_TS_H
 #define __ASM_ARM_TS_H
 
+#include <linux/earlysuspend.h>
+
 struct s3c2410_ts_mach_info {
        int             delay;
        int             presc;

@@ -42,6 +42,8 @@
 #include <plat/ohci.h>
 #include <plat/ehci.h>
 #include <plat/clock.h>
+#include <plat/ts.h>
+
 #include <plat/tvout.h>
 #include <mach/map.h>
 #include <mach/bootmem.h>
@@ -448,7 +450,7 @@ static void __init origen_fixup(struct machine_desc *desc,
 }
 
 MACHINE_START(ORIGEN, "ORIGEN")
-	/* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
+       /* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
 	.boot_params	= S5P_PA_SDRAM + 0x100,
 	.init_irq	= exynos4_init_irq,
 	.fixup		= origen_fixup,
