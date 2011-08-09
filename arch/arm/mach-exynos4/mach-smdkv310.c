@@ -48,6 +48,7 @@
 #include <plat/otg.h>
 #include <plat/ohci.h>
 #include <plat/clock.h>
+#include <plat/ehci.h>
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-mem.h>
@@ -440,6 +441,16 @@ static void __init smdkv310_ohci_init(void)
 	s5p_ohci_set_platdata(pdata);
 }
 
+/* USB EHCI */
+static struct s5p_ehci_platdata smdkv310_ehci_pdata;
+
+static void __init smdkv310_ehci_init(void)
+{
+	struct s5p_ehci_platdata *pdata = &smdkv310_ehci_pdata;
+
+	s5p_ehci_set_platdata(pdata);
+}
+
 static struct platform_device *smdkv310_devices[] __initdata = {
 #ifdef CONFIG_FB_S3C
 	&s3c_device_fb,
@@ -461,6 +472,7 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 	&s3c_device_rtc,
 	&s3c_device_wdt,
 	&s5p_device_ohci,
+	&s5p_device_ehci,
 	&exynos4_device_ac97,
 	&exynos4_device_i2s0,
 	&exynos4_device_pcm0,
