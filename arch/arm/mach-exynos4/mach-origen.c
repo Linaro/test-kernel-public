@@ -92,6 +92,12 @@ static struct i2c_board_info i2c_devs0[] __initdata = {
 		I2C_BOARD_INFO("max8997", (0xCC >> 1)),
 		.platform_data = &max8997_pdata,
 	},
+#ifdef CONFIG_TOUCHSCREEN_VPAD_CTP
+	{
+		I2C_BOARD_INFO("vpad_ctp", 0x41),
+		.irq = EINT_NUMBER(25),
+	},
+#endif
 };
 
 /* I2C1 */
