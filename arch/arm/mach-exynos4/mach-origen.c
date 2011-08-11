@@ -34,7 +34,7 @@
 #include <plat/fimg2d.h>
 #include <plat/fimc.h>
 #include <plat/pd.h>
-
+#include <plat/otg.h>
 #include <mach/map.h>
 #include <mach/bootmem.h>
 
@@ -102,9 +102,9 @@ static struct i2c_board_info i2c_devs0[] __initdata = {
 
 /* I2C1 */
 static struct i2c_board_info i2c_devs1[] __initdata = {
-        {
-                I2C_BOARD_INFO("rt5625", 0x1e),
-        },
+	{
+		I2C_BOARD_INFO("rt5625", 0x1e),
+	},
 };
 
 static struct s3c_sdhci_platdata origen_hsmmc2_pdata __initdata = {
@@ -137,7 +137,13 @@ static struct s3c_platform_fimc fimc_plat = {
 #endif
 };
 #endif
-
+static struct s5p_otg_platdata origen_otg_pdata;
+static void __init origen_otg_init(void)
+{
+	struct s5p_otg_platdata *pdata = &origen_otg_pdata;
+ 
+	s5p_otg_set_platdata(pdata);
+}
 static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fb,
 	&s3c_device_i2c0,
@@ -167,6 +173,9 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fimc2,
 #endif
 	&origen_device_button,
+#ifdef CONFIG_USB_GADGET_S3C_OTGD
+	&s3c_device_usbgadget,
+#endif
 };
 
 static void __init origen_map_io(void)
@@ -194,6 +203,9 @@ static void __init origen_machine_init(void)
 	s3c_fimc2_set_platdata(&fimc_plat);
 #endif
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
+#ifdef CONFIG_USB_GADGET_S3C_OTGD
+	 origen_otg_init();
+#endif
 }
 #if defined(CONFIG_S5P_MEM_CMA)
 static void __init exynos4_reserve_cma(void)
@@ -283,7 +295,7 @@ static void __init origen_fixup(struct machine_desc *desc,
 }
 
 MACHINE_START(ORIGEN, "ORIGEN")
-       /* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
+	/* Maintainer: JeongHyeon Kim <jhkim@insignal.co.kr> */
 	.boot_params	= S5P_PA_SDRAM + 0x100,
 	.init_irq	= exynos4_init_irq,
 	.fixup		= origen_fixup,
