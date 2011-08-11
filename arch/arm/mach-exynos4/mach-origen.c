@@ -41,6 +41,7 @@
 #include <plat/pd.h>
 #include <plat/fb.h>
 #include <plat/mfc.h>
+#include <plat/otg.h>
 
 #include <mach/map.h>
 
@@ -509,6 +510,16 @@ static void __init origen_ohci_init(void)
 	s5p_ohci_set_platdata(pdata);
 }
 
+/* USB OTG */
+static struct s5p_otg_platdata origen_otg_pdata;
+
+static void __init origen_otg_init(void)
+{
+	struct s5p_otg_platdata *pdata = &origen_otg_pdata;
+
+	s5p_otg_set_platdata(pdata);
+}
+
 static struct gpio_keys_button origen_gpio_keys_table[] = {
 	{
 		.code			= KEY_MENU,
@@ -620,6 +631,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_i2c0,
 	&s3c_device_i2c1,
 	&s3c_device_rtc,
+	&s3c_device_usbgadget,
 	&s3c_device_wdt,
 	&s5p_device_ehci,
 	&s5p_device_ohci,
@@ -703,6 +715,7 @@ static void __init origen_machine_init(void)
 
 	origen_ehci_init();
 	origen_ohci_init();
+	origen_otg_init();
 	clk_xusbxti.rate = 24000000;
 
 	s5p_tv_setup();
