@@ -35,6 +35,8 @@
 #include <plat/fimc.h>
 #include <plat/pd.h>
 #include <plat/otg.h>
+#include <plat/ohci.h>
+#include <plat/clock.h>
 #include <mach/map.h>
 #include <mach/bootmem.h>
 
@@ -144,6 +146,16 @@ static void __init origen_otg_init(void)
  
 	s5p_otg_set_platdata(pdata);
 }
+/*USB OHCI*/
+static struct s5p_ohci_platdata origen_ohci_pdata;
+
+static void __init origen_ohci_init(void)
+{
+	struct s5p_ohci_platdata *pdata = &origen_ohci_pdata;
+
+	s5p_ohci_set_platdata(pdata);
+}
+
 static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fb,
 	&s3c_device_i2c0,
@@ -151,6 +163,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_hsmmc2,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
+	&s5p_device_ohci,
 	&exynos4_device_i2s0,
 	&samsung_asoc_dma,
 	&exynos4_device_pd[PD_MFC],
@@ -206,6 +219,10 @@ static void __init origen_machine_init(void)
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	 origen_otg_init();
 #endif
+
+	origen_ohci_init();
+	clk_xusbxti.rate = 24000000;
+ 
 }
 #if defined(CONFIG_S5P_MEM_CMA)
 static void __init exynos4_reserve_cma(void)
