@@ -583,6 +583,7 @@ static void __init smdkv310_machine_init(void)
 
 	clk_xusbxti.rate = 24000000;
 
+	smdkv310_ehci_init();
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	smdkv310_otg_init();
 #endif
