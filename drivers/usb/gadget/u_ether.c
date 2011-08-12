@@ -240,12 +240,14 @@ rx_submit(struct eth_dev *dev, struct usb_request *req, gfp_t gfp_flags)
 		DBG(dev, "no rx skb\n");
 		goto enomem;
 	}
-
+#ifndef CONFIG_USB_GADGET_S3C_OTGD
 	/* Some platforms perform better when IP packets are aligned,
 	 * but on at least one, checksumming fails otherwise.  Note:
 	 * RNDIS headers involve variable numbers of LE32 values.
 	 */
 	skb_reserve(skb, NET_IP_ALIGN);
+
+#endif
 
 	req->buf = skb->data;
 	req->length = size;
@@ -476,6 +478,10 @@ static void tx_complete(struct usb_ep *ep, struct usb_request *req)
 	spin_unlock(&dev->req_lock);
 	dev_kfree_skb_any(skb);
 
+#ifdef CONFIG_USB_GADGET_S3C_OTGD
+	if (req->buf != skb->data)
+		kfree(req->buf);
+#endif
 	atomic_dec(&dev->tx_qlen);
 	if (netif_carrier_ok(dev->net))
 		netif_wake_queue(dev->net);
@@ -569,14 +575,25 @@ static netdev_tx_t eth_start_xmit(struct sk_buff *skb,
 
 		length = skb->len;
 	}
+#ifdef CONFIG_USB_GADGET_S3C_OTGD
+if ((int)skb->data & 3) {
+		req->buf = kmalloc(skb->len, GFP_ATOMIC);
+		if (!req->buf)
+			goto drop;
+		memcpy((void *)req->buf, (void *)skb->data, skb->len);
+	} else {
+		req->buf = skb->data;
+	}
+#else
 	req->buf = skb->data;
+#endif
 	req->context = skb;
 	req->complete = tx_complete;
 
 	/* NCM requires no zlp if transfer is dwNtbInMaxSize */
 	if (dev->port_usb->is_fixed &&
-	    length == dev->port_usb->fixed_in_len &&
-	    (length % in->maxpacket) == 0)
+		length == dev->port_usb->fixed_in_len &&
+		(length % in->maxpacket) == 0)
 		req->zero = 0;
 	else
 		req->zero = 1;
@@ -611,6 +628,10 @@ static netdev_tx_t eth_start_xmit(struct sk_buff *skb,
 		dev_kfree_skb_any(skb);
 drop:
 		dev->net->stats.tx_dropped++;
+#ifdef CONFIG_USB_GADGET_S3C_OTGD
+		if (req->buf != skb->data)
+			kfree(req->buf);
+#endif
 		spin_lock_irqsave(&dev->req_lock, flags);
 		if (list_empty(&dev->tx_reqs))
 			netif_start_queue(net);
@@ -735,7 +756,7 @@ static const struct net_device_ops eth_netdev_ops = {
 	.ndo_stop		= eth_stop,
 	.ndo_start_xmit		= eth_start_xmit,
 	.ndo_change_mtu		= ueth_change_mtu,
-	.ndo_set_mac_address 	= eth_mac_addr,
+	.ndo_set_mac_address	= eth_mac_addr,
 	.ndo_validate_addr	= eth_validate_addr,
 };
 
