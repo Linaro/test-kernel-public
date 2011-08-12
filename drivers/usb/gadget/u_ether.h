@@ -92,6 +92,9 @@ static inline int gether_setup(struct usb_gadget *g, u8 ethaddr[ETH_ALEN])
 }
 
 void gether_cleanup(void);
+/* variant of gether_setup that allows customizing network device name */
+int gether_setup_name(struct usb_gadget *g, u8 ethaddr[ETH_ALEN],
+		const char *netname);
 
 /* connect/disconnect is handled by individual functions */
 struct net_device *gether_connect(struct gether *);
