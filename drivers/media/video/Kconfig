@@ -1037,6 +1037,9 @@ config USB_S2255
 
 endif # V4L_USB_DRIVERS
 source "drivers/media/video/samsung/Kconfig"
+
+source "drivers/media/video/s5p-tvout/Kconfig"
+
 endif # VIDEO_CAPTURE_DRIVERS
 
 menuconfig V4L_MEM2MEM_DRIVERS
