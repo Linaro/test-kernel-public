@@ -165,4 +165,10 @@
 
 #define S5P_CHECK_SLEEP				0x00000BAD
 
+#define S5P_HDMI_PHY_CONTROL		S5P_PMUREG(0x0700)
+
+#define S5P_DAC_CONTROL				S5P_PMUREG(0x070C)
+#define S5P_DAC_ENABLE				(1)
+#define S5P_DAC_DISABLE				(0)
+
 #endif /* __ASM_ARCH_REGS_PMU_H */
