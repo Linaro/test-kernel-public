@@ -131,6 +131,12 @@ config EXYNOS4_SETUP_USB_PHY
 	help
 	  Common setup code for USB PHY controller
 
+config EXYNOS4_SETUP_TVOUT
+	bool
+	default y
+	help
+	  Common setup code for TVOUT
+
 # machine support
 
 menu "EXYNOS4 Machines"
