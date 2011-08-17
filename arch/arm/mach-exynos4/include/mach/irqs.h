@@ -160,6 +160,9 @@
 #define S5P_EINT_BASE1		(S5P_IRQ_EINT_BASE + 0)
 #define S5P_EINT_BASE2		(S5P_IRQ_EINT_BASE + 16)
 
+/* GPIO Externel intrerrupt to IRQ used by Touch screen */
+#define EINT_NUMBER(x)		((x) + S5P_IRQ_EINT_BASE)
+
 /* optional GPIO interrupts */
 #define S5P_GPIOINT_BASE	(S5P_IRQ_EINT_BASE + 32)
 #define IRQ_GPIO1_NR_GROUPS	16
@@ -170,11 +173,11 @@
 #define NR_IRQS			(IRQ_GPIO_END)
 
 #if defined(CONFIG_S3C_DEV_ADC)
-#define IRQ_ADC                 IRQ_ADC0
-#define IRQ_TC                  IRQ_PEN0
+#define IRQ_ADC			IRQ_ADC0
+#define IRQ_TC			IRQ_PEN0
 #else
-#define IRQ_ADC                 IRQ_ADC1
-#define IRQ_TC                  IRQ_PEN1
+#define IRQ_ADC			IRQ_ADC1
+#define IRQ_TC			IRQ_PEN1
 #endif
 
 #endif /* __ASM_ARCH_IRQS_H */
