@@ -41,6 +41,15 @@ struct pixcir_i2c_ts_data {
 	int irq;
 };
 
+static inline int pixcir_touch_read_gpio(void)
+{
+	int ret = 0;
+
+	ret = gpio_get_value(TOUCH_INT_PIN);
+	return ret;
+}
+
+
 static void pixcir_ts_poscheck(struct work_struct *work)
 {
 	struct pixcir_i2c_ts_data *tsdata = container_of(work,
@@ -327,7 +336,7 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 		goto fail2;
 	}
 
-	error = gpio_request(TOUCH_INT_PIN, "GPH1");
+	error = gpio_request(TOUCH_INT_PIN, "GPX3");
 	if (error) {
 			dev_err(&client->dev, "gpio_request failed\n");
 			error = -ENODEV;
@@ -335,8 +344,6 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 
 	} else {
 		s3c_gpio_cfgpin(TOUCH_INT_PIN, S3C_GPIO_SFN(0x0F));
-		gpio_direction_input(TOUCH_INT_PIN);
-		s3c_gpio_setpull(TOUCH_INT_PIN, S3C_GPIO_PULL_UP);
 	}
 
 #if defined(Unidisplay_9_7inch) || defined(Unidisplay_7inch) \
