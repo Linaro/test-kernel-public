@@ -52,6 +52,7 @@
 #include <plat/ohci.h>
 #include <plat/clock.h>
 #include <plat/ehci.h>
+#include <plat/tvout.h>
 
 #include <mach/regs-gpio.h>
 #include <mach/regs-mem.h>
@@ -423,6 +424,12 @@ static struct i2c_board_info i2c_devs1[] __initdata = {
 		.platform_data  = &wm8994_platform_data,
 #endif
 	},
+#ifdef CONFIG_VIDEO_SAMSUNG_TVOUT
+	{
+		I2C_BOARD_INFO("s5p_ddc", (0x74 >> 1)),
+	},
+#endif
+
 };
 
 static struct s5p_otg_platdata smdkv310_otg_pdata;
@@ -466,6 +473,11 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 #endif
 #ifdef CONFIG_TOUCHSCREEN_EXYNOS4
 	&s3c_device_ts,
+#endif
+#ifdef CONFIG_VIDEO_SAMSUNG_TVOUT
+	&s5p_device_tvout,
+	&s5p_device_cec,
+	&s5p_device_hpd,
 #endif
 	&s3c_device_hsmmc0,
 	&s3c_device_hsmmc1,
@@ -552,6 +564,15 @@ static void __init smdkv310_map_io(void)
 	s3c24xx_init_uarts(smdkv310_uartcfgs, ARRAY_SIZE(smdkv310_uartcfgs));
 }
 
+#if defined(CONFIG_VIDEO_SAMSUNG_TVOUT)
+static struct s5p_platform_hpd hdmi_hpd_data __initdata = {
+
+};
+static struct s5p_platform_cec hdmi_cec_data __initdata = {
+
+};
+#endif
+
 static void __init smdkv310_machine_init(void)
 {
 #ifdef CONFIG_FB_S3C_AMS369FG06
@@ -574,6 +595,11 @@ static void __init smdkv310_machine_init(void)
 
 #ifdef CONFIG_TOUCHSCREEN_EXYNOS4
 	s3c_ts_set_platdata(&s3c_ts_platform);
+#endif
+
+#if defined(CONFIG_VIDEO_SAMSUNG_TVOUT)
+	s5p_hdmi_hpd_set_platdata(&hdmi_hpd_data);
+	s5p_hdmi_cec_set_platdata(&hdmi_cec_data);
 #endif
 	s3c_sdhci0_set_platdata(&smdkv310_hsmmc0_pdata);
 	s3c_sdhci1_set_platdata(&smdkv310_hsmmc1_pdata);

@@ -41,6 +41,7 @@
 #include <plat/ohci.h>
 #include <plat/ehci.h>
 #include <plat/clock.h>
+#include <plat/tvout.h>
 #include <mach/map.h>
 #include <mach/bootmem.h>
 
@@ -112,6 +113,11 @@ static struct i2c_board_info i2c_devs1[] __initdata = {
 		I2C_BOARD_INFO("rt5625", 0x1e),
 	},
 };
+static struct i2c_board_info i2c_devs6[] __initdata = {
+	{
+		I2C_BOARD_INFO("s5p_ddc", (0x74 >> 1)),
+	},
+};
 
 static struct s3c_sdhci_platdata origen_hsmmc2_pdata __initdata = {
 	.cd_type		= S3C_SDHCI_CD_GPIO,
@@ -173,6 +179,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fb,
 	&s3c_device_i2c0,
 	&s3c_device_i2c1,
+	&s3c_device_i2c6,
 	&s3c_device_hsmmc2,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
@@ -199,6 +206,11 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fimc1,
 	&s3c_device_fimc2,
 #endif
+#ifdef CONFIG_VIDEO_SAMSUNG_TVOUT
+	&s5p_device_tvout,
+	&s5p_device_cec,
+	&s5p_device_hpd,
+#endif
 	&origen_device_button,
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	&s3c_device_usbgadget,
@@ -223,12 +235,23 @@ static void __init origen_map_io(void)
 	s3c24xx_init_uarts(origen_uartcfgs, ARRAY_SIZE(origen_uartcfgs));
 }
 
+#if defined(CONFIG_VIDEO_SAMSUNG_TVOUT)
+static struct s5p_platform_hpd hdmi_hpd_data __initdata = {
+
+};
+static struct s5p_platform_cec hdmi_cec_data __initdata = {
+
+};
+#endif
+
 static void __init origen_machine_init(void)
 {
 	s3c_i2c0_set_platdata(NULL);
 	s3c_i2c1_set_platdata(NULL);
+	s3c_i2c6_set_platdata(NULL);
 	i2c_register_board_info(0, i2c_devs0, ARRAY_SIZE(i2c_devs0));
 	i2c_register_board_info(1, i2c_devs1, ARRAY_SIZE(i2c_devs1));
+	i2c_register_board_info(2, i2c_devs6, ARRAY_SIZE(i2c_devs6));
 	s3cfb_set_platdata(NULL);
 	s3c_sdhci2_set_platdata(&origen_hsmmc2_pdata);
 #ifdef CONFIG_VIDEO_FIMG2D
@@ -239,6 +262,10 @@ static void __init origen_machine_init(void)
 	s3c_fimc0_set_platdata(&fimc_plat);
 	s3c_fimc1_set_platdata(&fimc_plat);
 	s3c_fimc2_set_platdata(&fimc_plat);
+#endif
+#if defined(CONFIG_VIDEO_SAMSUNG_TVOUT)
+	s5p_hdmi_hpd_set_platdata(&hdmi_hpd_data);
+	s5p_hdmi_cec_set_platdata(&hdmi_cec_data);
 #endif
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
