@@ -153,6 +153,9 @@ extern struct platform_device s5p_device_ehci;
 extern struct platform_device s5p_device_ohci;
 
 extern struct platform_device s5p_device_fimg2d;
+extern struct platform_device s5p_device_tvout;
+extern struct platform_device s5p_device_cec;
+extern struct platform_device s5p_device_hpd;
 
 extern struct platform_device exynos4_device_sysmmu;
 

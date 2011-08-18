@@ -76,6 +76,10 @@
 #define IRQ_LCD0		COMBINER_IRQ(11, 0)
 #define IRQ_LCD1		COMBINER_IRQ(11, 1)
 
+#define IRQ_HDMI			COMBINER_IRQ(16, 0)
+#define IRQ_HDMI_I2C		COMBINER_IRQ(16, 1)
+#define IRQ_CEC				COMBINER_IRQ(16, 2)
+
 #define IRQ_ADC0			COMBINER_IRQ(19, 0)
 #define IRQ_PEN0			COMBINER_IRQ(19, 1)
 #define IRQ_ADC1			COMBINER_IRQ(19, 2)
@@ -132,6 +136,9 @@
 
 #define IRQ_MCT_L1		COMBINER_IRQ(35, 3)
 
+#define IRQ_MIXER		COMBINER_IRQ(36, 0)
+#define IRQ_TVENC		COMBINER_IRQ(36, 1)
+
 #define IRQ_EINT4		COMBINER_IRQ(37, 0)
 #define IRQ_EINT5		COMBINER_IRQ(37, 1)
 #define IRQ_EINT6		COMBINER_IRQ(37, 2)
@@ -159,7 +166,7 @@
 
 #define S5P_EINT_BASE1		(S5P_IRQ_EINT_BASE + 0)
 #define S5P_EINT_BASE2		(S5P_IRQ_EINT_BASE + 16)
-
+#define IRQ_TVOUT_HPD		(S5P_IRQ_EINT_BASE + 31)
 /* GPIO Externel intrerrupt to IRQ used by Touch screen */
 #define EINT_NUMBER(x)		((x) + S5P_IRQ_EINT_BASE)
 
