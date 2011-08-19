@@ -14,6 +14,7 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 #include <linux/input.h>
+#include <linux/pwm_backlight.h>
 #include <linux/i2c.h>
 #if defined(CONFIG_S5P_MEM_CMA)
 #include <linux/cma.h>
@@ -34,6 +35,8 @@
 #include <plat/fimg2d.h>
 #include <plat/fimc.h>
 #include <plat/pd.h>
+#include <plat/gpio-cfg.h>
+#include <plat/backlight.h>
 #include <plat/otg.h>
 #include <plat/ohci.h>
 #include <plat/ehci.h>
@@ -202,6 +205,17 @@ static struct platform_device *origen_devices[] __initdata = {
 #endif
 };
 
+/* LCD Backlight data */
+static struct samsung_bl_gpio_info origen_bl_gpio_info = {
+	.no = EXYNOS4_GPD0(0),
+	.func = S3C_GPIO_SFN(2),
+};
+
+static struct platform_pwm_backlight_data origen_bl_data = {
+	.pwm_id = 0,
+	.pwm_period_ns = 1000,
+};
+
 static void __init origen_map_io(void)
 {
 	s5p_init_io(NULL, 0, S5P_VA_CHIPID);
@@ -233,6 +247,8 @@ static void __init origen_machine_init(void)
 	origen_ohci_init();
 	clk_xusbxti.rate = 24000000;
 	origen_ehci_init();
+
+	samsung_bl_set(&origen_bl_gpio_info, &origen_bl_data);
  
 }
 #if defined(CONFIG_S5P_MEM_CMA)
