@@ -20,6 +20,7 @@
 #include <linux/cma.h>
 #endif
 #include <linux/input.h>
+#include <linux/pwm_backlight.h>
 #include <linux/clk.h>
 #include <plat/fimg2d.h>
 #include <linux/regulator/machine.h>
@@ -40,6 +41,8 @@
 #include <plat/sdhci.h>
 #include <plat/iic.h>
 #include <plat/pd.h>
+#include <plat/gpio-cfg.h>
+#include <plat/backlight.h>
 #include <plat/bootmem.h>
 #include <plat/s3c64xx-spi.h>
 #include <plat/gpio-cfg.h>
@@ -531,6 +534,17 @@ static void __init smdkv310_smsc911x_init(void)
 		     (0x1 << S5P_SROM_BCX__TACS__SHIFT), S5P_SROM_BC1);
 }
 
+/* LCD Backlight data */
+static struct samsung_bl_gpio_info smdkv310_bl_gpio_info = {
+	.no = EXYNOS4_GPD0(1),
+	.func = S3C_GPIO_SFN(2),
+};
+
+static struct platform_pwm_backlight_data smdkv310_bl_data = {
+	.pwm_id = 1,
+	.pwm_period_ns = 1000,
+};
+
 static void __init smdkv310_map_io(void)
 {
 	s5p_init_io(NULL, 0, S5P_VA_CHIPID);
@@ -567,6 +581,8 @@ static void __init smdkv310_machine_init(void)
 	s3c_sdhci3_set_platdata(&smdkv310_hsmmc3_pdata);
 
 	samsung_keypad_set_platdata(&smdkv310_keypad_data);
+	samsung_bl_set(&smdkv310_bl_gpio_info, &smdkv310_bl_data);
+
 #ifdef CONFIG_VIDEO_FIMC
 	/* fimc */
 	s3c_fimc0_set_platdata(&fimc_plat);
