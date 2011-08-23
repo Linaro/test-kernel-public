@@ -217,8 +217,8 @@ static void pixcir_ts_poscheck(struct work_struct *work)
 		input_mt_sync(tsdata->input);
 	}
 	input_sync(tsdata->input);
-
 out:
+	udelay(1000);
 	enable_irq(tsdata->irq);
 }
 
@@ -365,8 +365,8 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 	error = request_irq(tsdata->irq, pixcir_ts_isr, IRQF_DISABLED |
 				IRQF_TRIGGER_FALLING, client->name, tsdata);
 #elif defined Unidisplay_7inch
-	error = request_irq(tsdata->irq, pixcir_ts_isr, IRQF_DISABLED |
-				IRQF_TRIGGER_LOW, client->name, tsdata);
+	error = request_irq(tsdata->irq, pixcir_ts_isr, IRQF_SAMPLE_RANDOM
+				, client->name, tsdata);
 #endif
 	if (error) {
 		dev_err(&client->dev, "Failed to request irq %d\n", \
