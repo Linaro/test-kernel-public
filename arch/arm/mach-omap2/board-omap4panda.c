@@ -28,6 +28,9 @@
 #include <linux/regulator/machine.h>
 #include <linux/regulator/fixed.h>
 #include <linux/wl12xx.h>
+#ifdef CONFIG_CMA
+#include <linux/dma-contiguous.h>
+#endif
 
 #include <mach/hardware.h>
 #include <mach/omap4-common.h>
@@ -856,10 +859,20 @@ static void __init omap4_panda_map_io(void)
 	omap44xx_map_common_io();
 }
 
+/* Intercept reserve call to add CMA support */
+static void __init omap4_panda_reserve(void)
+{
+	omap_reserve();
+#if defined(CONFIG_CMA) && (defined(CONFIG_VIDEO_OMAP4) || defined(CONFIG_VIDEO_OMAP4_MODULE))
+	/* Create private 32MiB contiguous memory area for panda_camera device */
+	dma_declare_contiguous(&panda_camera.dev, 32*SZ_1M, 0, 0);
+#endif
+}
+
 MACHINE_START(OMAP4_PANDA, "OMAP4 Panda board")
 	/* Maintainer: David Anders - Texas Instruments Inc */
 	.boot_params	= 0x80000100,
-	.reserve	= omap_reserve,
+	.reserve	= omap4_panda_reserve,
 	.map_io		= omap4_panda_map_io,
 	.init_early	= omap4_panda_init_early,
 	.init_irq	= gic_init_irq,
