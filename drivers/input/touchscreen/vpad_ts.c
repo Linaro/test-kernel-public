@@ -344,6 +344,7 @@ static int pixcir_i2c_ts_probe(struct i2c_client *client,
 
 	} else {
 		s3c_gpio_cfgpin(TOUCH_INT_PIN, S3C_GPIO_SFN(0x0F));
+		s3c_gpio_setpull(TOUCH_INT_PIN, S3C_GPIO_PULL_UP);
 	}
 
 #if defined(Unidisplay_9_7inch) || defined(Unidisplay_7inch) \
