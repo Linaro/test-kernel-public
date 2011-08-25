@@ -337,16 +337,9 @@ int s3c_udc_start(struct usb_gadget_driver *driver,
 		dev_dbg(&dev->gadget.dev, "%s vbus connect %d\n",
 					__func__, retval);
 
-	if (!(readl(S3C_UDC_OTG_GOTGCTL) & B_SESSION_VALID)) {
-		retval = usb_gadget_vbus_disconnect(&dev->gadget);
-		if (retval < 0) {
-			dev_dbg(&dev->gadget.dev, "%s vbus disconnect %d\n",
-					__func__, retval);
-		}
-	}
 	printk(KERN_INFO "Registered gadget driver '%s'\n",
 			driver->driver.name);
-
+	udc_enable(dev);
 	return 0;
 }
 
