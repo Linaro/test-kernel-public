@@ -119,6 +119,11 @@ static struct i2c_board_info i2c_devs6[] __initdata = {
 	},
 };
 
+static struct s3c_sdhci_platdata origen_hsmmc0_pdata __initdata = {
+	.cd_type		= S3C_SDHCI_CD_INTERNAL,
+	.clk_type		= S3C_SDHCI_CLK_DIV_EXTERNAL,
+};
+
 static struct s3c_sdhci_platdata origen_hsmmc2_pdata __initdata = {
 	.cd_type		= S3C_SDHCI_CD_INTERNAL,
 	.clk_type		= S3C_SDHCI_CLK_DIV_EXTERNAL,
@@ -179,6 +184,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_i2c1,
 	&s3c_device_i2c6,
 	&s3c_device_hsmmc2,
+	&s3c_device_hsmmc0,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
 	&s5p_device_ohci,
@@ -252,6 +258,7 @@ static void __init origen_machine_init(void)
 	i2c_register_board_info(2, i2c_devs6, ARRAY_SIZE(i2c_devs6));
 	s3cfb_set_platdata(NULL);
 	s3c_sdhci2_set_platdata(&origen_hsmmc2_pdata);
+	s3c_sdhci0_set_platdata(&origen_hsmmc0_pdata);
 #ifdef CONFIG_VIDEO_FIMG2D
 	s5p_fimg2d_set_platdata(&fimg2d_data);
 #endif
