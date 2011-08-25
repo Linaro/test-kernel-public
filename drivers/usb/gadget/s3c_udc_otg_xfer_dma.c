@@ -506,6 +506,13 @@ static irqreturn_t s3c_udc_irq(int irq, void *_dev)
 			reset_available = 1;
 			DEBUG_ISR("\t\tRESET handling skipped\n");
 		}
+		/* Added to handle usb connect/disconnect even in boards not having
+		 usb detection chip.
+		 */
+		if((usb_status & 0xd0000) == (0x1 << 16)) {
+			stop_activity(dev, dev->driver);
+			DEBUG_ISR("s3c_udc: Cable removed\n");
+		}
 	}
 
 	if (intr_status & INT_IN_EP)
