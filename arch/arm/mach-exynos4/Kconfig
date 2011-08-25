@@ -247,6 +247,7 @@ config MACH_ORIGEN
 	select CPU_S5PV310_EVT1
 	select S3C_DEV_RTC
 	select S3C_DEV_WDT
+	select S3C_DEV_HSMMC
 	select S3C_DEV_HSMMC2
 	select SAMSUNG_DEV_BACKLIGHT
 	select S3C_DEV_I2C0
