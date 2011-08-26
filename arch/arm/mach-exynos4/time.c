@@ -20,6 +20,7 @@
 #include <linux/platform_device.h>
 
 #include <asm/smp_twd.h>
+#include <asm/sched_clock.h>
 
 #include <mach/map.h>
 #include <plat/regs-timer.h>
@@ -206,6 +207,35 @@ static cycle_t exynos4_pwm4_read(struct clocksource *cs)
 	return (cycle_t) ~__raw_readl(S3C_TIMERREG(0x40));
 }
 
+/*
+ * Override the global weak sched_clock symbol with this
+ * local implementation which uses the clocksource to get some
+ * better resolution when scheduling the kernel. We accept that
+ * this wraps around for now, since it is just a relative time
+ * stamp. (Inspired by U300 implementation.)
+ */
+static DEFINE_CLOCK_DATA(cd);
+
+unsigned long long notrace sched_clock(void)
+{
+	void __iomem *reg = S3C_TIMERREG(0x40);
+
+	if (!reg)
+		return 0;
+
+	return cyc_to_sched_clock(&cd, ~__raw_readl(reg), (u32)~0);
+}
+
+static void notrace exynos4_update_sched_clock(void)
+{
+	void __iomem *reg = S3C_TIMERREG(0x40);
+
+	if (!reg)
+		return;
+
+	update_sched_clock(&cd, ~__raw_readl(reg), (u32)~0);
+}
+
 #ifdef CONFIG_PM
 static void exynos4_pwm4_resume(struct clocksource *cs)
 {
@@ -246,6 +276,8 @@ static void __init exynos4_clocksource_init(void)
 
 	exynos4_pwm_init(4, ~0);
 	exynos4_pwm_start(4, 1);
+
+	init_sched_clock(&cd, exynos4_update_sched_clock, 32, clock_rate);
 
 	if (clocksource_register_hz(&pwm_clocksource, clock_rate))
 		panic("%s: can't register clocksource\n", pwm_clocksource.name);
