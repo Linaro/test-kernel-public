@@ -166,6 +166,10 @@
 
 #define S5P_EINT_BASE1		(S5P_IRQ_EINT_BASE + 0)
 #define S5P_EINT_BASE2		(S5P_IRQ_EINT_BASE + 16)
+
+/* GPIO Externel intrerrupt to IRQ used by Touch screen */
+#define EINT_NUMBER(x)		((x) + S5P_IRQ_EINT_BASE)
+
 #define IRQ_TVOUT_HPD		(S5P_IRQ_EINT_BASE + 31)
 
 /* optional GPIO interrupts */
