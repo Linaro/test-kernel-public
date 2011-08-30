@@ -30,6 +30,7 @@
 #include <mach/regs-clock.h>
 #include <mach/regs-pmu.h>
 #include <mach/pm-core.h>
+#include <mach/regs-audss.h>
 
 static struct sleep_save exynos4_sleep[] = {
 	{ .reg = S5P_ARM_CORE0_LOWPWR			, .val = 0x2, },
@@ -120,6 +121,7 @@ static struct sleep_save exynos4_set_clksrc[] = {
 
 static struct sleep_save exynos4_core_save[] = {
 	/* CMU side */
+	SAVE_ITEM(S5P_CLKSRC_AUDSS),
 	SAVE_ITEM(S5P_CLKDIV_LEFTBUS),
 	SAVE_ITEM(S5P_CLKGATE_IP_LEFTBUS),
 	SAVE_ITEM(S5P_CLKDIV_RIGHTBUS),
