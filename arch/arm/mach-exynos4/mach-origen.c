@@ -1,7 +1,7 @@
 /* linux/arch/arm/mach-exynos4/mach-origen.c
  *
  * Copyright (c) 2011 Insignal Co., Ltd.
- *		http://www.insignal.co.kr/
+ *              http://www.insignal.co.kr/
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
