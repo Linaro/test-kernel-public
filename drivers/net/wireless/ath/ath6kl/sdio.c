@@ -877,10 +877,17 @@ static struct sdio_driver ath6kl_sdio_driver = {
 	.remove = ath6kl_sdio_remove,
 };
 
+#ifdef CONFIG_MACH_ORIGEN
+extern int origen_wifi_set_detect(int val);
+#endif
+
 static int __init ath6kl_sdio_init(void)
 {
 	int ret;
 
+#ifdef CONFIG_MACH_ORIGEN
+	origen_wifi_set_detect(true);
+#endif
 	ret = sdio_register_driver(&ath6kl_sdio_driver);
 	if (ret)
 		ath6kl_err("sdio driver registration failed: %d\n", ret);
@@ -891,6 +898,9 @@ static int __init ath6kl_sdio_init(void)
 static void __exit ath6kl_sdio_exit(void)
 {
 	sdio_unregister_driver(&ath6kl_sdio_driver);
+#ifdef CONFIG_MACH_ORIGEN
+	origen_wifi_set_detect(false);
+#endif
 }
 
 module_init(ath6kl_sdio_init);
