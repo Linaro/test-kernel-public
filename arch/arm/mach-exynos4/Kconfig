@@ -249,6 +249,7 @@ config MACH_ORIGEN
 	select S3C_DEV_WDT
 	select S3C_DEV_HSMMC
 	select S3C_DEV_HSMMC2
+	select S3C_DEV_HSMMC3
 	select SAMSUNG_DEV_BACKLIGHT
 	select S3C_DEV_I2C0
 	select S3C_DEV_I2C1
