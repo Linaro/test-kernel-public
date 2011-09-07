@@ -218,12 +218,12 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_fimc1,
 	&s3c_device_fimc2,
 #endif
+
 #ifdef CONFIG_VIDEO_SAMSUNG_TVOUT
 	&s5p_device_tvout,
 	&s5p_device_cec,
 	&s5p_device_hpd,
 #endif
-	&origen_device_button,
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	&s3c_device_usbgadget,
 #endif
