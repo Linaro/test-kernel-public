@@ -389,6 +389,7 @@ config USB_PXA_U2O
 config USB_GADGET_S3C_OTGD
 	boolean "S3C HS USB OTG Device"
 	depends on (PLAT_S5P)
+	select USB_OTG_UTILS
 	help
 	  Samsung's S3C64XX processors include high speed USB OTG2.0
 	  controller. It has 15 configurable endpoints, as well as
