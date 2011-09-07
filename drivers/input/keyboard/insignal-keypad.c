@@ -52,17 +52,19 @@
 	({ do {} while (0); 0; })
 #endif
 
+static struct timer_list insignal_keypad_timer;
 static struct input_dev	*insignal_keypad;
 
 static int insignal_keypad_open(struct input_dev *dev);
 static void insignal_keypad_close(struct input_dev *dev);
 
 static void insignal_keypad_release_device(struct device *dev);
-static int insignal_keypad_resume(struct device *dev);
-static int insignal_keypad_suspend(struct device *dev, pm_message_t state);
+static int insignal_keypad_resume(struct platform_device *dev);
+static int insignal_keypad_suspend(struct platform_device *dev, \
+					pm_message_t state);
 
-static int __devinit insignal_keypad_probe(struct device *pdev);
-static int __devexit insignal_keypad_remove(struct device *pdev);
+static int __devinit insignal_keypad_probe(struct platform_device *pdev);
+static int __devexit insignal_keypad_remove(struct platform_device *pdev);
 
 static int __init insignal_keypad_init(void);
 static void __exit insignal_keypad_exit(void);
@@ -119,18 +121,21 @@ static void	insignal_keypad_release_device(struct device *dev)
 
 static int sleepmode = 0;
 static int powerkey = 0;
-static int	insignal_keypad_resume(struct device *dev)
+static int	insignal_keypad_resume(struct platform_device *dev)
 {
-	sleepmode = 0;
-	if(powerkey)
+	if (sleepmode)
 	{
-		input_report_key(insignal_keypad, KEY_POWER, 0);
+		sleepmode = 0;
+		input_report_key(insignal_keypad, KEY_MENU, 1);
+		input_report_key(insignal_keypad, KEY_MENU, 0);
+		input_sync(insignal_keypad);
 		powerkey = 0;
 	}
 	return 0;
 }
 
-static int	insignal_keypad_suspend(struct device *dev, pm_message_t state)
+static int	insignal_keypad_suspend(struct platform_device *dev, \
+						pm_message_t state)
 {
 	sleepmode = 1;
 	return 0;
@@ -171,7 +176,7 @@ static irqreturn_t insignal_keypad_irq(int irq, void *dev_id)
 	}
 	if( sleepmode )
 	{
-		keycode = KEY_POWER;
+		keycode = KEY_MENU;
 		powerkey = pressed;
 	}
 	if( prev_keycode != keycode || prev_pressed != pressed )
@@ -222,24 +227,26 @@ struct platform_device insignal_platform_device_driver = {
 	},
 };
 
-struct device_driver insignal_device_driver = {
+static struct platform_driver insignal_keypad_driver = {
+	.driver = {
 	.owner		= THIS_MODULE,
 	.name		= DEVICE_NAME,
-	.bus		= &platform_bus_type,
+	},
+/*	.bus            = &platform_bus_type, */
 	.probe		= insignal_keypad_probe,
 	.remove		= __devexit_p(insignal_keypad_remove),
 	.suspend	= insignal_keypad_suspend,
 	.resume		= insignal_keypad_resume,
 };
 
-static int __devinit	insignal_keypad_probe(struct device *pdev)
+static int __devinit insignal_keypad_probe(struct platform_device *pdev)
 {
 	int	key, code;
 
 	insignal_keypad = input_allocate_device();
 
 	if(!(insignal_keypad)) {
-		dev_err(pdev, "Can't allocation Memory.\n");
+		dev_err(&pdev->dev, "Error!!! Can't allocation Memory. [input_allocate_device]!!\n");
 		return -ENOMEM;
 	}
 
@@ -271,45 +278,45 @@ static int __devinit	insignal_keypad_probe(struct device *pdev)
 	insignal_keypad->id.version = 0x0001;
 
 	if(input_register_device(insignal_keypad))	{
-		dev_err(pdev, "insignal keypad driver register failed\n");
+		dev_err(&pdev->dev, "insignal keypad input driver register device failed.!\n");
 		input_free_device(insignal_keypad);		
 		return	-ENODEV;
 	}
 	
 	if(request_irq(IRQ_KEY_MENU, insignal_keypad_irq, IRQF_TRIGGER_FALLING\
 			| IRQF_TRIGGER_RISING|IRQF_DISABLED, "KEY_MENU", NULL))
-		dev_err(pdev, "Unable to request IRQ_KEY_MENU.\n");
+		dev_err(&pdev->dev, "Unable to request IRQ_KEY_MENU.\n");
 	else
 		irq_set_irq_wake(IRQ_KEY_MENU, 1);
 
 	if(request_irq(IRQ_KEY_HOME, insignal_keypad_irq, IRQF_TRIGGER_FALLING\
 		| IRQF_TRIGGER_RISING | IRQF_DISABLED, "KEY_HOME", NULL))
-		dev_err(pdev, "Unable to request IRQ_KEY_HOME.\n");
+		dev_err(&pdev->dev, "Unable to request IRQ_KEY_HOME.\n");
 	else
 		irq_set_irq_wake(IRQ_KEY_HOME, 1);
 	if(request_irq(IRQ_KEY_BACK, insignal_keypad_irq, IRQF_TRIGGER_FALLING\
 		| IRQF_TRIGGER_RISING | IRQF_DISABLED, "KEY_BACK", NULL))
-		dev_err(pdev, "Unable to request IRQ_KEY_BACK.\n");
+		dev_err(&pdev->dev, "Unable to request IRQ_KEY_BACK.\n");
 	else
 		irq_set_irq_wake(IRQ_KEY_BACK, 1);
 	if(request_irq(IRQ_KEY_VOLUMEUP, insignal_keypad_irq,\
 		IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING\
 		| IRQF_DISABLED, "KEY_VOLUMEUP", NULL))
-		dev_err(pdev, "Unable to request IRQ_KEY_VOLUMEUP.\n");
+		dev_err(&pdev->dev, "Unable to request IRQ_KEY_VOLUMEUP.\n");
 	else
 		irq_set_irq_wake(IRQ_KEY_VOLUMEUP, 1);
 	if(request_irq(IRQ_KEY_VOLUMEDOWN, insignal_keypad_irq,\
 		IRQF_TRIGGER_FALLING | IRQF_TRIGGER_RISING\
 		| IRQF_DISABLED, "KEY_VOLUMEDOWN", NULL))
-		dev_err(pdev, "Unable to request IRQ_KEY_VOLUMEDOWN.\n");
+		dev_err(&pdev->dev, "Unable to request IRQ_KEY_VOLUMEDOWN.\n");
 	else
 		irq_set_irq_wake(IRQ_KEY_VOLUMEDOWN, 1);
 
-	dev_info(pdev, "insignal keypad input driver Initialized!!\n");
+	dev_info(&pdev->dev, "insignal keypad input driver Initialized!!\n");
 	return 0;
 }
 
-static int __devexit	insignal_keypad_remove(struct device *pdev)
+static int __devexit insignal_keypad_remove(struct platform_device *pdev)
 {
 	disable_irq(IRQ_KEY_MENU);
 	disable_irq(IRQ_KEY_HOME);
@@ -322,13 +329,13 @@ static int __devexit	insignal_keypad_remove(struct device *pdev)
 
 static int __init insignal_keypad_init(void)
 {
-	int ret = driver_register(&insignal_device_driver);
+	int ret = platform_driver_register(&insignal_keypad_driver);
 	
 	if (!ret) {
 		ret = platform_device_register(&insignal_platform_device_driver);
 		
 		if (ret)
-			driver_unregister(&insignal_device_driver);
+			platform_driver_unregister(&insignal_keypad_driver);
 	}
 	return ret;
 }
@@ -336,7 +343,7 @@ static int __init insignal_keypad_init(void)
 static void __exit insignal_keypad_exit(void)
 {
 	platform_device_unregister(&insignal_platform_device_driver);
-	driver_unregister(&insignal_device_driver);
+	platform_driver_unregister(&insignal_keypad_driver);
 }
 
 module_init(insignal_keypad_init);
