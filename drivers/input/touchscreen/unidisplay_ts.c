@@ -256,23 +256,16 @@ static int unidisplay_ts_probe(struct i2c_client *client,
 	}
 
 	tsdata->input->evbit[0] = BIT_MASK(EV_SYN) | BIT_MASK(EV_KEY) |\
-		BIT_MASK(EV_ABS) | BIT_MASK(EV_REL) | BIT_MASK(EV_SW);
+		BIT_MASK(EV_ABS);
 	set_bit(EV_SYN, tsdata->input->evbit);
 	set_bit(EV_KEY, tsdata->input->evbit);
 	set_bit(EV_ABS, tsdata->input->evbit);
-	set_bit(EV_REL, tsdata->input->evbit);
-	set_bit(EV_SW , tsdata->input->evbit);
 
 	tsdata->input->keybit[BIT_WORD(BTN_TOUCH)] = BIT_MASK(BTN_TOUCH);
-
-	set_bit(0, tsdata->input->relbit);
-	set_bit(1, tsdata->input->relbit);
 
 	set_bit(0, tsdata->input->absbit);
 	set_bit(1, tsdata->input->absbit);
 	set_bit(2, tsdata->input->absbit);
-
-	set_bit(0, tsdata->input->swbit);
 
 	input_set_abs_params(tsdata->input, ABS_X, TOUCHSCREEN_MINX,\
 						TOUCHSCREEN_MAXX, 0, 0);
