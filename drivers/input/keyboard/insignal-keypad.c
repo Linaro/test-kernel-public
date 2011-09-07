@@ -28,7 +28,6 @@
 #include <mach/map.h>
 #include <mach/gpio.h>
 #include <plat/gpio-cfg.h>
-//#include <mach/gpio-bank.h>
 #include <mach/regs-gpio.h>
 
 #define DEVICE_NAME 		"insignal-keypad"
@@ -189,6 +188,7 @@ static irqreturn_t insignal_keypad_irq(int irq, void *dev_id)
 		input_event(insignal_keypad, EV_MSC, MSC_SCAN, irq);
 		input_report_key(insignal_keypad, keycode, pressed);
 		input_sync(insignal_keypad);
+#ifdef USE_DEBUG
 		switch(keycode)
 		{
 		case KEY_MENU:
@@ -213,6 +213,7 @@ static irqreturn_t insignal_keypad_irq(int irq, void *dev_id)
 			printk("[UNKNOWN] keycode=%d, pressed=%d\n", keycode, pressed);
 			break;
 		}
+#endif
 	}
 	return IRQ_HANDLED;
 }
