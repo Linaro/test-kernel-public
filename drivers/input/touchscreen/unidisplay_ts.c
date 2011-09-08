@@ -137,8 +137,6 @@ int unidisplay_ts_thread(void *kthread)
 	u8 type = 0;
 	int pendown;
 
-	init_waitqueue_head(&idle_wait);
-
 	do {
 
 		interruptible_sleep_on(&idle_wait);
@@ -301,6 +299,8 @@ static int unidisplay_ts_probe(struct i2c_client *client,
 	}
 
 	device_init_wakeup(&client->dev, 1);
+	init_waitqueue_head(&idle_wait);
+		
 
 	kidle_task = kthread_run(unidisplay_ts_thread, tsdata, "kidle_timeout");
 	if (IS_ERR(kidle_task)) {
