@@ -191,8 +191,9 @@ void __init exynos4_map_io(void)
 	/*
 	 * Default allocation size for ARM = 2MB
 	 * Memory required for FB = (~ 2.4 MB) 4MB
+	 * Memory required for HDMI = 64MB
 	 */
-	init_consistent_dma_size(SZ_2M + SZ_4M);
+	init_consistent_dma_size(SZ_2M + SZ_4M + SZ_64M);
 
 	if (soc_is_exynos4210() && samsung_rev() == EXYNOS4210_REV_0)
 		iotable_init(exynos4_iodesc0, ARRAY_SIZE(exynos4_iodesc0));
