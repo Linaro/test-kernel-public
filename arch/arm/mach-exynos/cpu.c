@@ -201,6 +201,7 @@ void __init exynos4_map_io(void)
 {
 	iotable_init(exynos_iodesc, ARRAY_SIZE(exynos_iodesc));
 	iotable_init(exynos4_iodesc, ARRAY_SIZE(exynos4_iodesc));
+	init_consistent_dma_size(SZ_32M);
 
 	/*
 	 * Default allocation size for ARM = 2MB
