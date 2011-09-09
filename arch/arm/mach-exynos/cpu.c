@@ -12,6 +12,7 @@
 #include <linux/sysdev.h>
 #include <linux/of.h>
 #include <linux/of_irq.h>
+#include <linux/dma-mapping.h>
 
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
@@ -176,6 +177,12 @@ void __init exynos4_map_io(void)
 {
 	iotable_init(exynos_iodesc, ARRAY_SIZE(exynos_iodesc));
 	iotable_init(exynos4_iodesc, ARRAY_SIZE(exynos4_iodesc));
+
+	/*
+	 * Default allocation size for ARM = 2MB
+	 * Memory required for FB = (~ 2.4 MB) 4MB
+	 */
+	init_consistent_dma_size(SZ_2M + SZ_4M);
 
 	if (soc_is_exynos4210() && samsung_rev() == EXYNOS4210_REV_0)
 		iotable_init(exynos4_iodesc0, ARRAY_SIZE(exynos4_iodesc0));
