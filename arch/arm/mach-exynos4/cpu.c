@@ -10,6 +10,7 @@
 
 #include <linux/sched.h>
 #include <linux/sysdev.h>
+#include <linux/dma-mapping.h>
 
 #include <asm/cacheflush.h>
 #include <asm/mach/map.h>
@@ -163,6 +164,7 @@ static void exynos4_sw_reset(void)
 void __init exynos4_map_io(void)
 {
 	iotable_init(exynos4_iodesc, ARRAY_SIZE(exynos4_iodesc));
+	init_consistent_dma_size(SZ_8M);
 
 	if (soc_is_exynos4210() && samsung_rev() == EXYNOS4210_REV_0)
 		iotable_init(exynos4_iodesc0, ARRAY_SIZE(exynos4_iodesc0));
