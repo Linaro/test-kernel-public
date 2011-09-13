@@ -186,9 +186,7 @@ static irqreturn_t insignal_keypad_irq(int irq, void *dev_id)
 	{
 		prev_keycode = keycode;
 		prev_pressed = pressed;
-		input_event(insignal_keypad, EV_MSC, MSC_SCAN, irq);
 		input_report_key(insignal_keypad, keycode, pressed);
-		input_sync(insignal_keypad);
 		switch(keycode)
 		{
 		case KEY_MENU:
