@@ -67,3 +67,4 @@ obj-$(CONFIG_EXYNOS4_SETUP_SDHCI_GPIO)	+= setup-sdhci-gpio.o
 obj-$(CONFIG_EXYNOS4_SETUP_USB_PHY)	+= setup-usb-phy.o
 obj-$(CONFIG_SPI_S3C64XX)		+= dev-spi.o
 obj-$(CONFIG_EXYNOS4_SETUP_TVOUT)	+= setup-tvout.o
+obj-$(CONFIG_MACH_ORIGEN)		+= setup-origen-keypad.o
