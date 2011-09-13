@@ -36,8 +36,8 @@
 
 //#define USE_DEBUG
 
-#define EXYNOS4_GPX1DAT (S5P_VA_GPIO2 + 0x0c24)
-#define EXYNOS4_GPX2DAT (S5P_VA_GPIO2 + 0x0c44)
+#define S5PV310_GPX1DAT (S5PV310_VA_GPIO2 + 0x0c24)
+#define S5PV310_GPX2DAT (S5PV310_VA_GPIO2 + 0x0c44)
 
 #define	IRQ_KEY_MENU		EINT_NUMBER(13)
 #define	IRQ_KEY_HOME		EINT_NUMBER(14)
@@ -84,24 +84,24 @@ unsigned int insignal_keypad_keycode_map[MAX_KEYPAD_CNT] = {
 static void insignal_keypad_gpio_cfg(void)
 {
 	/* Push Key Button 1 */
-	s3c_gpio_cfgpin(EXYNOS4_GPX1(5), S3C_GPIO_SFN(0));
-	s3c_gpio_setpull(EXYNOS4_GPX1(5), S3C_GPIO_PULL_NONE);
+	s3c_gpio_cfgpin(S5PV310_GPX1(5), S3C_GPIO_SFN(0));
+	s3c_gpio_setpull(S5PV310_GPX1(5), S3C_GPIO_PULL_NONE);
 
 	/* Push Key Button 2 */
-	s3c_gpio_cfgpin(EXYNOS4_GPX1(6), S3C_GPIO_SFN(0));
-	s3c_gpio_setpull(EXYNOS4_GPX1(6), S3C_GPIO_PULL_NONE);
+	s3c_gpio_cfgpin(S5PV310_GPX1(6), S3C_GPIO_SFN(0));
+	s3c_gpio_setpull(S5PV310_GPX1(6), S3C_GPIO_PULL_NONE);
 
 	/* Push Key Button 3 */
-	s3c_gpio_cfgpin(EXYNOS4_GPX1(7), S3C_GPIO_SFN(0));
-	s3c_gpio_setpull(EXYNOS4_GPX1(7), S3C_GPIO_PULL_NONE);
+	s3c_gpio_cfgpin(S5PV310_GPX1(7), S3C_GPIO_SFN(0));
+	s3c_gpio_setpull(S5PV310_GPX1(7), S3C_GPIO_PULL_NONE);
 
 	/* Push Key Button 4 */
-	s3c_gpio_cfgpin(EXYNOS4_GPX2(0), S3C_GPIO_SFN(0));
-	s3c_gpio_setpull(EXYNOS4_GPX2(0), S3C_GPIO_PULL_NONE);
+	s3c_gpio_cfgpin(S5PV310_GPX2(0), S3C_GPIO_SFN(0));
+	s3c_gpio_setpull(S5PV310_GPX2(0), S3C_GPIO_PULL_NONE);
 
 	/* Push Key Button 4 */
-	s3c_gpio_cfgpin(EXYNOS4_GPX2(1), S3C_GPIO_SFN(0));
-	s3c_gpio_setpull(EXYNOS4_GPX2(1), S3C_GPIO_PULL_NONE);
+	s3c_gpio_cfgpin(S5PV310_GPX2(1), S3C_GPIO_SFN(0));
+	s3c_gpio_setpull(S5PV310_GPX2(1), S3C_GPIO_PULL_NONE);
 }
 
 //[*]TODO : --------------------------------------------------------------------------------------------[*]
@@ -155,24 +155,24 @@ static irqreturn_t insignal_keypad_irq(int irq, void *dev_id)
 	{
 	case IRQ_KEY_MENU:
 		keycode = KEY_MENU;
-		pressed = ((readl(EXYNOS4_GPX1DAT) & (0x1<<5)) == 0) ? 1 : 0;
+		pressed = ((readl(S5PV310_GPX1DAT) & (0x1<<5)) == 0) ? 1 : 0;
 		break;
 
 	case IRQ_KEY_HOME:
 		keycode = KEY_HOME;
-		pressed = ((readl(EXYNOS4_GPX1DAT) & (0x1<<6)) == 0) ? 1 : 0;
+		pressed = ((readl(S5PV310_GPX1DAT) & (0x1<<6)) == 0) ? 1 : 0;
 		break;
 	case IRQ_KEY_BACK:
 		keycode = KEY_BACK;
-		pressed = ((readl(EXYNOS4_GPX1DAT) & (0x1<<7)) == 0) ? 1 : 0;
+		pressed = ((readl(S5PV310_GPX1DAT) & (0x1<<7)) == 0) ? 1 : 0;
 		break;
 	case IRQ_KEY_VOLUMEUP:
 		keycode = KEY_VOLUMEUP;
-		pressed = ((readl(EXYNOS4_GPX2DAT) & (0x1<<0)) == 0) ? 1 : 0;
+		pressed = ((readl(S5PV310_GPX2DAT) & (0x1<<0)) == 0) ? 1 : 0;
 		break;
 	case IRQ_KEY_VOLUMEDOWN:
 		keycode = KEY_VOLUMEDOWN;
-		pressed = ((readl(EXYNOS4_GPX2DAT) & (0x1<<1)) == 0) ? 1 : 0;
+		pressed = ((readl(S5PV310_GPX2DAT) & (0x1<<1)) == 0) ? 1 : 0;
 		break;
 	default:
 		return IRQ_HANDLED;
@@ -283,24 +283,24 @@ static int __devinit	insignal_keypad_probe(struct device *pdev)
 	if(request_irq(IRQ_KEY_MENU, insignal_keypad_irq, IRQF_TRIGGER_FALLING|IRQF_TRIGGER_RISING|IRQF_DISABLED, "KEY_MENU", NULL))
 		dev_err(pdev, "Unable to request IRQ_KEY_MENU.\n");
 	else
-		irq_set_irq_wake(IRQ_KEY_MENU, 1);
+		set_irq_wake(IRQ_KEY_MENU, 1);
 
 	if(request_irq(IRQ_KEY_HOME, insignal_keypad_irq, IRQF_TRIGGER_FALLING|IRQF_TRIGGER_RISING|IRQF_DISABLED, "KEY_HOME", NULL))
 		dev_err(pdev, "Unable to request IRQ_KEY_HOME.\n");
 	else
-		irq_set_irq_wake(IRQ_KEY_HOME, 1);
+		set_irq_wake(IRQ_KEY_HOME, 1);
 	if(request_irq(IRQ_KEY_BACK, insignal_keypad_irq, IRQF_TRIGGER_FALLING|IRQF_TRIGGER_RISING|IRQF_DISABLED, "KEY_BACK", NULL))
 		dev_err(pdev, "Unable to request IRQ_KEY_BACK.\n");
 	else
-		irq_set_irq_wake(IRQ_KEY_BACK, 1);
+		set_irq_wake(IRQ_KEY_BACK, 1);
 	if(request_irq(IRQ_KEY_VOLUMEUP, insignal_keypad_irq, IRQF_TRIGGER_FALLING|IRQF_TRIGGER_RISING|IRQF_DISABLED, "KEY_VOLUMEUP", NULL))
 		dev_err(pdev, "Unable to request IRQ_KEY_VOLUMEUP.\n");
 	else
-		irq_set_irq_wake(IRQ_KEY_VOLUMEUP, 1);
+		set_irq_wake(IRQ_KEY_VOLUMEUP, 1);
 	if(request_irq(IRQ_KEY_VOLUMEDOWN, insignal_keypad_irq, IRQF_TRIGGER_FALLING|IRQF_TRIGGER_RISING|IRQF_DISABLED, "KEY_VOLUMEDOWN", NULL))
 		dev_err(pdev, "Unable to request IRQ_KEY_VOLUMEDOWN.\n");
 	else
-		irq_set_irq_wake(IRQ_KEY_VOLUMEDOWN, 1);
+		set_irq_wake(IRQ_KEY_VOLUMEDOWN, 1);
 
 	dev_info(pdev, "insignal keypad input driver Initialized!!\n");
 	return 0;
