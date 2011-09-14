@@ -37,7 +37,6 @@
 #include <plat/pd.h>
 #include <plat/gpio-cfg.h>
 #include <plat/backlight.h>
-#include <plat/origen-keypad.h>
 #include <plat/otg.h>
 #include <plat/ohci.h>
 #include <plat/ehci.h>
@@ -161,28 +160,6 @@ static struct s3c_platform_fimc fimc_plat = {
 #endif
 };
 #endif
-
-static struct origen_keypad_platdata origen_keypad_pdata __initdata = {
-	.cfg_gpio = origen_keypad_cfg_gpio,
-};
-
-static struct platform_device origen_device_keypad = {
-	.name		= "origen-keypad",
-	.id		= 0,
-	.num_resources	= 0,
-	.dev		= {
-		.platform_data = &origen_keypad_pdata,
-	},
-};
-
-void __init origen_keypad_set_platdata(struct origen_keypad_platdata *pd)
-{
-	struct origen_keypad_platdata *npd;
-
-	npd = s3c_set_platdata(pd, sizeof(struct origen_keypad_platdata),
-						&origen_device_keypad);
-}
-
 static struct s5p_otg_platdata origen_otg_pdata;
 static void __init origen_otg_init(void)
 {
@@ -250,7 +227,6 @@ static struct platform_device *origen_devices[] __initdata = {
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	&s3c_device_usbgadget,
 #endif
-	&origen_device_keypad
 };
 
 /* LCD Backlight data */
@@ -304,7 +280,6 @@ static void __init origen_machine_init(void)
 	s5p_hdmi_hpd_set_platdata(&hdmi_hpd_data);
 	s5p_hdmi_cec_set_platdata(&hdmi_cec_data);
 #endif
-	origen_keypad_set_platdata(NULL);
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	 origen_otg_init();
