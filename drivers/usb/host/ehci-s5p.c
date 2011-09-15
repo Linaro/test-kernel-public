@@ -189,11 +189,37 @@ static void s5p_ehci_shutdown(struct platform_device *pdev)
 	if (hcd->driver->shutdown)
 		hcd->driver->shutdown(hcd);
 }
+#ifdef CONFIG_PM
+static int s5p_ehci_suspend(struct platform_device *pdev,
+		pm_message_t message)
+{
+	struct s5p_ehci_platdata *pdata = pdev->dev.platform_data;
+	struct s5p_ehci_hcd *s5p_ehci = platform_get_drvdata(pdev);
 
+	if (pdata && pdata->phy_exit)
+                pdata->phy_exit(pdev, S5P_USB_PHY_HOST);
+
+	clk_disable(s5p_ehci->clk);
+}
+static int s5p_ehci_resume(struct platform_device *pdev)
+{
+	struct s5p_ehci_platdata *pdata = pdev->dev.platform_data;
+        struct s5p_ehci_hcd *s5p_ehci = platform_get_drvdata(pdev);
+
+        clk_enable(s5p_ehci->clk);
+
+        if (pdata && pdata->phy_init)
+                pdata->phy_init(pdev, S5P_USB_PHY_HOST);
+}
+#endif
 static struct platform_driver s5p_ehci_driver = {
 	.probe		= s5p_ehci_probe,
 	.remove		= __devexit_p(s5p_ehci_remove),
 	.shutdown	= s5p_ehci_shutdown,
+#ifdef CONFIG_PM
+	.suspend        = s5p_ehci_suspend,
+        .resume         = s5p_ehci_resume,
+#endif
 	.driver = {
 		.name	= "s5p-ehci",
 		.owner	= THIS_MODULE,

@@ -69,6 +69,7 @@ static int ohci_hcd_s5pv210_drv_suspend(
 	clear_bit(HCD_FLAG_HW_ACCESSIBLE, &hcd->flags);
 
 	pdata->phy_exit(pdev, S5P_USB_PHY_HOST);
+	clk_disable(s5p_ohci->clk);
 bail:
 	spin_unlock_irqrestore(&ohci->lock, flags);
 
@@ -87,6 +88,9 @@ static int ohci_hcd_s5pv210_drv_resume(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+	rc = clk_enable(s5p_ohci->clk);
+	if(rc)
+	  return rc;	
 	if (pdata->phy_init)
 		pdata->phy_init(pdev, S5P_USB_PHY_HOST);
 
