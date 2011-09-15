@@ -20,25 +20,29 @@
 #include <plat/ohci.h>
 #include <plat/usb-phy.h>
 
+#define INSNREG00 0x12580090
+#define APP_START_CLK (1<<21)
+
 struct s5p_ohci_hcd {
         struct device *dev;
         struct usb_hcd *hcd;
         struct clk *clk;
 };
 
-
+static void ohci_s5pv210_set_clock(int start_clk);
 #ifdef CONFIG_PM
 static int ohci_hcd_s5pv210_drv_suspend(
 	struct platform_device *pdev,
 	pm_message_t message
 ){
-	struct s5p_ohci_platdata *pdata;
-	struct usb_hcd *hcd = platform_get_drvdata(pdev);
+	struct s5p_ohci_platdata *pdata = pdev->dev.platform_data;
+	struct s5p_ohci_hcd *s5p_ohci = platform_get_drvdata(pdev);
+        struct usb_hcd *hcd = s5p_ohci->hcd;
 	struct ohci_hcd	*ohci = hcd_to_ohci(hcd);
 	unsigned long flags;
 	int rc = 0;
 
-	pdata = pdev->dev.platform_data;
+	
 	if (!pdata) {
 		dev_err(&pdev->dev, "No platform data defined\n");
 		return -EINVAL;
@@ -72,11 +76,12 @@ bail:
 }
 static int ohci_hcd_s5pv210_drv_resume(struct platform_device *pdev)
 {
-	struct s5p_ohci_platdata *pdata;
-	struct usb_hcd *hcd = platform_get_drvdata(pdev);
+	struct s5p_ohci_platdata *pdata = pdev->dev.platform_data;
+        struct s5p_ohci_hcd *s5p_ohci = platform_get_drvdata(pdev);
+        struct usb_hcd *hcd = s5p_ohci->hcd;
 	int rc = 0;
 
-	pdata = pdev->dev.platform_data;
+	
 	if (!pdata) {
 		dev_err(&pdev->dev, "No platform data defined\n");
 		return -EINVAL;
@@ -91,6 +96,22 @@ static int ohci_hcd_s5pv210_drv_resume(struct platform_device *pdev)
 	ohci_finish_controller_resume(hcd);
 
 	return rc;
+}
+static int ohci_s5pv210_bus_suspend(struct usb_hcd *hcd)
+{
+	int ret;
+	ohci_s5pv210_set_clock(1);
+	ret = ohci_bus_suspend(hcd);
+	ohci_s5pv210_set_clock(0);
+	return ret;
+}
+static int ohci_s5pv210_bus_resume(struct usb_hcd *hcd)
+{
+	int ret;
+	ohci_s5pv210_set_clock(1);
+	ret = ohci_bus_resume(hcd);
+	ohci_s5pv210_set_clock(0);
+	return ret;
 }
 #else
 #define ohci_hcd_s5pv210_drv_suspend NULL
@@ -152,8 +173,8 @@ static const struct hc_driver ohci_s5pv210_hc_driver = {
 	.hub_status_data	= ohci_hub_status_data,
 	.hub_control		= ohci_hub_control,
 #ifdef	CONFIG_PM
-	.bus_suspend		= ohci_bus_suspend,
-	.bus_resume		= ohci_bus_resume,
+	.bus_suspend		= ohci_s5pv210_bus_suspend,
+	.bus_resume		= ohci_s5pv210_bus_resume,
 #endif
 	.start_port_reset	= ohci_start_port_reset,
 };
@@ -281,13 +302,26 @@ static int __devexit ohci_hcd_s5pv210_drv_remove(struct platform_device *pdev)
 
 	return 0;
 }
+static void ohci_s5pv210_set_clock(int start_clk)
+{
+	void __iomem* insnreg;
+        insnreg = ioremap(INSNREG00,4);
+
+	if(start_clk) {
+		__raw_writel(APP_START_CLK,insnreg);
+	}
+	else {
+		__raw_writel(~APP_START_CLK,insnreg);
+	}		
+}
 static void ohci_hcd_s5pv210_shutdown(struct platform_device *pdev)
 {
         struct s5p_ohci_hcd *s5p_ohci = platform_get_drvdata(pdev);
         struct usb_hcd *hcd = s5p_ohci->hcd;
-
+	ohci_s5pv210_set_clock(1);
         if (hcd->driver->shutdown)
                 hcd->driver->shutdown(hcd);
+	ohci_s5pv210_set_clock(0);
 }
 static struct platform_driver  ohci_hcd_s5pv210_driver = {
 	.probe		= ohci_hcd_s5pv210_drv_probe,
