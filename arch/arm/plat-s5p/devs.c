@@ -42,9 +42,16 @@ static struct resource s3cfb_resource[] = {
 		.end	= S5P_PA_LCD0 + S5P_SZ_LCD0 - 1,
 		.flags	= IORESOURCE_MEM,
 	},
-	[3] = {
-		.start	= IRQ_LCD0,
-		.end	= IRQ_LCD0,
+	/* Frame sync interrupt for LCD0 */
+	[1] = {
+		.start	= IRQ_LCD0_0,
+		.end	= IRQ_LCD0_0,
+		.flags	= IORESOURCE_IRQ,
+	},
+	/* FIFO level sync interrupt for LCD0 */
+	[2] = {
+		.start	= IRQ_LCD0_1,
+		.end	= IRQ_LCD0_1,
 		.flags	= IORESOURCE_IRQ,
 	},
 };
