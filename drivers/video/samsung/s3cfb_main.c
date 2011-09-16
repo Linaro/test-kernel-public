@@ -215,7 +215,7 @@ static int s3cfb_probe(struct platform_device *pdev)
 			goto err1;
 		}
 		/* irq */
-		fbdev[i]->irq = platform_get_irq(pdev, 0);
+		fbdev[i]->irq = platform_get_irq(pdev, 1);
 		if (request_irq(fbdev[i]->irq, s3cfb_irq_frame, IRQF_SHARED,
 				pdev->name, fbdev[i])) {
 			dev_err(fbdev[i]->dev, "request_irq failed\n");
