@@ -75,7 +75,7 @@ config FB_S3C_Y_VRES
 config VIDEO_SAMSUNG_MEMSIZE_FIMD0
 	int "Memory size in kbytes for FIMD0"
 	depends on FB_S3C
-	default "24576"
+	default "5120"
 
 config VIDEO_SAMSUNG_MEMSIZE_FIMD1
 	int "Memory size in kbytes for FIMD1"
