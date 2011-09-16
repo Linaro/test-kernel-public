@@ -386,6 +386,12 @@ static void __init exynos4_reserve_cma(void)
 			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMC3 * SZ_1K,
 		},
 #endif
+#ifdef CONFIG_FB_S3C
+		{
+			.name = "fimd",
+			.size = CONFIG_VIDEO_SAMSUNG_MEMSIZE_FIMD0 * SZ_1K,
+		},
+#endif
 		{
 			.name = "common",
 			.size = CONFIG_CMA_COMMON_MEMORY_SIZE * SZ_1K,
@@ -400,6 +406,9 @@ static void __init exynos4_reserve_cma(void)
 #if defined(CONFIG_VIDEO_FIMC)
 		"s3c-fimc.0=fimc0;s3c-fimc.1=fimc1;"
 		"s3c-fimc.2=fimc2;s3c-fimc.3=fimc3;"
+#endif
+#ifdef CONFIG_FB_S3C
+		"s3cfb=fimd;"
 #endif
 		"*=common";
 	int i = 0;
