@@ -32,7 +32,7 @@
 #include <linux/kthread.h>
 
 /* 20 ms */
-#define TOUCH_READ_TIME		(HZ/200)
+#define TOUCH_READ_TIME		msecs_to_jiffies(20)
 
 #define TOUCH_INT_PIN		EXYNOS4_GPX3(1)
 #define TOUCH_INT_PIN_SHIFT	1
