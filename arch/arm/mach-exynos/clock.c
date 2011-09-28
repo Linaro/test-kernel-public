@@ -489,11 +489,6 @@ static struct clk init_clocks_off[] = {
 		.enable		= exynos4_clk_ip_cam_ctrl,
 		.ctrlbit	= (1 << 3),
 	}, {
-		.name		= "fimd",
-		.devname	= "exynos4-fb.0",
-		.enable		= exynos4_clk_ip_lcd0_ctrl,
-		.ctrlbit	= (1 << 0),
-	}, {
 		.name		= "hsmmc",
 		.devname	= "s3c-sdhci.0",
 		.parent		= &clk_aclk_133.clk,
@@ -780,6 +775,13 @@ static struct clk clk_pdma1 = {
 	.devname	= "dma-pl330.1",
 	.enable		= exynos4_clk_ip_fsys_ctrl,
 	.ctrlbit	= (1 << 1),
+};
+
+static struct clk clk_fimd = {
+	.name		= "fimd",
+	.devname	= "exynos4-fb.0",
+	.enable		= exynos4_clk_ip_lcd0_ctrl,
+	.ctrlbit	= (1 << 0),
 };
 
 struct clk *clkset_group_list[] = {
@@ -1101,16 +1103,6 @@ static struct clksrc_clk clksrcs[] = {
 		.reg_div = { .reg = S5P_CLKDIV_CAM, .shift = 12, .size = 4 },
 	}, {
 		.clk		= {
-			.name		= "sclk_fimd",
-			.devname	= "exynos4-fb.0",
-			.enable		= exynos4_clksrc_mask_lcd0_ctrl,
-			.ctrlbit	= (1 << 0),
-		},
-		.sources = &clkset_group,
-		.reg_src = { .reg = S5P_CLKSRC_LCD0, .shift = 0, .size = 4 },
-		.reg_div = { .reg = S5P_CLKDIV_LCD0, .shift = 0, .size = 4 },
-	}, {
-		.clk		= {
 			.name		= "sclk_spi",
 			.devname	= "s3c64xx-spi.0",
 			.enable		= exynos4_clksrc_mask_peril1_ctrl,
@@ -1249,6 +1241,18 @@ static struct clksrc_clk clk_sclk_uart3 = {
 	.reg_div = { .reg = S5P_CLKDIV_PERIL0, .shift = 12, .size = 4 },
 };
 
+static struct clksrc_clk clk_sclk_fimd = {
+	.clk		= {
+		.name		= "sclk_fimd",
+		.devname	= "exynos4-fb.0",
+		.enable		= exynos4_clksrc_mask_lcd0_ctrl,
+		.ctrlbit	= (1 << 0),
+	},
+	.sources = &clkset_group,
+	.reg_src = { .reg = S5P_CLKSRC_LCD0, .shift = 0, .size = 4 },
+	.reg_div = { .reg = S5P_CLKDIV_LCD0, .shift = 0, .size = 4 },
+};
+
 /* Clock initialization code */
 static struct clksrc_clk *sysclks[] = {
 	&clk_mout_apll,
@@ -1286,6 +1290,7 @@ static struct clksrc_clk *sysclks[] = {
 static struct clk *clk_cdev[] = {
 	&clk_pdma0,
 	&clk_pdma1,
+	&clk_fimd,
 };
 
 static struct clksrc_clk *clksrc_cdev[] = {
@@ -1293,6 +1298,7 @@ static struct clksrc_clk *clksrc_cdev[] = {
 	&clk_sclk_uart1,
 	&clk_sclk_uart2,
 	&clk_sclk_uart3,
+	&clk_sclk_fimd,
 };
 
 static struct clk_lookup exynos4_clk_lookup[] = {
@@ -1302,6 +1308,8 @@ static struct clk_lookup exynos4_clk_lookup[] = {
 	CLKDEV_INIT("exynos4210-uart.3", "clk_uart_baud0", &clk_sclk_uart3.clk),
 	CLKDEV_INIT("dma-pl330.0", "apb_pclk", &clk_pdma0),
 	CLKDEV_INIT("dma-pl330.1", "apb_pclk", &clk_pdma1),
+	CLKDEV_INIT("exynos4-fb.0", "clk_fb_bus", &clk_fimd),
+	CLKDEV_INIT("exynos4-fb.0", "clk_fb_lcd", &clk_sclk_fimd.clk),
 };
 
 static int xtal_rate;
