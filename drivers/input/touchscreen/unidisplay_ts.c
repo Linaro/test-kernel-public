@@ -1,38 +1,22 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
-#include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/pm.h>
 #include <linux/i2c.h>
-#include <linux/string.h>
 #include <linux/platform_device.h>
 #include <linux/interrupt.h>
 #include <linux/input.h>
 #include <linux/clk.h>
-#include <linux/irq.h>
 #include <linux/io.h>
 #include <linux/slab.h>
 #include <linux/delay.h>
-
-#ifdef CONFIG_HAS_EARLYSUSPEND
-#include <linux/wakelock.h>
-#include <linux/earlysuspend.h>
-#include <linux/suspend.h>
-#endif
-
-#include <asm/irq.h>
+#include <linux/kthread.h>
+#include <linux/freezer.h>
 
 #include <mach/gpio.h>
-#include <mach/map.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
 #include <mach/regs-gpio.h>
 
 #include <plat/gpio-cfg.h>
-#include <linux/kthread.h>
-
-/* 20 ms */
-#define TOUCH_READ_TIME		msecs_to_jiffies(20)
 
 #define TOUCH_INT_PIN		EXYNOS4_GPX3(1)
 #define TOUCH_INT_PIN_SHIFT	1
@@ -42,7 +26,12 @@
 #define TOUCHSCREEN_MAXX	3968
 #define TOUCHSCREEN_MINY	0
 #define TOUCHSCREEN_MAXY	2304
-
+#define TOUCH_DEBUG
+#ifdef TOUCH_DEBUG
+#define DEBUG_PRINT(fmt, args...) printk(fmt, ##args)
+#else
+#define DEBUG_PRINT(fmt, args...)
+#endif
 
 #define	INPUT_REPORT(x, y, p)	\
 		{ \
@@ -55,12 +44,13 @@
 struct unidisplay_ts_data {
 	struct i2c_client *client;
 	struct input_dev *input;
+	struct task_struct *kidle_task;
+	wait_queue_head_t idle_wait;
 	struct delayed_work work;
 	int irq;
+	unsigned int irq_pending;
 };
 
-wait_queue_head_t idle_wait;
-static struct task_struct *kidle_task;
 
 static irqreturn_t unidisplay_ts_isr(int irq, void *dev_id);
 
@@ -70,7 +60,7 @@ static void unidisplay_ts_config(void)
 	s3c_gpio_setpull(TOUCH_INT_PIN, S3C_GPIO_PULL_UP);
 
 	if (gpio_request(TOUCH_INT_PIN, "TOUCH_INT_PIN")) {
-		printk(KERN_ERR "%s : gpio request failed.\n", __func__);
+		pr_err("%s : gpio request failed.\n", __func__);
 		return;
 	}
 	gpio_direction_input(TOUCH_INT_PIN);
@@ -80,7 +70,7 @@ static void unidisplay_ts_config(void)
 	s3c_gpio_cfgpin(TOUCH_RST_PIN, S3C_GPIO_OUTPUT);
 
 	if (gpio_request(TOUCH_RST_PIN, "TOUCH_RST_PIN")) {
-		printk(KERN_ERR "%s : gpio request failed.\n", __func__);
+		pr_err("%s : gpio request failed.\n", __func__);
 		return;
 	}
 	gpio_direction_output(TOUCH_RST_PIN, 1);
@@ -90,7 +80,7 @@ static void unidisplay_ts_config(void)
 static void unidisplay_ts_start(void)
 {
 	if (gpio_request(TOUCH_RST_PIN, "TOUCH_RST_PIN")) {
-		printk(KERN_ERR "%s : gpio request failed.\n", __func__);
+		pr_err("%s : gpio request failed.\n", __func__);
 		return;
 	}
 	gpio_set_value(TOUCH_RST_PIN, 0);
@@ -100,7 +90,7 @@ static void unidisplay_ts_start(void)
 static void unidisplay_ts_stop(void)
 {
 	if (gpio_request(TOUCH_RST_PIN, "TOUCH_RST_PIN")) {
-		printk(KERN_ERR "%s : gpio request failed.\n", __func__);
+		pr_err("%s : gpio request failed.\n", __func__);
 		return;
 	}
 	gpio_set_value(TOUCH_RST_PIN, 1);
@@ -114,57 +104,66 @@ static void unidisplay_ts_reset(void)
 	unidisplay_ts_start();
 }
 
-static int unidisplay_ts_read_irq(void)
+static int unidisplay_ts_pen_up(void)
 {
-	return (readl(S5P_VA_GPIO2 + 0xC64) >> (TOUCH_INT_PIN_SHIFT)) & 0x1;
+	int ret = (__raw_readl(S5P_VA_GPIO2 + 0xC64) \
+			>> (TOUCH_INT_PIN_SHIFT)) & 0x1;
+	return ret;
 }
 
 static irqreturn_t unidisplay_ts_isr(int irq, void *dev_id)
 {
-	if (!unidisplay_ts_read_irq())
-		wake_up_interruptible(&(idle_wait));
-
-	return IRQ_HANDLED;
+	struct unidisplay_ts_data *tsdata = dev_id;
+	if (irq == tsdata->irq) {
+		disable_irq_nosync(tsdata->irq);
+		tsdata->irq_pending = 1;
+		wake_up(&tsdata->idle_wait);
+		return IRQ_HANDLED;
+	}
+	return IRQ_NONE;
 }
 
-int unidisplay_ts_thread(void *kthread)
+static int unidisplay_ts_thread(void *kthread)
 {
-	struct unidisplay_ts_data *tsdata = 
-		(struct unidisplay_ts_data *)kthread;
-	u8 buf[9];
-	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
-	int ret;
-	u8 type = 0;
-	int pendown;
-
-	do {
-
-		interruptible_sleep_on(&idle_wait);
-		disable_irq(tsdata->irq);
-		while (!kthread_should_stop()) {
-
-			pendown = !unidisplay_ts_read_irq();
+	struct unidisplay_ts_data *tsdata = kthread;
+	struct task_struct *tsk = current;
+	int ret = 0;
+	struct sched_param param = { .sched_priority = 1 };
+	sched_setscheduler(tsk, SCHED_FIFO, &param);
+	set_freezable();
+	while (!kthread_should_stop()) {
+			int x1 = 0, y1 = 0;
+			u8 buf[9];
+			u8 type = 0;
+			unsigned int pendown = 0;
+			long timeout = 0;
+			if (tsdata->irq_pending) {
+				tsdata->irq_pending = 0;
+				enable_irq(tsdata->irq);
+			}
+			pendown = !unidisplay_ts_pen_up();
 			if (pendown) {
-
 				u8 addr = 0x10;
 				memset(buf, 0, sizeof(buf));
 				ret = i2c_master_send(tsdata->client, &addr, 1);
 				if (ret != 1) {
 					dev_err(&tsdata->client->dev,\
 					"Unable to write to i2c touchscreen\n");
-					enable_irq(tsdata->irq);
-					continue;
+					ret = -EIO;
+					timeout = MAX_SCHEDULE_TIMEOUT;
+					goto wait_event;
 				}
 				ret = i2c_master_recv(tsdata->client, buf, 9);
 				if (ret != 9) {
 					dev_err(&tsdata->client->dev,\
 					"Unable to read to i2c touchscreen!\n");
-					enable_irq(tsdata->irq);
-					continue;
+					ret = -EIO;
+					timeout = MAX_SCHEDULE_TIMEOUT;
+					goto wait_event;
 				}
-
+				/* mark everything ok now */
+				ret = 0;
 				type = buf[0];
-
 				if (type & 0x1) {
 					x1 = buf[2];
 					x1 <<= 8;
@@ -175,72 +174,86 @@ int unidisplay_ts_thread(void *kthread)
 					INPUT_REPORT(x1, y1, 1);
 				}
 				if (type & 0x2) {
-					x2 = buf[6];
-					x2 <<= 8;
-					x2 |= buf[5];
-					y2 = buf[8];
-					y2 <<= 8;
-					y2 |= buf[7];
-					INPUT_REPORT(x2, y2, 2);
+					x1 = buf[6];
+					x1 <<= 8;
+					x1 |= buf[5];
+					y1 = buf[8];
+					y1 <<= 8;
+					y1 |= buf[7];
+					INPUT_REPORT(x1, y1, 2);
 				}
-
 				input_sync(tsdata->input);
-				interruptible_sleep_on_timeout(&idle_wait,\
-							TOUCH_READ_TIME);
+				timeout = msecs_to_jiffies(20);
 			} else {
-				if (type & 1) {
-					INPUT_REPORT(x1, y1, 0);
-					x1 = 0;
-					y1 = 0;
-				}
-				if (type & 2) {
-					INPUT_REPORT(x2, y2, 0);
-					x2 = 0;
-					y2 = 0;
-				}
-				input_sync(tsdata->input);
-
 				INPUT_REPORT(0, 0, 0);
 				INPUT_REPORT(0, 0, 0);
 				input_sync(tsdata->input);
-				break;
+				timeout = MAX_SCHEDULE_TIMEOUT;
 			}
-		}
-		enable_irq(tsdata->irq);
-	} while (!kthread_should_stop());
-
-	return 0;
+wait_event:
+			wait_event_freezable_timeout(tsdata->idle_wait, \
+				tsdata->irq_pending || kthread_should_stop(), \
+				timeout);
+	}
+	return ret;
 }
 
 static int unidisplay_ts_open(struct input_dev *dev)
 {
+	struct unidisplay_ts_data *tsdata = input_get_drvdata(dev);
+	int ret = 0;
+	u8 addr = 0x10;
+	BUG_ON(tsdata->kidle_task);
+
+	ret = i2c_master_send(tsdata->client, &addr, 1);
+
+	if (ret != 1) {
+		dev_err(&tsdata->client->dev, "Unable to open touchscreen device\n");
+		return -ENODEV;
+	}
+
+	tsdata->kidle_task = kthread_run(unidisplay_ts_thread, tsdata, \
+					 "unidisplay_ts");
+	if (IS_ERR(tsdata->kidle_task)) {
+		ret = PTR_ERR(tsdata->kidle_task);
+		tsdata->kidle_task = NULL;
+		return ret;
+	}
+	enable_irq(tsdata->irq);
+
 	return 0;
 }
 
 static void unidisplay_ts_close(struct input_dev *dev)
 {
+	struct unidisplay_ts_data *tsdata = input_get_drvdata(dev);
+
+	if (tsdata->kidle_task)
+		kthread_stop(tsdata->kidle_task);
+
+	disable_irq(tsdata->irq);
 }
 
 static int unidisplay_ts_probe(struct i2c_client *client,
 				const struct i2c_device_id *id)
 {
 	struct unidisplay_ts_data *tsdata;
-	int error;
+	int err;
 
 	unidisplay_ts_config();
 	unidisplay_ts_reset();
 
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C)) {
-		printk(KERN_ERR "unidisplay_ts_probe: i2c function check failed.\n");
-		return -ENODEV;
+		dev_err(&client->dev, "i2c func not supported\n");
+		err = -EIO;
+		goto end;
 	}
 
 	tsdata = kzalloc(sizeof(*tsdata), GFP_KERNEL);
 	if (!tsdata) {
 		dev_err(&client->dev, "failed to allocate driver data!\n");
-		error = -ENOMEM;
-		dev_set_drvdata(&client->dev, NULL);
-		return error;
+		err = -ENOMEM;
+		goto fail1;
 	}
 
 	dev_set_drvdata(&client->dev, tsdata);
@@ -248,9 +261,8 @@ static int unidisplay_ts_probe(struct i2c_client *client,
 	tsdata->input = input_allocate_device();
 	if (!tsdata->input) {
 		dev_err(&client->dev, "failed to allocate input device!\n");
-		input_free_device(tsdata->input);
-		kfree(tsdata);
-		return -ENOMEM;
+		err = -ENOMEM;
+		goto fail2;
 	}
 
 	tsdata->input->evbit[0] = BIT_MASK(EV_SYN) | BIT_MASK(EV_KEY) |\
@@ -292,29 +304,32 @@ static int unidisplay_ts_probe(struct i2c_client *client,
 	tsdata->client = client;
 	tsdata->irq = client->irq;
 
-	if (input_register_device(tsdata->input)) {
-		input_free_device(tsdata->input);
-		kfree(tsdata);
-		return -EIO;
-	}
+	err = input_register_device(tsdata->input);
+	if (err)
+		goto fail2;
 
 	device_init_wakeup(&client->dev, 1);
-	init_waitqueue_head(&idle_wait);
-		
+	init_waitqueue_head(&tsdata->idle_wait);
 
-	kidle_task = kthread_run(unidisplay_ts_thread, tsdata, "kidle_timeout");
-	if (IS_ERR(kidle_task)) {
-		printk(KERN_ERR "error k thread run\n");
-		return -1;
-	}
-
-	if (request_irq(tsdata->irq, unidisplay_ts_isr,\
-		IRQF_DISABLED | IRQF_TRIGGER_FALLING, client->name, tsdata)) {
+	err = request_irq(tsdata->irq, unidisplay_ts_isr,\
+		IRQF_TRIGGER_FALLING, client->name, tsdata);
+	if (err != 0) {
 		dev_err(&client->dev, "Unable to request touchscreen IRQ.\n");
-		input_unregister_device(tsdata->input);
+		goto fail3;
 	}
-
-	return 0;
+	/* disable irq for now, will be enabled when device is opened */
+	disable_irq(tsdata->irq);
+	pr_info("Unidisplay touch driver registered successfully\n");
+	return err;
+fail3:
+	input_unregister_device(tsdata->input);
+fail2:
+	input_free_device(tsdata->input);
+	kfree(tsdata);
+fail1:
+	dev_set_drvdata(&client->dev, NULL);
+end:
+	return err;
 }
 
 
@@ -328,20 +343,25 @@ static int unidisplay_ts_remove(struct i2c_client *client)
 	dev_set_drvdata(&client->dev, NULL);
 	return 0;
 }
-
-static int unidisplay_ts_suspend(struct i2c_client *client, pm_message_t mesg)
+#ifdef CONFIG_PM
+static int unidisplay_ts_suspend(struct device *dev)
 {
-	struct unidisplay_ts_data *tsdata = dev_get_drvdata(&client->dev);
+	struct unidisplay_ts_data *tsdata = dev_get_drvdata(dev);
 	disable_irq(tsdata->irq);
 	return 0;
 }
 
-static int unidisplay_ts_resume(struct i2c_client *client)
+static int unidisplay_ts_resume(struct device *dev)
 {
-	struct unidisplay_ts_data *tsdata = dev_get_drvdata(&client->dev);
+	struct unidisplay_ts_data *tsdata = dev_get_drvdata(dev);
 	enable_irq(tsdata->irq);
 	return 0;
 }
+static const struct dev_pm_ops unidisplay_ts_pm = {
+	.suspend = unidisplay_ts_suspend,
+	.resume  = unidisplay_ts_resume,
+};
+#endif
 
 static const struct i2c_device_id unidisplay_ts_i2c_id[] = {
 	{ "unidisplay_ts", 0 },
@@ -351,27 +371,27 @@ MODULE_DEVICE_TABLE(i2c, unidisplay_ts_i2c_id);
 
 static struct i2c_driver unidisplay_ts_i2c_driver = {
 	.driver = {
-		.owner = THIS_MODULE,
-		.name = "unidisplay touchscreen driver",
+		.name	=	"Unidisplay Touch Driver",
+		.owner	=	THIS_MODULE,
+#ifdef CONFIG_PM
+		.pm	=	&unidisplay_ts_pm,
+#endif
 	},
-	.probe = unidisplay_ts_probe,
-	.remove = unidisplay_ts_remove,
-	.suspend = unidisplay_ts_suspend,
-	.resume = unidisplay_ts_resume,
-	.id_table = unidisplay_ts_i2c_id,
+	.probe		=	unidisplay_ts_probe,
+	.remove		=	unidisplay_ts_remove,
+	.id_table	=	unidisplay_ts_i2c_id,
 };
 
 static int __init unidisplay_ts_init(void)
 {
 	return i2c_add_driver(&unidisplay_ts_i2c_driver);
 }
+module_init(unidisplay_ts_init);
 
 static void __exit unidisplay_ts_exit(void)
 {
 	i2c_del_driver(&unidisplay_ts_i2c_driver);
 }
-
-module_init(unidisplay_ts_init);
 module_exit(unidisplay_ts_exit);
 
 MODULE_AUTHOR("JHKIM");
