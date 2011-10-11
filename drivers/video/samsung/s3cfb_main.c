@@ -167,12 +167,11 @@ static int s3cfb_probe(struct platform_device *pdev)
 	int ret = 0;
 	int i = 0;
 
-#ifdef CONFIG_EXYNOS4_DEV_PD
 	/* to use the runtime PM helper functions */
 	pm_runtime_enable(&pdev->dev);
 	/* enable the power domain */
 	pm_runtime_get_sync(&pdev->dev);
-#endif
+
 	fbfimd = kzalloc(sizeof(struct s3cfb_fimd_desc), GFP_KERNEL);
 	if (FIMD_MAX == 2)
 		fbfimd->dual = 1;
@@ -332,11 +331,10 @@ static int s3cfb_remove(struct platform_device *pdev)
 		kfree(fbdev[i]->fb);
 		kfree(fbdev[i]);
 	}
-#ifdef CONFIG_EXYNOS4_DEV_PD
 	/* disable the power domain */
 	pm_runtime_put(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
-#endif
+	
 	return 0;
 }
 
