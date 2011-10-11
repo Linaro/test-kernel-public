@@ -24,6 +24,7 @@
 #include <linux/workqueue.h>
 #include <linux/dma-mapping.h>
 #include <linux/sched.h>
+#include <linux/pm_runtime.h>
 #include <asm/atomic.h>
 #include <asm/cacheflush.h>
 #include <plat/cpu.h>
@@ -636,10 +637,9 @@ static int fimg2d_probe(struct platform_device *pdev)
 	}
 #endif
 
-#ifdef CONFIG_PM_RUNTIME
 	pm_runtime_enable(&pdev->dev);
+	pm_runtime_get_sync(&pdev->dev);
 	printk(KERN_INFO "FIMG2D PM runtime enable\n");
-#endif
 
 #if defined(CONFIG_S5P_SYSMMU_FIMG2D) && defined(CONFIG_VCM)
 	s5pvcm = vcm_create_unified(1024 << 20, VCM_DEV_G2D, &fimg2d_vcm_driver);
@@ -722,10 +722,10 @@ static int fimg2d_remove(struct platform_device *pdev)
 	}
 #endif /* CONFIG_S5P_SYSMMU_FIMG2D && CONFIG_VCM */
 
-#ifdef CONFIG_PM_RUNTIME
+	/* disable the power domain */
+        pm_runtime_put(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 	fimg2d_debug("pm_runtime_disable\n");
-#endif
 
 	return 0;
 }
@@ -739,6 +739,9 @@ static int fimg2d_suspend(struct platform_device *pdev, pm_message_t state)
 {
 	if (atomic_read(&info->power) == 1) {
 		fimg2d_power_off();
+		/* disable the power domain */
+        	fimg2d_debug("fimg2d: disable power domain\n");
+	        pm_runtime_put(&pdev->dev);
 	}
 	return 0;
 }
@@ -750,6 +753,9 @@ static int fimg2d_suspend(struct platform_device *pdev, pm_message_t state)
 static int fimg2d_resume(struct platform_device *pdev)
 {
 	if (atomic_read(&info->power) == 0) {
+		/* enable the power domain */
+	        fimg2d_debug("fimg2d - enable power domain\n");
+        	pm_runtime_get_sync(&pdev->dev);
 		fimg2d_power_on();
 #if defined(CONFIG_S5P_SYSMMU_FIMG2D) && defined(CONFIG_VCM)
 		fimg2d_debug("vcm_set_pgtable_base\n");
