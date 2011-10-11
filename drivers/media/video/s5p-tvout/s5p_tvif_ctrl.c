@@ -1105,9 +1105,11 @@ static void s5p_sdo_ctrl_clock(bool on)
 {
 	if (on) {
 		clk_enable(s5p_sdo_ctrl_private.clk[SDO_MUX].ptr);
+		s5p_tvout_pm_runtime_get();
 		clk_enable(s5p_sdo_ctrl_private.clk[SDO_PCLK].ptr);
 	} else {
 		clk_disable(s5p_sdo_ctrl_private.clk[SDO_PCLK].ptr);
+		s5p_tvout_pm_runtime_put();
 		clk_disable(s5p_sdo_ctrl_private.clk[SDO_MUX].ptr);
 	}
 }
@@ -1574,9 +1576,11 @@ static void s5p_hdmi_ctrl_clock(bool on)
 
 	if (on) {
 		clk_enable(clk[HDMI_MUX].ptr);
+		s5p_tvout_pm_runtime_get();
 		clk_enable(clk[HDMI_PCLK].ptr);
 	} else {
 		clk_disable(clk[HDMI_PCLK].ptr);
+		s5p_tvout_pm_runtime_put();
 		clk_disable(clk[HDMI_MUX].ptr);
 	}
 }

@@ -228,9 +228,11 @@ static void s5p_mixer_ctrl_clock(bool on)
 	/* power control function is not implemented yet */
 	if (on) {
 		clk_enable(s5p_mixer_ctrl_private.clk[MUX].ptr);
+		s5p_tvout_pm_runtime_get();
 		clk_enable(s5p_mixer_ctrl_private.clk[ACLK].ptr);
 	} else {
 		clk_disable(s5p_mixer_ctrl_private.clk[ACLK].ptr);
+		s5p_tvout_pm_runtime_put();
 		clk_disable(s5p_mixer_ctrl_private.clk[MUX].ptr);
 	}
 }

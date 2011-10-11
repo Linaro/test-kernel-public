@@ -322,10 +322,14 @@ static void s5p_vp_ctrl_internal_stop(void)
 
 static void s5p_vp_ctrl_clock(bool on)
 {
-	if (on)
+	if (on) {
+		s5p_tvout_pm_runtime_get();
 		clk_enable(s5p_vp_ctrl_private.clk.ptr);
-	else
+	}
+	else {
 		clk_disable(s5p_vp_ctrl_private.clk.ptr);
+		s5p_tvout_pm_runtime_put();
+		}
 }
 
 void s5p_vp_ctrl_set_src_plane(u32 base_y, u32 base_c, u32 width, u32 height,
