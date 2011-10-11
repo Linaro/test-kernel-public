@@ -248,10 +248,6 @@ static struct platform_device *origen_devices[] __initdata = {
 	&exynos4_device_pd[PD_MFC],
 	&exynos4_device_pd[PD_G3D],
 	&exynos4_device_pd[PD_LCD0],
-	&exynos4_device_pd[PD_LCD1],
-	&exynos4_device_pd[PD_CAM],
-	&exynos4_device_pd[PD_TV],
-	&exynos4_device_pd[PD_GPS],
 	&s3c_device_fb,
 	&s3c_device_i2c0,
 	&s3c_device_i2c1,
@@ -330,6 +326,7 @@ static void __init origen_machine_init(void)
 	s3c_sdhci0_set_platdata(&origen_hsmmc0_pdata);
 #ifdef CONFIG_VIDEO_FIMG2D
 	s5p_fimg2d_set_platdata(&fimg2d_data);
+	s5p_device_fimg2d.dev.parent = &exynos4_device_pd[PD_LCD0].dev;
 #endif
 #ifdef CONFIG_VIDEO_FIMC
 	/* fimc */
