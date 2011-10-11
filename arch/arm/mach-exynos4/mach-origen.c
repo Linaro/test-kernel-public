@@ -248,6 +248,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&exynos4_device_pd[PD_MFC],
 	&exynos4_device_pd[PD_G3D],
 	&exynos4_device_pd[PD_LCD0],
+	&exynos4_device_pd[PD_TV],
 	&s3c_device_fb,
 	&s3c_device_i2c0,
 	&s3c_device_i2c1,
@@ -337,6 +338,7 @@ static void __init origen_machine_init(void)
 #if defined(CONFIG_VIDEO_SAMSUNG_TVOUT)
 	s5p_hdmi_hpd_set_platdata(&hdmi_hpd_data);
 	s5p_hdmi_cec_set_platdata(&hdmi_cec_data);
+	s5p_device_tvout.dev.parent = &exynos4_device_pd[PD_TV].dev;
 #endif
 	platform_add_devices(origen_devices, ARRAY_SIZE(origen_devices));
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
