@@ -17,6 +17,7 @@
 #include <linux/pwm_backlight.h>
 #include <linux/i2c.h>
 #include <linux/gpio_keys.h>
+#include <linux/delay.h>
 #if defined(CONFIG_S5P_MEM_CMA)
 #include <linux/cma.h>
 #endif
@@ -139,6 +140,101 @@ static struct s3c_sdhci_platdata origen_hsmmc2_pdata __initdata = {
 	.host_caps		= MMC_CAP_8_BIT_DATA,
 #endif
 };
+
+/*
+ * WLAN: SDIO Host will call this func at booting time
+ */
+static int origen_wifi_status_register(void (*notify_func)
+		(struct platform_device *, int state));
+
+/* WLAN: MMC3-SDIO */
+static struct s3c_sdhci_platdata origen_hsmmc3_pdata __initdata = {
+	.max_width		= 4,
+	.host_caps		= MMC_CAP_4_BIT_DATA |
+			MMC_CAP_MMC_HIGHSPEED | MMC_CAP_SD_HIGHSPEED,
+	.cd_type		= S3C_SDHCI_CD_EXTERNAL,
+	.ext_cd_init		= origen_wifi_status_register,
+};
+
+/*
+ * WLAN: Save SDIO Card detect func into this pointer
+ */
+static void (*wifi_status_cb)(struct platform_device *, int state);
+
+static int origen_wifi_status_register(void (*notify_func)
+		(struct platform_device *, int state))
+{
+	if (!notify_func)
+		return -EAGAIN;
+	else
+		wifi_status_cb = notify_func;
+
+	return 0;
+}
+
+static struct gpio origen_wlan_bt_gpios[] __initdata = {
+	{ EXYNOS4_GPX2(2), GPIOF_OUT_INIT_HIGH, "GPIO_BT_RESET"},
+	{ EXYNOS4_GPX2(3), GPIOF_OUT_INIT_HIGH, "GPIO_WIFI_BT_WOW"},
+	{ EXYNOS4_GPX2(4), GPIOF_OUT_INIT_LOW, "GPIO_WIFI_RESET"},
+};
+
+static void origen_wlan_setup_power(bool val)
+{
+	int err;
+
+	origen_wlan_bt_gpios[0].gpio = EXYNOS4_GPX2(2);
+	origen_wlan_bt_gpios[1].gpio = EXYNOS4_GPX2(3);
+	origen_wlan_bt_gpios[2].gpio = EXYNOS4_GPX2(4);
+
+	if (val) {
+		err = gpio_request_array(origen_wlan_bt_gpios,
+			ARRAY_SIZE(origen_wlan_bt_gpios));
+		if (err) {
+			pr_warning("ORIGEN: Not obtain WIFI/BT gpios\n");
+			return;
+		}
+		s3c_gpio_cfgpin(origen_wlan_bt_gpios[2].gpio, S3C_GPIO_OUTPUT);
+		s3c_gpio_setpull(origen_wlan_bt_gpios[2].gpio,
+						S3C_GPIO_PULL_NONE);
+		/* VDD33,I/O Supply must be done */
+		gpio_set_value(origen_wlan_bt_gpios[2].gpio, 0);
+		udelay(30);	/*Tb */
+		gpio_direction_output(origen_wlan_bt_gpios[2].gpio, 1);
+	} else {
+		gpio_direction_output(origen_wlan_bt_gpios[2].gpio, 0);
+		gpio_free_array(origen_wlan_bt_gpios,
+			ARRAY_SIZE(origen_wlan_bt_gpios));
+	}
+
+	return;
+}
+
+/*
+ * This will be called at init time of WLAN driver
+ */
+int origen_wifi_set_detect(bool val)
+{
+	if (!wifi_status_cb) {
+		printk(KERN_WARNING "WLAN: Nobody to notify\n");
+		return -EAGAIN;
+	}
+	if (true == val) {
+		origen_wlan_setup_power(true);
+		wifi_status_cb(&s3c_device_hsmmc3, 1);
+	} else {
+		origen_wlan_setup_power(false);
+		wifi_status_cb(&s3c_device_hsmmc3, 0);
+	}
+
+	return 0;
+}
+
+/*
+ * Atheros driver can be module driver and then call
+ * this API before registering SDIO device driver
+ */
+EXPORT_SYMBOL(origen_wifi_set_detect);
+
 #ifdef CONFIG_VIDEO_FIMG2D
 static struct fimg2d_platdata fimg2d_data __initdata = {
 	.hw_ver = 30,
@@ -253,6 +349,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s3c_device_i2c6,
 	&s3c_device_hsmmc2,
 	&s3c_device_hsmmc0,
+	&s3c_device_hsmmc3,
 	&s3c_device_rtc,
 	&s3c_device_wdt,
 	&s5p_device_ohci,
@@ -329,6 +426,7 @@ static void __init origen_machine_init(void)
 	s3cfb_set_platdata(NULL);
 	s3c_sdhci2_set_platdata(&origen_hsmmc2_pdata);
 	s3c_sdhci0_set_platdata(&origen_hsmmc0_pdata);
+	s3c_sdhci3_set_platdata(&origen_hsmmc3_pdata);
 #ifdef CONFIG_VIDEO_FIMG2D
 	s5p_fimg2d_set_platdata(&fimg2d_data);
 #endif
