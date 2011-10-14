@@ -1327,6 +1327,8 @@ static struct clksrc_clk *sysclks[] = {
 	&clk_dout_mmc4,
 	&clk_mout_mfc0,
 	&clk_mout_mfc1,
+	&clk_mout_g2d0,
+	&clk_mout_g2d1,
 };
 
 static u32 epll_div[][6] = {

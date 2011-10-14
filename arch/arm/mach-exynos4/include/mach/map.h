@@ -122,6 +122,8 @@
 #define EXYNOS4_PA_HDMI			0x12D00000
 #define EXYNOS4_PA_IIC_HDMIPHY		0x138E0000
 
+#define EXYNOS4_PA_2D			0x12800000
+
 #define EXYNOS4_PA_IIC(x)		(0x13860000 + ((x) * 0x10000))
 
 #define EXYNOS4_PA_ADC			0x13910000
@@ -195,5 +197,9 @@
 #define S5P_PA_UART4			S5P_PA_UART(4)
 
 #define S5P_SZ_UART			SZ_256
+
+/* FIMG2D */
+#define S5P_PA_2D			EXYNOS4_PA_2D
+#define S5P_SZ_2D			SZ_64K
 
 #endif /* __ASM_ARCH_MAP_H */
