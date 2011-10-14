@@ -268,6 +268,14 @@ config MACH_ORIGEN
 	help
 	  Machine support for ORIGEN based on Samsung EXYNOS4210
 
+config ORIGEN_BT
+	bool "Bluetooth(CSR) of Origen"
+	depends on MACH_ORIGEN
+	select RFKILL
+	help
+	This driver is able to control
+	the state of CSR8819 in Origen
+
 endmenu
 
 comment "Configuration for HSMMC bus width"

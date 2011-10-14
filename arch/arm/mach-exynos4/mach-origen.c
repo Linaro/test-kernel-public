@@ -170,8 +170,10 @@ static int origen_wifi_status_register(void (*notify_func)
 	return 0;
 }
 
-static struct gpio origen_wlan_bt_gpios[] __initdata = {
-	{ EXYNOS4_GPX2(2), GPIOF_OUT_INIT_HIGH, "GPIO_BT_RESET"},
+/*
+ * WLAN & BT GPIO Configurations
+ */
+static struct gpio origen_w_b[] __initdata = {
 	{ EXYNOS4_GPX2(3), GPIOF_OUT_INIT_HIGH, "GPIO_WIFI_BT_WOW"},
 	{ EXYNOS4_GPX2(4), GPIOF_OUT_INIT_LOW, "GPIO_WIFI_RESET"},
 };
@@ -180,28 +182,25 @@ static void origen_wlan_setup_power(bool val)
 {
 	int err;
 
-	origen_wlan_bt_gpios[0].gpio = EXYNOS4_GPX2(2);
-	origen_wlan_bt_gpios[1].gpio = EXYNOS4_GPX2(3);
-	origen_wlan_bt_gpios[2].gpio = EXYNOS4_GPX2(4);
+	origen_w_b[0].gpio = EXYNOS4_GPX2(3);
+	origen_w_b[1].gpio = EXYNOS4_GPX2(4);
 
 	if (val) {
-		err = gpio_request_array(origen_wlan_bt_gpios,
-			ARRAY_SIZE(origen_wlan_bt_gpios));
+		err = gpio_request_one(origen_w_b[1].gpio,
+			origen_w_b[1].flags, origen_w_b[1].label);
 		if (err) {
-			pr_warning("ORIGEN: Not obtain WIFI/BT gpios\n");
+			pr_warning("ORIGEN: Not obtain WIFI gpios\n");
 			return;
 		}
-		s3c_gpio_cfgpin(origen_wlan_bt_gpios[2].gpio, S3C_GPIO_OUTPUT);
-		s3c_gpio_setpull(origen_wlan_bt_gpios[2].gpio,
-						S3C_GPIO_PULL_NONE);
+		s3c_gpio_cfgpin(origen_w_b[1].gpio, S3C_GPIO_OUTPUT);
+		s3c_gpio_setpull(origen_w_b[1].gpio, S3C_GPIO_PULL_NONE);
 		/* VDD33,I/O Supply must be done */
-		gpio_set_value(origen_wlan_bt_gpios[2].gpio, 0);
+		gpio_set_value(origen_w_b[1].gpio, 0);
 		udelay(30);	/*Tb */
-		gpio_direction_output(origen_wlan_bt_gpios[2].gpio, 1);
+		gpio_direction_output(origen_w_b[1].gpio, 1);
 	} else {
-		gpio_direction_output(origen_wlan_bt_gpios[2].gpio, 0);
-		gpio_free_array(origen_wlan_bt_gpios,
-			ARRAY_SIZE(origen_wlan_bt_gpios));
+		gpio_direction_output(origen_w_b[1].gpio, 0);
+		gpio_free(origen_w_b[1].gpio);
 	}
 
 	return;
@@ -340,6 +339,24 @@ static void __init origen_ehci_init(void)
 	s5p_ehci_set_platdata(pdata);
 }
 
+/*
+ * UART configuration for Bluetooth
+ */
+static struct gpio origen_bt_pins[] = {
+	{ EXYNOS4_GPA0(0), 0, "UART_0_RXD"},
+	{ EXYNOS4_GPA0(1), 0, "UART_0_TXD"},
+	{ EXYNOS4_GPA0(2), 0, "UART_0_CTSn"},
+	{ EXYNOS4_GPA0(3), 0, "UART_0_RTSn"},
+	{ EXYNOS4_GPX2(2), 0, "GPIO_BT_RESET"},
+};
+
+/* Bluetooth Platform device */
+static struct platform_device origen_device_bluetooth = {
+	.name = "origen-bt",
+	.id = -1,
+	.dev.platform_data = &origen_bt_pins,
+};
+
 static struct platform_device *origen_devices[] __initdata = {
 	&exynos4_device_pd[PD_MFC],
 	&exynos4_device_pd[PD_G3D],
@@ -378,6 +395,9 @@ static struct platform_device *origen_devices[] __initdata = {
 #endif
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	&s3c_device_usbgadget,
+#endif
+#ifdef CONFIG_ORIGEN_BT
+	&origen_device_bluetooth,
 #endif
 
 	&origen_device_gpiokeys,
@@ -447,8 +467,8 @@ static void __init origen_machine_init(void)
 	origen_ehci_init();
 
 	samsung_bl_set(&origen_bl_gpio_info, &origen_bl_data);
- 
 }
+
 #if defined(CONFIG_S5P_MEM_CMA)
 static void __init exynos4_reserve_cma(void)
 {
