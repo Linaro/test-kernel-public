@@ -514,6 +514,11 @@ static struct clk init_clocks_off[] = {
 		.enable		= exynos4_clk_ip_cam_ctrl,
 		.ctrlbit	= (1 << 3),
 	}, {
+		.name		= "jpeg",
+		.id		= -1,
+		.enable		= exynos4_clk_ip_cam_ctrl,
+		.ctrlbit	= (1 << 6),
+	}, {
 		.name		= "hsmmc",
 		.devname	= "s3c-sdhci.0",
 		.parent		= &clk_aclk_133.clk,
