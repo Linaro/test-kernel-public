@@ -137,12 +137,12 @@ static struct clk *dpll_per_m3x2_ck;
 static struct clk *aux_clk;
 
 static char *aux_clk_name[] = {
-	"auxclk0_ck",
-	"auxclk1_ck",
-	"auxclk2_ck",
-	"auxclk3_ck",
-	"auxclk4_ck",
-	"auxclk5_ck",
+	"auxclk0_src_ck",
+	"auxclk1_src_ck",
+	"auxclk2_src_ck",
+	"auxclk3_src_ck",
+	"auxclk4_src_ck",
+	"auxclk5_src_ck",
 };
 
 static int omap4_fref_clk_init(struct device *dev,
