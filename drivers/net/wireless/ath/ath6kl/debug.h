@@ -100,6 +100,50 @@ static inline void ath6kl_dump_registers(struct ath6kl_device *dev,
 static inline void dump_cred_dist_stats(struct htc_target *target)
 {
 }
+
+static inline void ath6kl_debug_fwlog_event(struct ath6kl *ar,
+					    const void *buf, size_t len)
+{
+}
+
+static inline void ath6kl_debug_war(struct ath6kl *ar, enum ath6kl_war war)
+{
+}
+
+static inline int ath6kl_debug_init(struct ath6kl *ar)
+{
+	return 0;
+}
+
+static inline void ath6kl_debug_cleanup(struct ath6kl *ar)
+{
+}
+#endif
+
+#ifdef CONFIG_ATH6KL_SDIO_POLL
+void ath6kl_wd_init(struct ath6kl *ar);
+
+void ath6kl_wd_cleanup(struct ath6kl *ar);
+
+static inline int ath6kl_wd_poll_is_ture(void)
+{
+	return true;
+}
+
+#else
+static inline void ath6kl_wd_init(struct ath6kl *ar)
+{
+}
+
+static inline void ath6kl_wd_cleanup(struct ath6kl *ar)
+{
+}
+
+static inline int ath6kl_wd_poll_is_ture(void)
+{
+	return false;
+}
+
 #endif
 
 #endif
