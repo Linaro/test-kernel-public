@@ -85,7 +85,6 @@ static void ath6kl_wd_poll_handler(struct ath6kl *ar)
 		return;
 
 	ar_sdio = (struct ath6kl_sdio *)ar->hif_priv;
-	ath6kl_dbg(ATH6KL_DBG_SDIO, "irq\n");
 	atomic_set(&ar_sdio->irq_handling, 1);
 	status = ath6kldev_intr_bh_handler(ar);
 	atomic_set(&ar_sdio->irq_handling, 0);

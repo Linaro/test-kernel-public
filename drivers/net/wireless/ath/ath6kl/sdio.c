@@ -450,8 +450,6 @@ static void ath6kl_sdio_irq_handler(struct sdio_func *func)
 	if (ath6kl_wd_poll_is_ture())
 		return;
 
-	ath6kl_dbg(ATH6KL_DBG_SDIO, "irq\n");
-
 	ar_sdio = sdio_get_drvdata(func);
 	atomic_set(&ar_sdio->irq_handling, 1);
 
