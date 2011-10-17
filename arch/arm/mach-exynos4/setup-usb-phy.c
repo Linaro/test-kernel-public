@@ -30,10 +30,12 @@ int s5p_usb_phy_init(struct platform_device *pdev, int type)
 	u32 phyclk;
 	u32 rstcon;
 	int err;
+/*
 	if(type == S5P_USB_PHY_HOST && host_phy_initialized != 0) {
 		host_phy_initialized++;
 		return 0;
 	}
+*/
 	otg_clk = clk_get(&pdev->dev, "otg");
 	if (IS_ERR(otg_clk)) {
 		dev_err(&pdev->dev, "Failed to get otg clock\n");
@@ -91,7 +93,7 @@ int s5p_usb_phy_init(struct platform_device *pdev, int type)
 
 		rstcon &= ~(HOST_LINK_PORT_SWRST_MASK | PHY1_SWRST_MASK);
 		writel(rstcon, EXYNOS4_RSTCON);
-		host_phy_initialized++;
+//		host_phy_initialized++;
 	} else if (type == S5P_USB_PHY_DEVICE) {
 		writel(readl(S5P_USBDEVICE_PHY_CONTROL) | (0x1<<0),
 				S5P_USBDEVICE_PHY_CONTROL);
@@ -131,10 +133,10 @@ int s5p_usb_phy_exit(struct platform_device *pdev, int type)
 	}
 
 	if (type == S5P_USB_PHY_HOST) {
-		host_phy_initialized--;
+/*		host_phy_initialized--;
 		if(host_phy_initialized !=0)
 			goto end;
-
+*/
 		writel((readl(EXYNOS4_PHYPWR) | PHY1_STD_ANALOG_POWERDOWN),
 				EXYNOS4_PHYPWR);
 
