@@ -33,3 +33,7 @@ ath6kl-y += txrx.o
 ath6kl-y += wmi.o
 ath6kl-y += node.o
 ath6kl-y += sdio.o
+ath6kl-$(CONFIG_ATH6KL_SDIO_POLL) += sdio_poll.o
+ath6kl-$(CONFIG_NL80211_TESTMODE) += testmode.o
+
+ccflags-y += -D__CHECK_ENDIAN__
