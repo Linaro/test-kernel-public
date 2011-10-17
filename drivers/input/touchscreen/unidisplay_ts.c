@@ -228,8 +228,11 @@ static void unidisplay_ts_close(struct input_dev *dev)
 {
 	struct unidisplay_ts_data *tsdata = input_get_drvdata(dev);
 
-	if (tsdata->kidle_task)
+	if (tsdata->kidle_task) {
 		kthread_stop(tsdata->kidle_task);
+		tsdata->kidle_task = NULL;
+	}
+
 
 	disable_irq(tsdata->irq);
 }
