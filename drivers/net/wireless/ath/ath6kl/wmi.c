@@ -17,7 +17,6 @@
 #include <linux/ip.h>
 #include "core.h"
 #include "debug.h"
-#include "testmode.h"
 #include "../regd.h"
 #include "../regd_common.h"
 
@@ -1046,7 +1045,6 @@ static int ath6kl_wmi_bitrate_reply_rx(struct wmi *wmi, u8 *datap, int len)
 
 static int ath6kl_wmi_tcmd_test_report_rx(struct wmi *wmi, u8 *datap, int len)
 {
-	ath6kl_tm_rx_report_event(wmi->parent_dev, datap, len);
 
 	return 0;
 }

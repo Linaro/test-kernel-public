@@ -18,7 +18,6 @@
 #include "cfg80211.h"
 #include "debug.h"
 #include "hif-ops.h"
-#include "testmode.h"
 
 static unsigned int ath6kl_p2p;
 
