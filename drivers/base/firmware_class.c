@@ -8,10 +8,6 @@
  */
 
 #include <linux/capability.h>
-
-
-#define DEBUG 1 /* HITCHCAR */
-
 #include <linux/device.h>
 #include <linux/module.h>
 #include <linux/init.h>
@@ -32,7 +28,6 @@ MODULE_DESCRIPTION("Multi purpose firmware loading support");
 MODULE_LICENSE("GPL");
 
 /* Builtin firmware support */
-
 
 #ifdef CONFIG_FW_LOADER
 
@@ -550,9 +545,6 @@ static int _request_firmware(const struct firmware **firmware_p,
 	fw_priv = fw_create_instance(firmware, name, device, uevent, nowait);
 	if (IS_ERR(fw_priv)) {
 		retval = PTR_ERR(fw_priv);
-		
-		dev_dbg(device, "firmware: error create_instance   %s\n", name);
-
 		goto out;
 	}
 
@@ -565,19 +557,14 @@ static int _request_firmware(const struct firmware **firmware_p,
 		kobject_uevent(&fw_priv->dev.kobj, KOBJ_ADD);
 	}
 
-	dev_dbg(device, "firmware: waiting completion  %s\n", name);
-
 	wait_for_completion(&fw_priv->completion);
 
 	set_bit(FW_STATUS_DONE, &fw_priv->status);
 	del_timer_sync(&fw_priv->timeout);
 
 	mutex_lock(&fw_lock);
-	if (!fw_priv->fw->size || test_bit(FW_STATUS_ABORT, &fw_priv->status)) {
+	if (!fw_priv->fw->size || test_bit(FW_STATUS_ABORT, &fw_priv->status))
 		retval = -ENOENT;
-		dev_dbg(device, "firmware:error ENONENT  %s\n", name);
-
-		}
 	fw_priv->fw = NULL;
 	mutex_unlock(&fw_lock);
 
