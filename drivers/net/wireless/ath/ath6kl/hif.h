@@ -20,6 +20,8 @@
 #include "common.h"
 #include "core.h"
 
+#include <linux/scatterlist.h>
+
 #define BUS_REQUEST_MAX_NUM                64
 #define HIF_MBOX_BLOCK_SIZE                128
 #define HIF_MBOX0_BLOCK_SIZE               1
@@ -200,6 +202,7 @@ struct ath6kl_hif_ops {
 	int (*scat_req_rw) (struct ath6kl *ar,
 			    struct hif_scatter_req *scat_req);
 	void (*cleanup_scatter)(struct ath6kl *ar);
+	int (*suspend)(struct ath6kl *ar);
 };
 
 #endif

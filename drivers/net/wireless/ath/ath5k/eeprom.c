@@ -26,7 +26,6 @@
 #include "ath5k.h"
 #include "reg.h"
 #include "debug.h"
-#include "base.h"
 
 
 /******************\
@@ -105,7 +104,7 @@ ath5k_eeprom_init_header(struct ath5k_hw *ah)
 		 * big still, waiting on a better value.
 		 */
 		if (eep_max > (3 * AR5K_EEPROM_INFO_MAX)) {
-			ATH5K_ERR(ah->ah_sc, "Invalid max custom EEPROM size: "
+			ATH5K_ERR(ah, "Invalid max custom EEPROM size: "
 				  "%d (0x%04x) max expected: %d (0x%04x)\n",
 				  eep_max, eep_max,
 				  3 * AR5K_EEPROM_INFO_MAX,
@@ -119,7 +118,7 @@ ath5k_eeprom_init_header(struct ath5k_hw *ah)
 		cksum ^= val;
 	}
 	if (cksum != AR5K_EEPROM_INFO_CKSUM) {
-		ATH5K_ERR(ah->ah_sc, "Invalid EEPROM "
+		ATH5K_ERR(ah, "Invalid EEPROM "
 			  "checksum: 0x%04x eep_max: 0x%04x (%s)\n",
 			  cksum, eep_max,
 			  eep_max == AR5K_EEPROM_INFO_MAX ?
@@ -1780,13 +1779,12 @@ ath5k_eeprom_detach(struct ath5k_hw *ah)
 int
 ath5k_eeprom_mode_from_channel(struct ieee80211_channel *channel)
 {
-	switch (channel->hw_value & CHANNEL_MODES) {
-	case CHANNEL_A:
-	case CHANNEL_XR:
+	switch (channel->hw_value) {
+	case AR5K_MODE_11A:
 		return AR5K_EEPROM_MODE_11A;
-	case CHANNEL_G:
+	case AR5K_MODE_11G:
 		return AR5K_EEPROM_MODE_11G;
-	case CHANNEL_B:
+	case AR5K_MODE_11B:
 		return AR5K_EEPROM_MODE_11B;
 	default:
 		return -1;
