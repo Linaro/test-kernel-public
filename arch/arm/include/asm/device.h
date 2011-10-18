@@ -11,6 +11,10 @@ struct dev_archdata {
 #ifdef CONFIG_DMABOUNCE
 	struct dmabounce_device_info *dmabounce;
 #endif
+#ifdef CONFIG_ARM_DMA_USE_IOMMU
+	void				*iommu_priv;
+	struct dma_iommu_mapping	*mapping;
+#endif
 };
 
 struct pdev_archdata {
