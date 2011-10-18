@@ -22,7 +22,8 @@
 #include "debug.h"
 #include "hif-ops.h"
 
-unsigned int debug_mask;
+unsigned int debug_mask = ATH6KL_DBG_HTC_RECV |
+		ATH6KL_DBG_WMI | ATH6KL_DBG_TRC;
 
 module_param(debug_mask, uint, 0644);
 
