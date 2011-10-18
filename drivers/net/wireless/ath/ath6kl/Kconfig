@@ -13,3 +13,11 @@ config ATH6KL_DEBUG
 	depends on ATH6KL
 	---help---
 	  Enables debug support
+
+config ATH6KL_SDIO_POLL
+        bool "Atheros ath6kl debugging with SDIO polling"
+        depends on ATH6KL
+        ---help---
+          Enables SDIO polling for debugging when SDIO's problem
+          happens. This is tested only with HW2.0. By default
+          polling time interval is 10ms
