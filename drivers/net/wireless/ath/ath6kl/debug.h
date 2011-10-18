@@ -133,6 +133,31 @@ static inline int ath6kl_debug_init(struct ath6kl *ar)
 static inline void ath6kl_debug_cleanup(struct ath6kl *ar)
 {
 }
+#endif
+
+#ifdef CONFIG_ATH6KL_SDIO_POLL
+void ath6kl_wd_init(struct ath6kl *ar);
+
+void ath6kl_wd_cleanup(struct ath6kl *ar);
+
+static inline int ath6kl_wd_poll_is_ture(void)
+{
+	return true;
+}
+
+#else
+static inline void ath6kl_wd_init(struct ath6kl *ar)
+{
+}
+
+static inline void ath6kl_wd_cleanup(struct ath6kl *ar)
+{
+}
+
+static inline int ath6kl_wd_poll_is_ture(void)
+{
+	return false;
+}
 
 #endif
 #endif
