@@ -22,7 +22,7 @@
  * All files in TVOUT driver can access function or definition in this file.
  */
 
-#define HDMI_LCD_DISPLAY	1
+#define HDMI_LCD_DISPLAY	0
 #define DRV_NAME	"S5P-TVOUT"
 
 #define tvout_err(fmt, ...)					\

@@ -279,6 +279,7 @@ static int s5p_tvout_fb_blank(int blank_mode, struct fb_info *fb)
 	}
 
 	switch (blank_mode) {
+	default:
 	case FB_BLANK_UNBLANK:
 		if (fb->fix.smem_start)
 			s5p_mixer_ctrl_enable_layer(layer);
@@ -291,12 +292,57 @@ static int s5p_tvout_fb_blank(int blank_mode, struct fb_info *fb)
 		s5p_mixer_ctrl_disable_layer(layer);
 		break;
 
-	default:
-		tvout_err("not supported blank mode\n");
-		return -1;
+		//		tvout_err("not supported blank mode\n");
+		//return -1;
 	}
 
 	return 0;
+}
+
+static int __devinit s5p_tvout_fb_map_video_memory(int id)
+{
+        enum s5p_mixer_layer layer;
+        struct s5ptvfb_window *win = fb[FB_INDEX(id)]->par;
+        struct fb_fix_screeninfo *fix = &fb[FB_INDEX(id)]->fix;
+
+	printk("s5p_tvout_fb_map_video_memory called \n");
+
+        if (win->path == TVFB_DATA_PATH_FIFO)
+                return 0;
+	
+	printk("smem_length = %d\n", fix->smem_len);
+
+        fb[FB_INDEX(id)]->screen_base = dma_alloc_writecombine(win->dev_fb,
+                        PAGE_ALIGN(fix->smem_len),
+                        (unsigned int *) &fix->smem_start, GFP_KERNEL);
+
+        switch (id) {
+        case S5PTV_FB_LAYER0_MINOR:
+                layer = MIXER_GPR0_LAYER;
+                break;
+        case S5PTV_FB_LAYER1_MINOR:
+                layer = MIXER_GPR1_LAYER;
+                break;
+        default:
+                tvout_err("invalid layer\n");
+                return -1;
+        }
+        s5p_mixer_ctrl_init_fb_addr_phy(layer, fix->smem_start);
+
+        if (!fb[FB_INDEX(id)]->screen_base)
+	{
+		printk("s5p_tvout_fb_map_video_memory error \n");
+                return -1;
+	}
+        else
+                tvout_dbg("[fb%d] dma: 0x%08x, cpu: 0x%08x,size: 0x%08x\n",
+                        win->id, (unsigned int) fix->smem_start,
+                        (unsigned int) fb[FB_INDEX(id)]->screen_base,
+                        fix->smem_len);
+
+        memset(fb[FB_INDEX(id)]->screen_base, 0, fix->smem_len);
+
+        return 0;
 }
 
 static int s5p_tvout_fb_set_par(struct fb_info *fb)
@@ -309,7 +355,10 @@ static int s5p_tvout_fb_set_par(struct fb_info *fb)
 	tvout_dbg("[fb%d] set_par\n", win->id);
 
 	if (!fb->fix.smem_start)
-		printk(KERN_INFO " The frame buffer is allocated here\n");
+	  {
+	    printk(KERN_INFO " The frame buffer is allocated here\n");
+	    s5p_tvout_fb_map_video_memory(win->id);
+	  }
 
 	bpp = fb->var.bits_per_pixel;
 	trans_len = fb->var.transp.length;
@@ -672,15 +721,15 @@ int s5p_tvout_fb_register_framebuffer(struct device *dev_fb)
 
 	return 0;
 }
+/* making this below global for time being */
+dma_addr_t start_addr;
+enum s5p_mixer_layer layer;
+
 #if HDMI_LCD_DISPLAY
 /* Below functions are called from probe() to enable
  * hdmi to display the lcd frame buffer immediately after
  * boot
  */
-
-/* making this below global for time being */
-dma_addr_t start_addr;
-enum s5p_mixer_layer layer;
 
 int s5p_tvout_fb_setup_framebuffer(struct device *dev_fb)
 {
@@ -776,4 +825,102 @@ int s5p_tvout_fb_ctrl_enable(bool enable)
 
 	return 0;
 }
+
+#else
+
+int s5p_tvout_fb_setup_framebuffer(struct device *dev_fb)
+{
+	struct s3cfb_global *fbdev;
+	struct fb_info *fb1;
+	struct fb_var_screeninfo *var;
+	struct s5ptvfb_window *win;
+
+	fbdev = fbfimd->fbdev[0];
+	fb1 = fb[0];
+	win = fb1->par;
+	var = &fb1->var;
+
+	switch (fb1->node) {
+	case S5PTV_FB_LAYER0_MINOR:
+		layer = MIXER_GPR0_LAYER;
+		break;
+	case S5PTV_FB_LAYER1_MINOR:
+		layer = MIXER_GPR1_LAYER;
+		break;
+	default:
+		printk(KERN_ERR "[Error] invalid layer\n");
+		return -1;
+	}
+
+	s5p_tvout_fb_check_var(&fb[0]->var, fb[0]);
+	s5p_tvout_fb_set_par(fb[0]);
+
+	start_addr = fb1->fix.smem_start;
+
+	return 0;
+}
+
+int s5p_tvout_fb_ctrl_enable(bool enable)
+{
+	struct fb_info *fb1 = fb[0];
+	struct fb_var_screeninfo var;
+	struct s5ptvfb_user_window user_window;
+	enum s5p_mixer_layer layer;
+	enum s5p_tvout_disp_mode        tv_std;
+	enum s5p_tvout_o_mode           tv_if;
+	struct s3cfb_global *fbdev;
+
+	fbdev = fbfimd->fbdev[0];
+
+	/* hard-coded values below for 1080p 60Hz */
+	tv_std = TVOUT_1080P_60;
+	tv_if = TVOUT_HDMI_RGB;
+
+	switch (fb1->node) {
+	case S5PTV_FB_LAYER0_MINOR:
+		layer = MIXER_GPR0_LAYER;
+		break;
+	case S5PTV_FB_LAYER1_MINOR:
+		layer = MIXER_GPR1_LAYER;
+		break;
+	default:
+		printk(KERN_ERR"[Error] invalid layer\n");
+		return -1;
+	}
+
+	if (s5p_tvif_ctrl_start(tv_std, tv_if) < 0) {
+		printk(KERN_ERR"[S5P-TVOUT] s5p_tvif_ctrl_start failed\n");
+		return -1;
+	}
+
+	//	s5p_mixer_ctrl_set_buffer_address(layer, start_addr);
+	s5p_mixer_ctrl_set_buffer_address(layer, fb1->fix.smem_start);
+
+	if (fb1->fix.smem_start)
+		s5p_mixer_ctrl_enable_layer(layer);
+	else
+		printk(KERN_ERR"[S5P-TVOUT] FB unblanking failed\n");
+
+	var.xres = 1920;
+	var.yres = 1080;
+	var.bits_per_pixel = DEF_FB_BPP;
+	var.xres_virtual = var.xres;
+	var.yres_virtual = var.yres;
+	var.xoffset = 0;
+	var.yoffset = 0;
+	var.width = 0;
+	var.height = 0;
+	var.transp.length = 0;
+	var.activate = FB_ACTIVATE_FORCE;
+
+	/* X and Y coordinate are calculated to center the display */
+	user_window.x = 0;
+	user_window.y = 0;
+
+	s5p_mixer_ctrl_set_dst_win_pos(layer, user_window.x, user_window.y, \
+			var.xres, var.yres);
+
+	return 0;
+}
+
 #endif

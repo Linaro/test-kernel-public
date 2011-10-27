@@ -13,15 +13,13 @@
 #define __S5P_TVOUT_FB_H_ __FILE__
 
 #include <linux/fb.h>
-#if HDMI_LCD_DISPLAY
 #include "../../../video/samsung/s3cfb.h"
 
 extern struct s3cfb_fimd_desc *fbfimd;
-#endif
+
 extern int s5p_tvout_fb_alloc_framebuffer(struct device *dev_fb);
 extern int s5p_tvout_fb_register_framebuffer(struct device *dev_fb);
-#if HDMI_LCD_DISPLAY
 extern int s5p_tvout_fb_setup_framebuffer(struct device *dev_fb);
 extern int s5p_tvout_fb_ctrl_enable(bool enable);
-#endif
+
 #endif /* __S5P_TVOUT_FB_H_ */

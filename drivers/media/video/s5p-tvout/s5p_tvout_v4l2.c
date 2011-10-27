@@ -702,7 +702,8 @@ static int s5p_tvout_tvif_open(struct file *file)
 /* Disable the below code, as some application should
  * not succeed in opening this driver again
  */
-#if !(HDMI_LCD_DISPLAY)
+//#if !(HDMI_LCD_DISPLAY)
+#if 0
 	mutex_lock(&s5p_tvout_tvif_mutex);
 
 	atomic_inc(&s5p_tvout_v4l2_private.tvif_use);
@@ -1003,7 +1004,8 @@ static int s5p_tvout_vo_open(struct file *file)
 /* Disable the below code, as some application should
  * not succeed in opening this driver again
  */
-#if !(HDMI_LCD_DISPLAY)
+//#if !(HDMI_LCD_DISPLAY)
+#if 0
 	int ret = 0;
 
 	tvout_dbg("\n");

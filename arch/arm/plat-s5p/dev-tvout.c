@@ -74,11 +74,17 @@ static struct resource s5p_tvout_resources[] = {
 	},
 };
 
+static u64 tvout_dma_mask = 0xffffffffUL;
+
 struct platform_device s5p_device_tvout = {
 	.name		 = "s5p-tvout",
 	.id		 = -1,
 	.num_resources	= ARRAY_SIZE(s5p_tvout_resources),
 	.resource	= s5p_tvout_resources,
+	.dev            = {
+                .dma_mask               = &tvout_dma_mask,
+                .coherent_dma_mask      = 0xffffffffUL
+        }
 };
 EXPORT_SYMBOL(s5p_device_tvout);
 

@@ -84,7 +84,9 @@ static int __devinit s5p_tvout_clk_get(struct platform_device *pdev,
 
 static int __devinit s5p_tvout_probe(struct platform_device *pdev)
 {
+	enum s5p_mixer_layer layer = MIXER_GPR0_LAYER;
 	s5p_tvout_pm_runtime_enable(&pdev->dev);
+
 	printk("[s5p_tvout.c] : s5p_tvout_probe()\n");
 	/* The feature of System MMU will be turned on later */
 	if (s5p_tvout_clk_get(pdev, &s5ptv_status) < 0) {
@@ -112,7 +114,7 @@ static int __devinit s5p_tvout_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 	#ifndef CONFIG_USER_ALLOC_TVOUT
-	if (s5p_tvif_ctrl_start(TVOUT_720P_60, TVOUT_HDMI) < 0) {
+	if (s5p_tvif_ctrl_start(TVOUT_1080P_60, TVOUT_HDMI) < 0) {
 		printk(KERN_ERR "[s5p_tvout.c] s5p_tvif_ctrl_start error\n");
 		return -ENODEV;
 	}
@@ -127,7 +129,6 @@ static int __devinit s5p_tvout_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 
-#if HDMI_LCD_DISPLAY
 	/* Associate LCD FB memory with the HDMI FB memory */
 	if (s5p_tvout_fb_setup_framebuffer(&pdev->dev)) {
 		printk(KERN_ERR "[S5P-TVOUT] Failed to setup FB memory\n");
@@ -139,7 +140,7 @@ static int __devinit s5p_tvout_probe(struct platform_device *pdev)
 		printk(KERN_ERR "[S5P-TVOUT] Failed to enable the HDMI display\n");
 		return -ENODEV;
 	}
-#endif
+
 	return 0;
 }
 
