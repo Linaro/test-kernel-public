@@ -41,11 +41,237 @@
 #include <plat/usb.h>
 #include <plat/mmc.h>
 #include <video/omap-panel-generic-dpi.h>
+#include <plat/omap-pm.h>
 
 #include "hsmmc.h"
 #include "control.h"
 #include "mux.h"
 #include "common-board-devices.h"
+
+#if defined(CONFIG_VIDEO_OMAP4) || defined(CONFIG_VIDEO_OMAP4_MODULE)
+#include <mach/omap4-cam.h>
+#include <media/omap4_camera.h>
+#include <media/soc_camera.h>
+
+#define PANDA_CAM_PWRDN		45
+#define PANDA_CAM_RESET		83
+
+static struct omap4_camera_pdata panda_camera_pdata = {
+	.csi2cfg = {
+		.lanes.clock = {
+			.pol = OMAP4_ISS_CSIPHY_LANEPOL_DXPOS_DYNEG,
+			.pos = OMAP4_ISS_CSIPHY_LANEPOS_DXY0,
+		},
+		.lanes.data = {
+			{
+				.pol = OMAP4_ISS_CSIPHY_LANEPOL_DXPOS_DYNEG,
+				.pos = OMAP4_ISS_CSIPHY_LANEPOS_DXY1,
+			},
+			{
+				.pol = OMAP4_ISS_CSIPHY_LANEPOL_DXPOS_DYNEG,
+				.pos = OMAP4_ISS_CSIPHY_LANEPOS_DXY2,
+			},
+		},
+	},
+};
+
+static struct platform_device panda_camera = {
+	.name		= "omap4-camera",
+	.id		= 0,
+	.num_resources	= ARRAY_SIZE(omap4_camera_resources),
+	.resource	= omap4_camera_resources,
+	.dev    = {
+		.platform_data = &panda_camera_pdata,
+	},
+};
+
+#define OV5640_I2C_ADDRESS   (0x3C)
+#define OV5650_I2C_ADDRESS   (0x36)
+
+static struct i2c_board_info panda_i2c_camera[] = {
+#ifdef CONFIG_MACH_OMAP4_PANDA_CAM_OV5650
+	{
+		I2C_BOARD_INFO("ov5650", OV5650_I2C_ADDRESS),
+	},
+#elif defined(CONFIG_MACH_OMAP4_PANDA_CAM_OV5640)
+	{
+		I2C_BOARD_INFO("ov5640", OV5640_I2C_ADDRESS),
+	},
+#elif defined(CONFIG_MACH_OMAP4_PANDA_CAM_OV3640)
+	{
+		/* Uses same I2C Address as OV5640 */
+		I2C_BOARD_INFO("ov3640", OV5640_I2C_ADDRESS),
+	},
+#endif
+};
+
+/* Helper function to quick access to HW registers */
+static inline void quick_out32(phys_addr_t phy_addr, u32 val)
+{
+	void __iomem *port;
+
+	port = ioremap(phy_addr, 4);
+	writel(val, port);
+	iounmap(port);
+}
+
+static inline void quick_andor32(phys_addr_t phy_addr, u32 and_val, u32 or_val)
+{
+	void __iomem *port;
+
+	port = ioremap(phy_addr, 4);
+	writel((readl(port) & and_val) | or_val, port);
+	iounmap(port);
+}
+
+
+/* FIXME: Make this nicer */
+#define SCRM_AUXCLK(x)				(0x4A30A310 + ((x) * 4))
+#define SCRM_AUXCLK_CLKDIV_MASK			(0xF << 16)
+#define SCRM_AUXCLK_CLKDIV_SHIFT		16
+
+static struct clk *dpll_per_m3x2_ck;
+static struct clk *aux_clk;
+
+static char *aux_clk_name[] = {
+	"auxclk0_ck",
+	"auxclk1_ck",
+	"auxclk2_ck",
+	"auxclk3_ck",
+	"auxclk4_ck",
+	"auxclk5_ck",
+};
+
+static int omap4_fref_clk_init(struct device *dev,
+				unsigned int clknum,
+				unsigned int freq)
+{
+	unsigned int auxclk_div;
+	int ret = 0;
+
+	if (clknum > 5) {
+		dev_err(dev, "ERROR: Wrong fref_clk index. Should be between"
+				"0 and 5.\n");
+		return -EINVAL;
+	}
+
+	if (!dpll_per_m3x2_ck) {
+		dpll_per_m3x2_ck = clk_get(dev, "dpll_per_m3x2_ck");
+		if (IS_ERR(dpll_per_m3x2_ck)) {
+			dev_err(dev,
+				"Unable to get dpll_per_m3x2_ck clock info\n");
+			return -ENODEV;
+		}
+	}
+
+	aux_clk = clk_get(dev, aux_clk_name[clknum]);
+	if (IS_ERR(aux_clk)) {
+		clk_put(dpll_per_m3x2_ck);
+		dev_err(dev,
+			"Unable to get %s clock info\n", aux_clk_name[clknum]);
+		return -ENODEV;
+	}
+
+	ret = clk_set_parent(aux_clk, dpll_per_m3x2_ck);
+	if (ret) {
+		clk_put(aux_clk);
+		clk_put(dpll_per_m3x2_ck);
+		dev_err(dev, "Unable to set clock: dpll_per_m3x2_ck"
+			" as parent of auxclk%d\n",
+			clknum);
+		return -ENODEV;
+	}
+
+	/* Ensure PER DPLL M3 divider is enabled */
+	clk_enable(dpll_per_m3x2_ck);
+
+	auxclk_div = clk_get_rate(dpll_per_m3x2_ck) / freq;
+
+	/*
+	 * This is most likely to happen when DPLL_PER M3 couldn't be
+	 * negotiated
+	 */
+	if (auxclk_div > 16)
+		auxclk_div = 16;
+
+	quick_andor32(SCRM_AUXCLK(clknum), ~SCRM_AUXCLK_CLKDIV_MASK,
+		      ((auxclk_div - 1) << SCRM_AUXCLK_CLKDIV_SHIFT) &
+		      SCRM_AUXCLK_CLKDIV_MASK);
+
+	return 0;
+}
+
+/* FIXME: Make this nicer */
+static void omap4_fref_clk_enable(unsigned int clknum, int enable)
+{
+	if (enable)
+		clk_enable(aux_clk);
+	else
+		clk_disable(aux_clk);
+}
+
+static int panda_ov5640_power(struct device *dev, int power)
+{
+	int ret = 0;
+
+	if (power) {
+		/*
+		 * FIXME: Look for something more precise as a good
+		 * throughtput limit
+		 */
+		omap_pm_set_min_bus_tput(dev, OCP_INITIATOR_AGENT, 800000);
+
+		dev_dbg(dev, "Initializing and enabling FREQ_CLK1...\n");
+		if (omap4_fref_clk_init(dev, 1, 24000000))
+			return -EINVAL;
+
+		gpio_set_value(PANDA_CAM_PWRDN, 0);
+		omap4_fref_clk_enable(1, 1); /* Enable XCLK */
+		mdelay(2);
+	} else {
+		omap4_fref_clk_enable(1, 0);
+		gpio_set_value(PANDA_CAM_PWRDN, 1);
+		omap_pm_set_min_bus_tput(dev, OCP_INITIATOR_AGENT, -1);
+	}
+
+	return ret;
+}
+
+static struct v4l2_subdev_sensor_interface_parms ov5640_if_params = {
+	.if_type	= V4L2_SUBDEV_SENSOR_SERIAL,
+	.if_mode	= V4L2_SUBDEV_SENSOR_MODE_SERIAL_CSI2,
+	/* Below used to know the physical limitations */
+	.parms.serial = {
+		.lanes = 2,
+		.channel = 0,
+		.phy_rate = 0, /* If zero, there's no board limitation */
+		.pix_clk = 0, /* if zero, there's no board limitation */
+	},
+};
+
+static struct soc_camera_link iclink_ov5640 = {
+	.bus_id		= 0,		/* Must match with the camera ID */
+	.board_info	= &panda_i2c_camera[0],
+	.i2c_adapter_id	= 3,
+#ifdef CONFIG_MACH_OMAP4_PANDA_CAM_OV5650
+	.module_name	= "ov5650",
+#elif defined(CONFIG_MACH_OMAP4_PANDA_CAM_OV5640)
+	.module_name	= "ov5640",
+#elif defined(CONFIG_MACH_OMAP4_PANDA_CAM_OV3640)
+	.module_name	= "ov3640",
+#endif
+	.power		= &panda_ov5640_power,
+	.priv		= &ov5640_if_params,
+};
+
+static struct platform_device panda_ov5640 = {
+	.name	= "soc-camera-pdrv",
+	.id	= 1,
+	.dev	= {
+		.platform_data = &iclink_ov5640,
+	},
+};
+#endif
 
 #define GPIO_HUB_POWER		1
 #define GPIO_HUB_NRESET		62
@@ -93,6 +319,10 @@ static struct platform_device leds_gpio = {
 static struct platform_device *panda_devices[] __initdata = {
 	&leds_gpio,
 	&wl1271_device,
+#if defined(CONFIG_VIDEO_OMAP4) || defined(CONFIG_VIDEO_OMAP4_MODULE)
+	&panda_ov5640,
+	&panda_camera,
+#endif
 };
 
 static void __init omap4_panda_init_early(void)
@@ -573,6 +803,51 @@ static void __init omap4_panda_init(void)
 	omap4_ehci_init();
 	usb_musb_init(&musb_board_data);
 	omap4_panda_display_init();
+
+#if defined(CONFIG_VIDEO_OMAP4) || defined(CONFIG_VIDEO_OMAP4_MODULE)
+	/* Configure MUX settings for Camera board */
+	/* Prepare CSI2 pins */
+	omap_mux_init_signal("csi21_dx0", OMAP_PIN_INPUT);
+	omap_mux_init_signal("csi21_dy0", OMAP_PIN_INPUT);
+	omap_mux_init_signal("csi21_dx1", OMAP_PIN_INPUT);
+	omap_mux_init_signal("csi21_dy1", OMAP_PIN_INPUT);
+	omap_mux_init_signal("csi21_dx2", OMAP_PIN_INPUT);
+	omap_mux_init_signal("csi21_dy2", OMAP_PIN_INPUT);
+
+	/*
+	 * CSI2 1(A):
+	 *   LANEENABLE[4:0] = 00111(0x7) - Lanes 0, 1 & 2 enabled
+	 *   CTRLCLKEN = 1 - Active high enable for CTRLCLK
+	 *   CAMMODE = 0 - DPHY mode
+	 */
+	omap4_ctrl_pad_writel((omap4_ctrl_pad_readl(
+				OMAP4_CTRL_MODULE_PAD_CORE_CONTROL_CAMERA_RX) &
+			  ~(OMAP4_CAMERARX_CSI21_LANEENABLE_MASK |
+			    OMAP4_CAMERARX_CSI21_CAMMODE_MASK)) |
+			 (0x7 << OMAP4_CAMERARX_CSI21_LANEENABLE_SHIFT) |
+			 OMAP4_CAMERARX_CSI21_CTRLCLKEN_MASK,
+			 OMAP4_CTRL_MODULE_PAD_CORE_CONTROL_CAMERA_RX);
+
+	/* Select GPIO 45 */
+	omap_mux_init_gpio(PANDA_CAM_PWRDN, OMAP_PIN_OUTPUT);
+
+	/* Select GPIO 83 */
+	omap_mux_init_gpio(PANDA_CAM_RESET, OMAP_PIN_OUTPUT);
+
+	/* Init FREF_CLK1_OUT */
+	omap_mux_init_signal("fref_clk1_out", OMAP_PIN_OUTPUT);
+
+	if (gpio_request_one(PANDA_CAM_PWRDN, GPIOF_OUT_INIT_HIGH,
+			     "CAM_PWRDN"))
+		printk(KERN_WARNING "Cannot request GPIO %d\n",
+			PANDA_CAM_PWRDN);
+
+	if (gpio_request_one(PANDA_CAM_RESET, GPIOF_OUT_INIT_HIGH,
+			     "CAM_RESET"))
+		printk(KERN_WARNING "Cannot request GPIO %d\n",
+			PANDA_CAM_RESET);
+
+#endif /* CONFIG_VIDEO_OMAP4 || CONFIG_VIDEO_OMAP4_MODULE */
 }
 
 static void __init omap4_panda_map_io(void)

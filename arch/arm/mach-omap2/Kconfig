@@ -341,6 +341,21 @@ config MACH_OMAP4_PANDA
 	select OMAP_PACKAGE_CBS
 	select REGULATOR_FIXED_VOLTAGE
 
+choice
+	prompt "Camera sensor to use"
+	depends on MACH_OMAP4_PANDA && VIDEO_OMAP4
+	default MACH_OMAP4_PANDA_CAM_OV5650
+
+	config MACH_OMAP_PANDA_CAM_OV3640
+		bool "Use OmniVision OV3640 Camera"
+
+	config MACH_OMAP4_PANDA_CAM_OV5640
+		bool "Use OmniVision OV5640 Camera"
+
+	config MACH_OMAP4_PANDA_CAM_OV5650
+		bool "Use OmniVision OV5650 Camera"
+endchoice
+
 config OMAP3_EMU
 	bool "OMAP3 debugging peripherals"
 	depends on ARCH_OMAP3
