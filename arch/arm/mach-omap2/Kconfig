@@ -318,6 +318,21 @@ config MACH_OMAP_4430SDP
 	select OMAP_PACKAGE_CBS
 	select REGULATOR_FIXED_VOLTAGE
 
+choice
+	prompt "Camera sensor to use"
+	depends on MACH_OMAP_4430SDP && VIDEO_OMAP4
+	default MACH_OMAP_4430SDP_CAM_OV5650
+
+	config MACH_OMAP_4430SDP_CAM_OV3640
+		bool "Use OmniVision OV3640 Camera"
+
+	config MACH_OMAP_4430SDP_CAM_OV5640
+		bool "Use OmniVision OV5640 Camera"
+
+	config MACH_OMAP_4430SDP_CAM_OV5650
+		bool "Use OmniVision OV5650 Camera"
+endchoice
+
 config MACH_OMAP4_PANDA
 	bool "OMAP4 Panda Board"
 	default y
