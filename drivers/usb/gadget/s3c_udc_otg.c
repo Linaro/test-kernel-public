@@ -288,7 +288,7 @@ static int udc_enable(struct s3c_udc *dev)
 /*
  * Register entry point for the peripheral controller driver.
  */
-int usb_gadget_probe_driver(struct usb_gadget_driver *driver,
+int s3c_udc_start(struct usb_gadget_driver *driver,
 				int (*bind)(struct usb_gadget *))
 {
 	struct s3c_udc *dev = the_controller;
@@ -349,12 +349,11 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver,
 
 	return 0;
 }
-EXPORT_SYMBOL(usb_gadget_probe_driver);
 
 /*
  * Unregister entry point for the peripheral controller driver.
  */
-int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+int s3c_udc_stop(struct usb_gadget_driver *driver)
 {
 	struct s3c_udc *dev = the_controller;
 	unsigned long flags;
@@ -381,7 +380,6 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
 
 	return 0;
 }
-EXPORT_SYMBOL(usb_gadget_unregister_driver);
 
 static int s3c_udc_power(struct s3c_udc *dev, char en)
 {
@@ -901,6 +899,8 @@ static const struct usb_gadget_ops s3c_udc_ops = {
 	/* current versions must always be self-powered */
 	.pullup		= s3c_udc_pullup,
 	.vbus_session	= s3c_vbus_enable,
+	.start		= s3c_udc_start,
+	.stop		= s3c_udc_stop,
 };
 
 static void nop_release(struct device *dev)
