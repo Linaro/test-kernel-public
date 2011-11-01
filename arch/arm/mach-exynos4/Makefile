@@ -32,6 +32,8 @@ obj-$(CONFIG_MACH_UNIVERSAL_C210)	+= mach-universal_c210.o
 obj-$(CONFIG_MACH_NURI)			+= mach-nuri.o
 obj-$(CONFIG_MACH_ORIGEN)		+= mach-origen.o
 
+obj-$(CONFIG_MACH_EXYNOS4_DT)		+= mach-exynos4-dt.o
+
 # device support
 
 obj-y					+= dev-audio.o
