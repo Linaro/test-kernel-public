@@ -385,6 +385,8 @@ static void exynos4_pm_resume(void)
 	exynos4_scu_enable(S5P_VA_SCU);
 
 early_wakeup:
+	/* Clear INFORM Register */
+	__raw_writel(0, S5P_INFORM1);
 	return;
 }
 
