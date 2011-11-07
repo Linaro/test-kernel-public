@@ -362,7 +362,9 @@ static struct platform_device *origen_devices[] __initdata = {
 	&exynos4_device_pd[PD_G3D],
 	&exynos4_device_pd[PD_LCD0],
 	&exynos4_device_pd[PD_TV],
+#ifdef CONFIG_FB_S3C
 	&s3c_device_fb,
+#endif
 	&s3c_device_i2c0,
 	&s3c_device_i2c1,
 	&s3c_device_i2c6,
@@ -438,8 +440,10 @@ static void __init origen_machine_init(void)
 	i2c_register_board_info(0, i2c_devs0, ARRAY_SIZE(i2c_devs0));
 	i2c_register_board_info(1, i2c_devs1, ARRAY_SIZE(i2c_devs1));
 	i2c_register_board_info(2, i2c_devs6, ARRAY_SIZE(i2c_devs6));
+#ifdef CONFIG_FB_S3C
 	s3cfb_set_platdata(NULL);
 	s3c_device_fb.dev.parent = &exynos4_device_pd[PD_LCD0].dev;
+#endif
 	s3c_sdhci2_set_platdata(&origen_hsmmc2_pdata);
 	s3c_sdhci0_set_platdata(&origen_hsmmc0_pdata);
 	s3c_sdhci3_set_platdata(&origen_hsmmc3_pdata);
