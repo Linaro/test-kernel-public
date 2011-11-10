@@ -1450,8 +1450,10 @@ static int rt5625_hifi_pcm_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S20_3LE:
 		iface |= 0x0004;
+		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 		iface |= 0x0008;
+		break;
 	case SNDRV_PCM_FORMAT_S8:
 		iface |= 0x000c;
 	}
@@ -1482,8 +1484,10 @@ static int rt5625_voice_pcm_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S20_3LE:
 		iface |= 0x0004;
+		break;
 	case SNDRV_PCM_FORMAT_S24_LE:
 		iface |= 0x0008;
+		break;
 	case SNDRV_PCM_FORMAT_S8:
 		iface |= 0x000c;
 	}
