@@ -75,7 +75,7 @@ static int origen_hw_params(struct snd_pcm_substream *substream,
 	case 88200:
 	case 96000:
 		if (bfs == 48)
-			rfs = 384;
+			rfs = 768;/*384;*/
 		else
 			rfs = 256;
 		break;
