@@ -18,6 +18,7 @@ obj-$(CONFIG_CPU_EXYNOS4210)	+= clock-exynos4210.o
 obj-$(CONFIG_SOC_EXYNOS4212)	+= clock-exynos4212.o
 obj-$(CONFIG_PM)		+= pm.o
 obj-$(CONFIG_CPU_IDLE)		+= cpuidle.o
+obj-$(CONFIG_ARM_EXYNOS4210_CPUFREQ)	+= asv.o
 
 obj-$(CONFIG_SMP)		+= platsmp.o headsmp.o
 
