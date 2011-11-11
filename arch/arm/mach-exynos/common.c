@@ -54,6 +54,9 @@ extern int s3c_irq_wake(struct irq_data *data, unsigned int state);
 #define s3c_irq_wake NULL
 #endif
 
+#define L2_AUX_VAL 0x7C470001
+#define L2_AUX_MASK 0xC200ffff
+
 static const char name_exynos4210[] = "EXYNOS4210";
 static const char name_exynos4212[] = "EXYNOS4212";
 static const char name_exynos4412[] = "EXYNOS4412";
