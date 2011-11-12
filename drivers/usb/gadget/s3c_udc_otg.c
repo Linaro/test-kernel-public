@@ -314,14 +314,13 @@ int s3c_udc_start(struct usb_gadget_driver *driver,
 	retval = device_add(&dev->gadget.dev);
 
 	if (retval) { /* TODO */
-		printk(KERN_ERR "target device_add failed, error %d\n",
-			retval);
+		pr_err("target device_add failed, error %d\n", retval);
 		return retval;
 	}
 
 	retval = bind(&dev->gadget);
 	if (retval) {
-		printk(KERN_ERR "%s: bind to driver %s --> error %d\n",
+		pr_err("%s: bind to driver %s --> error %d\n",
 			dev->gadget.name, driver->driver.name, retval);
 		device_del(&dev->gadget.dev);
 
@@ -337,7 +336,7 @@ int s3c_udc_start(struct usb_gadget_driver *driver,
 		dev_dbg(&dev->gadget.dev, "%s vbus connect %d\n",
 					__func__, retval);
 
-	printk(KERN_INFO "Registered gadget driver '%s'\n",
+	pr_info("Registered gadget driver '%s'\n",
 			driver->driver.name);
 	udc_enable(dev);
 	return 0;
@@ -366,7 +365,7 @@ int s3c_udc_stop(struct usb_gadget_driver *driver)
 
 	disable_irq(IRQ_USB_HSOTG);
 
-	printk(KERN_DEBUG "Unregistered gadget driver '%s'\n",
+	pr_debug("Unregistered gadget driver '%s'\n",
 			driver->driver.name);
 
 	udc_disable(dev);
@@ -402,13 +401,9 @@ int s3c_vbus_enable(struct usb_gadget *gadget, int enable)
 			spin_unlock_irqrestore(&dev->lock, flags);
 			udc_disable(dev);
 			clk_disable(otg_clock);
-			/* ToDo: Uncomment once regulator support has been added in machine file
 			s3c_udc_power(dev, 0);
-			*/
 		} else {
-			/* ToDo: Uncomment once regulator support has been added in machine file
 			s3c_udc_power(dev, 1);
-			*/
 			clk_enable(otg_clock);
 			udc_reinit(dev);
 			udc_enable(dev);
@@ -862,10 +857,10 @@ void s3c_udc_soft_connect(void)
 void s3c_udc_soft_disconnect(void)
 {
 	u32 uTemp;
-	DEBUG("[%s]\n", __func__);
 	struct s3c_udc *dev = the_controller;
 	unsigned long flags;
 
+	DEBUG("[%s]\n", __func__);
 	/* Mask the core interrupt */
 	writel(0, S3C_UDC_OTG_GINTMSK);
 
@@ -1169,23 +1164,20 @@ static int s3c_udc_probe(struct platform_device *pdev)
 	dev->gadget.b_hnp_enable = 0;
 	dev->gadget.a_hnp_support = 0;
 	dev->gadget.a_alt_hnp_support = 0;
-	/*
-	ToDo: Commented out as currently regulator is not implemented 
-	Need to enable once it is defined properly.
-	
+
 	dev->udc_vcc_d = regulator_get(&pdev->dev, "pd_io");
 	dev->udc_vcc_a = regulator_get(&pdev->dev, "pd_core");
 	if (IS_ERR(dev->udc_vcc_d) || IS_ERR(dev->udc_vcc_a)) {
-		printk(KERN_ERR "failed to find udc vcc source\n");
+		pr_err("failed to find udc vcc source\n");
 		return -ENOENT;
 	}
-	*/
+
 	the_controller = dev;
 	platform_set_drvdata(pdev, dev);
 
 	otg_clock = clk_get(&pdev->dev, "otg");
 	if (IS_ERR(otg_clock)) {
-		printk(KERN_INFO "failed to find otg clock source\n");
+		pr_info("failed to find otg clock source\n");
 		return -ENOENT;
 	}
 	udc_reinit(dev);
@@ -1194,13 +1186,22 @@ static int s3c_udc_probe(struct platform_device *pdev)
 	retval = request_irq(IRQ_USB_HSOTG, s3c_udc_irq, 0, driver_name, dev);
 
 	if (retval != 0) {
-		DEBUG(KERN_ERR "%s: can't get irq %i, err %d\n", driver_name,
-				IRQ_USB_HSOTG, retval);
-		return -EBUSY;
+		pr_err("can't get irq %i, err %d\n", IRQ_USB_HSOTG, retval);
+		goto err_req_irq;
 	}
 
 	disable_irq(IRQ_USB_HSOTG);
+	retval = usb_add_gadget_udc(&pdev->dev, &dev->gadget);
+	if (retval)
+		goto err_add_udc;
+
 	create_proc_files();
+
+	return retval;
+
+err_req_irq:
+err_add_udc:
+	clk_put(otg_clock);
 	return retval;
 }
 
@@ -1214,6 +1215,7 @@ static int s3c_udc_remove(struct platform_device *pdev)
 		clk_put(otg_clock);
 		otg_clock = NULL;
 	}
+	usb_del_gadget_udc(&dev->gadget);
 	remove_proc_files();
 	usb_gadget_unregister_driver(dev->driver);
 
@@ -1294,7 +1296,7 @@ static int __init udc_init(void)
 
 	ret = platform_driver_register(&s3c_udc_driver);
 	if (!ret)
-		printk(KERN_INFO "%s : %s\n"
+		pr_info("%s : %s\n"
 			"%s : version %s %s\n",
 			driver_name, DRIVER_DESC,
 			driver_name, DRIVER_VERSION,
@@ -1306,7 +1308,7 @@ static int __init udc_init(void)
 static void __exit udc_exit(void)
 {
 	platform_driver_unregister(&s3c_udc_driver);
-	printk(KERN_INFO "Unloaded %s version %s\n",
+	pr_info("Unloaded %s version %s\n",
 				driver_name, DRIVER_VERSION);
 }
 
