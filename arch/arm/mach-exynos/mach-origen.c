@@ -696,7 +696,6 @@ static void __init origen_machine_init(void)
 	origen_ehci_init();
 	origen_ohci_init();
 	origen_otg_init();
-	clk_xusbxti.rate = 24000000;
 
 	s5p_tv_setup();
 	s5p_i2c_hdmiphy_set_platdata(NULL);
