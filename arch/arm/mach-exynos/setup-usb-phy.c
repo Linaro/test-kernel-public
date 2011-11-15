@@ -14,12 +14,14 @@
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/platform_device.h>
+#include <linux/usb/ch9.h>
 #include <mach/regs-pmu.h>
 #include <mach/regs-usb-phy.h>
 #include <plat/cpu.h>
 #include <plat/usb-phy.h>
+#include <plat/regs-otg.h>
 
-static int exynos4_usb_phy1_init(struct platform_device *pdev)
+int s5p_usb_phy_init(struct platform_device *pdev, int type)
 {
 	struct clk *otg_clk;
 	struct clk *xusbxti_clk;
@@ -38,9 +40,6 @@ static int exynos4_usb_phy1_init(struct platform_device *pdev)
 		clk_put(otg_clk);
 		return err;
 	}
-
-	writel(readl(S5P_USBHOST_PHY_CONTROL) | S5P_USBHOST_PHY_ENABLE,
-			S5P_USBHOST_PHY_CONTROL);
 
 	/* set clock frequency for PLL */
 	phyclk = readl(EXYNOS4_PHYCLK) & ~CLKSEL_MASK;
@@ -64,24 +63,42 @@ static int exynos4_usb_phy1_init(struct platform_device *pdev)
 
 	writel(phyclk, EXYNOS4_PHYCLK);
 
-	/* floating prevention logic: disable */
-	writel((readl(EXYNOS4_PHY1CON) | FPENABLEN), EXYNOS4_PHY1CON);
+	if (type == S5P_USB_PHY_HOST) {
+		writel(readl(S5P_USBHOST_PHY_CONTROL) | S5P_USBHOST_PHY_ENABLE,
+			S5P_USBHOST_PHY_CONTROL);
 
-	/* set to normal HSIC 0 and 1 of PHY1 */
-	writel((readl(EXYNOS4_PHYPWR) & ~PHY1_HSIC_NORMAL_MASK),
+		writel((readl(EXYNOS4_PHY1CON) | FPENABLEN), EXYNOS4_PHY1CON);
+
+		/* set to normal HSIC 0 and 1 of PHY1 */
+		writel((readl(EXYNOS4_PHYPWR) & ~PHY1_HSIC_NORMAL_MASK),
 			EXYNOS4_PHYPWR);
 
-	/* set to normal standard USB of PHY1 */
-	writel((readl(EXYNOS4_PHYPWR) & ~PHY1_STD_NORMAL_MASK), EXYNOS4_PHYPWR);
+		/* set to normal standard USB of PHY1 */
+		writel((readl(EXYNOS4_PHYPWR) & ~PHY1_STD_NORMAL_MASK),
+			EXYNOS4_PHYPWR);
 
-	/* reset all ports of both PHY and Link */
-	rstcon = readl(EXYNOS4_RSTCON) | HOST_LINK_PORT_SWRST_MASK |
-		PHY1_SWRST_MASK;
-	writel(rstcon, EXYNOS4_RSTCON);
-	udelay(10);
+		/* reset all ports of both PHY and Link */
+		rstcon = readl(EXYNOS4_RSTCON) | HOST_LINK_PORT_SWRST_MASK |
+			PHY1_SWRST_MASK;
 
-	rstcon &= ~(HOST_LINK_PORT_SWRST_MASK | PHY1_SWRST_MASK);
-	writel(rstcon, EXYNOS4_RSTCON);
+		writel(rstcon, EXYNOS4_RSTCON);
+		udelay(10);
+
+		rstcon &= ~(HOST_LINK_PORT_SWRST_MASK | PHY1_SWRST_MASK);
+		writel(rstcon, EXYNOS4_RSTCON);
+	} else if (type == S5P_USB_PHY_DEVICE) {
+		writel(readl(S5P_USBDEVICE_PHY_CONTROL) | (0x1<<0),
+				S5P_USBDEVICE_PHY_CONTROL);
+		writel((readl(EXYNOS4_PHYPWR) & ~(0x7<<3)&~(0x1<<0)),
+				EXYNOS4_PHYPWR);
+		writel((readl(EXYNOS4_PHYCLK) & ~(0x5<<2))|(0x3<<0),
+				EXYNOS4_PHYCLK);
+		writel((readl(EXYNOS4_RSTCON) & ~(0x3<<1))|(0x1<<0),
+				EXYNOS4_RSTCON);
+		udelay(10);
+		writel(readl(EXYNOS4_RSTCON) & ~(0x7<<0),
+				EXYNOS4_RSTCON);
+	}
 	udelay(80);
 
 	clk_disable(otg_clk);
@@ -90,7 +107,7 @@ static int exynos4_usb_phy1_init(struct platform_device *pdev)
 	return 0;
 }
 
-static int exynos4_usb_phy1_exit(struct platform_device *pdev)
+int s5p_usb_phy_exit(struct platform_device *pdev, int type)
 {
 	struct clk *otg_clk;
 	int err;
@@ -107,11 +124,20 @@ static int exynos4_usb_phy1_exit(struct platform_device *pdev)
 		return err;
 	}
 
-	writel((readl(EXYNOS4_PHYPWR) | PHY1_STD_ANALOG_POWERDOWN),
-			EXYNOS4_PHYPWR);
+	if (type == S5P_USB_PHY_HOST) {
+		writel((readl(EXYNOS4_PHYPWR) | PHY1_STD_ANALOG_POWERDOWN),
+				EXYNOS4_PHYPWR);
 
-	writel(readl(S5P_USBHOST_PHY_CONTROL) & ~S5P_USBHOST_PHY_ENABLE,
-			S5P_USBHOST_PHY_CONTROL);
+		writel(readl(S5P_USBHOST_PHY_CONTROL) & ~S5P_USBHOST_PHY_ENABLE,
+				S5P_USBHOST_PHY_CONTROL);
+	} else if (type == S5P_USB_PHY_DEVICE) {
+		writel(readl(EXYNOS4_PHYPWR) | (0x3<<3),
+				EXYNOS4_PHYPWR);
+
+		writel(readl(S5P_USBDEVICE_PHY_CONTROL) & ~(1<<0),
+				S5P_USBDEVICE_PHY_CONTROL);
+
+	}
 
 	clk_disable(otg_clk);
 	clk_put(otg_clk);
@@ -119,18 +145,6 @@ static int exynos4_usb_phy1_exit(struct platform_device *pdev)
 	return 0;
 }
 
-int s5p_usb_phy_init(struct platform_device *pdev, int type)
-{
-	if (type == S5P_USB_PHY_HOST)
-		return exynos4_usb_phy1_init(pdev);
-
-	return -EINVAL;
-}
-
-int s5p_usb_phy_exit(struct platform_device *pdev, int type)
-{
-	if (type == S5P_USB_PHY_HOST)
-		return exynos4_usb_phy1_exit(pdev);
-
-	return -EINVAL;
-}
+/* USB Control request data struct must be located here for DMA transfer */
+struct usb_ctrlrequest usb_ctrl __attribute__((aligned(8)));
+EXPORT_SYMBOL(usb_ctrl);
