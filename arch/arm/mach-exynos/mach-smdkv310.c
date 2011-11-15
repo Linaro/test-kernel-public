@@ -39,6 +39,7 @@
 #include <plat/backlight.h>
 #include <plat/mfc.h>
 #include <plat/ehci.h>
+#include <plat/ohci.h>
 #include <plat/clock.h>
 
 #include <mach/map.h>
@@ -245,6 +246,16 @@ static void __init smdkv310_ehci_init(void)
 	s5p_ehci_set_platdata(pdata);
 }
 
+/* USB OHCI */
+static struct s5p_ohci_platdata smdkv310_ohci_pdata;
+
+static void __init smdkv310_ohci_init(void)
+{
+	struct s5p_ohci_platdata *pdata = &smdkv310_ohci_pdata;
+
+	s5p_ohci_set_platdata(pdata);
+}
+
 static struct platform_device *smdkv310_devices[] __initdata = {
 	&s3c_device_hsmmc0,
 	&s3c_device_hsmmc1,
@@ -255,6 +266,7 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 	&s3c_device_rtc,
 	&s3c_device_wdt,
 	&s5p_device_ehci,
+	&s5p_device_ohci,
 	&s5p_device_fimc0,
 	&s5p_device_fimc1,
 	&s5p_device_fimc2,
@@ -363,6 +375,7 @@ static void __init smdkv310_machine_init(void)
 	s5p_fimd0_set_platdata(&smdkv310_lcd0_pdata);
 
 	smdkv310_ehci_init();
+	smdkv310_ohci_init();
 	clk_xusbxti.rate = 24000000;
 
 	platform_add_devices(smdkv310_devices, ARRAY_SIZE(smdkv310_devices));
