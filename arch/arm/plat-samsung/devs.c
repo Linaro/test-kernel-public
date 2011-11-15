@@ -46,6 +46,7 @@
 #include <plat/adc.h>
 #include <plat/ata.h>
 #include <plat/ehci.h>
+#include <plat/ohci.h>
 #include <plat/fb.h>
 #include <plat/fb-s3c2410.h>
 #include <plat/hwmon.h>
@@ -1396,6 +1397,39 @@ void __init s5p_ehci_set_platdata(struct s5p_ehci_platdata *pd)
 		npd->phy_exit = s5p_usb_phy_exit;
 }
 #endif /* CONFIG_S5P_DEV_USB_EHCI */
+
+/* USB OHCI Host Controller */
+
+#ifdef CONFIG_S5P_DEV_USB_OHCI
+static struct resource s5p_ohci_resource[] = {
+	[0] = DEFINE_RES_MEM(S5P_PA_OHCI, SZ_256),
+	[1] = DEFINE_RES_IRQ(IRQ_USB_HOST),
+};
+
+struct platform_device s5p_device_ohci = {
+	.name		= "s5p-ohci",
+	.id		= -1,
+	.num_resources	= ARRAY_SIZE(s5p_ohci_resource),
+	.resource	= s5p_ohci_resource,
+	.dev		= {
+		.dma_mask		= &samsung_device_dma_mask,
+		.coherent_dma_mask	= DMA_BIT_MASK(32),
+	}
+};
+
+void __init s5p_ohci_set_platdata(struct s5p_ohci_platdata *pd)
+{
+	struct s5p_ohci_platdata *npd;
+
+	npd = s3c_set_platdata(pd, sizeof(struct s5p_ohci_platdata),
+			&s5p_device_ohci);
+
+	if (!npd->phy_init)
+		npd->phy_init = s5p_usb_phy_init;
+	if (!npd->phy_exit)
+		npd->phy_exit = s5p_usb_phy_exit;
+}
+#endif /* CONFIG_S5P_DEV_USB_OHCI */
 
 /* USB HSOTG */
 
