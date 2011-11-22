@@ -38,6 +38,12 @@
 #include <mach/regs-pmu.h>
 #include <mach/pmu.h>
 
+#ifdef CONFIG_PM
+extern int s3c_irq_wake(struct irq_data *data, unsigned int state);
+#else
+#define s3c_irq_wake NULL
+#endif
+
 unsigned int gic_bank_offset __read_mostly;
 
 extern int combiner_init(unsigned int combiner_nr, void __iomem *base,
@@ -281,6 +287,9 @@ void __init exynos4_init_irq(void)
 	 * uses GIC instead of VIC.
 	 */
 	s5p_init_irq(NULL, 0);
+#ifdef CONFIG_PM
+	irq_get_chip(IRQ_RTC_ALARM)->irq_set_wake = s3c_irq_wake;
+#endif
 }
 
 struct sysdev_class exynos4_sysclass = {
