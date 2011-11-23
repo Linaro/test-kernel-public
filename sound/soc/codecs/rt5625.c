@@ -1876,7 +1876,7 @@ static __devinit int rt5625_i2c_probe(struct i2c_client *i2c,
 
 	i2c_set_clientdata(i2c, rt5625);
 	rt5625->control_data = i2c;
-	rt5625->control_type = SND_SOC_I2C;
+	rt5625->control_type = SND_SOC_REGMAP;
 
 	ret = snd_soc_register_codec(&i2c->dev, &soc_codec_dev_rt5625, 
 			rt5625_dai, ARRAY_SIZE(rt5625_dai));
