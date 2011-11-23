@@ -135,7 +135,7 @@ static inline void free_desc_list(struct list_head *list)
 {
 	struct dma_pl330_dmac *pdmac;
 	struct dma_pl330_desc *desc;
-	struct dma_pl330_chan *pch;
+	struct dma_pl330_chan *pch = NULL;
 	unsigned long flags;
 
 	if (list_empty(list))
@@ -167,7 +167,7 @@ static inline void free_desc_list(struct list_head *list)
 static inline void handle_cyclic_desc_list(struct list_head *list)
 {
 	struct dma_pl330_desc *desc;
-	struct dma_pl330_chan *pch;
+	struct dma_pl330_chan *pch = NULL;
 	unsigned long flags;
 
 	if (list_empty(list))
