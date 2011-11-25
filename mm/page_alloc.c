@@ -1362,12 +1362,12 @@ int split_free_page(struct page *page)
 
 	zone = page_zone(page);
 	order = page_order(page);
-
+#if 0
 	/* Obey watermarks as if the page was being allocated */
 	watermark = low_wmark_pages(zone) + (1 << order);
 	if (!zone_watermark_ok(zone, 0, watermark, 0, 0))
 		return 0;
-
+#endif
 	/* Remove page from free list */
 	list_del(&page->lru);
 	zone->free_area[order].nr_free--;
@@ -5564,6 +5564,12 @@ static unsigned long pfn_align_to_maxpage_up(unsigned long pfn)
 	return ALIGN(pfn, MAX_ORDER_NR_PAGES);
 }
 
+static struct page *
+cma_migrate_alloc(struct page *page, unsigned long private, int **x)
+{
+	return alloc_page(GFP_HIGHUSER_MOVABLE);
+}
+
 static int __alloc_contig_migrate_range(unsigned long start, unsigned long end)
 {
 	/* This function is based on compact_zone() from compaction.c. */
@@ -5631,7 +5637,7 @@ static int __alloc_contig_migrate_range(unsigned long start, unsigned long end)
 		}
 
 		/* Try to migrate. */
-		ret = migrate_pages(&cc.migratepages, compaction_alloc,
+		ret = migrate_pages(&cc.migratepages, cma_migrate_alloc,
 				    (unsigned long)&cc, false, cc.sync);
 
 		/* Migrated all of them? Great! */
