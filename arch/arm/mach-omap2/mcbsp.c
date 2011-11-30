@@ -65,13 +65,11 @@ static int omap2_mcbsp1_mux_rx_clk(struct device *dev, const char *signal,
 	return 0;
 }
 
-/* McBSP CLKS source switching function */
-static int omap2_mcbsp_set_clk_src(struct device *dev, struct clk *clk,
-				   const char *src)
+static int omap2_mcbsp_reparent_clk(struct device *dev, struct clk *clk,
+				    char *fck_src_name)
 {
 	struct omap_mcbsp_platform_data *pdata = dev->platform_data;
 	struct clk *fck_src;
-	char *fck_src_name;
 	int r;
 
 	if (!strcmp(src, "clks_ext"))
@@ -83,8 +81,8 @@ static int omap2_mcbsp_set_clk_src(struct device *dev, struct clk *clk,
 
 	fck_src = clk_get(dev, fck_src_name);
 	if (IS_ERR_OR_NULL(fck_src)) {
-		pr_err("omap-mcbsp: %s: could not clk_get() %s\n", "clks",
-		       fck_src_name);
+		dev_err(dev, "clk reparent: could not clk_get() %s\n",
+			fck_src_name);
 		return -EINVAL;
 	}
 
@@ -92,8 +90,8 @@ static int omap2_mcbsp_set_clk_src(struct device *dev, struct clk *clk,
 
 	r = clk_set_parent(clk, fck_src);
 	if (IS_ERR_VALUE(r)) {
-		pr_err("omap-mcbsp: %s: could not clk_set_parent() to %s\n",
-		       "clks", fck_src_name);
+		dev_err(dev, "clk reparent: could not clk_set_parent() to %s\n",
+			fck_src_name);
 		clk_put(fck_src);
 		return -EINVAL;
 	}
@@ -103,6 +101,22 @@ static int omap2_mcbsp_set_clk_src(struct device *dev, struct clk *clk,
 	clk_put(fck_src);
 
 	return 0;
+}
+
+/* McBSP CLKS source switching for OMAP2/3 */
+static int omap2_mcbsp_set_clk_src(struct device *dev, struct clk *clk,
+				   const char *src)
+{
+	char *fck_src_name;
+
+	if (!strcmp(src, "clks_ext"))
+		fck_src_name = "pad_fck";
+	else if (!strcmp(src, "clks_fclk"))
+		fck_src_name = "prcm_fck";
+	else
+		return -EINVAL;
+
+	return omap2_mcbsp_reparent_clk(dev, clk, fck_src_name);
 }
 
 static int omap3_enable_st_clock(unsigned int id, bool enable)
