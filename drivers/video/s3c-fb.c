@@ -24,6 +24,7 @@
 #include <linux/uaccess.h>
 #include <linux/interrupt.h>
 #include <linux/pm_runtime.h>
+#include <linux/regulator/consumer.h>
 
 #include <mach/map.h>
 #include <plat/regs-fb-v4.h>
@@ -206,6 +207,7 @@ struct s3c_fb {
 	struct clk		*lcd_clk;
 	void __iomem		*regs;
 	struct s3c_fb_variant	 variant;
+	struct regulator	*vdd_lcd;
 
 	unsigned char		 enabled;
 
@@ -1354,11 +1356,20 @@ static int __devinit s3c_fb_probe(struct platform_device *pdev)
 
 	spin_lock_init(&sfb->slock);
 
+	sfb->vdd_lcd = regulator_get(dev, "vdd_lcd");
+	if (IS_ERR(sfb->vdd_lcd)) {
+		dev_err(dev, "failed to get regulator\n");
+		ret = PTR_ERR(sfb->vdd_lcd);
+		goto err_sfb;
+	}
+
+	regulator_enable(sfb->vdd_lcd);
+
 	sfb->bus_clk = clk_get(dev, "lcd");
 	if (IS_ERR(sfb->bus_clk)) {
 		dev_err(dev, "failed to get bus clock\n");
 		ret = PTR_ERR(sfb->bus_clk);
-		goto err_sfb;
+		goto err_regulator;
 	}
 
 	clk_enable(sfb->bus_clk);
@@ -1480,6 +1491,10 @@ err_bus_clk:
 	clk_disable(sfb->bus_clk);
 	clk_put(sfb->bus_clk);
 
+err_regulator:
+	regulator_disable(sfb->vdd_lcd);
+	regulator_put(sfb->vdd_lcd);
+
 err_sfb:
 	kfree(sfb);
 	return ret;
@@ -1515,6 +1530,9 @@ static int __devexit s3c_fb_remove(struct platform_device *pdev)
 	clk_disable(sfb->bus_clk);
 	clk_put(sfb->bus_clk);
 
+	regulator_disable(sfb->vdd_lcd);
+	regulator_put(sfb->vdd_lcd);
+
 	release_mem_region(sfb->regs_res->start, resource_size(sfb->regs_res));
 
 	pm_runtime_put_sync(sfb->dev);
@@ -1545,6 +1563,8 @@ static int s3c_fb_suspend(struct device *dev)
 		clk_disable(sfb->lcd_clk);
 
 	clk_disable(sfb->bus_clk);
+
+	regulator_disable(sfb->vdd_lcd);
 	return 0;
 }
 
@@ -1555,6 +1575,8 @@ static int s3c_fb_resume(struct device *dev)
 	struct s3c_fb_platdata *pd = sfb->pdata;
 	struct s3c_fb_win *win;
 	int win_no;
+
+	regulator_enable(sfb->vdd_lcd);
 
 	clk_enable(sfb->bus_clk);
 
@@ -1610,6 +1632,8 @@ static int s3c_fb_runtime_suspend(struct device *dev)
 		clk_disable(sfb->lcd_clk);
 
 	clk_disable(sfb->bus_clk);
+
+	regulator_disable(sfb->vdd_lcd);
 	return 0;
 }
 
@@ -1620,6 +1644,8 @@ static int s3c_fb_runtime_resume(struct device *dev)
 	struct s3c_fb_platdata *pd = sfb->pdata;
 	struct s3c_fb_win *win;
 	int win_no;
+
+	regulator_enable(sfb->vdd_lcd);
 
 	clk_enable(sfb->bus_clk);
 
