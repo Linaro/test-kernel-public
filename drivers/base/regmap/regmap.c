@@ -268,6 +268,7 @@ static int _regmap_raw_write(struct regmap *map, unsigned int reg,
 	 * send the work_buf directly, otherwise try to do a gather
 	 * write.
 	 */
+#if 0
 	if (val == map->work_buf + map->format.reg_bytes)
 		ret = map->bus->write(map->dev, map->work_buf,
 				      map->format.reg_bytes + val_len);
@@ -275,6 +276,8 @@ static int _regmap_raw_write(struct regmap *map, unsigned int reg,
 		ret = map->bus->gather_write(map->dev, map->work_buf,
 					     map->format.reg_bytes,
 					     val, val_len);
+#endif
+	ret = map->bus->write(map->dev, val, val_len);
 
 	/* If that didn't work fall back on linearising by hand. */
 	if (ret == -ENOTSUPP) {

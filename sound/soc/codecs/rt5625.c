@@ -34,6 +34,7 @@ struct rt5625_priv {
 	enum snd_soc_control_type control_type;
 	void *control_data;
 	struct snd_soc_codec *codec;
+	struct regmap *regmap;
 };
 
 struct rt5625_init_reg {
@@ -160,8 +161,8 @@ static unsigned int rt5625_read_hw_reg(struct snd_soc_codec *codec, unsigned int
 	unsigned int value = 0x0;
 
 	data[0] = reg;
-	if (codec->hw_write(codec->control_data, data, 1) == 1) {
-		i2c_master_recv(codec->control_data, data, 2);
+	if (!regmap_raw_write(codec->control_data, reg, data, 1)) {
+		regmap_raw_read(codec->control_data, reg, data, 2);
 		value = (data[0] << 8) | data[1];
 		return value;
 	} else {
@@ -194,6 +195,7 @@ static int rt5625_write(struct snd_soc_codec *codec, unsigned int reg,
 {
 	u8 data[3];
 	unsigned int *regvalue = NULL;
+	int ret;
 
 	data[0] = reg;
 	data[1] = (value & 0xff00) >> 8;
@@ -206,7 +208,7 @@ static int rt5625_write(struct snd_soc_codec *codec, unsigned int reg,
 	}
 	rt5625_write_reg_cache(codec, reg, value);
 
-	if (codec->hw_write(codec->control_data, data, 3) == 3) {
+	if (!regmap_raw_write(codec->control_data, reg, data, 3)) {
 		return 0;
 	} else {
 		printk(KERN_ERR "rt5625_write fail\n");
@@ -1810,7 +1812,7 @@ static int rt5625_probe(struct snd_soc_codec *codec)
 	struct rt5625_priv *rt5625 = snd_soc_codec_get_drvdata(codec);
 	int ret;
 
-	codec->control_data = rt5625->control_data;
+	codec->control_data = rt5625->regmap;
 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, rt5625->control_type);
 	if (ret < 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
@@ -1863,6 +1865,12 @@ static struct snd_soc_codec_driver soc_codec_dev_rt5625 = {
 	.compress_type = SND_SOC_RBTREE_COMPRESSION,
 };
 
+static const struct regmap_config rt5625_i2c_regmap_config = {
+	.val_bits = 8,
+	.reg_bits = 8,
+};
+
+
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
 static __devinit int rt5625_i2c_probe(struct i2c_client *i2c,
 		const struct i2c_device_id *id)
@@ -1874,6 +1882,12 @@ static __devinit int rt5625_i2c_probe(struct i2c_client *i2c,
 	if (rt5625 == NULL)
 		return -ENOMEM;
 
+	rt5625->regmap = regmap_init_i2c(i2c, &rt5625_i2c_regmap_config);
+	if (IS_ERR(rt5625->regmap)) {
+		ret = PTR_ERR(rt5625->regmap);
+		goto err_free;
+	}
+
 	i2c_set_clientdata(i2c, rt5625);
 	rt5625->control_data = i2c;
 	rt5625->control_type = SND_SOC_REGMAP;
@@ -1881,6 +1895,14 @@ static __devinit int rt5625_i2c_probe(struct i2c_client *i2c,
 	ret = snd_soc_register_codec(&i2c->dev, &soc_codec_dev_rt5625, 
 			rt5625_dai, ARRAY_SIZE(rt5625_dai));
 
+	if(ret < 0)
+		goto err_regmap;
+
+	return ret;
+
+err_regmap:
+	regmap_exit(rt5625->regmap);
+err_free:
 	if (ret < 0)
 		kfree(rt5625);
 	return ret;
@@ -1888,7 +1910,9 @@ static __devinit int rt5625_i2c_probe(struct i2c_client *i2c,
 
 static __devexit int rt5625_i2c_remove(struct i2c_client *client)
 {
+	struct rt5625_priv *rt5625 = i2c_get_clientdata(client);
 	snd_soc_unregister_codec(&client->dev);
+	regmap_exit(rt5625->regmap);
 	kfree(i2c_get_clientdata(client));
 	return 0;
 }
