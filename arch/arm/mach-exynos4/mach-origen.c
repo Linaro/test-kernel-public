@@ -19,6 +19,7 @@
 #include <linux/gpio_keys.h>
 #include <linux/delay.h>
 #include <linux/rfkill-gpio.h>
+#include <linux/ath6kl.h>
 #if defined(CONFIG_S5P_MEM_CMA)
 #include <linux/cma.h>
 #endif
@@ -171,38 +172,32 @@ static int origen_wifi_status_register(void (*notify_func)
 	return 0;
 }
 
-/*
- * WLAN & BT GPIO Configurations
- */
-static struct gpio origen_w_b[] __initdata = {
-	{ EXYNOS4_GPX2(3), GPIOF_OUT_INIT_HIGH, "GPIO_WIFI_BT_WOW"},
-	{ EXYNOS4_GPX2(4), GPIOF_OUT_INIT_LOW, "GPIO_WIFI_RESET"},
-};
+#define ORIGEN_WLAN_WOW EXYNOS4_GPX2(3)
+#define ORIGEN_WLAN_RESET EXYNOS4_GPX2(4)
 
 static void origen_wlan_setup_power(bool val)
 {
 	int err;
 
-	origen_w_b[0].gpio = EXYNOS4_GPX2(3);
-	origen_w_b[1].gpio = EXYNOS4_GPX2(4);
-
 	if (val) {
-		err = gpio_request_one(origen_w_b[1].gpio,
-			origen_w_b[1].flags, origen_w_b[1].label);
+		err = gpio_request_one(ORIGEN_WLAN_RESET,
+				GPIOF_OUT_INIT_LOW, "GPX2_4");
 		if (err) {
 			pr_warning("ORIGEN: Not obtain WIFI gpios\n");
 			return;
 		}
-		s3c_gpio_cfgpin(origen_w_b[1].gpio, S3C_GPIO_OUTPUT);
-		s3c_gpio_setpull(origen_w_b[1].gpio, S3C_GPIO_PULL_NONE);
+		s3c_gpio_cfgpin(ORIGEN_WLAN_RESET, S3C_GPIO_OUTPUT);
+		s3c_gpio_setpull(ORIGEN_WLAN_RESET,
+						S3C_GPIO_PULL_NONE);
 		/* VDD33,I/O Supply must be done */
-		gpio_set_value(origen_w_b[1].gpio, 0);
+		gpio_set_value(ORIGEN_WLAN_RESET, 0);
 		udelay(30);	/*Tb */
-		gpio_direction_output(origen_w_b[1].gpio, 1);
+		gpio_direction_output(ORIGEN_WLAN_RESET, 1);
 	} else {
-		gpio_direction_output(origen_w_b[1].gpio, 0);
-		gpio_free(origen_w_b[1].gpio);
+		gpio_direction_output(ORIGEN_WLAN_RESET, 0);
+		gpio_free(ORIGEN_WLAN_RESET);
 	}
+	mdelay(100);
 
 	return;
 }
@@ -227,11 +222,10 @@ int origen_wifi_set_detect(bool val)
 	return 0;
 }
 
-/*
- * Atheros driver can be module driver and then call
- * this API before registering SDIO device driver
- */
-EXPORT_SYMBOL(origen_wifi_set_detect);
+struct ath6kl_platform_data origen_wlan_data  __initdata = {
+	.setup_power = origen_wifi_set_detect,
+};
+
 
 #ifdef CONFIG_VIDEO_FIMG2D
 static struct fimg2d_platdata fimg2d_data __initdata = {
@@ -482,6 +476,9 @@ static void __init origen_machine_init(void)
 	samsung_bl_set(&origen_bl_gpio_info, &origen_bl_data);
 
 	origen_bt_setup();
+
+	ath6kl_set_platform_data(&origen_wlan_data);
+
 }
 
 #if defined(CONFIG_S5P_MEM_CMA)
