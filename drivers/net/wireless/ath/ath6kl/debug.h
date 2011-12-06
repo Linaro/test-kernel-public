@@ -44,8 +44,8 @@ enum ATH6K_DEBUG_MASK {
 };
 
 extern unsigned int debug_mask;
-extern int ath6kl_printk(const char *level, const char *fmt, ...)
-	__attribute__ ((format (printf, 2, 3)));
+extern __printf(2, 3)
+int ath6kl_printk(const char *level, const char *fmt, ...);
 
 #define ath6kl_info(fmt, ...)				\
 	ath6kl_printk(KERN_INFO, fmt, ##__VA_ARGS__)
@@ -132,31 +132,6 @@ static inline int ath6kl_debug_init(struct ath6kl *ar)
 
 static inline void ath6kl_debug_cleanup(struct ath6kl *ar)
 {
-}
-#endif
-
-#ifdef CONFIG_ATH6KL_SDIO_POLL
-void ath6kl_wd_init(struct ath6kl *ar);
-
-void ath6kl_wd_cleanup(struct ath6kl *ar);
-
-static inline int ath6kl_wd_poll_is_ture(void)
-{
-	return true;
-}
-
-#else
-static inline void ath6kl_wd_init(struct ath6kl *ar)
-{
-}
-
-static inline void ath6kl_wd_cleanup(struct ath6kl *ar)
-{
-}
-
-static inline int ath6kl_wd_poll_is_ture(void)
-{
-	return false;
 }
 
 #endif

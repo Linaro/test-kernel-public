@@ -1643,6 +1643,7 @@ static int ath6kl_htc_rx_process_packets(struct htc_target *target,
 	int status = 0;
 
 	list_for_each_entry_safe(packet, tmp_pkt, comp_pktq, list) {
+		list_del(&packet->list);
 		ep = &target->endpoint[packet->endpoint];
 
 		/* process header for each of the recv packet */
@@ -1650,8 +1651,6 @@ static int ath6kl_htc_rx_process_packets(struct htc_target *target,
 						   n_lk_ahd);
 		if (status)
 			return status;
-
-		list_del(&packet->list);
 
 		if (list_empty(comp_pktq)) {
 			/*
@@ -1687,14 +1686,10 @@ static int ath6kl_htc_rx_fetch(struct htc_target *target,
 	int fetched_pkts;
 	bool part_bundle = false;
 	int status = 0;
-	struct list_head tmp_rxq;
-	struct htc_packet *packet, *tmp_pkt;
 
 	/* now go fetch the list of HTC packets */
 	while (!list_empty(rx_pktq)) {
 		fetched_pkts = 0;
-
-		INIT_LIST_HEAD(&tmp_rxq);
 
 		if (target->rx_bndl_enable && (get_queue_depth(rx_pktq) > 1)) {
 			/*
@@ -1703,27 +1698,28 @@ static int ath6kl_htc_rx_fetch(struct htc_target *target,
 			 * allowed.
 			 */
 			status = ath6kl_htc_rx_bundle(target, rx_pktq,
-						      &tmp_rxq,
+						      comp_pktq,
 						      &fetched_pkts,
 						      part_bundle);
 			if (status)
-				goto fail_rx;
+				return status;
 
 			if (!list_empty(rx_pktq))
 				part_bundle = true;
-
-			list_splice_tail_init(&tmp_rxq, comp_pktq);
 		}
 
 		if (!fetched_pkts) {
+			struct htc_packet *packet;
 
 			packet = list_first_entry(rx_pktq, struct htc_packet,
 						   list);
 
+			list_del(&packet->list);
+
 			/* fully synchronous */
 			packet->completion = NULL;
 
-			if (!list_is_singular(rx_pktq))
+			if (!list_empty(rx_pktq))
 				/*
 				 * look_aheads in all packet
 				 * except the last one in the
@@ -1735,42 +1731,18 @@ static int ath6kl_htc_rx_fetch(struct htc_target *target,
 			/* go fetch the packet */
 			status = ath6kl_htc_rx_packet(target, packet,
 						      packet->act_len);
-
-			list_move_tail(&packet->list, &tmp_rxq);
-
 			if (status)
-				goto fail_rx;
+				return status;
 
-			list_splice_tail_init(&tmp_rxq, comp_pktq);
+			list_add_tail(&packet->list, comp_pktq);
 		}
-	}
-
-	return 0;
-
-fail_rx:
-
-	/*
-	 * Cleanup any packets we allocated but didn't use to
-	 * actually fetch any packets.
-	 */
-
-	list_for_each_entry_safe(packet, tmp_pkt, rx_pktq, list) {
-		list_del(&packet->list);
-		htc_reclaim_rxbuf(target, packet,
-				&target->endpoint[packet->endpoint]);
-	}
-
-	list_for_each_entry_safe(packet, tmp_pkt, &tmp_rxq, list) {
-		list_del(&packet->list);
-		htc_reclaim_rxbuf(target, packet,
-				&target->endpoint[packet->endpoint]);
 	}
 
 	return status;
 }
 
 int ath6kl_htc_rxmsg_pending_handler(struct htc_target *target,
-				     u32 msg_look_ahead, int *num_pkts)
+				     u32 msg_look_ahead[], int *num_pkts)
 {
 	struct htc_packet *packets, *tmp_pkt;
 	struct htc_endpoint *endpoint;
@@ -1787,7 +1759,7 @@ int ath6kl_htc_rxmsg_pending_handler(struct htc_target *target,
 	 * On first entry copy the look_aheads into our temp array for
 	 * processing
 	 */
-	look_aheads[0] = msg_look_ahead;
+	memcpy(look_aheads, msg_look_ahead, sizeof(look_aheads));
 
 	while (true) {
 
@@ -1855,6 +1827,15 @@ int ath6kl_htc_rxmsg_pending_handler(struct htc_target *target,
 	if (status) {
 		ath6kl_err("failed to get pending recv messages: %d\n",
 			   status);
+		/*
+		 * Cleanup any packets we allocated but didn't use to
+		 * actually fetch any packets.
+		 */
+		list_for_each_entry_safe(packets, tmp_pkt, &rx_pktq, list) {
+			list_del(&packets->list);
+			htc_reclaim_rxbuf(target, packets,
+					&target->endpoint[packets->endpoint]);
+		}
 
 		/* cleanup any packets in sync completion queue */
 		list_for_each_entry_safe(packets, tmp_pkt, &comp_pktq, list) {

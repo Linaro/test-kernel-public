@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009 Atheros Communications Inc.
+ * Copyright (c) 2010-2011 Atheros Communications Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,34 +14,23 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <linux/export.h>
-#include "ath.h"
+#include "core.h"
 
-const char *ath_opmode_to_string(enum nl80211_iftype opmode)
+#ifdef CONFIG_NL80211_TESTMODE
+
+void ath6kl_tm_rx_report_event(struct ath6kl *ar, void *buf, size_t buf_len);
+int ath6kl_tm_cmd(struct wiphy *wiphy, void *data, int len);
+
+#else
+
+static inline void ath6kl_tm_rx_report_event(struct ath6kl *ar, void *buf,
+					     size_t buf_len)
 {
-	switch (opmode) {
-	case NL80211_IFTYPE_UNSPECIFIED:
-		return "UNSPEC";
-	case NL80211_IFTYPE_ADHOC:
-		return "ADHOC";
-	case NL80211_IFTYPE_STATION:
-		return "STATION";
-	case NL80211_IFTYPE_AP:
-		return "AP";
-	case NL80211_IFTYPE_AP_VLAN:
-		return "AP-VLAN";
-	case NL80211_IFTYPE_WDS:
-		return "WDS";
-	case NL80211_IFTYPE_MONITOR:
-		return "MONITOR";
-	case NL80211_IFTYPE_MESH_POINT:
-		return "MESH";
-	case NL80211_IFTYPE_P2P_CLIENT:
-		return "P2P-CLIENT";
-	case NL80211_IFTYPE_P2P_GO:
-		return "P2P-GO";
-	default:
-		return "UNKNOWN";
-	}
 }
-EXPORT_SYMBOL(ath_opmode_to_string);
+
+static inline int ath6kl_tm_cmd(struct wiphy *wiphy, void *data, int len)
+{
+	return 0;
+}
+
+#endif

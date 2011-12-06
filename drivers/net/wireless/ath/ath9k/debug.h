@@ -25,8 +25,10 @@ struct ath_buf;
 
 #ifdef CONFIG_ATH9K_DEBUGFS
 #define TX_STAT_INC(q, c) sc->debug.stats.txstats[q].c++
+#define RESET_STAT_INC(sc, type) sc->debug.stats.reset[type]++
 #else
 #define TX_STAT_INC(q, c) do { } while (0)
+#define RESET_STAT_INC(sc, type) do { } while (0)
 #endif
 
 #ifdef CONFIG_ATH9K_DEBUGFS
@@ -171,10 +173,21 @@ struct ath_rx_stats {
 	u8 rs_antenna;
 };
 
+enum ath_reset_type {
+	RESET_TYPE_BB_HANG,
+	RESET_TYPE_BB_WATCHDOG,
+	RESET_TYPE_FATAL_INT,
+	RESET_TYPE_TX_ERROR,
+	RESET_TYPE_TX_HANG,
+	RESET_TYPE_PLL_HANG,
+	__RESET_TYPE_MAX
+};
+
 struct ath_stats {
 	struct ath_interrupt_stats istats;
 	struct ath_tx_stats txstats[ATH9K_NUM_TX_QUEUES];
 	struct ath_rx_stats rxstats;
+	u32 reset[__RESET_TYPE_MAX];
 };
 
 #define ATH_DBG_MAX_SAMPLES	10
@@ -196,6 +209,8 @@ struct ath_dbg_bb_mac_samp {
 		u8 rateindex;
 		u8 qid;
 		u8 tid;
+		u32 ba_low;
+		u32 ba_high;
 	} ts[ATH_DBG_MAX_SAMPLES];
 	struct {
 		u64 jiffies;

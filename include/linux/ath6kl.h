@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2009 Atheros Communications Inc.
+ * Copyright (c) 2008 Atheros Communications Inc.
+ * Copyright (c) 2009 Gabor Juhos <juhosg@openwrt.org>
+ * Copyright (c) 2009 Imre Kaloz <kaloz@openwrt.org>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,34 +16,23 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <linux/export.h>
-#include "ath.h"
+#ifndef _LINUX_ATH6KL_PLATFORM_H
+#define _LINUX_ATH6KL_PLATFORM_H
 
-const char *ath_opmode_to_string(enum nl80211_iftype opmode)
+struct ath6kl_platform_data {
+	int (*setup_power)(bool);
+};
+
+#ifdef CONFIG_ATH6KL_PLATFORM_DATA
+int ath6kl_set_platform_data(const struct ath6kl_platform_data *data);
+#else
+static inline
+int ath6kl_set_platform_data(const struct ath6kl_platform_data *data)
 {
-	switch (opmode) {
-	case NL80211_IFTYPE_UNSPECIFIED:
-		return "UNSPEC";
-	case NL80211_IFTYPE_ADHOC:
-		return "ADHOC";
-	case NL80211_IFTYPE_STATION:
-		return "STATION";
-	case NL80211_IFTYPE_AP:
-		return "AP";
-	case NL80211_IFTYPE_AP_VLAN:
-		return "AP-VLAN";
-	case NL80211_IFTYPE_WDS:
-		return "WDS";
-	case NL80211_IFTYPE_MONITOR:
-		return "MONITOR";
-	case NL80211_IFTYPE_MESH_POINT:
-		return "MESH";
-	case NL80211_IFTYPE_P2P_CLIENT:
-		return "P2P-CLIENT";
-	case NL80211_IFTYPE_P2P_GO:
-		return "P2P-GO";
-	default:
-		return "UNKNOWN";
-	}
+	return -ENOSYS;
 }
-EXPORT_SYMBOL(ath_opmode_to_string);
+#endif
+
+const struct ath6kl_platform_data *ath6kl_get_platform_data(void);
+
+#endif /* _LINUX_ATH6KL_PLATFORM_H */
