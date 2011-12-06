@@ -18,6 +18,7 @@
 #include <linux/i2c.h>
 #include <linux/gpio_keys.h>
 #include <linux/delay.h>
+#include <linux/rfkill-gpio.h>
 #if defined(CONFIG_S5P_MEM_CMA)
 #include <linux/cma.h>
 #endif
@@ -339,22 +340,21 @@ static void __init origen_ehci_init(void)
 	s5p_ehci_set_platdata(pdata);
 }
 
-/*
- * UART configuration for Bluetooth
- */
-static struct gpio origen_bt_pins[] = {
-	{ EXYNOS4_GPA0(0), 0, "UART_0_RXD"},
-	{ EXYNOS4_GPA0(1), 0, "UART_0_TXD"},
-	{ EXYNOS4_GPA0(2), 0, "UART_0_CTSn"},
-	{ EXYNOS4_GPA0(3), 0, "UART_0_RTSn"},
-	{ EXYNOS4_GPX2(2), 0, "GPIO_BT_RESET"},
+/* Bluetooth rfkill gpio platform data */
+struct rfkill_gpio_platform_data origen_bt_pdata = {
+	.reset_gpio	= EXYNOS4_GPX2(2),
+	.shutdown_gpio	= -1,
+	.type		= RFKILL_TYPE_BLUETOOTH,
+	.name		= "origen-bt",
 };
 
 /* Bluetooth Platform device */
 static struct platform_device origen_device_bluetooth = {
-	.name = "origen-bt",
-	.id = -1,
-	.dev.platform_data = &origen_bt_pins,
+	.name		= "rfkill_gpio",
+	.id		= -1,
+	.dev		= {
+		.platform_data	= &origen_bt_pdata,
+	},
 };
 
 static struct platform_device *origen_devices[] __initdata = {
@@ -398,9 +398,8 @@ static struct platform_device *origen_devices[] __initdata = {
 #ifdef CONFIG_USB_GADGET_S3C_OTGD
 	&s3c_device_usbgadget,
 #endif
-#ifdef CONFIG_ORIGEN_BT
+
 	&origen_device_bluetooth,
-#endif
 
 	&origen_device_gpiokeys,
 };
@@ -415,6 +414,16 @@ static struct platform_pwm_backlight_data origen_bl_data = {
 	.pwm_id = 0,
 	.pwm_period_ns = 1000,
 };
+
+static void __init origen_bt_setup(void)
+{
+	gpio_request(EXYNOS4_GPA0(0), "GPIO BT_UART");
+	/* 4 UART Pins configuration */
+	s3c_gpio_cfgrange_nopull(EXYNOS4_GPA0(0), 4, S3C_GPIO_SFN(2));
+	/* Setup BT Reset, this gpio will be requesed by rfkill-gpio */
+	s3c_gpio_cfgpin(EXYNOS4_GPX2(2), S3C_GPIO_OUTPUT);
+	s3c_gpio_setpull(EXYNOS4_GPX2(2), S3C_GPIO_PULL_NONE);
+}
 
 static void __init origen_map_io(void)
 {
@@ -471,6 +480,8 @@ static void __init origen_machine_init(void)
 	origen_ehci_init();
 
 	samsung_bl_set(&origen_bl_gpio_info, &origen_bl_data);
+
+	origen_bt_setup();
 }
 
 #if defined(CONFIG_S5P_MEM_CMA)
