@@ -40,7 +40,7 @@ module_param(ump_debug_level, int, S_IRUSR | S_IWUSR | S_IWGRP | S_IRGRP | S_IRO
 MODULE_PARM_DESC(ump_debug_level, "Higher number, more dmesg output");
 
 /* By default the module uses any available major, but it's possible to set it at load time to a specific number */
-int ump_major = 0;
+int ump_major = 243;
 module_param(ump_major, int, S_IRUGO); /* r--r--r-- */
 MODULE_PARM_DESC(ump_major, "Device major number");
 
