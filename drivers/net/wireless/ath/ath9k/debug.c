@@ -16,6 +16,7 @@
 
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
+#include <linux/export.h>
 #include <asm/unaligned.h>
 
 #include "ath9k.h"
@@ -523,9 +524,22 @@ static ssize_t read_file_wiphy(struct file *file, char __user *user_buf,
 	if (tmp & ATH9K_RX_FILTER_PHYRADAR)
 		len += snprintf(buf + len, sizeof(buf) - len, " PHYRADAR");
 	if (tmp & ATH9K_RX_FILTER_MCAST_BCAST_ALL)
-		len += snprintf(buf + len, sizeof(buf) - len, " MCAST_BCAST_ALL\n");
-	else
-		len += snprintf(buf + len, sizeof(buf) - len, "\n");
+		len += snprintf(buf + len, sizeof(buf) - len, " MCAST_BCAST_ALL");
+
+	len += snprintf(buf + len, sizeof(buf) - len,
+		       "\n\nReset causes:\n"
+		       "  baseband hang: %d\n"
+		       "  baseband watchdog: %d\n"
+		       "  fatal hardware error interrupt: %d\n"
+		       "  tx hardware error: %d\n"
+		       "  tx path hang: %d\n"
+		       "  pll rx hang: %d\n",
+		       sc->debug.stats.reset[RESET_TYPE_BB_HANG],
+		       sc->debug.stats.reset[RESET_TYPE_BB_WATCHDOG],
+		       sc->debug.stats.reset[RESET_TYPE_FATAL_INT],
+		       sc->debug.stats.reset[RESET_TYPE_TX_ERROR],
+		       sc->debug.stats.reset[RESET_TYPE_TX_HANG],
+		       sc->debug.stats.reset[RESET_TYPE_PLL_HANG]);
 
 	if (len > sizeof(buf))
 		len = sizeof(buf);
@@ -876,6 +890,15 @@ void ath_debug_stat_tx(struct ath_softc *sc, struct ath_buf *bf,
 	TX_SAMP_DBG(rssi) = ts->ts_rssi;
 	TX_SAMP_DBG(tid) = ts->tid;
 	TX_SAMP_DBG(qid) = ts->qid;
+
+	if (ts->ts_flags & ATH9K_TX_BA) {
+		TX_SAMP_DBG(ba_low) = ts->ba_low;
+		TX_SAMP_DBG(ba_high) = ts->ba_high;
+	} else {
+		TX_SAMP_DBG(ba_low) = 0;
+		TX_SAMP_DBG(ba_high) = 0;
+	}
+
 	sc->debug.tsidx = (sc->debug.tsidx + 1) % ATH_DBG_MAX_SAMPLES;
 	spin_unlock(&sc->debug.samp_lock);
 
@@ -1516,14 +1539,15 @@ static int open_file_bb_mac_samps(struct inode *inode, struct file *file)
 	len += snprintf(buf + len, size - len, "Tx status Dump :\n");
 	len += snprintf(buf + len, size - len,
 			"Sample rssi:- ctl0 ctl1 ctl2 ext0 ext1 ext2 comb "
-			"isok rts_fail data_fail rate tid qid tx_before(ms)\n");
+			"isok rts_fail data_fail rate tid qid "
+					"ba_low  ba_high tx_before(ms)\n");
 	for (sampidx = 0; sampidx < ATH_DBG_MAX_SAMPLES; sampidx++) {
 		for (i = 0; i < ATH_DBG_MAX_SAMPLES; i++) {
 			if (!ATH_SAMP_DBG(ts[i].jiffies))
 				continue;
-			len += snprintf(buf + len, size - len, "%4d \t"
-				"%8d %4d %4d %4d %4d %4d %4d %4d %4d "
-				"%4d %4d %2d %2d %d\n",
+			len += snprintf(buf + len, size - len, "%-14d"
+				"%-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-8d "
+				"%-9d %-4d %-3d %-3d %08x %08x %-11d\n",
 				sampidx,
 				ATH_SAMP_DBG(ts[i].rssi_ctl0),
 				ATH_SAMP_DBG(ts[i].rssi_ctl1),
@@ -1538,6 +1562,8 @@ static int open_file_bb_mac_samps(struct inode *inode, struct file *file)
 				ATH_SAMP_DBG(ts[i].rateindex),
 				ATH_SAMP_DBG(ts[i].tid),
 				ATH_SAMP_DBG(ts[i].qid),
+				ATH_SAMP_DBG(ts[i].ba_low),
+				ATH_SAMP_DBG(ts[i].ba_high),
 				jiffies_to_msecs(jiffies -
 					ATH_SAMP_DBG(ts[i].jiffies)));
 		}
@@ -1550,8 +1576,8 @@ static int open_file_bb_mac_samps(struct inode *inode, struct file *file)
 		for (i = 0; i < ATH_DBG_MAX_SAMPLES; i++) {
 			if (!ATH_SAMP_DBG(rs[i].jiffies))
 				continue;
-			len += snprintf(buf + len, size - len, "%4d \t"
-				"%8d %4d %4d %4d %4d %4d %4d %s %4d %02x %d\n",
+			len += snprintf(buf + len, size - len, "%-14d"
+				"%-4d %-4d %-4d %-4d %-4d %-4d %-4d %-9s %-2d %02x %-13d\n",
 				sampidx,
 				ATH_SAMP_DBG(rs[i].rssi_ctl0),
 				ATH_SAMP_DBG(rs[i].rssi_ctl1),

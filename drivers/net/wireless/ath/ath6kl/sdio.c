@@ -14,6 +14,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <linux/module.h>
 #include <linux/mmc/card.h>
 #include <linux/mmc/mmc.h>
 #include <linux/mmc/host.h>
@@ -447,9 +448,6 @@ static void ath6kl_sdio_irq_handler(struct sdio_func *func)
 	int status;
 	struct ath6kl_sdio *ar_sdio;
 
-	if (ath6kl_wd_poll_is_ture())
-		return;
-
 	ath6kl_dbg(ATH6KL_DBG_SDIO, "irq\n");
 
 	ar_sdio = sdio_get_drvdata(func);
@@ -861,8 +859,6 @@ static int ath6kl_sdio_probe(struct sdio_func *func,
 
 	sdio_release_host(func);
 
-	ath6kl_wd_init(ar);
-
 	ret = ath6kl_core_init(ar);
 	if (ret) {
 		ath6kl_err("Failed to init ath6kl core\n");
@@ -896,8 +892,6 @@ static void ath6kl_sdio_remove(struct sdio_func *func)
 	ath6kl_stop_txrx(ar_sdio->ar);
 	cancel_work_sync(&ar_sdio->wr_async_work);
 
-	ath6kl_wd_cleanup(ar_sdio->ar);
-
 	ath6kl_unavail_ev(ar_sdio->ar);
 
 	ath6kl_sdio_power_off(ar_sdio);
@@ -921,18 +915,10 @@ static struct sdio_driver ath6kl_sdio_driver = {
 	.remove = ath6kl_sdio_remove,
 };
 
-
-#ifdef CONFIG_MACH_ORIGEN
-extern int origen_wifi_set_detect(int val);
-#endif
-
 static int __init ath6kl_sdio_init(void)
 {
 	int ret;
 
-#ifdef CONFIG_MACH_ORIGEN
-        origen_wifi_set_detect(true);
-#endif
 	ret = sdio_register_driver(&ath6kl_sdio_driver);
 	if (ret)
 		ath6kl_err("sdio driver registration failed: %d\n", ret);
@@ -943,9 +929,6 @@ static int __init ath6kl_sdio_init(void)
 static void __exit ath6kl_sdio_exit(void)
 {
 	sdio_unregister_driver(&ath6kl_sdio_driver);
-#ifdef CONFIG_MACH_ORIGEN
-        origen_wifi_set_detect(false);
-#endif
 }
 
 module_init(ath6kl_sdio_init);

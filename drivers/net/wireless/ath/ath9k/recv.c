@@ -205,14 +205,22 @@ static void ath_rx_remove_buffer(struct ath_softc *sc,
 
 static void ath_rx_edma_cleanup(struct ath_softc *sc)
 {
+	struct ath_hw *ah = sc->sc_ah;
+	struct ath_common *common = ath9k_hw_common(ah);
 	struct ath_buf *bf;
 
 	ath_rx_remove_buffer(sc, ATH9K_RX_QUEUE_LP);
 	ath_rx_remove_buffer(sc, ATH9K_RX_QUEUE_HP);
 
 	list_for_each_entry(bf, &sc->rx.rxbuf, list) {
-		if (bf->bf_mpdu)
+		if (bf->bf_mpdu) {
+			dma_unmap_single(sc->dev, bf->bf_buf_addr,
+					common->rx_bufsize,
+					DMA_BIDIRECTIONAL);
 			dev_kfree_skb_any(bf->bf_mpdu);
+			bf->bf_buf_addr = 0;
+			bf->bf_mpdu = NULL;
+		}
 	}
 
 	INIT_LIST_HEAD(&sc->rx.rxbuf);
@@ -425,12 +433,9 @@ void ath_rx_cleanup(struct ath_softc *sc)
 
 u32 ath_calcrxfilter(struct ath_softc *sc)
 {
-#define	RX_FILTER_PRESERVE (ATH9K_RX_FILTER_PHYERR | ATH9K_RX_FILTER_PHYRADAR)
-
 	u32 rfilt;
 
-	rfilt = (ath9k_hw_getrxfilter(sc->sc_ah) & RX_FILTER_PRESERVE)
-		| ATH9K_RX_FILTER_UCAST | ATH9K_RX_FILTER_BCAST
+	rfilt = ATH9K_RX_FILTER_UCAST | ATH9K_RX_FILTER_BCAST
 		| ATH9K_RX_FILTER_MCAST;
 
 	if (sc->rx.rxfilter & FIF_PROBE_REQ)
@@ -578,21 +583,10 @@ static bool ath_beacon_dtim_pending_cab(struct sk_buff *skb)
 
 static void ath_rx_ps_beacon(struct ath_softc *sc, struct sk_buff *skb)
 {
-	struct ieee80211_mgmt *mgmt;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 
 	if (skb->len < 24 + 8 + 2 + 2)
 		return;
-
-	mgmt = (struct ieee80211_mgmt *)skb->data;
-	if (memcmp(common->curbssid, mgmt->bssid, ETH_ALEN) != 0) {
-		/* TODO:  This doesn't work well if you have stations
-		 * associated to two different APs because curbssid
-		 * is just the last AP that any of the stations associated
-		 * with.
-		 */
-		return; /* not from our current AP */
-	}
 
 	sc->ps_flags &= ~PS_WAIT_FOR_BEACON;
 
@@ -629,7 +623,7 @@ static void ath_rx_ps_beacon(struct ath_softc *sc, struct sk_buff *skb)
 	}
 }
 
-static void ath_rx_ps(struct ath_softc *sc, struct sk_buff *skb)
+static void ath_rx_ps(struct ath_softc *sc, struct sk_buff *skb, bool mybeacon)
 {
 	struct ieee80211_hdr *hdr;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
@@ -638,7 +632,7 @@ static void ath_rx_ps(struct ath_softc *sc, struct sk_buff *skb)
 
 	/* Process Beacon and CAB receive in PS state */
 	if (((sc->ps_flags & PS_WAIT_FOR_BEACON) || ath9k_check_auto_sleep(sc))
-	    && ieee80211_is_beacon(hdr->frame_control))
+	    && mybeacon)
 		ath_rx_ps_beacon(sc, skb);
 	else if ((sc->ps_flags & PS_WAIT_FOR_CAB) &&
 		 (ieee80211_is_data(hdr->frame_control) ||
@@ -814,6 +808,7 @@ static bool ath9k_rx_accept(struct ath_common *common,
 			    struct ath_rx_status *rx_stats,
 			    bool *decrypt_error)
 {
+	struct ath_softc *sc = (struct ath_softc *) common->priv;
 	bool is_mc, is_valid_tkip, strip_mic, mic_error;
 	struct ath_hw *ah = common->ah;
 	__le16 fc;
@@ -826,7 +821,8 @@ static bool ath9k_rx_accept(struct ath_common *common,
 		test_bit(rx_stats->rs_keyix, common->tkip_keymap);
 	strip_mic = is_valid_tkip && ieee80211_is_data(fc) &&
 		!(rx_stats->rs_status &
-		(ATH9K_RXERR_DECRYPT | ATH9K_RXERR_CRC | ATH9K_RXERR_MIC));
+		(ATH9K_RXERR_DECRYPT | ATH9K_RXERR_CRC | ATH9K_RXERR_MIC |
+		 ATH9K_RXERR_KEYMISS));
 
 	if (!rx_stats->rs_datalen)
 		return false;
@@ -854,6 +850,8 @@ static bool ath9k_rx_accept(struct ath_common *common,
 	 * descriptors.
 	 */
 	if (rx_stats->rs_status != 0) {
+		u8 status_mask;
+
 		if (rx_stats->rs_status & ATH9K_RXERR_CRC) {
 			rxs->flag |= RX_FLAG_FAILED_FCS_CRC;
 			mic_error = false;
@@ -861,7 +859,8 @@ static bool ath9k_rx_accept(struct ath_common *common,
 		if (rx_stats->rs_status & ATH9K_RXERR_PHY)
 			return false;
 
-		if (rx_stats->rs_status & ATH9K_RXERR_DECRYPT) {
+		if ((rx_stats->rs_status & ATH9K_RXERR_DECRYPT) ||
+		    (!is_mc && (rx_stats->rs_status & ATH9K_RXERR_KEYMISS))) {
 			*decrypt_error = true;
 			mic_error = false;
 		}
@@ -871,17 +870,14 @@ static bool ath9k_rx_accept(struct ath_common *common,
 		 * decryption and MIC failures. For monitor mode,
 		 * we also ignore the CRC error.
 		 */
-		if (ah->is_monitoring) {
-			if (rx_stats->rs_status &
-			    ~(ATH9K_RXERR_DECRYPT | ATH9K_RXERR_MIC |
-			      ATH9K_RXERR_CRC))
-				return false;
-		} else {
-			if (rx_stats->rs_status &
-			    ~(ATH9K_RXERR_DECRYPT | ATH9K_RXERR_MIC)) {
-				return false;
-			}
-		}
+		status_mask = ATH9K_RXERR_DECRYPT | ATH9K_RXERR_MIC |
+			      ATH9K_RXERR_KEYMISS;
+
+		if (ah->is_monitoring && (sc->rx.rxfilter & FIF_FCSFAIL))
+			status_mask |= ATH9K_RXERR_CRC;
+
+		if (rx_stats->rs_status & ~status_mask)
+			return false;
 	}
 
 	/*
@@ -1944,10 +1940,10 @@ int ath_rx_tasklet(struct ath_softc *sc, int flush, bool hp)
 		spin_lock_irqsave(&sc->sc_pm_lock, flags);
 
 		if ((sc->ps_flags & (PS_WAIT_FOR_BEACON |
-					      PS_WAIT_FOR_CAB |
-					      PS_WAIT_FOR_PSPOLL_DATA)) ||
-						ath9k_check_auto_sleep(sc))
-			ath_rx_ps(sc, skb);
+				     PS_WAIT_FOR_CAB |
+				     PS_WAIT_FOR_PSPOLL_DATA)) ||
+		    ath9k_check_auto_sleep(sc))
+			ath_rx_ps(sc, skb, rs.is_mybeacon);
 		spin_unlock_irqrestore(&sc->sc_pm_lock, flags);
 
 		if ((ah->caps.hw_caps & ATH9K_HW_CAP_ANT_DIV_COMB) && sc->ant_rx == 3)
@@ -1976,7 +1972,7 @@ requeue:
 
 	if (!(ah->imask & ATH9K_INT_RXEOL)) {
 		ah->imask |= (ATH9K_INT_RXEOL | ATH9K_INT_RXORN);
-		ath9k_hw_set_interrupts(ah, ah->imask);
+		ath9k_hw_set_interrupts(ah);
 	}
 
 	return 0;
