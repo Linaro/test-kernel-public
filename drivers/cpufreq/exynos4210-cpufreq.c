@@ -27,6 +27,15 @@
 #include <plat/clock.h>
 #include <plat/pm.h>
 
+#define SUPPORT_1400MHZ		(1 << 31)
+#define SUPPORT_1200MHZ		(1 << 30)
+#define SUPPORT_1000MHZ		(1 << 29)
+
+#define SUPPORT_FREQ_SHIFT	29
+#define SUPPORT_FREQ_MASK	7
+
+extern unsigned int exynos_result_of_asv; 
+
 static struct clk *cpu_clk;
 static struct clk *moutcore;
 static struct clk *mout_mpll;
@@ -104,28 +113,28 @@ static unsigned int clkdiv_cpu1[CPUFREQ_LEVEL_END][2] = {
 	{ 3, 0 },
 };
 
-struct cpufreq_voltage_table {
-	unsigned int	index;		/* any */
-	unsigned int	arm_volt;	/* uV */
-};
+static unsigned int exynos4_volt_table[CPUFREQ_LEVEL_END];
 
-static struct cpufreq_voltage_table exynos4_volt_table[CPUFREQ_LEVEL_END] = {
-	{
-		.index		= L0,
-		.arm_volt	= 1350000,
-	}, {
-		.index		= L1,
-		.arm_volt	= 1300000,
-	}, {
-		.index		= L2,
-		.arm_volt	= 1200000,
-	}, {
-		.index		= L3,
-		.arm_volt	= 1100000,
-	}, {
-		.index		= L4,
-		.arm_volt	= 1050000,
-	},
+/*
+ * ASV group voltage table
+ */
+static const unsigned int asv_voltage[CPUFREQ_LEVEL_END][8] = {
+	/*
+	 *		SS, A1, A2, B1, B2, C1, C2, D
+	 * @1200 :
+	 * @1000 :
+	 * @800	:	ASV_VOLTAGE_TABLE
+	 * @500	:
+	 * @200	:
+	 */
+	{ 1350000, 1350000, 1300000, 1275000, 1250000, 1225000, 1200000,
+	1175000 },
+	{ 1300000, 1250000, 1200000, 1175000, 1150000, 1125000, 1100000,
+	1075000 },
+	{ 1200000, 1150000, 1100000, 1075000, 1050000, 1025000, 1000000,
+	975000 },
+	{ 1100000, 1050000, 1000000, 975000, 975000, 950000, 925000, 925000 },
+	{ 1050000, 1000000, 975000, 950000, 950000, 925000, 925000, 925000 },
 };
 
 static unsigned int exynos4_apll_pms_table[CPUFREQ_LEVEL_END] = {
@@ -306,7 +315,7 @@ static int exynos4_target(struct cpufreq_policy *policy,
 		goto out;
 
 	/* get the voltage value */
-	arm_volt = exynos4_volt_table[index].arm_volt;
+	arm_volt = exynos4_volt_table[index];	
 
 	cpufreq_notify_transition(&freqs, CPUFREQ_PRECHANGE);
 
@@ -420,9 +429,36 @@ static struct notifier_block exynos4_cpufreq_nb = {
 	.notifier_call = exynos4_cpufreq_pm_notifier,
 };
 
+static void __init set_volt_table(void)
+{
+	unsigned int tmp, i, asv_group = 0;
+
+	tmp = exynos_result_of_asv;
+
+	switch (tmp & (SUPPORT_FREQ_MASK << SUPPORT_FREQ_SHIFT)) {
+	case SUPPORT_1200MHZ:
+		asv_group = (tmp & 0xF);
+		break;
+	case SUPPORT_1400MHZ:
+	case SUPPORT_1000MHZ:
+	default:
+		/* Not supported and assign typical ASV group */
+		asv_group = 2;
+		break;
+	}
+
+	printk(KERN_INFO "DVFS: VDD_ARM Voltage table set with %d Group\n",
+		asv_group);
+
+	for (i = 0 ; i < CPUFREQ_LEVEL_END ; i++)
+		exynos4_volt_table[i] = asv_voltage[i][asv_group];
+}
+
 static int exynos4_cpufreq_cpu_init(struct cpufreq_policy *policy)
 {
 	int ret;
+
+	set_volt_table();
 
 	policy->cur = policy->min = policy->max = exynos4_getspeed(policy->cpu);
 
