@@ -1,6 +1,6 @@
 config UMP
         bool "Enable UMP(Unified Memory Provider)"
-        default n
+        default y
 	---help---
 		This enables UMP memory provider
 
@@ -14,6 +14,6 @@ config UMP_MEM_SIZE
 config UMP_DEBUG
 	bool "Enables debug messages"
 	depends on UMP
-	default n
+	default y
 	---help---
 		This enables UMP driver debug messages
