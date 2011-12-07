@@ -3,7 +3,6 @@
 #include <linux/ath6kl.h>
 
 static const struct ath6kl_platform_data *platform_data;
-
 int __init ath6kl_set_platform_data(const struct ath6kl_platform_data *data)
 {
 	if (platform_data)
