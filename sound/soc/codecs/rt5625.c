@@ -34,6 +34,7 @@ struct rt5625_priv {
 	enum snd_soc_control_type control_type;
 	void *control_data;
 	struct snd_soc_codec *codec;
+	struct regmap *regmap;
 };
 
 struct rt5625_init_reg {
@@ -156,25 +157,21 @@ static inline unsigned int rt5625_read_reg_cache(struct snd_soc_codec *codec,
 
 static unsigned int rt5625_read_hw_reg(struct snd_soc_codec *codec, unsigned int reg) 
 {
-	u8 data[2] = {0};
 	unsigned int value = 0x0;
 
-	data[0] = reg;
-	if (codec->hw_write(codec->control_data, data, 1) == 1) {
-		i2c_master_recv(codec->control_data, data, 2);
-		value = (data[0] << 8) | data[1];
-		return value;
-	} else {
+	if (regmap_read(codec->control_data, reg, &value) < 0) {
 		printk(KERN_DEBUG "%s failed\n", __func__);
 		return -EIO;
 	}
+	return value;
 }
 
 
 static unsigned int rt5625_read(struct snd_soc_codec *codec, unsigned int reg)
 {
 	if ((reg == 0x80) || (reg == 0x82) || (reg == 0x84))
-		return (reg == 0x80) ? reg80 : ((reg == 0x82) ? reg82 : reg84);
+		return (reg == 0x80) ? reg80 : ((reg == 0x82) ?
+			reg82 : reg84);
 
 	return rt5625_read_hw_reg(codec, reg);
 }
@@ -192,21 +189,17 @@ static inline void rt5625_write_reg_cache(struct snd_soc_codec *codec,
 static int rt5625_write(struct snd_soc_codec *codec, unsigned int reg,
 		unsigned int value)
 {
-	u8 data[3];
 	unsigned int *regvalue = NULL;
 
-	data[0] = reg;
-	data[1] = (value & 0xff00) >> 8;
-	data[2] = value & 0x00ff;
-
-	if ((reg == 0x80) || (reg == 0x82) || (reg == 0x84)) { 
-		regvalue = ((reg == 0x80) ? &reg80 : ((reg == 0x82) ? &reg82 : &reg84));
+	if ((reg == 0x80) || (reg == 0x82) || (reg == 0x84)) {
+		regvalue = ((reg == 0x80) ? &reg80 : ((reg == 0x82) ?
+			    &reg82 : &reg84));
 		*regvalue = value;
 		return 0;
 	}
 	rt5625_write_reg_cache(codec, reg, value);
 
-	if (codec->hw_write(codec->control_data, data, 3) == 3) {
+	if (!regmap_write(codec->control_data, reg, value)) {
 		return 0;
 	} else {
 		printk(KERN_ERR "rt5625_write fail\n");
