@@ -302,7 +302,6 @@ config MACH_ORIGEN
 	select S5P_DEV_MFC
 	select S5P_DEV_TV
 	select S5P_DEV_USB_EHCI
-	select S5P_DEV_USB_OHCI
 	select S5P_DEV_USB_HSDEVICE
 	select SAMSUNG_DEV_BACKLIGHT
 	select SAMSUNG_DEV_PWM
@@ -312,6 +311,7 @@ config MACH_ORIGEN
 	select EXYNOS4_SETUP_I2C1
 	select EXYNOS4_SETUP_SDHCI
 	select EXYNOS4_SETUP_USB_PHY
+	select EXYNOS4_DEV_USB_OHCI
 	help
 	  Machine support for ORIGEN based on Samsung EXYNOS4210
 
