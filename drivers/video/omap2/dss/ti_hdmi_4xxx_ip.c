@@ -1387,4 +1387,5 @@ void ti_hdmi_4xxx_wp_audio_enable(struct hdmi_ip_data *ip_data, bool enable)
 	REG_FLD_MOD(hdmi_wp_base(ip_data),
 				HDMI_WP_AUDIO_CTRL, enable, 30, 30);
 }
+
 #endif

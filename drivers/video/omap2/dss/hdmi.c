@@ -892,12 +892,14 @@ static int hdmi_audio_trigger(struct snd_pcm_substream *substream, int cmd,
 	case SNDRV_PCM_TRIGGER_START:
 	case SNDRV_PCM_TRIGGER_RESUME:
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
+		omap_hwmod_set_slave_idlemode(ip_data->oh, HWMOD_IDLEMODE_NO);
 		ip_data->ops->audio_enable(ip_data, true);
 		break;
 	case SNDRV_PCM_TRIGGER_STOP:
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
 		ip_data->ops->audio_enable(ip_data, false);
+		omap_hwmod_set_slave_idlemode(ip_data->oh, HWMOD_IDLEMODE_SMART_WKUP);
 		break;
 	default:
 		err = -EINVAL;
@@ -962,7 +964,7 @@ static int hdmi_audio_hw_params(struct snd_pcm_substream *substream,
 		return -EINVAL;
 	}
 
-	err = hdmi_config_audio_acr(ip_data, params_rate(params), &n, &cts);
+	err = hdmi_config_audio_acr(&hdmi.ip_data, params_rate(params), &n, &cts);
 	if (err < 0)
 		return err;
 
@@ -978,8 +980,8 @@ static int hdmi_audio_hw_params(struct snd_pcm_substream *substream,
 	audio_dma.mode = HDMI_AUDIO_TRANSF_DMA;
 	audio_dma.fifo_threshold = 0x20; /* in number of samples */
 
-	hdmi_wp_audio_config_dma(ip_data, &audio_dma);
-	hdmi_wp_audio_config_format(ip_data, &audio_format);
+	hdmi_wp_audio_config_dma(&hdmi.ip_data, &audio_dma);
+	hdmi_wp_audio_config_format(&hdmi.ip_data, &audio_format);
 
 	/*
 	 * I2S config
@@ -1023,7 +1025,7 @@ static int hdmi_audio_hw_params(struct snd_pcm_substream *substream,
 	/* Use parallel audio interface */
 	core_cfg.en_parallel_aud_input = true;
 
-	hdmi_core_audio_config(ip_data, &core_cfg);
+	hdmi_core_audio_config(&hdmi.ip_data, &core_cfg);
 
 	/*
 	 * Configure packet
@@ -1037,8 +1039,14 @@ static int hdmi_audio_hw_params(struct snd_pcm_substream *substream,
 	aud_if_cfg.db5_downmix_inh = false;
 	aud_if_cfg.db5_lsv = 0;
 
-	hdmi_core_audio_infoframe_config(ip_data, &aud_if_cfg);
+	hdmi_core_audio_infoframe_config(&hdmi.ip_data, &aud_if_cfg);
 	return 0;
+}
+
+int hdmi_audio_trigger(struct snd_pcm_substream *substream,
+		int cmd, struct snd_soc_dai *dai)
+{
+	return hdmi_4xxx_audio_trigger(&hdmi.ip_data, substream, cmd, dai);
 }
 
 static int hdmi_audio_startup(struct snd_pcm_substream *substream,
