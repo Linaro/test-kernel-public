@@ -30,6 +30,8 @@
 #include <linux/seq_file.h>
 #include <linux/gpio.h>
 
+#include <plat/omap_hwmod.h>
+
 #include "ti_hdmi_4xxx_ip.h"
 #include "dss.h"
 
