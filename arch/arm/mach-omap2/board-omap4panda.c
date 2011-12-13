@@ -193,6 +193,10 @@ static struct platform_device panda_v1v8 = {
 	.dev = {
 		.platform_data = &panda_v1v8_pdata,
 	},
+
+static struct platform_device omap4panda_hdmi_audio_device = {
+	.name	= "hdmi-audio-dai",
+	.id	= -1,
 };
 
 static struct platform_device *panda_devices[] __initdata = {
@@ -201,6 +205,7 @@ static struct platform_device *panda_devices[] __initdata = {
 	&panda_abe_audio,
 	&panda_v1v8,
 	&panda_v2v1,
+	&omap4panda_hdmi_audio_device,
 };
 
 static const struct usbhs_omap_board_data usbhs_bdata __initconst = {
