@@ -15,6 +15,7 @@
  */
 
 #include <linux/moduleparam.h>
+#include <linux/errno.h>
 
 #include "core.h"
 #include "cfg80211.h"
