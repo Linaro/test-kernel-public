@@ -628,15 +628,16 @@ static inline int free_pages_check(struct page *page)
  *
  * And clear the zone's pages_scanned counter, to hold off the "all pages are
  * pinned" detection logic.
+ *
+ * Caller must hold zone->lock.
  */
-static void free_pcppages_bulk(struct zone *zone, int count,
+static void __free_pcppages_bulk(struct zone *zone, int count,
 					struct per_cpu_pages *pcp)
 {
 	int migratetype = 0;
 	int batch_free = 0;
 	int to_free = count;
 
-	spin_lock(&zone->lock);
 	zone->all_unreclaimable = 0;
 	zone->pages_scanned = 0;
 
@@ -666,13 +667,13 @@ static void free_pcppages_bulk(struct zone *zone, int count,
 			page = list_entry(list->prev, struct page, lru);
 			/* must delete as __free_one_page list manipulates */
 			list_del(&page->lru);
+
 			/* MIGRATE_MOVABLE list may include MIGRATE_RESERVEs */
 			__free_one_page(page, zone, 0, page_private(page));
 			trace_mm_page_pcpu_drain(page, 0, page_private(page));
 		} while (--to_free && --batch_free && !list_empty(list));
 	}
 	__mod_zone_page_state(zone, NR_FREE_PAGES, count);
-	spin_unlock(&zone->lock);
 }
 
 static void free_one_page(struct zone *zone, struct page *page, int order,
@@ -1113,14 +1114,14 @@ void drain_zone_pages(struct zone *zone, struct per_cpu_pages *pcp)
 	unsigned long flags;
 	int to_drain;
 
-	local_irq_save(flags);
+	spin_lock_irqsave(&zone->lock, flags);
 	if (pcp->count >= pcp->batch)
 		to_drain = pcp->batch;
 	else
 		to_drain = pcp->count;
-	free_pcppages_bulk(zone, to_drain, pcp);
+	__free_pcppages_bulk(zone, to_drain, pcp);
 	pcp->count -= to_drain;
-	local_irq_restore(flags);
+	spin_unlock_irqrestore(&zone->lock, flags);
 }
 #endif
 
@@ -1145,7 +1146,9 @@ static void drain_pages(unsigned int cpu)
 
 		pcp = &pset->pcp;
 		if (pcp->count) {
-			free_pcppages_bulk(zone, pcp->count, pcp);
+			spin_lock(&zone->lock);
+			__free_pcppages_bulk(zone, pcp->count, pcp);
+			spin_unlock(&zone->lock);
 			pcp->count = 0;
 		}
 		local_irq_restore(flags);
@@ -1166,6 +1169,32 @@ void drain_local_pages(void *arg)
 void drain_all_pages(void)
 {
 	on_each_cpu(drain_local_pages, NULL, 1);
+}
+
+/* Caller must hold zone->lock. */
+static void __zone_drain_local_pages(void *arg)
+{
+	struct per_cpu_pages *pcp;
+	struct zone *zone = arg;
+	unsigned long flags;
+
+	local_irq_save(flags);
+	pcp = &per_cpu_ptr(zone->pageset, smp_processor_id())->pcp;
+	if (pcp->count) {
+		/* Caller holds zone->lock, no need to grab it. */
+		__free_pcppages_bulk(zone, pcp->count, pcp);
+		pcp->count = 0;
+	}
+	local_irq_restore(flags);
+}
+
+/*
+ * Like drain_all_pages() but operates on a single zone.  Caller must
+ * hold zone->lock.
+ */
+static void __zone_drain_all_pages(struct zone *zone)
+{
+	on_each_cpu(__zone_drain_local_pages, zone, 1);
 }
 
 #ifdef CONFIG_HIBERNATION
@@ -1248,7 +1277,9 @@ void free_hot_cold_page(struct page *page, int cold)
 		list_add(&page->lru, &pcp->lists[migratetype]);
 	pcp->count++;
 	if (pcp->count >= pcp->high) {
-		free_pcppages_bulk(zone, pcp->batch, pcp);
+		spin_lock(&zone->lock);
+		__free_pcppages_bulk(zone, pcp->batch, pcp);
+		spin_unlock(&zone->lock);
 		pcp->count -= pcp->batch;
 	}
 
@@ -3803,10 +3834,10 @@ static int __zone_pcp_update(void *data)
 		pset = per_cpu_ptr(zone->pageset, cpu);
 		pcp = &pset->pcp;
 
-		local_irq_save(flags);
-		free_pcppages_bulk(zone, pcp->count, pcp);
+		spin_lock_irqsave(&zone->lock, flags);
+		__free_pcppages_bulk(zone, pcp->count, pcp);
 		setup_pageset(pset, batch);
-		local_irq_restore(flags);
+		spin_unlock_irqrestore(&zone->lock, flags);
 	}
 	return 0;
 }
@@ -5481,13 +5512,12 @@ int set_migratetype_isolate(struct page *page)
 
 out:
 	if (!ret) {
+		__zone_drain_all_pages(zone);
 		set_pageblock_migratetype(page, MIGRATE_ISOLATE);
 		move_freepages_block(zone, page, MIGRATE_ISOLATE);
 	}
 
 	spin_unlock_irqrestore(&zone->lock, flags);
-	if (!ret)
-		drain_all_pages();
 	return ret;
 }
 
