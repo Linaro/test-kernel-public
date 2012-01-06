@@ -18,6 +18,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/cpufreq.h>
 #include <linux/notifier.h>
+#include <linux/reboot.h>
 #include <linux/suspend.h>
 
 #include <mach/map.h>
@@ -429,6 +430,32 @@ static struct notifier_block exynos4_cpufreq_nb = {
 	.notifier_call = exynos4_cpufreq_pm_notifier,
 };
 
+static int exynos4_cpufreq_reboot_notifier(struct notifier_block *this,
+						unsigned long code, void *_cmd)
+{
+	struct cpufreq_policy *policy = cpufreq_cpu_get(0); /* boot CPU */
+	mutex_lock(&cpufreq_lock);
+
+	if (frequency_locked)
+		goto out;
+	frequency_locked = true;
+
+	if (locking_frequency) {
+		mutex_unlock(&cpufreq_lock);
+		exynos4_target(policy, locking_frequency,
+			       CPUFREQ_RELATION_H);
+		mutex_lock(&cpufreq_lock);
+	}
+
+out:
+	mutex_unlock(&cpufreq_lock);
+	return NOTIFY_DONE;
+}
+
+static struct notifier_block exynos4_cpufreq_reboot_nb = {
+	.notifier_call = exynos4_cpufreq_reboot_notifier,
+};
+
 static void __init set_volt_table(void)
 {
 	unsigned int tmp, i, asv_group = 0;
@@ -567,6 +594,7 @@ static int __init exynos4_cpufreq_init(void)
 	}
 
 	register_pm_notifier(&exynos4_cpufreq_nb);
+	register_reboot_notifier(&exynos4_cpufreq_reboot_nb);
 
 	if (cpufreq_register_driver(&exynos4_driver)) {
 		pr_err("failed to register cpufreq driver\n");
