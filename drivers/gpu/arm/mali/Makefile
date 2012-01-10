@@ -10,7 +10,7 @@
 
 OSKOS :=linux
 FILES_PREFIX=
-MALI_FILE_PREFIX := $(srctree)/drivers/gpu/arm/mali
+MALI_FILE_PREFIX := $(VPATH)/drivers/gpu/arm/mali
 KBUILDROOT =
 
 # Add platform configuration file for Mali

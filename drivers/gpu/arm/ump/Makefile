@@ -13,7 +13,7 @@ USING_MEMORY_TYPE=1
 endif
 
 UMP_FILE_PREFIX = 
-UDD_FILE_PREFIX := drivers/gpu/arm/ump/
+UDD_FILE_PREFIX := $(VPATH)/drivers/gpu/arm/ump/
 
 # For each arch check: CROSS_COMPILE , KDIR , CFLAGS += -DARCH
 
