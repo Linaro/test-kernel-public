@@ -17,9 +17,11 @@
 #include <linux/percpu.h>
 #include <linux/node.h>
 #include <linux/nodemask.h>
+#include <linux/of.h>
 #include <linux/sched.h>
 
 #include <asm/cputype.h>
+#include <asm/smp_plat.h>
 #include <asm/topology.h>
 
 #define MPIDR_SMP_BITMASK (0x3 << 30)
@@ -48,6 +50,30 @@ const struct cpumask *cpu_coregroup_mask(int cpu)
 	return &cpu_topology[cpu].core_sibling;
 }
 
+void update_siblings_masks(unsigned int cpuid)
+{
+	struct cputopo_arm *cpu_topo, *cpuid_topo = &cpu_topology[cpuid];
+	int cpu;
+	/* update core and thread sibling masks */
+	for_each_possible_cpu(cpu) {
+		cpu_topo = &cpu_topology[cpu];
+
+		if (cpuid_topo->socket_id == cpu_topo->socket_id) {
+			cpumask_set_cpu(cpuid, &cpu_topo->core_sibling);
+			if (cpu != cpuid)
+				cpumask_set_cpu(cpu, &cpuid_topo->core_sibling);
+
+			if (cpuid_topo->core_id == cpu_topo->core_id) {
+				cpumask_set_cpu(cpuid,
+					&cpu_topo->thread_sibling);
+				if (cpu != cpuid)
+					cpumask_set_cpu(cpu,
+						&cpuid_topo->thread_sibling);
+			}
+		}
+	}
+}
+
 /*
  * store_cpu_topology is called at boot when only one cpu is running
  * and with the mutex cpu_hotplug.lock locked, when several cpus have booted,
@@ -57,7 +83,6 @@ void store_cpu_topology(unsigned int cpuid)
 {
 	struct cputopo_arm *cpuid_topo = &cpu_topology[cpuid];
 	unsigned int mpidr;
-	unsigned int cpu;
 
 	/* If the cpu topology has been already set, just return */
 	if (cpuid_topo->core_id != -1)
@@ -99,25 +124,7 @@ void store_cpu_topology(unsigned int cpuid)
 		cpuid_topo->socket_id = -1;
 	}
 
-	/* update core and thread sibling masks */
-	for_each_possible_cpu(cpu) {
-		struct cputopo_arm *cpu_topo = &cpu_topology[cpu];
-
-		if (cpuid_topo->socket_id == cpu_topo->socket_id) {
-			cpumask_set_cpu(cpuid, &cpu_topo->core_sibling);
-			if (cpu != cpuid)
-				cpumask_set_cpu(cpu,
-					&cpuid_topo->core_sibling);
-
-			if (cpuid_topo->core_id == cpu_topo->core_id) {
-				cpumask_set_cpu(cpuid,
-					&cpu_topo->thread_sibling);
-				if (cpu != cpuid)
-					cpumask_set_cpu(cpu,
-						&cpuid_topo->thread_sibling);
-			}
-		}
-	}
+	update_siblings_masks(cpuid);
 	smp_wmb();
 
 	printk(KERN_INFO "CPU%u: thread %d, cpu %d, socket %d, mpidr %x\n",
@@ -125,6 +132,67 @@ void store_cpu_topology(unsigned int cpuid)
 		cpu_topology[cpuid].core_id,
 		cpu_topology[cpuid].socket_id, mpidr);
 }
+
+#ifdef CONFIG_OF
+static void __init parse_dt_topology(void)
+{
+	struct cputopo_arm *cpu_info;
+	struct device_node *dn, *cn = NULL;
+	int cpu;
+
+	while ((cn = of_find_node_by_type(cn, "cpu"))) {
+		const u32 *hwid;
+		int len;
+
+		pr_debug("  * %s...\n", cn->full_name);
+
+		hwid = of_get_property(cn, "reg", &len);
+
+		if (!hwid || len != 4) {
+			pr_err("  * %s missing reg property\n", cn->full_name);
+			continue;
+		}
+
+		cpu = get_logical_index(be32_to_cpup(hwid));
+
+		if (cpu < 0) {
+			pr_err("  * %s wrong logical index %d\n", cn->full_name,
+							cpu);
+			continue;
+		}
+
+		cpu_info = &cpu_topology[cpu];
+
+		hwid = of_get_property(cn, "thread-id", &len);
+
+		if (hwid && len == 4)
+			cpu_info->thread_id = be32_to_cpup(hwid);
+
+		dn = of_parse_phandle(cn, "core", 0);
+
+		hwid = of_get_property(dn, "reg", &len);
+
+		if (hwid && len == 4)
+			cpu_info->core_id = be32_to_cpup(hwid);
+
+		dn = of_parse_phandle(cn, "cluster", 0);
+
+		hwid = of_get_property(dn, "reg", &len);
+
+		if (hwid && len == 4)
+			cpu_info->socket_id = be32_to_cpup(hwid);
+
+		update_siblings_masks(cpu);
+
+		printk(KERN_INFO "CPU%u: thread %d, core %d, socket %d\n",
+			cpu, cpu_topology[cpu].thread_id,
+			cpu_topology[cpu].core_id,
+			cpu_topology[cpu].socket_id);
+	}
+}
+#else
+static inline void parse_dt_topology(void) {}
+#endif
 
 /*
  * init_cpu_topology is called at boot when only one cpu is running
@@ -145,4 +213,6 @@ void init_cpu_topology(void)
 		cpumask_clear(&cpu_topo->thread_sibling);
 	}
 	smp_wmb();
+
+	parse_dt_topology();
 }
