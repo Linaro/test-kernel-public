@@ -272,7 +272,7 @@ static irqreturn_t hpd_irq_handler(int irq, void *data)
 	return IRQ_HANDLED;
 }
 
-int ti_hdmi_4xxx_phy_enable(struct hdmi_ip_data *ip_data)
+int ti_hdmi_4xxx_phy_poweron(struct hdmi_ip_data *ip_data)
 {
 	u16 r = 0;
 	void __iomem *phy_base = hdmi_phy_base(ip_data);
@@ -347,12 +347,37 @@ int ti_hdmi_4xxx_phy_enable(struct hdmi_ip_data *ip_data)
 	return 0;
 }
 
+int ti_hdmi_4xxx_phy_enable(struct hdmi_ip_data *ip_data)
+{
+	int r = 0;
+
+	r = hdmi_set_phy_pwr(ip_data, HDMI_PHYPWRCMD_LDOON);
+
+	return r;
+}
+
 void ti_hdmi_4xxx_phy_disable(struct hdmi_ip_data *ip_data)
 {
 	free_irq(gpio_to_irq(ip_data->hpd_gpio), ip_data);
 
 	hdmi_set_phy_pwr(ip_data, HDMI_PHYPWRCMD_OFF);
 	ip_data->phy_tx_enabled = false;
+}
+
+int ti_hdmi_4xxx_notify_hpd(struct hdmi_ip_data *ip_data, bool hpd_state)
+{
+	int r = 0;
+
+	if (hpd_state != ip_data->cfg.hdmi_phy_tx_enabled) {
+		if (hpd_state)
+			r = ti_hdmi_4xxx_phy_poweron(ip_data);
+		else
+			r = ti_hdmi_4xxx_phy_enable(ip_data);
+		if (!r)
+			ip_data->cfg.hdmi_phy_tx_enabled = hpd_state;
+	}
+
+	return r;
 }
 
 static int hdmi_core_ddc_init(struct hdmi_ip_data *ip_data)
