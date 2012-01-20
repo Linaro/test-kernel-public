@@ -45,6 +45,11 @@
 /* FB bits/pixel */
 #define DEF_FB_BPP 32
 
+/* Kernel cmd line parameter: s5p_tvout_fb.hdmi_lcd_display=X */
+static int hdmi_lcd_display = 0;
+module_param (hdmi_lcd_display, int, S_IRUGO);
+MODULE_PARM_DESC (hdmi_lcd_display, "LCD display routed over HDMI @1024x600");
+
 struct s5ptvfb_window {
 	int				id;
 	struct device			*dev_fb;
@@ -581,11 +586,7 @@ static int s5p_tvout_fb_init_fbinfo(int id, struct device *dev_fb)
 	struct fb_var_screeninfo *var = &fb[FB_INDEX(id)]->var;
 	struct s5ptvfb_window *win = fb[FB_INDEX(id)]->par;
 	struct s5ptvfb_alpha *alpha = &win->alpha;
-#if HDMI_LCD_DISPLAY
-	struct s3cfb_global *fbdev;
 
-	fbdev = fbfimd->fbdev[0];
-#endif
 	memset(win, 0, sizeof(struct s5ptvfb_window));
 
 	platform_set_drvdata(to_platform_device(dev_fb), fb[FB_INDEX(id)]);
@@ -609,13 +610,17 @@ static int s5p_tvout_fb_init_fbinfo(int id, struct device *dev_fb)
 	fix->type = FB_TYPE_PACKED_PIXELS;
 	fix->accel = FB_ACCEL_NONE;
 	fix->visual = FB_VISUAL_TRUECOLOR;
-#if !(HDMI_LCD_DISPLAY)
-	var->xres = lcd.width;
-	var->yres = lcd.height;
-#else
-	var->xres = fbdev->lcd->width;
-	var->yres = fbdev->lcd->height;
-#endif
+
+	if (hdmi_lcd_display) {
+		struct s3cfb_global *fbdev;
+		fbdev = fbfimd->fbdev[0];
+		var->xres = fbdev->lcd->width;
+		var->yres = fbdev->lcd->height;
+	} else {
+		var->xres = lcd.width;
+		var->yres = lcd.height;
+	}
+
 	var->xres_virtual = var->xres;
 	var->yres_virtual = var->yres + (var->yres * fix->ypanstep);
 	var->bits_per_pixel = 32;
@@ -725,12 +730,6 @@ int s5p_tvout_fb_register_framebuffer(struct device *dev_fb)
 dma_addr_t start_addr;
 enum s5p_mixer_layer layer;
 
-#if HDMI_LCD_DISPLAY
-/* Below functions are called from probe() to enable
- * hdmi to display the lcd frame buffer immediately after
- * boot
- */
-
 int s5p_tvout_fb_setup_framebuffer(struct device *dev_fb)
 {
 	struct s3cfb_global *fbdev;
@@ -741,6 +740,10 @@ int s5p_tvout_fb_setup_framebuffer(struct device *dev_fb)
 	fb1 = fb[0];
 	var = &fb1->var;
 
+	if (!hdmi_lcd_display) {
+		struct s5ptvfb_window *win;
+		win = fb1->par;
+	}
 	switch (fb1->node) {
 	case S5PTV_FB_LAYER0_MINOR:
 		layer = MIXER_GPR0_LAYER;
@@ -756,10 +759,14 @@ int s5p_tvout_fb_setup_framebuffer(struct device *dev_fb)
 	s5p_tvout_fb_check_var(&fb[0]->var, fb[0]);
 	s5p_tvout_fb_set_par(fb[0]);
 
-	fb1->fix.smem_start = fbdev->fb[0]->fix.smem_start;
-	start_addr = fb1->fix.smem_start + \
-		     (var->xres_virtual * \
-		      (var->bits_per_pixel / 8) * var->yoffset);
+	if (hdmi_lcd_display) {
+		fb1->fix.smem_start = fbdev->fb[0]->fix.smem_start;
+		start_addr = fb1->fix.smem_start + \
+			     (var->xres_virtual * \
+			     (var->bits_per_pixel / 8) * var->yoffset);
+	} else {
+		start_addr = fb1->fix.smem_start;
+	}
 
 	return 0;
 }
@@ -797,15 +804,31 @@ int s5p_tvout_fb_ctrl_enable(bool enable)
 		return -1;
 	}
 
-	s5p_mixer_ctrl_set_buffer_address(layer, start_addr);
+	if (hdmi_lcd_display)
+		s5p_mixer_ctrl_set_buffer_address(layer, start_addr);
+	else
+		s5p_mixer_ctrl_set_buffer_address(layer, fb1->fix.smem_start);
 
 	if (fb1->fix.smem_start)
 		s5p_mixer_ctrl_enable_layer(layer);
 	else
 		printk(KERN_ERR"[S5P-TVOUT] FB unblanking failed\n");
 
-	var.xres = fbdev->lcd->width;
-	var.yres = fbdev->lcd->height;
+	if (hdmi_lcd_display) {
+		var.xres = fbdev->lcd->width;
+		var.yres = fbdev->lcd->height;
+
+		/* X and Y coordinate are calculated to center the display */
+		user_window.x = (HDMI_DISPLAY_WIDTH/2) - ((fbdev->lcd->width)/2);
+		user_window.y = (HDMI_DISPLAY_HEIGHT/2) - ((fbdev->lcd->height)/2);
+	} else {
+		var.xres = 1920;
+		var.yres = 1080;
+
+		/* X and Y coordinate are calculated to center the display */
+		user_window.x = 0;
+		user_window.y = 0;
+	}
 	var.bits_per_pixel = DEF_FB_BPP;
 	var.xres_virtual = var.xres;
 	var.yres_virtual = var.yres;
@@ -816,111 +839,8 @@ int s5p_tvout_fb_ctrl_enable(bool enable)
 	var.transp.length = 0;
 	var.activate = FB_ACTIVATE_FORCE;
 
-	/* X and Y coordinate are calculated to center the display */
-	user_window.x = (HDMI_DISPLAY_WIDTH/2) - ((fbdev->lcd->width)/2);
-	user_window.y = (HDMI_DISPLAY_HEIGHT/2) - ((fbdev->lcd->height)/2);
-
 	s5p_mixer_ctrl_set_dst_win_pos(layer, user_window.x, user_window.y, \
 			var.xres, var.yres);
 
 	return 0;
 }
-
-#else
-
-int s5p_tvout_fb_setup_framebuffer(struct device *dev_fb)
-{
-	struct s3cfb_global *fbdev;
-	struct fb_info *fb1;
-	struct fb_var_screeninfo *var;
-	struct s5ptvfb_window *win;
-
-	fbdev = fbfimd->fbdev[0];
-	fb1 = fb[0];
-	win = fb1->par;
-	var = &fb1->var;
-
-	switch (fb1->node) {
-	case S5PTV_FB_LAYER0_MINOR:
-		layer = MIXER_GPR0_LAYER;
-		break;
-	case S5PTV_FB_LAYER1_MINOR:
-		layer = MIXER_GPR1_LAYER;
-		break;
-	default:
-		printk(KERN_ERR "[Error] invalid layer\n");
-		return -1;
-	}
-
-	s5p_tvout_fb_check_var(&fb[0]->var, fb[0]);
-	s5p_tvout_fb_set_par(fb[0]);
-
-	start_addr = fb1->fix.smem_start;
-
-	return 0;
-}
-
-int s5p_tvout_fb_ctrl_enable(bool enable)
-{
-	struct fb_info *fb1 = fb[0];
-	struct fb_var_screeninfo var;
-	struct s5ptvfb_user_window user_window;
-	enum s5p_mixer_layer layer;
-	enum s5p_tvout_disp_mode        tv_std;
-	enum s5p_tvout_o_mode           tv_if;
-	struct s3cfb_global *fbdev;
-
-	fbdev = fbfimd->fbdev[0];
-
-	/* hard-coded values below for 1080p 60Hz */
-	tv_std = TVOUT_1080P_60;
-	tv_if = TVOUT_HDMI_RGB;
-
-	switch (fb1->node) {
-	case S5PTV_FB_LAYER0_MINOR:
-		layer = MIXER_GPR0_LAYER;
-		break;
-	case S5PTV_FB_LAYER1_MINOR:
-		layer = MIXER_GPR1_LAYER;
-		break;
-	default:
-		printk(KERN_ERR"[Error] invalid layer\n");
-		return -1;
-	}
-
-	if (s5p_tvif_ctrl_start(tv_std, tv_if) < 0) {
-		printk(KERN_ERR"[S5P-TVOUT] s5p_tvif_ctrl_start failed\n");
-		return -1;
-	}
-
-	//	s5p_mixer_ctrl_set_buffer_address(layer, start_addr);
-	s5p_mixer_ctrl_set_buffer_address(layer, fb1->fix.smem_start);
-
-	if (fb1->fix.smem_start)
-		s5p_mixer_ctrl_enable_layer(layer);
-	else
-		printk(KERN_ERR"[S5P-TVOUT] FB unblanking failed\n");
-
-	var.xres = 1920;
-	var.yres = 1080;
-	var.bits_per_pixel = DEF_FB_BPP;
-	var.xres_virtual = var.xres;
-	var.yres_virtual = var.yres;
-	var.xoffset = 0;
-	var.yoffset = 0;
-	var.width = 0;
-	var.height = 0;
-	var.transp.length = 0;
-	var.activate = FB_ACTIVATE_FORCE;
-
-	/* X and Y coordinate are calculated to center the display */
-	user_window.x = 0;
-	user_window.y = 0;
-
-	s5p_mixer_ctrl_set_dst_win_pos(layer, user_window.x, user_window.y, \
-			var.xres, var.yres);
-
-	return 0;
-}
-
-#endif
