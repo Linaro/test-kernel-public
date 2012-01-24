@@ -135,7 +135,7 @@ int __cpu_disable(void)
 	 * Flush user cache and TLB mappings, and then remove this CPU
 	 * from the vm mask set of all processes.
 	 */
-	flush_cache_all();
+	flush_dcache_level(flush_cache_level_cpu());
 	local_flush_tlb_all();
 
 	clear_tasks_mm_cpumask(cpu);
