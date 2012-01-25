@@ -251,6 +251,7 @@ config MACH_UNIVERSAL_C210
 	select S3C_DEV_I2C3
 	select S3C_DEV_I2C5
 	select S5P_DEV_I2C_HDMIPHY
+	select S5P_DEV_JPEG
 	select S5P_DEV_MFC
 	select S5P_DEV_ONENAND
 	select S5P_DEV_TV
