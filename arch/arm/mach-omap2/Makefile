@@ -293,3 +293,6 @@ obj-y					+= $(smsc911x-m) $(smsc911x-y)
 obj-$(CONFIG_ARCH_OMAP4)		+= hwspinlock.o
 
 obj-y					+= common-board-devices.o twl-common.o
+
+# EMIF platform code
+obj-$(CONFIG_EMIF)			+= emif_omap.o
