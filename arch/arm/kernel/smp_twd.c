@@ -248,6 +248,7 @@ static void __cpuinit twd_timer_setup(struct clock_event_device *clk)
 		twd_timer_rate = clk_get_rate(twd_clk);
 	else
 		twd_calibrate_rate();
+	extern void smp_timer_broadcast(const struct cpumask *mask);
 
 	__raw_writel(0, twd_base + TWD_TIMER_CONTROL);
 
@@ -257,6 +258,11 @@ static void __cpuinit twd_timer_setup(struct clock_event_device *clk)
 	clk->rating = 450;	/* Make sure this is higher than broadcast */
 	clk->set_mode = twd_set_mode;
 	clk->set_next_event = twd_set_next_event;
+	clk->shift = 20;
+	clk->mult = div_sc(twd_timer_rate, NSEC_PER_SEC, clk->shift);
+	clk->max_delta_ns = clockevent_delta2ns(0xffffffff, clk);
+	clk->min_delta_ns = clockevent_delta2ns(0xf, clk);
+	clk->broadcast	= smp_timer_broadcast;
 
 	this_cpu_clk = __this_cpu_ptr(twd_evt);
 	*this_cpu_clk = clk;

@@ -433,7 +433,7 @@ static void ipi_timer(void)
 }
 
 #ifdef CONFIG_GENERIC_CLOCKEVENTS_BROADCAST
-static void smp_timer_broadcast(const struct cpumask *mask)
+void smp_timer_broadcast(const struct cpumask *mask)
 {
 	smp_cross_call(mask, IPI_TIMER);
 }
@@ -441,6 +441,7 @@ static void smp_timer_broadcast(const struct cpumask *mask)
 #define smp_timer_broadcast	NULL
 #endif
 
+#ifndef CONFIG_ARM_SMP_TWD
 static void broadcast_timer_set_mode(enum clock_event_mode mode,
 	struct clock_event_device *evt)
 {
@@ -463,6 +464,10 @@ static void __cpuinit broadcast_timer_setup(void)
 
 	clockevents_register_device(evt);
 }
+#else
+static void __cpuinit broadcast_timer_setup(void)
+{}
+#endif
 
 void __cpuinit percpu_timer_setup(void)
 {
