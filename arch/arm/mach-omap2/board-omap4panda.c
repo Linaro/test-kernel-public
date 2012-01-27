@@ -668,7 +668,7 @@ static struct __initdata emif_custom_configs custom_configs = {
 
 static void omap4_panda_init_rev(void)
 {
-	if (cpu_is_omap4430()) {
+	if (cpu_is_omap443x()) {
 		/* PandaBoard 4430 */
 		/* ASoC audio configuration */
 		panda_abe_audio_data.card_name = "Panda";
