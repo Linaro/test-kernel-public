@@ -272,6 +272,7 @@ static struct platform_device *smdkv310_devices[] __initdata = {
 	&s5p_device_fimc3,
 	&s5p_device_fimc_md,
 	&s5p_device_g2d,
+	&s5p_device_jpeg,
 	&exynos4_device_ac97,
 	&exynos4_device_i2s0,
 	&exynos4_device_ohci,
@@ -381,6 +382,8 @@ static void __init smdkv310_machine_init(void)
 	clk_xusbxti.rate = 24000000;
 
 	platform_add_devices(smdkv310_devices, ARRAY_SIZE(smdkv310_devices));
+
+	s5p_device_jpeg.dev.parent = &exynos4_device_pd[PD_CAM].dev;
 	s5p_device_mfc.dev.parent = &exynos4_device_pd[PD_MFC].dev;
 }
 
