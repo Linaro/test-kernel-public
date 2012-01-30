@@ -53,6 +53,8 @@ struct omap_dss_features {
 
 	const u32 buffer_size_unit;
 	const u32 burst_size_unit;
+
+	const u32 hdmi_core_sys_offset;
 };
 
 /* This struct is assigned to one of the below during initialization */
@@ -458,6 +460,8 @@ static const struct omap_dss_features omap4430_es1_0_dss_features  = {
 	.dss_params = omap4_dss_param_range,
 	.buffer_size_unit = 16,
 	.burst_size_unit = 16,
+
+	.hdmi_core_sys_offset = 0x400,
 };
 
 /* For all the other OMAP4 versions */
@@ -482,6 +486,8 @@ static const struct omap_dss_features omap4_dss_features = {
 	.dss_params = omap4_dss_param_range,
 	.buffer_size_unit = 16,
 	.burst_size_unit = 16,
+
+	.hdmi_core_sys_offset = 0x400,
 };
 
 /* OMAP5 DSS Features */
@@ -508,6 +514,8 @@ static const struct omap_dss_features omap5_dss_features = {
 	.dss_params = omap4_dss_param_range,
 	.buffer_size_unit = 16,
 	.burst_size_unit = 16,
+
+	.hdmi_core_sys_offset = 0x20000,
 };
 
 #if defined(CONFIG_OMAP4_DSS_HDMI)
@@ -596,6 +604,11 @@ u32 dss_feat_get_buffer_size_unit(void)
 u32 dss_feat_get_burst_size_unit(void)
 {
 	return omap_current_dss_features->burst_size_unit;
+}
+
+unsigned long dss_feat_get_hdmi_core_sys_offset(void)
+{
+	return omap_current_dss_features->hdmi_core_sys_offset;
 }
 
 /* DSS has_feature check */
