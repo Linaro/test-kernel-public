@@ -790,6 +790,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s5p_device_g2d,
 	&s5p_device_hdmi,
 	&s5p_device_i2c_hdmiphy,
+	&s5p_device_jpeg,
 	&s5p_device_mfc,
 	&s5p_device_mfc_l,
 	&s5p_device_mfc_r,
@@ -893,6 +894,8 @@ static void __init origen_machine_init(void)
 
 	s5p_device_hdmi.dev.parent = &exynos4_device_pd[PD_TV].dev;
 	s5p_device_mixer.dev.parent = &exynos4_device_pd[PD_TV].dev;
+
+	s5p_device_jpeg.dev.parent = &exynos4_device_pd[PD_CAM].dev;
 
 	s5p_device_mfc.dev.parent = &exynos4_device_pd[PD_MFC].dev;
 
