@@ -59,7 +59,12 @@ clean: debian/control
 
 	# This gets rid of the d-i packages in control
 	cp -f $(DEBIAN)/control.stub $(DEBIAN)/control
+ifeq ($(do_timestamp_version),true)
+	cat $(DEBIAN)/changelog | \
+		sed -e "1 s/)/~$$(printf %x $$(date +%s)))/" > debian/changelog
+else
 	cp $(DEBIAN)/changelog debian/changelog
+endif
 
 	# Install the copyright information.
 	cp $(DEBIAN)/copyright debian/copyright
