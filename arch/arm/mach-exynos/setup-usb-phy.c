@@ -28,6 +28,21 @@ static int exynos4_usb_host_phy_is_on(void)
 	return (readl(EXYNOS4_PHYPWR) & PHY1_STD_ANALOG_POWERDOWN) ? 0 : 1;
 }
 
+static inline int s5p_usbdevice_phy_init(void)
+{
+	writel(readl(S5P_USBDEVICE_PHY_CONTROL) | (0x1<<0),
+			S5P_USBDEVICE_PHY_CONTROL);
+	writel((readl(EXYNOS4_PHYPWR) & ~(0x7<<3)&~(0x1<<0)),
+			EXYNOS4_PHYPWR);
+	writel((readl(EXYNOS4_PHYCLK) & ~(0x5<<2))|(0x3<<0),
+			EXYNOS4_PHYCLK);
+	writel((readl(EXYNOS4_RSTCON) & ~(0x3<<1))|(0x1<<0),
+			EXYNOS4_RSTCON);
+	udelay(10);
+	writel(readl(EXYNOS4_RSTCON) & ~(0x7<<0),
+			EXYNOS4_RSTCON);
+}
+
 int s5p_usb_phy_init(struct platform_device *pdev, int type)
 {
 	struct clk *otg_clk;
@@ -50,8 +65,11 @@ int s5p_usb_phy_init(struct platform_device *pdev, int type)
 		return err;
 	}
 
-	if (exynos4_usb_host_phy_is_on())
+	if (exynos4_usb_host_phy_is_on()) {
+		if (type == S5P_USB_PHY_DEVICE)
+			s5p_usbdevice_phy_init();
 		return 0;
+	}
 
 	/* set clock frequency for PLL */
 	phyclk = readl(EXYNOS4_PHYCLK) & ~CLKSEL_MASK;
@@ -99,17 +117,7 @@ int s5p_usb_phy_init(struct platform_device *pdev, int type)
 		rstcon &= ~(HOST_LINK_PORT_SWRST_MASK | PHY1_SWRST_MASK);
 		writel(rstcon, EXYNOS4_RSTCON);
 	} else if (type == S5P_USB_PHY_DEVICE) {
-		writel(readl(S5P_USBDEVICE_PHY_CONTROL) | (0x1<<0),
-				S5P_USBDEVICE_PHY_CONTROL);
-		writel((readl(EXYNOS4_PHYPWR) & ~(0x7<<3)&~(0x1<<0)),
-				EXYNOS4_PHYPWR);
-		writel((readl(EXYNOS4_PHYCLK) & ~(0x5<<2))|(0x3<<0),
-				EXYNOS4_PHYCLK);
-		writel((readl(EXYNOS4_RSTCON) & ~(0x3<<1))|(0x1<<0),
-				EXYNOS4_RSTCON);
-		udelay(10);
-		writel(readl(EXYNOS4_RSTCON) & ~(0x7<<0),
-				EXYNOS4_RSTCON);
+		s5p_usbdevice_phy_init();
 	}
 	udelay(80);
 
