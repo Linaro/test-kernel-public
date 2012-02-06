@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 	const char *outform = "dts";
 	const char *outname = "-";
 	const char *depname = NULL;
-	int force = 0, check = 0, sort = 0;
+	int force = 0, sort = 0;
 	const char *arg;
 	int opt;
 	FILE *outf = NULL;
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 	minsize    = 0;
 	padsize    = 0;
 
-	while ((opt = getopt(argc, argv, "hI:O:o:V:d:R:S:p:fcqb:vH:s"))
+	while ((opt = getopt(argc, argv, "hI:O:o:V:d:R:S:p:fqb:vH:s"))
 			!= EOF) {
 		switch (opt) {
 		case 'I':
@@ -142,9 +142,6 @@ int main(int argc, char *argv[])
 			break;
 		case 'f':
 			force = 1;
-			break;
-		case 'c':
-			check = 1;
 			break;
 		case 'q':
 			quiet++;
