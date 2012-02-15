@@ -31,10 +31,10 @@
 #include <linux/regulator/machine.h>
 #include <linux/regulator/fixed.h>
 #include <linux/wl12xx.h>
+#include <linux/platform_data/omap-abe-twl6040.h>
 #include <linux/netdevice.h>
 #include <linux/if_ether.h>
 #include <linux/ti_wilink_st.h>
-#include <linux/platform_data/omap-abe-twl6040.h>
 
 #include <mach/hardware.h>
 #include <asm/hardware/gic.h>
@@ -50,8 +50,6 @@
 #include <plat/usb.h>
 #include <plat/mmc.h>
 #include <video/omap-panel-dvi.h>
-#include <plat/dma-44xx.h>
-#include <video/omap-panel-generic-dpi.h>
 
 #include "hsmmc.h"
 #include "control.h"
@@ -107,19 +105,6 @@ static struct platform_device leds_gpio = {
 		.platform_data	= &gpio_led_info,
 	},
 };
-
-static void __init panda_leds_init(void)
-{
-	if (cpu_is_omap443x()) {
-		gpio_leds[0].gpio = 7;
-		gpio_leds[1].gpio = 8;
-	} else {
-		gpio_leds[0].gpio = 110;
-		gpio_leds[1].gpio = 8;
-	}
-
-	platform_device_register(&leds_gpio);
-}
 
 static struct omap_abe_twl6040_data panda_abe_audio_data = {
 	/* Audio out */
@@ -694,14 +679,24 @@ static void omap4_panda_init_rev(void)
 	if (cpu_is_omap443x()) {
 		/* PandaBoard 4430 */
 		/* ASoC audio configuration */
-		panda_abe_audio_data.card_name = "Panda";
+		panda_abe_audio_data.card_name = "PandaBoard";
 		panda_abe_audio_data.has_hsmic = 1;
 	} else {
 		/* PandaBoard ES */
 		/* ASoC audio configuration */
-		panda_abe_audio_data.card_name = "PandaES";
+		panda_abe_audio_data.card_name = "PandaBoardES";
 	}
 }
+
+/*
+ * These device paths represent the onboard USB <-> Ethernet bridge, and
+ * the WLAN module on Panda, both of which need their random or all-zeros
+ * mac address replacing with a per-cpu stable generated one
+ */
+static const char * const panda_fixup_mac_device_paths[] = {
+	"usb1/1-1/1-1.1/1-1.1:1.0",
+	"mmc1:0001:2",
+};
 
 static void __init omap4_panda_init(void)
 {
@@ -736,6 +731,9 @@ static void __init omap4_panda_init(void)
 		pr_err("error setting wl12xx data: %d\n", ret);
 
 	omap4_panda_init_rev();
+
+	register_netdevice_notifier(&omap_panda_netdev_notifier);
+
 	omap4_panda_i2c_init();
 	platform_add_devices(panda_devices, ARRAY_SIZE(panda_devices));
 	platform_device_register(&omap_vwlan_device);
