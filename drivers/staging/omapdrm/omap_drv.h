@@ -101,6 +101,8 @@ int omap_framebuffer_pin(struct drm_framebuffer *fb);
 void omap_framebuffer_unpin(struct drm_framebuffer *fb);
 void omap_framebuffer_update_scanout(struct drm_framebuffer *fb, int x, int y,
 		struct omap_overlay_info *info);
+int omap_framebuffer_get_buffer(struct drm_framebuffer *fb, int x, int y,
+		void **vaddr, dma_addr_t *paddr, unsigned int *screen_width);
 struct drm_connector *omap_framebuffer_get_next_connector(
 		struct drm_framebuffer *fb, struct drm_connector *from);
 void omap_framebuffer_flush(struct drm_framebuffer *fb,
