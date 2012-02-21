@@ -137,6 +137,13 @@ bool omap4_device_prev_state_off(void)
 	return reg ? true : false;
 }
 
+/* stray from somewhere... */
+#if 0
+#ifdef CONFIG_ARCH_OMAP4
+	omap4_enter_lowpower(cpu_id, PWRDM_POWER_OFF);
+#endif
+#endif
+
 void omap4_device_clear_prev_off_state(void)
 {
 	omap4_prminst_write_inst_reg(OMAP4430_LOSTCONTEXT_RFF_MASK |
@@ -700,8 +707,10 @@ static int __init omap_pm_init(void)
 
 	if (cpu_is_omap44xx())
 		ret = omap4_init_static_deps();
-	else
+	else {
+	       	 prcm_setup_regs();                                                                
 		ret = omap5_init_static_deps();
+	}
 
 	if (ret) {
 		pr_err("Failed to initialise static depedencies\n");
