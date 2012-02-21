@@ -787,6 +787,13 @@ int omapdss_hdmi_display_enable(struct omap_dss_device *dssdev)
 		goto err0;
 	}
 
+	if (priv == NULL) {
+		pr_err("NULL priv!\n");
+		WARN_ON(1);
+                r = -ENODEV;                                                    
+                goto err0;                                                      
+	}
+
 	hdmi.ip_data.hpd_gpio = priv->hpd_gpio;
 
 	r = omap_dss_start_device(dssdev);
@@ -794,7 +801,6 @@ int omapdss_hdmi_display_enable(struct omap_dss_device *dssdev)
 		DSSERR("failed to start device\n");
 		goto err0;
 	}
-
 	if (dssdev->platform_enable) {
 		r = dssdev->platform_enable(dssdev);
 		if (r) {
@@ -808,7 +814,6 @@ int omapdss_hdmi_display_enable(struct omap_dss_device *dssdev)
 		DSSERR("failed to power on device\n");
 		goto err2;
 	}
-
 	mutex_unlock(&hdmi.lock);
 	return 0;
 

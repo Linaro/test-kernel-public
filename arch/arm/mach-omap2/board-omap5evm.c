@@ -1399,6 +1399,10 @@ static void omap5evm_panel_disable_hdmi(struct omap_dss_device *dssdev)
 
 }
 
+static struct omap_dss_hdmi_data omap5evm_hdmi_data = {                      
+        .hpd_gpio = 193,                                              
+};   
+
 static struct omap_dss_device omap5evm_hdmi_device = {
 	.name = "hdmi",
 	.driver_name = "hdmi_panel",
@@ -1406,7 +1410,8 @@ static struct omap_dss_device omap5evm_hdmi_device = {
 	.platform_enable = omap5evm_panel_enable_hdmi,
 	.platform_disable = omap5evm_panel_disable_hdmi,
 	.channel = OMAP_DSS_CHANNEL_DIGIT,
-	.hpd_gpio = 193,
+	.hpd_gpio = 193, // looks dead, jim
+	.data = &omap5evm_hdmi_data
 };
 
 static struct omap_dss_device *omap5evm_dss_devices[] = {
