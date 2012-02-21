@@ -433,6 +433,20 @@ static void omap_usbhs_init(struct device *dev)
 		/* Hold the PHY in RESET for enough time till DIR is high */
 		udelay(10);
 	}
+	/* Put UHH in NoIdle/NoStandby mode */
+	reg = usbhs_read(omap->uhh_base, OMAP_UHH_SYSCONFIG);
+	if (is_omap_usbhs_rev1(omap)) {
+		reg |= (OMAP_UHH_SYSCONFIG_ENAWAKEUP
+				| OMAP_UHH_SYSCONFIG_SIDLEMODE
+				| OMAP_UHH_SYSCONFIG_CACTIVITY
+				| OMAP_UHH_SYSCONFIG_MIDLEMODE);
+		reg &= ~OMAP_UHH_SYSCONFIG_AUTOIDLE;
+	} else if (is_omap_usbhs_rev2(omap)) {
+		reg &= ~OMAP4_UHH_SYSCONFIG_IDLEMODE_CLEAR;
+		reg |= OMAP4_UHH_SYSCONFIG_NOIDLE;
+		reg &= ~OMAP4_UHH_SYSCONFIG_STDBYMODE_CLEAR;
+		reg |= OMAP4_UHH_SYSCONFIG_NOSTDBY;
+	}
 
 	omap->usbhs_rev = usbhs_read(omap->uhh_base, OMAP_UHH_REVISION);
 	dev_dbg(dev, "OMAP UHH_REVISION 0x%x\n", omap->usbhs_rev);
