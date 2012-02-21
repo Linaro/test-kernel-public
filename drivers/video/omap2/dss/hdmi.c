@@ -179,6 +179,8 @@ static const int code_vesa[85] = {
 	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 	-1, 27, 28, -1, 33};
 
+static int hdmi_get_current_hpd(void);
+
 static int hdmi_runtime_get(void)
 {
 	int r;
@@ -431,7 +433,7 @@ static int hdmi_power_on(struct omap_dss_device *dssdev)
 		goto err;
 	}
 
-	if (gpio_get_value(hdmi.dssdev->hpd_gpio)) {
+	if (hdmi_get_current_hpd()) {
 		/*
 		 * If TPD is enabled before power on First interrupt is missed
 		 * so check for current HPD state
@@ -717,7 +719,9 @@ void hdmi_dump_regs(struct seq_file *s)
 
 static int hdmi_get_current_hpd(void)
 {
-	return gpio_get_value(hdmi.dssdev->hpd_gpio);
+	if (!hdmi.ip_data.hpd_gpio)
+		return 0;
+	return gpio_get_value(hdmi.ip_data.hpd_gpio);
 }
 
 static irqreturn_t hpd_enable_handler(int irq, void *ptr)
@@ -726,15 +730,6 @@ static irqreturn_t hpd_enable_handler(int irq, void *ptr)
 
 	hdmi.ip_data.ops->notify_hpd(&hdmi.ip_data, hdmi.hpd);
 
-	return IRQ_HANDLED;
-}
-
-static irqreturn_t hpd_irq_handler(int irq, void *ptr)
-{
-	if (hdmi.dssdev->state == OMAP_DSS_DISPLAY_ACTIVE) {
-		hdmi.hpd = hdmi_get_current_hpd();
-		return IRQ_WAKE_THREAD;
-	}
 	return IRQ_HANDLED;
 }
 
@@ -1142,16 +1137,6 @@ static int omapdss_hdmihw_probe(struct platform_device *pdev)
 
 	pm_runtime_enable(&pdev->dev);
 
-	r = request_threaded_irq(gpio_to_irq(hdmi.dssdev->hpd_gpio),
-			hpd_irq_handler, hpd_enable_handler,
-			IRQF_DISABLED | IRQF_TRIGGER_RISING |
-			IRQF_TRIGGER_FALLING, "hpd", NULL);
-	if (r < 0) {
-		pr_err("hdmi: request_irq %d failed\n",
-			gpio_to_irq(hdmi.dssdev->hpd_gpio));
-		return -EINVAL;
-	}
-
 	hdmi.hdmi_irq = platform_get_irq(pdev, 0);
 	r = request_irq(hdmi.hdmi_irq, hdmi_irq_handler, 0, "OMAP HDMI", NULL);
 	if (r < 0) {
@@ -1197,8 +1182,6 @@ static int omapdss_hdmihw_remove(struct platform_device *pdev)
 	defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI_MODULE)
 	snd_soc_unregister_codec(&pdev->dev);
 #endif
-
-	free_irq(gpio_to_irq(hdmi.dssdev->hpd_gpio), hpd_irq_handler);
 
 	pm_runtime_disable(&pdev->dev);
 
