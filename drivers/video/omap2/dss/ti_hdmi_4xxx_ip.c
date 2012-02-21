@@ -241,6 +241,8 @@ static int hdmi_check_hpd_state(struct hdmi_ip_data *ip_data)
 
 	hpd = gpio_get_value(ip_data->hpd_gpio);
 
+	pr_err("hdmi_check_hpd_state says %d\n", hpd);
+
 	if (hpd == ip_data->phy_tx_enabled) {
 		spin_unlock_irqrestore(&phy_tx_lock, flags);
 		return 0;
@@ -332,14 +334,12 @@ int ti_hdmi_4xxx_phy_poweron(struct hdmi_ip_data *ip_data)
 		hdmi_set_phy_pwr(ip_data, HDMI_PHYPWRCMD_OFF);
 		return r;
 	}
-
 	r = hdmi_check_hpd_state(ip_data);
 	if (r) {
 		free_irq(gpio_to_irq(ip_data->hpd_gpio), ip_data);
 		hdmi_set_phy_pwr(ip_data, HDMI_PHYPWRCMD_OFF);
 		return r;
 	}
-
 	/* enable divby2 */
 	if (cpu_is_omap54xx())
 		REG_FLD_MOD(phy_base, HDMI_TXPHY_BIST_CONTROL, 1, 11, 11);
