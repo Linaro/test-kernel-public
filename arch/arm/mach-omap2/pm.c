@@ -28,6 +28,38 @@
 
 static struct omap_device_pm_latency *pm_lats;
 
+static struct device *mpu_dev;
+static struct device *iva_dev;
+static struct device *l3_dev;
+static struct device *dsp_dev;
+
+bool omap_pm_is_ready_status;
+
+struct device *omap2_get_mpuss_device(void)
+{
+	WARN_ON_ONCE(!mpu_dev);
+	return mpu_dev;
+}
+
+struct device *omap2_get_iva_device(void)
+{
+	WARN_ON_ONCE(!iva_dev);
+	return iva_dev;
+}
+
+struct device *omap2_get_l3_device(void)
+{
+	WARN_ON_ONCE(!l3_dev);
+	return l3_dev;
+}
+
+struct device *omap4_get_dsp_device(void)
+{
+	WARN_ON_ONCE(!dsp_dev);
+	return dsp_dev;
+}
+EXPORT_SYMBOL(omap4_get_dsp_device);
+
 static int _init_omap_device(char *name)
 {
 	struct omap_hwmod *oh;
@@ -310,6 +342,10 @@ static int __init omap2_common_pm_late_init(void)
 
 	/* Smartreflex device init */
 	omap_devinit_smartreflex();
+
+	omap_pm_is_ready_status = true;
+	/* let the other CPU know as well */
+	smp_wmb();
 
 	return 0;
 }
