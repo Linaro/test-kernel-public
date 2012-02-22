@@ -31,6 +31,8 @@
 #include "pm.h"
 #include "twl-common.h"
 #include "dvfs.h"
+#include "prm2xxx_3xxx.h"
+#include "prm44xx.h"
 
 static struct omap_device_pm_latency *pm_lats;
 
@@ -100,6 +102,15 @@ static void omap2_init_processor_devices(void)
 	} else {
 		_init_omap_device("l3_main");
 	}
+}
+
+void omap_trigger_wuclk_ctrl(void)
+{
+	if (cpu_is_omap34xx())
+		omap3_trigger_wuclk_ctrl();
+
+	if (cpu_is_omap44xx())
+		omap4_trigger_wuclk_ctrl();
 }
 
 /* Types of sleep_switch used in omap_set_pwrdm_state */
