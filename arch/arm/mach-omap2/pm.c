@@ -484,10 +484,11 @@ static int __init omap2_common_pm_init(void)
 		return 0;
 	}
 
-        if (!of_have_populated_dt())                                            
-                omap2_init_processor_devices(); 
-
 #endif
+
+        if (!of_have_populated_dt())                                            
+                omap2_init_processor_devices();
+
 	omap_pm_if_init();
 
 	/* Register to the per-device PM QoS framework */
@@ -503,13 +504,6 @@ postcore_initcall(omap2_common_pm_init);
 
 static int __init omap2_common_pm_late_init(void)
 {
-#ifdef CONFIG_OMAP5_VIRTIO
-	if (cpu_is_omap54xx()) {
-		pr_err("FIXME: omap2_common_pm_late_init\n");
-		return 0;
-	}
-#endif
-
 	/* Init the OMAP TWL parameters */
 	omap_init_all_pmic();
 
