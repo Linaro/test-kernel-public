@@ -257,11 +257,10 @@ static inline u32 omap_mpuss_read_prev_context_state(void)
 extern int omap_sar_save(void);
 extern void omap_sar_overwrite(void);
 #else
-void omap_sar_save(void)
+static inline void omap_sar_save(void)
 {
 }
-void omap_sar_overwrite(void)
-{
+static inline void omap_sar_overwrite(void){
 }
 #endif
 
