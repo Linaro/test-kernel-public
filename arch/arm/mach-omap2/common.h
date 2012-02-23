@@ -252,5 +252,19 @@ static inline u32 omap_mpuss_read_prev_context_state(void)
 	return 0;
 }
 #endif
+
+#ifdef CONFIG_PM
+extern int omap_sar_save(void);
+extern void omap_sar_overwrite(void);
+#else
+void omap_sar_save(void)
+{
+}
+void omap_sar_overwrite(void)
+{
+}
+#endif
+
+
 #endif /* __ASSEMBLER__ */
 #endif /* __ARCH_ARM_MACH_OMAP2PLUS_COMMON_H */
