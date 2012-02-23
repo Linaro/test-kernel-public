@@ -211,7 +211,7 @@ struct omap_gpio_platform_data {
 	struct omap_gpio_reg_offs *regs;
 
 	/* Return context loss count due to PM states changing */
-	u32 (*get_context_loss_count)(struct device *dev);
+	int (*get_context_loss_count)(struct device *dev);
 };
 
 extern void omap2_gpio_prepare_for_idle(int off_mode);
