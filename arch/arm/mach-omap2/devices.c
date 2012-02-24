@@ -466,7 +466,7 @@ static inline void omap_init_dmic(void) {}
 #endif
 
 #if defined(CONFIG_SND_OMAP_SOC_ABE_DSP) || \
-	defined(CONFIG_SND_OMAP_SOC_ABE_DSP_MODULE)
+	defined(CONFIG_SND_OMAP_SOC_ABE_DSP_MODULE) || defined(CONFIG_SND_OMAP_SOC_OMAP_ABE_TWL6040)
 
 static struct omap_device_pm_latency omap_aess_latency[] = {
 	{
