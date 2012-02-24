@@ -1156,6 +1156,7 @@ static struct omap_hwmod_dma_info omap54xx_dmic_sdma_reqs[] = {
 
 static struct omap_hwmod_addr_space omap54xx_dmic_addrs[] = {
 	{
+		.name		= "mpu",
 		.pa_start	= 0x4012e000,
 		.pa_end		= 0x4012e07f,
 		.flags		= ADDR_TYPE_RT
@@ -1174,6 +1175,7 @@ static struct omap_hwmod_ocp_if omap54xx_l4_abe__dmic = {
 
 static struct omap_hwmod_addr_space omap54xx_dmic_dma_addrs[] = {
 	{
+		.name		= "dma",
 		.pa_start	= 0x4902e000,
 		.pa_end		= 0x4902e07f,
 		.flags		= ADDR_TYPE_RT
