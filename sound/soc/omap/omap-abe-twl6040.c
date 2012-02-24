@@ -1213,7 +1213,7 @@ static struct snd_soc_dai_link omap_abe_no_dmic_dai[] = {
 /* Audio machine driver */
 static struct snd_soc_card omap_abe_card = {
 	.owner = THIS_MODULE,
-
+        .name = "OMAP4-5",                                                      
 	.dapm_widgets = twl6040_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(twl6040_dapm_widgets),
 	.dapm_routes = audio_map,
@@ -1229,6 +1229,9 @@ static __devinit int omap_abe_probe(struct platform_device *pdev)
 	int ret;
 
 	card->dev = &pdev->dev;
+	if (!machine_is_omap_4430sdp() && !machine_is_omap5_sevm())
+		return -ENODEV;
+	printk(KERN_INFO "OMAP4/5 SoC init\n");
 
 	if (!pdata) {
 		dev_err(&pdev->dev, "Missing pdata\n");
