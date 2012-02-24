@@ -24,6 +24,7 @@
 #include <linux/of_fdt.h>
 #include <linux/i2c-gpio.h>
 #include <linux/clk.h>
+#include <linux/platform_data/omap-abe-twl6040.h>
 
 #include <linux/regulator/machine.h>
 #include <linux/regulator/fixed.h>
@@ -883,6 +884,33 @@ static struct twl6040_platform_data twl6040_data = {
 	.irq_base	= TWL6040_CODEC_IRQ_BASE,
 };
 
+static struct omap_abe_twl6040_data omap5sevm_abe_audio_data = {                    
+        /* Audio out */                                                         
+        .has_hs         = ABE_TWL6040_LEFT | ABE_TWL6040_RIGHT,                 
+        /* HandsFree through expasion connector */                              
+        .has_hf         = ABE_TWL6040_LEFT | ABE_TWL6040_RIGHT,                 
+        /* PandaBoard: FM TX, PandaBoardES: can be connected to audio out */    
+        .has_aux        = ABE_TWL6040_LEFT | ABE_TWL6040_RIGHT,                 
+        /* PandaBoard: FM RX, PandaBoardES: audio in */                         
+        .has_afm        = ABE_TWL6040_LEFT | ABE_TWL6040_RIGHT,                 
+        .has_abe        = 1,                                                    
+        /* No jack detection. */                                                
+        .jack_detection = 1,                                                    
+        /* MCLK input is 38.4MHz */                                             
+        .mclk_freq      = 19200000,                                             
+        .card_name      = "omap5sevm",
+	.has_hsmic	= 1,                                                                        
+	.has_dmic	= 0, // was  1
+}; 
+
+static struct platform_device omap5sevm_abe_audio = {                               
+        .name           = "omap-abe-twl6040",                                   
+        .id             = -1,                                                   
+        .dev = {                                                                
+                .platform_data = &omap5sevm_abe_audio_data,                         
+        },                                                                      
+};  
+
 static struct i2c_board_info __initdata omap5evm_i2c_1_boardinfo[] = {
 #ifdef CONFIG_OMAP5_SEVM_PALMAS
 	{
@@ -1642,6 +1670,7 @@ static void __init omap54xx_common_init(void)
 	omap2_hsmmc_init(mmc);
 	i2c_register_board_info(0, hdmi_i2c_eeprom, ARRAY_SIZE(hdmi_i2c_eeprom));
 	platform_device_register(&hdmi_edid_device);
+	platform_device_register(&omap5sevm_abe_audio);
 	omap_ehci_ohci_init();
 	platform_device_register(&leds_gpio);
 	omap5evm_display_init();
