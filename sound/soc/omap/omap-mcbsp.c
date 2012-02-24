@@ -61,6 +61,8 @@ struct omap_mcbsp_data {
 	int				wlen;
 };
 
+#define NUM_LINKS 5
+
 static struct omap_mcbsp_data mcbsp_data[NUM_LINKS];
 
 /*
