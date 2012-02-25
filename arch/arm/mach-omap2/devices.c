@@ -340,7 +340,7 @@ static struct platform_device codec_dmic2 = {
 };
 
 static struct platform_device omap_abe_dai = {
-	.name	= "omap-abe-dai",
+	.name	= "omap-abe-twl6040",
 	.id	= -1,
 };
 
