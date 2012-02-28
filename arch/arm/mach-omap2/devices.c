@@ -349,7 +349,8 @@ static inline void omap_init_abe(void)
 	platform_device_register(&codec_dmic0);
 	platform_device_register(&codec_dmic1);
 	platform_device_register(&codec_dmic2);
-	platform_device_register(&omap_abe_dai);
+	if (!cpu_is_omap54xx())
+		platform_device_register(&omap_abe_dai);
 }
 #else
 static inline void omap_init_abe(void) {}

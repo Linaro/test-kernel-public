@@ -900,7 +900,7 @@ static struct omap_abe_twl6040_data omap5sevm_abe_audio_data = {
         .mclk_freq      = 19200000,                                             
         .card_name      = "omap5sevm",
 	.has_hsmic	= 1,                                                                        
-	.has_dmic	= 0, // was  1
+	.has_dmic	= 0,
 }; 
 
 static struct platform_device omap5sevm_abe_audio = {                               
