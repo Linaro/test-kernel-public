@@ -65,6 +65,8 @@
 #define HDMI_DEFAULT_REGN 16
 #define HDMI_DEFAULT_REGM2 1
 
+#define IGNORE_HPD 1
+
 static struct {
 	struct mutex lock;
 	struct omap_display_platform_data *pdata;
@@ -719,9 +721,13 @@ void hdmi_dump_regs(struct seq_file *s)
 
 static int hdmi_get_current_hpd(void)
 {
+#if IGNORE_HPD
+	return 1;
+#else
 	if (!hdmi.ip_data.hpd_gpio)
 		return 0;
 	return gpio_get_value(hdmi.ip_data.hpd_gpio);
+#endif
 }
 
 static irqreturn_t hpd_enable_handler(int irq, void *ptr)
@@ -805,7 +811,6 @@ int omapdss_hdmi_display_enable(struct omap_dss_device *dssdev)
 			goto err1;
 		}
 	}
-
 	r = hdmi_power_on(dssdev);
 	if (r) {
 		DSSERR("failed to power on device\n");
