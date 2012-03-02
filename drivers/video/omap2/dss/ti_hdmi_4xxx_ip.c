@@ -33,6 +33,8 @@
 #include "ti_hdmi_4xxx_ip.h"
 #include "dss.h"
 
+#define IGNORE_HPD 1
+
 static inline void hdmi_write_reg(void __iomem *base_addr,
 				const u16 idx, u32 val)
 {
@@ -242,7 +244,9 @@ static int hdmi_check_hpd_state(struct hdmi_ip_data *ip_data)
 	hpd = gpio_get_value(ip_data->hpd_gpio);
 
 	pr_err("hdmi_check_hpd_state says %d\n", hpd);
-
+#if IGNORE_HPD
+	hpd=1;
+#endif
 	if (hpd == ip_data->phy_tx_enabled) {
 		spin_unlock_irqrestore(&phy_tx_lock, flags);
 		return 0;
@@ -535,7 +539,11 @@ int ti_hdmi_4xxx_read_edid(struct hdmi_ip_data *ip_data,
 
 bool ti_hdmi_4xxx_detect(struct hdmi_ip_data *ip_data)
 {
+#if IGNORE_HPD
+	return 1;
+#else
 	return gpio_get_value(ip_data->hpd_gpio);
+#endif
 }
 
 static void hdmi_core_init(struct hdmi_core_video_config *video_cfg,
