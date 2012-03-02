@@ -396,6 +396,7 @@ static int hdmi_power_on(struct omap_dss_device *dssdev)
 		goto err;
 
 	hdmi.ip_data.ops->video_enable(&hdmi.ip_data, 0);
+
 	dss_mgr_disable(dssdev->manager);
 
 	p = &dssdev->panel.timings;

@@ -35,29 +35,38 @@
 
 #define USE_I2C_EDID 1
 
+struct i2c_msg msgs[] = {
+	{
+		.addr   = DDC_ADDR,
+		.flags  = 0,
+		.len    = 1,
+	}, {
+		.addr   = DDC_ADDR,
+		.flags  = I2C_M_RD,
+	}
+};
+
+
 static int panel_hdmi_ddc_read(struct i2c_adapter *adapter,
 		unsigned char *buf, u16 count, u8 offset)
 {
-	int r, retries;
+	int r;
+	int retries = 3;
 
-	for (retries = 3; retries > 0; retries--) {
-		struct i2c_msg msgs[] = {
-			{
-				.addr   = DDC_ADDR,
-				.flags  = 0,
-				.len    = 1,
-				.buf    = &offset,
-			}, {
-				.addr   = DDC_ADDR,
-				.flags  = I2C_M_RD,
-				.len    = count,
-				.buf    = buf,
-			}
-		};
+	while (retries--) {
+		
+		msgs[0].buf    = &offset,
+		msgs[1].len    = count,
+		msgs[1].buf    = buf,
+
+		pr_err("panel_hdmi_ddc_read: reading %d\n", count);
 
 		r = i2c_transfer(adapter, msgs, 2);
-		if (r == 2)
+		if (r == 2) {
+			pr_err("panel_hdmi_ddc_read: happy exit\n");
 			return 0;
+		}
+		pr_err("panel_hdmi_ddc_read: i2c_transfer returns %d\n", r);
 
 		if (r != -EAGAIN)
 			break;
@@ -73,7 +82,7 @@ static int panel_hdmi_read_edid(u8 *edid, int len)
 
 	adapter = i2c_get_adapter(0);
 	if (!adapter) {
-		printk("panel_dvi_read_edid: Failed to get I2C adapter, bus 0\n");
+		pr_err("panel_dvi_read_edid: Failed to get I2C adapter, bus 6\n");
 		r = -EINVAL;
 		goto err;
 	}
@@ -86,18 +95,17 @@ static int panel_hdmi_read_edid(u8 *edid, int len)
 	bytes_read = l;
 
 	/* if there are extensions, read second block */
-	if (len > EDID_LENGTH && edid[0x7e] > 0) {
-		l = min(EDID_LENGTH, len - EDID_LENGTH);
+	if (len <= EDID_LENGTH || edid[0x7e] <= 0)
+		return bytes_read;
 
-		r = panel_hdmi_ddc_read(adapter, edid + EDID_LENGTH,
+	l = min(EDID_LENGTH, len - EDID_LENGTH);
+
+	r = panel_hdmi_ddc_read(adapter, edid + EDID_LENGTH,
 				l, EDID_LENGTH);
-		if (r)
-			goto err;
+	if (r)
+		goto err;
 
-		bytes_read += l;
-	}
-
-	return bytes_read;
+	return bytes_read + l;
 
 err:
 	return r;
