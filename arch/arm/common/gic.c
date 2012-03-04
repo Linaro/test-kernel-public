@@ -749,7 +749,7 @@ void __init gic_init_bases(unsigned int gic_nr, int irq_start,
 	domain->irq_base = irq_alloc_descs(irq_start, 16, domain->nr_irq,
 					   numa_node_id());
 	if (IS_ERR_VALUE(domain->irq_base)) {
-		WARN(1, "Cannot allocate irq_descs @ IRQ%d, assuming pre-allocated\n",
+		pr_warn("Cannot allocate irq_descs @ IRQ%d, assuming pre-allocated\n",
 		     irq_start);
 		domain->irq_base = irq_start;
 	}
