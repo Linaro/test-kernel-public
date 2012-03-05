@@ -1387,7 +1387,6 @@ struct omap_mux_setting omap5432_common_mux[] __initdata = {
                 .name = "emmc_data7.emmc_data7",
                 .mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE0,
         },
-
         {                                                                       
                 .name = "dsiportc_lane0x.dsiportc_lane0x",                                
                 .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                 
@@ -1432,7 +1431,26 @@ struct omap_mux_setting omap5432_common_mux[] __initdata = {
                 .name = "dsiportc_te0.dsiportc_te0",                      
                 .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
         }, 
-
+        {                                                                       
+                /* GPIO_112 mcpdm clk */                                        
+                .name = "abemcpdm_lb_clk.abemcpdm_lb_clk",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        },                                                                      
+        {                                                                       
+                /* GPIO_111 mcpdm frame */                                      
+                .name = "abemcpdm_frame.abemcpdm_frame",                        
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        },                                                                      
+        {                                                                       
+                /* GPIO_110 mcpdm dl data */                                    
+                .name = "abemcpdm_dl_data.abemcpdm_dl_data",                    
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        },                                                                      
+        {                                                                       
+                /* GPIO_109 mcpdm ul data */                                    
+                .name = "abemcpdm_ul_data.abemcpdm_ul_data",                    
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        },
 };                                                                              
 
 /*
@@ -1676,7 +1694,7 @@ static void __init omap54xx_common_init(void)
 	omap5evm_display_init();
 }
 
-struct omap_mux_setting omap5432_sevm_mux[] = {                                   
+struct omap_mux_setting omap5432_sevm_mux[] __initdata = {                                   
         {                                                                       
                 /* GPIO 172 - Ethernet bridge nRESET */
                 .name = "rfbi_data6.gpio6_172",
@@ -1717,7 +1735,7 @@ static void __init omap_5430_sevm_init(void)
 		pr_err("Keypad initialization failed: %d\n", status);
 }
 
-struct omap_mux_setting omap5432_uevm_mux[] = {
+struct omap_mux_setting omap5432_uevm_mux[] __initdata = {
 	{
 		/* I2C1 / PMIC scl */
 		.name = "i2c1_pmic_scl.i2c1_pmic_scl",
