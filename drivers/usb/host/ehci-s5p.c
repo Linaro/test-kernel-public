@@ -19,6 +19,22 @@
 #include <plat/ehci.h>
 #include <plat/usb-phy.h>
 
+/* EHCI EXYNOS4 Specific register */
+#define EHCI_INSREG00                  0x90
+
+/*
+ * EHCI INSREG00 Specific fields
+ * Enable AHB master to use burst trasfer from 4 to 16
+ */
+#define ENABLE_INCR16  (1 << 25)
+#define ENABLE_INCR8   (1 << 24)
+#define ENABLE_INCR4   (1 << 23)
+/* Force AHB master to start burst transfer only 4,8,16 alighment */
+#define ENABLE_INCRX_ALIGN (1 << 22)
+
+#define EHCI_INSNREG00_BURST_ENABLE    \
+	(ENABLE_INCR16 | ENABLE_INCR8 | ENABLE_INCR4 | ENABLE_INCRX_ALIGN)
+
 struct s5p_ehci_hcd {
 	struct device *dev;
 	struct usb_hcd *hcd;
@@ -130,6 +146,9 @@ static int __devinit s5p_ehci_probe(struct platform_device *pdev)
 	ehci->regs = hcd->regs +
 		HC_LENGTH(ehci, readl(&ehci->caps->hc_capbase));
 
+	writel(EHCI_INSNREG00_BURST_ENABLE, hcd->regs +
+		EHCI_INSNREG00_BURST_ENABLE);
+
 	dbg_hcs_params(ehci, "reset");
 	dbg_hcc_params(ehci, "reset");
 
@@ -237,7 +256,10 @@ static int s5p_ehci_resume(struct platform_device *pdev)
         
         /* Mark hardware accessible again as we are out of D3 state by now */
         set_bit(HCD_FLAG_HW_ACCESSIBLE, &hcd->flags);
-        
+
+	writel(EHCI_INSNREG00_BURST_ENABLE, hcd->regs +
+		EHCI_INSNREG00_BURST_ENABLE);
+
         /* If CF is still set, we maintained PCI Vaux power.
          * Just undo the effect of ehci_pci_suspend().
          */
