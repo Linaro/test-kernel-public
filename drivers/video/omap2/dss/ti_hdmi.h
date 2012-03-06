@@ -176,6 +176,8 @@ struct ti_hdmi_ip_ops {
 #if defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI) || \
 	defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI_MODULE)
 	void (*audio_enable)(struct hdmi_ip_data *ip_data, bool start);
+
+	void (*audio_start)(struct hdmi_ip_data *ip_data, bool start);
 #endif
 
 	int (*irq_handler) (struct hdmi_ip_data *ip_data);
@@ -266,6 +268,7 @@ void ti_hdmi_4xxx_phy_dump(struct hdmi_ip_data *ip_data, struct seq_file *s);
 #if defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI) || \
 	defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI_MODULE)
 void ti_hdmi_4xxx_wp_audio_enable(struct hdmi_ip_data *ip_data, bool enable);
+void ti_hdmi_4xxx_audio_start(struct hdmi_ip_data *ip_data, bool enable);
 #endif
 int ti_hdmi_4xxx_notify_hpd(struct hdmi_ip_data *ip_data, bool hpd_state);
 void ti_hdmi_5xxx_basic_configure(struct hdmi_ip_data *ip_data);
