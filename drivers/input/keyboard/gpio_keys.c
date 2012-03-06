@@ -333,10 +333,14 @@ static void gpio_keys_report_event(struct gpio_button_data *bdata)
 	input_sync(input);
 }
 
+static int button_code;
+
 static void gpio_keys_work_func(struct work_struct *work)
 {
 	struct gpio_button_data *bdata =
 		container_of(work, struct gpio_button_data, work);
+
+	button_code = bdata->button->code;
 
 	gpio_keys_report_event(bdata);
 }
@@ -421,6 +425,8 @@ static int __devinit gpio_keys_setup_key(struct platform_device *pdev,
 			irq, error);
 		goto fail3;
 	}
+
+	irq_set_handler(irq, handle_edge_irq);
 
 	return 0;
 
@@ -600,6 +606,9 @@ static int gpio_keys_resume(struct device *dev)
 	struct gpio_keys_drvdata *ddata = platform_get_drvdata(pdev);
 	struct gpio_keys_platform_data *pdata = pdev->dev.platform_data;
 	int i;
+	unsigned int type;
+	int state;
+
 
 	for (i = 0; i < pdata->nbuttons; i++) {
 
@@ -609,7 +618,14 @@ static int gpio_keys_resume(struct device *dev)
 			disable_irq_wake(irq);
 		}
 
-		gpio_keys_report_event(&ddata->data[i]);
+		if (ddata->data[i].button->code == button_code) {
+			type = ddata->data[i].button->type ?: EV_KEY;
+			state = (gpio_get_value_cansleep(ddata->data[i].button->gpio) ? 1 : 0) ^ ddata->data[i].button->active_low;
+
+			ddata->data[i].button->active_low;
+			input_event(ddata->input, type, button_code, !state);
+		}
+
 	}
 	input_sync(ddata->input);
 
