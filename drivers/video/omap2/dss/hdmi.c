@@ -39,6 +39,7 @@
 	defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI_MODULE)
 #include <sound/soc.h>
 #include <sound/pcm_params.h>
+#include <plat/omap_hwmod.h>
 #include "ti_hdmi_4xxx_ip.h"
 #endif
 
@@ -84,6 +85,11 @@ static struct {
 	struct clk *sys_clk;
 	struct clk *phy_clk;
 	struct regulator *vdds_hdmi;
+
+#if defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI) || \
+	defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI_MODULE)
+	struct omap_hwmod *oh;
+#endif
 } hdmi;
 
 /*
@@ -1197,6 +1203,16 @@ static int omapdss_hdmihw_probe(struct platform_device *pdev)
 
 #if defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI) || \
 	defined(CONFIG_SND_OMAP_SOC_OMAP4_HDMI_MODULE)
+
+	hdmi.oh = omap_hwmod_lookup("dss_hdmi");
+	if (!hdmi.oh) {
+		dev_err(&pdev->dev, "Cannot find omap_hwmod for hdmi\n");
+		hdmi_panel_exit();
+		pm_runtime_disable(&pdev->dev);
+		hdmi_put_clocks();
+		iounmap(hdmi.ip_data.base_wp);
+		return -ENODEV;
+	}
 
 	/* Register ASoC codec DAI */
 	r = snd_soc_register_codec(&pdev->dev, &hdmi_audio_codec_drv,
