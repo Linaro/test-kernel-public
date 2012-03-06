@@ -61,6 +61,7 @@ enum dss_feat_id {
 	FEAT_PARALLEL_SEL		= 1 << 28,
 	FEAT_DSI_PLL_SELFREQDCO		= 1 << 29,
 	FEAT_DSI_PLL_REFSEL		= 1 << 30,
+	FEAT_HDMI_AUDIO_USE_MCLK	= 1 << 31,
 };
 
 /* DSS register field id */
