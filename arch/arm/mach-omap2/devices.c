@@ -356,7 +356,7 @@ static struct platform_device omap_pcm = {
 };
 
 /*
- * Device for the ASoC OMAP4 HDMI machine driver
+ * Device for the ASoC OMAP4/5 HDMI machine driver
  */
 static struct platform_device omap_hdmi_audio = {
 	.name	= "omap4-hdmi-audio",
