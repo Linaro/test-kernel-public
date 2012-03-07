@@ -72,6 +72,9 @@
 
 static int gpio_wlan_irq = 9; /* correct for sEVM */
 
+#define HDMI_OE_GPIO                   256
+#define HDMI_HPD_EN_GPIO               257
+
 #define HDMI_GPIO_HPD 193
 
 static struct gpio_led gpio_leds[] = {
@@ -1423,12 +1426,26 @@ static struct omap_dss_device omap5evm_lcd_device = {
 
 static int omap5evm_panel_enable_hdmi(struct omap_dss_device *dssdev)
 {
+	int r;
+	/* Requesting HDMI OE GPIO and enable it, at bootup */
+	r = gpio_request_one(HDMI_OE_GPIO,
+				GPIOF_OUT_INIT_HIGH, "HDMI_OE");
+	if (r)
+		pr_err("Failed to get HDMI OE GPIO\n");
+
+	/* Requesting HDMI HPD_EN GPIO and enable it, at bootup */
+	r = gpio_request_one(HDMI_HPD_EN_GPIO,
+			GPIOF_OUT_INIT_HIGH, "HDMI_HPD_EN");
+	if (r)
+		pr_err("Failed to get HDMI HPD EN GPIO\n");
+
 	return 0;
 }
 
 static void omap5evm_panel_disable_hdmi(struct omap_dss_device *dssdev)
 {
-
+	gpio_free(HDMI_HPD_EN_GPIO);
+	gpio_free(HDMI_OE_GPIO);
 }
 
 static struct omap_dss_hdmi_data omap5evm_hdmi_data = {                      
