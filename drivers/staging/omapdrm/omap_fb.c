@@ -191,7 +191,7 @@ void omap_framebuffer_update_scanout(struct drm_framebuffer *fb, int x, int y,
 			omap_gem_rotated_paddr(plane->bo, orient, x/2, y/2,
 					&info->p_uv_addr);
 		} else {
-			info->paddr = get_inc_addr(plane, format, 1, x, y);
+			info->p_uv_addr = get_inc_addr(plane, format, 1, x, y);
 		}
 	} else {
 		info->p_uv_addr = 0;
