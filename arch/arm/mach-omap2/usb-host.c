@@ -255,10 +255,10 @@ static void setup_ehci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 			OMAP_PIN_INPUT_PULLDOWN);
 			break;
 	case OMAP_EHCI_PORT_MODE_HSIC:
-		omap_mux_init_signal("usbb1_hsic_data",
-			OMAP_PIN_OUTPUT);
-		omap_mux_init_signal("usbb1_hsic_strobe",
-			OMAP_PIN_OUTPUT);
+//		omap_mux_init_signal("usbb1_hsic_data",
+//			OMAP_PIN_OUTPUT);
+//		omap_mux_init_signal("usbb1_hsic_strobe",
+//			OMAP_PIN_OUTPUT);
 			break;
 	case OMAP_USBHS_PORT_MODE_UNUSED:
 	default:
@@ -318,10 +318,10 @@ static void setup_ehci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 			OMAP_PIN_INPUT_PULLDOWN);
 			break;
 	case OMAP_EHCI_PORT_MODE_HSIC:
-		omap_mux_init_signal("usbb2_hsic_data",
-			OMAP_PIN_OUTPUT);
-		omap_mux_init_signal("usbb2_hsic_strobe",
-			OMAP_PIN_OUTPUT);
+//		omap_mux_init_signal("usbb2_hsic_data",
+//			OMAP_PIN_OUTPUT);
+//		omap_mux_init_signal("usbb2_hsic_strobe",
+//			OMAP_PIN_OUTPUT);
 			break;
 	case OMAP_USBHS_PORT_MODE_UNUSED:
 	default:
@@ -329,10 +329,10 @@ static void setup_ehci_io_mux(const enum usbhs_omap_port_mode *port_mode)
 	}
 	switch (port_mode[2]) {
 	case OMAP_EHCI_PORT_MODE_HSIC:
-		omap_mux_init_signal("usbb3_hsic_data",
-			OMAP_PIN_OUTPUT);
-		omap_mux_init_signal("usbb3_hsic_strobe",
-			OMAP_PIN_OUTPUT);
+//		omap_mux_init_signal("usbb3_hsic_data",
+//			OMAP_PIN_OUTPUT);
+//		omap_mux_init_signal("usbb3_hsic_strobe",
+//			OMAP_PIN_OUTPUT);
 			break;
 	case OMAP_USBHS_PORT_MODE_UNUSED:
 	default:
