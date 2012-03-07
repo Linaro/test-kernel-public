@@ -1361,7 +1361,7 @@ static void omap5evm_hdmi_init(void)
 		pr_err("%s: Could not get HDMI\n", __func__);
 
 	/* Need to configure HPD as a gpio in mux */
-	omap_writel(0x1060100, 0x4A00293C);
+//	omap_writel(0x1060100, 0x4A00293C);
 }
 
 static void __init omap5evm_display_init(void)
