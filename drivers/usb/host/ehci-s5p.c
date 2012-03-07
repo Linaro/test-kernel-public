@@ -146,8 +146,7 @@ static int __devinit s5p_ehci_probe(struct platform_device *pdev)
 	ehci->regs = hcd->regs +
 		HC_LENGTH(ehci, readl(&ehci->caps->hc_capbase));
 
-	writel(EHCI_INSNREG00_BURST_ENABLE, hcd->regs +
-		EHCI_INSNREG00_BURST_ENABLE);
+	writel(EHCI_INSNREG00_BURST_ENABLE, hcd->regs + EHCI_INSREG00);
 
 	dbg_hcs_params(ehci, "reset");
 	dbg_hcc_params(ehci, "reset");
@@ -257,8 +256,7 @@ static int s5p_ehci_resume(struct platform_device *pdev)
         /* Mark hardware accessible again as we are out of D3 state by now */
         set_bit(HCD_FLAG_HW_ACCESSIBLE, &hcd->flags);
 
-	writel(EHCI_INSNREG00_BURST_ENABLE, hcd->regs +
-		EHCI_INSNREG00_BURST_ENABLE);
+	writel(EHCI_INSNREG00_BURST_ENABLE, hcd->regs + EHCI_INSREG00);
 
         /* If CF is still set, we maintained PCI Vaux power.
          * Just undo the effect of ehci_pci_suspend().
