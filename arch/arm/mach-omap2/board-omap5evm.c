@@ -1578,7 +1578,7 @@ struct omap_mux_setting omap5432_uevm_mux[] = {
         {                                                                       
                 /* GPIO80 USB host reset */
 		.name = "hsi2_caflag.gpio3_80",                                       
-                .mode = OMAP_PIN_OUTPUT,
+                .mode = OMAP_PIN_OUTPUT | OMAP_MUX_MODE6,
         },
         {                                                                       
                 /* GPIO 15 Ethernet reset */                                       

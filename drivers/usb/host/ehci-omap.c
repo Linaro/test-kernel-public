@@ -185,7 +185,7 @@ static int ehci_hcd_omap_probe(struct platform_device *pdev)
 		pdata->regulator[i] = regulator_get(dev, supply);
 		if (IS_ERR(pdata->regulator[i])) {
 			pdata->regulator[i] = NULL;
-			dev_dbg(dev,
+			dev_err(dev,
 			"failed to get ehci port%d regulator\n", i);
 		} else {
 			regulator_enable(pdata->regulator[i]);
@@ -212,7 +212,7 @@ static int ehci_hcd_omap_probe(struct platform_device *pdev)
 		}
 
 		/* Hold the PHY in RESET for enough time till DIR is high */
-		udelay(10);
+		udelay(100);
 	}
 
 	pm_runtime_enable(dev);
@@ -265,7 +265,7 @@ static int ehci_hcd_omap_probe(struct platform_device *pdev)
 		/* Hold the PHY in RESET for enough time till
 		 * PHY is settled and ready
 		 */
-		udelay(10);
+		udelay(100);
 
 		if (gpio_is_valid(pdata->reset_gpio_port[0]))
 			gpio_set_value(pdata->reset_gpio_port[0], 1);
