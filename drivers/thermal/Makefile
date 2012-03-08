@@ -3,3 +3,5 @@
 #
 
 obj-$(CONFIG_THERMAL)		+= thermal_sys.o
+obj-$(CONFIG_THERMAL_FREQ)	+= thermal_freq.o
+obj-$(CONFIG_CPU_THERMAL)	+= cpu_cooling.o
