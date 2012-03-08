@@ -1519,6 +1519,16 @@ struct omap_mux_setting omap5432_sevm_mux[] = {
 		.name = "rfbi_data7.gpio6_173",
                 .mode = OMAP_PIN_OUTPUT | OMAP_MUX_MODE6,                 
         },
+	{
+		/* GPIO 194 HDMI EDID BITBANG I2C scl */
+		.name = "hdmi_ddc_scl.gpio7_194",
+		.mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE6,
+	},
+	{
+		/* GPIO 195 HDMI EDID BITBANG I2C sda */
+		.name = "hdmi_ddc_sda.gpio7_195",
+		.mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE6,
+	},
 };
 
 
@@ -1530,9 +1540,6 @@ static void __init omap_5430_sevm_init(void)
 
 	omap_mux_init_array(omap5432_sevm_mux, ARRAY_SIZE(omap5432_sevm_mux));
 
-        /* Disable pulls on DCC lines - necessary for EDID detection */         
-        omap_writel(0x50000000, 0x4A002E20);                                    
-	
 	omap5evm_touch_init();
 
 	omap54xx_common_init();
@@ -1540,9 +1547,6 @@ static void __init omap_5430_sevm_init(void)
 	status = omap4_keyboard_init(&evm5430_keypad_data, &keypad_data);
 	if (status)
 		pr_err("Keypad initialization failed: %d\n", status);
-
-        /* Disable pulls on DCC lines - necessary for EDID detection */         
-        omap_writel(0x50000000, 0x4A002E20);
 }
 
 struct omap_mux_setting omap5432_uevm_mux[] = {
