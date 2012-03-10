@@ -2305,14 +2305,16 @@ static int __init omap_vout_probe(struct platform_device *pdev)
 	if (ret)
 		goto probe_err2;
 
-	if (!cpu_is_omap54xx()) {
-		for (i = 0; i < vid_dev->num_displays; i++) {
-			struct omap_dss_device *display = vid_dev->displays[i];
+	if (cpu_is_omap54xx())
+		return 0;
+
+	for (i = 0; i < vid_dev->num_displays; i++) {
+		struct omap_dss_device *display = vid_dev->displays[i];
 
 		if (display->driver && display->driver->update)
 			display->driver->update(display, 0, 0,
-					display->panel.timings.x_res,
-					display->panel.timings.y_res);
+				display->panel.timings.x_res,
+				display->panel.timings.y_res);
 	}
 
 	return 0;
