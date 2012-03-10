@@ -64,10 +64,6 @@
 #define HDMI_GPIO_LS_OE 41 /* Level shifter for HDMI */
 #define HDMI_GPIO_HPD  63 /* Hotplug detect */
 
-<<<<<<< current
-/* wl127x BT, FM, GPS connectivity chip */
-static int wl1271_gpios[] = {46, -1, -1};
-=======
 #define FIXED_REG_VWLAN_ID	0
 #define FIXED_REG_V2V1_ID	1
 #define FIXED_REG_V1V8_ID	2
@@ -75,7 +71,6 @@ static int wl1271_gpios[] = {46, -1, -1};
 /* wl127x BT, FM, GPS connectivity chip */
 static int wl1271_gpios[] = {46, -1, -1};
 
->>>>>>> patched
 static struct platform_device wl1271_device = {
 	.name	= "kim",
 	.id	= -1,
