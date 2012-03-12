@@ -267,5 +267,15 @@ static inline void omap_sar_overwrite(void){
 #endif
 
 
+struct omap_camera_platform_info {
+	const char *clock_name;
+	int gpio_powerdown;
+	int gpio_shutdown;
+	int gpio_led_flash_ready;
+};
+
+extern int __init panda_camera_init(struct omap_camera_platform_info *ocpi);
+
+
 #endif /* __ASSEMBLER__ */
 #endif /* __ARCH_ARM_MACH_OMAP2PLUS_COMMON_H */
