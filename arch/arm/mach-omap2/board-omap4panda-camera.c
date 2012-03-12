@@ -14,33 +14,23 @@
 #include "../../../drivers/media/video/omap4iss/iss.h"
 
 #include "control.h"
+#include "common.h"
 #include "mux.h"
 
-#define PANDA_GPIO_CAM_PWRDN		45
-#define PANDA_GPIO_CAM_RESET		83
-
 static struct clk *panda_cam_aux_clk;
+struct omap_camera_platform_info info;
 
 static int panda_ov_power(struct v4l2_subdev *subdev, int on)
 {
 	struct device *dev = subdev->v4l2_dev->dev;
 
 	if (on) {
-		int ret;
-
-		gpio_set_value(PANDA_GPIO_CAM_PWRDN, 0);
-		ret = clk_enable(panda_cam_aux_clk);
-		if (ret) {
-			dev_err(dev,
-				"Error in clk_enable() in %s(%d)\n",
-				__func__, on);
-			gpio_set_value(PANDA_GPIO_CAM_PWRDN, 1);
-			return ret;
-		}
+		gpio_set_value(info.gpio_powerdown, 0);
+		clk_enable(panda_cam_aux_clk);
 		mdelay(2);
 	} else {
 		clk_disable(panda_cam_aux_clk);
-		gpio_set_value(PANDA_GPIO_CAM_PWRDN, 1);
+		gpio_set_value(info.gpio_powerdown, 1);
 	}
 
 	return 0;
@@ -169,14 +159,13 @@ static struct omap_board_data omap4iss_data = {
 	.pads_cnt       	= ARRAY_SIZE(omap4iss_pads),
 };
 
-static int __init panda_camera_init(void)
+int __init panda_camera_init(struct omap_camera_platform_info *ocpi)
 {
-	if (!machine_is_omap4_panda())
-		return 0;
+	memcpy(&info, ocpi, sizeof(info));
 
-	panda_cam_aux_clk = clk_get(NULL, "auxclk1_ck");
+	panda_cam_aux_clk = clk_get(NULL, ocpi->clock_name);
 	if (IS_ERR(panda_cam_aux_clk)) {
-		printk(KERN_ERR "Unable to get auxclk1_ck\n");
+		printk(KERN_ERR "Unable to get %s\n", ocpi->clock_name);
 		return -ENODEV;
 	}
 
@@ -185,25 +174,26 @@ static int __init panda_camera_init(void)
 		return -EINVAL;
 
 	/* Select GPIO 45 */
-	omap_mux_init_gpio(PANDA_GPIO_CAM_PWRDN, OMAP_PIN_OUTPUT);
+	omap_mux_init_gpio(ocpi->gpio_powerdown, OMAP_PIN_OUTPUT);
 
 	/* Select GPIO 83 */
-	omap_mux_init_gpio(PANDA_GPIO_CAM_RESET, OMAP_PIN_OUTPUT);
+	omap_mux_init_gpio(ocpi->gpio_shutdown, OMAP_PIN_OUTPUT);
 
 	/* Init FREF_CLK1_OUT */
-	omap_mux_init_signal("fref_clk1_out", OMAP_PIN_OUTPUT);
+	omap_mux_init_signal(ocpi->clock_name, OMAP_PIN_OUTPUT);
 
-	if (gpio_request_one(PANDA_GPIO_CAM_PWRDN, GPIOF_OUT_INIT_HIGH,
+	if (gpio_request_one(ocpi->gpio_powerdown, GPIOF_OUT_INIT_HIGH,
 			     "CAM_PWRDN"))
 		printk(KERN_WARNING "Cannot request GPIO %d\n",
-			PANDA_GPIO_CAM_PWRDN);
+			ocpi->gpio_powerdown);
 
-	if (gpio_request_one(PANDA_GPIO_CAM_RESET, GPIOF_OUT_INIT_HIGH,
+	if (gpio_request_one(ocpi->gpio_shutdown, GPIOF_OUT_INIT_HIGH,
 			     "CAM_RESET"))
 		printk(KERN_WARNING "Cannot request GPIO %d\n",
-			PANDA_GPIO_CAM_RESET);
+			ocpi->gpio_shutdown);
 
 	omap4_init_camera(&panda_iss_platform_data, &omap4iss_data);
+
 	return 0;
 }
-late_initcall(panda_camera_init);
+
