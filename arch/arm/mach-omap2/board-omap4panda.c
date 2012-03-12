@@ -690,6 +690,13 @@ static void omap4_panda_init_rev(void)
 	}
 }
 
+struct omap_camera_platform_info panda_camera_board_info = {                                              
+        .clock_name = "auxclk1_ck",
+        .gpio_powerdown = 45,
+        .gpio_shutdown = 83,
+	.gpio_led_flash_ready = -EINVAL, 
+};
+
 static void __init omap4_panda_init(void)
 {
 	int package = OMAP_PACKAGE_CBS;
@@ -733,6 +740,9 @@ static void __init omap4_panda_init(void)
 	omap4_ehci_init();
 	usb_musb_init(&musb_board_data);
 	omap4_panda_display_init();
+#ifdef CONFIG_MACH_OMAP4_PANDA_CAMERA_SUPPORT
+	panda_camera_init(&panda_camera_board_info);
+#endif
 }
 
 static void __init omap4_panda_map_io(void)

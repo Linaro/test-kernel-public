@@ -1757,6 +1757,15 @@ static void omap_5430evm_bluetooth_init(void)
 #endif
 }
 
+/* sEVM by default */
+
+struct omap_camera_platform_info omap5evm_camera_board_info = {                    
+        .clock_name = "auxclk2_ck",
+        .gpio_powerdown = 227,
+        .gpio_shutdown = 178,
+        .gpio_led_flash_ready = 152,                                        
+};
+
 static void __init omap54xx_common_init(void)
 {
         omap_mux_init_array(omap5432_common_mux,                                
@@ -1794,6 +1803,7 @@ static void __init omap54xx_common_init(void)
 	omap_ehci_ohci_init();
 	platform_device_register(&leds_gpio);
 	omap5evm_display_init();
+	panda_camera_init(&omap5evm_camera_board_info);
 }
 
 struct omap_mux_setting omap5432_sevm_mux[] __initdata = {                                   
@@ -1968,6 +1978,11 @@ static void __init omap_5432_uevm_init(void)
 
 	/* WLAN module IRQ */
 	gpio_wlan_irq = 14;
+
+	/* camera */
+	omap5evm_camera_board_info.clock_name = "auxclk0_ck";
+	omap5evm_camera_board_info.gpio_shutdown = 85;
+	omap5evm_camera_board_info.gpio_led_flash_ready = 154;
 
 	omap54xx_common_init();
 }
