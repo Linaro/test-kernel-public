@@ -71,12 +71,12 @@
 
 #define GPIO_WIFI_PMENA			140
 
-static int gpio_wlan_irq = 9; /* correct for sEVM */
-
 #define HDMI_OE_GPIO                   256
 #define HDMI_HPD_EN_GPIO               257
 
 #define HDMI_GPIO_HPD 193
+
+static int gpio_wlan_irq = 9; /* correct for sEVM */
 
 static struct gpio_led gpio_leds[] = {
 	{
@@ -1867,6 +1867,9 @@ static void __init omap_5432_uevm_init(void)
 
 	/* AUDPWRON gpio */
 	twl6040_data.audpwron_gpio = 141;
+
+	/* WLAN module IRQ */
+	gpio_wlan_irq = 14;
 
 	omap54xx_common_init();
 }
