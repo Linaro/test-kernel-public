@@ -71,12 +71,12 @@
 
 #define GPIO_WIFI_PMENA			140
 
-static int gpio_wlan_irq = 9; /* correct for sEVM */
-
 #define HDMI_OE_GPIO                   256
 #define HDMI_HPD_EN_GPIO               257
 
 #define HDMI_GPIO_HPD 193
+
+static int gpio_wlan_irq = 9; /* correct for sEVM */
 
 static struct gpio_led gpio_leds[] = {
 	{
@@ -1584,7 +1584,6 @@ static void __init omap54xx_common_init(void)
                                   ARRAY_SIZE(omap5evm_fixup_mac_device_paths));
 
 	omap_serial_init();
-	omap5_sdp5430_wifi_init();
 	i2c_register_board_info(0, hdmi_i2c_eeprom, ARRAY_SIZE(hdmi_i2c_eeprom));
 	platform_device_register(&hdmi_edid_device);
 	platform_device_register(&omap5sevm_abe_audio);
@@ -1758,6 +1757,9 @@ static void __init omap_5432_uevm_init(void)
 
 	/* AUDPWRON gpio */
 	twl6040_data.audpwron_gpio = 141;
+
+	/* WLAN module IRQ */
+	gpio_wlan_irq = 14;
 
 	omap54xx_common_init();
 }
