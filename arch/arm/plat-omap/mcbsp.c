@@ -251,7 +251,8 @@ int omap_mcbsp_dma_reg_params(unsigned int id, unsigned int stream)
 }
 EXPORT_SYMBOL(omap_mcbsp_dma_reg_params);
 
-#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4) || \
+	defined(CONFIG_ARCH_OMAP5)
 static struct omap_device *find_omap_device_by_dev(struct device *dev)
 {
 	struct platform_device *pdev = container_of(dev,
@@ -498,7 +499,8 @@ static inline void omap_st_start(struct omap_mcbsp *mcbsp) {}
 static inline void omap_st_stop(struct omap_mcbsp *mcbsp) {}
 #endif
 
-#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4) || \
+	defined(CONFIG_ARCH_OMAP5)
 /*
  * omap_mcbsp_set_rx_threshold configures the transmit threshold in words.
  * The threshold parameter is 1 based, and it is converted (threshold - 1)
@@ -507,6 +509,9 @@ static inline void omap_st_stop(struct omap_mcbsp *mcbsp) {}
 void omap_mcbsp_set_tx_threshold(unsigned int id, u16 threshold)
 {
 	struct omap_mcbsp *mcbsp;
+
+	if (!cpu_is_omap34xx() && !cpu_is_omap44xx() && !cpu_is_omap54xx())
+		return;
 
 	if (!omap_mcbsp_check_valid_id(id)) {
 		printk(KERN_ERR "%s: Invalid id (%d)\n", __func__, id + 1);
@@ -529,6 +534,9 @@ EXPORT_SYMBOL(omap_mcbsp_set_tx_threshold);
 void omap_mcbsp_set_rx_threshold(unsigned int id, u16 threshold)
 {
 	struct omap_mcbsp *mcbsp;
+
+	if (!cpu_is_omap34xx() && !cpu_is_omap44xx() && !cpu_is_omap54xx())
+		return;
 
 	if (!omap_mcbsp_check_valid_id(id)) {
 		printk(KERN_ERR "%s: Invalid id (%d)\n", __func__, id + 1);
@@ -677,7 +685,7 @@ static inline void omap34xx_mcbsp_free(struct omap_mcbsp *mcbsp)
 	/*
 	 * Disable wakup behavior, smart idle and all wakeups
 	 */
-	if (cpu_is_omap34xx() || cpu_is_omap44xx()) {
+	if (cpu_is_omap34xx() || cpu_is_omap44xx() || cpu_is_omap54xx()) {
 		/*
 		 * HW bug workaround - If no_idle mode is taken, we need to
 		 * go to smart_idle before going to always_idle, or the
@@ -998,7 +1006,8 @@ void omap2_mcbsp1_mux_fsr_src(u8 mux)
 }
 EXPORT_SYMBOL(omap2_mcbsp1_mux_fsr_src);
 
-#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4) || \
+	defined(CONFIG_ARCH_OMAP5)
 #define max_thres(m)			(mcbsp->pdata->buffer_size)
 #define valid_threshold(m, val)		((val) <= max_thres(m))
 #define THRESHOLD_PROP_BUILDER(prop)					\
@@ -1228,11 +1237,12 @@ static inline int __devinit omap_st_add(struct omap_mcbsp *mcbsp) { return 0; }
 static inline void __devexit omap_st_remove(struct omap_mcbsp *mcbsp) {}
 #endif
 
-#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4)
+#if defined(CONFIG_ARCH_OMAP3) || defined(CONFIG_ARCH_OMAP4) || \
+	defined(CONFIG_ARCH_OMAP5)
 static inline void __devinit omap34xx_device_init(struct omap_mcbsp *mcbsp)
 {
 	mcbsp->dma_op_mode = MCBSP_DMA_MODE_ELEMENT;
-	if (cpu_is_omap34xx() || cpu_is_omap44xx()) {
+	if (cpu_is_omap34xx() || cpu_is_omap44xx() || cpu_is_omap54xx()) {
 		/*
 		 * Initially configure the maximum thresholds to a safe value.
 		 * The McBSP FIFO usage with these values should not go under
@@ -1265,7 +1275,7 @@ static inline void __devinit omap34xx_device_init(struct omap_mcbsp *mcbsp)
 
 static inline void __devexit omap34xx_device_exit(struct omap_mcbsp *mcbsp)
 {
-	if (cpu_is_omap34xx() || cpu_is_omap44xx())
+	if (cpu_is_omap34xx() || cpu_is_omap44xx() || cpu_is_omap54xx())
 		omap_additional_remove(mcbsp->dev);
 	if (cpu_is_omap34xx())
 		if (mcbsp->id == 2 || mcbsp->id == 3)
