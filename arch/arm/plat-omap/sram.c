@@ -377,7 +377,9 @@ static inline int omap34xx_sram_init(void)
 
 int __init omap_sram_init(void)
 {
-	omap_detect_sram();
+	if (!cpu_is_omap54xx())
+		omap_detect_sram();
+
 	omap_map_sram();
 
 	if (!(cpu_class_is_omap2()))
