@@ -48,7 +48,7 @@ static int exynos_target(struct cpufreq_policy *policy,
 			  unsigned int target_freq,
 			  unsigned int relation)
 {
-	unsigned int index, old_index, i;
+	unsigned int index, old_index = 0, i;
 	unsigned int arm_volt, safe_arm_volt = 0;
 	int ret = 0;
 	struct cpufreq_frequency_table *freq_table = exynos_info->freq_table;
@@ -65,7 +65,7 @@ static int exynos_target(struct cpufreq_policy *policy,
 	}
 
 	for (i = 0; (freq_table[i].frequency != CPUFREQ_TABLE_END); i++) {
-		if (freqs.old == freq_table[old_index].frequency) {
+		if (freqs.old == freq_table[i].frequency) {
 			old_index = i;
 			break;
 		}
