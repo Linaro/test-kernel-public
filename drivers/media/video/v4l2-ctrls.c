@@ -607,6 +607,12 @@ const char *v4l2_ctrl_get_name(u32 id)
 	case V4L2_CID_FLASH_CHARGE:		return "Charge";
 	case V4L2_CID_FLASH_READY:		return "Ready to Strobe";
 
+	/* Image source controls */
+	case V4L2_CID_IMAGE_SOURCE_CLASS:	return "Image source controls";
+	case V4L2_CID_IMAGE_SOURCE_VBLANK:	return "Vertical blanking";
+	case V4L2_CID_IMAGE_SOURCE_HBLANK:	return "Horizontal blanking";
+	case V4L2_CID_IMAGE_SOURCE_ANALOGUE_GAIN: return "Analogue gain";
+
 	default:
 		return NULL;
 	}
@@ -704,6 +710,7 @@ void v4l2_ctrl_fill(u32 id, const char **name, enum v4l2_ctrl_type *type,
 	case V4L2_CID_MPEG_CLASS:
 	case V4L2_CID_FM_TX_CLASS:
 	case V4L2_CID_FLASH_CLASS:
+	case V4L2_CID_IMAGE_SOURCE_CLASS:
 		*type = V4L2_CTRL_TYPE_CTRL_CLASS;
 		/* You can neither read not write these */
 		*flags |= V4L2_CTRL_FLAG_READ_ONLY | V4L2_CTRL_FLAG_WRITE_ONLY;
