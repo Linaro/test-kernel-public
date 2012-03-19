@@ -289,6 +289,8 @@ int omap4_init_camera(struct iss_platform_data *pdata, struct omap_board_data *b
 	dma_declare_contiguous(&pdev->dev, 32*SZ_1M, 0, 0);
 #endif
 
+	omap_hwmod_enable(oh);
+
 	return 0;
 }
 
