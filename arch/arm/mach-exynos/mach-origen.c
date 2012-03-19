@@ -629,6 +629,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s5p_device_mfc_r,
 	&s5p_device_mixer,
 	&exynos4_device_ohci,
+	&exynos4_device_tmu,
 	&origen_device_gpiokeys,
 	&origen_lcd_hv070wsa,
 	&origen_device_bluetooth,
