@@ -1534,6 +1534,17 @@ struct omap_mux_setting omap5432_common_mux[] __initdata = {
                 .name = "abe_clks.abe_clks",
                 .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,
         },
+        {                                                                       
+                /* I2C3 / expander scl */                                       
+                .name = "i2c3_scl.i2c3_scl",                                    
+                .mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE0,                 
+        },                                                                      
+        {                                                                       
+                /* I2C3 / expander sda */                                       
+                .name = "i2c3_sda.i2c3_sda",                                    
+                .mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE0,                 
+        },  
+
 };                                                                              
 
 /*
