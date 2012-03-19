@@ -806,7 +806,7 @@ static int iss_map_mem_resource(struct platform_device *pdev,
 
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, res);
 	if (!mem) {
-		dev_err(iss->dev, "no mem resource?\n");
+		dev_err(iss->dev, "no mem resource %d?\n", res);
 		return -ENODEV;
 	}
 
@@ -1003,8 +1003,12 @@ static int iss_probe(struct platform_device *pdev)
 	struct iss_device *iss;
 	int i, ret;
 
-	if (pdata == NULL)
+	pr_err("iss_probe:\n");
+
+	if (pdata == NULL) {
+		pr_err("omap4iss: camera has no platform data\n");
 		return -EINVAL;
+	}
 
 	iss = kzalloc(sizeof(*iss), GFP_KERNEL);
 	if (!iss) {
@@ -1021,32 +1025,54 @@ static int iss_probe(struct platform_device *pdev)
 	iss->raw_dmamask = DMA_BIT_MASK(32);
 	iss->dev->dma_mask = &iss->raw_dmamask;
 	iss->dev->coherent_dma_mask = DMA_BIT_MASK(32);
-
 	platform_set_drvdata(pdev, iss);
+
+        iss->reg_phy = regulator_get(&pdev->dev, "vcamphy");                       
+        if (!IS_ERR(iss->reg_phy)) {                                            
+                regulator_enable(iss->reg_phy);                                 
+                pr_info("iss_probe: enabled phy regulator\n");                      
+        }                                                                       
+        else                                                                    
+                iss->reg_phy = NULL; 
+
+	iss->reg_2v8 = regulator_get(&pdev->dev, "vcam");
+	if (!IS_ERR(iss->reg_2v8)) {
+		regulator_enable(iss->reg_2v8);
+		pr_info("iss_probe: enabled regulator\n");
+	}
+	else
+		iss->reg_2v8 = NULL;
 
 	/* Clocks */
 	ret = iss_map_mem_resource(pdev, iss, OMAP4_ISS_MEM_TOP);
-	if (ret < 0)
+	if (ret < 0) {
+		pr_err("iss_probe: failed on mapping\n");
 		goto error;
-
+	}
 	ret = iss_get_clocks(iss);
-	if (ret < 0)
+	if (ret < 0) {
+		pr_err("iss_probe: failed on get clocks\n");
 		goto error;
-
-	if (omap4iss_get(iss) == NULL)
+	}
+	if (omap4iss_get(iss) == NULL) {
+		pr_err("iss_probe: failed on get\n");
 		goto error;
-
+	}
 	ret = iss_reset(iss);
-	if (ret < 0)
+	if (ret < 0) {
+		pr_err("iss_probe: failed trying to reset\n");
 		goto error_iss;
+	}
 
 	iss->revision = readl(iss->regs[OMAP4_ISS_MEM_TOP] + ISS_HL_REVISION);
 	dev_info(iss->dev, "Revision %08x found\n", iss->revision);
 
 	for (i = 1; i < OMAP4_ISS_MEM_LAST; i++) {
 		ret = iss_map_mem_resource(pdev, iss, i);
-		if (ret)
-			goto error_iss;
+		if (ret) {
+			pr_info("iss_probe: ignoring resource error\n");
+			//goto error_iss;
+		}
 	}
 
 	/* Interrupt */
@@ -1074,6 +1100,8 @@ static int iss_probe(struct platform_device *pdev)
 
 	omap4iss_put(iss);
 
+	pr_err("iss_probe: completed OK\n");
+
 	return 0;
 
 error_modules:
@@ -1084,6 +1112,11 @@ error_iss:
 	omap4iss_put(iss);
 error:
 	iss_put_clocks(iss);
+
+	if (iss->reg_phy)
+		regulator_disable(iss->reg_phy);
+	if (iss->reg_2v8)
+		regulator_disable(iss->reg_2v8);
 
 	for (i = 0; i < OMAP4_ISS_MEM_LAST; i++) {
 		if (iss->regs[i]) {
@@ -1115,6 +1148,11 @@ static int iss_remove(struct platform_device *pdev)
 
 	free_irq(iss->irq_num, iss);
 	iss_put_clocks(iss);
+
+        if (iss->reg_phy)                                                       
+                regulator_disable(iss->reg_phy);
+	if (iss->reg_2v8)                                       
+                regulator_disable(iss->reg_2v8);
 
 	for (i = 0; i < OMAP4_ISS_MEM_LAST; i++) {
 		if (iss->regs[i]) {
