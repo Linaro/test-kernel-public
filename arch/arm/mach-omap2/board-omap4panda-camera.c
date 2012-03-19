@@ -159,19 +159,83 @@ static struct omap_board_data omap4iss_data = {
 	.pads_cnt       	= ARRAY_SIZE(omap4iss_pads),
 };
 
+static struct omap_device_pad omap5_iss_pads[] = {                               
+        {                                                                       
+                .name   = "csiporta_lane0x.csiporta_lane0x",                                
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        }, 
+        {                                                                       
+                .name   = "csiporta_lane0y.csiporta_lane0y",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane1x.csiporta_lane1x",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane1y.csiporta_lane1y",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane2x.csiporta_lane2x",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane2y.csiporta_lane2y",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane3x.csiporta_lane3x",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane3y.csiporta_lane3y",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane4x.csiporta_lane4x",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },
+        {                                                                       
+                .name   = "csiporta_lane4y.csiporta_lane4y",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,
+        },
+        {                                                                       
+                .name   = "cam_shutter.cam_shutter",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },                                                                      
+        {                                                                       
+                .name   = "cam_strobe.cam_strobe",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        },                                                                      
+        {                                                                       
+                .name   = "cam_globalreset.cam_globalreset",                    
+                .enable = OMAP_MUX_MODE0 | OMAP_INPUT_EN,                       
+        }, 
+};
+
+static struct omap_board_data omap5_iss_data = {                                 
+        .id                     = 1,                                            
+        .pads                   = omap5_iss_pads,                                
+        .pads_cnt               = ARRAY_SIZE(omap5_iss_pads),                    
+};
+
 int __init panda_camera_init(struct omap_camera_platform_info *ocpi)
 {
 	memcpy(&info, ocpi, sizeof(info));
 
 	panda_cam_aux_clk = clk_get(NULL, ocpi->clock_name);
 	if (IS_ERR(panda_cam_aux_clk)) {
-		printk(KERN_ERR "Unable to get %s\n", ocpi->clock_name);
+		pr_err("Unable to get %s\n", ocpi->clock_name);
 		return -ENODEV;
 	}
 
 	if (clk_set_rate(panda_cam_aux_clk,
-			clk_round_rate(panda_cam_aux_clk, 24000000)))
+			clk_round_rate(panda_cam_aux_clk, 24000000))) {
+		pr_err("camera: unable to set 24MHz on %s\n",
+							     ocpi->clock_name);
 		return -EINVAL;
+	}
 
 	/* Select GPIO 45 */
 	omap_mux_init_gpio(ocpi->gpio_powerdown, OMAP_PIN_OUTPUT);
@@ -192,7 +256,12 @@ int __init panda_camera_init(struct omap_camera_platform_info *ocpi)
 		printk(KERN_WARNING "Cannot request GPIO %d\n",
 			ocpi->gpio_shutdown);
 
-	omap4_init_camera(&panda_iss_platform_data, &omap4iss_data);
+	pr_err("camera: initializing...\n");
+
+	if (cpu_is_omap54xx())
+		omap4_init_camera(&panda_iss_platform_data, &omap5_iss_data);
+	else
+		omap4_init_camera(&panda_iss_platform_data, &omap4iss_data);
 
 	return 0;
 }
