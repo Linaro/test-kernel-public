@@ -19,6 +19,7 @@
 #include <linux/io.h>
 #include <linux/platform_device.h>
 #include <linux/wait.h>
+#include <linux/regulator/consumer.h>
 
 #include <media/omap4iss.h>
 
@@ -86,6 +87,9 @@ struct iss_device {
 	struct iss_csi2_device csi2b;
 	struct iss_csiphy csiphy1;
 	struct iss_csiphy csiphy2;
+
+	struct regulator *reg_2v8;
+        struct regulator *reg_phy;
 
 	unsigned int subclk_resources;
 };

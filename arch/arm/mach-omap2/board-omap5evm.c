@@ -630,6 +630,7 @@ static struct regulator_init_data omap5_ldo1 = {
 	.constraints = {
 		.min_uV			= 2800000,
 		.max_uV			= 2800000,
+		.always_on = 1,
 		.valid_modes_mask	= REGULATOR_MODE_NORMAL
 					| REGULATOR_MODE_STANDBY,
 		.valid_ops_mask		= REGULATOR_CHANGE_MODE
@@ -723,15 +724,22 @@ static struct regulator_init_data omap5_ldo7 = {
 	.consumer_supplies	= omap5_dss_phy_supply,
 };
 
+static struct regulator_consumer_supply omap5_vcamphy_supply[] = {                 
+        REGULATOR_SUPPLY("vcamphy", "omap4iss"),                                   
+}; 
+
 static struct regulator_init_data omap5_ldo8 = {
 	.constraints = {
 		.min_uV			= 1500000,
 		.max_uV			= 1500000,
+		.always_on = 1,
 		.valid_modes_mask	= REGULATOR_MODE_NORMAL
 					| REGULATOR_MODE_STANDBY,
 		.valid_ops_mask		= REGULATOR_CHANGE_MODE
 					| REGULATOR_CHANGE_STATUS,
 	},
+	.num_consumer_supplies	= ARRAY_SIZE(omap5_vcamphy_supply),
+	.consumer_supplies	= omap5_vcamphy_supply,
 };
 
 static struct regulator_consumer_supply omap5_mmc1_io_supply[] = {
