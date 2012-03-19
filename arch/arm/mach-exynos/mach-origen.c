@@ -650,6 +650,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&exynos4_device_pd[PD_CAM],
 	&exynos4_device_pd[PD_GPS],
 	&exynos4_device_pd[PD_MFC],
+	&exynos4_device_tmu,
 	&origen_device_gpiokeys,
 	&origen_lcd_hv070wsa,
 	&origen_device_bluetooth,
