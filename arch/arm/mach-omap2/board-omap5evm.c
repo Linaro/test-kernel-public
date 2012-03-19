@@ -441,7 +441,7 @@ static struct palmas_reg_init omap5_smps10_init = {
 };
 
 static struct palmas_reg_init omap5_ldo1_init = {
-	.warm_reset = 0,
+	.warm_reset = 1,
 	.mode_sleep = 0,
 };
 
@@ -622,6 +622,10 @@ static struct regulator_init_data omap5_smps10 = {
 	.consumer_supplies	= omap5_vbus_supply,
 };
 
+static struct regulator_consumer_supply omap5_vcam_supply[] = {
+        REGULATOR_SUPPLY("vcam", "omap4iss"),
+};
+
 static struct regulator_init_data omap5_ldo1 = {
 	.constraints = {
 		.min_uV			= 2800000,
@@ -631,6 +635,8 @@ static struct regulator_init_data omap5_ldo1 = {
 		.valid_ops_mask		= REGULATOR_CHANGE_MODE
 					| REGULATOR_CHANGE_STATUS,
 	},
+        .num_consumer_supplies  = ARRAY_SIZE(omap5_vcam_supply),                
+        .consumer_supplies      = omap5_vcam_supply,
 };
 
 static struct regulator_consumer_supply omap5evm_lcd_panel_supply[] = {
@@ -817,12 +823,12 @@ static struct palmas_resource_platform_data omap5_palmas_resource = {
 
 	.enable1_res = 0,
 	.enable1_smps = 0,
-	.enable1_ldo1 = 0,
+	.enable1_ldo1 = 1,
 	.enable1_ldo2 = 0,
 
 	.enable2_res = 0,
 	.enable2_smps = 0,
-	.enable2_ldo1 = 0,
+	.enable2_ldo1 = 1,
 	.enable2_ldo2 = 0,
 };
 
