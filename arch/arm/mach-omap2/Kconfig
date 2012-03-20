@@ -390,7 +390,7 @@ config SECURE_REGS
 
 config MACH_OMAP4_PANDA_CAMERA_SUPPORT
 	bool "OMAP4 Panda Board Camera support"
-	depends on MACH_OMAP4_PANDA
+	depends on MACH_OMAP4_PANDA || MACH_OMAP5_SEVM
 	select MEDIA_SUPPORT
 	select MEDIA_CONTROLLER
 	select VIDEO_DEV
