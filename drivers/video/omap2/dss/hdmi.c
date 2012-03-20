@@ -885,7 +885,7 @@ static int hdmi_audio_trigger(struct snd_pcm_substream *substream, int cmd,
 	struct hdmi_ip_data *ip_data = snd_soc_codec_get_drvdata(codec);
 	int err = 0;
 
-	if (!(ip_data->ops) && !(ip_data->ops->audio_enable)) {
+	if (!(ip_data->ops) || !(ip_data->ops->audio_enable)) {
 		dev_err(&pdev->dev, "Cannot enable/disable audio\n");
 		return -ENODEV;
 	}
@@ -1044,13 +1044,13 @@ static int hdmi_audio_hw_params(struct snd_pcm_substream *substream,
 	hdmi_core_audio_infoframe_config(&hdmi.ip_data, &aud_if_cfg);
 	return 0;
 }
-
+#if 0
 int hdmi_audio_trigger(struct snd_pcm_substream *substream,
 		int cmd, struct snd_soc_dai *dai)
 {
 	return hdmi_4xxx_audio_trigger(&hdmi.ip_data, substream, cmd, dai);
 }
-
+#endif
 static int hdmi_audio_startup(struct snd_pcm_substream *substream,
 				  struct snd_soc_dai *dai)
 {

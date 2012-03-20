@@ -382,7 +382,7 @@ static void omap_init_audio(void)
 	char *oh_hdmi_name = "dss_hdmi";
 	char *dev_hdmi_name = "hdmi-audio-dai";
 
-	if (cpu_is_omap44xx()) {
+	if (cpu_is_omap44xx() || cpu_is_omap54xx()) {
 		oh_hdmi = omap_hwmod_lookup(oh_hdmi_name);
 		WARN(!oh_hdmi, "%s: could not find omap_hwmod for %s\n",
 			__func__, oh_hdmi_name);
