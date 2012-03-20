@@ -122,7 +122,7 @@ config SND_OMAP_SOC_SDP4430
 
 config SND_OMAP_SOC_OMAP4_HDMI
 	tristate "SoC Audio support for Texas Instruments OMAP4 HDMI"
-	depends on SND_OMAP_SOC && OMAP4_DSS_HDMI && OMAP2_DSS && ARCH_OMAP4
+	depends on SND_OMAP_SOC && (OMAP4_DSS_HDMI || OMAP5_DSS_HDMI) && OMAP2_DSS && (ARCH_OMAP4 || ARCH_OMAP5)
 	select SND_OMAP_SOC_HDMI
 	help
 	  Say Y if you want to add support for SoC HDMI audio on Texas Instruments
