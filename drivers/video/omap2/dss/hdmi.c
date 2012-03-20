@@ -701,7 +701,7 @@ void omapdss_hdmi_display_set_timing(struct omap_dss_device *dssdev)
 			DSSERR("failed to power on device\n");
 	}
 
-        omapdss_hdmi_display_enable(dssdev);                                    
+//        omapdss_hdmi_display_enable(dssdev);                                    
 }
 
 void hdmi_dump_regs(struct seq_file *s)
