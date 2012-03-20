@@ -29,6 +29,7 @@ static void __iomem *twd_base;
 
 static struct clk *twd_clk;
 static unsigned long twd_timer_rate;
+static struct clock_event_device __percpu **twd_evt;
 
 static void twd_set_mode(enum clock_event_mode mode,
 			struct clock_event_device *clk)
@@ -217,8 +218,6 @@ static struct clk *twd_get_clock(void)
 }
 
 extern void smp_timer_broadcast(const struct cpumask *mask);
-
-static struct clock_event_device __percpu **twd_evt;
 
 /*
  * Setup the local clock events for a CPU.
