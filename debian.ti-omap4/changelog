@@ -1,3 +1,24 @@
+linux-ti-omap4 (3.3.0-1481.14) precise; urgency=low
+
+  [ Xavier Boudet ]
+
+  * Kernel 3.3 rebase
+
+ -- Xavier Boudet <x-boudet@ti.com>  Mon, 19 Mar 2012 09:04:01 +0100
+
+linux-ti-omap4 (3.3.0-1481.13) precise; urgency=low
+
+  [ Xavier Boudet ]
+
+  * Kernel 3.3-rc7 rebase
+  * Early integration of new Features:
+    - new drm driver
+    - remoteproc
+    - CMA
+    - rpmsg
+
+ -- Xavier Boudet <x-boudet@ti.com>  Fri, 16 Mar 2012 14:11:10 +0100
+
 linux-ti-omap4 (3.2.0-1406.8) precise; urgency=low
 
   [ Paolo Pisati ]
