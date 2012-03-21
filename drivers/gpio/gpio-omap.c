@@ -115,7 +115,6 @@ static void _set_gpio_dataout_reg(struct gpio_bank *bank, int gpio, int enable)
 	else
 		reg += bank->regs->clr_dataout;
 
-	l |= __raw_readl(bank->base + bank->regs->set_dataout);
 	__raw_writel(l, reg);
 	bank->context.dataout = l;
 }
