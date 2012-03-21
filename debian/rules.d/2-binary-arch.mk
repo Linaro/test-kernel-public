@@ -439,11 +439,11 @@ binary-debs: binary-perarch $(addprefix binary-,$(flavours))
 build-arch-deps-$(do_flavour_image_package) += $(addprefix $(stampdir)/stamp-build-,$(flavours))
 build-arch: $(build-arch-deps-true)
 
-ifeq ($(AUTOBUILD),)
-binary-arch-deps-$(do_flavour_image_package) += binary-udebs
-else
+#ifeq ($(AUTOBUILD),)
+#binary-arch-deps-$(do_flavour_image_package) += binary-udebs
+#else
 binary-arch-deps-$(do_flavour_image_package) = binary-debs
-endif
+#endif
 binary-arch-deps-$(do_libc_dev_package) += binary-arch-headers
 ifneq ($(do_common_headers_indep),true)
 binary-arch-deps-$(do_flavour_header_package) += binary-headers
