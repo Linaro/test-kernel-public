@@ -99,7 +99,7 @@
 
 static int omap_device_register(struct platform_device *pdev);
 static int omap_early_device_register(struct platform_device *pdev);
-static struct omap_device *omap_device_alloc(struct platform_device *pdev,
+struct omap_device *omap_device_alloc(struct platform_device *pdev,
 				      struct omap_hwmod **ohs, int oh_cnt,
 				      struct omap_device_pm_latency *pm_lats,
 				      int pm_lats_cnt);
@@ -509,7 +509,7 @@ static int omap_device_fill_resources(struct omap_device *od,
  *
  * Returns an struct omap_device pointer or ERR_PTR() on error;
  */
-static struct omap_device *omap_device_alloc(struct platform_device *pdev,
+struct omap_device *omap_device_alloc(struct platform_device *pdev,
 					struct omap_hwmod **ohs, int oh_cnt,
 					struct omap_device_pm_latency *pm_lats,
 					int pm_lats_cnt)
@@ -590,6 +590,8 @@ oda_exit1:
 
 	return ERR_PTR(ret);
 }
+
+EXPORT_SYMBOL_GPL(omap_device_alloc);
 
 static void omap_device_delete(struct omap_device *od)
 {
