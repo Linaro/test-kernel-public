@@ -688,16 +688,6 @@ static void omap4_panda_init_rev(void)
 	}
 }
 
-/*
- * These device paths represent the onboard USB <-> Ethernet bridge, and
- * the WLAN module on Panda, both of which need their random or all-zeros
- * mac address replacing with a per-cpu stable generated one
- */
-static const char * const panda_fixup_mac_device_paths[] = {
-	"usb1/1-1/1-1.1/1-1.1:1.0",
-	"mmc1:0001:2",
-};
-
 static void __init omap4_panda_init(void)
 {
 	int package = OMAP_PACKAGE_CBS;
@@ -731,8 +721,6 @@ static void __init omap4_panda_init(void)
 		pr_err("error setting wl12xx data: %d\n", ret);
 
 	omap4_panda_init_rev();
-
-	register_netdevice_notifier(&omap_panda_netdev_notifier);
 
 	omap4_panda_i2c_init();
 	platform_add_devices(panda_devices, ARRAY_SIZE(panda_devices));
