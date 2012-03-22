@@ -379,6 +379,13 @@ static struct omap_i2c_bus_board_data __initdata sdp4430_i2c_5_bus_pdata;
 
 #ifdef CONFIG_OMAP5_SEVM_PALMAS
 #define OMAP5_GPIO_END	0
+
+/* for TI WiLink devices */
+#include <linux/skbuff.h>
+#include <linux/ti_wilink_st.h>
+#define WILINK_UART_DEV_NAME "/dev/ttyO4"
+#define OMAP5_BT_NSHUTDOWN_GPIO		142
+
 static struct palmas_gpadc_platform_data omap5_palmas_gpadc = {
 	.ch3_current = 0,
 	.ch0_current = 0,
@@ -834,6 +841,78 @@ static struct palmas_platform_data palmas_omap5 = {
 	.usb_pdata = &omap5_palmas_usb,
 	.resource_pdata = &omap5_palmas_resource,
 };
+
+#ifdef CONFIG_TI_ST
+/* TODO: handle suspend/resume here.
+ * Upon every suspend, make sure the wilink chip is capable
+ * enough to wake-up the OMAP host.
+ */
+static int plat_wlink_kim_suspend(struct platform_device *pdev, pm_message_t
+		state)
+{
+	return 0;
+}
+
+static int plat_wlink_kim_resume(struct platform_device *pdev)
+{
+	return 0;
+}
+
+/* TODO: handle
+ */
+static int plat_wlink_kim_enable(struct kim_data_s *kim_gdata)
+{
+	/* Get 32Khz clock via TWL regulator here */
+	return 0;
+}
+
+static int plat_wlink_kim_disable(struct kim_data_s *kim_gdata)
+{
+	/* Put/Release 32Khz clock via TWL regulator here */
+	return 0;
+}
+
+static int plat_wlink_kim_asleep(struct kim_data_s *kim_gdata)
+{
+	return 0;
+}
+
+static int plat_wlink_kim_awake(struct kim_data_s *kim_gdata)
+{
+	return 0;
+}
+
+/* wl18xx, wl128x BT, FM, GPS connectivity chip */
+static struct ti_st_plat_data wilink_pdata = {
+	.dev_name = WILINK_UART_DEV_NAME,
+	.nshutdown_gpio = OMAP5_BT_NSHUTDOWN_GPIO, /* BT GPIO in OMAP5 */
+	.flow_cntrl = 1,
+	.baud_rate = 3686400, /* 115200 for test */
+	.suspend = plat_wlink_kim_suspend,
+	.resume = plat_wlink_kim_resume,
+	.chip_enable = plat_wlink_kim_enable,
+	.chip_disable = plat_wlink_kim_disable,
+	.chip_asleep = plat_wlink_kim_asleep,
+	.chip_awake = plat_wlink_kim_awake,
+};
+
+static struct platform_device wl18xx_device = {
+	.name           = "kim",
+	.id             = -1,
+	.dev.platform_data = &wilink_pdata,
+};
+
+static struct platform_device btwilink_device = {
+	.name = "btwilink",
+	.id = -1,
+};
+
+static struct platform_device *wl18xx_devices[] __initdata = {
+	&wl18xx_device,
+	&btwilink_device,
+};
+#endif
+
 #endif  /* CONFIG_OMAP5_SEVM_PALMAS */
 
 /*
@@ -1663,6 +1742,21 @@ static struct omap_dss_board_info omap5evm_dss_data = {
 	.default_device	= &omap5evm_dp_device,
 };
 
+static void omap_5430evm_bluetooth_init(void)
+{
+#ifdef CONFIG_TI_ST
+	omap_mux_init_signal("mcspi1_simo.gpio5_142", OMAP_MUX_MODE6 | OMAP_PIN_INPUT_PULLUP);
+
+	omap_mux_init_gpio(OMAP5_BT_NSHUTDOWN_GPIO, OMAP_PIN_OUTPUT);
+
+       /* UART5 muxing */
+	omap_mux_init_signal("uart5_rx.uart5_rx", OMAP_MUX_MODE0 | OMAP_PIN_INPUT_PULLUP);
+	omap_mux_init_signal("uart5_tx.uart5_tx", OMAP_MUX_MODE0 | OMAP_PIN_INPUT_PULLUP);
+	omap_mux_init_signal("uart5_cts.uart5_cts", OMAP_MUX_MODE0 | OMAP_PIN_INPUT_PULLUP);
+	omap_mux_init_signal("uart5_rts.uart5_rts", OMAP_MUX_MODE0 | OMAP_PIN_INPUT_PULLUP);
+#endif
+}
+
 static void __init omap54xx_common_init(void)
 {
         omap_mux_init_array(omap5432_common_mux,                                
@@ -1687,6 +1781,10 @@ static void __init omap54xx_common_init(void)
         omap_register_mac_device_fixup_paths(omap5evm_fixup_mac_device_paths,
                                   ARRAY_SIZE(omap5evm_fixup_mac_device_paths));
 
+#ifdef CONFIG_TI_ST
+	platform_add_devices(wl18xx_devices, ARRAY_SIZE(wl18xx_devices));
+#endif
+	omap_5430evm_bluetooth_init();
 	omap_serial_init();
 	omap_sdrc_init(NULL, NULL);
 	omap2_hsmmc_init(mmc);
