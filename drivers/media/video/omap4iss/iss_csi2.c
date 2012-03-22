@@ -537,7 +537,7 @@ int omap4iss_csi2_reset(struct iss_csi2_device *csi2)
 	if (i == 0) {
 		printk(KERN_ERR
 		       "CSI2: Reset for CSI2_96M_FCLK domain Failed!\n");
-		return -EBUSY;
+//		return -EBUSY;
 	}
 
 	writel((readl(csi2->regs1 + CSI2_SYSCONFIG) &

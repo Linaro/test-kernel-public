@@ -130,7 +130,7 @@ int omap4iss_csiphy_config(struct iss_device *iss,
 
 	lanes = &subdevs->bus.csi2.lanecfg;
 
-	if (cpu_is_omap44xx()) {
+	if (cpu_is_omap44xx() || cpu_is_omap54xx()) {
 		u32 cam_rx_ctrl = omap4_ctrl_pad_readl(
 				OMAP4_CTRL_MODULE_PAD_CORE_CONTROL_CAMERA_RX);
 
