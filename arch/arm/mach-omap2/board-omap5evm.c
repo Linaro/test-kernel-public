@@ -626,11 +626,13 @@ static struct regulator_consumer_supply omap5_vcam_supply[] = {
         REGULATOR_SUPPLY("vcam", "omap4iss"),
 };
 
+/* VAUX3 for Camera */
 static struct regulator_init_data omap5_ldo1 = {
 	.constraints = {
 		.min_uV			= 2800000,
 		.max_uV			= 2800000,
 		.always_on = 1,
+		.apply_uV		= true,
 		.valid_modes_mask	= REGULATOR_MODE_NORMAL
 					| REGULATOR_MODE_STANDBY,
 		.valid_ops_mask		= REGULATOR_CHANGE_MODE
@@ -728,11 +730,13 @@ static struct regulator_consumer_supply omap5_vcamphy_supply[] = {
         REGULATOR_SUPPLY("vcamphy", "omap4iss"),                                   
 }; 
 
+/* CSI for Camera */
 static struct regulator_init_data omap5_ldo8 = {
 	.constraints = {
 		.min_uV			= 1500000,
 		.max_uV			= 1500000,
 		.always_on = 1,
+		.apply_uV		= true,
 		.valid_modes_mask	= REGULATOR_MODE_NORMAL
 					| REGULATOR_MODE_STANDBY,
 		.valid_ops_mask		= REGULATOR_CHANGE_MODE
