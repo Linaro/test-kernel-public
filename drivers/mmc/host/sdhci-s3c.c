@@ -428,7 +428,7 @@ static int __devinit sdhci_s3c_parse_dt(struct device *dev,
 	struct device_node *node = dev->of_node;
 	struct sdhci_s3c *ourhost = to_s3c(host);
 	u32 max_width;
-	int gpio, cnt, ret;
+	int gpio = -1, cnt, ret;
 
 	/* if the bus-width property is not specified, assume width as 1 */
 	if (of_property_read_u32(node, "samsung,sdhci-bus-width",
