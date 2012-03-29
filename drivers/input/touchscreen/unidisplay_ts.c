@@ -109,9 +109,7 @@ static void unidisplay_ts_reset(void)
 
 static int unidisplay_ts_pen_up(void)
 {
-	int ret = (__raw_readl(S5P_VA_GPIO2 + 0xC64) \
-			>> (TOUCH_INT_PIN_SHIFT)) & 0x1;
-	return ret;
+	return (gpio_get_value(TOUCH_INT_PIN) & 0x1);
 }
 
 static irqreturn_t unidisplay_ts_isr(int irq, void *dev_id)
