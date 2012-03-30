@@ -1477,7 +1477,7 @@ config PROFILING
 # dynamically changed for a probe function.
 #
 config TRACEPOINTS
-	bool
+	bool "Tracepoints support"
 
 source "arch/Kconfig"
 
