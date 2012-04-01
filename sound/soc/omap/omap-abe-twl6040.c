@@ -1229,7 +1229,8 @@ static __devinit int omap_abe_probe(struct platform_device *pdev)
 	int ret;
 
 	card->dev = &pdev->dev;
-	if (!machine_is_omap_4430sdp() && !machine_is_omap5_sevm())
+	if (!machine_is_omap_4430sdp() &&
+			 !machine_is_omap4_panda() && !machine_is_omap5_sevm())
 		return -ENODEV;
 	printk(KERN_INFO "OMAP4/5 SoC init\n");
 
