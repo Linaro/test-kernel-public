@@ -171,7 +171,10 @@ static void dispc_save_context(void)
 		SR(CONTROL2);
 		SR(CONFIG2);
 	}
-
+        if (dss_has_feature(FEAT_MGR_LCD3)) {                                   
+                SR(CONTROL3);                                                   
+                SR(CONFIG3);                                                    
+        }
 	for (i = 0; i < dss_feat_get_num_mgrs(); i++) {
 		SR(DEFAULT_COLOR(i));
 		SR(TRANS_COLOR(i));
@@ -285,6 +288,9 @@ static void dispc_restore_context(void)
 	if (dss_has_feature(FEAT_MGR_LCD2))
 		RR(CONFIG2);
 
+        if (dss_has_feature(FEAT_MGR_LCD3))
+                RR(CONFIG3);
+
 	for (i = 0; i < dss_feat_get_num_mgrs(); i++) {
 		RR(DEFAULT_COLOR(i));
 		RR(TRANS_COLOR(i));
@@ -369,6 +375,8 @@ static void dispc_restore_context(void)
 	RR(CONTROL);
 	if (dss_has_feature(FEAT_MGR_LCD2))
 		RR(CONTROL2);
+        if (dss_has_feature(FEAT_MGR_LCD3))                                     
+                RR(CONTROL3);
 	/* clear spurious SYNC_LOST_DIGIT interrupts */
 	dispc_write_reg(DISPC_IRQSTATUS, DISPC_IRQ_SYNC_LOST_DIGIT);
 
@@ -408,7 +416,8 @@ void dispc_runtime_put(void)
 static inline bool dispc_mgr_is_lcd(enum omap_channel channel)
 {
 	if (channel == OMAP_DSS_CHANNEL_LCD ||
-			channel == OMAP_DSS_CHANNEL_LCD2)
+			channel == OMAP_DSS_CHANNEL_LCD2 ||
+			channel == OMAP_DSS_CHANNEL_LCD3)
 		return true;
 	else
 		return false;
@@ -429,6 +438,8 @@ u32 dispc_mgr_get_vsync_irq(enum omap_channel channel)
 		return DISPC_IRQ_VSYNC;
 	case OMAP_DSS_CHANNEL_LCD2:
 		return DISPC_IRQ_VSYNC2;
+	case OMAP_DSS_CHANNEL_LCD3:
+		return DISPC_IRQ_VSYNC3;
 	case OMAP_DSS_CHANNEL_DIGIT:
 		return DISPC_IRQ_EVSYNC_ODD | DISPC_IRQ_EVSYNC_EVEN;
 	default:
@@ -443,6 +454,8 @@ u32 dispc_mgr_get_framedone_irq(enum omap_channel channel)
 		return DISPC_IRQ_FRAMEDONE;
 	case OMAP_DSS_CHANNEL_LCD2:
 		return DISPC_IRQ_FRAMEDONE2;
+        case OMAP_DSS_CHANNEL_LCD3:
+                return DISPC_IRQ_FRAMEDONE3;
 	case OMAP_DSS_CHANNEL_DIGIT:
 		return 0;
 	default:
@@ -459,7 +472,9 @@ bool dispc_mgr_go_busy(enum omap_channel channel)
 	else
 		bit = 6; /* GODIGIT */
 
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		return REG_GET(DISPC_CONTROL3, bit, bit) == 1;
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		return REG_GET(DISPC_CONTROL2, bit, bit) == 1;
 	else
 		return REG_GET(DISPC_CONTROL, bit, bit) == 1;
@@ -476,7 +491,9 @@ void dispc_mgr_go(enum omap_channel channel)
 		bit = 1; /* DIGITALENABLE */
 
 	/* if the channel is not enabled, we don't need GO */
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		enable_bit = REG_GET(DISPC_CONTROL3, bit, bit) == 1;	
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		enable_bit = REG_GET(DISPC_CONTROL2, bit, bit) == 1;
 	else
 		enable_bit = REG_GET(DISPC_CONTROL, bit, bit) == 1;
@@ -489,7 +506,9 @@ void dispc_mgr_go(enum omap_channel channel)
 	else
 		bit = 6; /* GODIGIT */
 
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		go_bit = REG_GET(DISPC_CONTROL3, bit, bit) == 1;
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		go_bit = REG_GET(DISPC_CONTROL2, bit, bit) == 1;
 	else
 		go_bit = REG_GET(DISPC_CONTROL, bit, bit) == 1;
@@ -502,7 +521,9 @@ void dispc_mgr_go(enum omap_channel channel)
 	DSSDBG("GO %s\n", channel == OMAP_DSS_CHANNEL_LCD ? "LCD" :
 		(channel == OMAP_DSS_CHANNEL_LCD2 ? "LCD2" : "DIGIT"));
 
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		REG_FLD_MOD(DISPC_CONTROL3, 1, bit, bit);
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONTROL2, 1, bit, bit);
 	else
 		REG_FLD_MOD(DISPC_CONTROL, 1, bit, bit);
@@ -844,6 +865,10 @@ void dispc_ovl_set_channel_out(enum omap_plane plane, enum omap_channel channel)
 			chan = 0;
 			chan2 = 1;
 			break;
+		case OMAP_DSS_CHANNEL_LCD3:
+			chan = 0;
+			chan2 = 2;
+			break;
 		default:
 			BUG();
 		}
@@ -938,6 +963,8 @@ static void dispc_mgr_enable_cpr(enum omap_channel channel, bool enable)
 		reg = DISPC_CONFIG;
 	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		reg = DISPC_CONFIG2;
+	else if (channel == OMAP_DSS_CHANNEL_LCD3)
+		reg = DISPC_CONFIG3;
 	else
 		return;
 
@@ -1924,7 +1951,9 @@ static void dispc_disable_isr(void *data, u32 mask)
 
 static void _enable_lcd_out(enum omap_channel channel, bool enable)
 {
-	if (channel == OMAP_DSS_CHANNEL_LCD2) {
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		REG_FLD_MOD(DISPC_CONTROL3, enable ? 1 : 0, 0, 0);	
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONTROL2, enable ? 1 : 0, 0, 0);
 		/* flush posted write */
 		dispc_read_reg(DISPC_CONTROL2);
@@ -1944,12 +1973,15 @@ static void dispc_mgr_enable_lcd_out(enum omap_channel channel, bool enable)
 	/* When we disable LCD output, we need to wait until frame is done.
 	 * Otherwise the DSS is still working, and turning off the clocks
 	 * prevents DSS from going to OFF mode */
-	is_on = channel == OMAP_DSS_CHANNEL_LCD2 ?
-			REG_GET(DISPC_CONTROL2, 0, 0) :
-			REG_GET(DISPC_CONTROL, 0, 0);
+	is_on = channel == OMAP_DSS_CHANNEL_LCD3 ?
+			REG_GET(DISPC_CONTROL3, 0, 0) :
+			(channel == OMAP_DSS_CHANNEL_LCD2 ? 
+				REG_GET(DISPC_CONTROL2, 0, 0) :
+				REG_GET(DISPC_CONTROL, 0, 0));
 
-	irq = channel == OMAP_DSS_CHANNEL_LCD2 ? DISPC_IRQ_FRAMEDONE2 :
-			DISPC_IRQ_FRAMEDONE;
+	irq = channel == OMAP_DSS_CHANNEL_LCD3 ? DISPC_IRQ_FRAMEDONE3 :
+		(channel == OMAP_DSS_CHANNEL_LCD2 ? DISPC_IRQ_FRAMEDONE2 :
+			DISPC_IRQ_FRAMEDONE);
 
 	if (!enable && is_on) {
 		init_completion(&frame_done_completion);
@@ -2060,6 +2092,8 @@ bool dispc_mgr_is_enabled(enum omap_channel channel)
 		return !!REG_GET(DISPC_CONTROL, 1, 1);
 	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		return !!REG_GET(DISPC_CONTROL2, 0, 0);
+	else if (channel == OMAP_DSS_CHANNEL_LCD3)
+		return !!REG_GET(DISPC_CONTROL3, 0, 0);
 	else
 		BUG();
 }
@@ -2100,7 +2134,9 @@ void dispc_pck_free_enable(bool enable)
 
 void dispc_mgr_enable_fifohandcheck(enum omap_channel channel, bool enable)
 {
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		REG_FLD_MOD(DISPC_CONFIG3, enable ? 1 : 0, 16, 16);
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONFIG2, enable ? 1 : 0, 16, 16);
 	else
 		REG_FLD_MOD(DISPC_CONFIG, enable ? 1 : 0, 16, 16);
@@ -2126,7 +2162,9 @@ void dispc_mgr_set_lcd_display_type(enum omap_channel channel,
 		return;
 	}
 
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		REG_FLD_MOD(DISPC_CONTROL3, mode, 3, 3);
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONTROL2, mode, 3, 3);
 	else
 		REG_FLD_MOD(DISPC_CONTROL, mode, 3, 3);
@@ -2151,8 +2189,10 @@ static void dispc_mgr_set_trans_key(enum omap_channel ch,
 		REG_FLD_MOD(DISPC_CONFIG, type, 11, 11);
 	else if (ch == OMAP_DSS_CHANNEL_DIGIT)
 		REG_FLD_MOD(DISPC_CONFIG, type, 13, 13);
-	else /* OMAP_DSS_CHANNEL_LCD2 */
+	else if (ch == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONFIG2, type, 11, 11);
+	else
+		REG_FLD_MOD(DISPC_CONFIG3, type, 11, 11);
 
 	dispc_write_reg(DISPC_TRANS_COLOR(ch), trans_key);
 }
@@ -2163,8 +2203,10 @@ static void dispc_mgr_enable_trans_key(enum omap_channel ch, bool enable)
 		REG_FLD_MOD(DISPC_CONFIG, enable, 10, 10);
 	else if (ch == OMAP_DSS_CHANNEL_DIGIT)
 		REG_FLD_MOD(DISPC_CONFIG, enable, 12, 12);
-	else /* OMAP_DSS_CHANNEL_LCD2 */
+	else if (ch == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONFIG2, enable, 10, 10);
+	else
+		REG_FLD_MOD(DISPC_CONFIG3, enable, 10, 10);	
 }
 
 static void dispc_mgr_enable_alpha_fixed_zorder(enum omap_channel ch,
@@ -2215,7 +2257,9 @@ void dispc_mgr_set_tft_data_lines(enum omap_channel channel, u8 data_lines)
 		return;
 	}
 
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		REG_FLD_MOD(DISPC_CONTROL3, code, 9, 8);
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONTROL2, code, 9, 8);
 	else
 		REG_FLD_MOD(DISPC_CONTROL, code, 9, 8);
@@ -2252,7 +2296,9 @@ void dispc_mgr_set_io_pad_mode(enum dss_io_pad_mode mode)
 
 void dispc_mgr_enable_stallmode(enum omap_channel channel, bool enable)
 {
-	if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3)
+		REG_FLD_MOD(DISPC_CONTROL3, enable, 11, 11);
+	else if (channel == OMAP_DSS_CHANNEL_LCD2)
 		REG_FLD_MOD(DISPC_CONTROL2, enable, 11, 11);
 	else
 		REG_FLD_MOD(DISPC_CONTROL, enable, 11, 11);

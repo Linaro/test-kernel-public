@@ -171,6 +171,10 @@ static const enum omap_display_type omap5_dss_supported_displays[] = {
 	/* OMAP_DSS_CHANNEL_LCD2 */
 	OMAP_DISPLAY_TYPE_DPI | OMAP_DISPLAY_TYPE_DBI |
 	OMAP_DISPLAY_TYPE_DSI,
+
+	/* OMAP_DSS_CHANNEL_LCD3 */
+	OMAP_DISPLAY_TYPE_DPI | OMAP_DISPLAY_TYPE_DBI |
+	OMAP_DISPLAY_TYPE_DSI,
 };
 
 static const enum omap_color_mode omap2_dss_supported_color_modes[] = {
@@ -511,7 +515,7 @@ static const struct omap_dss_features omap5_dss_features = {
 		FEAT_PARALLEL_SEL | FEAT_DSI_PLL_SELFREQDCO |
 		FEAT_DSI_PLL_REFSEL,
 
-	.num_mgrs = 3,
+	.num_mgrs = 4,
 	.num_ovls = 4,
 	.supported_displays = omap5_dss_supported_displays,
 	.supported_color_modes = omap4_dss_supported_color_modes,
