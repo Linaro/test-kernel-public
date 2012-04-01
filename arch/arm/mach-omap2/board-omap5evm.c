@@ -864,7 +864,6 @@ static struct i2c_board_info __initdata omap5evm_i2c_1_boardinfo[] = {
 #endif
 };
 
-
 static struct qtm_touch_keyarray_cfg omap5evm_key_array_data[] = {
 	{
 		.ctrl = 0,
