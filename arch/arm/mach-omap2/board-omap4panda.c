@@ -185,7 +185,7 @@ static struct platform_device panda_v1v8 = {
 	},
 
 };
-
+#if 0
 static struct resource omap4panda_hdmi_resources[] = {
         [0] = {                                                                 
                 .start = OMAP44XX_DSS_HDMI_L3_BASE,                                        
@@ -205,14 +205,16 @@ static struct platform_device omap4panda_hdmi_audio_device = {
 	.num_resources = ARRAY_SIZE(omap4panda_hdmi_resources),
 	.resource = omap4panda_hdmi_resources,
 };
-
+#endif
 static struct platform_device *panda_devices[] __initdata = {
 	&leds_gpio,
 	&wl1271_device,
 	&panda_abe_audio,
 	&panda_v1v8,
 	&panda_v2v1,
+#if 0
 	&omap4panda_hdmi_audio_device,
+#endif
 };
 
 static const struct usbhs_omap_board_data usbhs_bdata __initconst = {
