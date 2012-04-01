@@ -1738,7 +1738,7 @@ static struct omap_hwmod_ocp_if *omap54xx_dss_hdmi_slaves[] = {
 };
 
 static struct omap_hwmod_opt_clk dss_hdmi_opt_clks[] = {
-	{ .role = "sys_clk", .clk = "dss_sys_clk" },
+	{ .role = "hdmi_sys_clk", .clk = "dss_sys_clk" },
 	{ .role = "hdmi_phy_clk", .clk = "dss_48mhz_clk" },
 };
 

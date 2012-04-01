@@ -1072,14 +1072,10 @@ static int hdmi_get_clocks(struct platform_device *pdev)
 {
 	struct clk *clk;
 
-	clk = clk_get(&pdev->dev, "sys_clk");
+	clk = clk_get(&pdev->dev, "hdmi_sys_clk");
 	if (IS_ERR(clk)) {
-
-		clk = clk_get(&pdev->dev, "dss_sys_clk");
-		if (IS_ERR(clk)) {
-			DSSERR("can't get sys_clk\n");
-			return PTR_ERR(clk);
-		}
+		DSSERR("can't get hdmi_sys_clk\n");
+		return PTR_ERR(clk);
 	}
 
 	hdmi.sys_clk = clk;
