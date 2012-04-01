@@ -498,6 +498,9 @@ static const struct omap_dss_features omap4430_es2_0_1_2_dss_features = {
 	.dss_params = omap4_dss_param_range,
 	.buffer_size_unit = 16,
 	.burst_size_unit = 16,
+
+	.hdmi_core_sys_offset = 0x400,
+	.dsi_ddr_div = 4,
 };
 
 /* For all the other OMAP4 versions */
