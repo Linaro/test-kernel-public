@@ -1191,6 +1191,8 @@ static int omapdss_hdmihw_remove(struct platform_device *pdev)
 	snd_soc_unregister_codec(&pdev->dev);
 #endif
 
+	free_irq(hdmi.hdmi_irq, NULL);
+
 	pm_runtime_disable(&pdev->dev);
 
 	hdmi_put_clocks();
