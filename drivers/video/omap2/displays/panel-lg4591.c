@@ -684,3 +684,4 @@ static void __exit lg4591_exit(void)
 
 module_init(lg4591_init);
 module_exit(lg4591_exit);
+MODULE_LICENSE("GPL");
