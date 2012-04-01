@@ -48,6 +48,10 @@
 #define DISPC_IRQ_FRAMEDONEWB		(1 << 23)
 #define DISPC_IRQ_FRAMEDONETV		(1 << 24)
 #define DISPC_IRQ_WBBUFFEROVERFLOW	(1 << 25)
+#define DISPC_IRQ_SYNC_LOST3		(1 << 27)
+#define DISPC_IRQ_VSYNC3		(1 << 28)
+#define DISPC_IRQ_ACBIAS_COUNT_STAT3	(1 << 29)
+#define DISPC_IRQ_FRAMEDONE3		(1 << 30)
 
 struct omap_dss_device;
 struct omap_overlay_manager;
@@ -73,6 +77,7 @@ enum omap_channel {
 	OMAP_DSS_CHANNEL_LCD	= 0,
 	OMAP_DSS_CHANNEL_DIGIT	= 1,
 	OMAP_DSS_CHANNEL_LCD2	= 2,
+	OMAP_DSS_CHANNEL_LCD3	= 3,
 };
 
 enum omap_color_mode {
@@ -163,6 +168,7 @@ enum omap_dss_overlay_managers {
 	OMAP_DSS_OVL_MGR_LCD,
 	OMAP_DSS_OVL_MGR_TV,
 	OMAP_DSS_OVL_MGR_LCD2,
+	OMAP_DSS_OVL_MGR_LCD3,
 };
 
 enum omap_dss_rotation_type {
