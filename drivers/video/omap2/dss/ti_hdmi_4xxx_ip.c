@@ -1030,10 +1030,10 @@ void ti_hdmi_4xxx_core_dump(struct hdmi_ip_data *ip_data, struct seq_file *s)
 
 #define CORE_REG(i, name) name(i)
 #define DUMPCORE(r) seq_printf(s, "%-35s %08x\n", #r,\
-		hdmi_read_reg(hdmi_pll_base(ip_data), r))
+		hdmi_read_reg(hdmi_core_sys_base(ip_data), r))
 #define DUMPCOREAV(i, r) seq_printf(s, "%s[%d]%*s %08x\n", #r, i, \
 		(i < 10) ? 32 - strlen(#r) : 31 - strlen(#r), " ", \
-		hdmi_read_reg(hdmi_pll_base(ip_data), CORE_REG(i, r)))
+		hdmi_read_reg(hdmi_core_sys_base(ip_data), CORE_REG(i, r)))
 
 	DUMPCORE(HDMI_CORE_SYS_VND_IDL);
 	DUMPCORE(HDMI_CORE_SYS_DEV_IDL);
