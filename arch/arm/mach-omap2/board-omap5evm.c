@@ -1333,6 +1333,52 @@ struct omap_mux_setting omap5432_common_mux[] __initdata = {
                 .name = "emmc_data7.emmc_data7",
                 .mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE0,
         },
+
+        {                                                                       
+                .name = "dsiportc_lane0x.dsiportc_lane0x",                                
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                 
+        },
+        {                                                                       
+                .name = "dsiportc_lane0y.dsiportc_lane0y",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_lane1x.dsiportc_lane1x",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_lane1y.dsiportc_lane1y",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_lane2x.dsiportc_lane2x",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_lane2y.dsiportc_lane2y",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_lane3x.dsiportc_lane3x",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_lane3y.dsiportc_lane3y",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_lane4x.dsiportc_lane4x",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        },                                                                      
+        {                                                                       
+                .name = "dsiportc_lane4y.dsiportc_lane4y",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+        {                                                                       
+                .name = "dsiportc_te0.dsiportc_te0",                      
+                .mode = OMAP_PIN_INPUT | OMAP_MUX_MODE0,                        
+        }, 
+
 };                                                                              
 
 /*
