@@ -776,7 +776,8 @@ static int tc358766xbg_probe(struct omap_dss_device *dssdev)
 		return -EIO;
 	}
 
-#define INT_IRQ 171
+//#define INT_IRQ 171
+#define INT_IRQ 81
 
 	r = gpio_request_one(INT_IRQ, GPIOF_IN, "tc358766xbg int");
 	if (r) {
