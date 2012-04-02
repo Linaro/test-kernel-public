@@ -1666,6 +1666,11 @@ static int tc358766xbg_enable(struct omap_dss_device *dssdev)
 	return r;
 }
 
+static  bool tc358766xbg_detect(struct omap_dss_device *dssdev)
+{
+	return 1;
+}
+
 static struct omap_dss_driver tc358766xbg_driver = {
 	.probe		= tc358766xbg_probe,
 	.remove		= tc358766xbg_remove,
@@ -1679,6 +1684,8 @@ static struct omap_dss_driver tc358766xbg_driver = {
 	.get_timings	= tc358766xbg_get_timings,
 	.set_timings	= tc358766xbg_set_timings,
 	.check_timings	= tc358766xbg_check_timings,
+
+	.detect		= tc358766xbg_detect,
 
 	.driver         = {
 		.name   = "tc358766xbg",
