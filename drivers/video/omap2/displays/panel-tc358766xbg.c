@@ -1668,7 +1668,7 @@ static int tc358766xbg_enable(struct omap_dss_device *dssdev)
 
 static  bool tc358766xbg_detect(struct omap_dss_device *dssdev)
 {
-	return 1;
+	return 0;
 }
 
 static struct omap_dss_driver tc358766xbg_driver = {
