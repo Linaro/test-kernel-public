@@ -332,8 +332,6 @@ struct dsi_data {
 	unsigned num_lanes_used;
 	int ddr_div;
 
-	int num_data_lanes;
-
 	unsigned scp_clk_refcount;
 };
 
@@ -2053,6 +2051,28 @@ static int dsi_cio_power(struct platform_device *dsidev,
 
 	return 0;
 }
+
+/* Number of data lanes used by the dss device */
+static inline int dsi_get_num_data_lanes_dssdev(struct omap_dss_device *dssdev)
+{
+        int num_data_lanes = 0;
+
+	pr_err("dsi_get_num_data_lanes_dssdev: %s\n", dssdev->name);
+
+        if (dssdev->phy.dsi.data1_lane != 0)
+                num_data_lanes++;
+        if (dssdev->phy.dsi.data2_lane != 0)
+                num_data_lanes++;
+        if (dssdev->phy.dsi.data3_lane != 0)
+                num_data_lanes++;
+        if (dssdev->phy.dsi.data4_lane != 0)
+                num_data_lanes++;
+
+	pr_err("   %d\n", num_data_lanes);
+
+        return num_data_lanes;
+}
+
 
 static unsigned dsi_get_line_buf_size(struct platform_device *dsidev)
 {
@@ -4060,6 +4080,69 @@ void dsi_disable_video_output(struct omap_dss_device *dssdev, int channel)
 }
 EXPORT_SYMBOL(dsi_disable_video_output);
 
+int dsi_video_mode_enable(struct omap_dss_device *dssdev, int channel)
+{
+        struct platform_device *dsidev = dsi_get_dsidev_from_dssdev(dssdev);
+        int bpp = dsi_get_pixel_size(dssdev->panel.dsi_pix_fmt);
+        u8 data_type;
+        u16 word_count;
+
+        switch (dssdev->panel.dsi_pix_fmt) {
+        case OMAP_DSS_DSI_FMT_RGB888:
+                data_type = MIPI_DSI_PACKED_PIXEL_STREAM_24;
+                break;
+        case OMAP_DSS_DSI_FMT_RGB666:
+                data_type = MIPI_DSI_PIXEL_STREAM_3BYTE_18;
+                break;
+        case OMAP_DSS_DSI_FMT_RGB666_PACKED:
+                data_type = MIPI_DSI_PACKED_PIXEL_STREAM_18;
+                break;
+        case OMAP_DSS_DSI_FMT_RGB565:
+                data_type = MIPI_DSI_PACKED_PIXEL_STREAM_16;
+                break;
+        default:
+                BUG();
+        };
+
+        dsi_if_enable(dsidev, false);
+        dsi_vc_enable(dsidev, channel, false);
+
+        /* MODE, 1 = video mode */
+        REG_FLD_MOD(dsidev, DSI_VC_CTRL(channel), 1, 4, 4);
+
+        word_count = DIV_ROUND_UP(dssdev->panel.timings.x_res * bpp, 8);
+
+        dsi_vc_write_long_header(dsidev, channel, data_type, word_count, 0);
+
+        dsi_vc_enable(dsidev, channel, true);
+        dsi_if_enable(dsidev, true);
+
+// doesn't exist yet
+//        dssdev->manager->enable(dssdev->manager);
+
+        return 0;
+}
+EXPORT_SYMBOL(dsi_video_mode_enable);
+
+void dsi_video_mode_disable(struct omap_dss_device *dssdev, int channel)
+{
+        struct platform_device *dsidev = dsi_get_dsidev_from_dssdev(dssdev);
+
+        dsi_if_enable(dsidev, false);
+        dsi_vc_enable(dsidev, channel, false);
+
+        /* MODE, 0 = command mode */
+        REG_FLD_MOD(dsidev, DSI_VC_CTRL(channel), 0, 4, 4);
+
+        dsi_vc_enable(dsidev, channel, true);
+        dsi_if_enable(dsidev, true);
+
+// doesn't exist yet
+//        dssdev->manager->disable(dssdev->manager);
+}
+EXPORT_SYMBOL(dsi_video_mode_disable);
+
+
 static void dsi_update_screen_dispc(struct omap_dss_device *dssdev,
 		u16 w, u16 h)
 {
@@ -4550,7 +4633,7 @@ int dsi_init_display(struct omap_dss_device *dssdev)
 	int dsi_module = dsi_get_dsidev_id(dsidev);
 //	struct regulator *panel_supply;
 
-	DSSDBG("DSI init\n");
+	pr_info("DSI init\n");
 
 	if (dssdev->panel.dsi_mode == OMAP_DSS_DSI_CMD_MODE) {
 		dssdev->caps = OMAP_DSS_DISPLAY_CAP_MANUAL_UPDATE |
@@ -4580,9 +4663,9 @@ int dsi_init_display(struct omap_dss_device *dssdev)
 		dsi->panel_supply = panel_supply;
 	}
 #endif
-	if (dsi_get_num_data_lanes_dssdev(dssdev) > dsi->num_data_lanes) {
+	if (dsi_get_num_data_lanes_dssdev(dssdev) > dsi->num_lanes_supported) {
 		DSSERR("DSI%d can't support more than %d data lanes\n",
-			dsi_module + 1, dsi->num_data_lanes);
+			dsi_module + 1, dsi->num_lanes_supported);
 		return -EINVAL;
 	}
 

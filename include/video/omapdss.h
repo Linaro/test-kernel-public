@@ -747,6 +747,9 @@ void omap_dsi_release_vc(struct omap_dss_device *dssdev, int channel);
 int omapdss_dsi_display_enable(struct omap_dss_device *dssdev);
 void omapdss_dsi_display_disable(struct omap_dss_device *dssdev,
 		bool disconnect_lanes, bool enter_ulps);
+void dsi_video_mode_disable(struct omap_dss_device *dssdev, int channel);
+int dsi_video_mode_enable(struct omap_dss_device *dssdev, int channel);
+
 
 int omapdss_dpi_display_enable(struct omap_dss_device *dssdev);
 void omapdss_dpi_display_disable(struct omap_dss_device *dssdev);
