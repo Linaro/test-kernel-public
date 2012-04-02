@@ -170,8 +170,6 @@ static void dispc_save_context(void)
 	if (dss_has_feature(FEAT_MGR_LCD2)) {
 		SR(CONTROL2);
 		SR(CONFIG2);
-	}
-        if (dss_has_feature(FEAT_MGR_LCD3)) {                                   
                 SR(CONTROL3);                                                   
                 SR(CONFIG3);                                                    
         }
@@ -285,11 +283,10 @@ static void dispc_restore_context(void)
 	if (dss_has_feature(FEAT_ALPHA_FIXED_ZORDER) ||
 			dss_has_feature(FEAT_ALPHA_FREE_ZORDER))
 		RR(GLOBAL_ALPHA);
-	if (dss_has_feature(FEAT_MGR_LCD2))
+	if (dss_has_feature(FEAT_MGR_LCD2)) {
 		RR(CONFIG2);
-
-        if (dss_has_feature(FEAT_MGR_LCD3))
                 RR(CONFIG3);
+	}
 
 	for (i = 0; i < dss_feat_get_num_mgrs(); i++) {
 		RR(DEFAULT_COLOR(i));
@@ -373,10 +370,10 @@ static void dispc_restore_context(void)
 
 	/* enable last, because LCD & DIGIT enable are here */
 	RR(CONTROL);
-	if (dss_has_feature(FEAT_MGR_LCD2))
+	if (dss_has_feature(FEAT_MGR_LCD2)) {
 		RR(CONTROL2);
-        if (dss_has_feature(FEAT_MGR_LCD3))                                     
                 RR(CONTROL3);
+	}
 	/* clear spurious SYNC_LOST_DIGIT interrupts */
 	dispc_write_reg(DISPC_IRQSTATUS, DISPC_IRQ_SYNC_LOST_DIGIT);
 
@@ -1952,9 +1949,11 @@ static void dispc_disable_isr(void *data, u32 mask)
 
 static void _enable_lcd_out(enum omap_channel channel, bool enable)
 {
-	if (channel == OMAP_DSS_CHANNEL_LCD3)
-		REG_FLD_MOD(DISPC_CONTROL3, enable ? 1 : 0, 0, 0);	
-	else if (channel == OMAP_DSS_CHANNEL_LCD2)
+	if (channel == OMAP_DSS_CHANNEL_LCD3) {
+		REG_FLD_MOD(DISPC_CONTROL3, enable ? 1 : 0, 0, 0);
+		/* flush posted write */
+                dispc_read_reg(DISPC_CONTROL3);
+	} else if (channel == OMAP_DSS_CHANNEL_LCD2) {
 		REG_FLD_MOD(DISPC_CONTROL2, enable ? 1 : 0, 0, 0);
 		/* flush posted write */
 		dispc_read_reg(DISPC_CONTROL2);
