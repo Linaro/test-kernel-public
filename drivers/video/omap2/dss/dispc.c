@@ -454,8 +454,8 @@ u32 dispc_mgr_get_framedone_irq(enum omap_channel channel)
 		return DISPC_IRQ_FRAMEDONE;
 	case OMAP_DSS_CHANNEL_LCD2:
 		return DISPC_IRQ_FRAMEDONE2;
-        case OMAP_DSS_CHANNEL_LCD3:
-                return DISPC_IRQ_FRAMEDONE3;
+	case OMAP_DSS_CHANNEL_LCD3:
+		return DISPC_IRQ_FRAMEDONE3;
 	case OMAP_DSS_CHANNEL_DIGIT:
 		return 0;
 	default:
@@ -519,7 +519,8 @@ void dispc_mgr_go(enum omap_channel channel)
 	}
 
 	DSSDBG("GO %s\n", channel == OMAP_DSS_CHANNEL_LCD ? "LCD" :
-		(channel == OMAP_DSS_CHANNEL_LCD2 ? "LCD2" : "DIGIT"));
+		(channel == OMAP_DSS_CHANNEL_LCD2 ? "LCD2" :
+		(channel == OMAP_DSS_CHANNEL_LCD3 ? "LCD3" : "DIGIT")));
 
 	if (channel == OMAP_DSS_CHANNEL_LCD3)
 		REG_FLD_MOD(DISPC_CONTROL3, 1, bit, bit);
@@ -2630,6 +2631,7 @@ void dispc_dump_regs(struct seq_file *s)
 		[OMAP_DSS_CHANNEL_LCD]		= "LCD",
 		[OMAP_DSS_CHANNEL_DIGIT]	= "TV",
 		[OMAP_DSS_CHANNEL_LCD2]		= "LCD2",
+		[OMAP_DSS_CHANNEL_LCD3]         = "LCD3",
 	};
 	const char *ovl_names[] = {
 		[OMAP_DSS_GFX]		= "GFX",
