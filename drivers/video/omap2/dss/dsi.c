@@ -133,7 +133,7 @@ struct dsi_reg { u16 idx; };
 #define DSI_IRQ_TA_TIMEOUT	(1 << 20)
 #define DSI_IRQ_ERROR_MASK \
 	(DSI_IRQ_HS_TX_TIMEOUT | DSI_IRQ_LP_RX_TIMEOUT | DSI_IRQ_SYNC_LOST | \
-	DSI_IRQ_TA_TIMEOUT | DSI_IRQ_SYNC_LOST)
+	DSI_IRQ_TA_TIMEOUT | DSI_IRQ_SYNC_LOST | DSI_IRQ_RESYNC)
 #define DSI_IRQ_CHANNEL_MASK	0xf
 
 /* Virtual channel interrupts */
@@ -4547,6 +4547,8 @@ int dsi_init_display(struct omap_dss_device *dssdev)
 {
 	struct platform_device *dsidev = dsi_get_dsidev_from_dssdev(dssdev);
 	struct dsi_data *dsi = dsi_get_dsidrv_data(dsidev);
+	int dsi_module = dsi_get_dsidev_id(dsidev);
+//	struct regulator *panel_supply;
 
 	DSSDBG("DSI init\n");
 
@@ -4566,6 +4568,22 @@ int dsi_init_display(struct omap_dss_device *dssdev)
 		}
 
 		dsi->vdds_dsi_reg = vdds_dsi;
+	}
+
+#if 0
+	panel_supply = regulator_get(&dsi->pdev->dev, "panel_supply");
+
+	if (IS_ERR(panel_supply)) {
+		DSSERR("can't get regulator for panel\n");
+		dsi->panel_supply = NULL;
+	} else {
+		dsi->panel_supply = panel_supply;
+	}
+#endif
+	if (dsi_get_num_data_lanes_dssdev(dssdev) > dsi->num_data_lanes) {
+		DSSERR("DSI%d can't support more than %d data lanes\n",
+			dsi_module + 1, dsi->num_data_lanes);
+		return -EINVAL;
 	}
 
 	return 0;
