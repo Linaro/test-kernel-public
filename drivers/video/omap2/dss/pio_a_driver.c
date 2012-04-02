@@ -83,6 +83,11 @@ int pio_a_i2c_write(u8 reg, u8 value)
 {
 	u8 data[2];
 
+        if (!pio_a_i2c_data) {                                                  
+                pr_err("pio_a_i2c_data is NULL\n");                             
+                return -EBUSY;                                                  
+        }
+
 	data[0] = reg;
 	data[1] = value;
 
@@ -140,13 +145,19 @@ int pio_a_read_byte(int reg)
 	u8 data;
 	printk(KERN_DEBUG "pio_a_read_byte\n");
 
+	if (!pio_a_i2c_data) {
+		pr_err("pio_a_i2c_data is NULL\n");
+		return -EBUSY;
+	}
+
 	if (pio_a_i2c_data->pio_a_i2c_client == NULL) {
 		printk(KERN_DEBUG "pio_a_i2c_data->pio_a_i2c_client is null ??\n");
 		return 0;
-	} else {
-	r = pio_a_read_block(pio_a_i2c_data->pio_a_i2c_client, reg, &data, 1);
-	return ((int)(data));
 	}
+
+	r = pio_a_read_block(pio_a_i2c_data->pio_a_i2c_client, reg, &data, 1);
+
+	return data;
 }
 EXPORT_SYMBOL(pio_a_read_byte);
 
