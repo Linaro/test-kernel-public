@@ -700,7 +700,7 @@ static irqreturn_t taal_te_isr(int irq, void *data)
 
 		tc358766xbg_read_reg(dssdev, GPIOI, &value);
 		printk("GPIOI %x (L->H)\n", value);
-		if (value & 1)
+		if (!(value & 1))
 			start_link(dssdev);
 	}
 
@@ -1559,10 +1559,9 @@ static int tc358766xbg_power_on(struct omap_dss_device *dssdev)
 
 	tc358766xbg_read_reg(dssdev, GPIOI, &value);
 	printk("GPIOI %x\n", value);
-	/*
-	if (value & 1)
+
+	if (!(value & 1))
 		start_link(dssdev);
-*/
 
 
 
