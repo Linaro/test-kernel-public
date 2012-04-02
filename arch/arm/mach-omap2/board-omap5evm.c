@@ -1482,7 +1482,7 @@ static struct omap_dss_device omap5evm_lcd_device = {
 
 
 static struct tc358766xbg_board_data blazetablet_dsi_panel = {
-	.reset_gpio	= 256 + 9,
+	.reset_gpio	= 256 + (2 * 8) + 6, // 256 + 9,
 };
 
 static struct omap_dss_device omap5evm_dp_device = {
@@ -1749,6 +1749,11 @@ struct omap_mux_setting omap5432_uevm_mux[] = {
 		.name = "fref_clk0_out.fref_clk0_out",
                 .mode = OMAP_PIN_OUTPUT,    
         },
+        {                                                                       
+                /* GPIO 3_81 Displayport Interrupt */
+                .name = "usbb1_ulpiphy_data1.gpio3_81",                               
+                .mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE6,                 
+        }, 
 };
 
 
