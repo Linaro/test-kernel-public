@@ -1095,10 +1095,6 @@ static struct i2c_board_info __initdata omap5evm_i2c_4_boardinfo[] = {
  * I2C GPIO Expander - TCA6424
  */
 
-#if OMAP_MAX_GPIO_LINES != 256
-#error need to hack OMAP_MAX_GPIO_LINES
-#endif
-
 static struct pca953x_platform_data omap_5430evm_gpio_expander_info_0 = {
 	.gpio_base	= OMAP_MAX_GPIO_LINES,
 };
@@ -1112,10 +1108,6 @@ static struct i2c_board_info __initdata omap5evm_i2c_5_boardinfo[] = {
 	{
 		I2C_BOARD_INFO("tca6424", 0x22),
 		.platform_data = &omap_5430evm_gpio_expander_info_0,
-	},
-	{
-		I2C_BOARD_INFO("tca6416", 0x20),
-		.platform_data = &am3517evm_gpio_expander_info_0,
 	},
 };
 
