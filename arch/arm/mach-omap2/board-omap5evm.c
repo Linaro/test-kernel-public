@@ -1743,7 +1743,7 @@ struct omap_mux_setting omap5432_uevm_mux[] = {
         },
         {                                                                       
                 /* GPIO 3_81 Displayport Interrupt */
-                .name = "usbb1_ulpiphy_data1.gpio3_81",                               
+                .name = "hsi2_cadata.gpio3_81",                               
                 .mode = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE6,                 
         }, 
 };
