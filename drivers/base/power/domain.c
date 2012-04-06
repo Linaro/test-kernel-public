@@ -1284,6 +1284,7 @@ int __pm_genpd_add_device(struct generic_pm_domain *genpd, struct device *dev,
 	dev->pm_domain = &genpd->domain;
 	dev->power.subsys_data->domain_data = &gpd_data->base;
 	gpd_data->base.dev = dev;
+	gpd_data->need_restore = true;
 	list_add_tail(&gpd_data->base.list_node, &genpd->dev_list);
 	gpd_data->need_restore = genpd->status == GPD_STATE_POWER_OFF;
 	if (td)
