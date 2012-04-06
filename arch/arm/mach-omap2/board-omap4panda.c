@@ -561,6 +561,9 @@ static void __init omap4_panda_init(void)
 			&lpddr2_elpida_S4_min_tck,
 			&custom_configs);
 
+	if (cpu_is_omap446x())
+		gpio_leds[0].gpio = 110;
+
 	omap4_mux_init(board_mux, NULL, package);
 
 	omap_register_mac_device_fixup_paths(panda_fixup_mac_device_paths,
