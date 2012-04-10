@@ -179,7 +179,7 @@ static const int code_vesa[85] = {
 	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 	-1, 27, 28, -1, 33};
 
-static int hdmi_get_current_hpd(void);
+static int __hdmi_get_current_hpd(void);
 
 static int hdmi_runtime_get(void)
 {
@@ -436,14 +436,16 @@ static int hdmi_power_on(struct omap_dss_device *dssdev)
 
 	msleep(1000);
 
-	if (hdmi_get_current_hpd()) {
+	if (__hdmi_get_current_hpd()) {
 		/*
 		 * If TPD is enabled before power on First interrupt is missed
 		 * so check for current HPD state
 		 */
+		pr_info("Initial hdmi_get_current_hpd says connected\n");
 		hdmi.hpd = 1;
 		hdmi.ip_data.ops->notify_hpd(&hdmi.ip_data, hdmi.hpd);
 	} else {
+		pr_info("Initial hdmi_get_current_hpd says disconnected\n");
 		r = hdmi.ip_data.ops->phy_enable(&hdmi.ip_data);
 		if (r) {
 			DSSDBG("Failed to start PHY\n");
@@ -727,11 +729,16 @@ void hdmi_dump_regs(struct seq_file *s)
 	mutex_unlock(&hdmi.lock);
 }
 
-static int hdmi_get_current_hpd(void)
+static int __hdmi_get_current_hpd(void)
 {
-	if (!hdmi.ip_data.hpd_gpio)
-		return 0;
-	return gpio_get_value(hdmi.ip_data.hpd_gpio);
+	int r = 1;
+
+        if (hdmi.ip_data.ops->detect)
+                r = hdmi.ip_data.ops->detect(&hdmi.ip_data);
+
+//	pr_info("__hdmi_get_current_hpd: says %d\n", r);
+
+	return r == 1;
 }
 
 static irqreturn_t hpd_enable_handler(int irq, void *ptr)
@@ -764,19 +771,19 @@ bool omapdss_hdmi_detect(void)
 {
 	int r;
 
+//	pr_info("omapdss_hdmi_detect\n");
+
 	mutex_lock(&hdmi.lock);
 
 	r = hdmi_runtime_get();
 	BUG_ON(r);
 
-	r = 1;
-	if (hdmi.ip_data.ops->detect)
-		r = hdmi.ip_data.ops->detect(&hdmi.ip_data);
+	r = __hdmi_get_current_hpd();
 
 	hdmi_runtime_put();
 	mutex_unlock(&hdmi.lock);
 
-	return r == 1;
+	return r;
 }
 
 int omapdss_hdmi_display_enable(struct omap_dss_device *dssdev)
