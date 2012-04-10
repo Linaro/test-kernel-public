@@ -84,7 +84,7 @@ int pio_a_i2c_write(u8 reg, u8 value)
 	u8 data[2];
 
         if (!pio_a_i2c_data) {                                                  
-                pr_err("pio_a_i2c_data is NULL\n");                             
+//                pr_err("pio_a_i2c_data is NULL\n");                             
                 return -EBUSY;                                                  
         }
 
@@ -143,10 +143,10 @@ int pio_a_read_byte(int reg)
 {
 	int r;
 	u8 data;
-	printk(KERN_DEBUG "pio_a_read_byte\n");
+//	printk(KERN_DEBUG "pio_a_read_byte\n");
 
 	if (!pio_a_i2c_data) {
-		pr_err("pio_a_i2c_data is NULL\n");
+//		pr_err("pio_a_i2c_data is NULL\n");
 		return -EBUSY;
 	}
 
