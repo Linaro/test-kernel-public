@@ -1411,7 +1411,7 @@ static void omap5evm_hdmi_init(void)
 
 static void __init omap5evm_display_init(void)
 {
-#define DP_INT_IRQ 171
+#define DP_INT_IRQ 81
 	omap_mux_init_gpio(DP_INT_IRQ, OMAP_PIN_INPUT_PULLDOWN);
 
 	omap5evm_lcd_init();
