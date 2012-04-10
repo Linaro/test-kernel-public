@@ -1407,9 +1407,6 @@ static void omap5evm_hdmi_init(void)
 		"hdmi_gpio_hpd");
 	if (r)
 		pr_err("%s: Could not get HDMI\n", __func__);
-
-	/* Need to configure HPD as a gpio in mux */
-//	omap_writel(0x1060100, 0x4A00293C);
 }
 
 static void __init omap5evm_display_init(void)
@@ -1564,7 +1561,6 @@ static struct omap_dss_device omap5evm_hdmi_device = {
 	.platform_enable = omap5evm_panel_enable_hdmi,
 	.platform_disable = omap5evm_panel_disable_hdmi,
 	.channel = OMAP_DSS_CHANNEL_DIGIT,
-	.hpd_gpio = 193, // looks dead, jim
 	.data = &omap5evm_hdmi_data
 };
 
