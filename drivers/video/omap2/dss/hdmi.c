@@ -434,6 +434,8 @@ static int hdmi_power_on(struct omap_dss_device *dssdev)
 		goto err;
 	}
 
+	msleep(1000);
+
 	if (hdmi_get_current_hpd()) {
 		/*
 		 * If TPD is enabled before power on First interrupt is missed
