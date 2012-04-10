@@ -564,6 +564,7 @@ static const struct ti_hdmi_ip_ops omap5_hdmi_functions = {
 	.phy_enable		=	ti_hdmi_4xxx_phy_enable,
 	.phy_disable		=	ti_hdmi_4xxx_phy_disable,
 	.read_edid		=	ti_hdmi_5xxx_read_edid,
+	.detect			=	ti_hdmi_4xxx_detect,
 	.pll_enable		=	ti_hdmi_4xxx_pll_enable,
 	.pll_disable		=	ti_hdmi_4xxx_pll_disable,
 	.video_enable		=	ti_hdmi_4xxx_wp_video_start,
@@ -571,7 +572,6 @@ static const struct ti_hdmi_ip_ops omap5_hdmi_functions = {
 	.irq_process		=	ti_hdmi_5xxx_irq_process,
 	.configure_range	=	ti_hdmi_5xxx_configure_range,
 	.notify_hpd		=	ti_hdmi_4xxx_notify_hpd,
-
 };
 
 void dss_init_hdmi_ip_ops(struct hdmi_ip_data *ip_data)
