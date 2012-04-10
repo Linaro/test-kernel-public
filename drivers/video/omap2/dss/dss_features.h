@@ -90,6 +90,7 @@ enum dss_range_param {
 	FEAT_PARAM_DSIPLL_LPDIV,
 	FEAT_PARAM_DOWNSCALE,
 	FEAT_PARAM_LINEWIDTH,
+	FEAT_PARAM_HDMI_MAXPCLK,
 };
 
 /* DSS Feature Functions */
