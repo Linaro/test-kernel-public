@@ -34,6 +34,7 @@
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/pm_runtime.h>
+#include <linux/pm_qos.h>
 #include <plat/dma.h>
 #include <mach/hardware.h>
 #include <plat/board.h>
@@ -166,6 +167,7 @@ struct omap_hsmmc_host {
 	struct	mmc_data	*data;
 	struct	clk		*fclk;
 	struct	clk		*dbclk;
+	struct pm_qos_request   pm_qos_request;
 	/*
 	 * vcc == configured supply
 	 * vcc_aux == optional
@@ -1734,6 +1736,9 @@ static void omap_hsmmc_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 	struct omap_hsmmc_host *host = mmc_priv(mmc);
 	int do_send_init_stream = 0;
 
+	if ((mmc_slot(host).features & HSMMC_DVFS) && (ios->clock))
+		pm_qos_update_request(&host->pm_qos_request, 540 * 1000);
+
 	pm_runtime_get_sync(host->dev);
 
 	if (ios->power_mode != host->power_mode) {
@@ -2142,6 +2147,7 @@ static int __init omap_hsmmc_probe(struct platform_device *pdev)
 		mmc->caps2 |= MMC_CAP2_NO_MULTI_READ;
 	}
 
+	pm_qos_add_request(&host->pm_qos_request, PM_QOS_MEMORY_THROUGHPUT, 0);
 	pm_runtime_enable(host->dev);
 	pm_runtime_get_sync(host->dev);
 	pm_runtime_set_autosuspend_delay(host->dev, MMC_AUTOSUSPEND_DELAY);
@@ -2327,6 +2333,7 @@ static int omap_hsmmc_remove(struct platform_device *pdev)
 
 		pm_runtime_put_sync(host->dev);
 		pm_runtime_disable(host->dev);
+		pm_qos_remove_request(&host->pm_qos_request);
 		clk_put(host->fclk);
 		if (host->got_dbclk) {
 			clk_disable(host->dbclk);
@@ -2451,6 +2458,8 @@ static int omap_hsmmc_runtime_suspend(struct device *dev)
 	host = platform_get_drvdata(to_platform_device(dev));
 	omap_hsmmc_context_save(host);
 	dev_dbg(mmc_dev(host->mmc), "disabled\n");
+	if ((mmc_slot(host).features & HSMMC_DVFS))
+		pm_qos_update_request(&host->pm_qos_request, 0);
 
 	return 0;
 }
@@ -2460,6 +2469,10 @@ static int omap_hsmmc_runtime_resume(struct device *dev)
 	struct omap_hsmmc_host *host;
 
 	host = platform_get_drvdata(to_platform_device(dev));
+
+	if ((mmc_slot(host).features & HSMMC_DVFS))
+		pm_qos_update_request(&host->pm_qos_request, 540 * 1000);
+
 	omap_hsmmc_context_restore(host);
 	dev_dbg(mmc_dev(host->mmc), "enabled\n");
 
