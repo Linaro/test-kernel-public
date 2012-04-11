@@ -326,12 +326,12 @@ struct fimg2d_control {
 
 /* externs */
 extern inline int fimg2d_match_closed(struct fimg2d_context *ctx, void *data);
-extern inline void fimg2d_enqueue(struct fimg2d_control *info,
+extern void fimg2d_enqueue(struct fimg2d_control *info,
 		struct list_head *node, struct list_head *q);
 extern void fimg2d_dequeue(struct fimg2d_control *info, struct list_head *node);
 
-extern inline int fimg2d_queue_is_empty(struct list_head *q);
-extern inline struct fimg2d_region *
+extern int fimg2d_queue_is_empty(struct list_head *q);
+extern struct fimg2d_region *
 	fimg2d_get_first_region(struct fimg2d_context *ctx);
 extern struct fimg2d_context *fimg2d_find_context(struct fimg2d_control *info,
 		void *data, int (*match)(struct fimg2d_context *ctx, void *data));
