@@ -134,4 +134,6 @@ source "drivers/staging/telephony/Kconfig"
 
 source "drivers/staging/ramster/Kconfig"
 
+source "drivers/staging/ozwpan/Kconfig"
+
 endif # STAGING
