@@ -74,7 +74,7 @@ void omapdrm_reserve_vram(void)
 	 * TODO revisit size.. if uc/wc buffers are allocated from CMA pages
 	 * then the amount of memory we need goes up..
 	 */
-	dma_declare_contiguous(&omap_drm_device.dev, 32 * SZ_1M, 0, 0);
+	dma_declare_contiguous(&omap_drm_device.dev, 32 * SZ_1M, 0, 0xa8800000);
 #else
 #  warning "CMA is not enabled, there may be limitations about scanout buffer allocations on OMAP3 and earlier"
 #endif
