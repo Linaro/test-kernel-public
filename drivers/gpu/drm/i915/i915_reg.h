@@ -2407,6 +2407,11 @@
 #define   PIPECONF_INTERLACED_DBL_ILK		(4 << 21) /* ilk/snb only */
 #define   PIPECONF_PFIT_PF_INTERLACED_DBL_ILK	(5 << 21) /* ilk/snb only */
 #define   PIPECONF_CXSR_DOWNCLOCK	(1<<16)
+#define   PIPECONF_ROTATION_MASK	(3 << 14)
+#define   PIPECONF_ROTATION_0	(0 << 14)
+#define   PIPECONF_ROTATION_90	(1 << 14)
+#define   PIPECONF_ROTATION_180	(2 << 14)
+#define   PIPECONF_ROTATION_270	(3 << 14)
 #define   PIPECONF_BPP_MASK	(0x000000e0)
 #define   PIPECONF_BPP_8	(0<<5)
 #define   PIPECONF_BPP_10	(1<<5)

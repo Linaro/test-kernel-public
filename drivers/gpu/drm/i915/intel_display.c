@@ -7626,6 +7626,50 @@ static void intel_crtc_reset(struct drm_crtc *crtc)
 	intel_sanitize_modesetting(dev, intel_crtc->pipe, intel_crtc->plane);
 }
 
+static void intel_crtc_set_rotation(struct drm_crtc *crtc,
+				    uint64_t rotation)
+{
+	struct drm_device *dev = crtc->dev;
+	struct drm_i915_private *dev_priv = dev->dev_private;
+	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
+	int reg = PIPECONF(intel_crtc->pipe);
+	u32 val = I915_READ(reg);
+
+	val &= ~PIPECONF_ROTATION_MASK;
+
+	switch (rotation) {
+	case 0:
+		val |= PIPECONF_ROTATION_0;
+		break;
+	case 90:
+		val |= PIPECONF_ROTATION_90;
+		break;
+	case 180:
+		val |= PIPECONF_ROTATION_180;
+		break;
+	case 270:
+		val |= PIPECONF_ROTATION_270;
+		break;
+	default:
+		DRM_ERROR("Unsupported rotation: %Lu\n", rotation);
+		val |= PIPECONF_ROTATION_0;
+	}
+
+	I915_WRITE(reg, val);
+}
+
+static int intel_crtc_set_property(struct drm_crtc *crtc,
+				   struct drm_property *property,
+				   uint64_t val)
+{
+	struct drm_device *dev = crtc->dev;
+	struct drm_i915_private *dev_priv = dev->dev_private;
+
+	if (property == dev_priv->rotation_property)
+		intel_crtc_set_rotation(crtc, val);
+	return 0;
+}
+
 static struct drm_crtc_helper_funcs intel_helper_funcs = {
 	.dpms = intel_crtc_dpms,
 	.mode_fixup = intel_crtc_mode_fixup,
@@ -7644,7 +7688,26 @@ static const struct drm_crtc_funcs intel_crtc_funcs = {
 	.set_config = drm_crtc_helper_set_config,
 	.destroy = intel_crtc_destroy,
 	.page_flip = intel_crtc_page_flip,
+	.set_property = intel_crtc_set_property,
 };
+
+static void intel_attach_rotation_property(struct drm_crtc *crtc)
+{
+	struct drm_device *dev = crtc->dev;
+	struct drm_i915_private *dev_priv = dev->dev_private;
+	struct drm_property *prop;
+
+	prop = dev_priv->rotation_property;
+	if (prop == NULL) {
+		prop = drm_property_create_range(dev, 0, "rotation", 0, 359);
+		if (prop == NULL)
+			return;
+
+		dev_priv->rotation_property = prop;
+	}
+
+	drm_object_attach_property(&crtc->base, prop, 0);
+}
 
 static void intel_crtc_init(struct drm_device *dev, int pipe)
 {
@@ -7664,6 +7727,9 @@ static void intel_crtc_init(struct drm_device *dev, int pipe)
 		intel_crtc->lut_g[i] = i;
 		intel_crtc->lut_b[i] = i;
 	}
+
+	if (INTEL_INFO(dev)->gen >= 5)
+		intel_attach_rotation_property(&intel_crtc->base);
 
 	/* Swap pipes & planes for FBC on pre-965 */
 	intel_crtc->pipe = pipe;
