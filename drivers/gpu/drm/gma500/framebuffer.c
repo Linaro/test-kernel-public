@@ -390,6 +390,7 @@ static int psbfb_create(struct psb_fbdev *fbdev,
 	mode_cmd.width = sizes->surface_width;
 	mode_cmd.height = sizes->surface_height;
 	bpp = sizes->surface_bpp;
+	depth = sizes->surface_depth;
 
 	/* No 24bit packed */
 	if (bpp == 24)
@@ -402,7 +403,6 @@ static int psbfb_create(struct psb_fbdev *fbdev,
 		 * is ok with some fonts
 		 */
         	mode_cmd.pitches[0] =  ALIGN(mode_cmd.width * ((bpp + 7) / 8), 4096 >> pitch_lines);
-        	depth = sizes->surface_depth;
 
         	size = mode_cmd.pitches[0] * mode_cmd.height;
         	size = ALIGN(size, PAGE_SIZE);
