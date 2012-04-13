@@ -140,4 +140,6 @@ source "drivers/devfreq/Kconfig"
 
 source "drivers/stm/Kconfig"
 
+source "drivers/gator/driver/Kconfig"
+
 endmenu
