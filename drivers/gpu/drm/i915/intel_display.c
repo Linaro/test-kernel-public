@@ -5621,6 +5621,78 @@ static int ironlake_get_refclk(struct drm_crtc *crtc)
 	return 120000;
 }
 
+/*
+ * The overscan compensation property (aka underscan property) has values from 0
+ * to 100, where 0 means that the compensation is disabled and 100 means the
+ * screen should shrink as much as possible. The current maximum supported value
+ * (from the specifications) is "src/dst < 1.125".
+ *
+ * In short:
+ * - if val == 0   -> dst = src
+ * - if val == 100 -> dst = src * 8/9
+ * - dst can't be odd
+ * - dst can't be < src * 8 / (double)9
+ * - so the formulae, not considering rounding, should be:
+ *   - dst = 9*src - prop*src/100 / 9
+ */
+static void ironlake_crtc_overscan_compensate(struct drm_crtc *crtc)
+{
+	struct drm_device *dev = crtc->dev;
+	struct drm_i915_private *dev_priv = dev->dev_private;
+	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
+	int pipe = intel_crtc->pipe;
+	uint64_t prop_x = 0, prop_y = 0;
+	int tot_x, tot_y, src_x, src_y, dst_x, dst_y, pos_x, pos_y;
+	u32 reg;
+
+	drm_object_property_get_value(&crtc->base,
+				      dev_priv->underscan_hborder_property,
+				      &prop_x);
+	drm_object_property_get_value(&crtc->base,
+				      dev_priv->underscan_vborder_property,
+				      &prop_y);
+
+	if (prop_x == 0 && prop_y == 0 &&
+	    !(dev_priv->pch_pf_size &&
+	      (intel_pipe_has_type(crtc, INTEL_OUTPUT_LVDS) || HAS_eDP))) {
+		I915_WRITE(PF_CTL(pipe), 0);
+		I915_WRITE(PF_WIN_POS(pipe), 0);
+		I915_WRITE(PF_WIN_SZ(pipe), 0);
+		return;
+	}
+
+	reg = I915_READ(HTOTAL(pipe));
+	tot_x = (reg & 0xFFF) + 1;
+	reg = I915_READ(VTOTAL(pipe));
+	tot_y = (reg & 0xFFF) + 1;
+	reg = I915_READ(PIPESRC(pipe));
+	src_x = ((reg >> 16) & 0xFFF) + 1;
+	src_y = (reg & 0xFFF) + 1;
+
+	dst_x = (src_x * 9 - src_x * prop_x / 100 + 8) / 9;
+	dst_x &= ~1;
+	if (dst_x < ((src_x * 8 + 8) / 9))
+		dst_x += 2;
+
+	dst_y = (src_y * 9 - src_y * prop_y / 100 + 8) / 9;
+	dst_y &= ~1;
+	if (dst_y < ((src_y * 8 + 8) / 9))
+		dst_y += 2;
+
+	pos_x = (tot_x - dst_x) / 2;
+	pos_y = (tot_y - dst_y) / 2;
+
+	if (pos_x == 1)
+		pos_x = 0;
+	reg = I915_READ(PIPECONF(pipe));
+	if ((reg & PIPECONF_INTERLACE_MASK) != PIPECONF_PROGRESSIVE)
+		pos_y &= ~1;
+
+	I915_WRITE(PF_CTL(pipe), PF_ENABLE | PF_FILTER_MED_3x3);
+	I915_WRITE(PF_WIN_POS(pipe), (pos_x << 16) | pos_y);
+	I915_WRITE(PF_WIN_SZ(pipe), (dst_x << 16) | dst_y);
+}
+
 static int ironlake_crtc_mode_set(struct drm_crtc *crtc,
 				  struct drm_display_mode *mode,
 				  struct drm_display_mode *adjusted_mode,
@@ -6065,6 +6137,8 @@ static int ironlake_crtc_mode_set(struct drm_crtc *crtc,
 	ret = intel_pipe_set_base(crtc, x, y, old_fb);
 
 	intel_update_watermarks(dev);
+
+	ironlake_crtc_overscan_compensate(crtc);
 
 	return ret;
 }
@@ -7667,6 +7741,11 @@ static int intel_crtc_set_property(struct drm_crtc *crtc,
 
 	if (property == dev_priv->rotation_property)
 		intel_crtc_set_rotation(crtc, val);
+	if (property == dev_priv->underscan_hborder_property ||
+	    property == dev_priv->underscan_vborder_property) {
+		drm_object_property_set_value(&crtc->base, property, val);
+		ironlake_crtc_overscan_compensate(crtc);
+	}
 	return 0;
 }
 
@@ -7709,6 +7788,34 @@ static void intel_attach_rotation_property(struct drm_crtc *crtc)
 	drm_object_attach_property(&crtc->base, prop, 0);
 }
 
+static void intel_attach_underscan_properties(struct drm_crtc *crtc)
+{
+	struct drm_device *dev = crtc->dev;
+	struct drm_i915_private *dev_priv = dev->dev_private;
+	struct drm_property *prop_h, *prop_v;
+
+	prop_h = dev_priv->underscan_hborder_property;
+	if (prop_h == NULL) {
+		prop_h = drm_property_create_range(dev, 0, "underscan hborder",
+						   0, 100);
+		if (prop_h != NULL)
+			dev_priv->underscan_hborder_property = prop_h;
+	}
+
+	prop_v = dev_priv->underscan_vborder_property;
+	if (prop_v == NULL) {
+		prop_v = drm_property_create_range(dev, 0, "underscan vborder",
+						   0, 100);
+		if (prop_v != NULL)
+			dev_priv->underscan_vborder_property = prop_v;
+	}
+
+	if (prop_h)
+		drm_object_attach_property(&crtc->base, prop_h, 0);
+	if (prop_v)
+		drm_object_attach_property(&crtc->base, prop_v, 0);
+}
+
 static void intel_crtc_init(struct drm_device *dev, int pipe)
 {
 	drm_i915_private_t *dev_priv = dev->dev_private;
@@ -7728,8 +7835,10 @@ static void intel_crtc_init(struct drm_device *dev, int pipe)
 		intel_crtc->lut_b[i] = i;
 	}
 
-	if (INTEL_INFO(dev)->gen >= 5)
+	if (INTEL_INFO(dev)->gen >= 5) {
 		intel_attach_rotation_property(&intel_crtc->base);
+		intel_attach_underscan_properties(&intel_crtc->base);
+	}
 
 	/* Swap pipes & planes for FBC on pre-965 */
 	intel_crtc->pipe = pipe;

@@ -780,6 +780,8 @@ typedef struct drm_i915_private {
 	struct drm_property *broadcast_rgb_property;
 	struct drm_property *force_audio_property;
 	struct drm_property *rotation_property;
+	struct drm_property *underscan_hborder_property;
+	struct drm_property *underscan_vborder_property;
 } drm_i915_private_t;
 
 enum hdmi_force_audio {
