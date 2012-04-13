@@ -84,11 +84,11 @@ int intel_ddc_get_modes(struct drm_connector *connector,
 	return ret;
 }
 
-static const char *force_audio_names[] = {
-	"force-dvi",
-	"off",
-	"auto",
-	"on",
+static const struct drm_prop_enum_list force_audio_names[] = {
+	{ HDMI_AUDIO_OFF_DVI, "force-dvi" },
+	{ HDMI_AUDIO_OFF, "off" },
+	{ HDMI_AUDIO_AUTO, "auto" },
+	{ HDMI_AUDIO_ON, "on" },
 };
 
 void
@@ -107,9 +107,6 @@ intel_attach_force_audio_property(struct drm_connector *connector)
 		if (prop == NULL)
 			return;
 
-		for (i = 0; i < ARRAY_SIZE(force_audio_names); i++)
-			drm_property_add_enum(prop, i, i-2,
-					      force_audio_names[i]);
 
 		dev_priv->force_audio_property = prop;
 	}

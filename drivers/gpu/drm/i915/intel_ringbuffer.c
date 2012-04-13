@@ -1191,18 +1191,6 @@ int intel_wait_ring_buffer(struct intel_ring_buffer *ring, int n)
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	unsigned long end;
 	int ret;
-	u32 head;
-
-	/* If the reported head position has wrapped or hasn't advanced,
-	 * fallback to the slow and accurate path.
-	 */
-	head = intel_read_status_page(ring, 4);
-	if (head > ring->head) {
-		ring->head = head;
-		ring->space = ring_space(ring);
-		if (ring->space >= n)
-			return 0;
-	}
 
 	ret = intel_ring_wait_request(ring, n);
 	if (ret != -ENOSPC)
