@@ -7015,9 +7015,7 @@ static void intel_increase_pllclock(struct drm_crtc *crtc)
 	if (!HAS_PIPE_CXSR(dev) && (dpll & DISPLAY_RATE_SELECT_FPA1)) {
 		DRM_DEBUG_DRIVER("upclocking LVDS\n");
 
-		/* Unlock panel regs */
-		I915_WRITE(PP_CONTROL,
-			   I915_READ(PP_CONTROL) | PANEL_UNLOCK_REGS);
+		assert_panel_unlocked(dev_priv, pipe);
 
 		dpll &= ~DISPLAY_RATE_SELECT_FPA1;
 		I915_WRITE(dpll_reg, dpll);
@@ -7026,9 +7024,6 @@ static void intel_increase_pllclock(struct drm_crtc *crtc)
 		dpll = I915_READ(dpll_reg);
 		if (dpll & DISPLAY_RATE_SELECT_FPA1)
 			DRM_DEBUG_DRIVER("failed to upclock LVDS!\n");
-
-		/* ...and lock them again */
-		I915_WRITE(PP_CONTROL, I915_READ(PP_CONTROL) & 0x3);
 	}
 
 	/* Schedule downclock */
@@ -7058,9 +7053,7 @@ static void intel_decrease_pllclock(struct drm_crtc *crtc)
 	if (!HAS_PIPE_CXSR(dev) && intel_crtc->lowfreq_avail) {
 		DRM_DEBUG_DRIVER("downclocking LVDS\n");
 
-		/* Unlock panel regs */
-		I915_WRITE(PP_CONTROL, I915_READ(PP_CONTROL) |
-			   PANEL_UNLOCK_REGS);
+		assert_panel_unlocked(dev_priv, pipe);
 
 		dpll |= DISPLAY_RATE_SELECT_FPA1;
 		I915_WRITE(dpll_reg, dpll);
@@ -7068,9 +7061,6 @@ static void intel_decrease_pllclock(struct drm_crtc *crtc)
 		dpll = I915_READ(dpll_reg);
 		if (!(dpll & DISPLAY_RATE_SELECT_FPA1))
 			DRM_DEBUG_DRIVER("failed to downclock LVDS!\n");
-
-		/* ...and lock them again */
-		I915_WRITE(PP_CONTROL, I915_READ(PP_CONTROL) & 0x3);
 	}
 
 }
