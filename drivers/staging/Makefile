@@ -56,3 +56,4 @@ obj-$(CONFIG_DRM_OMAP)		+= omapdrm/
 obj-$(CONFIG_ANDROID)		+= android/
 obj-$(CONFIG_OMAP_THERMAL)      += thermal_framework/
 obj-$(CONFIG_PHONE)		+= telephony/
+obj-$(CONFIG_RAMSTER)		+= ramster/
