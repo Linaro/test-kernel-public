@@ -272,7 +272,7 @@ int omap_framebuffer_replace(struct drm_framebuffer *a,
 			ret = omap_gem_get_paddr(pb->bo, &pb->paddr, true);
 	}
 
-	if (ret) {
+	if (ret && a) {
 		/* something went wrong.. unpin what has been pinned */
 		for (i = 0; i < nb; i++) {
 			struct plane *pb = &ofba->planes[i];
