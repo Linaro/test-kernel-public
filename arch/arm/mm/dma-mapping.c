@@ -528,6 +528,9 @@ static void __free_from_contiguous(struct device *dev, struct page *page,
 
 #else	/* !CONFIG_MMU */
 
+#define __dma_alloc_remap(page, size, gfp, prot, c)	page_address(page)
+#define __dma_free_remap(addr, size)			do { } while (0)
+
 #define nommu() 1
 
 #define __alloc_remap_buffer(dev, size, gfp, prot, ret, c)	NULL
@@ -535,7 +538,6 @@ static void __free_from_contiguous(struct device *dev, struct page *page,
 #define __alloc_from_contiguous(dev, size, prot, ret)		NULL
 #define __free_from_pool(cpu_addr, size)			0
 #define __free_from_contiguous(dev, page, size)			do { } while (0)
-#define __dma_free_remap(cpu_addr, size)			do { } while (0)
 
 #endif	/* CONFIG_MMU */
 
