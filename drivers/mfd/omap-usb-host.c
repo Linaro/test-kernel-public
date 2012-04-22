@@ -24,8 +24,11 @@
 #include <linux/clk.h>
 #include <linux/dma-mapping.h>
 #include <linux/spinlock.h>
-#include <plat/usb.h>
+#include <linux/gpio.h>
 #include <linux/pm_runtime.h>
+
+#include <plat/usb.h>
+#include <plat/cpu.h>
 
 #define USBHS_DRIVER_NAME	"usbhs_omap"
 #define OMAP_EHCI_DEVICE	"ehci-omap"
