@@ -1,0 +1,57 @@
+#!/bin/bash
+
+SRC=$1
+OBJ=$2
+MACH=$3
+PLAT1=$4
+PLAT2=$5
+
+# create $3 to include $2 if it doesn't already have the correct
+# contents, or remove it if it's no longer needed.
+mkfile()
+{
+	if [ -e $1/$2 ] ; then
+		if [ ! -e $3 ] ; then
+			mkdir -p ${3%/*}
+			echo "#include <${2}>" > $3
+		elif [ "`cat $3`" != "#include <${2#./}>" ] ; then
+			echo "#include <${2}>" > $3
+		fi
+	elif [ ! -e $1/$2 -a -e $3 ] ; then
+		rm -f $3
+	fi
+}
+
+# list any header files that are present in the source or
+# destination directories
+find_files()
+{
+	pushd ${SRC}/arch/arm/$1-$2/include/$1-$2 >/dev/null 2>&1 &&
+	find . -type f -name \*.h -o -name \*.S &&
+	popd > /dev/null 2>&1
+	pushd ${OBJ}/arch/arm/include/generated/$1 >/dev/null 2>&1 &&
+	find . -type f -name \*.h -o -name \*.S &&
+	popd > /dev/null 2>&1
+}
+
+# process files in either mach-{MACH} or plat-${PLAT}
+mkfiles()
+{
+	mkdir -p ${OBJ}/arch/arm/include/generated/$1
+
+	FILES=`find_files $1 $2 | sort -u`
+	for i in ${FILES} ; do
+		mkfile "${SRC}/arch/arm/$1-$2/include/" "$1-$2/${i#./}" \
+			"${OBJ}/arch/arm/include/generated/$1/$i"
+	done
+}
+
+# always process mach-*
+mkfiles mach ${MACH}
+# process plat-* if applicable
+if [ -d ${SRC}/arch/arm/plat-${PLAT1} ]; then
+	mkfiles plat ${PLAT1}
+fi
+if [ -d ${SRC}/arch/arm/plat-${PLAT2} ]; then
+	mkfiles plat ${PLAT2}
+fi
