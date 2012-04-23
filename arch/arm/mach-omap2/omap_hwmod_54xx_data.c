@@ -1372,8 +1372,16 @@ static struct omap_hwmod omap54xx_dsp_hwmod = {
  * display sub-system
  */
 
+static struct omap_hwmod_class_sysconfig omap54xx_dss_sysc = {
+	.rev_offs	= 0x0000,
+	.syss_offs	= 0x0014,
+	.sysc_flags	= SYSS_HAS_RESET_STATUS,
+};
+
 static struct omap_hwmod_class omap54xx_dss_hwmod_class = {
 	.name	= "dss",
+	.sysc	= &omap54xx_dss_sysc,
+	.reset	= omap_dss_reset,
 };
 
 /* dss */
