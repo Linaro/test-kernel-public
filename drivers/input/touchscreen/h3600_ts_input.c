@@ -39,8 +39,8 @@
 #include <linux/delay.h>
 
 /* SA1100 serial defines */
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/hardware.h>
+#include <mach-sa1100/irqs.h>
 
 #define DRIVER_DESC	"H3600 touchscreen driver"
 

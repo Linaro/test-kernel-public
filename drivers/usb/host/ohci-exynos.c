@@ -13,7 +13,7 @@
 
 #include <linux/clk.h>
 #include <linux/platform_device.h>
-#include <mach/ohci.h>
+#include <mach-exynos/ohci.h>
 #include <plat-samsung/usb-phy.h>
 
 struct exynos_ohci_hcd {

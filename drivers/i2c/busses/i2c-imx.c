@@ -53,9 +53,9 @@
 #include <linux/of_i2c.h>
 #include <linux/pinctrl/consumer.h>
 
-#include <mach/irqs.h>
-#include <mach/hardware.h>
-#include <mach/i2c.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/i2c.h>
 
 /** Defines ********************************************************************
 *******************************************************************************/

@@ -28,8 +28,8 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 
-#include <mach/mfp.h>
-#include <mach/i2c.h>
+#include <mach-w90x900/mfp.h>
+#include <mach-w90x900/i2c.h>
 
 /* nuc900 i2c registers offset */
 

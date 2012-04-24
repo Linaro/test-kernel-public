@@ -48,7 +48,7 @@
 #include <linux/module.h>
 
 #include <asm/irq.h>
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <asm/io.h>
 #include <asm/mach-types.h>
 

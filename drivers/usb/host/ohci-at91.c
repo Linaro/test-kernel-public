@@ -17,11 +17,11 @@
 #include <linux/of_platform.h>
 #include <linux/of_gpio.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/gpio.h>
 
-#include <mach/board.h>
-#include <mach/cpu.h>
+#include <mach-at91/board.h>
+#include <mach-at91/cpu.h>
 
 #ifndef CONFIG_ARCH_AT91
 #error "CONFIG_ARCH_AT91 must be defined."

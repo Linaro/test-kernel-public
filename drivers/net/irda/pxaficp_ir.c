@@ -27,10 +27,10 @@
 #include <net/irda/wrapper.h>
 #include <net/irda/irda_device.h>
 
-#include <mach/dma.h>
-#include <mach/irda.h>
-#include <mach/regs-uart.h>
-#include <mach/regs-ost.h>
+#include <mach-pxa/dma.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/regs-uart.h>
+#include <mach-pxa/regs-ost.h>
 
 #define FICP		__REG(0x40800000)  /* Start of FICP area */
 #define ICCR0		__REG(0x40800000)  /* ICP Control Register 0 */

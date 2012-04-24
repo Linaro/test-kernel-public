@@ -39,7 +39,7 @@
 #include <linux/of_gpio.h>
 #include <linux/pinctrl/consumer.h>
 
-#include <mach/spi.h>
+#include <mach-imx/spi.h>
 
 #define DRIVER_NAME "spi_imx"
 

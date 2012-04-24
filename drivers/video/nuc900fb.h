@@ -15,8 +15,8 @@
 #ifndef __NUC900FB_H
 #define __NUC900FB_H
 
-#include <mach/map.h>
-#include <mach/fb.h>
+#include <mach-w90x900/map.h>
+#include <mach-w90x900/fb.h>
 
 enum nuc900_lcddrv_type {
 	LCDDRV_NUC910,

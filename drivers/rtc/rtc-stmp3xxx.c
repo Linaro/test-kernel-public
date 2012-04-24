@@ -26,7 +26,7 @@
 #include <linux/rtc.h>
 #include <linux/slab.h>
 
-#include <mach/common.h>
+#include <mach-mxs/common.h>
 
 #define STMP3XXX_RTC_CTRL			0x0
 #define STMP3XXX_RTC_CTRL_SET			0x4

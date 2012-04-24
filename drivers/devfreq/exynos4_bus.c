@@ -30,7 +30,7 @@
 extern unsigned int exynos_result_of_asv;
 #endif
 
-#include <mach/regs-clock.h>
+#include <mach-exynos/regs-clock.h>
 
 #include <plat-samsung/map-s5p.h>
 

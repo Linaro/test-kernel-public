@@ -25,7 +25,7 @@
 #include <linux/platform_device.h>
 
 #include <asm/io.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/mach-types.h>
 
 struct sharpsl_nand {

@@ -30,7 +30,7 @@
 #include <linux/dma-mapping.h>
 #include <linux/dmaengine.h>
 #include <linux/pfn.h>
-#include <mach/usb.h>
+#include <mach-ux500/usb.h>
 #include "musb_core.h"
 
 struct ux500_dma_channel {

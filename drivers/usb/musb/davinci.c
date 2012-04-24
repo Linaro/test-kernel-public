@@ -33,7 +33,7 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 
-#include <mach/cputype.h>
+#include <mach-davinci/cputype.h>
 
 #include <asm/mach-types.h>
 

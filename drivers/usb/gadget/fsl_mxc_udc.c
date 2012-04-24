@@ -18,7 +18,7 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 static struct clk *mxc_ahb_clk;
 static struct clk *mxc_usb_clk;

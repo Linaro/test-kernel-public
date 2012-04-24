@@ -20,12 +20,12 @@
 #include <linux/clk.h>
 #include <linux/gpio.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/io.h>
 #include <asm/mach-types.h>
 
 #include <plat-omap/mux.h>
-#include <mach/irqs.h>
+#include <plat-omap/irqs.h>
 #include <plat-omap/fpga.h>
 #include <plat-omap/usb.h>
 

@@ -25,7 +25,7 @@
 #include <linux/clk.h>
 #include <linux/dma-mapping.h>
 #include <linux/slab.h>
-#include <mach/sram.h>
+#include <mach-davinci/sram.h>
 
 #define DRV_NAME "pruss_uio"
 #define DRV_VERSION "1.0"

@@ -33,7 +33,7 @@
 #include <linux/uaccess.h>
 #include <linux/timer.h>
 #include <linux/jiffies.h>
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 #define DRIVER_NAME "imx2-wdt"
 

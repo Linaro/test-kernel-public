@@ -26,7 +26,7 @@
 #include <linux/backlight.h>
 #include <linux/slab.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <plat-omap/board.h>
 #include <plat-omap/mux.h>
 

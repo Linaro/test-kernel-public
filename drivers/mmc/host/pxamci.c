@@ -33,9 +33,9 @@
 
 #include <asm/sizes.h>
 
-#include <mach/hardware.h>
-#include <mach/dma.h>
-#include <mach/mmc.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/dma.h>
+#include <mach-pxa/mmc.h>
 
 #include "pxamci.h"
 

@@ -25,12 +25,12 @@
 #include <linux/prefetch.h>
 
 #include <asm/byteorder.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 
 #include <linux/usb.h>
 #include <linux/usb/ch9.h>
 #include <linux/usb/gadget.h>
-#include <mach/udc.h>
+#include <mach-pxa/udc.h>
 
 #include "pxa27x_udc.h"
 

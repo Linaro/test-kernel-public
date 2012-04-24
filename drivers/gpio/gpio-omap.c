@@ -26,9 +26,9 @@
 #include <linux/of_device.h>
 #include <linux/irqdomain.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/irq.h>
-#include <mach/irqs.h>
+#include <plat-omap/irqs.h>
 #include <asm/gpio.h>
 #include <asm/mach/irq.h>
 
