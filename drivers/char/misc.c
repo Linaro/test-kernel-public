@@ -115,13 +115,19 @@ static int misc_open(struct inode * inode, struct file * file)
 	struct miscdevice *c;
 	int err = -ENODEV;
 	const struct file_operations *old_fops, *new_fops = NULL;
+	int sanity = 20;
 
 	mutex_lock(&misc_mtx);
-	
+
 	list_for_each_entry(c, &misc_list, list) {
+		pr_info("%s\n", c->name);
 		if (c->minor == minor) {
 			new_fops = fops_get(c->fops);		
 			break;
+		}
+		if (sanity-- == 0) {
+			pr_err("misc_open: sanity\n");
+			goto fail;
 		}
 	}
 		
@@ -218,6 +224,8 @@ int misc_register(struct miscdevice * misc)
 		err = PTR_ERR(misc->this_device);
 		goto out;
 	}
+
+	pr_err("---------- adding misc device %s\n", misc->name);
 
 	/*
 	 * Add it to the front, so that later devices can "override"
