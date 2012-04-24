@@ -23,7 +23,7 @@
 #include <linux/hw_random.h>
 
 #include <asm/io.h>
-#include <mach/hardware.h>
+#include <mach-ixp4xx/hardware.h>
 
 
 static int ixp4xx_rng_data_read(struct hwrng *rng, u32 *buffer)

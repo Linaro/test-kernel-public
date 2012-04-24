@@ -24,7 +24,7 @@
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>
 #include <asm/io.h>
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <asm/sizes.h>
 #include <linux/gpio.h>
 #include <plat-omap/board-ams-delta.h>
