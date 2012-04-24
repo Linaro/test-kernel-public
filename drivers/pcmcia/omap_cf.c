@@ -20,7 +20,7 @@
 
 #include <pcmcia/ss.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <asm/io.h>
 #include <asm/sizes.h>
 

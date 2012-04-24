@@ -39,7 +39,7 @@
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/pm_runtime.h>
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <plat-omap/board.h>
 #include <plat-omap/mmc.h>
 #include <plat-omap/cpu.h>

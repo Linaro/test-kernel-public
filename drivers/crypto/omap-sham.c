@@ -39,7 +39,7 @@
 
 #include <plat-omap/cpu.h>
 #include <plat-omap/dma.h>
-#include <mach/irqs.h>
+#include <mach-omap2/irqs.h>
 
 #define SHA_REG_DIGEST(x)		(0x00 + ((x) * 0x04))
 #define SHA_REG_DIN(x)			(0x1C + ((x) * 0x04))

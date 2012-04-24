@@ -18,7 +18,7 @@
 #include <linux/cpufreq.h>
 #include <linux/suspend.h>
 
-#include <mach/cpufreq.h>
+#include <mach-exynos/cpufreq.h>
 
 #include <plat-samsung/cpu.h>
 
