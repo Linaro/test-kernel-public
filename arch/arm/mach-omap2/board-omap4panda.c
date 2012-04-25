@@ -664,6 +664,12 @@ static void __init omap4_panda_init(void)
 	omap4_panda_display_init();
 }
 
+static void __init omap4_panda_map_io(void)
+{
+        omap2_set_globals_443x();
+        omap44xx_map_common_io();
+}
+
 static const char *omap4_panda_match[] = {
 	"ti,omap4-panda",
 	NULL,
