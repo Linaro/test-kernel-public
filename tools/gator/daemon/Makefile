@@ -17,7 +17,7 @@ CPP=$(CROSS_COMPILE)g++
 # -std=c++98 is the 1998 c++ standard
 # -march=armv5t is required to set the minimum architecture
 # -mthumb-interwork is required for interworking to ARM or Thumb stdlibc
-CFLAGS=-O3 -Wall -Werror -march=armv5t -mthumb-interwork
+CFLAGS=-O3 -Wall -Werror
 TARGET=gatord
 CPP_SRC = $(wildcard *.cpp)
 TGT_OBJS = $(CPP_SRC:%.cpp=%.o)
