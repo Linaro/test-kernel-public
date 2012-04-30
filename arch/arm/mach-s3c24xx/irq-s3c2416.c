@@ -194,7 +194,7 @@ static struct irq_chip s3c2416_irq_uart3 = {
 
 /* IRQ initialisation code */
 
-static int __init s3c2416_add_sub(unsigned int base,
+static int s3c2416_add_sub(unsigned int base,
 				   void (*demux)(unsigned int,
 						 struct irq_desc *),
 				   struct irq_chip *chip,
