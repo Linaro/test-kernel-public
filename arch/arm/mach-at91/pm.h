@@ -75,7 +75,7 @@ static inline void at91sam9g45_standby(void)
  * FIXME either or both the SDRAM controllers (EB0, EB1) might be in use;
  * handle those cases both here and in the Suspend-To-RAM support.
  */
-#warning Assuming EB1 SDRAM controller is *NOT* used
+//#warning Assuming EB1 SDRAM controller is *NOT* used
 #endif
 
 static inline void at91sam9_standby(void)
