@@ -292,7 +292,7 @@ static struct platform_device *da850_evm_devices[] = {
 #define DA8XX_AEMIF_CE2CFG_OFFSET	0x10
 #define DA8XX_AEMIF_ASIZE_16BIT		0x1
 
-static void __init da850_evm_init_nor(void)
+static void da850_evm_init_nor(void)
 {
 	void __iomem *aemif_addr;
 
