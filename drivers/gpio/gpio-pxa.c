@@ -28,6 +28,10 @@
 
 #include <mach/irqs.h>
 
+#ifdef CONFIG_ARCH_MMP
+#include <mach-mmp/irqs.h>
+#endif
+
 /*
  * We handle the GPIOs by banks, each bank covers up to 32 GPIOs with
  * one set of registers. The register offsets are organized below:
