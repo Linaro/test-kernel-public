@@ -549,7 +549,7 @@ static char *get_partition_name(int i)
 
 static uint64_t divide(uint64_t n, uint32_t d)
 {
-	do_div(n, d);
+	__do_div_asm(n, d);
 	return n;
 }
 
