@@ -108,6 +108,9 @@ AFLAGS_THUMB2	:=$(CFLAGS_THUMB2) -Wa$(comma)-mthumb
 ifeq ($(CONFIG_THUMB2_AVOID_R_ARM_THM_JUMP11),y)
 CFLAGS_MODULE	+=-fno-optimize-sibling-calls
 endif
+else
+CFLAGS_THUMB2   :=-marm
+AFLAGS_THUMB2	:=-marm
 endif
 
 # Need -Uarm for gcc < 3.x
