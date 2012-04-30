@@ -27,6 +27,7 @@
 
 #include <linux/mtd/mtd.h>
 #include <linux/mutex.h>
+#include <linux/io.h>
 
 #define DoC_Sig1 0
 #define DoC_Sig2 1
@@ -92,8 +93,8 @@
  * Others use readb/writeb
  */
 #if defined(__arm__)
-#define ReadDOC_(adr, reg)      ((unsigned char)(*(volatile __u32 *)(((unsigned long)adr)+((reg)<<2))))
-#define WriteDOC_(d, adr, reg)  do{ *(volatile __u32 *)(((unsigned long)adr)+((reg)<<2)) = (__u32)d; wmb();} while(0)
+#define ReadDOC_(adr, reg)      ((unsigned char)(__raw_readl((((unsigned long)adr)+((reg)<<2)))))
+#define WriteDOC_(d, adr, reg)  do{ __raw_writel(d, ((unsigned long)adr)+((reg)<<2));  wmb();} while(0)
 #define DOC_IOREMAP_LEN 0x8000
 #elif defined(__ppc__)
 #define ReadDOC_(adr, reg)      ((unsigned char)(*(volatile __u16 *)(((unsigned long)adr)+((reg)<<1))))
