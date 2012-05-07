@@ -33,6 +33,7 @@
 #include <video/omapdss.h>
 #include <plat-omap/vram.h>
 #include <plat-omap/vrfb.h>
+#include <plat-omap/cpu.h>
 
 #include "omapfb.h"
 

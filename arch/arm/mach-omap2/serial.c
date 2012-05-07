@@ -28,6 +28,7 @@
 #include <linux/console.h>
 
 #include <plat-omap/omap-serial.h>
+#include <plat-omap/hardware.h>
 #include "common.h"
 #include <plat-omap/board.h>
 #include <plat-omap/dma.h>

@@ -18,6 +18,7 @@
 #include <linux/smc91x.h>
 
 #include <plat-omap/board.h>
+#include <plat-omap/cpu.h>
 #include <plat-omap/gpmc.h>
 #include <plat-omap/gpmc-smc91x.h>
 

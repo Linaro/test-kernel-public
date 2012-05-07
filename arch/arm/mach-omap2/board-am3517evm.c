@@ -35,6 +35,7 @@
 #include <plat-omap/board.h>
 #include "common.h"
 #include <plat-omap/usb.h>
+#include <plat-omap/gpio.h>
 #include <video/omapdss.h>
 #include <video/omap-panel-generic-dpi.h>
 #include <video/omap-panel-tfp410.h>

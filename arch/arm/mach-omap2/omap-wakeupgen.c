@@ -29,6 +29,7 @@
 
 #include <mach-omap2/omap-wakeupgen.h>
 #include <mach-omap2/omap-secure.h>
+#include <plat-omap/irqs.h>
 
 #include "omap4-sar-layout.h"
 #include "common.h"

@@ -15,6 +15,7 @@
 #include <linux/delay.h>
 #include <linux/gpio.h>
 #include <mach-omap2/hardware.h>
+#include <plat-omap/gpio.h>
 #include <plat-omap/mmc.h>
 #include <plat-omap/omap-pm.h>
 #include <plat-omap/mux.h>

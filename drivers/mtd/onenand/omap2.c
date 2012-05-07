@@ -43,6 +43,7 @@
 #include <asm/gpio.h>
 
 #include <plat-omap/dma.h>
+#include <plat-omap/cpu.h>
 
 #include <plat-omap/board.h>
 
