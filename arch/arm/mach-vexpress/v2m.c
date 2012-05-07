@@ -35,6 +35,7 @@
 
 #include <mach-vexpress/ct-ca9x4.h>
 #include <mach-vexpress/motherboard.h>
+#include <mach-vexpress/clkdev.h>
 
 #include <plat-versatile/sched_clock.h>
 
