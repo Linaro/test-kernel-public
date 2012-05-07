@@ -36,7 +36,7 @@
 #include <linux/slab.h>
 #include <linux/delay.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <plat-omap/dma.h>
 
 #include <plat-omap/tc.h>

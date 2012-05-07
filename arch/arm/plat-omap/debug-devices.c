@@ -15,7 +15,7 @@
 #include <linux/io.h>
 #include <linux/smc91x.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 
 #include <plat-omap/board.h>
 

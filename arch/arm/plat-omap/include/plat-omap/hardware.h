@@ -1,5 +1,5 @@
 /*
- * arch/arm/plat-omap/include/mach/hardware.h
+ * arch/arm/plat-omap/include/plat-omap/hardware.h
  *
  * Hardware definitions for TI OMAP processors and boards
  *
@@ -42,6 +42,10 @@
 #include <plat-omap/cpu.h>
 #endif
 #include <plat-omap/serial.h>
+
+#ifdef CONFIG_ARCH_OMAP1
+#include <mach-omap1/hardware.h>
+#endif
 
 /*
  * ---------------------------------------------------------------------------

@@ -36,6 +36,7 @@ static inline u32 omap_cs3_phys(void)
 }
 
 #endif
-#endif
 
 #include <plat-omap/hardware.h>
+
+#endif

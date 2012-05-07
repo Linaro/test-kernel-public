@@ -1,5 +1,5 @@
 /*
- *  arch/arm/plat-omap/include/mach/irqs.h
+ *  arch/arm/plat-omap/include/plat-omap/irqs.h
  *
  *  Copyright (C) Greg Lonnon 2001
  *  Updated for OMAP-1610 by Tony Lindgren <tony@atomide.com>
@@ -444,7 +444,7 @@
 #define INTCPS_NR_MIR_REGS	3
 #define INTCPS_NR_IRQS		96
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 
 #ifdef CONFIG_FIQ
 #define FIQ_START		1024
