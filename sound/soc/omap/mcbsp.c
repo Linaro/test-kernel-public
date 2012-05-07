@@ -26,6 +26,7 @@
 #include <linux/slab.h>
 
 #include <plat-omap/mcbsp.h>
+#include <plat-omap/cpu.h>
 
 #include "mcbsp.h"
 

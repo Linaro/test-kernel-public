@@ -37,6 +37,7 @@
 #include <plat-omap/dma.h>
 #include <plat-omap/mux.h>
 #include <plat-omap/fpga.h>
+#include <plat-omap/cpu.h>
 
 #define	OMAP_MMC_REG_CMD	0x00
 #define	OMAP_MMC_REG_ARGL	0x01

@@ -34,6 +34,7 @@
 
 #include <plat-omap/dma.h>
 #include <plat-omap/mcbsp.h>
+#include <plat-omap/cpu.h>
 #include "mcbsp.h"
 #include "omap-mcbsp.h"
 #include "omap-pcm.h"

@@ -32,6 +32,7 @@
 #include <plat-omap/omap_hwmod.h>
 #include <plat-omap/multi.h>
 #include <plat-omap/dma.h>
+#include <plat-omap/hardware.h>
 
 #include "iomap.h"
 #include "voltage.h"

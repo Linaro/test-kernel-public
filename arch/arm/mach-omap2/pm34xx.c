@@ -39,6 +39,7 @@
 #include <plat-omap/sdrc.h>
 #include <plat-omap/prcm.h>
 #include <plat-omap/gpmc.h>
+#include <plat-omap/gpio.h>
 #include <plat-omap/dma.h>
 
 #include "common.h"

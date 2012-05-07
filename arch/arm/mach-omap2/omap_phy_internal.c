@@ -29,6 +29,7 @@
 #include <linux/usb.h>
 
 #include <plat-omap/usb.h>
+#include <plat-omap/hardware.h>
 #include "control.h"
 
 /* OMAP control module register for UTMI PHY */

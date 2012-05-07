@@ -941,6 +941,7 @@ config ARCH_OMAP
 	select CLKSRC_MMIO
 	select GENERIC_CLOCKEVENTS
 	select ARCH_HAS_HOLES_MEMORYMODEL
+	select MAY_HAVE_SPARSE_IRQ
 	help
 	  Support for TI's OMAP platform (OMAP1/2/3/4).
 

@@ -45,6 +45,8 @@
 #include <plat-omap/omap_hwmod.h>
 #include <plat-omap/omap_device.h>
 #include <plat-omap/omap-pm.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
 
 #include "powerdomain.h"
 

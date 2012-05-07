@@ -38,6 +38,7 @@
 #include <plat-omap/clock.h>
 #include <plat-omap/sram.h>
 #include <plat-omap/dma.h>
+#include <plat-omap/gpio.h>
 #include <plat-omap/board.h>
 
 #include <mach-omap2/irqs.h>

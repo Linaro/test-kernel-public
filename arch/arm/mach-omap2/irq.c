@@ -23,6 +23,7 @@
 #include <linux/of_address.h>
 
 #include <mach-omap2/hardware.h>
+#include <mach-omap2/irqs.h>
 
 #include "iomap.h"
 #include "common.h"

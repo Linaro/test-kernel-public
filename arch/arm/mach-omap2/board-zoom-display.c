@@ -15,6 +15,7 @@
 #include <linux/i2c/twl.h>
 #include <linux/spi/spi.h>
 #include <plat-omap/mcspi.h>
+#include <plat-omap/cpu.h>
 #include <video/omapdss.h>
 #include <mach-omap2/board-zoom.h>
 

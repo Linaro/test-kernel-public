@@ -29,6 +29,9 @@
 #include <plat-omap/gpmc.h>
 
 #include <plat-omap/sdrc.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
 
 /* GPMC register offsets */
 #define GPMC_REVISION		0x00
