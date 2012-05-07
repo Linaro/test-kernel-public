@@ -27,6 +27,7 @@
 #include "core.h"
 
 #include <mach-vexpress/motherboard.h>
+#include <mach-vexpress/irqs.h>
 
 #include <plat-versatile/clcd.h>
 
