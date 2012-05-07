@@ -38,6 +38,7 @@
 
 #include <plat-omap/hardware.h>
 #include <plat-omap/dma.h>
+#include <plat-omap/irqs.h>
 
 #include <plat-omap/tc.h>
 

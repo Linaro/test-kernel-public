@@ -27,6 +27,7 @@
 #include <plat-omap/omap_hwmod.h>
 #include <plat-omap/omap_device.h>
 #include <plat-omap/mmc.h>
+#include <plat-omap/irqs.h>
 
 #include "common.h"
 #include "control.h"

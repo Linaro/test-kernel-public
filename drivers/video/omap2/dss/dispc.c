@@ -38,6 +38,7 @@
 #include <linux/pm_runtime.h>
 
 #include <plat-omap/clock.h>
+#include <plat-omap/cpu.h>
 
 #include <video/omapdss.h>
 

@@ -17,6 +17,7 @@
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
 
+#include <plat-omap/serial.h>
 #include <plat-omap/gpmc.h>
 #include <plat-omap/gpmc-smsc911x.h>
 
