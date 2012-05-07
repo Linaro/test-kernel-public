@@ -28,7 +28,7 @@
 
 #include <linux/io.h>
 #include <linux/platform_device.h>
-#include <mach/irqs.h>
+#include <plat-omap/irqs.h>
 
 #define OMAP1_MPUIO_BASE			0xfffb5000
 

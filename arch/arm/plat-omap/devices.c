@@ -17,7 +17,7 @@
 #include <linux/slab.h>
 #include <linux/memblock.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 #include <asm/memblock.h>

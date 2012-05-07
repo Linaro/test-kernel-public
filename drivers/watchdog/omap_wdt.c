@@ -45,7 +45,7 @@
 #include <linux/uaccess.h>
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <plat-omap/prcm.h>
 
 #include "omap_wdt.h"

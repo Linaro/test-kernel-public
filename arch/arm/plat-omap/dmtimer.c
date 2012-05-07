@@ -43,7 +43,7 @@
 
 #include <plat-omap/dmtimer.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 
 static LIST_HEAD(omap_timer_list);
 static DEFINE_SPINLOCK(dm_timer_lock);

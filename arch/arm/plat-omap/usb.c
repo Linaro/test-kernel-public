@@ -29,7 +29,7 @@
 #include <plat-omap/usb.h>
 #include <plat-omap/board.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 
 #ifdef	CONFIG_ARCH_OMAP_OTG
 

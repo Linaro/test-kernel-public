@@ -13,7 +13,7 @@
 #include <linux/leds.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 

@@ -31,7 +31,7 @@
 #include <linux/err.h>
 #include <linux/clk.h>
 
-#include <mach/irqs.h>
+#include <plat-omap/irqs.h>
 #include <plat-omap/mux.h>
 #include <plat-omap/i2c.h>
 #include <plat-omap/omap-pm.h>

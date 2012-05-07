@@ -34,7 +34,7 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <mach-omap1/hardware.h>
+#include <plat-omap/hardware.h>
 
 #include "common.h"
 

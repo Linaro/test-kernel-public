@@ -39,7 +39,7 @@
 #include <plat-omap/keypad.h>
 #include <plat-omap/menelaus.h>
 #include <asm/irq.h>
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/io.h>
 #include <plat-omap/mux.h>
 
