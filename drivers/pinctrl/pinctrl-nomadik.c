@@ -37,6 +37,12 @@
 
 #include "pinctrl-nomadik.h"
 
+#ifdef CONFIG_ARCH_MULTI_UX500
+#include <mach-ux500/irqs.h>
+#endif
+
+#include <asm/gpio.h>
+
 /*
  * The GPIO module in the Nomadik family of Systems-on-Chip is an
  * AMBA device, managing 32 pins and alternate functions.  The logic block

@@ -16,6 +16,7 @@
 #include <plat-nomadik/ste_dma40.h>
 #include <mach-ux500/devices.h>
 #include <mach-ux500/hardware.h>
+#include <mach-ux500/irqs.h>
 
 #include "devices-db8500.h"
 #include "board-mop500.h"

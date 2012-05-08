@@ -24,6 +24,7 @@
 #include <mach-ux500/setup.h>
 #include <mach-ux500/devices.h>
 #include <mach-ux500/usb.h>
+#include <mach-ux500/irqs.h>
 #include <mach-ux500/db8500-regs.h>
 
 #include "devices-db8500.h"
