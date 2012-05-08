@@ -23,6 +23,8 @@
 #include <asm/mach/time.h>
 #include <mach-imx/common.h>
 #include <mach-imx/mx53.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/hardware.h>
 
 /*
  * Lookup table for attaching a specific name and platform_data pointer to

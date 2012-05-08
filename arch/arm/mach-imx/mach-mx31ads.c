@@ -27,6 +27,7 @@
 #include <asm/mach/time.h>
 #include <asm/memory.h>
 #include <asm/mach/map.h>
+#include <mach-imx/irqs.h>
 #include <mach-imx/common.h>
 #include <mach-imx/iomux-mx3.h>
 

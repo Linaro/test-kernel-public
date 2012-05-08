@@ -30,6 +30,10 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/module.h>
+
+#include <mach-imx/hardware.h>
+#include <mach-imx/irqs.h>
+
 #include <asm-generic/bug.h>
 #include <asm/mach/irq.h>
 

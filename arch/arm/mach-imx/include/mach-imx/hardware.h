@@ -21,6 +21,7 @@
 #define __ASM_ARCH_MXC_HARDWARE_H__
 
 #include <asm/sizes.h>
+#include <mach-imx/irqs.h>
 
 #define addr_in_module(addr, mod) \
 	((unsigned long)(addr) - mod ## _BASE_ADDR < mod ## _SIZE)
