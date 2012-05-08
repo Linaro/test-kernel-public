@@ -148,6 +148,7 @@ static struct exynos_pm_domain *exynos4_pm_domains[] = {
 static __init int exynos4_pm_init_power_domain(void)
 {
 	int idx;
+	struct generic_pm_domain *p;
 
 	if (of_have_populated_dt())
 		return exynos_pm_dt_parse_domains();
@@ -192,6 +193,13 @@ static __init int exynos4_pm_init_power_domain(void)
 #endif
 #ifdef CONFIG_S5P_DEV_G3D
 	exynos_pm_add_dev_to_genpd(&s5p_device_g3d, &exynos4_pd_g3d);
+
+	p = pd_to_genpd(s5p_device_g3d.dev.pm_domain);
+
+	/* This is flag not to call power_off callback */
+	/* pm_genpd_dev_always_on doesn't work with Mali */
+
+	p->status = GPD_STATE_WAIT_MASTER;
 #endif
 #ifdef CONFIG_S5P_DEV_JPEG
 	exynos_pm_add_dev_to_genpd(&s5p_device_jpeg, &exynos4_pd_cam);
