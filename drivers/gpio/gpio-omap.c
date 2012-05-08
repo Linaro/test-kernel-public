@@ -28,9 +28,12 @@
 
 #include <plat-omap/hardware.h>
 #include <plat-omap/irqs.h>
-#include <asm/irq.h>
 #include <asm/gpio.h>
 #include <asm/mach/irq.h>
+
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/gpio.h>
 
 #define OFF_MODE	1
 

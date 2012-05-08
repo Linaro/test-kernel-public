@@ -45,8 +45,9 @@
 #include <asm/mach-types.h>
 
 #include <plat-omap/dma.h>
-
-#include <mach/usb.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/hardware.h>
 
 #include "omap_udc.h"
 

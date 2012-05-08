@@ -19,6 +19,7 @@
 
 #include "virt-dma.h"
 #include <plat-omap/dma.h>
+#include <plat-omap/cpu.h>
 
 struct omap_dmadev {
 	struct dma_device ddev;

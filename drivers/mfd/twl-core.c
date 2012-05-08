@@ -46,7 +46,9 @@
 #include <linux/i2c.h>
 #include <linux/i2c/twl.h>
 
+#ifdef CONFIG_ARCH_OMAP
 #include <plat-omap/cpu.h>
+#endif
 
 #include "twl-core.h"
 

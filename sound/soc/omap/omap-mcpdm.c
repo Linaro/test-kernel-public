@@ -42,6 +42,7 @@
 
 #include <plat-omap/dma.h>
 #include <plat-omap/omap_hwmod.h>
+#include <plat-omap/hardware.h>
 #include "omap-mcpdm.h"
 #include "omap-pcm.h"
 
