@@ -17,6 +17,7 @@
 
 #include <mach-ux500/hardware.h>
 #include <mach-ux500/setup.h>
+#include <mach-ux500/irqs.h>
 
 #include "ste-dma40-db8500.h"
 
