@@ -18,6 +18,7 @@
 #include <asm/mach-types.h>
 
 #include <plat-omap/fpga.h>
+#include <plat-omap/gpio.h>
 
 
 /* Many OMAP development platforms reuse the same "debug board"; these
