@@ -26,12 +26,13 @@
 #include <linux/of_device.h>
 #include <linux/irqdomain.h>
 
-#include <plat-omap/hardware.h>
 #include <asm/irq.h>
-#include <plat-omap/irqs.h>
-#include <plat-omap/gpio.h>
 #include <asm/gpio.h>
 #include <asm/mach/irq.h>
+
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/gpio.h>
 
 #define OFF_MODE	1
 

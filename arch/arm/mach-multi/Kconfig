@@ -38,24 +38,6 @@ config ARCH_MULTI_CPU_AUTO
 	select ARCH_MULTI_V5
 
 comment "SoC family selection"
-
-config ARCH_MULTI_VEXPRESS
-	bool "ARM Ltd. Versatile Express family"
-	depends on ARCH_MULTI_V7
-	select ARCH_VEXPRESS
-	select ARCH_VEXPRESS_DT
-	select ARCH_VEXPRESS_CA9X4
-	select ARCH_WANT_OPTIONAL_GPIOLIB
-	select ARM_AMBA
-	select ARM_TIMER_SP804
-	select CLKDEV_LOOKUP
-	select GENERIC_CLOCKEVENTS
-	select HAVE_CLK
-	select HAVE_PATA_PLATFORM
-	select ICST
-	select PLAT_VERSATILE
-	select PLAT_VERSATILE_CLCD
-
 config ARCH_MULTI_OMAP2PLUS
 	bool
 	select ARCH_OMAP
@@ -141,5 +123,22 @@ config ARCH_MULTI_AUTOSELECT
 	depends on !ARCH_MULTI_UX500
 	depends on !ARCH_MXC
 	select ARCH_MULTI_VEXPRESS
+
+config ARCH_MULTI_VEXPRESS
+	bool "ARM Ltd. Versatile Express family"
+	depends on ARCH_MULTI_V7
+	select ARCH_VEXPRESS
+	select ARCH_VEXPRESS_DT
+	select ARCH_VEXPRESS_CA9X4
+	select ARCH_WANT_OPTIONAL_GPIOLIB
+	select ARM_AMBA
+	select ARM_TIMER_SP804
+	select CLKDEV_LOOKUP
+	select GENERIC_CLOCKEVENTS
+	select HAVE_CLK
+	select HAVE_PATA_PLATFORM
+	select ICST
+	select PLAT_VERSATILE
+	select PLAT_VERSATILE_CLCD
 
 endmenu

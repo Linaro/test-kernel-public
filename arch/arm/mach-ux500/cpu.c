@@ -77,7 +77,9 @@ void __init ux500_init_irq(void)
 
 void __init ux500_init_late(void)
 {
+#ifndef CONFIG_COMMON_CLK
 	clk_debugfs_init();
+#endif
 	clk_init_smp_twd_cpufreq();
 }
 

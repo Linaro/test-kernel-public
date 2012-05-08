@@ -11,7 +11,6 @@
  * (at your option) any later version.
  */
 
-#include <linux/blkdev.h>
 #include <linux/clk.h>
 #include <linux/debugfs.h>
 #include <linux/device.h>

@@ -72,6 +72,7 @@ config HAVE_EPIT
 config MXC_USE_EPIT
 	bool "Use EPIT instead of GPT"
 	depends on HAVE_EPIT
+	depends on BROKEN
 	help
 	  Use EPIT as the system timer on systems that have it. Normally you
 	  don't have a reason to do so as the EPIT has the same features and

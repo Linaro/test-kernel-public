@@ -483,6 +483,7 @@ config MACH_MX31_3DS
 	select IMX_HAVE_PLATFORM_MXC_MMC
 	select IMX_HAVE_PLATFORM_MXC_NAND
 	select IMX_HAVE_PLATFORM_SPI_IMX
+	select IMX_HAVE_PLATFORM_IMX_SSI
 	select MXC_ULPI if USB_ULPI
 	help
 	  Include support for MX31PDK (3DS) platform. This includes specific
