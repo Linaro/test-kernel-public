@@ -42,6 +42,7 @@
 #include <plat-omap/hardware.h>
 #include <asm/io.h>
 #include <plat-omap/mux.h>
+#include <plat-omap/irqs.h>
 
 #undef NEW_BOARD_LEARNING_MODE
 

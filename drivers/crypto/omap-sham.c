@@ -1278,7 +1278,7 @@ static int __devexit omap_sham_remove(struct platform_device *pdev)
 
 static struct platform_driver omap_sham_driver = {
 	.probe	= omap_sham_probe,
-	.remove	= omap_sham_remove,
+	.remove	= __devexit_p(omap_sham_remove),
 	.driver	= {
 		.name	= "omap-sham",
 		.owner	= THIS_MODULE,

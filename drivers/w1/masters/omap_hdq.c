@@ -20,6 +20,7 @@
 
 #include <asm/irq.h>
 #include <mach-omap2/hardware.h>
+#include <plat-omap/irqs.h>
 
 #include "../w1.h"
 #include "../w1_int.h"

@@ -29,7 +29,7 @@
 #include <plat-omap/hardware.h>
 #include <asm/irq.h>
 #include <plat-omap/irqs.h>
-#include <mach-omap2/gpio.h>
+#include <plat-omap/gpio.h>
 #include <asm/gpio.h>
 #include <asm/mach/irq.h>
 
