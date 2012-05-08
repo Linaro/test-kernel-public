@@ -177,7 +177,7 @@ machine-$(CONFIG_ARCH_EXYNOS4)		:= exynos
 machine-$(CONFIG_ARCH_EXYNOS5)		:= exynos
 machine-$(CONFIG_ARCH_SA1100)		:= sa1100
 machine-$(CONFIG_ARCH_SHARK)		:= shark
-machine-$(CONFIG_ARCH_SHMOBILE) 	:= shmobile
+machine-$(CONFIG_ARCH_SHMOBILE)		:= shmobile
 machine-$(CONFIG_ARCH_TEGRA)		:= tegra
 machine-$(CONFIG_ARCH_U300)		:= u300
 machine-$(CONFIG_ARCH_U8500)		:= ux500
@@ -209,6 +209,17 @@ plat-$(CONFIG_PLAT_S5P)		:= samsung
 plat-$(CONFIG_PLAT_SPEAR)	:= spear
 plat-$(CONFIG_PLAT_VERSATILE)	:= versatile
 
+# multiplatform directories
+machine-$(CONFIG_ARCH_MULTIPLATFORM)	:= multi
+machine-$(CONFIG_ARCH_MULTI_VEXPRESS)	+= vexpress
+machine-$(CONFIG_ARCH_MULTI_OMAP2PLUS)	+= omap2
+machine-$(CONFIG_ARCH_MULTI_UX500)	+= ux500
+machine-$(CONFIG_ARCH_MULTI_IMX)	+= imx
+plat-$(CONFIG_VERSATILE)		+= versatile
+plat-$(CONFIG_ARCH_MULTI_OMAP2PLUS)	+= omap
+plat-$(CONFIG_ARCH_MULTI_UX500)		+= nomadik
+plat-$(CONFIG_ARCH_MULTI_IMX)		+= mxc
+
 ifeq ($(CONFIG_ARCH_EBSA110),y)
 # This is what happens if you forget the IOCS16 line.
 # PCMCIA cards stop working.
@@ -226,8 +237,8 @@ else
 MACHINE  :=
 endif
 
-machdirs := $(patsubst %,arch/arm/mach-%/,$(machine-y))
-platdirs := $(patsubst %,arch/arm/plat-%/,$(plat-y))
+machdirs := $(sort $(patsubst %,arch/arm/mach-%/,$(machine-y)))
+platdirs := $(sort $(patsubst %,arch/arm/plat-%/,$(plat-y)))
 
 ifeq ($(KBUILD_SRC),)
 KBUILD_CPPFLAGS += $(patsubst %,-I%include,$(machdirs) $(platdirs))
