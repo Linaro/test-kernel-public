@@ -392,6 +392,7 @@ config OC_ETM
 config ARM_KPROBES_TEST
 	tristate "Kprobes test module"
 	depends on KPROBES && MODULES
+	depends on CPU_V6 || CPU_V7
 	help
 	  Perform tests of kprobes API and instruction set simulation.
 
