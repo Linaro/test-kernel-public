@@ -70,12 +70,16 @@ void __init ux500_init_irq(void)
 	 */
 	if (cpu_is_u8500_family())
 		db8500_prcmu_early_init();
+#ifndef CONFIG_COMMON_CLK
 	clk_init();
+#endif
 }
 
 void __init ux500_init_late(void)
 {
+#ifndef CONFIG_COMMON_CLK
 	clk_debugfs_init();
+#endif
 	clk_init_smp_twd_cpufreq();
 }
 

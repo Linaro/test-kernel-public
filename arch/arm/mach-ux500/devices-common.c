@@ -15,6 +15,7 @@
 #include <plat-nomadik/gpio-nomadik.h>
 
 #include <mach-ux500/hardware.h>
+#include <mach-ux500/irqs.h>
 
 #include "devices-common.h"
 
