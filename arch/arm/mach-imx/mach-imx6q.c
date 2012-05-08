@@ -69,11 +69,10 @@ soft:
 	soft_restart(0);
 }
 
-#ifdef CONFIG_PHYLIB
 /* For imx6q sabrelite board: set KSZ9021RN RGMII pad skew */
 static int ksz9021rn_phy_fixup(struct phy_device *phydev)
 {
-	if (IS_ENABLED(CONFIG_PHYLIB)) {
+	if (IS_BUILTIN(CONFIG_PHYLIB)) {
 		/* min rx data delay */
 		phy_write(phydev, 0x0b, 0x8105);
 		phy_write(phydev, 0x0c, 0x0000);
@@ -86,7 +85,6 @@ static int ksz9021rn_phy_fixup(struct phy_device *phydev)
 
 	return 0;
 }
-#endif
 
 static void __init imx6q_sabrelite_cko1_setup(void)
 {
@@ -115,7 +113,7 @@ put_clk:
 
 static void __init imx6q_sabrelite_init(void)
 {
-	if (IS_ENABLED(CONFIG_PHYLIB))
+	if (IS_BUILTIN(CONFIG_PHYLIB))
 		phy_register_fixup_for_uid(PHY_ID_KSZ9021, MICREL_PHY_ID_MASK,
 				ksz9021rn_phy_fixup);
 	imx6q_sabrelite_cko1_setup();

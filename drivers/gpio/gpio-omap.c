@@ -31,6 +31,10 @@
 #include <asm/gpio.h>
 #include <asm/mach/irq.h>
 
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/gpio.h>
+
 #define OFF_MODE	1
 
 static LIST_HEAD(omap_gpio_list);
