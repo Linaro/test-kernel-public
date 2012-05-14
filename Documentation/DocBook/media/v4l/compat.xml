@@ -2574,6 +2574,10 @@ ioctls.</para>
 	  <para><link linkend="v4l2-auto-focus-area"><constant>
 	  V4L2_CID_AUTO_FOCUS_AREA</constant></link> control.</para>
         </listitem>
+        <listitem>
+	  <para>Importing DMABUF file descriptors as a new IO method described
+	  in <xref linkend="dmabuf" />.</para>
+        </listitem>
       </itemizedlist>
     </section>
 
