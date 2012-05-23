@@ -185,6 +185,7 @@ enum v4l2_memory {
 	V4L2_MEMORY_MMAP             = 1,
 	V4L2_MEMORY_USERPTR          = 2,
 	V4L2_MEMORY_OVERLAY          = 3,
+	V4L2_MEMORY_DMABUF           = 4,
 };
 
 /* see also http://vektor.theorem.ca/graphics/ycbcr/ */
@@ -292,10 +293,10 @@ struct v4l2_pix_format {
 	__u32         		width;
 	__u32			height;
 	__u32			pixelformat;
-	enum v4l2_field  	field;
+	__u32			field;		/* enum v4l2_field */
 	__u32            	bytesperline;	/* for padding, zero if unused */
 	__u32          		sizeimage;
-	enum v4l2_colorspace	colorspace;
+	__u32			colorspace;	/* enum v4l2_colorspace */
 	__u32			priv;		/* private data, depends on pixelformat */
 };
 
@@ -378,7 +379,10 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_SGRBG12 v4l2_fourcc('B', 'A', '1', '2') /* 12  GRGR.. BGBG.. */
 #define V4L2_PIX_FMT_SRGGB12 v4l2_fourcc('R', 'G', '1', '2') /* 12  RGRG.. GBGB.. */
 	/* 10bit raw bayer DPCM compressed to 8 bits */
+#define V4L2_PIX_FMT_SBGGR10DPCM8 v4l2_fourcc('b', 'B', 'A', '8')
+#define V4L2_PIX_FMT_SGBRG10DPCM8 v4l2_fourcc('b', 'G', 'A', '8')
 #define V4L2_PIX_FMT_SGRBG10DPCM8 v4l2_fourcc('B', 'D', '1', '0')
+#define V4L2_PIX_FMT_SRGGB10DPCM8 v4l2_fourcc('b', 'R', 'A', '8')
 	/*
 	 * 10bit raw bayer, expanded to 16 bits
 	 * xxxxrrrrrrrrrrxxxxgggggggggg xxxxggggggggggxxxxbbbbbbbbbb...
@@ -432,7 +436,7 @@ struct v4l2_pix_format {
  */
 struct v4l2_fmtdesc {
 	__u32		    index;             /* Format number      */
-	enum v4l2_buf_type  type;              /* buffer type        */
+	__u32		    type;              /* enum v4l2_buf_type */
 	__u32               flags;
 	__u8		    description[32];   /* Description string */
 	__u32		    pixelformat;       /* Format fourcc      */
@@ -573,8 +577,8 @@ struct v4l2_jpegcompression {
  */
 struct v4l2_requestbuffers {
 	__u32			count;
-	enum v4l2_buf_type      type;
-	enum v4l2_memory        memory;
+	__u32			type;		/* enum v4l2_buf_type */
+	__u32			memory;		/* enum v4l2_memory */
 	__u32			reserved[2];
 };
 
@@ -588,6 +592,8 @@ struct v4l2_requestbuffers {
  *			should be passed to mmap() called on the video node)
  * @userptr:		when memory is V4L2_MEMORY_USERPTR, a userspace pointer
  *			pointing to this plane
+ * @fd:			when memory is V4L2_MEMORY_DMABUF, a userspace file
+ *			descriptor associated with this plane
  * @data_offset:	offset in the plane to the start of data; usually 0,
  *			unless there is a header in front of the data
  *
@@ -602,6 +608,7 @@ struct v4l2_plane {
 	union {
 		__u32		mem_offset;
 		unsigned long	userptr;
+		int		fd;
 	} m;
 	__u32			data_offset;
 	__u32			reserved[11];
@@ -610,20 +617,24 @@ struct v4l2_plane {
 /**
  * struct v4l2_buffer - video buffer info
  * @index:	id number of the buffer
- * @type:	buffer type (type == *_MPLANE for multiplanar buffers)
+ * @type:	enum v4l2_buf_type; buffer type (type == *_MPLANE for
+ *		multiplanar buffers);
  * @bytesused:	number of bytes occupied by data in the buffer (payload);
  *		unused (set to 0) for multiplanar buffers
  * @flags:	buffer informational flags
- * @field:	field order of the image in the buffer
+ * @field:	enum v4l2_field; field order of the image in the buffer
  * @timestamp:	frame timestamp
  * @timecode:	frame timecode
  * @sequence:	sequence count of this frame
- * @memory:	the method, in which the actual video data is passed
+ * @memory:	enum v4l2_memory; the method, in which the actual video data is
+ *		passed
  * @offset:	for non-multiplanar buffers with memory == V4L2_MEMORY_MMAP;
  *		offset from the start of the device memory for this plane,
  *		(or a "cookie" that should be passed to mmap() as offset)
  * @userptr:	for non-multiplanar buffers with memory == V4L2_MEMORY_USERPTR;
  *		a userspace pointer pointing to this buffer
+ * @fd:		for non-multiplanar buffers with memory == V4L2_MEMORY_DMABUF;
+ *		a userspace file descriptor associated with this buffer
  * @planes:	for multiplanar buffers; userspace pointer to the array of plane
  *		info structs for this buffer
  * @length:	size in bytes of the buffer (NOT its payload) for single-plane
@@ -636,20 +647,21 @@ struct v4l2_plane {
  */
 struct v4l2_buffer {
 	__u32			index;
-	enum v4l2_buf_type      type;
+	__u32			type;
 	__u32			bytesused;
 	__u32			flags;
-	enum v4l2_field		field;
+	__u32			field;
 	struct timeval		timestamp;
 	struct v4l2_timecode	timecode;
 	__u32			sequence;
 
 	/* memory location */
-	enum v4l2_memory        memory;
+	__u32			memory;
 	union {
 		__u32           offset;
 		unsigned long   userptr;
 		struct v4l2_plane *planes;
+		int		fd;
 	} m;
 	__u32			length;
 	__u32			input;
@@ -708,7 +720,7 @@ struct v4l2_clip {
 
 struct v4l2_window {
 	struct v4l2_rect        w;
-	enum v4l2_field  	field;
+	__u32			field;	 /* enum v4l2_field */
 	__u32			chromakey;
 	struct v4l2_clip	__user *clips;
 	__u32			clipcount;
@@ -745,14 +757,14 @@ struct v4l2_outputparm {
  *	I N P U T   I M A G E   C R O P P I N G
  */
 struct v4l2_cropcap {
-	enum v4l2_buf_type      type;
+	__u32			type;	/* enum v4l2_buf_type */
 	struct v4l2_rect        bounds;
 	struct v4l2_rect        defrect;
 	struct v4l2_fract       pixelaspect;
 };
 
 struct v4l2_crop {
-	enum v4l2_buf_type      type;
+	__u32			type;	/* enum v4l2_buf_type */
 	struct v4l2_rect        c;
 };
 
@@ -1040,7 +1052,7 @@ struct v4l2_input {
 	__u8	     name[32];		/*  Label */
 	__u32	     type;		/*  Type of input */
 	__u32	     audioset;		/*  Associated audios (bitfield) */
-	__u32        tuner;             /*  Associated tuner */
+	__u32        tuner;             /*  enum v4l2_tuner_type */
 	v4l2_std_id  std;
 	__u32	     status;
 	__u32	     capabilities;
@@ -1137,6 +1149,8 @@ struct v4l2_ext_controls {
 #define V4L2_CTRL_CLASS_FM_TX 0x009b0000	/* FM Modulator control class */
 #define V4L2_CTRL_CLASS_FLASH 0x009c0000	/* Camera flash controls */
 #define V4L2_CTRL_CLASS_JPEG 0x009d0000		/* JPEG-compression controls */
+#define V4L2_CTRL_CLASS_IMAGE_SOURCE 0x009e0000	/* Image source controls */
+#define V4L2_CTRL_CLASS_IMAGE_PROC 0x009f0000	/* Image processing controls */
 
 #define V4L2_CTRL_ID_MASK      	  (0x0fffffff)
 #define V4L2_CTRL_ID2CLASS(id)    ((id) & 0x0fff0000UL)
@@ -1151,12 +1165,13 @@ enum v4l2_ctrl_type {
 	V4L2_CTRL_TYPE_CTRL_CLASS    = 6,
 	V4L2_CTRL_TYPE_STRING        = 7,
 	V4L2_CTRL_TYPE_BITMASK       = 8,
+	V4L2_CTRL_TYPE_INTEGER_MENU = 9,
 };
 
 /*  Used in the VIDIOC_QUERYCTRL ioctl for querying controls */
 struct v4l2_queryctrl {
 	__u32		     id;
-	enum v4l2_ctrl_type  type;
+	__u32		     type;	/* enum v4l2_ctrl_type */
 	__u8		     name[32];	/* Whatever */
 	__s32		     minimum;	/* Note signedness */
 	__s32		     maximum;
@@ -1170,9 +1185,12 @@ struct v4l2_queryctrl {
 struct v4l2_querymenu {
 	__u32		id;
 	__u32		index;
-	__u8		name[32];	/* Whatever */
+	union {
+		__u8	name[32];	/* Whatever */
+		__s64	value;
+	};
 	__u32		reserved;
-};
+} __attribute__ ((packed));
 
 /*  Control flags  */
 #define V4L2_CTRL_FLAG_DISABLED		0x0001
@@ -1237,16 +1255,22 @@ enum v4l2_power_line_frequency {
 #define V4L2_CID_COLOR_KILLER                   (V4L2_CID_BASE+30)
 #define V4L2_CID_COLORFX			(V4L2_CID_BASE+31)
 enum v4l2_colorfx {
-	V4L2_COLORFX_NONE	= 0,
-	V4L2_COLORFX_BW		= 1,
-	V4L2_COLORFX_SEPIA	= 2,
-	V4L2_COLORFX_NEGATIVE = 3,
-	V4L2_COLORFX_EMBOSS = 4,
-	V4L2_COLORFX_SKETCH = 5,
-	V4L2_COLORFX_SKY_BLUE = 6,
-	V4L2_COLORFX_GRASS_GREEN = 7,
-	V4L2_COLORFX_SKIN_WHITEN = 8,
-	V4L2_COLORFX_VIVID = 9,
+	V4L2_COLORFX_NONE			= 0,
+	V4L2_COLORFX_BW				= 1,
+	V4L2_COLORFX_SEPIA			= 2,
+	V4L2_COLORFX_NEGATIVE			= 3,
+	V4L2_COLORFX_EMBOSS			= 4,
+	V4L2_COLORFX_SKETCH			= 5,
+	V4L2_COLORFX_SKY_BLUE			= 6,
+	V4L2_COLORFX_GRASS_GREEN		= 7,
+	V4L2_COLORFX_SKIN_WHITEN		= 8,
+	V4L2_COLORFX_VIVID			= 9,
+	V4L2_COLORFX_AQUA			= 10,
+	V4L2_COLORFX_ART_FREEZE			= 11,
+	V4L2_COLORFX_SILHOUETTE			= 12,
+	V4L2_COLORFX_SOLARIZATION		= 13,
+	V4L2_COLORFX_ANTIQUE			= 14,
+	V4L2_COLORFX_SET_CBCR			= 15,
 };
 #define V4L2_CID_AUTOBRIGHTNESS			(V4L2_CID_BASE+32)
 #define V4L2_CID_BAND_STOP_FILTER		(V4L2_CID_BASE+33)
@@ -1263,9 +1287,10 @@ enum v4l2_colorfx {
 #define V4L2_CID_MIN_BUFFERS_FOR_OUTPUT		(V4L2_CID_BASE+40)
 
 #define V4L2_CID_ALPHA_COMPONENT		(V4L2_CID_BASE+41)
+#define V4L2_CID_COLORFX_CBCR			(V4L2_CID_BASE+42)
 
 /* last CID + 1 */
-#define V4L2_CID_LASTP1                         (V4L2_CID_BASE+42)
+#define V4L2_CID_LASTP1                         (V4L2_CID_BASE+43)
 
 /*  MPEG-class control IDs defined by V4L2 */
 #define V4L2_CID_MPEG_BASE 			(V4L2_CTRL_CLASS_MPEG | 0x900)
@@ -1689,6 +1714,78 @@ enum  v4l2_exposure_auto_type {
 #define V4L2_CID_IRIS_ABSOLUTE			(V4L2_CID_CAMERA_CLASS_BASE+17)
 #define V4L2_CID_IRIS_RELATIVE			(V4L2_CID_CAMERA_CLASS_BASE+18)
 
+#define V4L2_CID_AUTO_EXPOSURE_BIAS		(V4L2_CID_CAMERA_CLASS_BASE+19)
+
+#define V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE	(V4L2_CID_CAMERA_CLASS_BASE+20)
+enum v4l2_auto_n_preset_white_balance {
+	V4L2_WHITE_BALANCE_MANUAL		= 0,
+	V4L2_WHITE_BALANCE_AUTO			= 1,
+	V4L2_WHITE_BALANCE_INCANDESCENT		= 2,
+	V4L2_WHITE_BALANCE_FLUORESCENT		= 3,
+	V4L2_WHITE_BALANCE_FLUORESCENT_H	= 4,
+	V4L2_WHITE_BALANCE_HORIZON		= 5,
+	V4L2_WHITE_BALANCE_DAYLIGHT		= 6,
+	V4L2_WHITE_BALANCE_FLASH		= 7,
+	V4L2_WHITE_BALANCE_CLOUDY		= 8,
+	V4L2_WHITE_BALANCE_SHADE		= 9,
+};
+
+#define V4L2_CID_WIDE_DYNAMIC_RANGE		(V4L2_CID_CAMERA_CLASS_BASE+21)
+#define V4L2_CID_IMAGE_STABILIZATION		(V4L2_CID_CAMERA_CLASS_BASE+22)
+
+#define V4L2_CID_ISO_SENSITIVITY		(V4L2_CID_CAMERA_CLASS_BASE+23)
+#define V4L2_CID_ISO_SENSITIVITY_AUTO		(V4L2_CID_CAMERA_CLASS_BASE+24)
+enum v4l2_iso_sensitivity_auto_type {
+	V4L2_ISO_SENSITIVITY_MANUAL		= 0,
+	V4L2_ISO_SENSITIVITY_AUTO		= 1,
+};
+
+#define V4L2_CID_EXPOSURE_METERING		(V4L2_CID_CAMERA_CLASS_BASE+25)
+enum v4l2_exposure_metering {
+	V4L2_EXPOSURE_METERING_AVERAGE		= 0,
+	V4L2_EXPOSURE_METERING_CENTER_WEIGHTED	= 1,
+	V4L2_EXPOSURE_METERING_SPOT		= 2,
+};
+
+#define V4L2_CID_SCENE_MODE			(V4L2_CID_CAMERA_CLASS_BASE+26)
+enum v4l2_scene_mode {
+	V4L2_SCENE_MODE_NONE			= 0,
+	V4L2_SCENE_MODE_BACKLIGHT		= 1,
+	V4L2_SCENE_MODE_BEACH_SNOW		= 2,
+	V4L2_SCENE_MODE_CANDLE_LIGHT		= 3,
+	V4L2_SCENE_MODE_DAWN_DUSK		= 4,
+	V4L2_SCENE_MODE_FALL_COLORS		= 5,
+	V4L2_SCENE_MODE_FIREWORKS		= 6,
+	V4L2_SCENE_MODE_LANDSCAPE		= 7,
+	V4L2_SCENE_MODE_NIGHT			= 8,
+	V4L2_SCENE_MODE_PARTY_INDOOR		= 9,
+	V4L2_SCENE_MODE_PORTRAIT		= 10,
+	V4L2_SCENE_MODE_SPORTS			= 11,
+	V4L2_SCENE_MODE_SUNSET			= 12,
+	V4L2_SCENE_MODE_TEXT			= 13,
+};
+
+#define V4L2_CID_3A_LOCK			(V4L2_CID_CAMERA_CLASS_BASE+27)
+#define V4L2_LOCK_EXPOSURE			(1 << 0)
+#define V4L2_LOCK_WHITE_BALANCE			(1 << 1)
+#define V4L2_LOCK_FOCUS				(1 << 2)
+
+#define V4L2_CID_AUTO_FOCUS_START		(V4L2_CID_CAMERA_CLASS_BASE+28)
+#define V4L2_CID_AUTO_FOCUS_STOP		(V4L2_CID_CAMERA_CLASS_BASE+29)
+#define V4L2_CID_AUTO_FOCUS_STATUS		(V4L2_CID_CAMERA_CLASS_BASE+30)
+#define V4L2_AUTO_FOCUS_STATUS_IDLE		(0 << 0)
+#define V4L2_AUTO_FOCUS_STATUS_BUSY		(1 << 0)
+#define V4L2_AUTO_FOCUS_STATUS_REACHED		(1 << 1)
+#define V4L2_AUTO_FOCUS_STATUS_FAILED		(1 << 2)
+
+#define V4L2_CID_AUTO_FOCUS_RANGE		(V4L2_CID_CAMERA_CLASS_BASE+31)
+enum v4l2_auto_focus_range {
+	V4L2_AUTO_FOCUS_RANGE_AUTO		= 0,
+	V4L2_AUTO_FOCUS_RANGE_NORMAL		= 1,
+	V4L2_AUTO_FOCUS_RANGE_MACRO		= 2,
+	V4L2_AUTO_FOCUS_RANGE_INFINITY		= 3,
+};
+
 /* FM Modulator class control IDs */
 #define V4L2_CID_FM_TX_CLASS_BASE		(V4L2_CTRL_CLASS_FM_TX | 0x900)
 #define V4L2_CID_FM_TX_CLASS			(V4L2_CTRL_CLASS_FM_TX | 1)
@@ -1782,13 +1879,28 @@ enum v4l2_jpeg_chroma_subsampling {
 #define	V4L2_JPEG_ACTIVE_MARKER_DQT		(1 << 17)
 #define	V4L2_JPEG_ACTIVE_MARKER_DHT		(1 << 18)
 
+/* Image source controls */
+#define V4L2_CID_IMAGE_SOURCE_CLASS_BASE	(V4L2_CTRL_CLASS_IMAGE_SOURCE | 0x900)
+#define V4L2_CID_IMAGE_SOURCE_CLASS		(V4L2_CTRL_CLASS_IMAGE_SOURCE | 1)
+
+#define V4L2_CID_VBLANK				(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 1)
+#define V4L2_CID_HBLANK				(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 2)
+#define V4L2_CID_ANALOGUE_GAIN			(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 3)
+
+/* Image processing controls */
+#define V4L2_CID_IMAGE_PROC_CLASS_BASE		(V4L2_CTRL_CLASS_IMAGE_PROC | 0x900)
+#define V4L2_CID_IMAGE_PROC_CLASS		(V4L2_CTRL_CLASS_IMAGE_PROC | 1)
+
+#define V4L2_CID_LINK_FREQ			(V4L2_CID_IMAGE_PROC_CLASS_BASE + 1)
+#define V4L2_CID_PIXEL_RATE			(V4L2_CID_IMAGE_PROC_CLASS_BASE + 2)
+
 /*
  *	T U N I N G
  */
 struct v4l2_tuner {
 	__u32                   index;
 	__u8			name[32];
-	enum v4l2_tuner_type    type;
+	__u32			type;	/* enum v4l2_tuner_type */
 	__u32			capability;
 	__u32			rangelow;
 	__u32			rangehigh;
@@ -1838,14 +1950,14 @@ struct v4l2_modulator {
 
 struct v4l2_frequency {
 	__u32		      tuner;
-	enum v4l2_tuner_type  type;
+	__u32		      type;	/* enum v4l2_tuner_type */
 	__u32		      frequency;
 	__u32		      reserved[8];
 };
 
 struct v4l2_hw_freq_seek {
 	__u32		      tuner;
-	enum v4l2_tuner_type  type;
+	__u32		      type;	/* enum v4l2_tuner_type */
 	__u32		      seek_upward;
 	__u32		      wrap_around;
 	__u32		      spacing;
@@ -2056,7 +2168,7 @@ struct v4l2_sliced_vbi_cap {
 				 (equals frame lines 313-336 for 625 line video
 				  standards, 263-286 for 525 line standards) */
 	__u16   service_lines[2][24];
-	enum v4l2_buf_type type;
+	__u32	type;		/* enum v4l2_buf_type */
 	__u32   reserved[3];    /* must be 0 */
 };
 
@@ -2137,8 +2249,8 @@ struct v4l2_plane_pix_format {
  * @width:		image width in pixels
  * @height:		image height in pixels
  * @pixelformat:	little endian four character code (fourcc)
- * @field:		field order (for interlaced video)
- * @colorspace:		supplemental to pixelformat
+ * @field:		enum v4l2_field; field order (for interlaced video)
+ * @colorspace:		enum v4l2_colorspace; supplemental to pixelformat
  * @plane_fmt:		per-plane information
  * @num_planes:		number of planes for this format
  */
@@ -2146,8 +2258,8 @@ struct v4l2_pix_format_mplane {
 	__u32				width;
 	__u32				height;
 	__u32				pixelformat;
-	enum v4l2_field			field;
-	enum v4l2_colorspace		colorspace;
+	__u32				field;
+	__u32				colorspace;
 
 	struct v4l2_plane_pix_format	plane_fmt[VIDEO_MAX_PLANES];
 	__u8				num_planes;
@@ -2156,7 +2268,7 @@ struct v4l2_pix_format_mplane {
 
 /**
  * struct v4l2_format - stream data format
- * @type:	type of the data stream
+ * @type:	enum v4l2_buf_type; type of the data stream
  * @pix:	definition of an image format
  * @pix_mp:	definition of a multiplanar image format
  * @win:	definition of an overlaid image
@@ -2165,7 +2277,7 @@ struct v4l2_pix_format_mplane {
  * @raw_data:	placeholder for future extensions and custom formats
  */
 struct v4l2_format {
-	enum v4l2_buf_type type;
+	__u32	 type;
 	union {
 		struct v4l2_pix_format		pix;     /* V4L2_BUF_TYPE_VIDEO_CAPTURE */
 		struct v4l2_pix_format_mplane	pix_mp;  /* V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE */
@@ -2179,7 +2291,7 @@ struct v4l2_format {
 /*	Stream type-dependent parameters
  */
 struct v4l2_streamparm {
-	enum v4l2_buf_type type;
+	__u32	 type;			/* enum v4l2_buf_type */
 	union {
 		struct v4l2_captureparm	capture;
 		struct v4l2_outputparm	output;
@@ -2292,14 +2404,14 @@ struct v4l2_dbg_chip_ident {
  * @index:	on return, index of the first created buffer
  * @count:	entry: number of requested buffers,
  *		return: number of created buffers
- * @memory:	buffer memory type
+ * @memory:	enum v4l2_memory; buffer memory type
  * @format:	frame format, for which buffers are requested
  * @reserved:	future extensions
  */
 struct v4l2_create_buffers {
 	__u32			index;
 	__u32			count;
-	enum v4l2_memory        memory;
+	__u32			memory;
 	struct v4l2_format	format;
 	__u32			reserved[8];
 };
@@ -2356,8 +2468,8 @@ struct v4l2_create_buffers {
 #define VIDIOC_TRY_FMT      	_IOWR('V', 64, struct v4l2_format)
 #define VIDIOC_ENUMAUDIO	_IOWR('V', 65, struct v4l2_audio)
 #define VIDIOC_ENUMAUDOUT	_IOWR('V', 66, struct v4l2_audioout)
-#define VIDIOC_G_PRIORITY        _IOR('V', 67, enum v4l2_priority)
-#define VIDIOC_S_PRIORITY        _IOW('V', 68, enum v4l2_priority)
+#define VIDIOC_G_PRIORITY	 _IOR('V', 67, __u32) /* enum v4l2_priority */
+#define VIDIOC_S_PRIORITY	 _IOW('V', 68, __u32) /* enum v4l2_priority */
 #define VIDIOC_G_SLICED_VBI_CAP _IOWR('V', 69, struct v4l2_sliced_vbi_cap)
 #define VIDIOC_LOG_STATUS         _IO('V', 70)
 #define VIDIOC_G_EXT_CTRLS	_IOWR('V', 71, struct v4l2_ext_controls)

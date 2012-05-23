@@ -2410,6 +2410,49 @@ details.</para>
       </orderedlist>
     </section>
 
+    <section>
+      <title>V4L2 in Linux 3.5</title>
+      <orderedlist>
+        <listitem>
+	  <para>Added integer menus, the new type will be
+	  V4L2_CTRL_TYPE_INTEGER_MENU.</para>
+        </listitem>
+        <listitem>
+	  <para>Added selection API for V4L2 subdev interface:
+	  &VIDIOC-SUBDEV-G-SELECTION; and
+	  &VIDIOC-SUBDEV-S-SELECTION;.</para>
+        </listitem>
+        <listitem>
+	  <para> Added <constant>V4L2_COLORFX_ANTIQUE</constant>,
+	  <constant>V4L2_COLORFX_ART_FREEZE</constant>,
+	  <constant>V4L2_COLORFX_AQUA</constant>,
+	  <constant>V4L2_COLORFX_SILHOUETTE</constant>,
+	  <constant>V4L2_COLORFX_SOLARIZATION</constant>,
+	  <constant>V4L2_COLORFX_VIVID</constant> and
+	  <constant>V4L2_COLORFX_ARBITRARY_CBCR</constant> menu items
+	  to the <constant>V4L2_CID_COLORFX</constant> control.</para>
+        </listitem>
+        <listitem>
+	  <para> Added <constant>V4L2_CID_COLORFX_CBCR</constant> control.</para>
+        </listitem>
+        <listitem>
+	  <para> Added camera controls <constant>V4L2_CID_AUTO_EXPOSURE_BIAS</constant>,
+	  <constant>V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE</constant>,
+	  <constant>V4L2_CID_IMAGE_STABILIZATION</constant>,
+	  <constant>V4L2_CID_ISO_SENSITIVITY</constant>,
+	  <constant>V4L2_CID_ISO_SENSITIVITY_AUTO</constant>,
+	  <constant>V4L2_CID_EXPOSURE_METERING</constant>,
+	  <constant>V4L2_CID_SCENE_MODE</constant>,
+	  <constant>V4L2_CID_3A_LOCK</constant>,
+	  <constant>V4L2_CID_AUTO_FOCUS_START</constant>,
+	  <constant>V4L2_CID_AUTO_FOCUS_STOP</constant>,
+	  <constant>V4L2_CID_AUTO_FOCUS_STATUS</constant> and
+	  <constant>V4L2_CID_AUTO_FOCUS_RANGE</constant>.
+	  </para>
+        </listitem>
+      </orderedlist>
+    </section>
+
     <section id="other">
       <title>Relation of V4L2 to other Linux multimedia APIs</title>
 
@@ -2523,6 +2566,18 @@ ioctls.</para>
         <listitem>
 	  <para>Selection API. <xref linkend="selection-api" /></para>
         </listitem>
+        <listitem>
+	  <para>Sub-device selection API: &VIDIOC-SUBDEV-G-SELECTION;
+	  and &VIDIOC-SUBDEV-S-SELECTION; ioctls.</para>
+        </listitem>
+        <listitem>
+	  <para><link linkend="v4l2-auto-focus-area"><constant>
+	  V4L2_CID_AUTO_FOCUS_AREA</constant></link> control.</para>
+        </listitem>
+        <listitem>
+	  <para>Importing DMABUF file descriptors as a new IO method described
+	  in <xref linkend="dmabuf" />.</para>
+        </listitem>
       </itemizedlist>
     </section>
 
@@ -2537,6 +2592,13 @@ interfaces and should not be implemented in new drivers.</para>
 	  <para><constant>VIDIOC_G_MPEGCOMP</constant> and
 <constant>VIDIOC_S_MPEGCOMP</constant> ioctls. Use Extended Controls,
 <xref linkend="extended-controls" />.</para>
+        </listitem>
+        <listitem>
+	  <para><constant>VIDIOC_SUBDEV_G_CROP</constant> and
+	  <constant>VIDIOC_SUBDEV_S_CROP</constant> ioctls. Use
+	  <constant>VIDIOC_SUBDEV_G_SELECTION</constant> and
+	  <constant>VIDIOC_SUBDEV_S_SELECTION</constant>, <xref
+	  linkend="vidioc-subdev-g-selection" />.</para>
         </listitem>
       </itemizedlist>
     </section>

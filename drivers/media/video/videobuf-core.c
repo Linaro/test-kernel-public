@@ -335,6 +335,9 @@ static void videobuf_status(struct videobuf_queue *q, struct v4l2_buffer *b,
 	case V4L2_MEMORY_OVERLAY:
 		b->m.offset  = vb->boff;
 		break;
+	case V4L2_MEMORY_DMABUF:
+		/* DMABUF is not handled in videobuf framework */
+		break;
 	}
 
 	b->flags    = 0;
@@ -411,6 +414,7 @@ int __videobuf_mmap_setup(struct videobuf_queue *q,
 			break;
 		case V4L2_MEMORY_USERPTR:
 		case V4L2_MEMORY_OVERLAY:
+		case V4L2_MEMORY_DMABUF:
 			/* nothing */
 			break;
 		}
@@ -1129,6 +1133,7 @@ unsigned int videobuf_poll_stream(struct file *file,
 				  struct videobuf_queue *q,
 				  poll_table *wait)
 {
+	unsigned long req_events = poll_requested_events(wait);
 	struct videobuf_buffer *buf = NULL;
 	unsigned int rc = 0;
 
@@ -1137,7 +1142,7 @@ unsigned int videobuf_poll_stream(struct file *file,
 		if (!list_empty(&q->stream))
 			buf = list_entry(q->stream.next,
 					 struct videobuf_buffer, stream);
-	} else {
+	} else if (req_events & (POLLIN | POLLRDNORM)) {
 		if (!q->reading)
 			__videobuf_read_start(q);
 		if (!q->reading) {
