@@ -251,7 +251,7 @@ static int s3c2416_add_sub(unsigned int base,
 	return 0;
 }
 
-static void __init s3c2416_irq_add_second(void)
+static void s3c2416_irq_add_second(void)
 {
 	unsigned long pend;
 	unsigned long last;
@@ -287,7 +287,7 @@ static void __init s3c2416_irq_add_second(void)
 	}
 }
 
-static int __init s3c2416_irq_add(struct device *dev,
+static int s3c2416_irq_add(struct device *dev,
 				  struct subsys_interface *sif)
 {
 	printk(KERN_INFO "S3C2416: IRQ Support\n");
