@@ -25,9 +25,9 @@
 #include <asm/mach-types.h>
 #include <asm/sizes.h>
 
-#include <mach/audio.h>
-#include <mach/colibri.h>
-#include <mach/pxa27x.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/colibri.h>
+#include <mach-pxa/pxa27x.h>
 
 #include "devices.h"
 #include "generic.h"

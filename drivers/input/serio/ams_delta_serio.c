@@ -27,9 +27,9 @@
 #include <linux/module.h>
 
 #include <asm/mach-types.h>
-#include <plat/board-ams-delta.h>
+#include <plat-omap/board-ams-delta.h>
 
-#include <mach/ams-delta-fiq.h>
+#include <mach-omap1/ams-delta-fiq.h>
 
 MODULE_AUTHOR("Matt Callow");
 MODULE_DESCRIPTION("AMS Delta (E3) keyboard port driver");

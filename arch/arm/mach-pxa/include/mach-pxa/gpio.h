@@ -26,7 +26,7 @@
 
 #include <asm-generic/gpio.h>
 
-#include <mach/irqs.h>
-#include <mach/hardware.h>
+#include <mach-pxa/irqs.h>
+#include <mach-pxa/hardware.h>
 
 #endif

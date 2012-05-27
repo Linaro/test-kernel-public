@@ -14,10 +14,10 @@
 #include <linux/gpio.h>
 #include <linux/io.h>
 
-#include <mach/map.h>
-#include <mach/regs-clock.h>
-#include <plat/gpio-cfg.h>
-#include <plat/ata.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/regs-clock.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/ata.h>
 
 void s3c64xx_ide_setup_gpio(void)
 {

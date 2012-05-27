@@ -16,7 +16,7 @@
 #ifndef __ASM_ARCH_MSM_DMA_H
 
 #include <linux/list.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 struct msm_dmov_errdata {
 	uint32_t flush[6];

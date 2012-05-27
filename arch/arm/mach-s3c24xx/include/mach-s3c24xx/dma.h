@@ -64,7 +64,7 @@ static inline bool samsung_dma_is_dmadev(void)
 	return false;
 }
 
-#include <plat/dma.h>
+#include <plat-samsung/dma.h>
 
 #define DMACH_LOW_LEVEL	(1<<28)	/* use this to specifiy hardware ch no */
 

@@ -26,8 +26,8 @@
 #include <asm/hardware/gic.h>
 #include <asm/setup.h>
 
-#include <mach/board.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/board.h>
+#include <mach-msm/msm_iomap.h>
 
 static void __init msm8x60_fixup(struct tag *tag, char **cmdline,
 		struct meminfo *mi)

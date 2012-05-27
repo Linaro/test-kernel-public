@@ -12,9 +12,9 @@
  * published by the Free Software Foundation.
 */
 
-#include <mach/map.h>
-#include <mach/regs-gpio.h>
-#include <plat/regs-serial.h>
+#include <mach-s3c24xx/map.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <plat-samsung/regs-serial.h>
 
 #define S3C2410_UART1_OFF (0x4000)
 #define SHIFT_2440TXF (14-9)
@@ -98,4 +98,4 @@
 
 /* include the reset of the code which will do the work */
 
-#include <plat/debug-macro.S>
+#include <plat-samsung/debug-macro.S>

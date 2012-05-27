@@ -17,14 +17,14 @@
 #include <linux/davinci_emac.h>
 #include <linux/spi/spi.h>
 
-#include <mach/serial.h>
-#include <mach/edma.h>
-#include <mach/i2c.h>
-#include <mach/asp.h>
-#include <mach/mmc.h>
-#include <mach/usb.h>
-#include <mach/pm.h>
-#include <mach/spi.h>
+#include <mach-davinci/serial.h>
+#include <mach-davinci/edma.h>
+#include <mach-davinci/i2c.h>
+#include <mach-davinci/asp.h>
+#include <mach-davinci/mmc.h>
+#include <mach-davinci/usb.h>
+#include <mach-davinci/pm.h>
+#include <mach-davinci/spi.h>
 
 extern void __iomem *da8xx_syscfg0_base;
 extern void __iomem *da8xx_syscfg1_base;

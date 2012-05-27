@@ -21,7 +21,7 @@
 #include <linux/mtd/gpmi-nand.h>
 #include <linux/delay.h>
 #include <linux/clk.h>
-#include <mach/mxs.h>
+#include <mach-mxs/mxs.h>
 
 #include "gpmi-nand.h"
 #include "gpmi-regs.h"

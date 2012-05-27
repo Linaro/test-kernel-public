@@ -17,9 +17,9 @@
 #include <linux/io.h>
 #include <linux/smc91x.h>
 
-#include <plat/board.h>
-#include <plat/gpmc.h>
-#include <plat/gpmc-smc91x.h>
+#include <plat-omap/board.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/gpmc-smc91x.h>
 
 static struct omap_smc91x_platform_data *gpmc_cfg;
 

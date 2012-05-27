@@ -9,7 +9,7 @@
 #include <linux/kernel.h>
 #include <linux/platform_device.h>
 #include <linux/init.h>
-#include <mach/sdma.h>
+#include <mach-imx/sdma.h>
 
 extern struct device mxc_aips_bus;
 extern struct device mxc_ahb_bus;
@@ -74,7 +74,7 @@ struct platform_device *__init imx_add_fsl_usb2_udc(
 struct platform_device *__init imx_add_gpio_keys(
 		const struct gpio_keys_platform_data *pdata);
 
-#include <mach/mx21-usbhost.h>
+#include <mach-imx/mx21-usbhost.h>
 struct imx_imx21_hcd_data {
 	resource_size_t iobase;
 	resource_size_t irq;
@@ -98,7 +98,7 @@ struct imx_imxdi_rtc_data {
 struct platform_device *__init imx_add_imxdi_rtc(
 		const struct imx_imxdi_rtc_data *data);
 
-#include <mach/imxfb.h>
+#include <mach-imx/imxfb.h>
 struct imx_imx_fb_data {
 	resource_size_t iobase;
 	resource_size_t iosize;
@@ -108,7 +108,7 @@ struct platform_device *__init imx_add_imx_fb(
 		const struct imx_imx_fb_data *data,
 		const struct imx_fb_platform_data *pdata);
 
-#include <mach/i2c.h>
+#include <mach-imx/i2c.h>
 struct imx_imx_i2c_data {
 	int id;
 	resource_size_t iobase;
@@ -129,7 +129,7 @@ struct platform_device *__init imx_add_imx_keypad(
 		const struct imx_imx_keypad_data *data,
 		const struct matrix_keymap_data *pdata);
 
-#include <mach/ssi.h>
+#include <mach-imx/ssi.h>
 struct imx_imx_ssi_data {
 	int id;
 	resource_size_t iobase;
@@ -144,7 +144,7 @@ struct platform_device *__init imx_add_imx_ssi(
 		const struct imx_imx_ssi_data *data,
 		const struct imx_ssi_platform_data *pdata);
 
-#include <mach/imx-uart.h>
+#include <mach-imx/imx-uart.h>
 struct imx_imx_uart_3irq_data {
 	int id;
 	resource_size_t iobase;
@@ -167,7 +167,7 @@ struct platform_device *__init imx_add_imx_uart_1irq(
 		const struct imx_imx_uart_1irq_data *data,
 		const struct imxuart_platform_data *pdata);
 
-#include <mach/usb.h>
+#include <mach-imx/usb.h>
 struct imx_imx_udc_data {
 	resource_size_t iobase;
 	resource_size_t iosize;
@@ -183,9 +183,9 @@ struct platform_device *__init imx_add_imx_udc(
 		const struct imx_imx_udc_data *data,
 		const struct imxusb_platform_data *pdata);
 
-#include <mach/ipu.h>
-#include <mach/mx3fb.h>
-#include <mach/mx3_camera.h>
+#include <mach-imx/ipu.h>
+#include <mach-imx/mx3fb.h>
+#include <mach-imx/mx3_camera.h>
 struct imx_ipu_core_data {
 	resource_size_t iobase;
 	resource_size_t synirq;
@@ -201,7 +201,7 @@ struct platform_device *__init imx_add_mx3_sdc_fb(
 		const struct imx_ipu_core_data *data,
 		struct mx3fb_platform_data *pdata);
 
-#include <mach/mx1_camera.h>
+#include <mach-imx/mx1_camera.h>
 struct imx_mx1_camera_data {
 	resource_size_t iobase;
 	resource_size_t iosize;
@@ -211,7 +211,7 @@ struct platform_device *__init imx_add_mx1_camera(
 		const struct imx_mx1_camera_data *data,
 		const struct mx1_camera_pdata *pdata);
 
-#include <mach/mx2_cam.h>
+#include <mach-imx/mx2_cam.h>
 struct imx_mx2_camera_data {
 	resource_size_t iobasecsi;
 	resource_size_t iosizecsi;
@@ -226,7 +226,7 @@ struct platform_device *__init imx_add_mx2_camera(
 struct platform_device *__init imx_add_mx2_emmaprp(
 		const struct imx_mx2_camera_data *data);
 
-#include <mach/mxc_ehci.h>
+#include <mach-imx/mxc_ehci.h>
 struct imx_mxc_ehci_data {
 	int id;
 	resource_size_t iobase;
@@ -236,7 +236,7 @@ struct platform_device *__init imx_add_mxc_ehci(
 		const struct imx_mxc_ehci_data *data,
 		const struct mxc_usbh_platform_data *pdata);
 
-#include <mach/mmc.h>
+#include <mach-imx/mmc.h>
 struct imx_mxc_mmc_data {
 	int id;
 	resource_size_t iobase;
@@ -248,7 +248,7 @@ struct platform_device *__init imx_add_mxc_mmc(
 		const struct imx_mxc_mmc_data *data,
 		const struct imxmmc_platform_data *pdata);
 
-#include <mach/mxc_nand.h>
+#include <mach-imx/mxc_nand.h>
 struct imx_mxc_nand_data {
 	/*
 	 * id is traditionally 0, but -1 is more appropriate.  We use -1 for new
@@ -297,7 +297,7 @@ struct imx_mxc_w1_data {
 struct platform_device *__init imx_add_mxc_w1(
 		const struct imx_mxc_w1_data *data);
 
-#include <mach/esdhc.h>
+#include <mach-imx/esdhc.h>
 struct imx_sdhci_esdhc_imx_data {
 	const char *devid;
 	int id;
@@ -308,7 +308,7 @@ struct platform_device *__init imx_add_sdhci_esdhc_imx(
 		const struct imx_sdhci_esdhc_imx_data *data,
 		const struct esdhc_platform_data *pdata);
 
-#include <mach/spi.h>
+#include <mach-imx/spi.h>
 struct imx_spi_imx_data {
 	const char *devid;
 	int id;

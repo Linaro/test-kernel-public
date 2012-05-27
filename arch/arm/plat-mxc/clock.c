@@ -38,8 +38,8 @@
 #include <linux/semaphore.h>
 #include <linux/string.h>
 
-#include <mach/clock.h>
-#include <mach/hardware.h>
+#include <mach-imx/clock.h>
+#include <mach-imx/hardware.h>
 
 #ifndef CONFIG_COMMON_CLK
 static LIST_HEAD(clocks);

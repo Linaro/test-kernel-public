@@ -28,7 +28,7 @@
 #include <linux/platform_device.h>
 #include <linux/spi/spi.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/irq.h>
@@ -37,8 +37,8 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/board.h>
-#include <mach/at91sam9_smc.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91sam9_smc.h>
 
 #include "sam9_smc.h"
 #include "generic.h"

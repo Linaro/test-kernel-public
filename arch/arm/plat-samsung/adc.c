@@ -23,8 +23,8 @@
 #include <linux/io.h>
 #include <linux/regulator/consumer.h>
 
-#include <plat/regs-adc.h>
-#include <plat/adc.h>
+#include <plat-samsung/regs-adc.h>
+#include <plat-samsung/adc.h>
 
 /* This driver is designed to control the usage of the ADC block between
  * the touchscreen and any other drivers that may need to use it, such as

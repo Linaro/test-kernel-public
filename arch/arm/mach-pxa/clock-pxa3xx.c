@@ -12,8 +12,8 @@
 #include <linux/io.h>
 #include <linux/syscore_ops.h>
 
-#include <mach/smemc.h>
-#include <mach/pxa3xx-regs.h>
+#include <mach-pxa/smemc.h>
+#include <mach-pxa/pxa3xx-regs.h>
 
 #include "clock.h"
 

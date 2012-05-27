@@ -16,16 +16,16 @@
 #include <linux/interrupt.h>
 #include <linux/gpio.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/mach/arch.h>
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
 
-#include <mach/pxa27x.h>
-#include <mach/colibri.h>
-#include <mach/mmc.h>
-#include <mach/ohci.h>
-#include <mach/pxa27x-udc.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/colibri.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/pxa27x-udc.h>
 
 #include "generic.h"
 #include "devices.h"

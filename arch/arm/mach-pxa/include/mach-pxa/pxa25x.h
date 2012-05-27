@@ -1,10 +1,10 @@
 #ifndef __MACH_PXA25x_H
 #define __MACH_PXA25x_H
 
-#include <mach/hardware.h>
-#include <mach/pxa2xx-regs.h>
-#include <mach/mfp-pxa25x.h>
-#include <mach/irqs.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/mfp-pxa25x.h>
+#include <mach-pxa/irqs.h>
 
 extern void __init pxa25x_map_io(void);
 extern void __init pxa25x_init_irq(void);

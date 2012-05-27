@@ -18,7 +18,7 @@
 #include <asm/hardware/gic.h>
 #include <asm/mach/map.h>
 
-#include <mach/motherboard.h>
+#include <mach-vexpress/motherboard.h>
 
 #include "core.h"
 

@@ -12,7 +12,7 @@
 
 /* pull in the relevant register and map files. */
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 	/* note, for the boot process to work we have to keep the UART
 	 * virtual address aligned to an 1MiB boundary for the L1
@@ -36,4 +36,4 @@
 #define fifo_full fifo_full_s5pv210
 #define fifo_level fifo_level_s5pv210
 
-#include <plat/debug-macro.S>
+#include <plat-samsung/debug-macro.S>

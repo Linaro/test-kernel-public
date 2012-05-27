@@ -23,10 +23,10 @@
 #include <linux/mtd/partitions.h>
 #include <linux/errno.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/setup.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/irqs.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/flash.h>
@@ -34,7 +34,7 @@
 #include <asm/hardware/sa1111.h>
 #include <asm/mach/serial_sa1100.h>
 
-#include <mach/badge4.h>
+#include <mach-sa1100/badge4.h>
 
 #include "generic.h"
 

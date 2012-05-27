@@ -26,8 +26,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 
-#include <mach/hardware.h>
-#include <mach/global_reg.h>
+#include <mach-gemini/hardware.h>
+#include <mach-gemini/global_reg.h>
 
 #include "common.h"
 

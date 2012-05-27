@@ -17,7 +17,7 @@
 #ifndef _MACH_TEGRA_BOARD_PAZ00_H
 #define _MACH_TEGRA_BOARD_PAZ00_H
 
-#include <mach/gpio-tegra.h>
+#include <mach-tegra/gpio-tegra.h>
 
 /* SDCARD */
 #define TEGRA_GPIO_SD1_CD		TEGRA_GPIO_PV5

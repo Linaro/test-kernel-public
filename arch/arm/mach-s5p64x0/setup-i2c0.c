@@ -18,10 +18,10 @@
 
 struct platform_device; /* don't need the contents */
 
-#include <plat/gpio-cfg.h>
-#include <plat/iic.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/iic.h>
 
-#include <mach/i2c.h>
+#include <mach-s5p64x0/i2c.h>
 
 void s5p6440_i2c0_cfg_gpio(struct platform_device *dev)
 {

@@ -14,7 +14,7 @@
 #define PNX_TIME_H
 
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-pnx4008/hardware.h>
 
 #define TICKS2USECS(x)	(x)
 

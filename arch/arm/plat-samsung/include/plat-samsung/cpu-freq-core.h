@@ -11,7 +11,7 @@
  * published by the Free Software Foundation.
 */
 
-#include <plat/cpu-freq.h>
+#include <plat-samsung/cpu-freq.h>
 
 struct seq_file;
 

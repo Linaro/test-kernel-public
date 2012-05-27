@@ -19,7 +19,7 @@
 #define INTPND		(0x10)
 #define INTOFFSET	(0x14)
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
 	.macro  get_irqnr_preamble, base, tmp

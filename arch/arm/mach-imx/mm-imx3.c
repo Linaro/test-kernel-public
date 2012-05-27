@@ -26,11 +26,11 @@
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/mach/map.h>
 
-#include <mach/common.h>
-#include <mach/devices-common.h>
-#include <mach/hardware.h>
-#include <mach/iomux-v3.h>
-#include <mach/irqs.h>
+#include <mach-imx/common.h>
+#include <mach-imx/devices-common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-v3.h>
+#include <mach-imx/irqs.h>
 
 #include "crmregs-imx3.h"
 

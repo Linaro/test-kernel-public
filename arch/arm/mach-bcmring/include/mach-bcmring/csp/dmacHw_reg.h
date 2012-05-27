@@ -25,7 +25,7 @@
 #define _DMACHW_REG_H
 
 #include <csp/stdint.h>
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 /* Data type for 64 bit little endian register */
 typedef struct {

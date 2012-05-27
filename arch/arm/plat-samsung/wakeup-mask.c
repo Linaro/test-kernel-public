@@ -16,8 +16,8 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <plat/wakeup-mask.h>
-#include <plat/pm.h>
+#include <plat-samsung/wakeup-mask.h>
+#include <plat-samsung/pm.h>
 
 void samsung_sync_wakemask(void __iomem *reg,
 			   struct samsung_wakeup_mask *mask, int nr_mask)

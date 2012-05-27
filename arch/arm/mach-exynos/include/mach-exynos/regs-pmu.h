@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_REGS_PMU_H
 #define __ASM_ARCH_REGS_PMU_H __FILE__
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 #define S5P_PMUREG(x)				(S5P_VA_PMU + (x))
 

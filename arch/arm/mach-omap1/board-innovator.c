@@ -31,15 +31,15 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/mux.h>
-#include <plat/flash.h>
-#include <plat/fpga.h>
-#include <plat/tc.h>
-#include <plat/usb.h>
-#include <plat/keypad.h>
-#include <plat/mmc.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/flash.h>
+#include <plat-omap/fpga.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/keypad.h>
+#include <plat-omap/mmc.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "iomap.h"
 #include "common.h"

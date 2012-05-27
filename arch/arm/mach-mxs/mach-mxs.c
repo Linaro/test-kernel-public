@@ -20,7 +20,7 @@
 #include <linux/of_platform.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
-#include <mach/common.h>
+#include <mach-mxs/common.h>
 
 static int __init mxs_icoll_add_irq_domain(struct device_node *np,
 				struct device_node *interrupt_parent)

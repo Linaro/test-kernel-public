@@ -35,16 +35,16 @@
 #include <linux/serial_core.h>
 #include <linux/io.h>
 
-#include <plat/regs-serial.h>
-#include <mach/regs-clock.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-mem.h>
-#include <mach/regs-irq.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-clock.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/regs-irq.h>
 
 #include <asm/mach/time.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/pm.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/pm.h>
 
 #define PFX "s3c24xx-pm: "
 

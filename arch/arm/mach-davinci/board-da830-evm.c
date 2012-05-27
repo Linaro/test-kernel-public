@@ -26,13 +26,13 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/cp_intc.h>
-#include <mach/mux.h>
-#include <mach/nand.h>
-#include <mach/da8xx.h>
-#include <mach/usb.h>
-#include <mach/aemif.h>
-#include <mach/spi.h>
+#include <mach-davinci/cp_intc.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/usb.h>
+#include <mach-davinci/aemif.h>
+#include <mach-davinci/spi.h>
 
 #define DA830_EVM_PHY_ID		""
 /*

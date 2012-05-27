@@ -29,20 +29,20 @@
 #include <linux/smsc911x.h>
 #include <linux/mmc/host.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/mcspi.h>
-#include <plat/board.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/gpmc.h>
-#include <mach/board-zoom.h>
+#include <plat-omap/gpmc.h>
+#include <mach-omap2/board-zoom.h>
 
 #include <asm/delay.h>
-#include <plat/usb.h>
-#include <plat/gpmc-smsc911x.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/gpmc-smsc911x.h>
 
 #include <video/omapdss.h>
 #include <video/omap-panel-generic-dpi.h>

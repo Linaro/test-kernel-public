@@ -26,22 +26,22 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-s3c64xx/hardware.h>
+#include <mach-s3c64xx/map.h>
 
 #include <asm/hardware/vic.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/regs-serial.h>
-#include <plat/iic.h>
-#include <plat/fb.h>
-#include <plat/nand.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/nand.h>
 
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/regs-fb-v4.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/regs-fb-v4.h>
 
 #include "common.h"
 

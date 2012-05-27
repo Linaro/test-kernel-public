@@ -1,9 +1,9 @@
 #ifndef __ASM_MACH_GPIO_PXA_H
 #define __ASM_MACH_GPIO_PXA_H
 
-#include <mach/addr-map.h>
-#include <mach/cputype.h>
-#include <mach/irqs.h>
+#include <mach-mmp/addr-map.h>
+#include <mach-mmp/cputype.h>
+#include <mach-mmp/irqs.h>
 
 #define GPIO_REGS_VIRT	(APB_VIRT_BASE + 0x19000)
 
@@ -24,6 +24,6 @@
 #define GPSR(x)		GPIO_REG(BANK_OFF(gpio_to_bank(x)) + 0x18)
 #define GPCR(x)		GPIO_REG(BANK_OFF(gpio_to_bank(x)) + 0x24)
 
-#include <plat/gpio-pxa.h>
+#include <plat-pxa/gpio-pxa.h>
 
 #endif /* __ASM_MACH_GPIO_PXA_H */

@@ -34,15 +34,15 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/board-ams-delta.h>
-#include <plat/keypad.h>
-#include <plat/mux.h>
-#include <plat/usb.h>
-#include <plat/board.h>
+#include <plat-omap/board-ams-delta.h>
+#include <plat-omap/keypad.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/board.h>
 
-#include <mach/hardware.h>
-#include <mach/ams-delta-fiq.h>
-#include <mach/camera.h>
+#include <mach-omap1/hardware.h>
+#include <mach-omap1/ams-delta-fiq.h>
+#include <mach-omap1/camera.h>
 
 #include "iomap.h"
 #include "common.h"

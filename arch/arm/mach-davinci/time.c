@@ -23,9 +23,9 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 
-#include <mach/cputype.h>
-#include <mach/hardware.h>
-#include <mach/time.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/time.h>
 
 #include "clock.h"
 

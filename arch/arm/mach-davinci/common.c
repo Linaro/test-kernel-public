@@ -17,8 +17,8 @@
 #include <asm/tlb.h>
 #include <asm/mach/map.h>
 
-#include <mach/common.h>
-#include <mach/cputype.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/cputype.h>
 
 #include "clock.h"
 

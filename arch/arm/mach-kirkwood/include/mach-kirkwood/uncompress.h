@@ -7,7 +7,7 @@
  */
 
 #include <linux/serial_reg.h>
-#include <mach/kirkwood.h>
+#include <mach-kirkwood/kirkwood.h>
 
 #define SERIAL_BASE	((unsigned char *)UART0_PHYS_BASE)
 

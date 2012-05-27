@@ -19,10 +19,10 @@
 /* ---- Include Files ---------------------------------------------------- */
 
 #include <cfg_global.h>
-#include <mach/csp/cap_inline.h>
+#include <mach-bcmring/csp/cap_inline.h>
 
 #if defined(__KERNEL__)
-#include <mach/memory_settings.h>
+#include <mach-bcmring/memory_settings.h>
 #else
 #include <hw_cfg.h>
 #endif

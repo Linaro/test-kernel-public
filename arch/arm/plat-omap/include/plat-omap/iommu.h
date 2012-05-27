@@ -147,7 +147,7 @@ static inline struct omap_iommu *dev_to_omap_iommu(struct device *dev)
 #if defined(CONFIG_ARCH_OMAP1)
 #error "iommu for this processor not implemented yet"
 #else
-#include <plat/iommu2.h>
+#include <plat-omap/iommu2.h>
 #endif
 
 /*

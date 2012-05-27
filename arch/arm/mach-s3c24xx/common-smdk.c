@@ -33,18 +33,18 @@
 #include <asm/mach/irq.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/leds-gpio.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/leds-gpio.h>
 
-#include <plat/nand.h>
+#include <plat-samsung/nand.h>
 
-#include <plat/common-smdk.h>
-#include <plat/gpio-cfg.h>
-#include <plat/devs.h>
-#include <plat/pm.h>
+#include <plat-samsung/common-smdk.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/pm.h>
 
 /* LED devices */
 

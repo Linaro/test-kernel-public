@@ -21,8 +21,8 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <plat/regs-iis.h>
-#include <mach/gta02.h>
+#include <plat-samsung/regs-iis.h>
+#include <mach-s3c24xx/gta02.h>
 
 #include "../codecs/wm8753.h"
 #include "s3c24xx-i2s.h"

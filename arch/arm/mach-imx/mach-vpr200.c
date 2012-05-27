@@ -28,10 +28,10 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/iomux-mx35.h>
-#include <mach/irqs.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx35.h>
+#include <mach-imx/irqs.h>
 
 #include <linux/i2c.h>
 #include <linux/i2c/at24.h>

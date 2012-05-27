@@ -33,14 +33,14 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <linux/atomic.h>
 #include <asm/irq.h>
 
-#include <mach/regs-clock.h>
+#include <mach-s3c24xx/regs-clock.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
 
 static int s3c2440_setparent_armclk(struct clk *clk, struct clk *parent)
 {

@@ -22,8 +22,8 @@
  * 02110-1301 USA
  */
 
-#include <plat/omap_hwmod.h>
-#include <plat/hdq1w.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/hdq1w.h>
 
 #include "common.h"
 

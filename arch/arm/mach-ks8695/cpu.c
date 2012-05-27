@@ -26,12 +26,12 @@
 #include <linux/init.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-ks8695/hardware.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/regs-sys.h>
-#include <mach/regs-misc.h>
+#include <mach-ks8695/regs-sys.h>
+#include <mach-ks8695/regs-misc.h>
 
 
 static struct __initdata map_desc ks8695_io_desc[] = {

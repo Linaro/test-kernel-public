@@ -20,9 +20,9 @@
 #include <linux/of_platform.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach/arch.h>
-#include <mach/dma.h>
-#include <mach/generic.h>
-#include <mach/spear.h>
+#include <mach-spear13xx/dma.h>
+#include <mach-spear13xx/generic.h>
+#include <mach-spear13xx/spear.h>
 
 /* Base addresses */
 #define SPEAR1340_SATA_BASE			UL(0xB1000000)

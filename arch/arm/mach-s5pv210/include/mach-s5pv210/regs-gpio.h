@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_REGS_GPIO_H
 #define __ASM_ARCH_REGS_GPIO_H __FILE__
 
-#include <mach/map.h>
+#include <mach-s5pv210/map.h>
 
 #define S5PV210_EINT30CON		(S5P_VA_GPIO + 0xE00)
 #define S5P_EINT_CON(x)			(S5PV210_EINT30CON + ((x) * 0x4))

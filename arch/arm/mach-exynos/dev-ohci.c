@@ -13,12 +13,12 @@
 #include <linux/dma-mapping.h>
 #include <linux/platform_device.h>
 
-#include <mach/irqs.h>
-#include <mach/map.h>
-#include <mach/ohci.h>
+#include <mach-exynos/irqs.h>
+#include <mach-exynos/map.h>
+#include <mach-exynos/ohci.h>
 
-#include <plat/devs.h>
-#include <plat/usb-phy.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/usb-phy.h>
 
 static struct resource exynos4_ohci_resource[] = {
 	[0] = DEFINE_RES_MEM(EXYNOS4_PA_OHCI, SZ_256),

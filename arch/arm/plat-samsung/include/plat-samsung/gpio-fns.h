@@ -24,7 +24,7 @@
  * either replaced or given a wrapper until the calls can be removed.
 */
 
-#include <plat/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg.h>
 
 static inline void s3c2410_gpio_cfgpin(unsigned int pin, unsigned int cfg)
 {

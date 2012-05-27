@@ -12,7 +12,7 @@
 
 #include <linux/clk.h>
 
-#include <mach/clock.h>
+#include <mach-davinci/clock.h>
 
 int cdce_set_rate(struct clk *clk, unsigned long rate);
 

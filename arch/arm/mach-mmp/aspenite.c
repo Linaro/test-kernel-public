@@ -21,13 +21,13 @@
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/addr-map.h>
-#include <mach/mfp-pxa168.h>
-#include <mach/pxa168.h>
-#include <mach/irqs.h>
+#include <mach-mmp/addr-map.h>
+#include <mach-mmp/mfp-pxa168.h>
+#include <mach-mmp/pxa168.h>
+#include <mach-mmp/irqs.h>
 #include <video/pxa168fb.h>
 #include <linux/input.h>
-#include <plat/pxa27x_keypad.h>
+#include <plat-pxa/pxa27x_keypad.h>
 
 #include "common.h"
 

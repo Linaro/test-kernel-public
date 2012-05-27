@@ -21,7 +21,7 @@
 #define __MACH_TEGRA_GPIO_TEGRA_H
 
 #include <linux/types.h>
-#include <mach/irqs.h>
+#include <mach-tegra/irqs.h>
 
 #define TEGRA_NR_GPIOS		INT_GPIO_NR
 

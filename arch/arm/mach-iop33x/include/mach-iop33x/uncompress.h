@@ -5,7 +5,7 @@
 #include <asm/types.h>
 #include <asm/mach-types.h>
 #include <linux/serial_reg.h>
-#include <mach/hardware.h>
+#include <mach-iop33x/hardware.h>
 
 volatile u32 *uart_base;
 

@@ -15,10 +15,10 @@
 #include <asm/mach/arch.h>
 #include <asm/setup.h>
 #include <asm/delay.h>
-#include <plat/pcie.h>
-#include <mach/irqs.h>
-#include <mach/bridge-regs.h>
-#include <plat/addr-map.h>
+#include <plat-orion/pcie.h>
+#include <mach-dove/irqs.h>
+#include <mach-dove/bridge-regs.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 struct pcie_port {

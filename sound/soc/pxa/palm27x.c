@@ -24,8 +24,8 @@
 #include <sound/jack.h>
 
 #include <asm/mach-types.h>
-#include <mach/audio.h>
-#include <mach/palmasoc.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/palmasoc.h>
 
 #include "../codecs/wm9712.h"
 #include "pxa2xx-ac97.h"

@@ -181,9 +181,9 @@
 
 #include <video/sa1100fb.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
-#include <mach/shannon.h>
+#include <mach-sa1100/shannon.h>
 
 /*
  * Complain if VAR is out of range.

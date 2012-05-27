@@ -26,7 +26,7 @@
 #include <linux/io.h>
 #include <linux/clk.h>
 
-#include <mach/tnetv107x.h>
+#include <mach-davinci/tnetv107x.h>
 
 #define TSC_PENUP_POLL		(HZ / 5)
 #define IDLE_TIMEOUT		100 /* msec */

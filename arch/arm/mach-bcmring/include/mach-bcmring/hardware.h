@@ -23,7 +23,7 @@
 
 #include <asm/sizes.h>
 #include <cfg_global.h>
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 /* Hardware addresses of major areas.
  *  *_START is the physical address

@@ -23,11 +23,11 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/clock.h>
 
-#include <plat/regs-serial.h>
+#include <plat-samsung/regs-serial.h>
 
 static struct cpu_table *cpu;
 

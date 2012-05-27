@@ -10,7 +10,7 @@
 #define __ASM_ARCH_PM_H
 
 #include <asm/errno.h>
-#include <mach/irqs.h>
+#include <mach-dove/irqs.h>
 
 #define CLOCK_GATING_CONTROL	(DOVE_PMU_VIRT_BASE + 0x38)
 #define  CLOCK_GATING_USB0_MASK		(1 << 0)

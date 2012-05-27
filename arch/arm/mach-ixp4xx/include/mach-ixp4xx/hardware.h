@@ -27,7 +27,7 @@
 #include "ixp4xx-regs.h"
 
 #ifndef __ASSEMBLER__
-#include <mach/cpu.h>
+#include <mach-ixp4xx/cpu.h>
 #endif
 
 /* Platform helper functions and definitions */

@@ -21,9 +21,9 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 
-#include <plat/dma.h>
-#include <plat/gpmc.h>
-#include <plat/nand.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/nand.h>
 
 #define	DRIVER_NAME	"omap2-nand"
 #define	OMAP_NAND_TIMEOUT_MS	5000

@@ -21,7 +21,7 @@
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
 
-#include <mach/hardware.h>
+#include <mach-w90x900/hardware.h>
 
 #include "nuc900-audio.h"
 

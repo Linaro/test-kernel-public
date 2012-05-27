@@ -22,7 +22,7 @@
 #include <linux/delay.h>
 #include <linux/power_supply.h>
 
-#include <mach/hardware.h>
+#include <mach-msm/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
@@ -32,10 +32,10 @@
 #include <asm/hardware/cache-l2x0.h>
 #endif
 
-#include <mach/vreg.h>
-#include <mach/mpp.h>
-#include <mach/board.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/vreg.h>
+#include <mach-msm/mpp.h>
+#include <mach-msm/board.h>
+#include <mach-msm/msm_iomap.h>
 
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>

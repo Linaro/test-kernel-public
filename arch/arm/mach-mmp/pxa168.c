@@ -18,17 +18,17 @@
 
 #include <asm/mach/time.h>
 #include <asm/system_misc.h>
-#include <mach/addr-map.h>
-#include <mach/cputype.h>
-#include <mach/regs-apbc.h>
-#include <mach/regs-apmu.h>
-#include <mach/irqs.h>
-#include <mach/dma.h>
-#include <mach/devices.h>
-#include <mach/mfp.h>
+#include <mach-mmp/addr-map.h>
+#include <mach-mmp/cputype.h>
+#include <mach-mmp/regs-apbc.h>
+#include <mach-mmp/regs-apmu.h>
+#include <mach-mmp/irqs.h>
+#include <mach-mmp/dma.h>
+#include <mach-mmp/devices.h>
+#include <mach-mmp/mfp.h>
 #include <linux/dma-mapping.h>
-#include <mach/pxa168.h>
-#include <mach/regs-usb.h>
+#include <mach-mmp/pxa168.h>
+#include <mach-mmp/regs-usb.h>
 
 #include "common.h"
 #include "clock.h"

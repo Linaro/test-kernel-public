@@ -26,7 +26,7 @@
 #include <stddef.h>
 
 #include <csp/stdint.h>
-#include <mach/csp/dmacHw_reg.h>
+#include <mach-bcmring/csp/dmacHw_reg.h>
 
 /* Define DMA Channel ID using DMA controller number (m) and channel number (c).
 

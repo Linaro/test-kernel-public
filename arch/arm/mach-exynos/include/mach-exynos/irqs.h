@@ -12,7 +12,7 @@
 #ifndef __ASM_ARCH_IRQS_H
 #define __ASM_ARCH_IRQS_H __FILE__
 
-#include <plat/irqs.h>
+#include <plat-samsung/irqs.h>
 
 /* PPI: Private Peripheral Interrupt */
 

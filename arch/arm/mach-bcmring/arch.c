@@ -32,11 +32,11 @@
 #include <asm/pmu.h>
 
 #include <asm/mach/arch.h>
-#include <mach/dma.h>
-#include <mach/hardware.h>
-#include <mach/csp/mm_io.h>
-#include <mach/csp/chipcHw_def.h>
-#include <mach/csp/chipcHw_inline.h>
+#include <mach-bcmring/dma.h>
+#include <mach-bcmring/hardware.h>
+#include <mach-bcmring/csp/mm_io.h>
+#include <mach-bcmring/csp/chipcHw_def.h>
+#include <mach-bcmring/csp/chipcHw_inline.h>
 
 #include <cfg_global.h>
 

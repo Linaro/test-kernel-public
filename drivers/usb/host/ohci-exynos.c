@@ -14,7 +14,7 @@
 #include <linux/clk.h>
 #include <linux/platform_device.h>
 #include <mach/ohci.h>
-#include <plat/usb-phy.h>
+#include <plat-samsung/usb-phy.h>
 
 struct exynos_ohci_hcd {
 	struct device *dev;

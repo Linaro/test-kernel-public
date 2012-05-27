@@ -19,10 +19,10 @@
 #include <linux/clk.h>
 #include <linux/slab.h>
 
-#include <mach/common.h>
-#include <mach/irqs.h>
-#include <mach/edma.h>
-#include <mach/tnetv107x.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/edma.h>
+#include <mach-davinci/tnetv107x.h>
 
 #include "clock.h"
 

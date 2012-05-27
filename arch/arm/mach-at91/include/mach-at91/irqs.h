@@ -22,7 +22,7 @@
 #define __ASM_ARCH_IRQS_H
 
 #include <linux/io.h>
-#include <mach/at91_aic.h>
+#include <mach-at91/at91_aic.h>
 
 #define NR_AIC_IRQS 32
 

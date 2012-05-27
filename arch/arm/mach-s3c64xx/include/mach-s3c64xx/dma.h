@@ -69,7 +69,7 @@ static inline bool samsung_dma_is_dmadev(void)
 }
 #define S3C2410_DMAF_CIRCULAR		(1 << 0)
 
-#include <plat/dma.h>
+#include <plat-samsung/dma.h>
 
 #define DMACH_LOW_LEVEL (1<<28) /* use this to specifiy hardware ch no */
 
@@ -126,6 +126,6 @@ struct s3c2410_dma_chan {
 	 */
 };
 
-#include <plat/dma-core.h>
+#include <plat-samsung/dma-core.h>
 
 #endif /* __ASM_ARCH_IRQ_H */

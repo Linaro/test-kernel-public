@@ -33,8 +33,8 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 
-#include <mach/da8xx.h>
-#include <mach/usb.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/usb.h>
 
 #include "musb_core.h"
 

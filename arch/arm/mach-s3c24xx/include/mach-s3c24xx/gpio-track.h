@@ -15,7 +15,7 @@
 #ifndef __ASM_ARCH_GPIO_CORE_H
 #define __ASM_ARCH_GPIO_CORE_H __FILE__
 
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
 extern struct samsung_gpio_chip s3c24xx_gpios[];
 

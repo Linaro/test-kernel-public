@@ -29,16 +29,16 @@
 
 #include <asm/mach-types.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
 #include <asm/mach/irq.h>
 
-#include <mach/regs-irq.h>
-#include <mach/bast-map.h>
-#include <mach/bast-irq.h>
+#include <mach-s3c24xx/regs-irq.h>
+#include <mach-s3c24xx/bast-map.h>
+#include <mach-s3c24xx/bast-irq.h>
 
-#include <plat/irq.h>
+#include <plat-samsung/irq.h>
 
 #if 0
 #include <asm/debug-ll.h>

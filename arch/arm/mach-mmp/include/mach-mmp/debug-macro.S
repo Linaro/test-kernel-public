@@ -9,7 +9,7 @@
  * published by the Free Software Foundation.
  */
 
-#include <mach/addr-map.h>
+#include <mach-mmp/addr-map.h>
 
 		.macro	addruart, rp, rv, tmp
 		ldr	\rp, =APB_PHYS_BASE		@ physical

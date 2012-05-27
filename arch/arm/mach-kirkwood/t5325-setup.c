@@ -25,7 +25,7 @@
 #include <sound/alc5623.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/kirkwood.h>
+#include <mach-kirkwood/kirkwood.h>
 #include "common.h"
 #include "mpp.h"
 

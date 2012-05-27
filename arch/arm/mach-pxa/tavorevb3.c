@@ -22,7 +22,7 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/pxa930.h>
+#include <mach-pxa/pxa930.h>
 
 #include "devices.h"
 #include "generic.h"

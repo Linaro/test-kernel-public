@@ -21,14 +21,14 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/regs-dsc.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-dsc.h>
 
-#include <plat/cpu.h>
-#include <plat/s3c244x.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/s3c244x.h>
 
 int s3c2440_set_dsc(unsigned int pin, unsigned int value)
 {

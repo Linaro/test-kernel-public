@@ -21,7 +21,7 @@
 #include <linux/ata_platform.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/orion5x.h>
+#include <mach-orion5x/orion5x.h>
 #include "common.h"
 #include "mpp.h"
 

@@ -18,7 +18,7 @@
 #include <linux/err.h>
 #include <linux/io.h>
 
-#include <plat/hardware.h>
+#include <plat-omap/hardware.h>
 
 #include "iomap.h"
 #include "common.h"

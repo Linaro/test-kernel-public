@@ -33,7 +33,7 @@
 #include <asm/setup.h>
 #include <asm/memory.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/irq.h>
 #include <asm/sizes.h>
 
@@ -42,15 +42,15 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/flash.h>
 
-#include <mach/pxa27x.h>
-#include <mach/mainstone.h>
-#include <mach/audio.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/irda.h>
-#include <mach/ohci.h>
-#include <plat/pxa27x_keypad.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/mainstone.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/ohci.h>
+#include <plat-pxa/pxa27x_keypad.h>
+#include <mach-pxa/smemc.h>
 
 #include "generic.h"
 #include "devices.h"

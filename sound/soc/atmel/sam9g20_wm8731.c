@@ -46,8 +46,8 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
-#include <mach/gpio.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/gpio.h>
 
 #include "../codecs/wm8731.h"
 #include "atmel-pcm.h"

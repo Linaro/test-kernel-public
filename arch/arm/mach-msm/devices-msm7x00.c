@@ -17,8 +17,8 @@
 #include <linux/platform_device.h>
 #include <linux/clkdev.h>
 
-#include <mach/irqs.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/irqs.h>
+#include <mach-msm/msm_iomap.h>
 #include "devices.h"
 
 #include <asm/mach/flash.h>
@@ -27,7 +27,7 @@
 
 #include "clock.h"
 #include "clock-pcom.h"
-#include <mach/mmc.h>
+#include <mach-msm/mmc.h>
 
 static struct resource resources_uart1[] = {
 	{

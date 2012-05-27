@@ -40,8 +40,8 @@
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
 
-#include <plat/dma.h>
-#include <plat/omap_hwmod.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/omap_hwmod.h>
 #include "omap-mcpdm.h"
 #include "omap-pcm.h"
 

@@ -7,18 +7,18 @@
 #include <linux/i2c/pxa-i2c.h>
 
 #include <asm/pmu.h>
-#include <mach/udc.h>
-#include <mach/pxa3xx-u2d.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/irda.h>
-#include <mach/irqs.h>
-#include <mach/ohci.h>
-#include <plat/pxa27x_keypad.h>
-#include <mach/camera.h>
-#include <mach/audio.h>
-#include <mach/hardware.h>
-#include <plat/pxa3xx_nand.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/pxa3xx-u2d.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/irqs.h>
+#include <mach-pxa/ohci.h>
+#include <plat-pxa/pxa27x_keypad.h>
+#include <mach-pxa/camera.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/hardware.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 #include "devices.h"
 #include "generic.h"

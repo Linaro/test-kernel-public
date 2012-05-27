@@ -22,7 +22,7 @@
 #ifndef __MACH_HARDWARE_H
 #define __MACH_HARDWARE_H
 
-#include <mach/clps711x.h>
+#include <mach-clps711x/clps711x.h>
 
 #define CLPS711X_VIRT_BASE	IOMEM(0xff000000)
 

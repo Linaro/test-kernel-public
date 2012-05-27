@@ -17,7 +17,7 @@
 
 
 #include <mach/map.h>
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
 unsigned long samsung_cpu_id;
 static unsigned int samsung_cpu_rev;

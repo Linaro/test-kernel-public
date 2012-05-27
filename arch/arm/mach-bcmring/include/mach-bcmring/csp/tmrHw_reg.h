@@ -23,8 +23,8 @@
 #ifndef _TMRHW_REG_H
 #define _TMRHW_REG_H
 
-#include <mach/csp/mm_io.h>
-#include <mach/csp/hw_cfg.h>
+#include <mach-bcmring/csp/mm_io.h>
+#include <mach-bcmring/csp/hw_cfg.h>
 /* Base address */
 #define tmrHw_MODULE_BASE_ADDR          MM_IO_BASE_TMR
 

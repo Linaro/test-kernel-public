@@ -25,12 +25,12 @@
 #include <linux/gpio.h>
 #include <linux/spi/flash.h>
 #include <linux/spi/spi.h>
-#include <mach/common.h>
-#include <mach/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
-#include <mach/iomux-mx53.h>
+#include <mach-imx/iomux-mx53.h>
 
 #define MX53_EVK_FEC_PHY_RST	IMX_GPIO_NR(7, 6)
 #define EVK_ECSPI1_CS0		IMX_GPIO_NR(2, 30)

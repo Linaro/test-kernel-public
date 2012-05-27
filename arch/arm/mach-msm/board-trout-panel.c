@@ -14,8 +14,8 @@
 #include <asm/mach-types.h>
 #include <asm/system_info.h>
 
-#include <mach/msm_fb.h>
-#include <mach/vreg.h>
+#include <mach-msm/msm_fb.h>
+#include <mach-msm/vreg.h>
 
 #include "board-trout.h"
 #include "proc_comm.h"

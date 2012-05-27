@@ -10,8 +10,8 @@
  * warranty of any kind, whether express or implied.
  */
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-omap1/hardware.h>
+#include <mach-omap1/irqs.h>
 
 #include "../../iomap.h"
 

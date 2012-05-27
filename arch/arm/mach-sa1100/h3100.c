@@ -20,8 +20,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/irda.h>
 
-#include <mach/h3xxx.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/h3xxx.h>
+#include <mach-sa1100/irqs.h>
 
 #include "generic.h"
 

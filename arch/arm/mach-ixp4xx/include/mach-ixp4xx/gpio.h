@@ -26,7 +26,7 @@
 #define __ASM_ARCH_IXP4XX_GPIO_H
 
 #include <linux/kernel.h>
-#include <mach/hardware.h>
+#include <mach-ixp4xx/hardware.h>
 
 #define __ARM_GPIOLIB_COMPLEX
 

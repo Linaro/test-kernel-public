@@ -16,13 +16,13 @@
 #include <linux/syscore_ops.h>
 #include <linux/io.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/regs-timer.h>
-#include <plat/wakeup-mask.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/regs-timer.h>
+#include <plat-samsung/wakeup-mask.h>
 
-#include <mach/regs-clock.h>
-#include <mach/regs-gpio.h>
+#include <mach-s5p64x0/regs-clock.h>
+#include <mach-s5p64x0/regs-gpio.h>
 
 static struct sleep_save s5p64x0_core_save[] = {
 	SAVE_ITEM(S5P64X0_APLL_CON),

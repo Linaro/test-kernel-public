@@ -19,12 +19,12 @@
 #include <linux/syscore_ops.h>
 #include <linux/io.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/regs-timer.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/regs-timer.h>
 
-#include <mach/regs-irq.h>
-#include <mach/regs-clock.h>
+#include <mach-s5pv210/regs-irq.h>
+#include <mach-s5pv210/regs-clock.h>
 
 static struct sleep_save s5pv210_core_save[] = {
 	/* Clock source */

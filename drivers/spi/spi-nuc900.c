@@ -26,7 +26,7 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/spi_bitbang.h>
 
-#include <mach/nuc900_spi.h>
+#include <mach-w90x900/nuc900_spi.h>
 
 /* usi registers offset */
 #define USI_CNT		0x00

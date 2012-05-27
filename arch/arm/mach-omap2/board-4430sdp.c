@@ -28,17 +28,17 @@
 #include <linux/leds_pwm.h>
 #include <linux/platform_data/omap4-keypad.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/usb.h>
-#include <plat/mmc.h>
-#include <plat/omap4-keypad.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/omap4-keypad.h>
 #include <video/omapdss.h>
 #include <video/omap-panel-nokia-dsi.h>
 #include <video/omap-panel-picodlp.h>

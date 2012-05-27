@@ -11,7 +11,7 @@
 #ifndef __ASM_MACH_ICU_H
 #define __ASM_MACH_ICU_H
 
-#include <mach/addr-map.h>
+#include <mach-mmp/addr-map.h>
 
 #define ICU_VIRT_BASE	(AXI_VIRT_BASE + 0x82000)
 #define ICU_REG(x)	(ICU_VIRT_BASE + (x))

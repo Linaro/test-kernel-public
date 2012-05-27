@@ -34,10 +34,10 @@
 
 #include <sound/cs4271.h>
 
-#include <mach/hardware.h>
-#include <mach/fb.h>
-#include <mach/ep93xx_spi.h>
-#include <mach/gpio-ep93xx.h>
+#include <mach-ep93xx/hardware.h>
+#include <mach-ep93xx/fb.h>
+#include <mach-ep93xx/ep93xx_spi.h>
+#include <mach-ep93xx/gpio-ep93xx.h>
 
 #include <asm/hardware/vic.h>
 #include <asm/mach-types.h>

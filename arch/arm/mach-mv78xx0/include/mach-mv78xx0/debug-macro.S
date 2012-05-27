@@ -6,7 +6,7 @@
  * published by the Free Software Foundation.
 */
 
-#include <mach/mv78xx0.h>
+#include <mach-mv78xx0/mv78xx0.h>
 
 	.macro	addruart, rp, rv, tmp
 	ldr	\rp, =MV78XX0_REGS_PHYS_BASE

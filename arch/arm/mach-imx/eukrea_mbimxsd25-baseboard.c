@@ -26,12 +26,12 @@
 #include <linux/spi/spi.h>
 #include <video/platform_lcd.h>
 
-#include <mach/hardware.h>
-#include <mach/iomux-mx25.h>
-#include <mach/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-mx25.h>
+#include <mach-imx/common.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/mx25.h>
+#include <mach-imx/mx25.h>
 
 #include "devices-imx25.h"
 

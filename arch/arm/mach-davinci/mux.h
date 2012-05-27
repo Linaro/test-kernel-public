@@ -13,7 +13,7 @@
 #ifndef _MACH_DAVINCI_MUX_H_
 #define _MACH_DAVINCI_MUX_H_
 
-#include <mach/mux.h>
+#include <mach-davinci/mux.h>
 
 #define MUX_CFG(soc, desc, muxreg, mode_offset, mode_mask, mux_mode, dbg)\
 [soc##_##desc] = {							\

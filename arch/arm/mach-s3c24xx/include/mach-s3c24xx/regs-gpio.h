@@ -14,7 +14,7 @@
 #ifndef __ASM_ARCH_REGS_GPIO_H
 #define __ASM_ARCH_REGS_GPIO_H
 
-#include <mach/gpio-nrs.h>
+#include <mach-s3c24xx/gpio-nrs.h>
 
 #define S3C24XX_MISCCR		S3C24XX_GPIOREG2(0x80)
 

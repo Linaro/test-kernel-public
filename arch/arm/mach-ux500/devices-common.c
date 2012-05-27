@@ -12,9 +12,9 @@
 #include <linux/slab.h>
 #include <linux/platform_device.h>
 
-#include <plat/gpio-nomadik.h>
+#include <plat-nomadik/gpio-nomadik.h>
 
-#include <mach/hardware.h>
+#include <mach-ux500/hardware.h>
 
 #include "devices-common.h"
 

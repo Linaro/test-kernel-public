@@ -16,7 +16,7 @@
 #ifndef AT91SAM9_SMC_H
 #define AT91SAM9_SMC_H
 
-#include <mach/cpu.h>
+#include <mach-at91/cpu.h>
 
 #ifndef __ASSEMBLY__
 struct sam9_smc_config {

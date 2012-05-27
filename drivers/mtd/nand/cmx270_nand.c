@@ -28,7 +28,7 @@
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <mach/pxa2xx-regs.h>
+#include <mach-pxa/pxa2xx-regs.h>
 
 #define GPIO_NAND_CS	(11)
 #define GPIO_NAND_RB	(89)

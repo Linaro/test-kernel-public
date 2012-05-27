@@ -20,7 +20,7 @@
 #include <csp/stdint.h>
 #include <csp/errno.h>
 #include <csp/reg.h>
-#include <mach/csp/chipcHw_reg.h>
+#include <mach-bcmring/csp/chipcHw_reg.h>
 
 /* ---- Public Constants and Types ---------------------------------------- */
 

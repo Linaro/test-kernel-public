@@ -33,8 +33,8 @@
 
 #include <asm/io.h>
 #include <asm/irq.h>
-#include <mach/hardware.h>
-#include <mach/netx-regs.h>
+#include <mach-netx/hardware.h>
+#include <mach-netx/netx-regs.h>
 
 /* We've been assigned a range on the "Low-density serial ports" major */
 #define SERIAL_NX_MAJOR	204

@@ -35,10 +35,10 @@
 #include <asm/hardware/gic.h>
 #include <asm/setup.h>
 
-#include <mach/tegra_wm8903_pdata.h>
-#include <mach/iomap.h>
-#include <mach/irqs.h>
-#include <mach/sdhci.h>
+#include <mach-tegra/tegra_wm8903_pdata.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/irqs.h>
+#include <mach-tegra/sdhci.h>
 
 #include "board.h"
 #include "board-harmony.h"

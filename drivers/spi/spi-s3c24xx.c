@@ -27,9 +27,9 @@
 #include <linux/spi/s3c24xx.h>
 #include <linux/module.h>
 
-#include <plat/regs-spi.h>
+#include <plat-samsung/regs-spi.h>
 
-#include <plat/fiq.h>
+#include <plat-samsung/fiq.h>
 #include <asm/fiq.h>
 
 #include "spi-s3c24xx-fiq.h"

@@ -27,8 +27,8 @@
 
 #include <asm/irq.h>
 
-#include <mach/netx-regs.h>
-#include <mach/hardware.h>
+#include <mach-netx/netx-regs.h>
+#include <mach-netx/hardware.h>
 
 static struct clcd_panel *netx_panel;
 

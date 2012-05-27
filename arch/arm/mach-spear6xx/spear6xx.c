@@ -25,9 +25,9 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 #include <asm/mach/map.h>
-#include <plat/pl080.h>
-#include <mach/generic.h>
-#include <mach/spear.h>
+#include <plat-spear/pl080.h>
+#include <mach-spear6xx/generic.h>
+#include <mach-spear6xx/spear.h>
 
 /* dmac device registration */
 static struct pl08x_channel_data spear600_dma_info[] = {

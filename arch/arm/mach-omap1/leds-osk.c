@@ -6,7 +6,7 @@
 #include <linux/gpio.h>
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <asm/leds.h>
 
 #include "leds.h"

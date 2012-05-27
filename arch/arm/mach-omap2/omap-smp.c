@@ -24,8 +24,8 @@
 #include <asm/hardware/gic.h>
 #include <asm/smp_scu.h>
 
-#include <mach/hardware.h>
-#include <mach/omap-secure.h>
+#include <mach-omap2/hardware.h>
+#include <mach-omap2/omap-secure.h>
 
 #include "iomap.h"
 #include "common.h"

@@ -19,10 +19,10 @@
  *
  */
 
-#include <plat/cpu.h>
-#include <plat/i2c.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/i2c.h>
 #include "common.h"
-#include <plat/omap_hwmod.h>
+#include <plat-omap/omap_hwmod.h>
 
 #include "mux.h"
 

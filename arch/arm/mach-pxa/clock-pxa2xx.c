@@ -12,7 +12,7 @@
 #include <linux/io.h>
 #include <linux/syscore_ops.h>
 
-#include <mach/pxa2xx-regs.h>
+#include <mach-pxa/pxa2xx-regs.h>
 
 #include "clock.h"
 

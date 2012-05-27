@@ -27,15 +27,15 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-s3c64xx/hardware.h>
+#include <mach-s3c64xx/map.h>
 
-#include <plat/regs-serial.h>
+#include <plat-samsung/regs-serial.h>
 
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/iic.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/iic.h>
 
 #include "common.h"
 

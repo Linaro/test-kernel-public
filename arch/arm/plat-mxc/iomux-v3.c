@@ -25,9 +25,9 @@
 #include <linux/string.h>
 #include <linux/gpio.h>
 
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 #include <asm/mach/map.h>
-#include <mach/iomux-v3.h>
+#include <mach-imx/iomux-v3.h>
 
 static void __iomem *base;
 

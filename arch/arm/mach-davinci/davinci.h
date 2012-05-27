@@ -23,9 +23,9 @@
 #include <linux/platform_device.h>
 #include <linux/spi/spi.h>
 
-#include <mach/asp.h>
-#include <mach/keyscan.h>
-#include <mach/hardware.h>
+#include <mach-davinci/asp.h>
+#include <mach-davinci/keyscan.h>
+#include <mach-davinci/hardware.h>
 
 #include <media/davinci/vpfe_capture.h>
 #include <media/davinci/vpif_types.h>

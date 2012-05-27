@@ -23,7 +23,7 @@
 #include <linux/init.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 

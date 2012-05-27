@@ -1,7 +1,7 @@
 #ifndef __ASM_ARCH_REGS_LCD_H
 #define __ASM_ARCH_REGS_LCD_H
 
-#include <mach/bitfield.h>
+#include <mach-pxa/bitfield.h>
 
 /*
  * LCD Controller Registers and Bits Definitions

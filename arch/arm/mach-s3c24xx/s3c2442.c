@@ -36,20 +36,20 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <linux/atomic.h>
 #include <asm/irq.h>
 
-#include <mach/regs-clock.h>
+#include <mach-s3c24xx/regs-clock.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/s3c244x.h>
-#include <plat/pm.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/s3c244x.h>
+#include <plat-samsung/pm.h>
 
-#include <plat/gpio-core.h>
-#include <plat/gpio-cfg.h>
-#include <plat/gpio-cfg-helpers.h>
+#include <plat-samsung/gpio-core.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg-helpers.h>
 
 /* S3C2442 extended clock support */
 

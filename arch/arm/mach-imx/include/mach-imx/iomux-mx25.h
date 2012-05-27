@@ -19,7 +19,7 @@
 #ifndef __MACH_IOMUX_MX25_H__
 #define __MACH_IOMUX_MX25_H__
 
-#include <mach/iomux-v3.h>
+#include <mach-imx/iomux-v3.h>
 
 /*
  * IOMUX/PAD Bit field definitions

@@ -27,7 +27,7 @@
 #include <mach/hardware.h>
 #include <asm/sizes.h>
 #include <linux/gpio.h>
-#include <plat/board-ams-delta.h>
+#include <plat-omap/board-ams-delta.h>
 
 /*
  * MTD structure for E3 (Delta)

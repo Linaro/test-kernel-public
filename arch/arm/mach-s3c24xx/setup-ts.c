@@ -15,8 +15,8 @@
 
 struct platform_device; /* don't need the contents */
 
-#include <mach/hardware.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
 /**
  * s3c24xx_ts_cfg_gpio - configure gpio for s3c2410 systems

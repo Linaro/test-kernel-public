@@ -32,8 +32,8 @@
 #include <sound/jack.h>
 
 #include <asm/mach-types.h>
-#include <plat/hardware.h>
-#include <plat/mux.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/mux.h>
 
 #include "omap-dmic.h"
 #include "omap-mcpdm.h"

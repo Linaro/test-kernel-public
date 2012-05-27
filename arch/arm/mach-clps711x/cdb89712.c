@@ -24,7 +24,7 @@
 #include <linux/mm.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/pgtable.h>
 #include <asm/page.h>
 #include <asm/setup.h>

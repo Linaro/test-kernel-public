@@ -16,13 +16,13 @@
 #include <linux/io.h>
 #include <linux/dma-mapping.h>
 
-#include <plat/common.h>
-#include <plat/board.h>
-#include <plat/vram.h>
-#include <plat/dsp.h>
-#include <plat/dma.h>
+#include <plat-omap/common.h>
+#include <plat-omap/board.h>
+#include <plat-omap/vram.h>
+#include <plat-omap/dsp.h>
+#include <plat-omap/dma.h>
 
-#include <plat/omap-secure.h>
+#include <plat-omap/omap-secure.h>
 
 
 #define NO_LENGTH_CHECK 0xffffffff

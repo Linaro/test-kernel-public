@@ -49,8 +49,8 @@
 #include <mach/hardware.h>
 #include <mach/map.h>
 
-#include <plat/regs-serial.h>
-#include <plat/clock.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/clock.h>
 
 #include "samsung.h"
 

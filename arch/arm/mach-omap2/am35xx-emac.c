@@ -18,8 +18,8 @@
 #include <linux/clk.h>
 #include <linux/davinci_emac.h>
 #include <linux/platform_device.h>
-#include <plat/irqs.h>
-#include <mach/am35xx.h>
+#include <plat-omap/irqs.h>
+#include <mach-omap2/am35xx.h>
 
 #include "control.h"
 

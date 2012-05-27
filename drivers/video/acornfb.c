@@ -30,7 +30,7 @@
 #include <linux/io.h>
 #include <linux/gfp.h>
 
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 #include <asm/pgtable.h>
@@ -339,7 +339,7 @@ acornfb_setcolreg(u_int regno, u_int red, u_int green, u_int blue,
 #endif
 
 #ifdef HAS_VIDC20
-#include <mach/acornfb.h>
+#include <mach-rpc/acornfb.h>
 
 #define MAX_SIZE	2*1024*1024
 

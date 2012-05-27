@@ -7,7 +7,7 @@
  * License version 2. This program is licensed "as is" without any
  * warranty of any kind, whether express or implied.
  */
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 
 		.macro	get_irqnr_preamble, base, tmp
 		.endm

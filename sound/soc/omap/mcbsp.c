@@ -25,7 +25,7 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 
-#include <plat/mcbsp.h>
+#include <plat-omap/mcbsp.h>
 
 #include "mcbsp.h"
 

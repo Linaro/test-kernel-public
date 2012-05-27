@@ -8,8 +8,8 @@
  */
 #include <linux/dma-mapping.h>
 #include <asm/sizes.h>
-#include <mach/hardware.h>
-#include <mach/devices-common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/devices-common.h>
 
 #define imx_fec_data_entry_single(soc, _devid)				\
 	{								\

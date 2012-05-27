@@ -26,7 +26,7 @@
 #include <linux/module.h>
 #include <linux/device.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/irq.h>
@@ -35,7 +35,7 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/board.h>
+#include <mach-at91/board.h>
 
 #include "generic.h"
 

@@ -17,21 +17,21 @@
 #include <linux/device.h>
 #include <linux/serial_core.h>
 
-#include <mach/map.h>
-#include <mach/dma.h>
+#include <mach-s3c24xx/map.h>
+#include <mach-s3c24xx/dma.h>
 
-#include <plat/cpu.h>
-#include <plat/dma-s3c24xx.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/dma-s3c24xx.h>
 
-#include <plat/regs-serial.h>
-#include <mach/regs-gpio.h>
-#include <plat/regs-ac97.h>
-#include <plat/regs-dma.h>
-#include <mach/regs-mem.h>
-#include <mach/regs-lcd.h>
-#include <mach/regs-sdi.h>
-#include <plat/regs-iis.h>
-#include <plat/regs-spi.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <plat-samsung/regs-ac97.h>
+#include <plat-samsung/regs-dma.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/regs-lcd.h>
+#include <mach-s3c24xx/regs-sdi.h>
+#include <plat-samsung/regs-iis.h>
+#include <plat-samsung/regs-spi.h>
 
 static struct s3c24xx_dma_map __initdata s3c2410_dma_mappings[] = {
 	[DMACH_XD0] = {

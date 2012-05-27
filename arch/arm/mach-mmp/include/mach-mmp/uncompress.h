@@ -7,7 +7,7 @@
  */
 
 #include <linux/serial_reg.h>
-#include <mach/addr-map.h>
+#include <mach-mmp/addr-map.h>
 #include <asm/mach-types.h>
 
 #define UART1_BASE	(APB_PHYS_BASE + 0x36000)

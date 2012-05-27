@@ -23,11 +23,11 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/i2c.h>
-#include <mach/serial.h>
-#include <mach/nand.h>
-#include <mach/mmc.h>
-#include <mach/usb.h>
+#include <mach-davinci/i2c.h>
+#include <mach-davinci/serial.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/mmc.h>
+#include <mach-davinci/usb.h>
 
 #include "davinci.h"
 

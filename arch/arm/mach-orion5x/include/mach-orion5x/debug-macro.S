@@ -8,7 +8,7 @@
  * published by the Free Software Foundation.
 */
 
-#include <mach/orion5x.h>
+#include <mach-orion5x/orion5x.h>
 
 	.macro  addruart, rp, rv, tmp
 	ldr	\rp, =ORION5X_REGS_PHYS_BASE

@@ -30,10 +30,10 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/iomux-mx3.h>
-#include <mach/board-mx31lilly.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx3.h>
+#include <mach-imx/board-mx31lilly.h>
 
 #include "devices-imx31.h"
 

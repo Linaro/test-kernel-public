@@ -23,8 +23,8 @@
 #include <linux/delay.h>
 #include <linux/module.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
 #include <asm/system_misc.h>
 #include <asm/proc-fns.h>
 #include <asm/mach-types.h>

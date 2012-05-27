@@ -21,8 +21,8 @@
 
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-lpc32xx/hardware.h>
+#include <mach-lpc32xx/platform.h>
 
 /*
  * Uncompress output is hardcoded to standard UART 5

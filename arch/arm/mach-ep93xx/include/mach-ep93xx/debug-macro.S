@@ -9,7 +9,7 @@
  * the Free Software Foundation; either version 2 of the License, or (at
  * your option) any later version.
  */
-#include <mach/ep93xx-regs.h>
+#include <mach-ep93xx/ep93xx-regs.h>
 
 		.macro	addruart, rp, rv, tmp
 		ldr	\rp, =EP93XX_APB_PHYS_BASE	@ Physical base

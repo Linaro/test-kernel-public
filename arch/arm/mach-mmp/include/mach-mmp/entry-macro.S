@@ -7,7 +7,7 @@
  */
 
 #include <asm/irq.h>
-#include <mach/regs-icu.h>
+#include <mach-mmp/regs-icu.h>
 
 	.macro	get_irqnr_preamble, base, tmp
 	mrc	p15, 0, \tmp, c0, c0, 0		@ CPUID

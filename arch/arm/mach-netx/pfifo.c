@@ -22,9 +22,9 @@
 #include <linux/mutex.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/netx-regs.h>
-#include <mach/pfifo.h>
+#include <mach-netx/hardware.h>
+#include <mach-netx/netx-regs.h>
+#include <mach-netx/pfifo.h>
 
 static DEFINE_MUTEX(pfifo_lock);
 

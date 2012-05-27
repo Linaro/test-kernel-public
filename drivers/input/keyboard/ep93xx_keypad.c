@@ -28,8 +28,8 @@
 #include <linux/input/matrix_keypad.h>
 #include <linux/slab.h>
 
-#include <mach/hardware.h>
-#include <mach/ep93xx_keypad.h>
+#include <mach-ep93xx/hardware.h>
+#include <mach-ep93xx/ep93xx_keypad.h>
 
 /*
  * Keypad Interface Register offsets

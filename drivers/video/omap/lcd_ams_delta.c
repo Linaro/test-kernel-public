@@ -27,8 +27,8 @@
 #include <linux/lcd.h>
 #include <linux/gpio.h>
 
-#include <plat/board-ams-delta.h>
-#include <mach/hardware.h>
+#include <plat-omap/board-ams-delta.h>
+#include <mach-omap1/hardware.h>
 
 #include "omapfb.h"
 

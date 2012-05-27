@@ -26,7 +26,7 @@
 #include <asm/hardware/debug-8250.S>
 
 #else
-#include <mach/hardware.h>
+#include <mach-footbridge/hardware.h>
 	/* For EBSA285 debugging */
 		.equ	dc21285_high, ARMCSR_BASE & 0xff000000
 		.equ	dc21285_low,  ARMCSR_BASE & 0x00ffffff

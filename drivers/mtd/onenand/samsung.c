@@ -25,7 +25,7 @@
 #include <linux/interrupt.h>
 
 #include <asm/mach/flash.h>
-#include <plat/regs-onenand.h>
+#include <plat-samsung/regs-onenand.h>
 
 #include <linux/io.h>
 

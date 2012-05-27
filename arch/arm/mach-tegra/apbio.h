@@ -23,7 +23,7 @@ void tegra_apb_writel(u32 value, unsigned long offset);
 
 #else
 #include <asm/io.h>
-#include <mach/io.h>
+#include <mach-tegra/io.h>
 
 static inline u32 tegra_apb_readl(unsigned long offset)
 {

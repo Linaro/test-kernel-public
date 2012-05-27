@@ -14,7 +14,7 @@
 #ifndef __ARCH_OMAP_MTD_XIP_H__
 #define __ARCH_OMAP_MTD_XIP_H__
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #define OMAP_MPU_TIMER_BASE	(0xfffec500)
 #define OMAP_MPU_TIMER_OFFSET	0x100
 

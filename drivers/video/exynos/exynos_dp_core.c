@@ -21,7 +21,7 @@
 
 #include <video/exynos_dp.h>
 
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
 #include "exynos_dp_core.h"
 

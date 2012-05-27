@@ -18,8 +18,8 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/audio.h>
-#include <mach/eseries-gpio.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/eseries-gpio.h>
 
 #include "../codecs/wm9712.h"
 #include "pxa2xx-ac97.h"

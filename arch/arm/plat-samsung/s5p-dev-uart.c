@@ -21,7 +21,7 @@
 #include <mach/hardware.h>
 #include <mach/map.h>
 
-#include <plat/devs.h>
+#include <plat-samsung/devs.h>
 
  /* Serial port registrations */
 

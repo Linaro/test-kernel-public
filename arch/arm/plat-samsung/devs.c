@@ -43,27 +43,27 @@
 #include <mach/irqs.h>
 #include <mach/map.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/adc.h>
-#include <plat/ata.h>
-#include <plat/ehci.h>
-#include <plat/fb.h>
-#include <plat/fb-s3c2410.h>
-#include <plat/hwmon.h>
-#include <plat/iic.h>
-#include <plat/keypad.h>
-#include <plat/mci.h>
-#include <plat/nand.h>
-#include <plat/sdhci.h>
-#include <plat/ts.h>
-#include <plat/udc.h>
-#include <plat/usb-control.h>
-#include <plat/usb-phy.h>
-#include <plat/regs-iic.h>
-#include <plat/regs-serial.h>
-#include <plat/regs-spi.h>
-#include <plat/s3c64xx-spi.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/ata.h>
+#include <plat-samsung/ehci.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/fb-s3c2410.h>
+#include <plat-samsung/hwmon.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/keypad.h>
+#include <plat-samsung/mci.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/ts.h>
+#include <plat-samsung/udc.h>
+#include <plat-samsung/usb-control.h>
+#include <plat-samsung/usb-phy.h>
+#include <plat-samsung/regs-iic.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/regs-spi.h>
+#include <plat-samsung/s3c64xx-spi.h>
 
 static u64 samsung_device_dma_mask = DMA_BIT_MASK(32);
 

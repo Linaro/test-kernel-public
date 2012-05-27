@@ -27,8 +27,8 @@
 #include <linux/clk.h>
 
 #include <asm/mach/time.h>
-#include <mach/mxs.h>
-#include <mach/common.h>
+#include <mach-mxs/mxs.h>
+#include <mach-mxs/common.h>
 
 /*
  * There are 2 versions of the timrot on Freescale MXS-based SoCs.

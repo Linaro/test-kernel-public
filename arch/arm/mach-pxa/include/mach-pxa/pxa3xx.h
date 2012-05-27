@@ -1,9 +1,9 @@
 #ifndef __MACH_PXA3XX_H	
 #define __MACH_PXA3XX_H
 
-#include <mach/hardware.h>
-#include <mach/pxa3xx-regs.h>
-#include <mach/irqs.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/pxa3xx-regs.h>
+#include <mach-pxa/irqs.h>
 
 extern void __init pxa3xx_map_io(void);
 extern void __init pxa3xx_init_irq(void);

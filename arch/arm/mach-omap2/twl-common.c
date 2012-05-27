@@ -26,8 +26,8 @@
 #include <linux/regulator/machine.h>
 #include <linux/regulator/fixed.h>
 
-#include <plat/i2c.h>
-#include <plat/usb.h>
+#include <plat-omap/i2c.h>
+#include <plat-omap/usb.h>
 
 #include "twl-common.h"
 #include "pm.h"

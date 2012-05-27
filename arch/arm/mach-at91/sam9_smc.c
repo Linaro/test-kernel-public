@@ -14,7 +14,7 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 
-#include <mach/at91sam9_smc.h>
+#include <mach-at91/at91sam9_smc.h>
 
 #include "sam9_smc.h"
 

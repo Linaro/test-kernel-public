@@ -10,8 +10,8 @@
 #define __ASM_ARCH_UNCOMPRESS_H
 
 #include <linux/io.h>
-#include <mach/hardware.h>
-#include <mach/uart.h>
+#include <mach-prima2/hardware.h>
+#include <mach-prima2/uart.h>
 
 void arch_decomp_setup(void)
 {

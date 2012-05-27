@@ -34,8 +34,8 @@
 #include <sound/soc.h>
 #include <sound/saif.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
-#include <mach/mxs.h>
+#include <mach-mxs/hardware.h>
+#include <mach-mxs/mxs.h>
 
 #include "mxs-saif.h"
 

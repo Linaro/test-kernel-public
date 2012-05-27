@@ -23,8 +23,8 @@
 #include <linux/io.h>
 #include <linux/clkdev.h>
 
-#include <mach/hardware.h>
-#include <mach/clock.h>
+#include <mach-pnx4008/hardware.h>
+#include <mach-pnx4008/clock.h>
 #include "clock.h"
 
 /*forward declaration*/

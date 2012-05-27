@@ -25,11 +25,11 @@
 #include <linux/spinlock.h>
 #include <linux/platform_device.h>
 
-#include <mach/hardware.h>
-#include <mach/smemc.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/smemc.h>
 #include <asm/io.h>
 #include <asm/irq.h>
-#include <mach/pxa2xx-regs.h>
+#include <mach-pxa/pxa2xx-regs.h>
 #include <asm/mach-types.h>
 
 #include <pcmcia/ss.h>

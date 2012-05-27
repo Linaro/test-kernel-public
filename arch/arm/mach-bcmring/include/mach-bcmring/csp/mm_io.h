@@ -27,7 +27,7 @@
 #define _MM_IO_H
 
 /* ---- Include Files ---------------------------------------------------- */
-#include <mach/csp/mm_addr.h>
+#include <mach-bcmring/csp/mm_addr.h>
 
 #if !defined(CSP_SIMULATION)
 #include <cfg_global.h>

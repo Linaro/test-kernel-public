@@ -27,7 +27,7 @@
 #include <linux/platform_device.h>
 #include <linux/mfd/core.h>
 
-#include <mach/edma.h>
+#include <mach-davinci/edma.h>
 
 /*
  * Register values.

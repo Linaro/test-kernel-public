@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_MAP_H
 #define __ASM_ARCH_MAP_H
 
-#include <plat/map-base.h>
+#include <plat-samsung/map-base.h>
 
 /*
  * S3C2410 UART offset is 0x4000 but the other SoCs are 0x400.
@@ -21,7 +21,7 @@
  */
 #define S3C_UART_OFFSET		(0x4000)
 
-#include <plat/map-s3c.h>
+#include <plat-samsung/map-s3c.h>
 
 /*
  * interrupt controller is the first thing we put in, to make

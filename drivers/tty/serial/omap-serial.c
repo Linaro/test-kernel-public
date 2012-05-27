@@ -40,9 +40,9 @@
 #include <linux/pm_runtime.h>
 #include <linux/of.h>
 
-#include <plat/dma.h>
-#include <plat/dmtimer.h>
-#include <plat/omap-serial.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/dmtimer.h>
+#include <plat-omap/omap-serial.h>
 
 #define UART_BUILD_REVISION(x, y)	(((x) << 8) | (y))
 

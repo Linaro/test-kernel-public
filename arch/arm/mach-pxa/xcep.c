@@ -27,9 +27,9 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/pxa25x.h>
-#include <mach/smemc.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/smemc.h>
 
 #include "generic.h"
 

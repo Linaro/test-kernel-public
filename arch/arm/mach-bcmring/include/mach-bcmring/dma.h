@@ -28,7 +28,7 @@
 #include <linux/kernel.h>
 #include <linux/semaphore.h>
 #include <csp/dmacHw.h>
-#include <mach/timer.h>
+#include <mach-bcmring/timer.h>
 
 /* ---- Constants and Types ---------------------------------------------- */
 

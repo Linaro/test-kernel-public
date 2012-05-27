@@ -36,10 +36,10 @@
 
 #include <asm/irq.h>
 
-#include <mach/regs-switch.h>
-#include <mach/regs-misc.h>
+#include <mach-ks8695/regs-switch.h>
+#include <mach-ks8695/regs-misc.h>
 #include <asm/mach/irq.h>
-#include <mach/regs-irq.h>
+#include <mach-ks8695/regs-irq.h>
 
 #include "ks8695net.h"
 

@@ -24,12 +24,12 @@
 #include <mach/hardware.h>
 #include <mach/map.h>
 
-#include <plat/regs-serial.h>
+#include <plat-samsung/regs-serial.h>
 #include <mach/regs-clock.h>
 #include <mach/regs-irq.h>
 #include <asm/irq.h>
 
-#include <plat/pm.h>
+#include <plat-samsung/pm.h>
 #include <mach/pm-core.h>
 
 /* for external use */

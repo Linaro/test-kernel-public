@@ -15,14 +15,14 @@
 #include <linux/platform_device.h>
 
 #include <asm/mach/time.h>
-#include <mach/addr-map.h>
-#include <mach/regs-apbc.h>
-#include <mach/regs-apmu.h>
-#include <mach/cputype.h>
-#include <mach/irqs.h>
-#include <mach/dma.h>
-#include <mach/mfp.h>
-#include <mach/devices.h>
+#include <mach-mmp/addr-map.h>
+#include <mach-mmp/regs-apbc.h>
+#include <mach-mmp/regs-apmu.h>
+#include <mach-mmp/cputype.h>
+#include <mach-mmp/irqs.h>
+#include <mach-mmp/dma.h>
+#include <mach-mmp/mfp.h>
+#include <mach-mmp/devices.h>
 
 #include "common.h"
 #include "clock.h"

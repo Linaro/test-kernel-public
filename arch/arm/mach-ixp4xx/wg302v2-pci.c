@@ -23,7 +23,7 @@
 #include <linux/irq.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-ixp4xx/hardware.h>
 
 #include <asm/mach/pci.h>
 

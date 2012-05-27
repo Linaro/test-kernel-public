@@ -10,7 +10,7 @@
 #ifndef ASM_ARCH_IRQS_H
 #define ASM_ARCH_IRQS_H
 
-#include <mach/hardware.h>
+#include <mach-ux500/hardware.h>
 
 #define IRQ_LOCALTIMER			29
 #define IRQ_LOCALWDOG			30
@@ -36,14 +36,14 @@
 /* This will be overridden by SoC-specific irq headers */
 #define IRQ_SOC_END		IRQ_SOC_START
 
-#include <mach/irqs-db8500.h>
+#include <mach-ux500/irqs-db8500.h>
 
 #define IRQ_BOARD_START		IRQ_SOC_END
 /* This will be overridden by board-specific irq headers */
 #define IRQ_BOARD_END		IRQ_BOARD_START
 
 #ifdef CONFIG_MACH_MOP500
-#include <mach/irqs-board-mop500.h>
+#include <mach-ux500/irqs-board-mop500.h>
 #endif
 
 #define NR_IRQS			IRQ_BOARD_END

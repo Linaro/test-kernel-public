@@ -16,7 +16,7 @@
 #define CAP_INLINE_H
 
 /* ---- Include Files ---------------------------------------------------- */
-#include <mach/csp/cap.h>
+#include <mach-bcmring/csp/cap.h>
 #include <cfg_global.h>
 
 /* ---- Public Constants and Types --------------------------------------- */

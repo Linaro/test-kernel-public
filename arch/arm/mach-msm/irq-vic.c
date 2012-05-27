@@ -24,9 +24,9 @@
 
 #include <asm/cacheflush.h>
 
-#include <mach/hardware.h>
+#include <mach-msm/hardware.h>
 
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 #include "smd_private.h"
 

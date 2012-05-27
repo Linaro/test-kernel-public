@@ -13,8 +13,8 @@
 #ifndef __ASM_ARCH_UNCOMPRESS_H
 #define __ASM_ARCH_UNCOMPRESS_H
 
-#include <mach/map.h>
-#include <plat/uncompress.h>
+#include <mach-s5pv210/map.h>
+#include <plat-samsung/uncompress.h>
 
 static void arch_detect_cpu(void)
 {

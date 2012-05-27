@@ -11,7 +11,7 @@
 #ifndef __ASM_ARCH_BRIDGE_REGS_H
 #define __ASM_ARCH_BRIDGE_REGS_H
 
-#include <mach/orion5x.h>
+#include <mach-orion5x/orion5x.h>
 
 #define CPU_CONF		(ORION5X_BRIDGE_VIRT_BASE | 0x100)
 

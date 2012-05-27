@@ -15,9 +15,9 @@
 #include <linux/i2c/at24.h>
 #include <linux/gpio.h>
 #include <asm/mach/time.h>
-#include <mach/kirkwood.h>
-#include <mach/irqs.h>
-#include <plat/time.h>
+#include <mach-kirkwood/kirkwood.h>
+#include <mach-kirkwood/irqs.h>
+#include <plat-orion/time.h>
 #include "common.h"
 
 /*****************************************************************************

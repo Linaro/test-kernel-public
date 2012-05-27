@@ -21,7 +21,7 @@
 #include <linux/io.h>
 #include <linux/sh_clk.h>
 #include <linux/clkdev.h>
-#include <mach/common.h>
+#include <mach-shmobile/common.h>
 
 /* SH7367 registers */
 #define RTFRQCR    0xe6150000

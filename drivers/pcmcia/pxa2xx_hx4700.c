@@ -13,7 +13,7 @@
 #include <linux/irq.h>
 
 #include <asm/mach-types.h>
-#include <mach/hx4700.h>
+#include <mach-pxa/hx4700.h>
 
 #include "soc_common.h"
 

@@ -20,8 +20,8 @@
 
 /*  ----------------------------------- Host OS */
 #include <dspbridge/host_os.h>
-#include <plat/dmtimer.h>
-#include <plat/mcbsp.h>
+#include <plat-omap/dmtimer.h>
+#include <plat-omap/mcbsp.h>
 
 /*  ----------------------------------- DSP/BIOS Bridge */
 #include <dspbridge/dbdefs.h>

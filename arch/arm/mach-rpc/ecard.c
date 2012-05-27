@@ -47,7 +47,7 @@
 
 #include <asm/dma.h>
 #include <asm/ecard.h>
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/irq.h>
 #include <asm/mmu_context.h>
 #include <asm/mach/irq.h>

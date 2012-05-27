@@ -1,7 +1,7 @@
 #ifndef _GTA02_H
 #define _GTA02_H
 
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
 /* Different hardware revisions, passed in ATAG_REVISION by u-boot */
 #define GTA02v1_SYSTEM_REV	0x00000310

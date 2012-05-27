@@ -15,7 +15,7 @@
 
 #include <linux/bitops.h>
 
-#include <mach/hardware.h>
+#include <mach-ixp4xx/hardware.h>
 
 extern int (*ixp4xx_pci_read)(u32 addr, u32 cmd, u32* data);
 extern int ixp4xx_pci_write(u32 addr, u32 cmd, u32 data);

@@ -11,8 +11,8 @@
  *
  */
 
-#include <mach/mx23.h>
-#include <mach/mx28.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/mx28.h>
 
 #ifdef CONFIG_DEBUG_IMX23_UART
 #define UART_PADDR	MX23_DUART_BASE_ADDR

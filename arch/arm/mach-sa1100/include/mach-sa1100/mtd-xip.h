@@ -15,7 +15,7 @@
 #ifndef __ARCH_SA1100_MTD_XIP_H__
 #define __ARCH_SA1100_MTD_XIP_H__
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 
 #define xip_irqpending()	(ICIP & ICMR)
 

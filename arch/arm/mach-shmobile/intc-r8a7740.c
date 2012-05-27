@@ -24,8 +24,8 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 #include <linux/sh_intc.h>
-#include <mach/intc.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/intc.h>
+#include <mach-shmobile/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 

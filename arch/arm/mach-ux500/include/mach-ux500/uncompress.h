@@ -22,7 +22,7 @@
 #include <asm/mach-types.h>
 #include <linux/io.h>
 #include <linux/amba/serial.h>
-#include <mach/hardware.h>
+#include <mach-ux500/hardware.h>
 
 u32 ux500_uart_base;
 

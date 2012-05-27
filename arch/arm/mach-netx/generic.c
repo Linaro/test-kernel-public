@@ -23,10 +23,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-netx/hardware.h>
 #include <asm/mach/map.h>
 #include <asm/hardware/vic.h>
-#include <mach/netx-regs.h>
+#include <mach-netx/netx-regs.h>
 #include <asm/mach/irq.h>
 
 static struct map_desc netx_io_desc[] __initdata = {

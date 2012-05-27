@@ -21,10 +21,10 @@
 
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-s3c64xx/hardware.h>
+#include <mach-s3c64xx/map.h>
 
-#include <plat/devs.h>
+#include <plat-samsung/devs.h>
 
 /* Serial port registrations */
 

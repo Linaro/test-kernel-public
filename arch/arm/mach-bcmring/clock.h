@@ -11,7 +11,7 @@
 * license other than the GPL, without Broadcom's express prior written
 * consent.
 *****************************************************************************/
-#include <mach/csp/chipcHw_def.h>
+#include <mach-bcmring/csp/chipcHw_def.h>
 
 #define CLK_TYPE_PRIMARY         1	/* primary clock must NOT have a parent */
 #define CLK_TYPE_PLL1            2	/* PPL1 */

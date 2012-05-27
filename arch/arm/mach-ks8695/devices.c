@@ -23,12 +23,12 @@
 #include <linux/gpio.h>
 #include <linux/platform_device.h>
 
-#include <mach/irqs.h>
-#include <mach/regs-wan.h>
-#include <mach/regs-lan.h>
-#include <mach/regs-hpna.h>
-#include <mach/regs-switch.h>
-#include <mach/regs-misc.h>
+#include <mach-ks8695/irqs.h>
+#include <mach-ks8695/regs-wan.h>
+#include <mach-ks8695/regs-lan.h>
+#include <mach-ks8695/regs-hpna.h>
+#include <mach-ks8695/regs-switch.h>
+#include <mach-ks8695/regs-misc.h>
 
 
 /* --------------------------------------------------------------------

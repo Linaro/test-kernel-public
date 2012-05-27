@@ -19,9 +19,9 @@
 #include <linux/io.h>
 #include <linux/irq.h>
 #include <linux/module.h>
-#include <mach/cpu.h>
-#include <mach/msm_gpiomux.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/cpu.h>
+#include <mach-msm/msm_gpiomux.h>
+#include <mach-msm/msm_iomap.h>
 
 /* see 80-VA736-2 Rev C pp 695-751
 **

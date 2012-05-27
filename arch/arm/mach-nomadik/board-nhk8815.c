@@ -29,11 +29,11 @@
 #include <asm/mach/flash.h>
 #include <asm/mach/time.h>
 
-#include <plat/gpio-nomadik.h>
-#include <plat/mtu.h>
+#include <plat-nomadik/gpio-nomadik.h>
+#include <plat-nomadik/mtu.h>
 
-#include <mach/nand.h>
-#include <mach/fsmc.h>
+#include <mach-nomadik/nand.h>
+#include <mach-nomadik/fsmc.h>
 
 #include "cpu-8815.h"
 

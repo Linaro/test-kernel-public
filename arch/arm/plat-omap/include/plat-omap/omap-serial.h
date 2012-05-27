@@ -21,7 +21,7 @@
 #include <linux/platform_device.h>
 #include <linux/pm_qos.h>
 
-#include <plat/mux.h>
+#include <plat-omap/mux.h>
 
 #define DRIVER_NAME	"omap_uart"
 

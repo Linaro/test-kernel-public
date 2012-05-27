@@ -36,9 +36,9 @@
 #include <linux/input/matrix_keypad.h>
 #include <linux/mfd/ti_ssp.h>
 
-#include <mach/mmc.h>
-#include <mach/nand.h>
-#include <mach/serial.h>
+#include <mach-davinci/mmc.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/serial.h>
 
 struct tnetv107x_device_info {
 	struct davinci_uart_config	*serial_config;

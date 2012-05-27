@@ -28,12 +28,12 @@
 #include <linux/io.h>
 
 #include <asm/irq.h>
-#include <mach/hardware.h>
-#include <mach/dma.h>
-#include <mach/map.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/dma.h>
+#include <mach-s3c24xx/map.h>
 
-#include <plat/dma-s3c24xx.h>
-#include <plat/regs-dma.h>
+#include <plat-samsung/dma-s3c24xx.h>
+#include <plat-samsung/regs-dma.h>
 
 /* io map for dma */
 static void __iomem *dma_base;

@@ -56,6 +56,6 @@
 #define S3C_UART_OFFSET		(0x400)
 #endif
 
-#include <plat/map-s3c.h>
+#include <plat-samsung/map-s3c.h>
 
 #endif /* __ASM_PLAT_MAP_S5P_H */

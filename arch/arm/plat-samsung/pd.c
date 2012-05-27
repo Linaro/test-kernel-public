@@ -16,7 +16,7 @@
 #include <linux/err.h>
 #include <linux/pm_runtime.h>
 
-#include <plat/pd.h>
+#include <plat-samsung/pd.h>
 
 static int samsung_pd_probe(struct platform_device *pdev)
 {

@@ -19,8 +19,8 @@
 #include <linux/of.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
-#include <mach/common.h>
-#include <mach/emev2.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/emev2.h>
 
 #define is_sh73a0() (machine_is_ag5evm() || machine_is_kota2() || \
 			of_machine_is_compatible("renesas,sh73a0"))

@@ -28,11 +28,11 @@
 #include <asm/irq.h>
 #include <asm/mach/irq.h>
 
-#include <plat/regs-irqtype.h>
+#include <plat-samsung/regs-irqtype.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/irq.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/irq.h>
 
 static void
 s3c_irq_mask(struct irq_data *data)

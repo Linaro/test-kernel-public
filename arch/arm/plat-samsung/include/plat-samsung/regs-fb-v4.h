@@ -24,7 +24,7 @@
  * override them at a later date.
 */
 
-#include <plat/regs-fb.h>
+#include <plat-samsung/regs-fb.h>
 
 #define S3C_FB_MAX_WIN (5)  /* number of hardware windows available. */
 #define VIDCON1_FSTATUS_EVEN	(1 << 15)

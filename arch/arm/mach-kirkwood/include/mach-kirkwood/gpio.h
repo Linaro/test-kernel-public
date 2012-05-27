@@ -6,4 +6,4 @@
  * warranty of any kind, whether express or implied.
  */
 
-#include <plat/gpio.h>
+#include <plat-orion/gpio.h>

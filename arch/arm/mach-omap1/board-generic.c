@@ -17,14 +17,14 @@
 #include <linux/init.h>
 #include <linux/platform_device.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/mux.h>
-#include <plat/usb.h>
-#include <plat/board.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/board.h>
 #include "common.h"
 
 /* assume no Mini-AB port */

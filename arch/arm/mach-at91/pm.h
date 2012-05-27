@@ -11,8 +11,8 @@
 #ifndef __ARCH_ARM_MACH_AT91_PM
 #define __ARCH_ARM_MACH_AT91_PM
 
-#include <mach/at91_ramc.h>
-#include <mach/at91rm9200_sdramc.h>
+#include <mach-at91/at91_ramc.h>
+#include <mach-at91/at91rm9200_sdramc.h>
 
 /*
  * The AT91RM9200 goes into self-refresh mode with this command, and will

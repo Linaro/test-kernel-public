@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <mach/platform.h>
+#include <mach-versatile/platform.h>
 
 /* 
  *  IRQ interrupts definitions are the same as the INT definitions

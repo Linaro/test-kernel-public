@@ -19,7 +19,7 @@
 #ifndef __MACH_MX23_H__
 #define __MACH_MX23_H__
 
-#include <mach/mxs.h>
+#include <mach-mxs/mxs.h>
 
 /*
  * OCRAM

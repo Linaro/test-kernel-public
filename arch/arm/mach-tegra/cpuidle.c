@@ -27,7 +27,7 @@
 #include <linux/cpuidle.h>
 #include <linux/hrtimer.h>
 
-#include <mach/iomap.h>
+#include <mach-tegra/iomap.h>
 
 extern void tegra_cpu_wfi(void);
 

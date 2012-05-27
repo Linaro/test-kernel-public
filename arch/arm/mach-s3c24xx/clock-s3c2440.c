@@ -35,15 +35,15 @@
 #include <linux/io.h>
 #include <linux/serial_core.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <linux/atomic.h>
 #include <asm/irq.h>
 
-#include <mach/regs-clock.h>
+#include <mach-s3c24xx/regs-clock.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/regs-serial.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/regs-serial.h>
 
 /* S3C2440 extended clock support */
 

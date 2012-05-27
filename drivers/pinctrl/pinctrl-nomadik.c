@@ -32,8 +32,8 @@
 
 #include <asm/mach/irq.h>
 
-#include <plat/pincfg.h>
-#include <plat/gpio-nomadik.h>
+#include <plat-nomadik/pincfg.h>
+#include <plat-nomadik/gpio-nomadik.h>
 
 #include "pinctrl-nomadik.h"
 

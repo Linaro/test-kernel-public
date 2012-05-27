@@ -29,7 +29,7 @@
 #include <linux/timex.h>
 
 #include <asm/sizes.h>
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/irq.h>
 #include <asm/leds.h>
 #include <asm/pgtable.h>

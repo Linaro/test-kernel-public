@@ -18,8 +18,8 @@
 
 #include <asm-generic/gpio.h>
 
-#include <mach/irqs.h>
-#include <mach/common.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/common.h>
 
 #define DAVINCI_GPIO_BASE 0x01C67000
 

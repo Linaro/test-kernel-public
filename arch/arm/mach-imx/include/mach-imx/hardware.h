@@ -102,20 +102,20 @@
 
 #define IMX_IO_ADDRESS(x)	IOMEM(IMX_IO_P2V(x))
 
-#include <mach/mxc.h>
+#include <mach-imx/mxc.h>
 
-#include <mach/mx6q.h>
-#include <mach/mx50.h>
-#include <mach/mx51.h>
-#include <mach/mx53.h>
-#include <mach/mx3x.h>
-#include <mach/mx31.h>
-#include <mach/mx35.h>
-#include <mach/mx2x.h>
-#include <mach/mx21.h>
-#include <mach/mx27.h>
-#include <mach/mx1.h>
-#include <mach/mx25.h>
+#include <mach-imx/mx6q.h>
+#include <mach-imx/mx50.h>
+#include <mach-imx/mx51.h>
+#include <mach-imx/mx53.h>
+#include <mach-imx/mx3x.h>
+#include <mach-imx/mx31.h>
+#include <mach-imx/mx35.h>
+#include <mach-imx/mx2x.h>
+#include <mach-imx/mx21.h>
+#include <mach-imx/mx27.h>
+#include <mach-imx/mx1.h>
+#include <mach-imx/mx25.h>
 
 #define imx_map_entry(soc, name, _type)	{				\
 	.virtual = soc ## _IO_P2V(soc ## _ ## name ## _BASE_ADDR),	\

@@ -31,7 +31,7 @@
 #include <asm/setup.h>
 #include <asm/memory.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/irq.h>
 #include <asm/sizes.h>
 
@@ -42,15 +42,15 @@
 
 #include <asm/hardware/sa1111.h>
 
-#include <mach/pxa25x.h>
-#include <mach/audio.h>
-#include <mach/lubbock.h>
-#include <mach/udc.h>
-#include <mach/irda.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/pm.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/lubbock.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/pm.h>
+#include <mach-pxa/smemc.h>
 
 #include "generic.h"
 #include "clock.h"

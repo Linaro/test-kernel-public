@@ -22,7 +22,7 @@
 #include <asm/mach-types.h>
 #include <asm/smp_plat.h>
 
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 #include "scm-boot.h"
 

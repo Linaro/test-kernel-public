@@ -15,14 +15,14 @@
 #include <linux/io.h>
 #include <linux/gpio.h>
 
-#include <mach/map.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-clock.h>
+#include <mach-s5p64x0/map.h>
+#include <mach-s5p64x0/regs-gpio.h>
+#include <mach-s5p64x0/regs-clock.h>
 
-#include <plat/cpu.h>
-#include <plat/gpio-core.h>
-#include <plat/gpio-cfg.h>
-#include <plat/gpio-cfg-helpers.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/gpio-core.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg-helpers.h>
 
 /*
  * S5P6440 GPIO bank summary:

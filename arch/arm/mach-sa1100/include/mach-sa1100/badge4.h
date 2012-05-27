@@ -13,7 +13,7 @@
  */
 
 #ifndef __ASM_ARCH_HARDWARE_H
-#error "include <mach/hardware.h> instead"
+#error "include <mach-sa1100/hardware.h> instead"
 #endif
 
 #define BADGE4_SA1111_BASE		(0x48000000)

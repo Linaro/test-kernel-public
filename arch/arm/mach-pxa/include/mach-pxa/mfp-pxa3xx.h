@@ -1,7 +1,7 @@
 #ifndef __ASM_ARCH_MFP_PXA3XX_H
 #define __ASM_ARCH_MFP_PXA3XX_H
 
-#include <plat/mfp.h>
+#include <plat-pxa/mfp.h>
 
 #define MFPR_BASE	(0x40e10000)
 

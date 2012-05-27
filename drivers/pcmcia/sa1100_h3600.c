@@ -12,10 +12,10 @@
 #include <linux/delay.h>
 #include <linux/gpio.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
-#include <mach/h3xxx.h>
+#include <mach-sa1100/h3xxx.h>
 
 #include "sa1100_generic.h"
 

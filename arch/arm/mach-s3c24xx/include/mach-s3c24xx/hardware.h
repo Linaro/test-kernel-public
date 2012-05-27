@@ -32,7 +32,7 @@ extern int s3c2412_gpio_set_sleepcfg(unsigned int pin, unsigned int state);
 #endif /* __ASSEMBLY__ */
 
 #include <asm/sizes.h>
-#include <mach/map.h>
+#include <mach-s3c24xx/map.h>
 
 /* machine specific hardware definitions should go after this */
 

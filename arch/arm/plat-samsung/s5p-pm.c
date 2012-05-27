@@ -14,7 +14,7 @@
 */
 
 #include <linux/suspend.h>
-#include <plat/pm.h>
+#include <plat-samsung/pm.h>
 
 #define PFX "s5p pm: "
 

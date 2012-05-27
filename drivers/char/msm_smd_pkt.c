@@ -31,7 +31,7 @@
 #include <linux/workqueue.h>
 #include <linux/poll.h>
 
-#include <mach/msm_smd.h>
+#include <mach-msm/msm_smd.h>
 
 #define NUM_SMD_PKT_PORTS 9
 #define DEVICE_NAME "smdpkt"

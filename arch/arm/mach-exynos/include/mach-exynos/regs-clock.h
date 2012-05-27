@@ -13,8 +13,8 @@
 #ifndef __ASM_ARCH_REGS_CLOCK_H
 #define __ASM_ARCH_REGS_CLOCK_H __FILE__
 
-#include <plat/cpu.h>
-#include <mach/map.h>
+#include <plat-samsung/cpu.h>
+#include <mach-exynos/map.h>
 
 #define EXYNOS_CLKREG(x)			(S5P_VA_CMU + (x))
 
@@ -330,7 +330,7 @@
 
 /* Compatibility defines and inclusion */
 
-#include <mach/regs-pmu.h>
+#include <mach-exynos/regs-pmu.h>
 
 #define S5P_EPLL_CON				EXYNOS4_EPLL_CON0
 

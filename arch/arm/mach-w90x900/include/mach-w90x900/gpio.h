@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_W90P910_GPIO_H
 #define __ASM_ARCH_W90P910_GPIO_H
 
-#include <mach/hardware.h>
+#include <mach-w90x900/hardware.h>
 #include <asm/irq.h>
 
 static inline int gpio_to_irq(unsigned gpio)

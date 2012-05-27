@@ -25,8 +25,8 @@
 #include <linux/init.h>
 #include <asm/io.h>
 #include <asm/sizes.h>
-#include <mach/hardware.h>
-#include <mach/autcpu12.h>
+#include <mach-clps711x/hardware.h>
+#include <mach-clps711x/autcpu12.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/map.h>
 #include <linux/mtd/partitions.h>

@@ -22,11 +22,11 @@
 #include <asm/mach/map.h>
 #include <asm/memblock.h>
 
-#include <plat/tc.h>
-#include <plat/board.h>
-#include <plat/mmc.h>
-#include <plat/menelaus.h>
-#include <plat/omap44xx.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/menelaus.h>
+#include <plat-omap/omap44xx.h>
 
 /*-------------------------------------------------------------------------*/
 

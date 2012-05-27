@@ -26,8 +26,8 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <plat/usb.h>
-#include <plat/board.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/board.h>
 
 #include <mach/hardware.h>
 

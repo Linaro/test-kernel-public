@@ -22,11 +22,11 @@
 
 #include <asm/irq.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 
-#include <mach/spitz.h>
-#include <mach/pxa27x.h>
-#include <mach/sharpsl_pm.h>
+#include <mach-pxa/spitz.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/sharpsl_pm.h>
 
 #include "generic.h"
 

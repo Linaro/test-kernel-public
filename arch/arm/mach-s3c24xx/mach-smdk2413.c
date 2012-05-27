@@ -26,29 +26,29 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/hardware/iomd.h>
 #include <asm/setup.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
 //#include <asm/debug-ll.h>
-#include <plat/regs-serial.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-lcd.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-lcd.h>
 
-#include <mach/idle.h>
-#include <plat/udc.h>
-#include <plat/iic.h>
-#include <mach/fb.h>
+#include <mach-s3c24xx/idle.h>
+#include <plat-samsung/udc.h>
+#include <plat-samsung/iic.h>
+#include <mach-s3c24xx/fb.h>
 
-#include <plat/s3c2410.h>
-#include <plat/s3c2412.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
+#include <plat-samsung/s3c2410.h>
+#include <plat-samsung/s3c2412.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
 
-#include <plat/common-smdk.h>
+#include <plat-samsung/common-smdk.h>
 
 static struct map_desc smdk2413_iodesc[] __initdata = {
 };

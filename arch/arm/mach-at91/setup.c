@@ -14,11 +14,11 @@
 #include <asm/system_misc.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/cpu.h>
-#include <mach/at91_dbgu.h>
-#include <mach/at91_pmc.h>
-#include <mach/at91_shdwc.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/cpu.h>
+#include <mach-at91/at91_dbgu.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/at91_shdwc.h>
 
 #include "soc.h"
 #include "generic.h"

@@ -17,10 +17,10 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/mx23.h>
-#include <mach/mx28.h>
-#include <mach/common.h>
-#include <mach/iomux.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/mx28.h>
+#include <mach-mxs/common.h>
+#include <mach-mxs/iomux.h>
 
 /*
  * Define the MX23 memory map.

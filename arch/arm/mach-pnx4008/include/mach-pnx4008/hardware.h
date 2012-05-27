@@ -21,7 +21,7 @@
 #define __ASM_ARCH_HARDWARE_H
 
 #include <asm/sizes.h>
-#include <mach/platform.h>
+#include <mach-pnx4008/platform.h>
 
 /* Start of virtual addresses for IO devices */
 #define IO_BASE         0xF0000000

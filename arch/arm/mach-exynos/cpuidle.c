@@ -21,10 +21,10 @@
 #include <asm/suspend.h>
 #include <asm/unified.h>
 #include <asm/cpuidle.h>
-#include <mach/regs-pmu.h>
-#include <mach/pmu.h>
+#include <mach-exynos/regs-pmu.h>
+#include <mach-exynos/pmu.h>
 
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
 #define REG_DIRECTGO_ADDR	(samsung_rev() == EXYNOS4210_REV_1_1 ? \
 			S5P_INFORM7 : (samsung_rev() == EXYNOS4210_REV_1_0 ? \

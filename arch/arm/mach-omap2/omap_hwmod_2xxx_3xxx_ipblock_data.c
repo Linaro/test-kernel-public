@@ -9,13 +9,13 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
-#include <plat/omap_hwmod.h>
-#include <plat/serial.h>
-#include <plat/dma.h>
-#include <plat/common.h>
-#include <plat/hdq1w.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/serial.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/common.h>
+#include <plat-omap/hdq1w.h>
 
-#include <mach/irqs.h>
+#include <mach-omap2/irqs.h>
 
 #include "omap_hwmod_common_data.h"
 

@@ -14,7 +14,7 @@
 #include <linux/smp.h>
 #include <linux/cpumask.h>
 #include <linux/delay.h>
-#include <mach/common.h>
+#include <mach-shmobile/common.h>
 #include <asm/cacheflush.h>
 
 static cpumask_t dead_cpus;

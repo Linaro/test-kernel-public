@@ -19,8 +19,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach-types.h>
-#include <mach/map.h>
-#include <mach/fb.h>
+#include <mach-w90x900/map.h>
+#include <mach-w90x900/fb.h>
 
 #include "nuc950.h"
 

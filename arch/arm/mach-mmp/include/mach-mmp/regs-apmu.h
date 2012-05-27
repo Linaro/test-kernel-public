@@ -11,7 +11,7 @@
 #ifndef __ASM_MACH_REGS_APMU_H
 #define __ASM_MACH_REGS_APMU_H
 
-#include <mach/addr-map.h>
+#include <mach-mmp/addr-map.h>
 
 /* Clock Reset Control */
 #define APMU_IRE	APMU_REG(0x048)

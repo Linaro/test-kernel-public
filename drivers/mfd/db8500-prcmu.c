@@ -31,10 +31,10 @@
 #include <linux/regulator/db8500-prcmu.h>
 #include <linux/regulator/machine.h>
 #include <asm/hardware/gic.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <mach/db8500-regs.h>
-#include <mach/id.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/irqs.h>
+#include <mach-ux500/db8500-regs.h>
+#include <mach-ux500/id.h>
 #include "dbx500-prcmu-regs.h"
 
 /* Offset for the firmware version within the TCPM */

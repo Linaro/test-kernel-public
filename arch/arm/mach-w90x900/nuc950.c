@@ -17,7 +17,7 @@
 
 #include <linux/platform_device.h>
 #include <asm/mach/map.h>
-#include <mach/hardware.h>
+#include <mach-w90x900/hardware.h>
 
 #include "cpu.h"
 

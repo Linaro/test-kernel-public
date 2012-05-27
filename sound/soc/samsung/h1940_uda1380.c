@@ -20,8 +20,8 @@
 #include <sound/soc.h>
 #include <sound/jack.h>
 
-#include <plat/regs-iis.h>
-#include <mach/h1940-latch.h>
+#include <plat-samsung/regs-iis.h>
+#include <mach-s3c24xx/h1940-latch.h>
 #include <asm/mach-types.h>
 
 #include "s3c24xx-i2s.h"

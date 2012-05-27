@@ -11,8 +11,8 @@
 #define __MACH_SYSTEM_H
 
 #include <linux/io.h>
-#include <mach/hardware.h>
-#include <mach/global_reg.h>
+#include <mach-gemini/hardware.h>
+#include <mach-gemini/global_reg.h>
 
 static inline void arch_reset(char mode, const char *cmd)
 {

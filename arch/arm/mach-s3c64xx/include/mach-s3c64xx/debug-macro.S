@@ -12,8 +12,8 @@
 
 /* pull in the relevant register and map files. */
 
-#include <mach/map.h>
-#include <plat/regs-serial.h>
+#include <mach-s3c64xx/map.h>
+#include <plat-samsung/regs-serial.h>
 
 	/* note, for the boot process to work we have to keep the UART
 	 * virtual address aligned to an 1MiB boundary for the L1
@@ -35,4 +35,4 @@
  * will be fine with us.
  */
 
-#include <plat/debug-macro.S>
+#include <plat-samsung/debug-macro.S>

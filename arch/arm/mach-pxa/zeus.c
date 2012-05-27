@@ -36,18 +36,18 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/pxa27x.h>
-#include <mach/regs-uart.h>
-#include <mach/ohci.h>
-#include <mach/mmc.h>
-#include <mach/pxa27x-udc.h>
-#include <mach/udc.h>
-#include <mach/pxafb.h>
-#include <mach/pm.h>
-#include <mach/audio.h>
-#include <mach/arcom-pcmcia.h>
-#include <mach/zeus.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/regs-uart.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/pxa27x-udc.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/pm.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/arcom-pcmcia.h>
+#include <mach-pxa/zeus.h>
+#include <mach-pxa/smemc.h>
 
 #include "generic.h"
 

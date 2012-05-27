@@ -23,7 +23,7 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/balloon3.h>
+#include <mach-pxa/balloon3.h>
 
 #include <asm/mach-types.h>
 

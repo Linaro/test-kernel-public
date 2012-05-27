@@ -25,8 +25,8 @@
 #include <asm/mach/time.h>
 #include <asm/mach/irq.h>
 
-#include <mach/at91_pmc.h>
-#include <mach/cpu.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/cpu.h>
 
 #include "generic.h"
 #include "pm.h"
@@ -35,8 +35,8 @@
  * Show the reason for the previous system reset.
  */
 
-#include <mach/at91_rstc.h>
-#include <mach/at91_shdwc.h>
+#include <mach-at91/at91_rstc.h>
+#include <mach-at91/at91_shdwc.h>
 
 static void __init show_reset_status(void)
 {

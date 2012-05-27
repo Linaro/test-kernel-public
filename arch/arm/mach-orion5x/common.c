@@ -27,14 +27,14 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
-#include <mach/bridge-regs.h>
-#include <mach/hardware.h>
-#include <mach/orion5x.h>
-#include <plat/orion_nand.h>
-#include <plat/ehci-orion.h>
-#include <plat/time.h>
-#include <plat/common.h>
-#include <plat/addr-map.h>
+#include <mach-orion5x/bridge-regs.h>
+#include <mach-orion5x/hardware.h>
+#include <mach-orion5x/orion5x.h>
+#include <plat-orion/orion_nand.h>
+#include <plat-orion/ehci-orion.h>
+#include <plat-orion/time.h>
+#include <plat-orion/common.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 /*****************************************************************************

@@ -2,7 +2,7 @@
 #define ZBOOT_H
 
 #include <asm/mach-types.h>
-#include <mach/zboot_macros.h>
+#include <mach-shmobile/zboot_macros.h>
 
 /**************************************************
  *

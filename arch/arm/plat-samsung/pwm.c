@@ -22,7 +22,7 @@
 
 #include <mach/map.h>
 
-#include <plat/regs-timer.h>
+#include <plat-samsung/regs-timer.h>
 
 struct pwm_device {
 	struct list_head	 list;

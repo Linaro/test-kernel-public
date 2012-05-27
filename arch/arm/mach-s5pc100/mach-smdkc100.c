@@ -29,29 +29,29 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/map.h>
-#include <mach/regs-gpio.h>
+#include <mach-s5pc100/map.h>
+#include <mach-s5pc100/regs-gpio.h>
 
 #include <video/platform_lcd.h>
 
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/regs-serial.h>
-#include <plat/gpio-cfg.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/gpio-cfg.h>
 
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/fb.h>
-#include <plat/iic.h>
-#include <plat/ata.h>
-#include <plat/adc.h>
-#include <plat/keypad.h>
-#include <plat/ts.h>
-#include <plat/audio.h>
-#include <plat/backlight.h>
-#include <plat/regs-fb-v4.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/ata.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/keypad.h>
+#include <plat-samsung/ts.h>
+#include <plat-samsung/audio.h>
+#include <plat-samsung/backlight.h>
+#include <plat-samsung/regs-fb-v4.h>
 
 #include "common.h"
 

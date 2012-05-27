@@ -18,10 +18,10 @@
 
 #include <asm/proc-fns.h>
 
-#include <mach/map.h>
+#include <mach-s3c64xx/map.h>
 
-#include <mach/regs-sys.h>
-#include <mach/regs-syscon-power.h>
+#include <mach-s3c64xx/regs-sys.h>
+#include <mach-s3c64xx/regs-syscon-power.h>
 
 static int s3c64xx_enter_idle(struct cpuidle_device *dev,
 			      struct cpuidle_driver *drv,

@@ -22,7 +22,7 @@
 #include <linux/kernel.h>
 #include <linux/io.h>
 
-#include <mach/iomap.h>
+#include <mach-tegra/iomap.h>
 
 #include "flowctrl.h"
 

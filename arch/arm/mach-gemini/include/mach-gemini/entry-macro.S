@@ -8,7 +8,7 @@
  * License version 2. This program is licensed "as is" without any
  * warranty of any kind, whether express or implied.
  */
-#include <mach/hardware.h>
+#include <mach-gemini/hardware.h>
 
 #define IRQ_STATUS	0x14
 

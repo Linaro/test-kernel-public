@@ -22,9 +22,9 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/io.h>
-#include <mach/common.h>
-#include <mach/intc.h>
-#include <mach/r8a7779.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/intc.h>
+#include <mach-shmobile/r8a7779.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

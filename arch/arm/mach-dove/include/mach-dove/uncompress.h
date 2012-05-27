@@ -6,7 +6,7 @@
  * warranty of any kind, whether express or implied.
  */
 
-#include <mach/dove.h>
+#include <mach-dove/dove.h>
 
 #define UART_THR ((volatile unsigned char *)(DOVE_UART0_PHYS_BASE + 0x0))
 #define UART_LSR ((volatile unsigned char *)(DOVE_UART0_PHYS_BASE + 0x14))

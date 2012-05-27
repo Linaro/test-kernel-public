@@ -14,10 +14,10 @@
 
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
-#include <plat/cpu.h>
-#include <plat/regs-serial.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/regs-serial.h>
 
 #include "common.h"
 

@@ -29,8 +29,8 @@
 #include <linux/amba/bus.h>
 #include <linux/clkdev.h>
 
-#include <mach/csp/mm_addr.h>
-#include <mach/hardware.h>
+#include <mach-bcmring/csp/mm_addr.h>
+#include <mach-bcmring/hardware.h>
 #include <linux/io.h>
 #include <asm/irq.h>
 #include <asm/hardware/arm_timer.h>
@@ -48,9 +48,9 @@
 #include "clock.h"
 
 #include <csp/secHw.h>
-#include <mach/csp/secHw_def.h>
-#include <mach/csp/chipcHw_inline.h>
-#include <mach/csp/tmrHw_reg.h>
+#include <mach-bcmring/csp/secHw_def.h>
+#include <mach-bcmring/csp/chipcHw_inline.h>
+#include <mach-bcmring/csp/tmrHw_reg.h>
 
 static AMBA_APB_DEVICE(uartA, "uartA", 0, MM_ADDR_IO_UARTA, {IRQ_UARTA}, NULL);
 static AMBA_APB_DEVICE(uartB, "uartB", 0, MM_ADDR_IO_UARTB, {IRQ_UARTB}, NULL);

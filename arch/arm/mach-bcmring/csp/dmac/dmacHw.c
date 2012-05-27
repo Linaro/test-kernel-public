@@ -30,9 +30,9 @@
 #include <stddef.h>
 
 #include <csp/dmacHw.h>
-#include <mach/csp/dmacHw_reg.h>
-#include <mach/csp/dmacHw_priv.h>
-#include <mach/csp/chipcHw_inline.h>
+#include <mach-bcmring/csp/dmacHw_reg.h>
+#include <mach-bcmring/csp/dmacHw_priv.h>
+#include <mach-bcmring/csp/chipcHw_inline.h>
 
 /* ---- External Function Prototypes ------------------------------------- */
 

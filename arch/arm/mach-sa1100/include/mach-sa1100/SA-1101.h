@@ -38,7 +38,7 @@
 #define SA1101_p2v(PhAdd)  (PhAdd)
 #endif
 
-#include <mach/bitfield.h>
+#include <mach-sa1100/bitfield.h>
 
 #define C               0
 #define Assembly        1

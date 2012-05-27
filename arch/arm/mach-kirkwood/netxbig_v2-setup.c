@@ -31,8 +31,8 @@
 #include <linux/leds.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/kirkwood.h>
-#include <mach/leds-netxbig.h>
+#include <mach-kirkwood/kirkwood.h>
+#include <mach-kirkwood/leds-netxbig.h>
 #include "common.h"
 #include "mpp.h"
 #include "lacie_v2-common.h"

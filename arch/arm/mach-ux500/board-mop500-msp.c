@@ -9,14 +9,14 @@
 #include <linux/gpio.h>
 #include <linux/pinctrl/consumer.h>
 
-#include <plat/gpio-nomadik.h>
-#include <plat/pincfg.h>
-#include <plat/ste_dma40.h>
+#include <plat-nomadik/gpio-nomadik.h>
+#include <plat-nomadik/pincfg.h>
+#include <plat-nomadik/ste_dma40.h>
 
-#include <mach/devices.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <mach/msp.h>
+#include <mach-ux500/devices.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/irqs.h>
+#include <mach-ux500/msp.h>
 
 #include "ste-dma40-db8500.h"
 #include "board-mop500.h"

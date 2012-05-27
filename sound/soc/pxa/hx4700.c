@@ -23,7 +23,7 @@
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
 
-#include <mach/hx4700.h>
+#include <mach-pxa/hx4700.h>
 #include <asm/mach-types.h>
 #include "pxa2xx-i2s.h"
 

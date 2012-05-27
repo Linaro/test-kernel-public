@@ -10,8 +10,8 @@
  * warranty of any kind, whether express or implied.
  */
 
-#include <mach/hardware.h>
-#include <mach/at91_aic.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/at91_aic.h>
 
 	.macro  get_irqnr_preamble, base, tmp
 	ldr	\base, =at91_aic_base		@ base virtual address of AIC peripheral

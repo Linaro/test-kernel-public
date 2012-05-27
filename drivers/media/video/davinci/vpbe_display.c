@@ -26,7 +26,7 @@
 #include <linux/slab.h>
 
 #include <asm/pgtable.h>
-#include <mach/cputype.h>
+#include <mach-davinci/cputype.h>
 
 #include <media/v4l2-dev.h>
 #include <media/v4l2-common.h>

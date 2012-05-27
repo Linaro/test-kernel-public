@@ -8,14 +8,14 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
-#include <plat/omap_hwmod.h>
-#include <plat/serial.h>
-#include <plat/gpio.h>
-#include <plat/dma.h>
-#include <plat/dmtimer.h>
-#include <plat/mcspi.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/serial.h>
+#include <plat-omap/gpio.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/dmtimer.h>
+#include <plat-omap/mcspi.h>
 
-#include <mach/irqs.h>
+#include <mach-omap2/irqs.h>
 
 #include "omap_hwmod_common_data.h"
 #include "cm-regbits-24xx.h"

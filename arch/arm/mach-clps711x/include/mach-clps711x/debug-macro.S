@@ -11,7 +11,7 @@
  *
 */
 
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 
 		.macro	addruart, rp, rv, tmp
 #ifndef CONFIG_DEBUG_CLPS711X_UART2

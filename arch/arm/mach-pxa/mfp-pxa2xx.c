@@ -20,8 +20,8 @@
 #include <linux/io.h>
 #include <linux/syscore_ops.h>
 
-#include <mach/pxa2xx-regs.h>
-#include <mach/mfp-pxa2xx.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/mfp-pxa2xx.h>
 
 #include "generic.h"
 

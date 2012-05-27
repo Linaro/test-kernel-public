@@ -45,7 +45,7 @@
 #include <linux/io.h>
 #include <linux/bug.h>
 
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 #include "clock.h"
 

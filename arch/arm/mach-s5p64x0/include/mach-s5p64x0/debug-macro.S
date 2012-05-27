@@ -10,10 +10,10 @@
 
 /* pull in the relevant register and map files. */
 
-#include <plat/map-base.h>
-#include <plat/map-s5p.h>
+#include <plat-samsung/map-base.h>
+#include <plat-samsung/map-s5p.h>
 
-#include <plat/regs-serial.h>
+#include <plat-samsung/regs-serial.h>
 
 	.macro addruart, rp, rv, tmp
 		mov	\rp, #0xE0000000
@@ -30,4 +30,4 @@
 #endif
 	.endm
 
-#include <plat/debug-macro.S>
+#include <plat-samsung/debug-macro.S>

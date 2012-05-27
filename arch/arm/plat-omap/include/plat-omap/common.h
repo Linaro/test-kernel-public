@@ -27,8 +27,8 @@
 #ifndef __ARCH_ARM_MACH_OMAP_COMMON_H
 #define __ARCH_ARM_MACH_OMAP_COMMON_H
 
-#include <plat/i2c.h>
-#include <plat/omap_hwmod.h>
+#include <plat-omap/i2c.h>
+#include <plat-omap/omap_hwmod.h>
 
 extern int __init omap_init_clocksource_32k(void __iomem *vbase);
 

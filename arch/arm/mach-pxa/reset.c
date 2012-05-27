@@ -11,8 +11,8 @@
 #include <asm/proc-fns.h>
 #include <asm/system_misc.h>
 
-#include <mach/regs-ost.h>
-#include <mach/reset.h>
+#include <mach-pxa/regs-ost.h>
+#include <mach-pxa/reset.h>
 
 unsigned int reset_status;
 EXPORT_SYMBOL(reset_status);

@@ -18,11 +18,11 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 
-#include <mach/irqs.h>
-#include <plat/dma.h>
-#include <plat/cpu.h>
-#include <plat/mcbsp.h>
-#include <plat/omap_device.h>
+#include <mach-omap2/irqs.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/mcbsp.h>
+#include <plat-omap/omap_device.h>
 #include <linux/pm_runtime.h>
 
 #include "control.h"

@@ -8,7 +8,7 @@
  * published by the Free Software Foundation.
  *
  */
-#include <mach/hardware.h>
+#include <mach-ux500/hardware.h>
 
 #if CONFIG_UX500_DEBUG_UART > 2
 #error Invalid Ux500 debug UART

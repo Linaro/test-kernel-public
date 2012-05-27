@@ -9,9 +9,9 @@
 #include <linux/device.h>
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
-#include <mach/shannon.h>
+#include <mach-sa1100/shannon.h>
 #include <asm/irq.h>
 #include "sa1100_generic.h"
 

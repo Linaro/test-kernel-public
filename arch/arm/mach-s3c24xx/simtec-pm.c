@@ -24,15 +24,15 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 
-#include <mach/map.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-mem.h>
+#include <mach-s3c24xx/map.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-mem.h>
 
 #include <asm/mach-types.h>
 
-#include <plat/pm.h>
+#include <plat-samsung/pm.h>
 
 #define COPYRIGHT ", Copyright 2005 Simtec Electronics"
 

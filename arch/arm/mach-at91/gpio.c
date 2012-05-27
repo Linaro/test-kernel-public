@@ -26,8 +26,8 @@
 #include <linux/of_irq.h>
 #include <linux/of_gpio.h>
 
-#include <mach/hardware.h>
-#include <mach/at91_pio.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/at91_pio.h>
 
 #include "generic.h"
 

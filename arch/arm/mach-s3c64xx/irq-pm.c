@@ -19,13 +19,13 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/map.h>
+#include <mach-s3c64xx/map.h>
 
-#include <plat/regs-serial.h>
-#include <plat/regs-timer.h>
-#include <mach/regs-gpio.h>
-#include <plat/cpu.h>
-#include <plat/pm.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/regs-timer.h>
+#include <mach-s3c64xx/regs-gpio.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
 
 /* We handled all the IRQ types in this code, to save having to make several
  * small files to handle each different type separately. Having the EINT_GRP

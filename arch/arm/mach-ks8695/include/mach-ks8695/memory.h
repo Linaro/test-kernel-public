@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_MEMORY_H
 #define __ASM_ARCH_MEMORY_H
 
-#include <mach/hardware.h>
+#include <mach-ks8695/hardware.h>
 
 /*
  * Physical SRAM offset.

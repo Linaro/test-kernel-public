@@ -26,7 +26,7 @@
 #ifndef SECHW_DEF_H
 #define SECHW_DEF_H
 
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 /* Bit mask for various secure device */
 #define secHw_BLK_MASK_CHIP_CONTROL     0x00000001
@@ -95,6 +95,6 @@ static inline void secHw_setUnsecure(uint32_t mask	/*  mask of type secHw_BLK_MA
 /****************************************************************************/
 static inline uint32_t secHw_getStatus(void);
 
-#include <mach/csp/secHw_inline.h>
+#include <mach-bcmring/csp/secHw_inline.h>
 
 #endif /* SECHW_DEF_H */

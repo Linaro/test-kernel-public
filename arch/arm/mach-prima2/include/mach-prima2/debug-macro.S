@@ -6,8 +6,8 @@
  * Licensed under GPLv2 or later.
  */
 
-#include <mach/hardware.h>
-#include <mach/uart.h>
+#include <mach-prima2/hardware.h>
+#include <mach-prima2/uart.h>
 
 	.macro	addruart, rp, rv, tmp
 	ldr	\rp, =SIRFSOC_UART1_PA_BASE		@ physical

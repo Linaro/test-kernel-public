@@ -20,8 +20,8 @@
 
 /* Defines for UART registers */
 
-#include <mach/regs-serial.h>
-#include <mach/map.h>
+#include <mach-w90x900/regs-serial.h>
+#include <mach-w90x900/map.h>
 #include <linux/serial_reg.h>
 
 #define arch_decomp_wdog()

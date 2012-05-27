@@ -8,7 +8,7 @@
  * published by the Free Software Foundation.
  */
 
-#include <plat/gpmc.h>
+#include <plat-omap/gpmc.h>
 #include <linux/mtd/partitions.h>
 
 enum nand_io {

@@ -23,7 +23,7 @@
 #include <sound/initval.h>
 #include <sound/soc.h>
 
-#include <mach/asp.h>
+#include <mach-davinci/asp.h>
 
 #include "davinci-pcm.h"
 #include "davinci-i2s.h"

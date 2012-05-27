@@ -21,8 +21,8 @@
 #include <linux/slab.h>
 #include <linux/basic_mmio_gpio.h>
 
-#include <mach/hardware.h>
-#include <mach/gpio-ep93xx.h>
+#include <mach-ep93xx/hardware.h>
+#include <mach-ep93xx/gpio-ep93xx.h>
 
 #define irq_to_gpio(irq)	((irq) - gpio_to_irq(0))
 

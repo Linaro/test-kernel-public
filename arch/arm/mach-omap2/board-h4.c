@@ -27,17 +27,17 @@
 #include <linux/io.h>
 #include <linux/input/matrix_keypad.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/usb.h>
-#include <plat/board.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/menelaus.h>
-#include <plat/dma.h>
-#include <plat/gpmc.h>
+#include <plat-omap/menelaus.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/gpmc.h>
 
 #include <video/omapdss.h>
 #include <video/omap-panel-generic-dpi.h>

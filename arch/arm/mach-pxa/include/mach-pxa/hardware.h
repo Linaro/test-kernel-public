@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_HARDWARE_H
 #define __ASM_ARCH_HARDWARE_H
 
-#include <mach/addr-map.h>
+#include <mach-pxa/addr-map.h>
 
 /*
  * Workarounds for at least 2 errata so far require this.

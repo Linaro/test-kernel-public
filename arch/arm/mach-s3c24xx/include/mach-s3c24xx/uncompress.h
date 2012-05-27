@@ -14,14 +14,14 @@
 #ifndef __ASM_ARCH_UNCOMPRESS_H
 #define __ASM_ARCH_UNCOMPRESS_H
 
-#include <mach/regs-gpio.h>
-#include <mach/map.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/map.h>
 
 /* working in physical space... */
 #undef S3C2410_GPIOREG
 #define S3C2410_GPIOREG(x) ((S3C24XX_PA_GPIO + (x)))
 
-#include <plat/uncompress.h>
+#include <plat-samsung/uncompress.h>
 
 static inline int is_arm926(void)
 {

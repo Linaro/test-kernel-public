@@ -6,7 +6,7 @@
  * Licensed under GPLv2 or later.
  */
 
-#include <mach/hardware.h>
+#include <mach-prima2/hardware.h>
 
 #define SIRFSOC_INT_ID 0x38
 

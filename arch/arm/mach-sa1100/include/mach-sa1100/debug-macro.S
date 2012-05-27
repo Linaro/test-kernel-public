@@ -10,7 +10,7 @@
  * published by the Free Software Foundation.
  *
 */
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 
 		.macro	addruart, rp, rv, tmp
 		mrc	p15, 0, \rp, c1, c0

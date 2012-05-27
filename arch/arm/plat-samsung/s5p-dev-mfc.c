@@ -16,9 +16,9 @@
 #include <linux/ioport.h>
 
 #include <mach/map.h>
-#include <plat/devs.h>
-#include <plat/irqs.h>
-#include <plat/mfc.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/irqs.h>
+#include <plat-samsung/mfc.h>
 
 struct s5p_mfc_reserved_mem {
 	phys_addr_t	base;

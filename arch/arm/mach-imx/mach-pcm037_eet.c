@@ -11,8 +11,8 @@
 #include <linux/platform_device.h>
 #include <linux/spi/spi.h>
 
-#include <mach/common.h>
-#include <mach/iomux-mx3.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx3.h>
 
 #include <asm/mach-types.h>
 

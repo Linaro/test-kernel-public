@@ -34,8 +34,8 @@
 #include <linux/platform_device.h>
 #include <linux/wait.h>
 #include <linux/iommu.h>
-#include <plat/iommu.h>
-#include <plat/iovmm.h>
+#include <plat-omap/iommu.h>
+#include <plat-omap/iovmm.h>
 
 #include "ispstat.h"
 #include "ispccdc.h"

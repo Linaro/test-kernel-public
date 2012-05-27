@@ -26,8 +26,8 @@
 #include <linux/export.h>
 
 #include "common.h"
-#include <plat/prcm.h>
-#include <plat/irqs.h>
+#include <plat-omap/prcm.h>
+#include <plat-omap/irqs.h>
 
 #include "clock.h"
 #include "clock2xxx.h"

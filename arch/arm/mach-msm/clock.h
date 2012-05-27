@@ -19,7 +19,7 @@
 
 #include <linux/init.h>
 #include <linux/list.h>
-#include <mach/clk.h>
+#include <mach-msm/clk.h>
 
 #define CLKFLAG_INVERT			0x00000001
 #define CLKFLAG_NOINVERT		0x00000002

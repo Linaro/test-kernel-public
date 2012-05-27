@@ -24,16 +24,16 @@
 #include <linux/clkdev.h>
 #include <linux/mtd/physmap.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/hardware/arm_timer.h>
 #include <asm/hardware/icst.h>
 
-#include <mach/cm.h>
-#include <mach/lm.h>
-#include <mach/irqs.h>
+#include <mach-integrator/cm.h>
+#include <mach-integrator/lm.h>
+#include <mach-integrator/irqs.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
@@ -42,9 +42,9 @@
 
 #include <asm/hardware/timer-sp.h>
 
-#include <plat/clcd.h>
-#include <plat/fpga-irq.h>
-#include <plat/sched_clock.h>
+#include <plat-versatile/clcd.h>
+#include <plat-versatile/fpga-irq.h>
+#include <plat-versatile/sched_clock.h>
 
 #include "common.h"
 

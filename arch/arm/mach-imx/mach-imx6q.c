@@ -30,8 +30,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 #include <asm/system_misc.h>
-#include <mach/common.h>
-#include <mach/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
 
 void imx6q_restart(char mode, const char *cmd)
 {

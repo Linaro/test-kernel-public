@@ -8,7 +8,7 @@
  * is licensed "as is" without any warranty of any kind, whether express
  * or implied.
  */
-#include <mach/irqs.h>
+#include <mach-davinci/irqs.h>
 
 		.macro  get_irqnr_preamble, base, tmp
 		ldr \base, =davinci_intc_base

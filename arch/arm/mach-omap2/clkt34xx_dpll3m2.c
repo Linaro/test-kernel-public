@@ -21,9 +21,9 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <plat/clock.h>
-#include <plat/sram.h>
-#include <plat/sdrc.h>
+#include <plat-omap/clock.h>
+#include <plat-omap/sram.h>
+#include <plat-omap/sdrc.h>
 
 #include "clock.h"
 #include "clock3xxx.h"

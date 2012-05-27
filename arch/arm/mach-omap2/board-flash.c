@@ -16,12 +16,12 @@
 #include <linux/platform_device.h>
 #include <linux/mtd/physmap.h>
 #include <linux/io.h>
-#include <plat/irqs.h>
+#include <plat-omap/irqs.h>
 
-#include <plat/gpmc.h>
-#include <plat/nand.h>
-#include <plat/onenand.h>
-#include <plat/tc.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/nand.h>
+#include <plat-omap/onenand.h>
+#include <plat-omap/tc.h>
 
 #include "board-flash.h"
 

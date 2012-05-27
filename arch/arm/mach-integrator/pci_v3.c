@@ -28,9 +28,9 @@
 #include <linux/init.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
-#include <mach/irqs.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
+#include <mach-integrator/irqs.h>
 
 #include <asm/signal.h>
 #include <asm/mach/pci.h>

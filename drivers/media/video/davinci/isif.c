@@ -36,7 +36,7 @@
 #include <linux/err.h>
 #include <linux/module.h>
 
-#include <mach/mux.h>
+#include <mach-davinci/mux.h>
 
 #include <media/davinci/isif.h>
 #include <media/davinci/vpss.h>

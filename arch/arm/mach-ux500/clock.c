@@ -16,8 +16,8 @@
 #include <linux/clkdev.h>
 #include <linux/cpufreq.h>
 
-#include <plat/mtu.h>
-#include <mach/hardware.h>
+#include <plat-nomadik/mtu.h>
+#include <mach-ux500/hardware.h>
 #include "clock.h"
 
 #ifdef CONFIG_DEBUG_FS

@@ -23,7 +23,7 @@
 #include <asm/leds.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/pci.h>
-#include <mach/orion5x.h>
+#include <mach-orion5x/orion5x.h>
 #include "common.h"
 
 static struct mv643xx_eth_platform_data rd88f6183ap_ge_eth_data = {

@@ -45,7 +45,7 @@
 #include <linux/platform_device.h>
 
 #include <asm/mach-types.h>
-#include <mach/audio.h>
+#include <mach-pxa/audio.h>
 
 #include <sound/core.h>
 #include <sound/pcm.h>

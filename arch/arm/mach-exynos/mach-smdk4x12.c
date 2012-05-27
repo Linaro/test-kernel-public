@@ -24,18 +24,18 @@
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
 
-#include <plat/backlight.h>
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/gpio-cfg.h>
-#include <plat/iic.h>
-#include <plat/keypad.h>
-#include <plat/mfc.h>
-#include <plat/regs-serial.h>
-#include <plat/sdhci.h>
+#include <plat-samsung/backlight.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/keypad.h>
+#include <plat-samsung/mfc.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/sdhci.h>
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 #include "common.h"
 

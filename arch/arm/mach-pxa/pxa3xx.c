@@ -24,14 +24,14 @@
 
 #include <asm/mach/map.h>
 #include <asm/suspend.h>
-#include <mach/hardware.h>
-#include <mach/pxa3xx-regs.h>
-#include <mach/reset.h>
-#include <mach/ohci.h>
-#include <mach/pm.h>
-#include <mach/dma.h>
-#include <mach/smemc.h>
-#include <mach/irqs.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/pxa3xx-regs.h>
+#include <mach-pxa/reset.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/pm.h>
+#include <mach-pxa/dma.h>
+#include <mach-pxa/smemc.h>
+#include <mach-pxa/irqs.h>
 
 #include "generic.h"
 #include "devices.h"

@@ -23,7 +23,7 @@
 
 #include <asm/mach-types.h>
 
-#include <mach/serial.h>
+#include <mach-davinci/serial.h>
 
 #define IOMEM(x)	((void __force __iomem *)(x))
 

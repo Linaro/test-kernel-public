@@ -27,10 +27,10 @@
 #include <linux/interrupt.h>
 #include <linux/io.h>
 
-#include <plat/dma.h>
+#include <plat-omap/dma.h>
 
-#include <mach/hardware.h>
-#include <mach/lcdc.h>
+#include <mach-omap1/hardware.h>
+#include <mach-omap1/lcdc.h>
 
 int omap_lcd_dma_running(void)
 {

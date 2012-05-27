@@ -18,7 +18,7 @@
 #ifndef __PLAT_S3C_SDHCI_H
 #define __PLAT_S3C_SDHCI_H __FILE__
 
-#include <plat/devs.h>
+#include <plat-samsung/devs.h>
 
 struct platform_device;
 struct mmc_host;

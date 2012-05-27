@@ -12,7 +12,7 @@
 
 #include <linux/types.h>
 
-#include <plat/gpio-switch.h>
+#include <plat-omap/gpio-switch.h>
 
 /*
  * OMAP35x EVM revision

@@ -19,8 +19,8 @@
 #include <linux/module.h>
 #include <linux/spinlock.h>
 
-#include <mach/mux.h>
-#include <mach/common.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/common.h>
 
 static void __iomem *pinmux_base;
 

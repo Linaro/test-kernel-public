@@ -14,8 +14,8 @@
 #include <linux/gpio.h>
 #include <linux/io.h>
 
-#include <mach/regs-clock.h>
-#include <plat/gpio-cfg.h>
+#include <mach-s5pc100/regs-clock.h>
+#include <plat-samsung/gpio-cfg.h>
 
 static void s5pc100_ide_cfg_gpios(unsigned int base, unsigned int nr)
 {

@@ -13,7 +13,7 @@
 #include <linux/init.h>
 #include <linux/mbus.h>
 #include <linux/io.h>
-#include <plat/addr-map.h>
+#include <plat-orion/addr-map.h>
 
 struct mbus_dram_target_info orion_mbus_dram_info;
 

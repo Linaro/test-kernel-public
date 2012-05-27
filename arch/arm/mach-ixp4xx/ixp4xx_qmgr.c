@@ -12,7 +12,7 @@
 #include <linux/interrupt.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
-#include <mach/qmgr.h>
+#include <mach-ixp4xx/qmgr.h>
 
 struct qmgr_regs __iomem *qmgr_regs;
 static struct resource *mem_res;

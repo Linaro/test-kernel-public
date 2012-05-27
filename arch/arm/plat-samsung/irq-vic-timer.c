@@ -19,9 +19,9 @@
 #include <linux/io.h>
 
 #include <mach/map.h>
-#include <plat/cpu.h>
-#include <plat/irq-vic-timer.h>
-#include <plat/regs-timer.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/irq-vic-timer.h>
+#include <plat-samsung/regs-timer.h>
 
 #include <asm/mach/irq.h>
 

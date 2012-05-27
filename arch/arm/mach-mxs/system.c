@@ -27,8 +27,8 @@
 #include <asm/proc-fns.h>
 #include <asm/system_misc.h>
 
-#include <mach/mxs.h>
-#include <mach/common.h>
+#include <mach-mxs/mxs.h>
+#include <mach-mxs/common.h>
 
 #define MX23_CLKCTRL_RESET_OFFSET	0x120
 #define MX28_CLKCTRL_RESET_OFFSET	0x1e0

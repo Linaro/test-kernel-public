@@ -16,8 +16,8 @@
  * GNU General Public License for more details.
  */
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-lpc32xx/hardware.h>
+#include <mach-lpc32xx/platform.h>
 
 #define LPC32XX_INTC_MASKED_STATUS_OFS	0x8
 

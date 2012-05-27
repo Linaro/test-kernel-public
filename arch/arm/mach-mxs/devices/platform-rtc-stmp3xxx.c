@@ -6,9 +6,9 @@
  * Free Software Foundation.
  */
 #include <asm/sizes.h>
-#include <mach/mx23.h>
-#include <mach/mx28.h>
-#include <mach/devices-common.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/mx28.h>
+#include <mach-mxs/devices-common.h>
 
 #ifdef CONFIG_SOC_IMX23
 struct platform_device *__init mx23_add_rtc_stmp3xxx(void)

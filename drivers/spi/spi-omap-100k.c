@@ -37,7 +37,7 @@
 
 #include <linux/spi/spi.h>
 
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 #define OMAP1_SPI100K_MAX_FREQ          48000000
 

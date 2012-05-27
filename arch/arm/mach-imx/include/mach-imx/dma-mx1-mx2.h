@@ -5,6 +5,6 @@
  * converted to mach/dma-v1.h
  */
 
-#include <mach/dma-v1.h>
+#include <mach-imx/dma-v1.h>
 
 #endif /* ifndef __MACH_DMA_MX1_MX2_H__ */

@@ -24,7 +24,7 @@
 #include <linux/pm_wakeup.h>
 #include <linux/slab.h>
 #include <linux/types.h>
-#include <plat/keyboard.h>
+#include <plat-spear/keyboard.h>
 
 /* Keyboard Registers */
 #define MODE_REG	0x00	/* 16 bit reg */

@@ -32,8 +32,8 @@
 #include <linux/io.h>
 #include <linux/math64.h>
 
-#include <mach/imxfb.h>
-#include <mach/hardware.h>
+#include <mach-imx/imxfb.h>
+#include <mach-imx/hardware.h>
 
 /*
  * Complain if VAR is out of range.

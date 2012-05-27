@@ -20,7 +20,7 @@
 
 #include <asm/mach/time.h>
 
-#include <mach/at91_pit.h>
+#include <mach-at91/at91_pit.h>
 
 
 #define PIT_CPIV(x)	((x) & AT91_PIT_CPIV)

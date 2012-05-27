@@ -33,7 +33,7 @@ extern "C" {
 #include <csp/reg.h>
 #include <csp/stdint.h>
 
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 /* ---- Public Constants and Types --------------------------------------- */
 

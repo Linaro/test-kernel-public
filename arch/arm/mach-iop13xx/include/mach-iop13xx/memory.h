@@ -1,7 +1,7 @@
 #ifndef __ASM_ARCH_MEMORY_H
 #define __ASM_ARCH_MEMORY_H
 
-#include <mach/hardware.h>
+#include <mach-iop13xx/hardware.h>
 
 /*
  * Physical DRAM offset.

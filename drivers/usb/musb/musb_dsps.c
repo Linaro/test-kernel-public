@@ -40,7 +40,7 @@
 #include <linux/of_device.h>
 #include <linux/of_address.h>
 
-#include <plat/usb.h>
+#include <plat-omap/usb.h>
 
 #include "musb_core.h"
 

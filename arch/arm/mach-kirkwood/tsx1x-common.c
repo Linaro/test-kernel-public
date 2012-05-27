@@ -5,7 +5,7 @@
 #include <linux/spi/flash.h>
 #include <linux/spi/spi.h>
 #include <linux/serial_reg.h>
-#include <mach/kirkwood.h>
+#include <mach-kirkwood/kirkwood.h>
 #include "common.h"
 
 /*

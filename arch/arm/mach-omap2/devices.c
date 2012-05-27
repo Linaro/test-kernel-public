@@ -19,19 +19,19 @@
 #include <linux/of.h>
 #include <linux/platform_data/omap4-keypad.h>
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-omap2/hardware.h>
+#include <mach-omap2/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 #include <asm/pmu.h>
 
 #include "iomap.h"
-#include <plat/board.h>
-#include <plat/mmc.h>
-#include <plat/dma.h>
-#include <plat/omap_hwmod.h>
-#include <plat/omap_device.h>
-#include <plat/omap4-keypad.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/omap_device.h>
+#include <plat-omap/omap4-keypad.h>
 
 #include "mux.h"
 #include "control.h"
@@ -128,7 +128,7 @@ static struct platform_device omap2cam_device = {
 
 #if defined(CONFIG_IOMMU_API)
 
-#include <plat/iommu.h>
+#include <plat-omap/iommu.h>
 
 static struct resource omap3isp_resources[] = {
 	{
@@ -386,7 +386,7 @@ static inline void omap_init_hdmi_audio(void) {}
 
 #if defined(CONFIG_SPI_OMAP24XX) || defined(CONFIG_SPI_OMAP24XX_MODULE)
 
-#include <plat/mcspi.h>
+#include <plat-omap/mcspi.h>
 
 static int __init omap_mcspi_init(struct omap_hwmod *oh, void *unused)
 {

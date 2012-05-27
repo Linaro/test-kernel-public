@@ -15,7 +15,7 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 
-#include <mach/pxa930_rotary.h>
+#include <mach-pxa/pxa930_rotary.h>
 
 #define SBCR	(0x04)
 #define ERCR	(0x0c)

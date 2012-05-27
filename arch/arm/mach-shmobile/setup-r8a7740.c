@@ -25,9 +25,9 @@
 #include <linux/platform_device.h>
 #include <linux/serial_sci.h>
 #include <linux/sh_timer.h>
-#include <mach/r8a7740.h>
-#include <mach/common.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/r8a7740.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 #include <asm/mach/arch.h>

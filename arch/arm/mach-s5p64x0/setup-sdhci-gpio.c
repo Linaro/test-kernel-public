@@ -14,12 +14,12 @@
 #include <linux/io.h>
 #include <linux/gpio.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/regs-clock.h>
+#include <mach-s5p64x0/regs-gpio.h>
+#include <mach-s5p64x0/regs-clock.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/sdhci.h>
-#include <plat/cpu.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/cpu.h>
 
 void s5p64x0_setup_sdhci0_cfg_gpio(struct platform_device *dev, int width)
 {

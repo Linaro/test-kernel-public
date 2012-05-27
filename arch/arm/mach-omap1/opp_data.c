@@ -10,7 +10,7 @@
  * published by the Free Software Foundation.
  */
 
-#include <plat/clkdev_omap.h>
+#include <plat-omap/clkdev_omap.h>
 #include "opp.h"
 
 /*-------------------------------------------------------------------------

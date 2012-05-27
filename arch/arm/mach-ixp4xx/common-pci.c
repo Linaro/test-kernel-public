@@ -33,7 +33,7 @@
 #include <asm/irq.h>
 #include <asm/sizes.h>
 #include <asm/mach/pci.h>
-#include <mach/hardware.h>
+#include <mach-ixp4xx/hardware.h>
 
 
 /*

@@ -23,10 +23,10 @@
 #include <linux/io.h>
 #include <linux/clkdev.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
-#include <mach/cm.h>
-#include <mach/irqs.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
+#include <mach-integrator/cm.h>
+#include <mach-integrator/irqs.h>
 
 #include <asm/leds.h>
 #include <asm/mach-types.h>

@@ -21,6 +21,6 @@
 #ifndef __ASM_ARCH_MEMORY_H
 #define __ASM_ARCH_MEMORY_H
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 
 #endif

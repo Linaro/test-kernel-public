@@ -29,7 +29,7 @@
 #include <linux/spi/spi.h>
 
 #include <mach/dma.h>
-#include <plat/s3c64xx-spi.h>
+#include <plat-samsung/s3c64xx-spi.h>
 
 /* Registers and bit-fields */
 

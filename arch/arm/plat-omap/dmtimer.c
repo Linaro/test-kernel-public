@@ -41,7 +41,7 @@
 #include <linux/err.h>
 #include <linux/pm_runtime.h>
 
-#include <plat/dmtimer.h>
+#include <plat-omap/dmtimer.h>
 
 #include <mach/hardware.h>
 

@@ -27,8 +27,8 @@
 #include <linux/slab.h>
 
 #include <mach/hardware.h>
-#include <plat/board.h>
-#include <plat/mux.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mux.h>
 
 #define OMAPBL_MAX_INTENSITY		0xff
 

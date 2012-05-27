@@ -12,12 +12,12 @@
 #include <linux/dma-mapping.h>
 #include <linux/gpio.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/audio.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/audio.h>
 
-#include <mach/map.h>
-#include <mach/dma.h>
-#include <mach/irqs.h>
+#include <mach-s5p64x0/map.h>
+#include <mach-s5p64x0/dma.h>
+#include <mach-s5p64x0/irqs.h>
 
 static const char *rclksrc[] = {
 	[0] = "iis",

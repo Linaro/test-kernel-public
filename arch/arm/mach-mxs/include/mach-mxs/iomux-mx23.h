@@ -13,7 +13,7 @@
 #ifndef __MACH_IOMUX_MX23_H__
 #define __MACH_IOMUX_MX23_H__
 
-#include <mach/iomux.h>
+#include <mach-mxs/iomux.h>
 
 /*
  * The naming convention for the pad modes is MX23_PAD_<padname>__<padmode>

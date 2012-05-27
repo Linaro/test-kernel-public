@@ -11,8 +11,8 @@
  * published by the Free Software Foundation.
  */
 
-#include <mach/hardware.h>
-#include <mach/regs-uart.h>
+#include <mach-ks8695/hardware.h>
+#include <mach-ks8695/regs-uart.h>
 
 	.macro	addruart, rp, rv, tmp
 		ldr	\rp, =KS8695_UART_PA		@ physical base address

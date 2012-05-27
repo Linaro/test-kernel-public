@@ -8,7 +8,7 @@
  */
 
 #ifndef __ASM_ARCH_HARDWARE_H__
-#error "Do not include this directly, instead #include <mach/hardware.h>"
+#error "Do not include this directly, instead #include <mach-ixp4xx/hardware.h>"
 #endif
 
 #ifndef __ASSEMBLY__

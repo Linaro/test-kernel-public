@@ -41,8 +41,8 @@
 
 #include <asm/irq.h>
 
-#include <plat/regs-iic.h>
-#include <plat/iic.h>
+#include <plat-samsung/regs-iic.h>
+#include <plat-samsung/iic.h>
 
 /* Treat S3C2410 as baseline hardware, anything else is supported via quirks */
 #define QUIRK_S3C2440		(1 << 0)

@@ -12,11 +12,11 @@
 
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/leds.h>
 
-#include <mach/pxa27x.h>
-#include <mach/mainstone.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/mainstone.h>
 
 #include "leds.h"
 

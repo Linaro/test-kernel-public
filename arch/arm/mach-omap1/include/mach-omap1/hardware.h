@@ -16,7 +16,7 @@ extern void omap_writeb(u8 v, u32 pa);
 extern void omap_writew(u16 v, u32 pa);
 extern void omap_writel(u32 v, u32 pa);
 
-#include <plat/tc.h>
+#include <plat-omap/tc.h>
 
 /* Almost all documentation for chip and board memory maps assumes
  * BM is clear.  Most devel boards have a switch to control booting
@@ -38,4 +38,4 @@ static inline u32 omap_cs3_phys(void)
 #endif
 #endif
 
-#include <plat/hardware.h>
+#include <plat-omap/hardware.h>

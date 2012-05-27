@@ -28,11 +28,11 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/regs-s3c2412-mem.h>
+#include <mach-s3c24xx/regs-s3c2412-mem.h>
 
-#include <plat/cpu.h>
-#include <plat/cpu-freq-core.h>
-#include <plat/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/cpu-freq-core.h>
+#include <plat-samsung/clock.h>
 
 #define print_ns(x) ((x) / 10), ((x) % 10)
 

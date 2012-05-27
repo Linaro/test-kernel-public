@@ -1,7 +1,7 @@
 #ifndef __ASM_MACH_REGS_RTC_H
 #define __ASM_MACH_REGS_RTC_H
 
-#include <mach/addr-map.h>
+#include <mach-mmp/addr-map.h>
 
 #define RTC_VIRT_BASE	(APB_VIRT_BASE + 0x10000)
 #define RTC_REG(x)	(*((volatile u32 __iomem *)(RTC_VIRT_BASE + (x))))
