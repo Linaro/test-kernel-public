@@ -989,6 +989,7 @@ static int mx2_camera_set_bus_param(struct soc_camera_device *icd)
 	int ret;
 	int bytesperline;
 	u32 csicr1 = pcdev->csicr1;
+	u32 pixfmt = icd->current_fmt->host_fmt->fourcc;
 
 	ret = v4l2_subdev_call(sd, video, g_mbus_config, &cfg);
 	if (!ret) {

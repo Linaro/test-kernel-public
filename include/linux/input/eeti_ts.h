@@ -3,6 +3,7 @@
 
 struct eeti_ts_platform_data {
 	unsigned int irq_active_high;
+	unsigned int gpio;
 };
 
 #endif /* LINUX_INPUT_EETI_TS_H */

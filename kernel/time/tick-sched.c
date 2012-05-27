@@ -30,15 +30,16 @@
  */
 static DEFINE_PER_CPU(struct tick_sched, tick_cpu_sched);
 
-/*
- * The time, when the last jiffy update happened. Protected by xtime_lock.
- */
-static ktime_t last_jiffies_update;
-
 struct tick_sched *tick_get_tick_sched(int cpu)
 {
 	return &per_cpu(tick_cpu_sched, cpu);
 }
+
+#if defined(CONFIG_NO_HZ) || defined(CONFIG_HIGH_RES_TIMERS)
+/*
+ * The time, when the last jiffy update happened. Protected by xtime_lock.
+ */
+static ktime_t last_jiffies_update;
 
 /*
  * Must be called with interrupts disabled !
@@ -97,6 +98,7 @@ static ktime_t tick_init_jiffy_update(void)
 	write_sequnlock(&xtime_lock);
 	return period;
 }
+#endif
 
 /*
  * NOHZ - aka dynamic tick functionality

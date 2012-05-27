@@ -22,6 +22,7 @@
 #include <asm/mach/map.h>
 
 #include <mach-pxa/pxa25x.h>
+#undef GPIO24_SSP1_SFRM
 #include <mach-pxa/pxa27x.h>
 #include <mach-pxa/audio.h>
 #include <mach-pxa/pxafb.h>

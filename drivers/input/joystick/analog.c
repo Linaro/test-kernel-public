@@ -172,7 +172,7 @@ static unsigned long analog_faketime = 0;
 #define GET_TIME(x)     do { x = analog_faketime++; } while(0)
 #define DELTA(x,y)	((y)-(x))
 #define TIME_NAME	"Unreliable"
-#warning Precise timer not defined for this architecture.
+//#warning Precise timer not defined for this architecture.
 #endif
 
 /*

@@ -189,13 +189,15 @@ static int lp5521_load_program(struct lp5521_engine *eng, const u8 *pattern)
 	struct i2c_client *client = chip->client;
 	int ret;
 	int addr;
-	u8 mode;
+	u8 mode = 0;
 
 	/* move current engine to direct mode and remember the state */
 	ret = lp5521_set_engine_mode(eng, LP5521_CMD_DIRECT);
 	/* Mode change requires min 500 us delay. 1 - 2 ms  with margin */
 	usleep_range(1000, 2000);
 	ret |= lp5521_read(client, LP5521_REG_OP_MODE, &mode);
+	if (ret)
+		goto out;
 
 	/* For loading, all the engines to load mode */
 	lp5521_write(client, LP5521_REG_OP_MODE, LP5521_CMD_DIRECT);
@@ -212,6 +214,7 @@ static int lp5521_load_program(struct lp5521_engine *eng, const u8 *pattern)
 				pattern);
 
 	ret |= lp5521_write(client, LP5521_REG_OP_MODE, mode);
+out:
 	return ret;
 }
 
@@ -738,7 +741,7 @@ static int __devinit lp5521_probe(struct i2c_client *client,
 	struct lp5521_chip		*chip;
 	struct lp5521_platform_data	*pdata;
 	int ret, i, led;
-	u8 buf;
+	u8 buf = 0;
 
 	chip = kzalloc(sizeof(*chip), GFP_KERNEL);
 	if (!chip)

@@ -980,7 +980,7 @@ static int __init clk_init(void)
 			if (clk->disable && !clk->usecount)
 				clk->disable(clk);
 		}
-		pr_debug("%s: clock %s, rate %ld\n",
+		pr_debug("%s: clock %s, rate %d\n",
 			__func__, clk->name, clk->rate);
 	}
 

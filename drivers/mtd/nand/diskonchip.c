@@ -54,7 +54,7 @@ static unsigned long __initdata doc_locations[] = {
 	0xe8000, 0xea000, 0xec000, 0xee000,
 #endif /*  CONFIG_MTD_DOCPROBE_HIGH */
 #else
-#warning Unknown architecture for DiskOnChip. No default probe locations defined
+//#warning Unknown architecture for DiskOnChip. No default probe locations defined
 #endif
 	0xffffffff };
 
@@ -315,7 +315,7 @@ static u_char doc2000_read_byte(struct mtd_info *mtd)
 	void __iomem *docptr = doc->virtadr;
 	u_char ret;
 
-	ReadDOC(docptr, CDSNSlowIO);
+	(void)ReadDOC(docptr, CDSNSlowIO);
 	DoC_Delay(doc, 2);
 	ret = ReadDOC(docptr, 2k_CDSN_IO);
 	if (debug)
@@ -491,7 +491,7 @@ static u_char doc2001_read_byte(struct mtd_info *mtd)
 	//ReadDOC(docptr, CDSNSlowIO);
 	/* 11.4.5 -- delay twice to allow extended length cycle */
 	DoC_Delay(doc, 2);
-	ReadDOC(docptr, ReadPipeInit);
+	(void)ReadDOC(docptr, ReadPipeInit);
 	//return ReadDOC(docptr, Mil_CDSN_IO);
 	return ReadDOC(docptr, LastDataRead);
 }
@@ -517,7 +517,7 @@ static void doc2001_readbuf(struct mtd_info *mtd, u_char *buf, int len)
 	int i;
 
 	/* Start read pipeline */
-	ReadDOC(docptr, ReadPipeInit);
+	(void)ReadDOC(docptr, ReadPipeInit);
 
 	for (i = 0; i < len - 1; i++)
 		buf[i] = ReadDOC(docptr, Mil_CDSN_IO + (i & 0xff));
@@ -534,11 +534,11 @@ static int doc2001_verifybuf(struct mtd_info *mtd, const u_char *buf, int len)
 	int i;
 
 	/* Start read pipeline */
-	ReadDOC(docptr, ReadPipeInit);
+	(void)ReadDOC(docptr, ReadPipeInit);
 
 	for (i = 0; i < len - 1; i++)
 		if (buf[i] != ReadDOC(docptr, Mil_CDSN_IO)) {
-			ReadDOC(docptr, LastDataRead);
+			(void)ReadDOC(docptr, LastDataRead);
 			return i;
 		}
 	if (buf[i] != ReadDOC(docptr, LastDataRead))
@@ -553,8 +553,8 @@ static u_char doc2001plus_read_byte(struct mtd_info *mtd)
 	void __iomem *docptr = doc->virtadr;
 	u_char ret;
 
-	ReadDOC(docptr, Mplus_ReadPipeInit);
-	ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
 	ret = ReadDOC(docptr, Mplus_LastDataRead);
 	if (debug)
 		printk("read_byte returns %02x\n", ret);
@@ -590,8 +590,8 @@ static void doc2001plus_readbuf(struct mtd_info *mtd, u_char *buf, int len)
 		printk("readbuf of %d bytes: ", len);
 
 	/* Start read pipeline */
-	ReadDOC(docptr, Mplus_ReadPipeInit);
-	ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
 
 	for (i = 0; i < len - 2; i++) {
 		buf[i] = ReadDOC(docptr, Mil_CDSN_IO);
@@ -621,13 +621,13 @@ static int doc2001plus_verifybuf(struct mtd_info *mtd, const u_char *buf, int le
 		printk("verifybuf of %d bytes: ", len);
 
 	/* Start read pipeline */
-	ReadDOC(docptr, Mplus_ReadPipeInit);
-	ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
 
 	for (i = 0; i < len - 2; i++)
 		if (buf[i] != ReadDOC(docptr, Mil_CDSN_IO)) {
-			ReadDOC(docptr, Mplus_LastDataRead);
-			ReadDOC(docptr, Mplus_LastDataRead);
+			(void)ReadDOC(docptr, Mplus_LastDataRead);
+			(void)ReadDOC(docptr, Mplus_LastDataRead);
 			return i;
 		}
 	if (buf[len - 2] != ReadDOC(docptr, Mplus_LastDataRead))
@@ -1451,9 +1451,9 @@ static inline int __init doc2001_init(struct mtd_info *mtd)
 	this->read_buf = doc2001_readbuf;
 	this->verify_buf = doc2001_verifybuf;
 
-	ReadDOC(doc->virtadr, ChipID);
-	ReadDOC(doc->virtadr, ChipID);
-	ReadDOC(doc->virtadr, ChipID);
+	(void)ReadDOC(doc->virtadr, ChipID);
+	(void)ReadDOC(doc->virtadr, ChipID);
+	(void)ReadDOC(doc->virtadr, ChipID);
 	if (ReadDOC(doc->virtadr, ChipID) != DOC_ChipID_DocMil) {
 		/* It's not a Millennium; it's one of the newer
 		   DiskOnChip 2000 units with a similar ASIC.
@@ -1544,7 +1544,7 @@ static int __init doc_probe(unsigned long physadr)
 		/* Possible Millennium Plus, need to do more checks */
 		/* Possibly release from power down mode */
 		for (tmp = 0; (tmp < 4); tmp++)
-			ReadDOC(virtadr, Mplus_Power);
+			(void)ReadDOC(virtadr, Mplus_Power);
 
 		/* Reset the Millennium Plus ASIC */
 		tmp = DOC_MODE_RESET | DOC_MODE_MDWREN | DOC_MODE_RST_LAT | DOC_MODE_BDECT;

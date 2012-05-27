@@ -162,6 +162,7 @@ static void __init davinci_ntosd2_map_io(void)
 	dm644x_init();
 }
 
+#if 0
 /*
  I2C initialization
 */
@@ -193,6 +194,12 @@ static	int ntosd2_init_i2c(void)
 	}
 	return status;
 }
+#else
+static  int ntosd2_init_i2c(void)
+{
+	return 0;
+}
+#endif
 
 static struct davinci_mmc_config davinci_ntosd2_mmc_config = {
 	.wires		= 4,
