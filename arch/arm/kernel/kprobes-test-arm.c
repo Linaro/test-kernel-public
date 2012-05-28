@@ -456,7 +456,7 @@ void kprobe_arm_test_cases(void)
 	TEST_UNSUPPORTED(".word	0xe1500090") /* Unallocated space */
 	TEST_UNSUPPORTED(".word	0xe1600090") /* Unallocated space */
 	TEST_UNSUPPORTED(".word	0xe1700090") /* Unallocated space */
-#if __LINUX_ARM_ARCH__ >= 6
+#ifdef CONFIG_CPU_32v6K
 	TEST_UNSUPPORTED("ldrex	r2, [sp]")
 	TEST_UNSUPPORTED("strexd	r0, r2, r3, [sp]")
 	TEST_UNSUPPORTED("ldrexd	r2, r3, [sp]")
