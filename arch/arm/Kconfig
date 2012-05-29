@@ -249,7 +249,7 @@ config MMU
 #
 choice
 	prompt "ARM system type"
-	default ARCH_VERSATILE
+	default ARCH_MULTIPLATFORM
 
 config ARCH_MULTIPLATFORM
 	bool "Allow multiple platforms to be selected"
