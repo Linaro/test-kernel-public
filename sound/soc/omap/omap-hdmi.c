@@ -236,6 +236,8 @@ static struct snd_soc_dai_driver omap_hdmi_dai = {
 	.ops = &omap_hdmi_dai_ops,
 };
 
+extern void omap_pcm_dummy(void);
+
 static __devinit int omap_hdmi_probe(struct platform_device *pdev)
 {
 	int ret;
@@ -259,6 +261,9 @@ static __devinit int omap_hdmi_probe(struct platform_device *pdev)
 	}
 
 	omap_hdmi_dai_dma_params.dma_req =  hdmi_rsrc->start;
+
+	/* Dummy symbol to enforce loading of snd-soc-omap */
+	omap_pcm_dummy();
 
 	/*
 	 * Find an HDMI device. In the future, registers all the HDMI devices
