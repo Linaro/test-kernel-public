@@ -1777,7 +1777,7 @@ static void rproc_loader_thread(struct rproc *rproc)
 	const struct firmware *fw;
 	struct device *dev = &rproc->dev;
 
-	while (kobject_uevent(&dev->kobj, KOBJ_CHANGE))
+//	while (kobject_uevent(&dev->kobj, KOBJ_CHANGE))
 		msleep(1000);
 
 	request_firmware(&fw, rproc->firmware, dev);
