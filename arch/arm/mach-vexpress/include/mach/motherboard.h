@@ -1,6 +1,8 @@
 #ifndef __MACH_MOTHERBOARD_H
 #define __MACH_MOTHERBOARD_H
 
+#include <linux/clk-provider.h>
+
 /*
  * Physical addresses, offset from V2M_PA_CS0-3
  */
@@ -138,6 +140,7 @@ struct ct_desc {
 	void			(*map_io)(void);
 	void			(*init_early)(void);
 	void			(*init_irq)(void);
+	void			(*init_clk)(void);
 	void			(*init_tile)(void);
 #ifdef CONFIG_SMP
 	void			(*init_cpu_map)(void);
@@ -146,5 +149,22 @@ struct ct_desc {
 };
 
 extern struct ct_desc *ct_desc;
+
+/*
+ * OSC clock provider
+ */
+struct v2m_osc {
+	struct clk_hw hw;
+	u8 site; /* 0 = motherboard, 1 = site 1, 2 = site 2 */
+	u8 stack; /* board stack position */
+	u16 osc;
+	unsigned long rate_min;
+	unsigned long rate_max;
+	unsigned long rate_default;
+};
+
+#define to_v2m_osc(osc) container_of(osc, struct v2m_osc, hw)
+
+struct clk *v2m_osc_register(const char *name, struct v2m_osc *osc);
 
 #endif
