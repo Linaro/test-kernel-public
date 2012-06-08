@@ -147,6 +147,13 @@ void __init v2m_flags_set(u32 data)
 	writel(data, v2m_sysreg_base + V2M_SYS_FLAGSSET);
 }
 
+int v2m_get_master_site(void)
+{
+	u32 misc = readl(v2m_sysreg_base + V2M_SYS_MISC);
+
+	return misc & SYS_MISC_MASTERSITE ? SYS_CFG_SITE_DB2 : SYS_CFG_SITE_DB1;
+}
+
 
 static struct resource v2m_pcie_i2c_resource = {
 	.start	= V2M_SERIAL_BUS_PCI,
@@ -413,7 +420,6 @@ static void v2m_restart(char str, const char *cmd)
 	if (v2m_cfg_write(SYS_CFG_REBOOT | SYS_CFG_SITE_MB, 0))
 		printk(KERN_EMERG "Unable to reboot\n");
 }
-
 struct ct_desc *ct_desc;
 
 static struct ct_desc *ct_descs[] __initdata = {
@@ -605,8 +611,8 @@ void __init v2m_dt_init_early(void)
 
 	/* Confirm board type against DT property, if available */
 	if (of_property_read_u32(allnodes, "arm,hbi", &dt_hbi) == 0) {
-		u32 misc = readl(v2m_sysreg_base + V2M_SYS_MISC);
-		u32 id = readl(v2m_sysreg_base + (misc & SYS_MISC_MASTERSITE ?
+		int site = v2m_get_master_site();
+		u32 id = readl(v2m_sysreg_base + (site == SYS_CFG_SITE_DB2 ?
 				V2M_SYS_PROCID1 : V2M_SYS_PROCID0));
 		u32 hbi = id & SYS_PROCIDx_HBI_MASK;
 
