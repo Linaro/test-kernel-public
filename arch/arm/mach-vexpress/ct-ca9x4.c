@@ -111,47 +111,21 @@ static struct amba_device *ct_ca9x4_amba_devs[] __initdata = {
 	&gpio_device,
 };
 
+static struct v2m_osc ct_osc1 = {
+	.osc = 1,
+	.rate_min = 10000000,
+	.rate_max = 80000000,
+	.rate_default = 23750000,
+};
 
-static long ct_round(struct clk *clk, unsigned long rate)
+static void __init ct_ca9x4_init_clk(void)
 {
-	return rate;
+	struct clk *clk;
+
+	ct_osc1.site = v2m_get_master_site();
+	clk = v2m_osc_register("ct:osc1", &ct_osc1);
+	clk_register_clkdev(clk, NULL, "ct:clcd");
 }
-
-static int ct_set(struct clk *clk, unsigned long rate)
-{
-	u32 site = v2m_get_master_site();
-
-	return v2m_cfg_write(SYS_CFG_OSC | SYS_CFG_SITE(site) | 1, rate);
-}
-
-static const struct clk_ops osc1_clk_ops = {
-	.round	= ct_round,
-	.set	= ct_set,
-};
-
-static struct clk osc1_clk = {
-	.ops	= &osc1_clk_ops,
-	.rate	= 24000000,
-};
-
-static struct clk ct_sp804_clk = {
-	.rate	= 1000000,
-};
-
-static struct clk_lookup lookups[] = {
-	{	/* CLCD */
-		.dev_id		= "ct:clcd",
-		.clk		= &osc1_clk,
-	}, {	/* SP804 timers */
-		.dev_id		= "sp804",
-		.con_id		= "ct-timer0",
-		.clk		= &ct_sp804_clk,
-	}, {	/* SP804 timers */
-		.dev_id		= "sp804",
-		.con_id		= "ct-timer1",
-		.clk		= &ct_sp804_clk,
-	},
-};
 
 static struct resource pmu_resources[] = {
 	[0] = {
@@ -182,11 +156,6 @@ static struct platform_device pmu_device = {
 	.num_resources	= ARRAY_SIZE(pmu_resources),
 	.resource	= pmu_resources,
 };
-
-static void __init ct_ca9x4_init_early(void)
-{
-	clkdev_add_table(lookups, ARRAY_SIZE(lookups));
-}
 
 static void __init ct_ca9x4_init(void)
 {
@@ -243,8 +212,8 @@ struct ct_desc ct_ca9x4_desc __initdata = {
 	.id		= V2M_CT_ID_CA9,
 	.name		= "CA9x4",
 	.map_io		= ct_ca9x4_map_io,
-	.init_early	= ct_ca9x4_init_early,
 	.init_irq	= ct_ca9x4_init_irq,
+	.init_clk	= ct_ca9x4_init_clk,
 	.init_tile	= ct_ca9x4_init,
 #ifdef CONFIG_SMP
 	.init_cpu_map	= ct_ca9x4_init_cpu_map,
