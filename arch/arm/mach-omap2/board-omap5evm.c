@@ -841,11 +841,6 @@ static struct platform_device omap5evm_abe_audio = {
 	},
 };
 
-static struct platform_device *omap5evm_devices[] __initdata = {
-	&omap5evm_dmic_codec,
-	&omap5evm_abe_audio,
-};
-
 static struct platform_device omap5evm_hdmi_audio_codec = {
 	.name	= "hdmi-audio-codec",
 	.id	= -1,
