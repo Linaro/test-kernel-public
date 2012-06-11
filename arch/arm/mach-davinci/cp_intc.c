@@ -13,8 +13,8 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/common.h>
-#include <mach/cp_intc.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/cp_intc.h>
 
 static inline unsigned int cp_intc_read(unsigned offset)
 {

@@ -21,8 +21,8 @@
 #include <linux/sched.h>
 #include <linux/mutex.h>
 
-#include <mach/dma.h>
-#include <mach/iomap.h>
+#include <mach-tegra/dma.h>
+#include <mach-tegra/iomap.h>
 
 #include "apbio.h"
 

@@ -28,25 +28,25 @@
 
 #include <video/platform_lcd.h>
 
-#include <mach/map.h>
-#include <mach/regs-clock.h>
+#include <mach-s5pv210/map.h>
+#include <mach-s5pv210/regs-clock.h>
 
-#include <plat/regs-serial.h>
-#include <plat/regs-srom.h>
-#include <plat/gpio-cfg.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/adc.h>
-#include <plat/ts.h>
-#include <plat/ata.h>
-#include <plat/iic.h>
-#include <plat/keypad.h>
-#include <plat/pm.h>
-#include <plat/fb.h>
-#include <plat/s5p-time.h>
-#include <plat/backlight.h>
-#include <plat/regs-fb-v4.h>
-#include <plat/mfc.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/regs-srom.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/ts.h>
+#include <plat-samsung/ata.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/keypad.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/s5p-time.h>
+#include <plat-samsung/backlight.h>
+#include <plat-samsung/regs-fb-v4.h>
+#include <plat-samsung/mfc.h>
 
 #include "common.h"
 

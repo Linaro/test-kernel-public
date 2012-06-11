@@ -275,6 +275,7 @@ config MFD_TWL4030_AUDIO
 config TWL6030_PWM
 	tristate "TWL6030 PWM (Pulse Width Modulator) Support"
 	depends on TWL4030_CORE
+	depends on MXC_PWM=n
 	select HAVE_PWM
 	default n
 	help

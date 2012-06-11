@@ -196,7 +196,7 @@ struct scsi_varlen_cdb_hdr {
 	__u8 additional_cdb_length;         /* total cdb length - 8 */
 	__be16 service_action;
 	/* service specific data follows */
-};
+} __attribute__((packed,aligned(2)));
 
 static inline unsigned
 scsi_varlen_cdb_length(const void *hdr)

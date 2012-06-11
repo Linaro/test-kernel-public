@@ -35,12 +35,12 @@
 #include <mach/regs-clock.h>
 #include <mach/regs-gpio.h>
 
-#include <plat/cpu.h>
-#include <plat/gpio-core.h>
-#include <plat/gpio-cfg.h>
-#include <plat/gpio-cfg-helpers.h>
-#include <plat/gpio-fns.h>
-#include <plat/pm.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/gpio-core.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg-helpers.h>
+#include <plat-samsung/gpio-fns.h>
+#include <plat-samsung/pm.h>
 
 #ifndef DEBUG_GPIO
 #define gpio_dbg(x...) do { } while (0)

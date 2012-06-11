@@ -21,8 +21,8 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 #include <asm/sched_clock.h>
-#include <mach/regs-ost.h>
-#include <mach/irqs.h>
+#include <mach-pxa/regs-ost.h>
+#include <mach-pxa/irqs.h>
 
 /*
  * This is PXA's sched_clock implementation. This has a resolution
@@ -122,7 +122,7 @@ static void __init pxa_timer_init(void)
 
 	setup_irq(IRQ_OST0, &pxa_ost0_irq);
 
-	clocksource_mmio_init(&OSCR, "oscr0", clock_tick_rate, 200, 32,
+	clocksource_mmio_init((void __iomem *)&OSCR, "oscr0", clock_tick_rate, 200, 32,
 		clocksource_mmio_readl_up);
 	clockevents_register_device(&ckevt_pxa_osmr0);
 }

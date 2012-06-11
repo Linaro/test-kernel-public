@@ -19,9 +19,9 @@
 #include <asm/delay.h>
 #include <asm/io.h>
 
-#include <mach/da8xx.h>
-#include <mach/sram.h>
-#include <mach/pm.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/sram.h>
+#include <mach-davinci/pm.h>
 
 #include "clock.h"
 

@@ -44,8 +44,9 @@
 #include <media/v4l2-device.h>
 #include <media/v4l2-ioctl.h>
 
-#include <plat/dma.h>
-#include <plat/vrfb.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/vrfb.h>
 #include <video/omapdss.h>
 
 #include "omap_voutlib.h"

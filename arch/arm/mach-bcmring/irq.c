@@ -22,12 +22,12 @@
 #include <linux/timer.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-bcmring/hardware.h>
 #include <asm/irq.h>
 
 #include <asm/mach/irq.h>
-#include <mach/csp/intcHw_reg.h>
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/intcHw_reg.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 static void bcmring_mask_irq0(struct irq_data *d)
 {

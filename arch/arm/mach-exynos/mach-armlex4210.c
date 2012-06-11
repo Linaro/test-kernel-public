@@ -19,14 +19,14 @@
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/gpio-cfg.h>
-#include <plat/regs-serial.h>
-#include <plat/regs-srom.h>
-#include <plat/sdhci.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/regs-srom.h>
+#include <plat-samsung/sdhci.h>
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 #include "common.h"
 

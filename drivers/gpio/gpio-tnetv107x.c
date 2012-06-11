@@ -16,8 +16,8 @@
 #include <linux/init.h>
 #include <linux/gpio.h>
 
-#include <mach/common.h>
-#include <mach/tnetv107x.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/tnetv107x.h>
 
 struct tnetv107x_gpio_regs {
 	u32	idver;

@@ -28,8 +28,8 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/mxs.h>
-#include <mach/iomux.h>
+#include <mach-mxs/mxs.h>
+#include <mach-mxs/iomux.h>
 
 /*
  * configures a single pad in the iomuxer

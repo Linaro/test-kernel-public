@@ -16,12 +16,12 @@
 #include <linux/platform_device.h>
 #include <linux/mtd/physmap.h>
 #include <linux/io.h>
-#include <plat/irqs.h>
+#include <plat-omap/irqs.h>
 
-#include <plat/gpmc.h>
-#include <plat/nand.h>
-#include <plat/onenand.h>
-#include <plat/tc.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/nand.h>
+#include <plat-omap/onenand.h>
+#include <plat-omap/tc.h>
 
 #include "board-flash.h"
 
@@ -96,11 +96,6 @@ __init board_onenand_init(struct mtd_partition *onenand_parts,
 	board_onenand_data.nr_parts	= nr_parts;
 
 	gpmc_onenand_init(&board_onenand_data);
-}
-#else
-void
-__init board_onenand_init(struct mtd_partition *nor_parts, u8 nr_parts, u8 cs)
-{
 }
 #endif /* CONFIG_MTD_ONENAND_OMAP2 || CONFIG_MTD_ONENAND_OMAP2_MODULE */
 

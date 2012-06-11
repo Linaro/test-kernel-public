@@ -28,8 +28,8 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/tosa.h>
-#include <mach/audio.h>
+#include <mach-pxa/tosa.h>
+#include <mach-pxa/audio.h>
 
 #include "../codecs/wm9712.h"
 #include "pxa2xx-ac97.h"

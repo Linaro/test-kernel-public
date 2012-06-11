@@ -42,15 +42,15 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/flash.h>
 
-#include <mach/pxa27x.h>
-#include <mach/balloon3.h>
-#include <mach/audio.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/udc.h>
-#include <mach/pxa27x-udc.h>
-#include <mach/irda.h>
-#include <mach/ohci.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/balloon3.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/pxa27x-udc.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/ohci.h>
 
 #include "generic.h"
 #include "devices.h"

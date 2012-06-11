@@ -14,8 +14,8 @@
 #include <linux/err.h>
 #include <linux/init.h>
 #include <linux/io.h>
-#include <mach/common.h>
-#include <mach/mx28.h>
+#include <mach-mxs/common.h>
+#include <mach-mxs/mx28.h>
 #include "clk.h"
 
 #define CLKCTRL			MX28_IO_ADDRESS(MX28_CLKCTRL_BASE_ADDR)

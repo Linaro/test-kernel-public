@@ -31,8 +31,9 @@
 #include <linux/omapfb.h>
 
 #include <video/omapdss.h>
-#include <plat/vram.h>
-#include <plat/vrfb.h>
+#include <plat-omap/vram.h>
+#include <plat-omap/vrfb.h>
+#include <plat-omap/cpu.h>
 
 #include "omapfb.h"
 

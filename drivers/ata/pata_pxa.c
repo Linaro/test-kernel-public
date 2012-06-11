@@ -31,9 +31,9 @@
 
 #include <scsi/scsi_host.h>
 
-#include <mach/pxa2xx-regs.h>
-#include <mach/pata_pxa.h>
-#include <mach/dma.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/pata_pxa.h>
+#include <mach-pxa/dma.h>
 
 #define DRV_NAME	"pata_pxa"
 #define DRV_VERSION	"0.1"

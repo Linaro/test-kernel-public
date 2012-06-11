@@ -18,9 +18,9 @@
 #include <linux/of_platform.h>
 #include <asm/hardware/vic.h>
 #include <asm/mach/arch.h>
-#include <plat/shirq.h>
-#include <mach/generic.h>
-#include <mach/spear.h>
+#include <plat-spear/shirq.h>
+#include <mach-spear3xx/generic.h>
+#include <mach-spear3xx/spear.h>
 
 #define SPEAR310_UART1_BASE		UL(0xB2000000)
 #define SPEAR310_UART2_BASE		UL(0xB2080000)
