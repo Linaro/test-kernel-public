@@ -44,6 +44,32 @@
 
 config SCSI_UFSHCD
 	tristate "Universal Flash Storage host controller driver"
-	depends on PCI && SCSI
+	depends on SCSI
 	---help---
-	This is a generic driver which supports PCIe UFS Host controllers.
+	This is a generic driver which supports UFS Host controllers.
+	This option is selected automatically if the SCSI option is
+	selected. This is a core ufs driver.
+
+config SCSI_UFSHCD_PCI
+	tristate "Universal Flash Storage host support on PCI bus"
+	depends on SCSI_UFSHCD && PCI
+	---help---
+	This selects the PCI bus for the Universal Flash Storage IP.
+	Select this option if the IP is present on PCI platform.
+
+	If you have a controller with this interface, say Y or M here.
+
+	If unsure, say N.
+
+config SCSI_UFSHCD_PLTFM
+	tristate "Universal Flash Storage host support as platform device"
+	depends on SCSI_UFSHCD
+	help
+	This selects the common helper functions support for Host Controller
+	Interface based platform driver. Please select this option if the IP
+	is present as a platform device. This is the common interface for the
+	UFS Host Controller IP.
+
+	If you have a controller with this interface, say Y or M here.
+
+	If unsure, say N.
