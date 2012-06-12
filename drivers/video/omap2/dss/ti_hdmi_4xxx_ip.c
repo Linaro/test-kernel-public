@@ -294,6 +294,8 @@ int ti_hdmi_4xxx_phy_enable(struct hdmi_ip_data *ip_data)
 	pr_debug("%s\n", __func__);
 	r = hdmi_set_phy_pwr(ip_data, HDMI_PHYPWRCMD_LDOON);
 
+	msleep(1000);
+
 	/*
 	 * HDMI_WP_PWR_CTRL doesn't seem to reflect the change in power
 	 * states, ignore the error for now
@@ -336,8 +338,6 @@ int ti_hdmi_4xxx_phy_enable(struct hdmi_ip_data *ip_data)
 	/* Write to phy address 3 to change the polarity control */
 	REG_FLD_MOD(phy_base, HDMI_TXPHY_PAD_CFG_CTRL, 0x1, 27, 27);
 
-	r = hdmi_set_phy_pwr(ip_data, HDMI_PHYPWRCMD_LDOON);
-
 	ip_data->irq = gpio_to_irq(ip_data->hpd_gpio);
 	r = request_threaded_irq(ip_data->irq,
 			NULL, hpd_irq_handler,
@@ -349,8 +349,6 @@ int ti_hdmi_4xxx_phy_enable(struct hdmi_ip_data *ip_data)
 //		hdmi_set_phy_pwr(ip_data, HDMI_PHYPWRCMD_OFF);
 //		return r;
 	}
-
-	msleep(1000);
 
 	r = hdmi_check_hpd_state(ip_data);
 	if (!r) {
