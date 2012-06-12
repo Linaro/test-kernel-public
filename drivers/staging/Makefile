@@ -57,5 +57,6 @@ obj-$(CONFIG_ANDROID)		+= android/
 obj-$(CONFIG_PHONE)		+= telephony/
 obj-$(CONFIG_RAMSTER)		+= ramster/
 obj-$(CONFIG_USB_WPAN_HCD)	+= ozwpan/
+obj-$(CONFIG_SND_SOC_ORIGEN_ALC5625)	+= alc5625/
 obj-$(CONFIG_OMAP_THERMAL)      += thermal_framework/
 obj-$(CONFIG_DRM_OMAP_DCE)	+= omapdce/
