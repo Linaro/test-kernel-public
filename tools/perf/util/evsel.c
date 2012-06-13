@@ -15,7 +15,13 @@
 #include "cpumap.h"
 #include "thread_map.h"
 #include "target.h"
+#include "parse-events-flex.h"
 #include "../../include/linux/perf_event.h"
+
+#ifdef PARSER_DEBUG
+extern int parse_events_debug;
+#endif
+int parse_events_parse(struct list_head *list, int *idx);
 
 #define FD(e, x, y) (*(int *)xyarray__entry(e->fd, x, y))
 #define GROUP_FD(group_fd, cpu) (*(int *)xyarray__entry(group_fd, cpu, 0))
@@ -44,6 +50,42 @@ void hists__init(struct hists *hists)
 	hists->entries_collapsed = RB_ROOT;
 	hists->entries = RB_ROOT;
 	pthread_mutex_init(&hists->lock, NULL);
+}
+
+struct perf_evsel *perf_evsel__new2(const char *str)
+{
+	struct perf_evsel *evsel, *n;
+	LIST_HEAD(list);
+	LIST_HEAD(list_tmp);
+	int ret, idx = 0;
+	YY_BUFFER_STATE buffer = parse_events__scan_string(str);
+
+#ifdef PARSER_DEBUG
+	parse_events_debug = 1;
+#endif
+	ret = parse_events_parse(&list, &idx);
+
+	parse_events__flush_buffer(buffer);
+	parse_events__delete_buffer(buffer);
+	parse_events_lex_destroy();
+
+	if (ret)
+		goto out_err;
+
+	if (idx > 1)
+		goto out_delete_list;
+
+	evsel = list_entry(list.next, struct perf_evsel, node);
+	list_del_init(&evsel->node);
+	return evsel;
+
+out_delete_list:
+	list_for_each_entry_safe(evsel, n, &list, node) {
+		list_del_init(&evsel->node);
+		perf_evsel__delete(evsel);
+	}
+out_err:
+	return NULL;
 }
 
 void perf_evsel__init(struct perf_evsel *evsel,

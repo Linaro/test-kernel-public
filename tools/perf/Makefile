@@ -170,7 +170,7 @@ SCRIPT_SH += perf-archive.sh
 grep-libs = $(filter -l%,$(1))
 strip-libs = $(filter-out -l%,$(1))
 
-PYTHON_EXT_SRCS := $(shell grep -v ^\# util/python-ext-sources)
+PYTHON_EXT_SRCS := $(shell grep -v ^\# util/python-ext-sources | sed 's/OUTPUT/$(OUTPUT)/g')
 PYTHON_EXT_DEPS := util/python-ext-sources util/setup.py
 
 $(OUTPUT)python/perf.so: $(PYRF_OBJS) $(PYTHON_EXT_SRCS) $(PYTHON_EXT_DEPS)
@@ -233,6 +233,7 @@ $(OUTPUT)util/pmu-flex.c: util/pmu.l
 $(OUTPUT)util/pmu-bison.c: util/pmu.y
 	$(QUIET_BISON)$(BISON) -v util/pmu.y -d -o $(OUTPUT)util/pmu-bison.c
 
+$(OUTPUT)util/evsel.o: $(OUTPUT)util/parse-events-flex.c $(OUTPUT)util/parse-events-bison.c
 $(OUTPUT)util/parse-events.o: $(OUTPUT)util/parse-events-flex.c $(OUTPUT)util/parse-events-bison.c
 $(OUTPUT)util/pmu.o: $(OUTPUT)util/pmu-flex.c $(OUTPUT)util/pmu-bison.c
 
@@ -579,7 +580,7 @@ else
   PYTHON_EXTBUILD     := $(OUTPUT)python_ext_build/
   PYTHON_EXTBUILD_LIB := $(PYTHON_EXTBUILD)lib/
   PYTHON_EXTBUILD_TMP := $(PYTHON_EXTBUILD)tmp/
-  export PYTHON_EXTBUILD_LIB PYTHON_EXTBUILD_TMP
+  export PYTHON_EXTBUILD_LIB PYTHON_EXTBUILD_TMP OUTPUT
 
   python-clean := rm -rf $(PYTHON_EXTBUILD) $(OUTPUT)python/perf.so
 
