@@ -27,15 +27,15 @@
 #include <linux/power/isp1704_charger.h>
 #include <asm/system_info.h>
 
-#include <plat/mcspi.h>
-#include <plat/board.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/dma.h>
-#include <plat/gpmc.h>
-#include <plat/onenand.h>
-#include <plat/gpmc-smc91x.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/onenand.h>
+#include <plat-omap/gpmc-smc91x.h>
 
-#include <mach/board-rx51.h>
+#include <mach-omap2/board-rx51.h>
 
 #include <sound/tlv320aic3x.h>
 #include <sound/tpa6130a2-plat.h>
@@ -144,7 +144,6 @@ static struct lis3lv02d_platform_data rx51_lis3lv02d_data = {
 	.release_resources = lis302_release,
 	.st_min_limits = {-32, 3, 3},
 	.st_max_limits = {-3, 32, 32},
-	.irq2 = OMAP_GPIO_IRQ(LIS302_IRQ2_GPIO),
 };
 #endif
 
@@ -1030,7 +1029,6 @@ static struct i2c_board_info __initdata rx51_peripherals_i2c_board_info_3[] = {
 	{
 		I2C_BOARD_INFO("lis3lv02d", 0x1d),
 		.platform_data = &rx51_lis3lv02d_data,
-		.irq = OMAP_GPIO_IRQ(LIS302_IRQ1_GPIO),
 	},
 #endif
 };
@@ -1056,6 +1054,10 @@ static int __init rx51_i2c_init(void)
 	omap_pmic_init(1, 2200, "twl5030", INT_34XX_SYS_NIRQ, &rx51_twldata);
 	omap_register_i2c_bus(2, 100, rx51_peripherals_i2c_board_info_2,
 			      ARRAY_SIZE(rx51_peripherals_i2c_board_info_2));
+#if defined(CONFIG_SENSORS_LIS3_I2C) || defined(CONFIG_SENSORS_LIS3_I2C_MODULE)
+	rx51_peripherals_i2c_board_info_3[0].irq = gpio_to_irq(LIS302_IRQ1_GPIO);
+	rx51_lis3lv02d_data.irq2 = gpio_to_irq(LIS302_IRQ2_GPIO);
+#endif
 	omap_register_i2c_bus(3, 400, rx51_peripherals_i2c_board_info_3,
 			      ARRAY_SIZE(rx51_peripherals_i2c_board_info_3));
 	return 0;

@@ -28,7 +28,7 @@
 #include <linux/spi/spi.h>
 #include <linux/mtd/physmap.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/irq.h>
@@ -37,9 +37,9 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/board.h>
-#include <mach/at91rm9200_mc.h>
-#include <mach/at91_ramc.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91rm9200_mc.h>
+#include <mach-at91/at91_ramc.h>
 
 #include "generic.h"
 

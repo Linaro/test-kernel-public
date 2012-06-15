@@ -33,7 +33,7 @@
 #include <linux/io.h>
 #include <linux/gpio.h>
 
-#include <mach/regs-ac97.h>
+#include <mach-pxa/regs-ac97.h>
 
 #include <asm/mach-types.h>
 

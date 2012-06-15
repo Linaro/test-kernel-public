@@ -2,7 +2,7 @@
 #include <linux/dma-mapping.h>
 #include <linux/amba/bus.h>
 #include <linux/amba/clcd.h>
-#include <plat/clcd.h>
+#include <plat-versatile/clcd.h>
 
 static struct clcd_panel vga = {
 	.mode		= {

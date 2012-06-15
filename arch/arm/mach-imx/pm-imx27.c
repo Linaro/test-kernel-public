@@ -10,7 +10,7 @@
 #include <linux/kernel.h>
 #include <linux/suspend.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 static int mx27_suspend_enter(suspend_state_t state)
 {

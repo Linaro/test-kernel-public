@@ -220,7 +220,7 @@ struct omapfb_display_info {
 
 #ifdef __KERNEL__
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 
 struct omapfb_platform_data {
 	struct omap_lcd_config		lcd;

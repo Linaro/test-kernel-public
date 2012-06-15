@@ -39,15 +39,15 @@
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>
 
-#include <plat/i2c.h>
-#include <plat/ste_dma40.h>
-#include <plat/gpio-nomadik.h>
+#include <plat-nomadik/i2c.h>
+#include <plat-nomadik/ste_dma40.h>
+#include <plat-nomadik/gpio-nomadik.h>
 
-#include <mach/hardware.h>
-#include <mach/setup.h>
-#include <mach/devices.h>
-#include <mach/irqs.h>
-#include <mach/crypto-ux500.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/setup.h>
+#include <mach-ux500/devices.h>
+#include <mach-ux500/irqs.h>
+#include <mach-ux500/crypto-ux500.h>
 
 #include "ste-dma40-db8500.h"
 #include "devices-db8500.h"

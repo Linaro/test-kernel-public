@@ -38,11 +38,11 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/coh901318.h>
-#include <mach/hardware.h>
-#include <mach/syscon.h>
-#include <mach/dma_channels.h>
-#include <mach/gpio-u300.h>
+#include <mach-u300/coh901318.h>
+#include <mach-u300/hardware.h>
+#include <mach-u300/syscon.h>
+#include <mach-u300/dma_channels.h>
+#include <mach-u300/gpio-u300.h>
 
 #include "clock.h"
 #include "spi.h"

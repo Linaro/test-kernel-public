@@ -30,8 +30,8 @@
 #include <linux/export.h>
 
 #include <video/omapdss.h>
-#include <plat/vrfb.h>
-#include <plat/vram.h>
+#include <plat-omap/vrfb.h>
+#include <plat-omap/vram.h>
 
 #include "omapfb.h"
 

@@ -28,10 +28,10 @@
 #include <linux/irq.h>
 #include <linux/delay.h>
 #include <linux/clk.h>
-#include <mach/dma.h>
-#include <mach/irqs.h>
-#include <mach/iomap.h>
-#include <mach/suspend.h>
+#include <mach-tegra/dma.h>
+#include <mach-tegra/irqs.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/suspend.h>
 
 #include "apbio.h"
 

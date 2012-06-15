@@ -27,10 +27,10 @@
 #include <linux/input.h>
 #include <linux/io.h>
 #include <linux/of_irq.h>
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/emev2.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/hardware.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/emev2.h>
+#include <mach-shmobile/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>

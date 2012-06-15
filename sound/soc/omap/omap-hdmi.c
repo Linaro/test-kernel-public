@@ -34,7 +34,7 @@
 #include <sound/asoundef.h>
 #include <video/omapdss.h>
 
-#include <plat/dma.h>
+#include <plat-omap/dma.h>
 #include "omap-pcm.h"
 #include "omap-hdmi.h"
 

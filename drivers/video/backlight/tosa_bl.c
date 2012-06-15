@@ -22,7 +22,7 @@
 
 #include <asm/mach/sharpsl_param.h>
 
-#include <mach/tosa.h>
+#include <mach-pxa/tosa.h>
 
 #define COMADJ_DEFAULT	97
 

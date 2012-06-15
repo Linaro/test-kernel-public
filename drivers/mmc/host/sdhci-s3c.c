@@ -27,8 +27,8 @@
 
 #include <linux/mmc/host.h>
 
-#include <plat/sdhci.h>
-#include <plat/regs-sdhci.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/regs-sdhci.h>
 
 #include "sdhci.h"
 

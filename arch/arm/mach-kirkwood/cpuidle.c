@@ -21,7 +21,7 @@
 #include <linux/export.h>
 #include <asm/proc-fns.h>
 #include <asm/cpuidle.h>
-#include <mach/kirkwood.h>
+#include <mach-kirkwood/kirkwood.h>
 
 #define KIRKWOOD_MAX_STATES	2
 
