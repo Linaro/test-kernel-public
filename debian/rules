@@ -118,10 +118,10 @@ debian/control: $(DEBIAN)/control.stub
 		$(builddir)/kernel-versions $(builddir)/package-list	\
 		$(builddir)/$(DEBIAN)
 	mkdir -p $(builddir)/modules/$(arch)/
-	cp $(DEBIAN)/d-i/modules/* $(builddir)/modules/$(arch)/
+	cp $(DEBIAN)/d-i/modules/* $(builddir)/modules/$(arch)/ || true
 	mkdir -p $(builddir)/firmware/$(arch)/
-	cp $(DEBIAN)/d-i/firmware/* $(builddir)/firmware/$(arch)/
-	cp $(DEBIAN)/d-i/package-list $(DEBIAN)/d-i/kernel-versions $(builddir)/
+	cp $(DEBIAN)/d-i/firmware/* $(builddir)/firmware/$(arch)/ || true 
+	cp $(DEBIAN)/d-i/package-list $(DEBIAN)/d-i/kernel-versions $(builddir)/ || echo true 
 	touch $(builddir)/modules/$(arch)/kernel-image
 	# kernel-wedge needs to poke around in $(DEBIAN)/
 	ln -nsf $(CURDIR)/debian $(builddir)/debian
@@ -133,7 +133,7 @@ debian/control: $(DEBIAN)/control.stub
 	fi
 	if [ -d $(DEBIAN)/d-i/firmware-$(arch) ]; then			\
 	    cp $(DEBIAN)/d-i/firmware-$(arch)/* \
-		$(builddir)/firmware/$(arch)/;				\
+		$(builddir)/firmware/$(arch)/ || true;				\
 	fi
 
 	# Remove unwanted stuff for this architecture
@@ -231,12 +231,12 @@ debian/control: $(DEBIAN)/control.stub
 	if [ ! -d $(builddir)/modules/$(build_arch) ]; then		\
 		mkdir -p $(builddir)/modules/$(build_arch);		\
 		cp $(builddir)/modules/$(arch)/*			\
-			$(builddir)/modules/$(build_arch);		\
+			$(builddir)/modules/$(build_arch) || true;		\
 	fi
 	if [ ! -d $(builddir)/firmware/$(build_arch) ]; then		\
 		mkdir -p $(builddir)/firmware/$(build_arch);		\
 		cp $(builddir)/firmware/$(arch)/*			\
-			$(builddir)/firmware/$(build_arch);		\
+			$(builddir)/firmware/$(build_arch) || true;		\
 	fi
 
 	cp $(DEBIAN)/control.stub debian/control.stub
