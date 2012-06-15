@@ -26,10 +26,10 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 #include <linux/sched.h>
-#include <mach/msm_iomap.h>
-#include <mach/irqs.h>
-#include <mach/board.h>
-#include <mach/msm_fb.h>
+#include <mach-msm/msm_iomap.h>
+#include <mach-msm/irqs.h>
+#include <mach-msm/board.h>
+#include <mach-msm/msm_fb.h>
 #include "mddi_hw.h"
 
 #define FLAG_DISABLE_HIBERNATION 0x0001

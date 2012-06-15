@@ -41,13 +41,13 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <plat/omap7xx.h>
-#include <plat/board.h>
-#include <plat/keypad.h>
-#include <plat/usb.h>
-#include <plat/mmc.h>
+#include <plat-omap/omap7xx.h>
+#include <plat-omap/board.h>
+#include <plat-omap/keypad.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/mmc.h>
 
-#include <mach/irqs.h>
+#include <mach-omap1/irqs.h>
 
 #include "common.h"
 

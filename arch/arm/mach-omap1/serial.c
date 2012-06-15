@@ -22,9 +22,9 @@
 
 #include <asm/mach-types.h>
 
-#include <plat/board.h>
-#include <plat/mux.h>
-#include <plat/fpga.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/fpga.h>
 
 #include "pm.h"
 

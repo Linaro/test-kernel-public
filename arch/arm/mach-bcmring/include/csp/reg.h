@@ -69,7 +69,7 @@
 /*  */
 
 #if defined(__KERNEL__) && !defined(STANDALONE)
-#include <mach/hardware.h>
+#include <mach-bcmring/hardware.h>
 #include <linux/interrupt.h>
 
 #define REG_LOCAL_IRQ_SAVE      HW_DECLARE_SPINLOCK(reg32) \

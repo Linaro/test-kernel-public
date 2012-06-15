@@ -23,20 +23,20 @@
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 
-#include <mach/map.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-modem.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/regs-gpio.h>
+#include <mach-s3c64xx/regs-modem.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/iic.h>
-#include <plat/gpio-cfg.h>
-#include <plat/hwmon.h>
-#include <plat/regs-serial.h>
-#include <plat/usb-control.h>
-#include <plat/sdhci.h>
-#include <plat/ts.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/hwmon.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/usb-control.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/ts.h>
 
 #include <video/platform_lcd.h>
 

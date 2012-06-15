@@ -16,8 +16,8 @@
 #include <linux/of_platform.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
-#include <mach/irqs.h>
-#include <mach/regs-apbc.h>
+#include <mach-mmp/irqs.h>
+#include <mach-mmp/regs-apbc.h>
 
 #include "common.h"
 

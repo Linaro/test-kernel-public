@@ -23,8 +23,8 @@
 #include <linux/err.h>
 #include <linux/slab.h>
 #include <asm/cpu.h>
-#include <mach/hardware.h>
-#include <mach/clock.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/clock.h>
 
 #define CLK32_FREQ	32768
 #define NANOSECOND	(1000 * 1000 * 1000)

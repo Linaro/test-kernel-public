@@ -28,8 +28,8 @@
 #include <linux/clk.h>
 #include <linux/slab.h>
 
-#include <mach/cputype.h>
-#include <mach/hardware.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/hardware.h>
 
 #include <media/davinci/vpss.h>
 #include <media/v4l2-device.h>

@@ -30,23 +30,23 @@
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
 
-#include <plat/regs-serial.h>
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/iic.h>
-#include <plat/gpio-cfg.h>
-#include <plat/fb.h>
-#include <plat/mfc.h>
-#include <plat/sdhci.h>
-#include <plat/pd.h>
-#include <plat/regs-fb-v4.h>
-#include <plat/fimc-core.h>
-#include <plat/s5p-time.h>
-#include <plat/camport.h>
-#include <plat/mipi_csis.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/mfc.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/pd.h>
+#include <plat-samsung/regs-fb-v4.h>
+#include <plat-samsung/fimc-core.h>
+#include <plat-samsung/s5p-time.h>
+#include <plat-samsung/camport.h>
+#include <plat-samsung/mipi_csis.h>
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 #include <media/v4l2-mediabus.h>
 #include <media/s5p_fimc.h>

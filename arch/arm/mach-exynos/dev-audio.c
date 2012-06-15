@@ -15,13 +15,13 @@
 #include <linux/dma-mapping.h>
 #include <linux/gpio.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/audio.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/audio.h>
 
-#include <mach/map.h>
-#include <mach/dma.h>
-#include <mach/irqs.h>
-#include <mach/regs-audss.h>
+#include <mach-exynos/map.h>
+#include <mach-exynos/dma.h>
+#include <mach-exynos/irqs.h>
+#include <mach-exynos/regs-audss.h>
 
 static const char *rclksrc[] = {
 	[0] = "busclk",

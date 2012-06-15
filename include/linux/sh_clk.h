@@ -135,7 +135,7 @@ int sh_clk_mstp_register(struct clk *clks, int nr);
  * responsible for defining their access sizes either directly or via the
  * clock definition wrappers.
  */
-static inline int __deprecated sh_clk_mstp32_register(struct clk *clks, int nr)
+static inline int sh_clk_mstp32_register(struct clk *clks, int nr)
 {
 	return sh_clk_mstp_register(clks, nr);
 }

@@ -69,26 +69,26 @@
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <mach/regs-irq.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-gpioj.h>
-#include <mach/fb.h>
+#include <mach-s3c24xx/regs-irq.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-gpioj.h>
+#include <mach-s3c24xx/fb.h>
 
-#include <plat/usb-control.h>
-#include <mach/regs-mem.h>
-#include <mach/hardware.h>
+#include <plat-samsung/usb-control.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/hardware.h>
 
-#include <mach/gta02.h>
+#include <mach-s3c24xx/gta02.h>
 
-#include <plat/regs-serial.h>
-#include <plat/nand.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/udc.h>
-#include <plat/gpio-cfg.h>
-#include <plat/iic.h>
-#include <plat/ts.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/udc.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/ts.h>
 
 #include "common.h"
 

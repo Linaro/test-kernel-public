@@ -33,20 +33,20 @@
 #include <linux/regulator/machine.h>
 #include <linux/i2c/twl.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/flash.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
 #include <video/omapdss.h>
 #include <video/omap-panel-tfp410.h>
-#include <plat/gpmc.h>
-#include <plat/nand.h>
-#include <plat/usb.h>
-#include <plat/omap_device.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/nand.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/omap_device.h>
 
 #include "mux.h"
 #include "hsmmc.h"

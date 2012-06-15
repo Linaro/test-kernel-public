@@ -46,12 +46,12 @@
 #include <linux/mtd/physmap.h>
 #include <linux/syscore_ops.h>
 
-#include <mach/pxa25x.h>
-#include <mach/audio.h>
-#include <mach/pxafb.h>
-#include <mach/regs-uart.h>
-#include <mach/arcom-pcmcia.h>
-#include <mach/viper.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/regs-uart.h>
+#include <mach-pxa/arcom-pcmcia.h>
+#include <mach-pxa/viper.h>
 
 #include <asm/setup.h>
 #include <asm/mach-types.h>
@@ -768,8 +768,7 @@ static unsigned long viper_tpm;
 
 static int __init viper_tpm_setup(char *str)
 {
-	strict_strtoul(str, 10, &viper_tpm);
-	return 1;
+	return strict_strtoul(str, 10, &viper_tpm) >= 0;
 }
 
 __setup("tpm=", viper_tpm_setup);

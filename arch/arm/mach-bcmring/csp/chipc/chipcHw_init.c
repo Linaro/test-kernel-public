@@ -30,8 +30,8 @@
 #include <csp/stdint.h>
 #include <csp/module.h>
 
-#include <mach/csp/chipcHw_def.h>
-#include <mach/csp/chipcHw_inline.h>
+#include <mach-bcmring/csp/chipcHw_def.h>
+#include <mach-bcmring/csp/chipcHw_inline.h>
 
 #include <csp/reg.h>
 #include <csp/delay.h>

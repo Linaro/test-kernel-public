@@ -33,13 +33,14 @@
 #include <asm/suspend.h>
 #include <asm/system_misc.h>
 
-#include <plat/sram.h>
+#include <plat-omap/sram.h>
 #include "clockdomain.h"
 #include "powerdomain.h"
-#include <plat/sdrc.h>
-#include <plat/prcm.h>
-#include <plat/gpmc.h>
-#include <plat/dma.h>
+#include <plat-omap/sdrc.h>
+#include <plat-omap/prcm.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/gpio.h>
+#include <plat-omap/dma.h>
 
 #include "common.h"
 #include "cm2xxx_3xxx.h"

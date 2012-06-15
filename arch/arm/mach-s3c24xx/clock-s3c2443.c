@@ -35,16 +35,16 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 
-#include <mach/regs-s3c2443-clock.h>
+#include <mach-s3c24xx/regs-s3c2443-clock.h>
 
-#include <plat/cpu-freq.h>
+#include <plat-samsung/cpu-freq.h>
 
-#include <plat/s3c2443.h>
-#include <plat/clock.h>
-#include <plat/clock-clksrc.h>
-#include <plat/cpu.h>
+#include <plat-samsung/s3c2443.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/clock-clksrc.h>
+#include <plat-samsung/cpu.h>
 
 /* We currently have to assume that the system is running
  * from the XTPll input, and that all ***REFCLKs are being

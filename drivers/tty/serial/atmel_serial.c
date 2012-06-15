@@ -44,11 +44,13 @@
 #include <asm/ioctls.h>
 
 #include <asm/mach/serial_at91.h>
-#include <mach/board.h>
 
 #ifdef CONFIG_ARM
-#include <mach/cpu.h>
+#include <mach-at91/board.h>
+#include <mach-at91/cpu.h>
 #include <asm/gpio.h>
+#else
+#include <mach/board.h>
 #endif
 
 #define PDC_BUFFER_SIZE		512

@@ -22,11 +22,11 @@
 #include <asm/mach/time.h>
 #include <asm/sched_clock.h>
 
-#include <plat/hardware.h>
-#include <plat/common.h>
-#include <plat/board.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/common.h>
+#include <plat-omap/board.h>
 
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 /* OMAP2_32KSYNCNT_CR_OFF: offset of 32ksync counter register */
 #define OMAP2_32KSYNCNT_CR_OFF		0x10

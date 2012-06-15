@@ -20,7 +20,7 @@
 #include <linux/platform_device.h>
 #include <linux/leds.h>
 #include <linux/module.h>
-#include <mach/hardware.h>
+#include <mach-ixp4xx/hardware.h>
 #include <asm/io.h>
 
 #define FSG_LED_WLAN_BIT	0

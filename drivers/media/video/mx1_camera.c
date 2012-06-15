@@ -41,9 +41,9 @@
 
 #include <asm/dma.h>
 #include <asm/fiq.h>
-#include <mach/dma-mx1-mx2.h>
-#include <mach/hardware.h>
-#include <mach/mx1_camera.h>
+#include <mach-imx/dma-mx1-mx2.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/mx1_camera.h>
 
 /*
  * CSI registers

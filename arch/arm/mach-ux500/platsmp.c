@@ -21,8 +21,8 @@
 #include <asm/hardware/gic.h>
 #include <asm/smp_plat.h>
 #include <asm/smp_scu.h>
-#include <mach/hardware.h>
-#include <mach/setup.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/setup.h>
 
 /* This is called from headsmp.S to wakeup the secondary core */
 extern void u8500_secondary_startup(void);
