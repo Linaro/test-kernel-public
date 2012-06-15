@@ -24,7 +24,7 @@
 #include <linux/mm.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/sizes.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
@@ -33,7 +33,7 @@
 #include <asm/page.h>
 
 #include <asm/mach/map.h>
-#include <mach/autcpu12.h>
+#include <mach-clps711x/autcpu12.h>
 
 #include "common.h"
 

@@ -1,0 +1,3 @@
+#ifndef CLOCK_TICK_RATE
+#define CLOCK_TICK_RATE 1000000
+#endif

@@ -15,9 +15,9 @@
 
 #include <linux/platform_device.h>
 
-#include <mach/wm8505_regs.h>
-#include <mach/wm8505_irqs.h>
-#include <mach/i8042.h>
+#include <mach-vt8500/wm8505_regs.h>
+#include <mach-vt8500/wm8505_irqs.h>
+#include <mach-vt8500/i8042.h>
 #include "devices.h"
 
 void __init wm8505_set_resources(void)

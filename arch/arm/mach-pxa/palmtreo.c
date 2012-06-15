@@ -31,20 +31,20 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/pxa27x.h>
-#include <mach/pxa27x-udc.h>
-#include <mach/audio.h>
-#include <mach/palmtreo.h>
-#include <mach/mmc.h>
-#include <mach/pxafb.h>
-#include <mach/irda.h>
-#include <plat/pxa27x_keypad.h>
-#include <mach/udc.h>
-#include <mach/ohci.h>
-#include <mach/pxa2xx-regs.h>
-#include <mach/palmasoc.h>
-#include <mach/camera.h>
-#include <mach/palm27x.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/pxa27x-udc.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/palmtreo.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/irda.h>
+#include <plat-pxa/pxa27x_keypad.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/palmasoc.h>
+#include <mach-pxa/camera.h>
+#include <mach-pxa/palm27x.h>
 
 #include <sound/pxa2xx-lib.h>
 

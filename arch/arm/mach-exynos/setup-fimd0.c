@@ -13,10 +13,10 @@
 #include <linux/fb.h>
 #include <linux/gpio.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/regs-fb-v4.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/regs-fb-v4.h>
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 void exynos4_fimd0_gpio_setup_24bpp(void)
 {

@@ -28,17 +28,17 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/s3c244x.h>
-#include <plat/pm.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/s3c244x.h>
+#include <plat-samsung/pm.h>
 
-#include <plat/gpio-core.h>
-#include <plat/gpio-cfg.h>
-#include <plat/gpio-cfg-helpers.h>
+#include <plat-samsung/gpio-core.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg-helpers.h>
 
 static struct device s3c2440_dev = {
 	.bus		= &s3c2440_subsys,

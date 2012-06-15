@@ -24,14 +24,14 @@
 #include <linux/device.h>
 #include <linux/irq.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-pnx4008/hardware.h>
 #include <asm/setup.h>
 #include <asm/pgtable.h>
 #include <asm/page.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
-#include <mach/irq.h>
+#include <mach-pnx4008/irq.h>
 
 static u8 pnx4008_irq_type[NR_IRQS] = PNX4008_IRQ_TYPES;
 

@@ -33,11 +33,11 @@
 
 #include <linux/dw_dmac.h>
 
-#include <mach/cpu.h>
-#include <mach/gpio.h>
+#include <mach-at91/cpu.h>
+#include <mach-at91/gpio.h>
 
 #ifdef CONFIG_ARCH_AT91
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #endif
 
 #include "ac97c.h"

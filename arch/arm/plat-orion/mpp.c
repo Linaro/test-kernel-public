@@ -14,7 +14,7 @@
 #include <linux/io.h>
 #include <linux/gpio.h>
 #include <mach/hardware.h>
-#include <plat/mpp.h>
+#include <plat-orion/mpp.h>
 
 /* Address of the ith MPP control register */
 static __init unsigned long mpp_ctrl_addr(unsigned int i,

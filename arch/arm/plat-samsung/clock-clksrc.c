@@ -19,9 +19,9 @@
 #include <linux/device.h>
 #include <linux/io.h>
 
-#include <plat/clock.h>
-#include <plat/clock-clksrc.h>
-#include <plat/cpu-freq.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/clock-clksrc.h>
+#include <plat-samsung/cpu-freq.h>
 
 static inline struct clksrc_clk *to_clksrc(struct clk *clk)
 {

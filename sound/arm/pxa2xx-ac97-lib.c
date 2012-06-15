@@ -22,9 +22,9 @@
 #include <sound/ac97_codec.h>
 #include <sound/pxa2xx-lib.h>
 
-#include <mach/irqs.h>
-#include <mach/regs-ac97.h>
-#include <mach/audio.h>
+#include <mach-pxa/irqs.h>
+#include <mach-pxa/regs-ac97.h>
+#include <mach-pxa/audio.h>
 
 static DEFINE_MUTEX(car_mutex);
 static DECLARE_WAIT_QUEUE_HEAD(gsr_wq);

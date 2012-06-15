@@ -19,8 +19,8 @@
 #include <linux/platform_device.h>
 
 #include <linux/dma-mapping.h>
-#include <mach/irqs-8960.h>
-#include <mach/board.h>
+#include <mach-msm/irqs-8960.h>
+#include <mach-msm/board.h>
 
 #include "devices.h"
 

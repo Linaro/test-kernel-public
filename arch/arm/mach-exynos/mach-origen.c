@@ -28,22 +28,22 @@
 
 #include <video/platform_lcd.h>
 
-#include <plat/regs-serial.h>
-#include <plat/regs-fb-v4.h>
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/sdhci.h>
-#include <plat/iic.h>
-#include <plat/ehci.h>
-#include <plat/clock.h>
-#include <plat/gpio-cfg.h>
-#include <plat/backlight.h>
-#include <plat/pd.h>
-#include <plat/fb.h>
-#include <plat/mfc.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/regs-fb-v4.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/ehci.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/backlight.h>
+#include <plat-samsung/pd.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/mfc.h>
 
-#include <mach/ohci.h>
-#include <mach/map.h>
+#include <mach-exynos/ohci.h>
+#include <mach-exynos/map.h>
 
 #include <drm/exynos_drm.h>
 #include "common.h"

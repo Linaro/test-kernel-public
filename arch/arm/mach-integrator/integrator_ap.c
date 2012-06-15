@@ -35,23 +35,23 @@
 #include <linux/clk.h>
 #include <video/vga.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
 #include <asm/hardware/arm_timer.h>
 #include <asm/setup.h>
 #include <asm/param.h>		/* HZ */
 #include <asm/mach-types.h>
 #include <asm/sched_clock.h>
 
-#include <mach/lm.h>
-#include <mach/irqs.h>
+#include <mach-integrator/lm.h>
+#include <mach-integrator/irqs.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 
-#include <plat/fpga-irq.h>
+#include <plat-versatile/fpga-irq.h>
 
 #include "common.h"
 

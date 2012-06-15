@@ -104,7 +104,7 @@ static inline void SMC_outw(u16 val, void __iomem *ioaddr, int reg)
 
 #elif defined(CONFIG_SA1100_ASSABET)
 
-#include <mach/neponset.h>
+#include <mach-sa1100/neponset.h>
 
 /* We can only do 8-bit reads and writes in the static memory space. */
 #define SMC_CAN_USE_8BIT	1
@@ -364,7 +364,7 @@ struct smc_local {
  * as RX which can overrun memory and lose packets.
  */
 #include <linux/dma-mapping.h>
-#include <mach/dma.h>
+#include <mach-pxa/dma.h>
 
 #ifdef SMC_insl
 #undef SMC_insl

@@ -9,9 +9,9 @@
 #include <linux/err.h>
 #include <linux/init.h>
 
-#include <mach/mx23.h>
-#include <mach/mx28.h>
-#include <mach/devices-common.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/mx28.h>
+#include <mach-mxs/devices-common.h>
 
 struct platform_device *__init mxs_add_gpio(
 	char *name, int id, resource_size_t iobase, int irq)
