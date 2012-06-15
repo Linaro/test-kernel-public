@@ -42,6 +42,9 @@ $(stampdir)/stamp-build-%: $(stampdir)/stamp-prepare-%
 	@touch $@
 
 # Install the finished build
+ifeq ($(do_complete_flavour_headers),true)
+indep_hdrdir = $(CURDIR)/debian/$(hdrs_pkg_name)/usr/src/$(hdrs_pkg_name)
+endif
 install-%: pkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*
 install-%: pkgdir_ex = $(CURDIR)/debian/$(extra_pkg_name)-$*
 install-%: bindoc = $(pkgdir)/usr/share/doc/$(bin_pkg_name)-$*
@@ -209,6 +212,22 @@ ifeq ($(arch),powerpc)
 endif
 	# Script to symlink everything up
 	$(SHELL) $(DROOT)/scripts/link-headers "$(hdrdir)" "$(basepkg)" "$*"
+ifeq ($(do_complete_flavour_headers),true)
+	install -d $(indep_hdrdir)
+	find . -path './debian' -prune -o -path './$(DEBIAN)' -prune \
+	  -o -path './include/*' -prune \
+	  -o -path './scripts/*' -prune -o -type f \
+	  \( -name 'Makefile*' -o -name 'Kconfig*' -o -name 'Kbuild*' -o \
+	     -name '*.sh' -o -name '*.pl' -o -name '*.lds' \) \
+	  -print | cpio -pd --preserve-modification-time $(indep_hdrdir)
+	cp -a drivers/media/dvb/dvb-core/*.h $(indep_hdrdir)/drivers/media/dvb/dvb-core
+	cp -a drivers/media/video/*.h $(indep_hdrdir)/drivers/media/video
+	cp -a drivers/media/dvb/frontends/*.h $(indep_hdrdir)/drivers/media/dvb/frontends
+	cp -a scripts include $(indep_hdrdir)
+	(find arch -name include -type d -print | \
+		xargs -n1 -i: find : -type f) | \
+		cpio -pd --preserve-modification-time $(indep_hdrdir)
+endif
 	# The build symlink
 	install -d debian/$(basepkg)-$*/lib/modules/$(abi_release)-$*
 	ln -s /usr/src/$(basepkg)-$* \
