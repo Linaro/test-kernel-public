@@ -407,7 +407,7 @@ static void __init v2m_clk_init(void)
 
 	clk = clk_register_fixed_rate(NULL, "dummy_apb_pclk", NULL,
 			CLK_IS_ROOT, 0);
-	WARN_ON(clk_register_clkdev(clk, "abp_pclk", NULL));
+	WARN_ON(clk_register_clkdev(clk, "apb_pclk", NULL));
 
 	clk = clk_register_fixed_rate(NULL, "mb:ref_clk", NULL,
 			CLK_IS_ROOT, 32768);
