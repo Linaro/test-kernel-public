@@ -156,7 +156,7 @@ do_source_package_content=false
 endif
 
 # linux-libc-dev may not be needed, default to building it.
-do_libc_dev_package=true
+do_libc_dev_package=false
 
 # common headers normally is built as an indep package, but may be arch
 do_common_headers_indep=true
