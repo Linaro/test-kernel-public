@@ -23,7 +23,7 @@
 	.section	".start", "ax"
 
 	/* load board-specific initialization code */
-#include <mach/zboot.h>
+#include <mach-shmobile/zboot.h>
 
 #if defined(CONFIG_ZBOOT_ROM_MMCIF) || defined(CONFIG_ZBOOT_ROM_SH_MOBILE_SDHI)
 	/* Load image from MMC/SD */

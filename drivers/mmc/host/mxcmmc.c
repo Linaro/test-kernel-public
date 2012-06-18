@@ -38,10 +38,10 @@
 #include <asm/dma.h>
 #include <asm/irq.h>
 #include <asm/sizes.h>
-#include <mach/mmc.h>
+#include <mach-imx/mmc.h>
 
-#include <mach/dma.h>
-#include <mach/hardware.h>
+#include <mach-imx/dma.h>
+#include <mach-imx/hardware.h>
 
 #define DRIVER_NAME "mxc-mmc"
 

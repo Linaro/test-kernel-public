@@ -24,7 +24,7 @@
 #include <linux/slab.h>
 #include <linux/pinctrl/consumer.h>
 #include <linux/pinctrl/pinconf-generic.h>
-#include <mach/gpio-u300.h>
+#include <mach-u300/gpio-u300.h>
 #include "pinctrl-coh901.h"
 
 /*

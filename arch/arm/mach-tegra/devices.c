@@ -24,10 +24,10 @@
 #include <linux/serial_8250.h>
 #include <linux/i2c-tegra.h>
 #include <asm/pmu.h>
-#include <mach/irqs.h>
-#include <mach/iomap.h>
-#include <mach/dma.h>
-#include <mach/usb_phy.h>
+#include <mach-tegra/irqs.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/dma.h>
+#include <mach-tegra/usb_phy.h>
 
 #include "gpio-names.h"
 #include "devices.h"

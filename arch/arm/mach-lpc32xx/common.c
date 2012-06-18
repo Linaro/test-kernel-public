@@ -27,8 +27,8 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-lpc32xx/hardware.h>
+#include <mach-lpc32xx/platform.h>
 #include "common.h"
 
 /*

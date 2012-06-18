@@ -16,8 +16,8 @@
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 
-#include <mach/da8xx.h>
-#include <mach/usb.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/usb.h>
 
 #ifndef CONFIG_ARCH_DAVINCI_DA8XX
 #error "This file is DA8xx bus glue.  Define CONFIG_ARCH_DAVINCI_DA8XX."

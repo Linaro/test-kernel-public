@@ -23,13 +23,13 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
 
-#include <mach/pxa320.h>
-#include <mach/colibri.h>
-#include <mach/pxafb.h>
-#include <mach/ohci.h>
-#include <mach/audio.h>
-#include <mach/pxa27x-udc.h>
-#include <mach/udc.h>
+#include <mach-pxa/pxa320.h>
+#include <mach-pxa/colibri.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxa27x-udc.h>
+#include <mach-pxa/udc.h>
 
 #include "generic.h"
 #include "devices.h"

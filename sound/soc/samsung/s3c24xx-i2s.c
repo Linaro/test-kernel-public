@@ -25,7 +25,7 @@
 
 #include <mach/regs-gpio.h>
 #include <mach/dma.h>
-#include <plat/regs-iis.h>
+#include <plat-samsung/regs-iis.h>
 
 #include "dma.h"
 #include "s3c24xx-i2s.h"

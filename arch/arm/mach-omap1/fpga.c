@@ -27,9 +27,9 @@
 #include <asm/irq.h>
 #include <asm/mach/irq.h>
 
-#include <plat/fpga.h>
+#include <plat-omap/fpga.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "iomap.h"
 

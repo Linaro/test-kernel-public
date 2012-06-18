@@ -51,9 +51,9 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 
-#include <plat/dmtimer.h>
+#include <plat-omap/dmtimer.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "common.h"
 

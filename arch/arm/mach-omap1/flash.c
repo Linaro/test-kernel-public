@@ -10,10 +10,10 @@
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/map.h>
 
-#include <plat/tc.h>
-#include <plat/flash.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/flash.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 void omap1_set_vpp(struct platform_device *pdev, int enable)
 {

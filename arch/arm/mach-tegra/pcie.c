@@ -37,9 +37,9 @@
 #include <asm/sizes.h>
 #include <asm/mach/pci.h>
 
-#include <mach/iomap.h>
-#include <mach/clk.h>
-#include <mach/powergate.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/clk.h>
+#include <mach-tegra/powergate.h>
 
 #include "board.h"
 

@@ -12,10 +12,10 @@
 #include <asm/irq.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
-#include <mach/at91sam9x5.h>
-#include <mach/at91_pmc.h>
-#include <mach/cpu.h>
-#include <mach/board.h>
+#include <mach-at91/at91sam9x5.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/cpu.h>
+#include <mach-at91/board.h>
 
 #include "soc.h"
 #include "generic.h"

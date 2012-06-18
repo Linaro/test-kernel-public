@@ -30,7 +30,7 @@
 #include <linux/iio/trigger.h>
 #include <linux/iio/trigger_consumer.h>
 
-#include <mach/at91_adc.h>
+#include <mach-at91/at91_adc.h>
 
 #define AT91_ADC_CHAN(st, ch) \
 	(st->registers->channel_base + (ch * 4))

@@ -21,7 +21,7 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-w90x900/hardware.h>
 
 #include "clock.h"
 

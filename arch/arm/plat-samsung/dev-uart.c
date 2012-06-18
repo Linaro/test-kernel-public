@@ -15,7 +15,7 @@
 #include <linux/kernel.h>
 #include <linux/platform_device.h>
 
-#include <plat/devs.h>
+#include <plat-samsung/devs.h>
 
 /* uart devices */
 

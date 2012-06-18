@@ -14,14 +14,14 @@
 #include <linux/dma-mapping.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/i2c.h>
-#include <mach/irqs.h>
-#include <mach/cputype.h>
-#include <mach/mux.h>
-#include <mach/edma.h>
-#include <mach/mmc.h>
-#include <mach/time.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/i2c.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/edma.h>
+#include <mach-davinci/mmc.h>
+#include <mach-davinci/time.h>
 
 #include "davinci.h"
 #include "clock.h"

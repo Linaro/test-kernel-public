@@ -8,9 +8,9 @@
  * the terms of the GNU General Public License version 2 as published by the
  * Free Software Foundation.
  */
-#include <mach/mx23.h>
-#include <mach/devices-common.h>
-#include <mach/mxsfb.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/devices-common.h>
+#include <mach-mxs/mxsfb.h>
 #include <linux/amba/bus.h>
 
 static inline int mx23_add_duart(void)

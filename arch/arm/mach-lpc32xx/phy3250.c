@@ -41,10 +41,10 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
-#include <mach/board.h>
-#include <mach/gpio-lpc32xx.h>
+#include <mach-lpc32xx/hardware.h>
+#include <mach-lpc32xx/platform.h>
+#include <mach-lpc32xx/board.h>
+#include <mach-lpc32xx/gpio-lpc32xx.h>
 #include "common.h"
 
 /*
