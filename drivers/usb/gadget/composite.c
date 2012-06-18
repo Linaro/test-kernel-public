@@ -788,7 +788,7 @@ done:
 	return status;
 }
 
-static int remove_config(struct usb_composite_dev *cdev,
+static void remove_config(struct usb_composite_dev *cdev,
 			      struct usb_configuration *config)
 {
 	while (!list_empty(&config->functions)) {
@@ -809,7 +809,6 @@ static int remove_config(struct usb_composite_dev *cdev,
 		config->unbind(config);
 			/* may free memory for "c" */
 	}
-	return 0;
 }
 
 /**
@@ -821,7 +820,7 @@ static int remove_config(struct usb_composite_dev *cdev,
  * to disconnect the device from the host and make sure the host will not
  * try to enumerate the device while we are changing the config list.
  */
-int usb_remove_config(struct usb_composite_dev *cdev,
+void usb_remove_config(struct usb_composite_dev *cdev,
 		      struct usb_configuration *config)
 {
 	unsigned long flags;
@@ -833,7 +832,7 @@ int usb_remove_config(struct usb_composite_dev *cdev,
 
 	spin_unlock_irqrestore(&cdev->lock, flags);
 
-	return remove_config(cdev, config);
+	remove_config(cdev, config);
 }
 
 /*-------------------------------------------------------------------------*/
