@@ -200,6 +200,7 @@ arch_initcall(exynos4_pm_init_power_domain);
 
 int __init exynos_pm_late_initcall(void)
 {
-	pm_genpd_poweroff_unused();
+	if (!of_have_populated_dt())
+		pm_genpd_poweroff_unused();
 	return 0;
 }
