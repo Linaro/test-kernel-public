@@ -288,4 +288,40 @@
 	spi_2: spi@13940000 {
 		status = "disabled";
 	};
+
+	pd_cam: pd-cam {
+		compatible = "samsung,exynos4210-pd";
+		reg = <0x10023C00 0x10>;
+	};
+
+	pd_tv: pd-tv {
+		compatible = "samsung,exynos4210-pd";
+		reg = <0x10023C20 0x10>;
+	};
+
+	pd_mfc: pd-mfc {
+		compatible = "samsung,exynos4210-pd";
+		reg = <0x10023C40 0x10>;
+	};
+
+	pd_g3d: pd-g3d {
+		compatible = "samsung,exynos4210-pd";
+		reg = <0x10023C60 0x10>;
+	};
+
+	pd_lcd0: pd-lcd0 {
+		compatible = "samsung,exynos4210-pd";
+		reg = <0x10023C80 0x10>;
+	};
+
+	pd_lcd1: pd-lcd1 {
+		compatible = "samsung,exynos4210-pd";
+		reg = <0x10023CA0 0x10>;
+	};
+
+	pd_gps: pd-gps {
+		compatible = "samsung,exynos4210-pd";
+		reg = <0x10023CE0 0x10>;
+		samsung,exynos4210-pd_off;
+	};
 };
