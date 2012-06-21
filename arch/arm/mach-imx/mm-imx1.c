@@ -22,10 +22,10 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <mach/iomux-v1.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/iomux-v1.h>
 
 static struct map_desc imx_io_desc[] __initdata = {
 	imx_map_entry(MX1, IO, MT_DEVICE),

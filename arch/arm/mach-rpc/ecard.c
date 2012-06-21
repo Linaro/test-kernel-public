@@ -47,7 +47,7 @@
 
 #include <asm/dma.h>
 #include <asm/ecard.h>
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/irq.h>
 #include <asm/mmu_context.h>
 #include <asm/mach/irq.h>
@@ -960,7 +960,9 @@ static int __init ecard_probe(int slot, unsigned irq, card_type_t type)
 	*ecp = ec;
 	slot_to_expcard[slot] = ec;
 
-	device_register(&ec->dev);
+	rc = device_register(&ec->dev);
+	if (rc)
+		goto nodev;
 
 	return 0;
 

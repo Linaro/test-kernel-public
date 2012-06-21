@@ -24,10 +24,10 @@
 #include <linux/io.h>
 #include <linux/gfp.h>
 
-#include <mach/hardware.h>
-#include <mach/dma.h>
+#include <mach-pnx4008/hardware.h>
+#include <mach-pnx4008/dma.h>
 #include <asm/dma-mapping.h>
-#include <mach/clock.h>
+#include <mach-pnx4008/clock.h>
 
 static struct dma_channel {
 	char *name;

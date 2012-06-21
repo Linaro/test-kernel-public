@@ -19,7 +19,7 @@
 #include <linux/module.h>
 #include <linux/opp.h>
 
-#include <plat/omap_device.h>
+#include <plat-omap/omap_device.h>
 
 #include "omap_opp_data.h"
 

@@ -27,7 +27,7 @@
 #include <linux/errno.h>
 #include <linux/time.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/memory.h>
 #include <asm/suspend.h>
 #include <asm/mach/time.h>

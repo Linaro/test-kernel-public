@@ -33,7 +33,7 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 
-#include <plat/usb.h>
+#include <plat-omap/usb.h>
 
 #include "musb_core.h"
 

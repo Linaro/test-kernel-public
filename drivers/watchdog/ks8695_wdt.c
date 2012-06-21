@@ -23,8 +23,8 @@
 #include <linux/watchdog.h>
 #include <linux/io.h>
 #include <linux/uaccess.h>
-#include <mach/hardware.h>
-#include <mach/regs-timer.h>
+#include <mach-ks8695/hardware.h>
+#include <mach-ks8695/regs-timer.h>
 
 #define WDT_DEFAULT_TIME	5	/* seconds */
 #define WDT_MAX_TIME		171	/* seconds */

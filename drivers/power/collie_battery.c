@@ -21,7 +21,7 @@
 
 #include <asm/mach/sharpsl_param.h>
 #include <asm/mach-types.h>
-#include <mach/collie.h>
+#include <mach-sa1100/collie.h>
 
 static DEFINE_MUTEX(bat_lock); /* protects gpio pins */
 static struct work_struct bat_work;

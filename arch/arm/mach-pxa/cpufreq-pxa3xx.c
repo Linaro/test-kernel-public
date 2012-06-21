@@ -17,7 +17,7 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 
-#include <mach/pxa3xx-regs.h>
+#include <mach-pxa/pxa3xx-regs.h>
 
 #include "generic.h"
 

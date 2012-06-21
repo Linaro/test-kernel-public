@@ -19,8 +19,8 @@
 #include <linux/io.h>
 #include <linux/gpio.h>
 
-#include <plat/gpio-core.h>
-#include <plat/pm.h>
+#include <plat-samsung/gpio-core.h>
+#include <plat-samsung/pm.h>
 
 /* PM GPIO helpers */
 

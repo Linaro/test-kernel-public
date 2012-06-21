@@ -12,11 +12,11 @@
 #include <linux/gpio.h>
 #include <linux/platform_device.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/s3c64xx-spi.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/s3c64xx-spi.h>
 
-#include <mach/hardware.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
 #ifdef CONFIG_S3C64XX_DEV_SPI0
 struct s3c64xx_spi_info s3c64xx_spi0_pdata __initdata = {

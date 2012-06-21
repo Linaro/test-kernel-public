@@ -31,7 +31,7 @@
 #include <linux/regulator/consumer.h>
 
 #include <video/omapdss.h>
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
 #include "dss.h"
 

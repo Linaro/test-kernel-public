@@ -31,8 +31,8 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/regs-clock.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/regs-clock.h>
 #include <asm/irq.h>
 #include <asm/cacheflush.h>
 #include <asm/system_info.h>
@@ -41,20 +41,20 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/regs-clock.h>
-#include <mach/regs-gpio.h>
-#include <plat/regs-serial.h>
+#include <mach-s3c24xx/regs-clock.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <plat-samsung/regs-serial.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/clock.h>
-#include <plat/s3c2410.h>
-#include <plat/s3c2412.h>
-#include <plat/s3c2416.h>
-#include <plat/s3c244x.h>
-#include <plat/s3c2443.h>
-#include <plat/cpu-freq.h>
-#include <plat/pll.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/s3c2410.h>
+#include <plat-samsung/s3c2412.h>
+#include <plat-samsung/s3c2416.h>
+#include <plat-samsung/s3c244x.h>
+#include <plat-samsung/s3c2443.h>
+#include <plat-samsung/cpu-freq.h>
+#include <plat-samsung/pll.h>
 
 /* table of supported CPUs */
 

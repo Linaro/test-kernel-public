@@ -24,9 +24,9 @@
 #include <sound/wm8962.h>
 #include <sound/wm9081.h>
 
-#include <plat/s3c64xx-spi.h>
+#include <plat-samsung/s3c64xx-spi.h>
 
-#include <mach/crag6410.h>
+#include <mach-s3c64xx/crag6410.h>
 
 static struct s3c64xx_spi_csinfo wm0010_spi_csinfo = {
 	.set_level = gpio_set_value,

@@ -1370,6 +1370,7 @@ int wl1271_rx_filter_alloc_field(struct wl12xx_rx_filter *filter,
 
 	return 0;
 }
+#endif
 
 int wl1271_rx_filter_get_fields_size(struct wl12xx_rx_filter *filter)
 {
@@ -1402,6 +1403,7 @@ void wl1271_rx_filter_flatten_fields(struct wl12xx_rx_filter *filter,
 	}
 }
 
+#ifdef CONFIG_PM
 /*
  * Allocates an RX filter returned through f
  * which needs to be freed using rx_filter_free()

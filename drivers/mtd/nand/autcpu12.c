@@ -32,9 +32,9 @@
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>
 #include <asm/io.h>
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/sizes.h>
-#include <mach/autcpu12.h>
+#include <mach-clps711x/autcpu12.h>
 
 /*
  * MTD structure for AUTCPU12 board
