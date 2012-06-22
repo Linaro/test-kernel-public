@@ -133,6 +133,7 @@ extern struct platform_device exynos4_device_pcm1;
 extern struct platform_device exynos4_device_pcm2;
 extern struct platform_device exynos4_device_pd[];
 extern struct platform_device exynos4_device_spdif;
+extern struct platform_device exynos4_device_tmu;
 
 extern struct platform_device exynos_device_drm;
 
