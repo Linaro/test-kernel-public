@@ -30,13 +30,13 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/common.h>
-#include <mach/i2c.h>
-#include <mach/serial.h>
-#include <mach/mux.h>
-#include <mach/nand.h>
-#include <mach/mmc.h>
-#include <mach/usb.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/i2c.h>
+#include <mach-davinci/serial.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/mmc.h>
+#include <mach-davinci/usb.h>
 
 #include "davinci.h"
 
@@ -162,6 +162,7 @@ static void __init davinci_ntosd2_map_io(void)
 	dm644x_init();
 }
 
+#if 0
 /*
  I2C initialization
 */
@@ -193,6 +194,12 @@ static	int ntosd2_init_i2c(void)
 	}
 	return status;
 }
+#else
+static  int ntosd2_init_i2c(void)
+{
+	return 0;
+}
+#endif
 
 static struct davinci_mmc_config davinci_ntosd2_mmc_config = {
 	.wires		= 4,

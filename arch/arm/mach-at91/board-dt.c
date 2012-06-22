@@ -15,7 +15,7 @@
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 
-#include <mach/board.h>
+#include <mach-at91/board.h>
 
 #include <asm/setup.h>
 #include <asm/irq.h>

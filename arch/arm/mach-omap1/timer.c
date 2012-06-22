@@ -26,9 +26,9 @@
 #include <linux/slab.h>
 #include <linux/platform_device.h>
 
-#include <mach/irqs.h>
+#include <mach-omap1/irqs.h>
 
-#include <plat/dmtimer.h>
+#include <plat-omap/dmtimer.h>
 
 #define OMAP1610_GPTIMER1_BASE		0xfffb1400
 #define OMAP1610_GPTIMER2_BASE		0xfffb1c00

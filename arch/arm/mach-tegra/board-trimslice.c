@@ -33,8 +33,8 @@
 #include <asm/mach/arch.h>
 #include <asm/setup.h>
 
-#include <mach/iomap.h>
-#include <mach/sdhci.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/sdhci.h>
 
 #include "board.h"
 #include "clock.h"

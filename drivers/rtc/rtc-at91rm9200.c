@@ -30,7 +30,7 @@
 
 #include <asm/uaccess.h>
 
-#include <mach/at91_rtc.h>
+#include <mach-at91/at91_rtc.h>
 
 #define at91_rtc_read(field) \
 	__raw_readl(at91_rtc_regs + field)

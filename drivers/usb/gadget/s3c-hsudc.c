@@ -32,7 +32,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/pm_runtime.h>
 
-#include <mach/regs-s3c2443-clock.h>
+#include <mach-s3c24xx/regs-s3c2443-clock.h>
 
 #define S3C_HSUDC_REG(x)	(x)
 

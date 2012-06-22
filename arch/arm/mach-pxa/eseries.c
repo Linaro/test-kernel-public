@@ -28,13 +28,13 @@
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
-#include <mach/pxa25x.h>
-#include <mach/eseries-gpio.h>
-#include <mach/eseries-irq.h>
-#include <mach/audio.h>
-#include <mach/pxafb.h>
-#include <mach/udc.h>
-#include <mach/irda.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/eseries-gpio.h>
+#include <mach-pxa/eseries-irq.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/irda.h>
 
 #include "devices.h"
 #include "generic.h"

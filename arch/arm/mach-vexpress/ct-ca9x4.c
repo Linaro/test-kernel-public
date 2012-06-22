@@ -9,6 +9,7 @@
 #include <linux/amba/bus.h>
 #include <linux/amba/clcd.h>
 #include <linux/clkdev.h>
+#include <mach-vexpress/clkdev.h>
 
 #include <asm/hardware/arm_timer.h>
 #include <asm/hardware/cache-l2x0.h>
@@ -17,7 +18,7 @@
 #include <asm/smp_scu.h>
 #include <asm/smp_twd.h>
 
-#include <mach/ct-ca9x4.h>
+#include <mach-vexpress/ct-ca9x4.h>
 
 #include <asm/hardware/timer-sp.h>
 
@@ -26,9 +27,10 @@
 
 #include "core.h"
 
-#include <mach/motherboard.h>
+#include <mach-vexpress/motherboard.h>
+#include <mach-vexpress/irqs.h>
 
-#include <plat/clcd.h>
+#include <plat-versatile/clcd.h>
 
 static struct map_desc ct_ca9x4_io_desc[] __initdata = {
 	{

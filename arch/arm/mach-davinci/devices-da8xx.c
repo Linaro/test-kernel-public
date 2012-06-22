@@ -17,11 +17,11 @@
 #include <linux/ahci_platform.h>
 #include <linux/clk.h>
 
-#include <mach/cputype.h>
-#include <mach/common.h>
-#include <mach/time.h>
-#include <mach/da8xx.h>
-#include <mach/cpuidle.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/time.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/cpuidle.h>
 
 #include "clock.h"
 

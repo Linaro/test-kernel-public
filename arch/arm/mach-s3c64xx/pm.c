@@ -19,19 +19,19 @@
 #include <linux/gpio.h>
 #include <linux/pm_domain.h>
 
-#include <mach/map.h>
-#include <mach/irqs.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/irqs.h>
 
-#include <plat/devs.h>
-#include <plat/pm.h>
-#include <plat/wakeup-mask.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/wakeup-mask.h>
 
-#include <mach/regs-sys.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-clock.h>
-#include <mach/regs-syscon-power.h>
-#include <mach/regs-gpio-memport.h>
-#include <mach/regs-modem.h>
+#include <mach-s3c64xx/regs-sys.h>
+#include <mach-s3c64xx/regs-gpio.h>
+#include <mach-s3c64xx/regs-clock.h>
+#include <mach-s3c64xx/regs-syscon-power.h>
+#include <mach-s3c64xx/regs-gpio-memport.h>
+#include <mach-s3c64xx/regs-modem.h>
 
 struct s3c64xx_pm_domain {
 	char *const name;

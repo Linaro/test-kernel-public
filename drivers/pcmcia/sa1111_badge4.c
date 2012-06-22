@@ -18,9 +18,9 @@
 #include <linux/errno.h>
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
-#include <mach/badge4.h>
+#include <mach-sa1100/badge4.h>
 #include <asm/hardware/sa1111.h>
 
 #include "sa1111_generic.h"

@@ -25,9 +25,9 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
-#include <mach/gpio.h>
-#include <plat/mcbsp.h>
+#include <mach-omap2/hardware.h>
+#include <mach-omap2/gpio.h>
+#include <plat-omap/mcbsp.h>
 
 #include "omap-mcbsp.h"
 #include "omap-pcm.h"

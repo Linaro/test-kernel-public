@@ -14,11 +14,12 @@
 #include <linux/string.h>
 #include <linux/delay.h>
 #include <linux/gpio.h>
-#include <mach/hardware.h>
-#include <plat/mmc.h>
-#include <plat/omap-pm.h>
-#include <plat/mux.h>
-#include <plat/omap_device.h>
+#include <mach-omap2/hardware.h>
+#include <plat-omap/gpio.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/omap-pm.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/omap_device.h>
 
 #include "mux.h"
 #include "hsmmc.h"

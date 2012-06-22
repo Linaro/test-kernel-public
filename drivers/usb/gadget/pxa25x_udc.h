@@ -130,7 +130,7 @@ struct pxa25x_udc {
 /*-------------------------------------------------------------------------*/
 
 #ifdef CONFIG_ARCH_LUBBOCK
-#include <mach/lubbock.h>
+#include <mach-pxa/lubbock.h>
 /* lubbock can also report usb connect/disconnect irqs */
 #endif
 

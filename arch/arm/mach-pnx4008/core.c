@@ -27,7 +27,7 @@
 #include <linux/spi/spi.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-pnx4008/hardware.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/pgtable.h>
@@ -38,9 +38,9 @@
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 
-#include <mach/irq.h>
-#include <mach/clock.h>
-#include <mach/dma.h>
+#include <mach-pnx4008/irq.h>
+#include <mach-pnx4008/clock.h>
+#include <mach-pnx4008/dma.h>
 
 struct resource spipnx_0_resources[] = {
 	{

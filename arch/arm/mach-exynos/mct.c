@@ -23,11 +23,11 @@
 #include <asm/hardware/gic.h>
 #include <asm/localtimer.h>
 
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
-#include <mach/map.h>
-#include <mach/irqs.h>
-#include <mach/regs-mct.h>
+#include <mach-exynos/map.h>
+#include <mach-exynos/irqs.h>
+#include <mach-exynos/regs-mct.h>
 #include <asm/mach/time.h>
 
 #define TICK_BASE_CNT	1
