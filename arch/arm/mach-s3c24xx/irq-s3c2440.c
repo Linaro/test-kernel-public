@@ -26,17 +26,17 @@
 #include <linux/device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
 #include <asm/mach/irq.h>
 
-#include <mach/regs-irq.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/regs-irq.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/irq.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/irq.h>
 
 /* WDT/AC97 */
 

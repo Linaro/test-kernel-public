@@ -27,12 +27,12 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 
-#include <plat/clock.h>
-#include <plat/board.h>
+#include <plat-omap/clock.h>
+#include <plat-omap/board.h>
 #include "powerdomain.h"
 #include "clockdomain.h"
-#include <plat/dmtimer.h>
-#include <plat/omap-pm.h>
+#include <plat-omap/dmtimer.h>
+#include <plat-omap/omap-pm.h>
 
 #include "cm2xxx_3xxx.h"
 #include "prm2xxx_3xxx.h"

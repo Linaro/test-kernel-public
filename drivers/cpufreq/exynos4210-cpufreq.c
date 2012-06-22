@@ -17,8 +17,8 @@
 #include <linux/slab.h>
 #include <linux/cpufreq.h>
 
-#include <mach/regs-clock.h>
-#include <mach/cpufreq.h>
+#include <mach-exynos/regs-clock.h>
+#include <mach-exynos/cpufreq.h>
 
 #define CPUFREQ_LEVEL_END	L5
 

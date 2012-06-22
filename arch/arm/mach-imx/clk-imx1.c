@@ -22,8 +22,8 @@
 #include <linux/clkdev.h>
 #include <linux/err.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
 #include "clk.h"
 
 /* CCM register addresses */

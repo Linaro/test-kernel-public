@@ -15,15 +15,15 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/irqs.h>
-#include <plat/board.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/usb.h>
+#include <plat-omap/usb.h>
 
 static struct omap_musb_board_data musb_board_data = {
 	.set_phy_power	= ti81xx_musb_phy_power,

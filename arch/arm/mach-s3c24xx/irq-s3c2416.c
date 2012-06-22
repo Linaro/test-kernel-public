@@ -29,17 +29,17 @@
 #include <linux/io.h>
 #include <linux/syscore_ops.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
 #include <asm/mach/irq.h>
 
-#include <mach/regs-irq.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/regs-irq.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/irq.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/irq.h>
 
 #define INTMSK(start, end) ((1 << ((end) + 1 - (start))) - 1)
 
@@ -232,7 +232,7 @@ struct irq_chip s3c2416_irq_second = {
 
 /* IRQ initialisation code */
 
-static int __init s3c2416_add_sub(unsigned int base,
+static int s3c2416_add_sub(unsigned int base,
 				   void (*demux)(unsigned int,
 						 struct irq_desc *),
 				   struct irq_chip *chip,
@@ -251,7 +251,7 @@ static int __init s3c2416_add_sub(unsigned int base,
 	return 0;
 }
 
-static void __init s3c2416_irq_add_second(void)
+static void s3c2416_irq_add_second(void)
 {
 	unsigned long pend;
 	unsigned long last;
@@ -287,7 +287,7 @@ static void __init s3c2416_irq_add_second(void)
 	}
 }
 
-static int __init s3c2416_irq_add(struct device *dev,
+static int s3c2416_irq_add(struct device *dev,
 				  struct subsys_interface *sif)
 {
 	printk(KERN_INFO "S3C2416: IRQ Support\n");

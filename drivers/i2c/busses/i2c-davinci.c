@@ -39,8 +39,8 @@
 #include <linux/cpufreq.h>
 #include <linux/gpio.h>
 
-#include <mach/hardware.h>
-#include <mach/i2c.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/i2c.h>
 
 /* ----- global defines ----------------------------------------------- */
 

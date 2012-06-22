@@ -24,9 +24,9 @@
 #include <sound/jack.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
-#include <mach/audio.h>
-#include <mach/z2.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/z2.h>
 
 #include "../codecs/wm8750.h"
 #include "pxa2xx-i2s.h"

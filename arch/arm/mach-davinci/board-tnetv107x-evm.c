@@ -30,11 +30,11 @@
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
-#include <mach/irqs.h>
-#include <mach/edma.h>
-#include <mach/mux.h>
-#include <mach/cp_intc.h>
-#include <mach/tnetv107x.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/edma.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/cp_intc.h>
+#include <mach-davinci/tnetv107x.h>
 
 #define EVM_MMC_WP_GPIO		21
 #define EVM_MMC_CD_GPIO		24

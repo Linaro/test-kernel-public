@@ -31,9 +31,9 @@
 #include <asm/smp_twd.h>
 #include <asm/sched_clock.h>
 
-#include <mach/iomap.h>
-#include <mach/irqs.h>
-#include <mach/suspend.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/irqs.h>
+#include <mach-tegra/suspend.h>
 
 #include "board.h"
 #include "clock.h"

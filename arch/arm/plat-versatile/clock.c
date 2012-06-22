@@ -16,7 +16,11 @@
 
 #include <asm/hardware/icst.h>
 
+#ifdef CONFIG_ARCH_VEXPRESS
+#include <mach-vexpress/clkdev.h>
+#else
 #include <mach/clkdev.h>
+#endif
 
 int clk_enable(struct clk *clk)
 {

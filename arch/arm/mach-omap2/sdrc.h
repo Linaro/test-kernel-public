@@ -15,7 +15,7 @@
  */
 #undef DEBUG
 
-#include <plat/sdrc.h>
+#include <plat-omap/sdrc.h>
 
 #ifndef __ASSEMBLER__
 

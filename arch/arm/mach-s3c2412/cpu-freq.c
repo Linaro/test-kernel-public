@@ -25,12 +25,12 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/regs-clock.h>
-#include <mach/regs-s3c2412-mem.h>
+#include <mach-s3c24xx/regs-clock.h>
+#include <mach-s3c24xx/regs-s3c2412-mem.h>
 
-#include <plat/cpu.h>
-#include <plat/clock.h>
-#include <plat/cpu-freq-core.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu-freq-core.h>
 
 /* our clock resources. */
 static struct clk *xtal;

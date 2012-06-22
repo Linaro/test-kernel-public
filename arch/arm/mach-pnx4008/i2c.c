@@ -14,8 +14,8 @@
 #include <linux/i2c-pnx.h>
 #include <linux/platform_device.h>
 #include <linux/err.h>
-#include <mach/platform.h>
-#include <mach/irqs.h>
+#include <mach-pnx4008/platform.h>
+#include <mach-pnx4008/irqs.h>
 
 static struct resource i2c0_resources[] = {
 	{

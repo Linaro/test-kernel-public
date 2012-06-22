@@ -20,9 +20,9 @@
 #include <linux/ioctl.h>
 #include <linux/slab.h>
 
-#include <mach/board.h>
-#include <mach/at91_rtt.h>
-#include <mach/cpu.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91_rtt.h>
+#include <mach-at91/cpu.h>
 
 
 /*

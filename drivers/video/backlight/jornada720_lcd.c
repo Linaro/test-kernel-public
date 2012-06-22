@@ -19,8 +19,8 @@
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 
-#include <mach/jornada720.h>
-#include <mach/hardware.h>
+#include <mach-sa1100/jornada720.h>
+#include <mach-sa1100/hardware.h>
 
 #include <video/s1d13xxxfb.h>
 

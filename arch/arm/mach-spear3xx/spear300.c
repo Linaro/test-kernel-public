@@ -17,9 +17,9 @@
 #include <linux/of_platform.h>
 #include <asm/hardware/vic.h>
 #include <asm/mach/arch.h>
-#include <plat/shirq.h>
-#include <mach/generic.h>
-#include <mach/spear.h>
+#include <plat-spear/shirq.h>
+#include <mach-spear3xx/generic.h>
+#include <mach-spear3xx/spear.h>
 
 /* Base address of various IPs */
 #define SPEAR300_TELECOM_BASE		UL(0x50000000)

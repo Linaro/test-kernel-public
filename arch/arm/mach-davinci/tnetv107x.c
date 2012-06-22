@@ -22,15 +22,15 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/common.h>
-#include <mach/time.h>
-#include <mach/cputype.h>
-#include <mach/psc.h>
-#include <mach/cp_intc.h>
-#include <mach/irqs.h>
-#include <mach/hardware.h>
-#include <mach/tnetv107x.h>
-#include <mach/gpio-davinci.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/time.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/psc.h>
+#include <mach-davinci/cp_intc.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/tnetv107x.h>
+#include <mach-davinci/gpio-davinci.h>
 
 #include "clock.h"
 #include "mux.h"
