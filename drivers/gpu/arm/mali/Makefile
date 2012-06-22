@@ -18,7 +18,7 @@ KBUILDROOT =
 # Add platform configuration file for Mali
 #ifeq ($(CONFIG_ARCH_EXYNOS4),y)
 MACHDIR  := $(srctree)/arch/arm/mach-exynos
-MALICONFIGDIR :=$(MACHDIR)/include/mach/mali
+MALICONFIGDIR :=$(MACHDIR)/include/mach-exynos/mali
 #endif
 
 USING_DED=0
