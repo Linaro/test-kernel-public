@@ -28,7 +28,6 @@
  */
 struct exynos_pm_domain {
 	void __iomem *base;
-	char const *name;
 	bool is_off;
 	struct generic_pm_domain pd;
 };
@@ -75,10 +74,10 @@ static int exynos_pd_power_off(struct generic_pm_domain *domain)
 #define EXYNOS_GPD(PD, BASE, NAME)			\
 static struct exynos_pm_domain PD = {			\
 	.base = (void __iomem *)BASE,			\
-	.name = NAME,					\
 	.pd = {						\
 		.power_off = exynos_pd_power_off,	\
 		.power_on = exynos_pd_power_on,	\
+		.name = NAME,				\
 	},						\
 }
 
@@ -99,7 +98,7 @@ static __init int exynos_pm_dt_parse_domains(void)
 
 		if (of_get_property(np, "samsung,exynos4210-pd-off", NULL))
 			pd->is_off = true;
-		pd->name = np->name;
+		pd->pd.name = (char *)np->name;
 		pd->base = of_iomap(np, 0);
 		pd->pd.power_off = exynos_pd_power_off;
 		pd->pd.power_on = exynos_pd_power_on;
@@ -124,7 +123,7 @@ static __init void exynos_pm_add_dev_to_genpd(struct platform_device *pdev,
 		else
 			pr_info("%s: error in adding %s device to %s power"
 				"domain\n", __func__, dev_name(&pdev->dev),
-				pd->name);
+				pd->pd.name);
 	}
 }
 
@@ -149,6 +148,7 @@ static struct exynos_pm_domain *exynos4_pm_domains[] = {
 static __init int exynos4_pm_init_power_domain(void)
 {
 	int idx;
+	struct generic_pm_domain *p;
 
 	if (of_have_populated_dt())
 		return exynos_pm_dt_parse_domains();
@@ -190,6 +190,16 @@ static __init int exynos4_pm_init_power_domain(void)
 #endif
 #ifdef CONFIG_S5P_DEV_G2D
 	exynos_pm_add_dev_to_genpd(&s5p_device_g2d, &exynos4_pd_lcd0);
+#endif
+#ifdef CONFIG_S5P_DEV_G3D
+	exynos_pm_add_dev_to_genpd(&s5p_device_g3d, &exynos4_pd_g3d);
+
+	p = pd_to_genpd(s5p_device_g3d.dev.pm_domain);
+
+	/* This is flag not to call power_off callback */
+	/* pm_genpd_dev_always_on doesn't work with Mali */
+
+	p->status = GPD_STATE_WAIT_MASTER;
 #endif
 #ifdef CONFIG_S5P_DEV_JPEG
 	exynos_pm_add_dev_to_genpd(&s5p_device_jpeg, &exynos4_pd_cam);
