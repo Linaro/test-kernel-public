@@ -583,7 +583,7 @@ static int test__basic_mmap(void)
 		if (nr_events[evsel->idx] != expected_nr_events[evsel->idx]) {
 			pr_debug("expected %d %s events, got %d\n",
 				 expected_nr_events[evsel->idx],
-				 event_name(evsel), nr_events[evsel->idx]);
+				 perf_evsel__name(evsel), nr_events[evsel->idx]);
 			goto out_munmap;
 		}
 	}
@@ -1103,6 +1103,54 @@ static int test__perf_pmu(void)
 	return perf_pmu__test();
 }
 
+static int test__evsel_parser_constructor(const char *ev)
+{
+	int err = 0;
+	struct perf_evsel *evsel = perf_evsel__new2(ev);
+
+	if (evsel == NULL) {
+		pr_debug("perf_evsel__new2 failed!");
+		return -1;
+	}
+
+	if (strcmp(perf_evsel__name(evsel), ev)) {
+		pr_debug("Expected %s, got %s!\n", ev, perf_evsel__name(evsel));
+		++err;
+	}
+
+	/*
+ 	 * Force rebuild
+ 	 */
+	free(evsel->name);
+	evsel->name = NULL;
+	if (strcmp(perf_evsel__name(evsel), ev)) {
+		pr_debug("Expected %s, got %s!\n", ev, perf_evsel__name(evsel));
+		++err;
+	}
+
+	perf_evsel__delete(evsel);
+	return err ? -1 : 0;
+}
+
+static int test__evsel_parser_constructors(void)
+{
+	char ev[] = "cycles:u";
+	char *tok = strchr(ev, ':');
+	const char modifiers[] = "hkuGp";
+	size_t i;
+	int err = 0;
+
+	if (tok++ == NULL)
+		return -1;
+
+	for (i = 0; i < sizeof(modifiers) - 1; ++i) {
+		*tok = modifiers[i];
+		err += test__evsel_parser_constructor(ev);
+	}
+
+	return err ? -1 : 0;
+}
+
 static struct test {
 	const char *desc;
 	int (*func)(void);
@@ -1140,6 +1188,10 @@ static struct test {
 	{
 		.desc = "Test perf pmu format parsing",
 		.func = test__perf_pmu,
+	},
+	{
+		.desc = "evsel parser constructor",
+		.func = test__evsel_parser_constructors,
 	},
 	{
 		.func = NULL,
