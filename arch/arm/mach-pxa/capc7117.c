@@ -28,8 +28,8 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/pxa320.h>
-#include <mach/mxm8x10.h>
+#include <mach-pxa/pxa320.h>
+#include <mach-pxa/mxm8x10.h>
 
 #include "generic.h"
 

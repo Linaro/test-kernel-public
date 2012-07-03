@@ -16,11 +16,11 @@
 #include <linux/platform_device.h>
 #include <linux/ahci_platform.h>
 
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
-#include <mach/irqs.h>
-#include <mach/map.h>
-#include <mach/regs-pmu.h>
+#include <mach-exynos/irqs.h>
+#include <mach-exynos/map.h>
+#include <mach-exynos/regs-pmu.h>
 
 /* PHY Control Register */
 #define SATA_CTRL0		0x0

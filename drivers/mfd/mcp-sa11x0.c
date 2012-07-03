@@ -22,9 +22,9 @@
 #include <linux/pm.h>
 #include <linux/mfd/mcp.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
-#include <mach/mcp.h>
+#include <mach-sa1100/mcp.h>
 
 #define DRIVER_NAME "sa11x0-mcp"
 

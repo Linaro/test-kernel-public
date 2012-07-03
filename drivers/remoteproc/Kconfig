@@ -6,9 +6,10 @@ config REMOTEPROC
 	depends on EXPERIMENTAL
 
 config OMAP_REMOTEPROC
-	tristate "OMAP remoteproc support"
+	tristate "OMAP remoteproc support (EXPERIMENTAL)"
 	depends on ARCH_OMAP4
 	depends on OMAP_IOMMU
+	depends on EXPERIMENTAL
 	select REMOTEPROC
 	select OMAP_MBOX_FWK
 	select RPMSG

@@ -22,9 +22,9 @@
 #include <asm/dma.h>
 #include <asm/mach-types.h>
 
-#include <mach/asp.h>
-#include <mach/edma.h>
-#include <mach/mux.h>
+#include <mach-davinci/asp.h>
+#include <mach-davinci/edma.h>
+#include <mach-davinci/mux.h>
 
 #include "davinci-pcm.h"
 #include "davinci-i2s.h"

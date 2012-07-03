@@ -16,11 +16,11 @@
 
 #include <asm/cacheflush.h>
 
-#include <mach/regs-power.h>
-#include <mach/regs-s3c2443-clock.h>
+#include <mach-s3c24xx/regs-power.h>
+#include <mach-s3c24xx/regs-s3c2443-clock.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
 
 extern void s3c2412_sleep_enter(void);
 

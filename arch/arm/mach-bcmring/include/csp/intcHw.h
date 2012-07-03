@@ -28,7 +28,7 @@
 #define _INTCHW_H
 
 /* ---- Include Files ---------------------------------------------------- */
-#include <mach/csp/intcHw_reg.h>
+#include <mach-bcmring/csp/intcHw_reg.h>
 
 /* ---- Public Constants and Types --------------------------------------- */
 /* ---- Public Variable Externs ------------------------------------------ */

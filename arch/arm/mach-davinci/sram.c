@@ -12,8 +12,8 @@
 #include <linux/init.h>
 #include <linux/genalloc.h>
 
-#include <mach/common.h>
-#include <mach/sram.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/sram.h>
 
 static struct gen_pool *sram_pool;
 

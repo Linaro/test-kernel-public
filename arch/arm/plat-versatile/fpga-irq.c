@@ -8,7 +8,7 @@
 
 #include <asm/exception.h>
 #include <asm/mach/irq.h>
-#include <plat/fpga-irq.h>
+#include <plat-versatile/fpga-irq.h>
 
 #define IRQ_STATUS		0x00
 #define IRQ_RAW_STATUS		0x04

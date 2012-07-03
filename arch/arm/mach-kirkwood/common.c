@@ -23,17 +23,17 @@
 #include <asm/kexec.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
-#include <mach/kirkwood.h>
-#include <mach/bridge-regs.h>
-#include <plat/audio.h>
-#include <plat/cache-feroceon-l2.h>
-#include <plat/mvsdio.h>
-#include <plat/orion_nand.h>
-#include <plat/ehci-orion.h>
-#include <plat/common.h>
-#include <plat/time.h>
-#include <plat/addr-map.h>
-#include <plat/mv_xor.h>
+#include <mach-kirkwood/kirkwood.h>
+#include <mach-kirkwood/bridge-regs.h>
+#include <plat-orion/audio.h>
+#include <plat-orion/cache-feroceon-l2.h>
+#include <plat-orion/mvsdio.h>
+#include <plat-orion/orion_nand.h>
+#include <plat-orion/ehci-orion.h>
+#include <plat-orion/common.h>
+#include <plat-orion/time.h>
+#include <plat-orion/addr-map.h>
+#include <plat-orion/mv_xor.h>
 #include "common.h"
 
 /*****************************************************************************

@@ -29,7 +29,7 @@
 #include <asm/mach/pci.h>
 #include <asm/mach-types.h>
 
-#include <mach/irqs.h>
+#include <mach-integrator/irqs.h>
 
 /* 
  * A small note about bridges and interrupts.  The DECchip 21050 (and

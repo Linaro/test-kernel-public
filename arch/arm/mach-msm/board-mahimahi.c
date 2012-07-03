@@ -28,9 +28,9 @@
 #include <asm/mach/map.h>
 #include <asm/setup.h>
 
-#include <mach/board.h>
-#include <mach/hardware.h>
-#include <mach/system.h>
+#include <mach-msm/board.h>
+#include <mach-msm/hardware.h>
+#include <mach-msm/system.h>
 
 #include "board-mahimahi.h"
 #include "devices.h"

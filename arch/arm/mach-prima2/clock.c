@@ -17,7 +17,7 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <asm/mach/map.h>
-#include <mach/map.h>
+#include <mach-prima2/map.h>
 
 #define SIRFSOC_CLKC_CLK_EN0    0x0000
 #define SIRFSOC_CLKC_CLK_EN1    0x0004

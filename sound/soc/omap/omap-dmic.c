@@ -33,7 +33,7 @@
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
 #include <linux/of_device.h>
-#include <plat/dma.h>
+#include <plat-omap/dma.h>
 
 #include <sound/core.h>
 #include <sound/pcm.h>

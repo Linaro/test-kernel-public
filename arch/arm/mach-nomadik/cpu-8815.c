@@ -23,9 +23,9 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <plat/gpio-nomadik.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <plat-nomadik/gpio-nomadik.h>
+#include <mach-nomadik/hardware.h>
+#include <mach-nomadik/irqs.h>
 #include <asm/mach/map.h>
 #include <asm/hardware/vic.h>
 

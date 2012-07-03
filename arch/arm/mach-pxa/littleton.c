@@ -34,19 +34,19 @@
 #include <asm/setup.h>
 #include <asm/memory.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/irq.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/pxa300.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <plat/pxa27x_keypad.h>
-#include <mach/littleton.h>
-#include <plat/pxa3xx_nand.h>
+#include <mach-pxa/pxa300.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <plat-pxa/pxa27x_keypad.h>
+#include <mach-pxa/littleton.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 #include "generic.h"
 

@@ -16,7 +16,7 @@
 
 #include <linux/i2c/tps65010.h>
 
-#include <plat/mmc.h>
+#include <plat-omap/mmc.h>
 
 #include "board-h2.h"
 

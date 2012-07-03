@@ -18,9 +18,9 @@
 #include <linux/irq.h>
 
 #include "common.h"
-#include <plat/cpu.h>
-#include <plat/prcm.h>
-#include <plat/irqs.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/prcm.h>
+#include <plat-omap/irqs.h>
 
 #include "vp.h"
 

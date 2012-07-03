@@ -13,10 +13,11 @@
 #include <linux/amba/bus.h>
 #include <linux/amba/pl022.h>
 
-#include <plat/ste_dma40.h>
+#include <plat-nomadik/ste_dma40.h>
 
-#include <mach/hardware.h>
-#include <mach/setup.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/setup.h>
+#include <mach-ux500/irqs.h>
 
 #include "ste-dma40-db8500.h"
 

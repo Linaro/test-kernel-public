@@ -21,10 +21,10 @@
 #include <asm/cacheflush.h>
 #include <asm/mach/map.h>
 
-#include <plat/iommu.h>
-#include <plat/iovmm.h>
+#include <plat-omap/iommu.h>
+#include <plat-omap/iovmm.h>
 
-#include <plat/iopgtable.h>
+#include <plat-omap/iopgtable.h>
 
 static struct kmem_cache *iovm_area_cachep;
 

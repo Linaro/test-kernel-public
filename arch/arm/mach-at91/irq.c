@@ -31,7 +31,7 @@
 #include <linux/irqdomain.h>
 #include <linux/err.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/irq.h>
 #include <asm/setup.h>
 

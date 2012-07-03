@@ -13,7 +13,7 @@
 #include <linux/errno.h>
 #include <asm/cacheflush.h>
 #include <asm/cp15.h>
-#include <mach/common.h>
+#include <mach-imx/common.h>
 
 int platform_cpu_kill(unsigned int cpu)
 {

@@ -18,7 +18,7 @@
 
 #include <linux/linkage.h>
 #include <asm/assembler.h>
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 
 		.text
 /*

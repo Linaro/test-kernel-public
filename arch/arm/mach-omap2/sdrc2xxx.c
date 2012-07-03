@@ -24,10 +24,10 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <plat/hardware.h>
-#include <plat/clock.h>
-#include <plat/sram.h>
-#include <plat/sdrc.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/clock.h>
+#include <plat-omap/sram.h>
+#include <plat-omap/sdrc.h>
 
 #include "iomap.h"
 #include "common.h"

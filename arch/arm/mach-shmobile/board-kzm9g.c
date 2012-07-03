@@ -33,9 +33,9 @@
 #include <linux/smsc911x.h>
 #include <linux/usb/r8a66597.h>
 #include <linux/videodev2.h>
-#include <mach/irqs.h>
-#include <mach/sh73a0.h>
-#include <mach/common.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh73a0.h>
+#include <mach-shmobile/common.h>
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>

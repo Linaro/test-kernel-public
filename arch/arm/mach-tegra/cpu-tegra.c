@@ -31,7 +31,7 @@
 #include <linux/suspend.h>
 
 
-#include <mach/clk.h>
+#include <mach-tegra/clk.h>
 
 /* Frequency table index must be sequential starting at 0 */
 static struct cpufreq_frequency_table freq_table[] = {

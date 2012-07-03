@@ -24,14 +24,14 @@
 #include <linux/gpio.h>
 #include <linux/i2c/pxa-i2c.h>
 
-#include <plat/pxa3xx_nand.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/ohci.h>
-#include <mach/pxa320.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/pxa320.h>
 
-#include <mach/mxm8x10.h>
+#include <mach-pxa/mxm8x10.h>
 
 #include "devices.h"
 #include "generic.h"

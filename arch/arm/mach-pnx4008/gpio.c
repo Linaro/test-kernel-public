@@ -17,9 +17,9 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
-#include <mach/platform.h>
-#include <mach/gpio-pnx4008.h>
+#include <mach-pnx4008/hardware.h>
+#include <mach-pnx4008/platform.h>
+#include <mach-pnx4008/gpio-pnx4008.h>
 
 /* register definitions */
 #define PIO_VA_BASE	IO_ADDRESS(PNX4008_PIO_BASE)

@@ -8,8 +8,8 @@
 
 #include <linux/platform_device.h>
 #include <linux/atomic.h>
-#include <mach/cns3xxx.h>
-#include <mach/pm.h>
+#include <mach-cns3xxx/cns3xxx.h>
+#include <mach-cns3xxx/pm.h>
 
 static int cns3xxx_ehci_init(struct usb_hcd *hcd)
 {

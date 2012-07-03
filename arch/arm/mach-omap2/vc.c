@@ -12,7 +12,7 @@
 #include <linux/init.h>
 #include <linux/bug.h>
 
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
 #include "voltage.h"
 #include "vc.h"

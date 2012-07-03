@@ -18,8 +18,8 @@
 #include <asm/hardware/gic.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
-#include <mach/generic.h>
-#include <mach/spear.h>
+#include <mach-spear13xx/generic.h>
+#include <mach-spear13xx/spear.h>
 
 /* Base addresses */
 #define SPEAR1310_SSP1_BASE			UL(0x5D400000)

@@ -28,14 +28,14 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/bast-map.h>
-#include <mach/bast-irq.h>
+#include <mach-s3c24xx/bast-map.h>
+#include <mach-s3c24xx/bast-irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 
-#include <plat/usb-control.h>
-#include <plat/devs.h>
+#include <plat-samsung/usb-control.h>
+#include <plat-samsung/devs.h>
 
 #include "simtec.h"
 
@@ -104,7 +104,7 @@ static struct s3c2410_hcd_info usb_simtec_info __initdata = {
 };
 
 
-int usb_simtec_init(void)
+int __init usb_simtec_init(void)
 {
 	int ret;
 

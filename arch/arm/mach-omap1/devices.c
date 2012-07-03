@@ -19,15 +19,15 @@
 
 #include <asm/mach/map.h>
 
-#include <plat/tc.h>
-#include <plat/board.h>
-#include <plat/mux.h>
-#include <plat/dma.h>
-#include <plat/mmc.h>
-#include <plat/omap7xx.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/omap7xx.h>
 
-#include <mach/camera.h>
-#include <mach/hardware.h>
+#include <mach-omap1/camera.h>
+#include <mach-omap1/hardware.h>
 
 #include "common.h"
 #include "clock.h"

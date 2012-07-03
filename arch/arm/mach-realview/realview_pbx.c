@@ -40,9 +40,9 @@
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 
-#include <mach/hardware.h>
-#include <mach/board-pbx.h>
-#include <mach/irqs.h>
+#include <mach-realview/hardware.h>
+#include <mach-realview/board-pbx.h>
+#include <mach-realview/irqs.h>
 
 #include "core.h"
 

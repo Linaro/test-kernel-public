@@ -31,7 +31,7 @@
 
 #include <asm/unaligned.h>
 
-#include <mach/clk.h>
+#include <mach-tegra/clk.h>
 
 #define TEGRA_I2C_TIMEOUT (msecs_to_jiffies(1000))
 #define BYTES_PER_FIFO_WORD 4

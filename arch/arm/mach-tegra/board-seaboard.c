@@ -29,10 +29,10 @@
 
 #include <sound/wm8903.h>
 
-#include <mach/iomap.h>
-#include <mach/irqs.h>
-#include <mach/sdhci.h>
-#include <mach/tegra_wm8903_pdata.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/irqs.h>
+#include <mach-tegra/sdhci.h>
+#include <mach-tegra/tegra_wm8903_pdata.h>
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

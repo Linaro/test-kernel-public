@@ -33,8 +33,8 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/serial_sa1100.h>
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/hardware.h>
+#include <mach-sa1100/irqs.h>
 
 #include "generic.h"
 

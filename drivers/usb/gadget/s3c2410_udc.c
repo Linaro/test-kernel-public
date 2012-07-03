@@ -42,8 +42,8 @@
 
 #include <mach/hardware.h>
 
-#include <plat/regs-udc.h>
-#include <plat/udc.h>
+#include <plat-samsung/regs-udc.h>
+#include <plat-samsung/udc.h>
 
 
 #include "s3c2410_udc.h"

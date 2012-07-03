@@ -28,9 +28,9 @@
 #include <linux/irq.h>
 #include <linux/gpio.h>
 
-#include <mach/gumstix.h>
-#include <mach/mfp-pxa25x.h>
-#include <mach/pxafb.h>
+#include <mach-pxa/gumstix.h>
+#include <mach-pxa/mfp-pxa25x.h>
+#include <mach-pxa/pxafb.h>
 
 #include "generic.h"
 

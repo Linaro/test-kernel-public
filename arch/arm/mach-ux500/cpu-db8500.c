@@ -19,12 +19,13 @@
 
 #include <asm/mach/map.h>
 #include <asm/pmu.h>
-#include <plat/gpio-nomadik.h>
-#include <mach/hardware.h>
-#include <mach/setup.h>
-#include <mach/devices.h>
-#include <mach/usb.h>
-#include <mach/db8500-regs.h>
+#include <plat-nomadik/gpio-nomadik.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/setup.h>
+#include <mach-ux500/devices.h>
+#include <mach-ux500/usb.h>
+#include <mach-ux500/irqs.h>
+#include <mach-ux500/db8500-regs.h>
 
 #include "devices-db8500.h"
 #include "ste-dma40-db8500.h"

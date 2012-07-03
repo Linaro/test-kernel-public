@@ -29,7 +29,7 @@
 #include <linux/of_device.h>
 
 #include <asm/irq.h>
-#include <mach/mxs.h>
+#include <mach-mxs/mxs.h>
 
 #include "dmaengine.h"
 

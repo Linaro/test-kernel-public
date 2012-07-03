@@ -197,11 +197,12 @@ static int sdio_bus_remove(struct device *dev)
 }
 
 #ifdef CONFIG_PM
-
+#ifdef CONFIG_PM_SLEEP
 static int pm_no_operation(struct device *dev)
 {
 	return 0;
 }
+#endif
 
 static const struct dev_pm_ops sdio_bus_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(pm_no_operation, pm_no_operation)
