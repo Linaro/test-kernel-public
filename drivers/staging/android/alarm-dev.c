@@ -23,12 +23,12 @@
 #include <linux/spinlock.h>
 #include <linux/uaccess.h>
 #include <linux/alarmtimer.h>
+#include <linux/wakelock.h>
 #include "android_alarm.h"
 
 #define ANDROID_ALARM_PRINT_INFO (1U << 0)
 #define ANDROID_ALARM_PRINT_IO (1U << 1)
 #define ANDROID_ALARM_PRINT_INT (1U << 2)
-
 
 static int debug_mask = ANDROID_ALARM_PRINT_INFO;
 module_param_named(debug_mask, debug_mask, int, S_IRUGO | S_IWUSR | S_IWGRP);
