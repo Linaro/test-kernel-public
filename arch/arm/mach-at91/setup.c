@@ -14,11 +14,11 @@
 #include <asm/system_misc.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/cpu.h>
-#include <mach/at91_dbgu.h>
-#include <mach/at91_pmc.h>
-#include <mach/at91_shdwc.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/cpu.h>
+#include <mach-at91/at91_dbgu.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/at91_shdwc.h>
 
 #include "soc.h"
 #include "generic.h"
@@ -87,12 +87,14 @@ void __init at91_init_sram(int bank, unsigned long base, unsigned int length)
 	iotable_init(desc, 1);
 }
 
+#ifdef CONFIG_MMU
 static struct map_desc at91_io_desc __initdata = {
 	.virtual	= AT91_VA_BASE_SYS,
 	.pfn		= __phys_to_pfn(AT91_BASE_SYS),
 	.length		= SZ_16K,
 	.type		= MT_DEVICE,
 };
+#endif
 
 static void __init soc_detect(u32 dbgu_base)
 {

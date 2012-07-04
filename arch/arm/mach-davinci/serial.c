@@ -28,8 +28,8 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <mach/serial.h>
-#include <mach/cputype.h>
+#include <mach-davinci/serial.h>
+#include <mach-davinci/cputype.h>
 
 static inline unsigned int serial_read_reg(struct plat_serial8250_port *up,
 					   int offset)

@@ -22,7 +22,7 @@
 #include <linux/slab.h>
 #include <linux/io.h>
 
-#include <plat/omap_device.h>
+#include <plat-omap/omap_device.h>
 
 #include "smartreflex.h"
 #include "voltage.h"

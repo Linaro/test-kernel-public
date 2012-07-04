@@ -31,11 +31,11 @@
 #include <linux/err.h>
 #include <linux/clk.h>
 
-#include <mach/irqs.h>
-#include <plat/mux.h>
-#include <plat/i2c.h>
-#include <plat/omap-pm.h>
-#include <plat/omap_device.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/i2c.h>
+#include <plat-omap/omap-pm.h>
+#include <plat-omap/omap_device.h>
 
 #define OMAP_I2C_SIZE		0x3f
 #define OMAP1_I2C_BASE		0xfffb3800

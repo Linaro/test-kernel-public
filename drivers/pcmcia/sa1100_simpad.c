@@ -9,10 +9,10 @@
 #include <linux/device.h>
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/irq.h>
-#include <mach/simpad.h>
+#include <mach-sa1100/simpad.h>
 #include "sa1100_generic.h"
  
 static int simpad_pcmcia_hw_init(struct soc_pcmcia_socket *skt)

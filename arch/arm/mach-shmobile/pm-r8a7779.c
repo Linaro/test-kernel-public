@@ -19,8 +19,8 @@
 #include <linux/interrupt.h>
 #include <linux/console.h>
 #include <asm/io.h>
-#include <mach/common.h>
-#include <mach/r8a7779.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/r8a7779.h>
 
 static void __iomem *r8a7779_sysc_base;
 

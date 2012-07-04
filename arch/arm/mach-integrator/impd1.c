@@ -25,8 +25,8 @@
 #include <linux/clkdev.h>
 
 #include <asm/hardware/icst.h>
-#include <mach/lm.h>
-#include <mach/impd1.h>
+#include <mach-integrator/lm.h>
+#include <mach-integrator/impd1.h>
 #include <asm/sizes.h>
 
 static int module_id;

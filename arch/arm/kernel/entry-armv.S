@@ -381,7 +381,7 @@ ENDPROC(__pabt_svc)
 	.macro	kuser_cmpxchg_check
 #if !defined(CONFIG_CPU_32v6K) && !defined(CONFIG_NEEDS_SYSCALL_FOR_CMPXCHG)
 #ifndef CONFIG_MMU
-#warning "NPTL on non MMU needs fixing"
+//#warning "NPTL on non MMU needs fixing"
 #else
 	@ Make sure our user space atomic helper is restarted
 	@ if it was interrupted in a critical region.  Here we
@@ -831,7 +831,7 @@ kuser_cmpxchg64_fixup:
 	.previous
 
 #else
-#warning "NPTL on non MMU needs fixing"
+//#warning "NPTL on non MMU needs fixing"
 	mov	r0, #-1
 	adds	r0, r0, #0
 	usr_ret	lr
@@ -904,7 +904,7 @@ kuser_cmpxchg32_fixup:
 	.previous
 
 #else
-#warning "NPTL on non MMU needs fixing"
+//#warning "NPTL on non MMU needs fixing"
 	mov	r0, #-1
 	adds	r0, r0, #0
 	usr_ret	lr

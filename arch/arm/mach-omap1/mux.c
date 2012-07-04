@@ -27,9 +27,9 @@
 #include <linux/io.h>
 #include <linux/spinlock.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
-#include <plat/mux.h>
+#include <plat-omap/mux.h>
 
 #ifdef CONFIG_OMAP_MUX
 

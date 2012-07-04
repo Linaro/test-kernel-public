@@ -29,8 +29,8 @@
 #include <asm/mach/time.h>
 #include <asm/system_misc.h>
 
-#include <mach/regs-timer.h>
-#include <mach/regs-irq.h>
+#include <mach-ks8695/regs-timer.h>
+#include <mach-ks8695/regs-irq.h>
 
 #include "generic.h"
 

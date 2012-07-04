@@ -20,7 +20,7 @@
 #include <linux/clk.h>
 #include <linux/module.h>
 
-#include <plat/ske.h>
+#include <plat-nomadik/ske.h>
 
 /* SKE_CR bits */
 #define SKE_KPMLT	(0x1 << 6)

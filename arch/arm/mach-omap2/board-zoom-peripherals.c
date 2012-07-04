@@ -25,9 +25,9 @@
 #include <asm/mach/map.h>
 
 #include "common.h"
-#include <plat/usb.h>
+#include <plat-omap/usb.h>
 
-#include <mach/board-zoom.h>
+#include <mach-omap2/board-zoom.h>
 
 #include "mux.h"
 #include "hsmmc.h"

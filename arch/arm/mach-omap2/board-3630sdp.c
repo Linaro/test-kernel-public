@@ -17,11 +17,11 @@
 #include <asm/mach/arch.h>
 
 #include "common.h"
-#include <plat/board.h>
-#include <plat/gpmc-smc91x.h>
-#include <plat/usb.h>
+#include <plat-omap/board.h>
+#include <plat-omap/gpmc-smc91x.h>
+#include <plat-omap/usb.h>
 
-#include <mach/board-zoom.h>
+#include <mach-omap2/board-zoom.h>
 
 #include "board-flash.h"
 #include "mux.h"

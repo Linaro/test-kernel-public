@@ -37,7 +37,7 @@
 #include <linux/can/dev.h>
 #include <linux/can/error.h>
 
-#include <mach/board.h>
+#include <mach-at91/board.h>
 
 #define AT91_MB_MASK(i)		((1 << (i)) - 1)
 

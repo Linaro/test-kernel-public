@@ -35,15 +35,15 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/sh_mmcif.h>
 #include <linux/mmc/sh_mobile_sdhi.h>
-#include <mach/common.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/irqs.h>
 #include <asm/page.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 #include <asm/hardware/cache-l2x0.h>
-#include <mach/r8a7740.h>
+#include <mach-shmobile/r8a7740.h>
 #include <video/sh_mobile_lcdc.h>
 
 /*

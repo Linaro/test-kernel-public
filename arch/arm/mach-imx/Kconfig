@@ -87,6 +87,7 @@ config SOC_IMX5
 	select ARCH_MXC_IOMUX_V3
 	select ARCH_HAS_CPUFREQ
 	select ARCH_MX5
+	select ARM_CPU_SUSPEND if PM
 	bool
 
 config SOC_IMX50
@@ -406,7 +407,7 @@ config MACH_MX31ADS_WM1133_EV1
 	bool "Support Wolfson Microelectronics 1133-EV1 module"
 	depends on MACH_MX31ADS
 	depends on MFD_WM8350_I2C
-	depends on REGULATOR_WM8350
+	depends on REGULATOR_WM8350=y
 	select MFD_WM8350_CONFIG_MODE_0
 	select MFD_WM8352_CONFIG_MODE_0
 	help
@@ -484,6 +485,7 @@ config MACH_MX31_3DS
 	select IMX_HAVE_PLATFORM_MXC_MMC
 	select IMX_HAVE_PLATFORM_MXC_NAND
 	select IMX_HAVE_PLATFORM_SPI_IMX
+	select IMX_HAVE_PLATFORM_IMX_SSI
 	select MXC_ULPI if USB_ULPI
 	help
 	  Include support for MX31PDK (3DS) platform. This includes specific

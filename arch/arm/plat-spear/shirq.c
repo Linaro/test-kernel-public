@@ -15,7 +15,7 @@
 #include <linux/io.h>
 #include <linux/irq.h>
 #include <linux/spinlock.h>
-#include <plat/shirq.h>
+#include <plat-spear/shirq.h>
 
 struct spear_shirq *shirq;
 static DEFINE_SPINLOCK(lock);

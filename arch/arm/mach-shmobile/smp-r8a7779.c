@@ -23,8 +23,8 @@
 #include <linux/spinlock.h>
 #include <linux/io.h>
 #include <linux/delay.h>
-#include <mach/common.h>
-#include <mach/r8a7779.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/r8a7779.h>
 #include <asm/smp_plat.h>
 #include <asm/smp_scu.h>
 #include <asm/smp_twd.h>

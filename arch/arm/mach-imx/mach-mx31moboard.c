@@ -42,12 +42,12 @@
 #include <asm/mach/time.h>
 #include <asm/mach/map.h>
 #include <asm/memblock.h>
-#include <mach/board-mx31moboard.h>
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/iomux-mx3.h>
-#include <mach/ulpi.h>
-#include <mach/ssi.h>
+#include <mach-imx/board-mx31moboard.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-mx3.h>
+#include <mach-imx/ulpi.h>
+#include <mach-imx/ssi.h>
 
 #include "devices-imx31.h"
 

@@ -476,7 +476,7 @@ struct cgroup_subsys {
 	void (*post_clone)(struct cgroup *cgrp);
 	void (*bind)(struct cgroup *root);
 
-	int subsys_id;
+	unsigned int subsys_id;
 	int active;
 	int disabled;
 	int early_init;

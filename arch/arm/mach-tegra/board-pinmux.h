@@ -17,7 +17,7 @@
 
 #include <linux/pinctrl/machine.h>
 
-#include <mach/pinconf-tegra.h>
+#include <mach-tegra/pinconf-tegra.h>
 
 #define PINMUX_DEV "tegra20-pinctrl"
 

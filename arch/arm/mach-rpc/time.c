@@ -19,7 +19,7 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/hardware/ioc.h>
 
 #include <asm/mach/time.h>

@@ -30,11 +30,11 @@
 #include <linux/of_irq.h>
 
 #include <asm/sched_clock.h>
-#include <mach/addr-map.h>
-#include <mach/regs-timers.h>
-#include <mach/regs-apbc.h>
-#include <mach/irqs.h>
-#include <mach/cputype.h>
+#include <mach-mmp/addr-map.h>
+#include <mach-mmp/regs-timers.h>
+#include <mach-mmp/regs-apbc.h>
+#include <mach-mmp/irqs.h>
+#include <mach-mmp/cputype.h>
 #include <asm/mach/time.h>
 
 #include "clock.h"

@@ -7,10 +7,10 @@
 
 #include <linux/usb/musb.h>
 
-#include <mach/common.h>
-#include <mach/irqs.h>
-#include <mach/cputype.h>
-#include <mach/usb.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/usb.h>
 
 #define DAVINCI_USB_OTG_BASE	0x01c64000
 

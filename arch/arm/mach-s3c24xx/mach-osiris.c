@@ -29,30 +29,30 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/osiris-map.h>
-#include <mach/osiris-cpld.h>
+#include <mach-s3c24xx/osiris-map.h>
+#include <mach-s3c24xx/osiris-cpld.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/cpu-freq.h>
-#include <plat/regs-serial.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-mem.h>
-#include <mach/regs-lcd.h>
-#include <plat/nand.h>
-#include <plat/iic.h>
+#include <plat-samsung/cpu-freq.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/regs-lcd.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/iic.h>
 
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/nand.h>
 #include <linux/mtd/nand_ecc.h>
 #include <linux/mtd/partitions.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
 
 #include "common.h"
 

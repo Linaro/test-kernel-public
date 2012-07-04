@@ -19,7 +19,7 @@
 /*  ----------------------------------- Host OS */
 #include <dspbridge/host_os.h>
 
-#include <plat/dsp.h>
+#include <plat-omap/dsp.h>
 
 /*  ----------------------------------- DSP/BIOS Bridge */
 #include <dspbridge/dbdefs.h>

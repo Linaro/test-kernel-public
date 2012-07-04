@@ -21,7 +21,7 @@
 #include <linux/regulator/machine.h>
 #include <linux/mfd/tps6586x.h>
 
-#include <mach/irqs.h>
+#include <mach-tegra/irqs.h>
 
 #include "board-harmony.h"
 

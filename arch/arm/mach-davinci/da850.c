@@ -20,15 +20,15 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/psc.h>
-#include <mach/irqs.h>
-#include <mach/cputype.h>
-#include <mach/common.h>
-#include <mach/time.h>
-#include <mach/da8xx.h>
-#include <mach/cpufreq.h>
-#include <mach/pm.h>
-#include <mach/gpio-davinci.h>
+#include <mach-davinci/psc.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/time.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/cpufreq.h>
+#include <mach-davinci/pm.h>
+#include <mach-davinci/gpio-davinci.h>
 
 #include "clock.h"
 #include "mux.h"
@@ -939,7 +939,7 @@ static struct platform_device da850_cpufreq_device = {
 
 unsigned int da850_max_speed = 300000;
 
-int __init da850_register_cpufreq(char *async_clk)
+int da850_register_cpufreq(char *async_clk)
 {
 	int i;
 

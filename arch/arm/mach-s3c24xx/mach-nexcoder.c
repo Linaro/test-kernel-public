@@ -31,21 +31,21 @@
 #include <asm/mach/irq.h>
 
 #include <asm/setup.h>
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
 //#include <asm/debug-ll.h>
-#include <mach/regs-gpio.h>
-#include <plat/regs-serial.h>
-#include <plat/iic.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/iic.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/s3c2410.h>
-#include <plat/s3c244x.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/s3c2410.h>
+#include <plat-samsung/s3c244x.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
 
 #include "common.h"
 

@@ -23,9 +23,9 @@
 #include <linux/signal.h>
 #include <linux/platform_device.h>
 #include <linux/clk.h>
-#include <mach/hardware.h>
-#include <mach/ohci.h>
-#include <mach/pxa3xx-u2d.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/pxa3xx-u2d.h>
 
 /*
  * UHC: USB Host Controller (OHCI-like) register definitions

@@ -26,11 +26,11 @@
 #include <asm/smp_plat.h>
 #include <asm/smp_scu.h>
 
-#include <mach/hardware.h>
-#include <mach/regs-clock.h>
-#include <mach/regs-pmu.h>
+#include <mach-exynos/hardware.h>
+#include <mach-exynos/regs-clock.h>
+#include <mach-exynos/regs-pmu.h>
 
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
 extern void exynos4_secondary_startup(void);
 
@@ -42,7 +42,7 @@ extern void exynos4_secondary_startup(void);
  * boot "holding pen"
  */
 
-volatile int __cpuinitdata pen_release = -1;
+volatile int pen_release = -1;
 
 /*
  * Write pen_release in a way that is guaranteed to be visible to all

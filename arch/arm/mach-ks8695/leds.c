@@ -13,7 +13,7 @@
 #include <linux/init.h>
 
 #include <asm/leds.h>
-#include <mach/devices.h>
+#include <mach-ks8695/devices.h>
 
 
 static inline void ks8695_led_on(unsigned int led)

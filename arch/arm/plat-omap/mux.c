@@ -30,8 +30,8 @@
 
 #include <asm/system.h>
 
-#include <plat/cpu.h>
-#include <plat/mux.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/mux.h>
 
 #ifdef CONFIG_OMAP_MUX
 
