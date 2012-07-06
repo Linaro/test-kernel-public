@@ -152,7 +152,10 @@ static void __init gic_init_if_maps(struct gic_chip_data *gic)
 	struct irq_domain *domain = gic->domain;
 	int i;
 
-	if (WARN_ON(!domain || !domain->of_node))
+	for (i = 0; i < NR_CPUS; i++)
+		cpuif_logical_map(i) = cpu_logical_map(i);
+
+	if (!domain || !domain->of_node)
 		return;
 
 	for_each_child_of_node(domain->of_node, gic_cpuif) {
