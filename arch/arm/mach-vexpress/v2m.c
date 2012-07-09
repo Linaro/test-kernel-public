@@ -566,6 +566,20 @@ static void __init v2m_dt_hdlcd_init(void)
 			v2m_get_master_site());
 };
 
+int set_dvi_mode(int mode)
+{
+	/* mode is a value from:
+	    0 = VGA
+	    1 = SVGA
+	    2 = XGA
+	    3 = SXGA
+	    4 = UXGA
+	    5 = WUXGA
+	*/
+	v2m_cfg_write(SYS_CFG_DVIMODE, mode);
+	return 0;
+}
+
 
 static struct map_desc v2m_rs1_io_desc __initdata = {
 	.virtual	= V2M_PERIPH,
