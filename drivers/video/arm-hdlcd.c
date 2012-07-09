@@ -29,12 +29,6 @@
 
 #include "edid.h"
 
-#ifdef CONFIG_SERIAL_AMBA_PCU_UART
-/* set the DVI output mode using the firmware */
-int set_dvi_mode(u8 *msgbuf);
-int get_edid(u8 *msgbuf);
-#endif
-
 #define to_hdlcd_device(info)	container_of(info, struct hdlcd_device, fb)
 
 static struct of_device_id  hdlcd_of_matches[] = {
@@ -140,34 +134,25 @@ static int hdlcd_check_var(struct fb_var_screeninfo *var, struct fb_info *info)
 	return hdlcd_set_bitfields(hdlcd, var);
 }
 
-#ifdef CONFIG_SERIAL_AMBA_PCU_UART
+extern int set_dvi_mode(int);
+
 static int hdlcd_set_output_mode(int xres, int yres)
 {
-	/* firmware uses some stupid protocol: 5 bytes (only byte 1 used)
-	   to send 3 bits of information (value between 0 - 5) */
-	u8 msgbuffer[5];
-
-	memset(msgbuffer, 0, sizeof(msgbuffer));
 	/* default resolution: 640 x 480 */
+	int mode = 0;
 	if (xres == 800 && yres <= 600)
-		msgbuffer[0] = 1;	/* SVGA: 800 * 600 */
+		mode = 1;	/* SVGA: 800 * 600 */
 	else if (xres == 1024 && yres <= 768)
-		msgbuffer[0] = 2;	/* XGA: 1024 * 768 */
+		mode = 2;	/* XGA: 1024 * 768 */
 	else if (xres == 1280 && yres <= 1024)
-		msgbuffer[0] = 3;	/* SXGA: 1280 * 1024 */
+		mode = 3;	/* SXGA: 1280 * 1024 */
 	else if (xres == 1600 && yres <= 1200)
-		msgbuffer[0] = 4;	/* UXGA: 1600 * 1200 */
+		mode = 4;	/* UXGA: 1600 * 1200 */
 	else if (xres == 1920 && yres <= 1200)
-		msgbuffer[0] = 5;	/* WUXGA: 1920 * 1200 */
+		mode = 5;	/* WUXGA: 1920 * 1200 */
 
-	return set_dvi_mode(msgbuffer);
+	return set_dvi_mode(mode);
 }
-#else
-inline int hdlcd_set_output_mode(int xres, int yres)
-{
-	return 0;
-}
-#endif
 
 #define WRITE_HDLCD_REG(reg, value)	writel((value), hdlcd->base + (reg))
 #define READ_HDLCD_REG(reg)		readl(hdlcd->base + (reg))
@@ -580,15 +565,6 @@ static int __devinit hdlcd_probe(struct platform_device *pdev)
 		edid = of_get_property(of_node, "edid", &len);
 		if (edid) {
 			err = parse_edid_data(hdlcd, edid, len);
-#ifdef CONFIG_SERIAL_AMBA_PCU_UART
-		} else {
-			/* ask the firmware to fetch the EDID */
-			dev_dbg(&pdev->dev, "HDLCD: Requesting EDID data\n");
-			hdlcd->edid = kzalloc(EDID_LENGTH, GFP_KERNEL);
-			if (!hdlcd->edid)
-				return -ENOMEM;
-			err = get_edid(hdlcd->edid);
-#endif /* CONFIG_SERIAL_AMBA_PCU_UART */
 		}
 		if (err)
 			dev_info(&pdev->dev, "HDLCD: Failed to parse EDID data\n");
