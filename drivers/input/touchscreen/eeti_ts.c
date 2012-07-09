@@ -48,7 +48,7 @@ struct eeti_ts_priv {
 	struct input_dev *input;
 	struct work_struct work;
 	struct mutex mutex;
-	int irq, irq_active_high;
+	int irq, gpio, irq_active_high;
 };
 
 #define EETI_TS_BITDEPTH	(11)
@@ -62,7 +62,7 @@ struct eeti_ts_priv {
 
 static inline int eeti_ts_irq_active(struct eeti_ts_priv *priv)
 {
-	return gpio_get_value(irq_to_gpio(priv->irq)) == priv->irq_active_high;
+	return gpio_get_value(priv->gpio) == priv->irq_active_high;
 }
 
 static void eeti_ts_read(struct work_struct *work)
@@ -203,8 +203,10 @@ static int __devinit eeti_ts_probe(struct i2c_client *client,
 
 	pdata = client->dev.platform_data;
 
-	if (pdata)
+	if (pdata) {
+		priv->gpio = pdata->gpio;
 		priv->irq_active_high = pdata->irq_active_high;
+	}
 
 	irq_flags = priv->irq_active_high ?
 		IRQF_TRIGGER_RISING : IRQF_TRIGGER_FALLING;

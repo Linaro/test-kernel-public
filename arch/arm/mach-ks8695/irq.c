@@ -26,13 +26,13 @@
 #include <linux/device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-ks8695/hardware.h>
 #include <asm/irq.h>
 
 #include <asm/mach/irq.h>
 
-#include <mach/regs-irq.h>
-#include <mach/regs-gpio.h>
+#include <mach-ks8695/regs-irq.h>
+#include <mach-ks8695/regs-gpio.h>
 
 static void ks8695_irq_mask(struct irq_data *d)
 {

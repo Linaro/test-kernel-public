@@ -39,8 +39,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 #include <asm/system_info.h>
-#include <mach/common.h>
-#include <mach/iomux-mx27.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx27.h>
 
 #include "devices-imx27.h"
 

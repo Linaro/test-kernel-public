@@ -28,29 +28,29 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/proc-fns.h>
 #include <asm/irq.h>
 #include <asm/system_misc.h>
 
-#include <plat/cpu-freq.h>
+#include <plat-samsung/cpu-freq.h>
 
-#include <mach/regs-clock.h>
-#include <plat/regs-serial.h>
-#include <mach/regs-power.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-gpioj.h>
-#include <mach/regs-dsc.h>
-#include <plat/regs-spi.h>
-#include <mach/regs-s3c2412.h>
+#include <mach-s3c24xx/regs-clock.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-power.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-gpioj.h>
+#include <mach-s3c24xx/regs-dsc.h>
+#include <plat-samsung/regs-spi.h>
+#include <mach-s3c24xx/regs-s3c2412.h>
 
-#include <plat/s3c2412.h>
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/clock.h>
-#include <plat/pm.h>
-#include <plat/pll.h>
-#include <plat/nand-core.h>
+#include <plat-samsung/s3c2412.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/pll.h>
+#include <plat-samsung/nand-core.h>
 
 #ifndef CONFIG_CPU_S3C2412_ONLY
 void __iomem *s3c24xx_va_gpio2 = S3C24XX_VA_GPIO;

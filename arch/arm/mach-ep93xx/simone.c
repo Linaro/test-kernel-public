@@ -21,9 +21,9 @@
 #include <linux/i2c.h>
 #include <linux/i2c-gpio.h>
 
-#include <mach/hardware.h>
-#include <mach/fb.h>
-#include <mach/gpio-ep93xx.h>
+#include <mach-ep93xx/hardware.h>
+#include <mach-ep93xx/fb.h>
+#include <mach-ep93xx/gpio-ep93xx.h>
 
 #include <asm/hardware/vic.h>
 #include <asm/mach-types.h>

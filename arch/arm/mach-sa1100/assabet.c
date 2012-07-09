@@ -23,7 +23,7 @@
 
 #include <video/sa1100fb.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/setup.h>
 #include <asm/page.h>
@@ -36,9 +36,9 @@
 #include <asm/mach/irda.h>
 #include <asm/mach/map.h>
 #include <asm/mach/serial_sa1100.h>
-#include <mach/assabet.h>
-#include <mach/mcp.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/assabet.h>
+#include <mach-sa1100/mcp.h>
+#include <mach-sa1100/irqs.h>
 
 #include "generic.h"
 
@@ -386,7 +386,7 @@ static void __init map_sa1100_gpio_regs( void )
  */
 static void __init get_assabet_scr(void)
 {
-	unsigned long scr, i;
+	unsigned long scr = 0, i;
 
 	GPDR |= 0x3fc;			/* Configure GPIO 9:2 as outputs */
 	GPSR = 0x3fc;			/* Write 0xFF to GPIO 9:2 */

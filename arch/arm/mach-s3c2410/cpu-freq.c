@@ -24,11 +24,11 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/regs-clock.h>
+#include <mach-s3c24xx/regs-clock.h>
 
-#include <plat/cpu.h>
-#include <plat/clock.h>
-#include <plat/cpu-freq-core.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu-freq-core.h>
 
 /* Note, 2410A has an extra mode for 1:4:4 ratio, bit 2 of CLKDIV */
 

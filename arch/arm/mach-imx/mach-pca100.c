@@ -32,12 +32,12 @@
 
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/iomux-mx27.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-mx27.h>
 #include <asm/mach/time.h>
-#include <mach/irqs.h>
-#include <mach/ulpi.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/ulpi.h>
 
 #include "devices-imx27.h"
 

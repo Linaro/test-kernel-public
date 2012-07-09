@@ -14,19 +14,19 @@
  *
  * XXX these should be marked initdata for multi-OMAP kernels
  */
-#include <plat/omap_hwmod.h>
-#include <mach/irqs.h>
-#include <plat/cpu.h>
-#include <plat/dma.h>
-#include <plat/serial.h>
-#include <plat/l3_3xxx.h>
-#include <plat/l4_3xxx.h>
-#include <plat/i2c.h>
-#include <plat/gpio.h>
-#include <plat/mmc.h>
-#include <plat/mcbsp.h>
-#include <plat/mcspi.h>
-#include <plat/dmtimer.h>
+#include <plat-omap/omap_hwmod.h>
+#include <mach-omap2/irqs.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/serial.h>
+#include <plat-omap/l3_3xxx.h>
+#include <plat-omap/l4_3xxx.h>
+#include <plat-omap/i2c.h>
+#include <plat-omap/gpio.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/mcbsp.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/dmtimer.h>
 
 #include "omap_hwmod_common_data.h"
 
@@ -34,7 +34,7 @@
 #include "prm-regbits-34xx.h"
 #include "cm-regbits-34xx.h"
 #include "wd_timer.h"
-#include <mach/am35xx.h>
+#include <mach-omap2/am35xx.h>
 
 /*
  * OMAP3xxx hardware module integration data

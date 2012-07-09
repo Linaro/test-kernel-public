@@ -200,6 +200,8 @@ choice
 
 config OMAP_PM_NOOP
 	bool "No-op/debug PM layer"
+	select LEDS_CLASS
+	select NEW_LEDS
 
 endchoice
 

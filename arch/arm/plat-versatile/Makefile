@@ -1,4 +1,6 @@
+ifndef CONFIG_COMMON_CLK
 obj-y	:= clock.o
+endif
 obj-$(CONFIG_PLAT_VERSATILE_CLCD) += clcd.o
 obj-$(CONFIG_PLAT_VERSATILE_FPGA_IRQ) += fpga-irq.o
 obj-$(CONFIG_PLAT_VERSATILE_LEDS) += leds.o

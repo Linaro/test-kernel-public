@@ -24,8 +24,8 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/ads7846.h>
 
-#include <plat/mcspi.h>
-#include <plat/nand.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/nand.h>
 
 #include "common-board-devices.h"
 

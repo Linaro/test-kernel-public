@@ -19,8 +19,8 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 
-#include <mach/hardware.h>
-#include <mach/pxa930_trkball.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/pxa930_trkball.h>
 
 /* Trackball Controller Register Definitions */
 #define TBCR		(0x000C)

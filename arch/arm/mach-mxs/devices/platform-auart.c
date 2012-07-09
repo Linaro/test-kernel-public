@@ -8,9 +8,9 @@
  */
 #include <linux/dma-mapping.h>
 #include <asm/sizes.h>
-#include <mach/mx23.h>
-#include <mach/mx28.h>
-#include <mach/devices-common.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/mx28.h>
+#include <mach-mxs/devices-common.h>
 
 #define mxs_auart_data_entry_single(soc, _id, hwid)			\
 	{								\

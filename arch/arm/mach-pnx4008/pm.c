@@ -23,9 +23,9 @@
 
 #include <asm/cacheflush.h>
 
-#include <mach/hardware.h>
-#include <mach/pm.h>
-#include <mach/clock.h>
+#include <mach-pnx4008/hardware.h>
+#include <mach-pnx4008/pm.h>
+#include <mach-pnx4008/clock.h>
 
 #define SRAM_VA IO_ADDRESS(PNX4008_IRAM_BASE)
 

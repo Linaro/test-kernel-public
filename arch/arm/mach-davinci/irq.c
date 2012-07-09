@@ -24,9 +24,9 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/cputype.h>
-#include <mach/common.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/common.h>
 #include <asm/mach/irq.h>
 
 #define FIQ_REG0_OFFSET		0x0000

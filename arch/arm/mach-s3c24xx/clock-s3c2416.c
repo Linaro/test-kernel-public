@@ -14,18 +14,18 @@
 #include <linux/init.h>
 #include <linux/clk.h>
 
-#include <plat/s3c2416.h>
-#include <plat/clock.h>
-#include <plat/clock-clksrc.h>
-#include <plat/cpu.h>
+#include <plat-samsung/s3c2416.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/clock-clksrc.h>
+#include <plat-samsung/cpu.h>
 
-#include <plat/cpu-freq.h>
-#include <plat/pll.h>
+#include <plat-samsung/cpu-freq.h>
+#include <plat-samsung/pll.h>
 
 #include <asm/mach/map.h>
 
-#include <mach/regs-clock.h>
-#include <mach/regs-s3c2443-clock.h>
+#include <mach-s3c24xx/regs-clock.h>
+#include <mach-s3c24xx/regs-s3c2443-clock.h>
 
 /* armdiv
  *

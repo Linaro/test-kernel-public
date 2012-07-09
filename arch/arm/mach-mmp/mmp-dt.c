@@ -15,7 +15,7 @@
 #include <linux/of_platform.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
-#include <mach/irqs.h>
+#include <mach-mmp/irqs.h>
 
 #include "common.h"
 

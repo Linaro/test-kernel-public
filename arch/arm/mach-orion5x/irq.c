@@ -14,8 +14,8 @@
 #include <linux/init.h>
 #include <linux/irq.h>
 #include <linux/io.h>
-#include <mach/bridge-regs.h>
-#include <plat/irq.h>
+#include <mach-orion5x/bridge-regs.h>
+#include <plat-orion/irq.h>
 #include "common.h"
 
 static void gpio_irq_handler(unsigned int irq, struct irq_desc *desc)

@@ -30,8 +30,8 @@
 #include <linux/spi/spi_bitbang.h>
 #include <linux/slab.h>
 
-#include <mach/spi.h>
-#include <mach/edma.h>
+#include <mach-davinci/spi.h>
+#include <mach-davinci/edma.h>
 
 #define SPI_NO_RESOURCE		((resource_size_t)-1)
 

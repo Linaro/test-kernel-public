@@ -21,12 +21,12 @@
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
-#include <plat/i2c.h>
-#include <plat/mmc.h>
-#include <plat/usb.h>
-#include <plat/gpmc.h>
+#include <plat-omap/i2c.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/gpmc.h>
 #include "common.h"
-#include <plat/onenand.h>
+#include <plat-omap/onenand.h>
 
 #include "mux.h"
 #include "hsmmc.h"

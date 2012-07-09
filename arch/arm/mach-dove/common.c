@@ -23,14 +23,14 @@
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 #include <asm/mach/pci.h>
-#include <mach/dove.h>
-#include <mach/bridge-regs.h>
+#include <mach-dove/dove.h>
+#include <mach-dove/bridge-regs.h>
 #include <asm/mach/arch.h>
 #include <linux/irq.h>
-#include <plat/time.h>
-#include <plat/ehci-orion.h>
-#include <plat/common.h>
-#include <plat/addr-map.h>
+#include <plat-orion/time.h>
+#include <plat-orion/ehci-orion.h>
+#include <plat-orion/common.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 static int get_tclk(void);
@@ -193,7 +193,7 @@ static int get_tclk(void)
 	return 166666667;
 }
 
-static void __init dove_timer_init(void)
+static void __init_refok dove_timer_init(void)
 {
 	orion_time_init(BRIDGE_VIRT_BASE, BRIDGE_INT_TIMER1_CLR,
 			IRQ_DOVE_BRIDGE, get_tclk());

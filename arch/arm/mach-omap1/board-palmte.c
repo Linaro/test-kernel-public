@@ -33,16 +33,16 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/flash.h>
-#include <plat/mux.h>
-#include <plat/usb.h>
-#include <plat/tc.h>
-#include <plat/dma.h>
-#include <plat/board.h>
-#include <plat/irda.h>
-#include <plat/keypad.h>
+#include <plat-omap/flash.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/board.h>
+#include <plat-omap/irda.h>
+#include <plat-omap/keypad.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "common.h"
 

@@ -17,7 +17,7 @@
 #include <linux/gpio.h>
 
 #include <asm/mach-types.h>
-#include <mach/palmld.h>
+#include <mach-pxa/palmld.h>
 #include "soc_common.h"
 
 static struct gpio palmld_pcmcia_gpios[] = {

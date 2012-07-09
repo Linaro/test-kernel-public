@@ -24,8 +24,8 @@
 #include <asm/mach-types.h>
 #include <asm/page.h>
 #include <asm/mach/arch.h>
-#include <mach/irqs.h>
-#include <mach/hardware.h>
+#include <mach-h720x/irqs.h>
+#include <mach-h720x/hardware.h>
 #include "common.h"
 
 static struct resource cirrus_resources[] = {

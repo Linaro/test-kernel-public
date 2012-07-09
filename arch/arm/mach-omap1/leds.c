@@ -10,7 +10,7 @@
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 
-#include <plat/mux.h>
+#include <plat-omap/mux.h>
 
 #include "leds.h"
 

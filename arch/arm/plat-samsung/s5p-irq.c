@@ -17,9 +17,9 @@
 #include <asm/hardware/vic.h>
 
 #include <mach/map.h>
-#include <plat/regs-timer.h>
-#include <plat/cpu.h>
-#include <plat/irq-vic-timer.h>
+#include <plat-samsung/regs-timer.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/irq-vic-timer.h>
 
 void __init s5p_init_irq(u32 *vic, u32 num_vic)
 {

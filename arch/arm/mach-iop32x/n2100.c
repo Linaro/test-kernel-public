@@ -30,7 +30,7 @@
 #include <linux/platform_device.h>
 #include <linux/reboot.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-iop32x/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
@@ -39,7 +39,7 @@
 #include <asm/mach-types.h>
 #include <asm/page.h>
 #include <asm/pgtable.h>
-#include <mach/time.h>
+#include <mach-iop32x/time.h>
 
 /*
  * N2100 timer tick configuration.

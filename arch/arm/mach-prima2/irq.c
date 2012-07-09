@@ -9,7 +9,7 @@
 #include <linux/init.h>
 #include <linux/io.h>
 #include <linux/irq.h>
-#include <mach/hardware.h>
+#include <mach-prima2/hardware.h>
 #include <asm/mach/irq.h>
 #include <linux/of.h>
 #include <linux/of_address.h>

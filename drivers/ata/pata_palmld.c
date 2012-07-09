@@ -29,7 +29,7 @@
 #include <linux/gpio.h>
 
 #include <scsi/scsi_host.h>
-#include <mach/palmld.h>
+#include <mach-pxa/palmld.h>
 
 #define DRV_NAME "pata_palmld"
 

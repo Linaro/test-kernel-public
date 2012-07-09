@@ -75,6 +75,7 @@ static int genpd_start_dev(struct generic_pm_domain *genpd, struct device *dev)
 					start_latency_ns, "start");
 }
 
+#ifdef CONFIG_PM_RUNTIME
 static int genpd_save_dev(struct generic_pm_domain *genpd, struct device *dev)
 {
 	return GENPD_DEV_TIMED_CALLBACK(genpd, int, save_state, dev,
@@ -87,6 +88,7 @@ static int genpd_restore_dev(struct generic_pm_domain *genpd, struct device *dev
 					restore_state_latency_ns,
 					"state restore");
 }
+#endif
 
 static bool genpd_sd_counter_dec(struct generic_pm_domain *genpd)
 {

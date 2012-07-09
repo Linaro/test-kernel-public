@@ -24,10 +24,10 @@
 
 #include <linux/usb/otg.h>
 
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/iomux-mx3.h>
-#include <mach/ulpi.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-mx3.h>
+#include <mach-imx/ulpi.h>
 
 #include <media/soc_camera.h>
 

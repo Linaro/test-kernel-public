@@ -16,7 +16,7 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 #include <linux/pwm.h>
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 
 /* i.MX1 and i.MX21 share the same PWM function block: */
