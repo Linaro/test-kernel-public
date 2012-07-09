@@ -4,6 +4,7 @@
 #ifdef CONFIG_ARM_ARCH_TIMER
 int arch_timer_of_register(void);
 int arch_timer_sched_clock_init(void);
+bool arch_timer_broken_for_sched_clock(void);
 #else
 static inline int arch_timer_of_register(void)
 {
@@ -13,6 +14,10 @@ static inline int arch_timer_of_register(void)
 static inline int arch_timer_sched_clock_init(void)
 {
 	return -ENXIO;
+}
+static inline  bool arch_timer_broken_for_sched_clock(void)
+{
+	return false;
 }
 #endif
 

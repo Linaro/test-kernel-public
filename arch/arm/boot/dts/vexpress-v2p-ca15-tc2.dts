@@ -211,6 +211,7 @@
 			     <1 14 0xf08>,
 			     <1 11 0xf08>,
 			     <1 10 0xf08>;
+		broken-for-sched-clock = <1>;
 	};
 
 	pmu {
