@@ -1,0 +1,167 @@
+* ARM topology binding description
+
+The device tree notion of CPUs in a system must be extended to cater for
+systems comprised of clusters and hyper-threaded (SMT) cpus.
+
+In an ARM system CPUs hierarchy is defined through three levels (in descending
+hierarchy order):
+
+(1) cluster
+(2) core
+(3) thread
+
+The cpus node represents the lowest hierarchy level for CPUs in a system.
+For instance in a system where CPUs support SMT, "cpu" nodes represent all
+HW threads ("thread" - level (3) above) existing in the systems.
+In systems where SMT is not supported "cpu" nodes just represent a "core"
+level (level (2) above).
+
+Every "cpu" node must define two phandles:
+
+- cluster: phandle pointing to the cluster the given thread/core belongs to
+- core: phandle pointing to the core the given thread/core belongs to
+
+In an SMT system a "cpu" node must also define
+
+- thread-id: property defining the thread-id for the cpu node in question
+
+A missing "thread-id" means that the cpu does not support SMT.
+
+The topology requires the definition of a "clusters" node.
+The "clusters" node does not represent a HW device; it is a container where
+all cluster child nodes ("cluster") are defined.
+
+Each "cluster" node must contain:
+
+- reg: property defining cluster id
+- it must provide a label (eg CLUSTER0: cluster@0x0) to be pointed to by a
+  phandle
+
+The topology requires the definition of a "cores" node.
+The "cores" node does not represent a HW device; it is a container where all
+core child nodes ("core") are defined.
+
+Each core node must contain:
+
+- reg: property defining core id
+- it must provide a label (eg CORE0: core@0x0) to be pointed to by a
+  phandle
+
+Example (8-core system, dual-cluster, no SMT):
+
+clusters {
+
+	#size-cells = <0>;
+	#address-cells = <1>;
+
+	CLUSTER0: cluster@0x0 {
+		reg = <0x0>;
+		cores {
+
+			#size-cells = <0>;
+			#address-cells = <1>;
+
+			CORE0: core@0x0 {
+				reg = <0x0>;
+			};
+
+			CORE1: core@0x1 {
+				reg = <0x1>;
+			};
+
+			CORE2: core@0x2 {
+				reg = <0x2>;
+			};
+
+			CORE3: core@0x3 {
+				reg = <0x3>;
+			};
+		};
+	};
+
+	CLUSTER1: cluster@0x1 {
+		reg = <0x1>;
+		cores {
+
+			#size-cells = <0>;
+			#address-cells = <1>;
+
+			CORE4: core@0x0 {
+				reg = <0x0>;
+			};
+
+			CORE5: core@0x1 {
+				reg = <0x1>;
+			};
+
+			CORE6: core@0x2 {
+				reg = <0x2>;
+			};
+
+			CORE7: core@0x3 {
+				reg = <0x3>;
+			};
+		};
+	};
+};
+
+cpus {
+	#size-cells = <0>;
+	#address-cells = <1>;
+
+	CPU0: cpu@0x0 {
+		device_type = "cpu";
+		reg = <0x0>;
+		cluster = <&CLUSTER0>;
+		core = <&CORE0>;
+	};
+
+	CPU1: cpu@0x1 {
+		device_type = "cpu";
+		reg = <0x1>;
+		cluster = <&CLUSTER0>;
+		core = <&CORE1>;
+	};
+
+	CPU2: cpu@0x2 {
+		device_type = "cpu";
+		reg = <0x2>;
+		cluster = <&CLUSTER0>;
+		core = <&CORE2>;
+	};
+
+	CPU3: cpu@0x3 {
+		device_type = "cpu";
+		reg = <0x3>;
+		cluster = <&CLUSTER0>;
+		core = <&CORE3>;
+	};
+
+	CPU4: cpu@0x100 {
+		device_type = "cpu";
+		reg = <0x100>;
+		cluster = <&CLUSTER1>;
+		core = <&CORE4>;
+	};
+
+	CPU5: cpu@0x101 {
+		device_type = "cpu";
+		reg = <0x101>;
+		cluster = <&CLUSTER1>;
+		core = <&CORE5>;
+	};
+
+	CPU6: cpu@0x102 {
+		device_type = "cpu";
+		reg = <0x102>;
+		cluster = <&CLUSTER1>;
+		core = <&CORE6>;
+	};
+
+	CPU7: cpu@0x103 {
+		device_type = "cpu";
+		reg = <0x103>;
+		cluster = <&CLUSTER1>;
+		core = <&CORE7>;
+	};
+};
