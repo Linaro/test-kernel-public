@@ -36,12 +36,13 @@
 #include <linux/errno.h>
 #include <linux/slab.h>
 #include <asm/gpio.h>
-#include <plat/keypad.h>
-#include <plat/menelaus.h>
+#include <plat-omap/keypad.h>
+#include <plat-omap/menelaus.h>
 #include <asm/irq.h>
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/io.h>
-#include <plat/mux.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/irqs.h>
 
 #undef NEW_BOARD_LEARNING_MODE
 

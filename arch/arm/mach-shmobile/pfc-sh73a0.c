@@ -21,8 +21,8 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/gpio.h>
-#include <mach/sh73a0.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/sh73a0.h>
+#include <mach-shmobile/irqs.h>
 
 #define CPU_ALL_PORT(fn, pfx, sfx)				\
 	PORT_10(fn, pfx,    sfx), PORT_10(fn, pfx##1, sfx),	\

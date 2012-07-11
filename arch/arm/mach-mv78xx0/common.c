@@ -17,14 +17,14 @@
 #include <linux/ethtool.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
-#include <mach/mv78xx0.h>
-#include <mach/bridge-regs.h>
-#include <plat/cache-feroceon-l2.h>
-#include <plat/ehci-orion.h>
-#include <plat/orion_nand.h>
-#include <plat/time.h>
-#include <plat/common.h>
-#include <plat/addr-map.h>
+#include <mach-mv78xx0/mv78xx0.h>
+#include <mach-mv78xx0/bridge-regs.h>
+#include <plat-orion/cache-feroceon-l2.h>
+#include <plat-orion/ehci-orion.h>
+#include <plat-orion/orion_nand.h>
+#include <plat-orion/time.h>
+#include <plat-orion/common.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 static int get_tclk(void);
@@ -339,7 +339,7 @@ void __init mv78xx0_init_early(void)
 	orion_time_set_base(TIMER_VIRT_BASE);
 }
 
-static void mv78xx0_timer_init(void)
+static void __init_refok mv78xx0_timer_init(void)
 {
 	orion_time_init(BRIDGE_VIRT_BASE, BRIDGE_INT_TIMER1_CLR,
 			IRQ_MV78XX0_TIMER_1, get_tclk());

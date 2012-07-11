@@ -18,8 +18,8 @@
 #include <linux/leds.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/kirkwood.h>
-#include <plat/mvsdio.h>
+#include <mach-kirkwood/kirkwood.h>
+#include <plat-orion/mvsdio.h>
 #include "common.h"
 #include "mpp.h"
 

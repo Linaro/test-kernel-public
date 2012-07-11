@@ -46,14 +46,14 @@
 #include <asm/setup.h>
 #include <asm/system_info.h>
 
-#include <mach/pxa300.h>
-#include <mach/pxa27x-udc.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/ohci.h>
-#include <plat/pxa3xx_nand.h>
-#include <mach/audio.h>
-#include <mach/pxa3xx-u2d.h>
+#include <mach-pxa/pxa300.h>
+#include <mach-pxa/pxa27x-udc.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/ohci.h>
+#include <plat-pxa/pxa3xx_nand.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxa3xx-u2d.h>
 
 #include <asm/mach/map.h>
 

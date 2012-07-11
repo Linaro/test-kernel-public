@@ -30,11 +30,11 @@
 #include <linux/mii.h>
 
 #include <asm/io.h>
-#include <mach/hardware.h>
-#include <mach/netx-regs.h>
-#include <mach/pfifo.h>
-#include <mach/xc.h>
-#include <mach/eth.h>
+#include <mach-netx/hardware.h>
+#include <mach-netx/netx-regs.h>
+#include <mach-netx/pfifo.h>
+#include <mach-netx/xc.h>
+#include <mach-netx/eth.h>
 
 /* XC Fifo Offsets */
 #define EMPTY_PTR_FIFO(xcno)    (0 + ((xcno) << 3))	/* Index of the empty pointer FIFO */

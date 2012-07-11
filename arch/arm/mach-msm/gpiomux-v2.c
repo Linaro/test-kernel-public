@@ -15,7 +15,7 @@
  * 02110-1301, USA.
  */
 #include <linux/io.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 #include "gpiomux.h"
 
 void __msm_gpiomux_write(unsigned gpio, gpiomux_config_t val)

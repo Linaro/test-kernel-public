@@ -16,17 +16,17 @@
 #include <linux/gpio.h>
 #include <linux/etherdevice.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/sizes.h>
 #include <asm/system_info.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
-#include <mach/pxa3xx-regs.h>
-#include <mach/mfp-pxa300.h>
-#include <mach/colibri.h>
-#include <mach/mmc.h>
-#include <mach/pxafb.h>
-#include <plat/pxa3xx_nand.h>
+#include <mach-pxa/pxa3xx-regs.h>
+#include <mach-pxa/mfp-pxa300.h>
+#include <mach-pxa/colibri.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/pxafb.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 #include "generic.h"
 #include "devices.h"

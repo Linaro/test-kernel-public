@@ -13,9 +13,9 @@
 
 #include <asm/io.h>
 
-#include <mach/vreg.h>
+#include <mach-msm/vreg.h>
 
-#include <mach/mmc.h>
+#include <mach-msm/mmc.h>
 
 #include "devices.h"
 

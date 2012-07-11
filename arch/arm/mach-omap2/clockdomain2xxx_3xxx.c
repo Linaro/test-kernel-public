@@ -13,7 +13,7 @@
  */
 
 #include <linux/types.h>
-#include <plat/prcm.h>
+#include <plat-omap/prcm.h>
 #include "prm.h"
 #include "prm2xxx_3xxx.h"
 #include "cm.h"

@@ -28,9 +28,9 @@
 #include <linux/irqdomain.h>
 #include <linux/module.h>
 
-#include <mach/irqs.h>
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-lpc32xx/irqs.h>
+#include <mach-lpc32xx/hardware.h>
+#include <mach-lpc32xx/platform.h>
 #include "common.h"
 
 /*

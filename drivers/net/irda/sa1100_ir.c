@@ -37,7 +37,7 @@
 #include <net/irda/wrapper.h>
 #include <net/irda/irda_device.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach/irda.h>
 
 static int power_level = 3;

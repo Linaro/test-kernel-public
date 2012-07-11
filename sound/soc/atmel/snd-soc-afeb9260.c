@@ -32,7 +32,7 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <linux/gpio.h>
 
 #include "../codecs/tlv320aic23.h"

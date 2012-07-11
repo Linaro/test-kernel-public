@@ -6,9 +6,9 @@
  * Free Software Foundation.
  */
 
-#include <mach/hardware.h>
-#include <mach/devices-common.h>
-#include <mach/esdhc.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/devices-common.h>
+#include <mach-imx/esdhc.h>
 
 #define imx_sdhci_esdhc_imx_data_entry_single(soc, _devid, _id, hwid) \
 	{								\

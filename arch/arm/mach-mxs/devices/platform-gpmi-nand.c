@@ -16,9 +16,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 #include <asm/sizes.h>
-#include <mach/mx23.h>
-#include <mach/mx28.h>
-#include <mach/devices-common.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/mx28.h>
+#include <mach-mxs/devices-common.h>
 #include <linux/dma-mapping.h>
 
 #ifdef CONFIG_SOC_IMX23

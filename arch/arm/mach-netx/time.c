@@ -24,9 +24,9 @@
 #include <linux/clockchips.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-netx/hardware.h>
 #include <asm/mach/time.h>
-#include <mach/netx-regs.h>
+#include <mach-netx/netx-regs.h>
 
 #define TIMER_CLOCKEVENT 0
 #define TIMER_CLOCKSOURCE 1

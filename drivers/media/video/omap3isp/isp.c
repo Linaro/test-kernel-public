@@ -67,6 +67,8 @@
 #include <linux/sched.h>
 #include <linux/vmalloc.h>
 
+#include <plat-omap/cpu.h>
+
 #include <media/v4l2-common.h>
 #include <media/v4l2-device.h>
 

@@ -22,8 +22,8 @@
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 #include <linux/smsc911x.h>
-#include <mach/common.h>
-#include <mach/emev2.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/emev2.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>

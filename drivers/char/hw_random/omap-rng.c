@@ -26,7 +26,7 @@
 
 #include <asm/io.h>
 
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
 #define RNG_OUT_REG		0x00		/* Output register */
 #define RNG_STAT_REG		0x04		/* Status register

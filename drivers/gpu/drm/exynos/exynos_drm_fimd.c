@@ -20,7 +20,7 @@
 #include <linux/pm_runtime.h>
 
 #include <drm/exynos_drm.h>
-#include <plat/regs-fb-v4.h>
+#include <plat-samsung/regs-fb-v4.h>
 
 #include "exynos_drm_drv.h"
 #include "exynos_drm_fbdev.h"

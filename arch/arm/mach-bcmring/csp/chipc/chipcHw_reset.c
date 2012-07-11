@@ -14,8 +14,8 @@
 
 /* ---- Include Files ---------------------------------------------------- */
 #include <csp/stdint.h>
-#include <mach/csp/chipcHw_def.h>
-#include <mach/csp/chipcHw_inline.h>
+#include <mach-bcmring/csp/chipcHw_def.h>
+#include <mach-bcmring/csp/chipcHw_inline.h>
 #include <csp/intcHw.h>
 #include <csp/cache.h>
 

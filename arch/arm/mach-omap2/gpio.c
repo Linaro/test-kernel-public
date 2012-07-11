@@ -22,9 +22,11 @@
 #include <linux/interrupt.h>
 #include <linux/of.h>
 
-#include <plat/omap_hwmod.h>
-#include <plat/omap_device.h>
-#include <plat/omap-pm.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/omap_device.h>
+#include <plat-omap/omap-pm.h>
+#include <plat-omap/gpio.h>
+#include <plat-omap/hardware.h>
 
 #include "powerdomain.h"
 

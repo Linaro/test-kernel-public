@@ -19,8 +19,8 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 
-#include <mach/clock.h>
-#include <mach/cdce949.h>
+#include <mach-davinci/clock.h>
+#include <mach-davinci/cdce949.h>
 
 #include "clock.h"
 

@@ -7,10 +7,10 @@
  */
 #include <linux/dma-mapping.h>
 #include <asm/sizes.h>
-#include <mach/mx23.h>
-#include <mach/mx28.h>
-#include <mach/devices-common.h>
-#include <mach/mxsfb.h>
+#include <mach-mxs/mx23.h>
+#include <mach-mxs/mx28.h>
+#include <mach-mxs/devices-common.h>
+#include <mach-mxs/mxsfb.h>
 
 #ifdef CONFIG_SOC_IMX23
 struct platform_device *__init mx23_add_mxsfb(

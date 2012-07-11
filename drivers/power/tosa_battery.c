@@ -19,7 +19,7 @@
 #include <linux/gpio.h>
 
 #include <asm/mach-types.h>
-#include <mach/tosa.h>
+#include <mach-pxa/tosa.h>
 
 static DEFINE_MUTEX(bat_lock); /* protects gpio pins */
 static struct work_struct bat_work;

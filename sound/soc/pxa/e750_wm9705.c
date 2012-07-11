@@ -17,8 +17,8 @@
 #include <sound/pcm.h>
 #include <sound/soc.h>
 
-#include <mach/audio.h>
-#include <mach/eseries-gpio.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/eseries-gpio.h>
 
 #include <asm/mach-types.h>
 

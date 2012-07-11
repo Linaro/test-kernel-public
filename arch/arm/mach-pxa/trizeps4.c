@@ -40,14 +40,14 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/flash.h>
 
-#include <mach/pxa27x.h>
-#include <mach/trizeps4.h>
-#include <mach/audio.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/irda.h>
-#include <mach/ohci.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/trizeps4.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/smemc.h>
 
 #include "generic.h"
 #include "devices.h"

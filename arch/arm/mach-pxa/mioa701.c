@@ -44,19 +44,19 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/pxa27x.h>
-#include <mach/regs-rtc.h>
-#include <plat/pxa27x_keypad.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <mach/udc.h>
-#include <mach/pxa27x-udc.h>
-#include <mach/camera.h>
-#include <mach/audio.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/regs-rtc.h>
+#include <plat-pxa/pxa27x_keypad.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/pxa27x-udc.h>
+#include <mach-pxa/camera.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/smemc.h>
 #include <media/soc_camera.h>
 
-#include <mach/mioa701.h>
+#include <mach-pxa/mioa701.h>
 
 #include "generic.h"
 #include "devices.h"

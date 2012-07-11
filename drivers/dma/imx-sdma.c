@@ -38,9 +38,9 @@
 #include <linux/of_device.h>
 
 #include <asm/irq.h>
-#include <mach/sdma.h>
-#include <mach/dma.h>
-#include <mach/hardware.h>
+#include <mach-imx/sdma.h>
+#include <mach-imx/dma.h>
+#include <mach-imx/hardware.h>
 
 #include "dmaengine.h"
 

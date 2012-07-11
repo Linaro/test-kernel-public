@@ -30,10 +30,10 @@
 #include <linux/io.h>
 #include <linux/omapfb.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/mach/map.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 
 #if defined(CONFIG_FB_OMAP) || defined(CONFIG_FB_OMAP_MODULE)
 

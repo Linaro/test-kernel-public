@@ -15,8 +15,8 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <sound/soc.h>
-#include <mach/kirkwood.h>
-#include <plat/audio.h>
+#include <mach-kirkwood/kirkwood.h>
+#include <plat-orion/audio.h>
 #include <asm/mach-types.h>
 #include "../codecs/alc5623.h"
 

@@ -30,8 +30,8 @@
 #include <asm/mach-types.h>
 #include <asm/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/nanoengine.h>
+#include <mach-sa1100/hardware.h>
+#include <mach-sa1100/nanoengine.h>
 
 #include "sa1100_generic.h"
 

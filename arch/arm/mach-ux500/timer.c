@@ -12,11 +12,11 @@
 
 #include <asm/smp_twd.h>
 
-#include <plat/mtu.h>
+#include <plat-nomadik/mtu.h>
 
-#include <mach/setup.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-ux500/setup.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/irqs.h>
 
 #ifdef CONFIG_HAVE_ARM_TWD
 static DEFINE_TWD_LOCAL_TIMER(u8500_twd_local_timer,

@@ -24,7 +24,7 @@
 #include <linux/slab.h>
 
 #include <mach/dma.h>
-#include <plat/pxa3xx_nand.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 #define	CHIP_DELAY_TIMEOUT	(2 * HZ/10)
 #define NAND_STOP_DELAY		(2 * HZ/50)
@@ -1046,6 +1046,9 @@ static int alloc_nand_resource(struct platform_device *pdev)
 	}
 
 	info->pdev = pdev;
+	if (pdata->num_cs < 1)
+		return -ENODEV;
+
 	for (cs = 0; cs < pdata->num_cs; cs++) {
 		mtd = (struct mtd_info *)((unsigned int)&info[1] +
 		      (sizeof(*mtd) + sizeof(*host)) * cs);

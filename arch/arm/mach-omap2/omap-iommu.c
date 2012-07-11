@@ -13,8 +13,8 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 
-#include <plat/iommu.h>
-#include <plat/irqs.h>
+#include <plat-omap/iommu.h>
+#include <plat-omap/irqs.h>
 
 struct iommu_device {
 	resource_size_t base;

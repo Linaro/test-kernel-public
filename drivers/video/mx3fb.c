@@ -27,10 +27,10 @@
 #include <linux/clk.h>
 #include <linux/mutex.h>
 
-#include <mach/dma.h>
-#include <mach/hardware.h>
-#include <mach/ipu.h>
-#include <mach/mx3fb.h>
+#include <mach-imx/dma.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/ipu.h>
+#include <mach-imx/mx3fb.h>
 
 #include <asm/io.h>
 #include <asm/uaccess.h>

@@ -38,13 +38,13 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/usb.h>
-#include <plat/nand.h>
-#include <plat/gpmc.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/nand.h>
+#include <plat-omap/gpmc.h>
 
-#include <mach/am35xx.h>
+#include <mach-omap2/am35xx.h>
 
 #include "mux.h"
 #include "control.h"

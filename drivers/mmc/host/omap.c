@@ -31,12 +31,13 @@
 #include <asm/io.h>
 #include <asm/irq.h>
 
-#include <plat/board.h>
-#include <plat/mmc.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mmc.h>
 #include <asm/gpio.h>
-#include <plat/dma.h>
-#include <plat/mux.h>
-#include <plat/fpga.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/fpga.h>
+#include <plat-omap/cpu.h>
 
 #define	OMAP_MMC_REG_CMD	0x00
 #define	OMAP_MMC_REG_ARGL	0x01
