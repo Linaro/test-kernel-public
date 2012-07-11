@@ -19,8 +19,10 @@
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 
+#include <asm/cputype.h>
 #include <asm/setup.h>
 #include <asm/page.h>
+#include <asm/smp_plat.h>
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
@@ -58,6 +60,44 @@ void __init arm_dt_memblock_reserve(void)
 		if (!size)
 			break;
 		memblock_reserve(base, size);
+	}
+}
+
+/*
+ * arm_dt_init_cpu_maps - Function retrieves cpu nodes from the device tree
+ * and builds the cpu logical map array containing MPIDR values related to
+ * logical cpus
+ *
+ * Updates the cpu possible mask with the number of parsed cpu nodes
+ */
+void __init arm_dt_init_cpu_maps(void)
+{
+	struct device_node *dn = NULL;
+	int i, cpu = 1;
+
+	while ((dn = of_find_node_by_type(dn, "cpu")) && cpu <= nr_cpu_ids) {
+		const u32 *hwid;
+		int len;
+
+		pr_debug("  * %s...\n", dn->full_name);
+
+		hwid = of_get_property(dn, "reg", &len);
+
+		if (!hwid || len != 4) {
+			pr_err("  * %s missing reg property\n", dn->full_name);
+			continue;
+		}
+
+		i = (be32_to_cpup(hwid) == (read_cpuid_mpidr() & 0xffffff))
+							? 0 : cpu++;
+
+		if (!i)
+			printk(KERN_INFO "Booting Linux on CPU HWID 0x%x\n",
+					be32_to_cpup(hwid));
+
+		cpu_logical_map(i) = be32_to_cpup(hwid);
+
+		set_cpu_possible(i, true);
 	}
 }
 
