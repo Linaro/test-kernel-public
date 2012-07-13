@@ -28,8 +28,8 @@
 #include <linux/dma-mapping.h>
 #include <linux/remoteproc.h>
 
-#include <plat/mailbox.h>
-#include <plat/remoteproc.h>
+#include <plat-omap/mailbox.h>
+#include <plat-omap/remoteproc.h>
 
 #include "omap_remoteproc.h"
 #include "remoteproc_internal.h"

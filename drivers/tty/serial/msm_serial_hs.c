@@ -51,8 +51,8 @@
 #include <linux/atomic.h>
 #include <asm/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/dma.h>
+#include <mach-msm/hardware.h>
+#include <mach-msm/dma.h>
 #include <linux/platform_data/msm_serial_hs.h>
 
 /* HSUART Registers */

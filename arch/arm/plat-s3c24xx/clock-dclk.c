@@ -16,11 +16,11 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <mach/regs-clock.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/regs-clock.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
 
 /* clocks that could be registered by external code */
 

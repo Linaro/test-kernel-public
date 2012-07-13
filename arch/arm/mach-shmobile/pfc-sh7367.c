@@ -19,7 +19,7 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/gpio.h>
-#include <mach/sh7367.h>
+#include <mach-shmobile/sh7367.h>
 
 #define CPU_ALL_PORT(fn, pfx, sfx)				\
 	PORT_10(fn, pfx, sfx), PORT_90(fn, pfx, sfx),		\

@@ -12,7 +12,7 @@
 #include <linux/mfd/abx500.h>
 #include <linux/regulator/machine.h>
 #include <linux/amba/bus.h>
-#include <mach/irqs.h>
+#include <mach-u300/irqs.h>
 
 /*
  * Initial settings of ab3100 registers.

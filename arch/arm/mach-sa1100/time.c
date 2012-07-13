@@ -17,8 +17,8 @@
 
 #include <asm/mach/time.h>
 #include <asm/sched_clock.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/hardware.h>
+#include <mach-sa1100/irqs.h>
 
 static u32 notrace sa1100_read_sched_clock(void)
 {
@@ -100,7 +100,7 @@ static void __init sa1100_timer_init(void)
 
 	setup_irq(IRQ_OST0, &sa1100_timer_irq);
 
-	clocksource_mmio_init(&OSCR, "oscr", CLOCK_TICK_RATE, 200, 32,
+	clocksource_mmio_init((void __iomem *)&OSCR, "oscr", CLOCK_TICK_RATE, 200, 32,
 		clocksource_mmio_readl_up);
 	clockevents_register_device(&ckevt_sa1100_osmr0);
 }

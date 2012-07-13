@@ -41,24 +41,24 @@
 #include <asm/mach/map.h>
 #include <asm/mach-types.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/regs-gpioj.h>
-#include <mach/regs-lcd.h>
-#include <mach/h1940.h>
-#include <mach/fb.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-gpioj.h>
+#include <mach-s3c24xx/regs-lcd.h>
+#include <mach-s3c24xx/h1940.h>
+#include <mach-s3c24xx/fb.h>
 
-#include <plat/clock.h>
-#include <plat/regs-serial.h>
-#include <plat/regs-iic.h>
-#include <plat/mci.h>
-#include <plat/udc.h>
-#include <plat/nand.h>
-#include <plat/iic.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/irq.h>
-#include <plat/ts.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/regs-iic.h>
+#include <plat-samsung/mci.h>
+#include <plat-samsung/udc.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/irq.h>
+#include <plat-samsung/ts.h>
 
 #include <sound/uda1380.h>
 

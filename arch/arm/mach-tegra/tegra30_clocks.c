@@ -31,7 +31,7 @@
 
 #include <asm/clkdev.h>
 
-#include <mach/iomap.h>
+#include <mach-tegra/iomap.h>
 
 #include "clock.h"
 #include "fuse.h"

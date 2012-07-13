@@ -21,11 +21,12 @@
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 
-#include <mach/pxa25x.h>
-#include <mach/pxa27x.h>
-#include <mach/audio.h>
-#include <mach/pxafb.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa25x.h>
+#undef GPIO24_SSP1_SFRM
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/smemc.h>
 
 #include <asm/hardware/it8152.h>
 

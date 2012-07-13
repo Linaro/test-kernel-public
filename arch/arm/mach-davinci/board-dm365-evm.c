@@ -31,13 +31,13 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/mux.h>
-#include <mach/common.h>
-#include <mach/i2c.h>
-#include <mach/serial.h>
-#include <mach/mmc.h>
-#include <mach/nand.h>
-#include <mach/keyscan.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/i2c.h>
+#include <mach-davinci/serial.h>
+#include <mach-davinci/mmc.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/keyscan.h>
 
 #include <media/tvp514x.h>
 

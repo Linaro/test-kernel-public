@@ -17,7 +17,7 @@
 #include <linux/i2c-algo-bit.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/hardware/ioc.h>
 
 #define FORCE_ONES	0xdc

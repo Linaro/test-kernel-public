@@ -23,9 +23,9 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/pxa930.h>
-#include <mach/pxafb.h>
-#include <plat/pxa27x_keypad.h>
+#include <mach-pxa/pxa930.h>
+#include <mach-pxa/pxafb.h>
+#include <plat-pxa/pxa27x_keypad.h>
 
 #include "devices.h"
 #include "generic.h"

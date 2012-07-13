@@ -13,9 +13,9 @@
 #include <linux/linkage.h>
 #include <asm/assembler.h>
 
-#include <mach/map.h>
-#include <mach/regs-irq.h>
-#include <plat/regs-spi.h>
+#include <mach-s3c24xx/map.h>
+#include <mach-s3c24xx/regs-irq.h>
+#include <plat-samsung/regs-spi.h>
 
 #include "spi-s3c24xx-fiq.h"
 

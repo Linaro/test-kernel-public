@@ -12,8 +12,8 @@
 #include <linux/pci.h>
 #include <linux/mbus.h>
 #include <asm/mach/pci.h>
-#include <plat/pcie.h>
-#include <plat/addr-map.h>
+#include <plat-orion/pcie.h>
+#include <plat-orion/addr-map.h>
 #include <linux/delay.h>
 
 /*

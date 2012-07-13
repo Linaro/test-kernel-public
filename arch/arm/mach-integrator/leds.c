@@ -26,11 +26,11 @@
 #include <linux/spinlock.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
-#include <mach/cm.h>
+#include <mach-integrator/cm.h>
 
 static int saved_leds;
 

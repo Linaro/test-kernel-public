@@ -23,7 +23,7 @@
 
 /* ---- Include Files ---------------------------------------------------- */
 
-#include <mach/csp/chipcHw_inline.h>
+#include <mach-bcmring/csp/chipcHw_inline.h>
 
 /* ---- Private Constants and Types --------------------------------------- */
 

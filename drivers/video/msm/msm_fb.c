@@ -25,8 +25,8 @@
 #include <linux/msm_mdp.h>
 #include <linux/io.h>
 #include <linux/uaccess.h>
-#include <mach/msm_fb.h>
-#include <mach/board.h>
+#include <mach-msm/msm_fb.h>
+#include <mach-msm/board.h>
 #include <linux/workqueue.h>
 #include <linux/clk.h>
 #include <linux/debugfs.h>

@@ -38,12 +38,12 @@
 #include <asm/mach/arch.h>
 #include <asm/system_info.h>
 
-#include <mach/cp_intc.h>
-#include <mach/da8xx.h>
-#include <mach/nand.h>
-#include <mach/mux.h>
-#include <mach/aemif.h>
-#include <mach/spi.h>
+#include <mach-davinci/cp_intc.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/aemif.h>
+#include <mach-davinci/spi.h>
 
 #define DA850_EVM_PHY_ID		"davinci_mdio-0:00"
 #define DA850_LCD_PWR_PIN		GPIO_TO_PIN(2, 8)
@@ -292,7 +292,7 @@ static struct platform_device *da850_evm_devices[] = {
 #define DA8XX_AEMIF_CE2CFG_OFFSET	0x10
 #define DA8XX_AEMIF_ASIZE_16BIT		0x1
 
-static void __init da850_evm_init_nor(void)
+static void da850_evm_init_nor(void)
 {
 	void __iomem *aemif_addr;
 

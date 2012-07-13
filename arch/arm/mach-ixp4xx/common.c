@@ -30,9 +30,9 @@
 #include <linux/export.h>
 #include <linux/gpio.h>
 
-#include <mach/udc.h>
-#include <mach/hardware.h>
-#include <mach/io.h>
+#include <mach-ixp4xx/udc.h>
+#include <mach-ixp4xx/hardware.h>
+#include <mach-ixp4xx/io.h>
 #include <asm/uaccess.h>
 #include <asm/pgtable.h>
 #include <asm/page.h>

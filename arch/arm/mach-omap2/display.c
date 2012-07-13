@@ -25,9 +25,9 @@
 #include <linux/delay.h>
 
 #include <video/omapdss.h>
-#include <plat/omap_hwmod.h>
-#include <plat/omap_device.h>
-#include <plat/omap-pm.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/omap_device.h>
+#include <plat-omap/omap-pm.h>
 #include "common.h"
 
 #include "iomap.h"

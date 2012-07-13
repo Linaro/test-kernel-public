@@ -19,10 +19,10 @@
 #include <linux/platform_device.h>
 #include <linux/debugfs.h>
 
-#include <plat/iommu.h>
-#include <plat/iovmm.h>
+#include <plat-omap/iommu.h>
+#include <plat-omap/iovmm.h>
 
-#include <plat/iopgtable.h>
+#include <plat-omap/iopgtable.h>
 
 #define MAXCOLUMN 100 /* for short messages */
 

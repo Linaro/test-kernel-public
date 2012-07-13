@@ -30,8 +30,8 @@
 #include <stddef.h>
 
 #include <csp/dmacHw.h>
-#include <mach/csp/dmacHw_reg.h>
-#include <mach/csp/dmacHw_priv.h>
+#include <mach-bcmring/csp/dmacHw_reg.h>
+#include <mach-bcmring/csp/dmacHw_priv.h>
 
 extern dmacHw_CBLK_t dmacHw_gCblk[dmacHw_MAX_CHANNEL_COUNT];	/* Declared in dmacHw.c */
 

@@ -17,8 +17,10 @@
 #include <linux/pinctrl/machine.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
-#include <mach/common.h>
-#include <mach/mx51.h>
+#include <mach-imx/common.h>
+#include <mach-imx/mx51.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/hardware.h>
 
 /*
  * Lookup table for attaching a specific name and platform_data pointer to

@@ -19,7 +19,7 @@
 #include <asm/dma.h>
 #include <asm/fiq.h>
 #include <asm/irq.h>
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/uaccess.h>
 
 #include <asm/mach/dma.h>

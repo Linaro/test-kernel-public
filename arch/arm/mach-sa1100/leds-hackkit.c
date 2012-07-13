@@ -11,7 +11,7 @@
  */
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/leds.h>
 
 #include "leds.h"

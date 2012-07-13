@@ -6,8 +6,8 @@
 #include <linux/clk-provider.h>
 #include <linux/of.h>
 
-#include <mach/common.h>
-#include <mach/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
 #include "clk.h"
 
 #define IO_ADDR_CCM(off)	(MX27_IO_ADDRESS(MX27_CCM_BASE_ADDR + (off)))

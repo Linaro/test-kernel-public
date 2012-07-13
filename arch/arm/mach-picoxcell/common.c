@@ -19,8 +19,8 @@
 #include <asm/hardware/vic.h>
 #include <asm/mach/map.h>
 
-#include <mach/map.h>
-#include <mach/picoxcell_soc.h>
+#include <mach-picoxcell/map.h>
+#include <mach-picoxcell/picoxcell_soc.h>
 
 #include "common.h"
 

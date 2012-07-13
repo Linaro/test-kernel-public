@@ -15,11 +15,11 @@
 #include <linux/device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/pxa2xx-regs.h>
-#include <mach/mfp-pxa25x.h>
-#include <mach/reset.h>
-#include <mach/irda.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/mfp-pxa25x.h>
+#include <mach-pxa/reset.h>
+#include <mach-pxa/irda.h>
 
 void pxa2xx_clear_reset_status(unsigned int mask)
 {

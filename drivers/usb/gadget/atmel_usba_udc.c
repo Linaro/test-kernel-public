@@ -23,7 +23,7 @@
 #include <linux/delay.h>
 
 #include <asm/gpio.h>
-#include <mach/board.h>
+#include <mach-at91/board.h>
 
 #include "atmel_usba_udc.h"
 
@@ -328,7 +328,7 @@ static int vbus_is_present(struct usba_udc *udc)
 
 #if defined(CONFIG_ARCH_AT91SAM9RL)
 
-#include <mach/at91_pmc.h>
+#include <mach-at91/at91_pmc.h>
 
 static void toggle_bias(int is_on)
 {

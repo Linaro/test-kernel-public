@@ -24,7 +24,7 @@
 #include <linux/mm.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/pgtable.h>
 #include <asm/page.h>
 #include <asm/setup.h>
@@ -32,7 +32,7 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
-#include <mach/syspld.h>
+#include <mach-clps711x/syspld.h>
 
 #include "common.h"
 

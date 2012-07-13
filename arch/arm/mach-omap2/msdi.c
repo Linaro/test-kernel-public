@@ -23,8 +23,8 @@
 
 #include <linux/kernel.h>
 
-#include <plat/omap_hwmod.h>
-#include <plat/mmc.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/mmc.h>
 
 #include "common.h"
 

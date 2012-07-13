@@ -13,14 +13,14 @@
 #include <linux/types.h>
 #include <linux/io.h>
 
-#include <mach/platform.h>
-#include <mach/hardware.h>
+#include <mach-pnx4008/platform.h>
+#include <mach-pnx4008/hardware.h>
 
 #include <linux/serial_core.h>
 #include <linux/serial_reg.h>
 
-#include <mach/gpio-pnx4008.h>
-#include <mach/clock.h>
+#include <mach-pnx4008/gpio-pnx4008.h>
+#include <mach-pnx4008/clock.h>
 
 #define UART_3		0
 #define UART_4		1

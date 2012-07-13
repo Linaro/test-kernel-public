@@ -24,7 +24,7 @@
 #include <asm/mach-types.h>
 #include <asm/page.h>
 #include <asm/mach/arch.h>
-#include <mach/hardware.h>
+#include <mach-h720x/hardware.h>
 #include "common.h"
 
 MACHINE_START(H7201, "Hynix GMS30C7201")

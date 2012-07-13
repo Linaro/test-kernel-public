@@ -17,9 +17,9 @@
 #include <video/vga.h>
 #include <asm/irq.h>
 #include <asm/mach/pci.h>
-#include <plat/pcie.h>
-#include <plat/addr-map.h>
-#include <mach/orion5x.h>
+#include <plat-orion/pcie.h>
+#include <plat-orion/addr-map.h>
+#include <mach-orion5x/orion5x.h>
 #include "common.h"
 
 /*****************************************************************************

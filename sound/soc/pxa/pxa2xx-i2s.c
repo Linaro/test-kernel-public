@@ -24,9 +24,9 @@
 #include <sound/soc.h>
 #include <sound/pxa2xx-lib.h>
 
-#include <mach/hardware.h>
-#include <mach/dma.h>
-#include <mach/audio.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/dma.h>
+#include <mach-pxa/audio.h>
 
 #include "pxa2xx-i2s.h"
 

@@ -24,7 +24,7 @@
 #include <linux/input.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/irq.h>
 #include <asm/hardware/iomd.h>
 

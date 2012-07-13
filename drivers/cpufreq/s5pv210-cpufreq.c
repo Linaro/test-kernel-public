@@ -20,7 +20,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/suspend.h>
 
-#include <mach/map.h>
+#include <mach-s5pv210/map.h>
 #include <mach/regs-clock.h>
 
 static struct clk *cpu_clk;

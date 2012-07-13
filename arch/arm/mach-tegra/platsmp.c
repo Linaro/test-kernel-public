@@ -24,9 +24,9 @@
 #include <asm/mach-types.h>
 #include <asm/smp_scu.h>
 
-#include <mach/clk.h>
-#include <mach/iomap.h>
-#include <mach/powergate.h>
+#include <mach-tegra/clk.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/powergate.h>
 
 #include "fuse.h"
 #include "flowctrl.h"

@@ -26,9 +26,9 @@
 #include <linux/platform_device.h>
 #include <linux/export.h>
 
-#include <mach/hardware.h>
-#include <mach/cpufreq.h>
-#include <mach/common.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/cpufreq.h>
+#include <mach-davinci/common.h>
 
 #include "clock.h"
 

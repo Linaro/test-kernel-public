@@ -64,10 +64,13 @@ extern int of_gpio_simple_xlate(struct gpio_chip *gc,
 
 #else /* CONFIG_OF_GPIO */
 
+struct gpio_chip;
+
 /* Drivers may not strictly depend on the GPIO support, so let them link. */
 static inline int of_get_named_gpio_flags(struct device_node *np,
 		const char *list_name, int index, enum of_gpio_flags *flags)
 {
+	*flags = 0;
 	return -ENOSYS;
 }
 

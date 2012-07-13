@@ -21,8 +21,8 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/mxs.h>
-#include <mach/common.h>
+#include <mach-mxs/mxs.h>
+#include <mach-mxs/common.h>
 
 #define HW_ICOLL_VECTOR				0x0000
 #define HW_ICOLL_LEVELACK			0x0010

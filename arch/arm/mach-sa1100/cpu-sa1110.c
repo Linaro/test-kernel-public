@@ -26,7 +26,7 @@
 #include <asm/cputype.h>
 #include <asm/mach-types.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 
 #include "generic.h"
 

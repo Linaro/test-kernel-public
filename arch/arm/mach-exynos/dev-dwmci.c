@@ -19,9 +19,9 @@
 #include <linux/ioport.h>
 #include <linux/mmc/dw_mmc.h>
 
-#include <plat/devs.h>
+#include <plat-samsung/devs.h>
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 static int exynos4_dwmci_get_bus_wd(u32 slot_id)
 {

@@ -248,7 +248,17 @@ config MMU
 #
 choice
 	prompt "ARM system type"
-	default ARCH_VERSATILE
+	default ARCH_MULTIPLATFORM
+
+config ARCH_MULTIPLATFORM
+	bool "Allow multiple platforms to be selected"
+	select USE_OF
+	select COMMON_CLK
+	select SPARSE_IRQ
+	select MULTI_IRQ_HANDLER
+	select AUTO_ZRELADDR
+	select ARM_PATCH_PHYS_VIRT
+	depends on MMU
 
 config ARCH_INTEGRATOR
 	bool "ARM Ltd. Integrator family"
@@ -301,20 +311,9 @@ config ARCH_VERSATILE
 	help
 	  This enables support for ARM Ltd Versatile board.
 
-config ARCH_VEXPRESS
+config ARCH_VEXPRESS_CHOICE
 	bool "ARM Ltd. Versatile Express family"
-	select ARCH_WANT_OPTIONAL_GPIOLIB
-	select ARM_AMBA
-	select ARM_TIMER_SP804
-	select CLKDEV_LOOKUP
-	select HAVE_MACH_CLKDEV
-	select GENERIC_CLOCKEVENTS
-	select HAVE_CLK
-	select HAVE_PATA_PLATFORM
-	select ICST
-	select NO_IOPORT
-	select PLAT_VERSATILE
-	select PLAT_VERSATILE_CLCD
+	select ARCH_VEXPRESS
 	help
 	  This enables support for the ARM Ltd Versatile Express boards.
 
@@ -439,14 +438,9 @@ config ARCH_FOOTBRIDGE
 	  Support for systems based on the DC21285 companion chip
 	  ("FootBridge"), such as the Simtec CATS and the Rebel NetWinder.
 
-config ARCH_MXC
+config ARCH_MXC_CHOICE
 	bool "Freescale MXC/iMX-based"
-	select GENERIC_CLOCKEVENTS
-	select ARCH_REQUIRE_GPIOLIB
-	select CLKDEV_LOOKUP
-	select CLKSRC_MMIO
-	select GENERIC_IRQ_CHIP
-	select MULTI_IRQ_HANDLER
+	select ARCH_MXC
 	help
 	  Support for Freescale MXC/iMX-based family of processors
 
@@ -894,17 +888,10 @@ config ARCH_U300
 	help
 	  Support for ST-Ericsson U300 series mobile platforms.
 
-config ARCH_U8500
+config ARCH_U8500_CHOICE
 	bool "ST-Ericsson U8500 Series"
+	select ARCH_U8500
 	depends on MMU
-	select CPU_V7
-	select ARM_AMBA
-	select GENERIC_CLOCKEVENTS
-	select CLKDEV_LOOKUP
-	select ARCH_REQUIRE_GPIOLIB
-	select ARCH_HAS_CPUFREQ
-	select HAVE_SMP
-	select MIGHT_HAVE_CACHE_L2X0
 	help
 	  Support for ST-Ericsson's Ux500 architecture
 
@@ -934,14 +921,10 @@ config ARCH_DAVINCI
 	help
 	  Support for TI's DaVinci platform.
 
-config ARCH_OMAP
+config ARCH_CHOICE_OMAP
 	bool "TI OMAP"
-	select HAVE_CLK
-	select ARCH_REQUIRE_GPIOLIB
-	select ARCH_HAS_CPUFREQ
-	select CLKSRC_MMIO
-	select GENERIC_CLOCKEVENTS
-	select ARCH_HAS_HOLES_MEMORYMODEL
+	select ARCH_OMAP
+	select MAY_HAVE_SPARSE_IRQ
 	help
 	  Support for TI's OMAP platform (OMAP1/2/3/4).
 
@@ -981,6 +964,51 @@ config ARCH_ZYNQ
 	help
 	  Support for Xilinx Zynq ARM Cortex A9 Platform
 endchoice
+
+config ARCH_OMAP
+	bool
+	select HAVE_CLK
+	select ARCH_REQUIRE_GPIOLIB
+	select ARCH_HAS_CPUFREQ
+	select CLKSRC_MMIO
+	select GENERIC_CLOCKEVENTS
+	select ARCH_HAS_HOLES_MEMORYMODEL
+	select MAY_HAVE_SPARSE_IRQ
+
+config ARCH_MXC
+	bool
+	select GENERIC_CLOCKEVENTS
+	select ARCH_REQUIRE_GPIOLIB
+	select CLKDEV_LOOKUP
+	select CLKSRC_MMIO
+	select GENERIC_IRQ_CHIP
+	select MULTI_IRQ_HANDLER
+
+config ARCH_U8500
+	bool
+	select CPU_V7
+	select ARM_AMBA
+	select GENERIC_CLOCKEVENTS
+	select CLKDEV_LOOKUP
+	select ARCH_REQUIRE_GPIOLIB
+	select ARCH_HAS_CPUFREQ
+	select HAVE_SMP
+	select MIGHT_HAVE_CACHE_L2X0
+
+config ARCH_VEXPRESS
+	bool
+	select ARCH_WANT_OPTIONAL_GPIOLIB
+	select ARM_AMBA
+	select ARM_TIMER_SP804
+	select CLKDEV_LOOKUP
+	select GENERIC_CLOCKEVENTS
+	select HAVE_CLK
+	select HAVE_PATA_PLATFORM
+	select ICST
+	select NO_IOPORT
+	select PLAT_VERSATILE
+	select PLAT_VERSATILE_CLCD
+	select MAY_HAVE_SPARSE_IRQ
 
 #
 # This is sorted alphabetically by mach-* pathname.  However, plat-*
@@ -1022,6 +1050,8 @@ source "arch/arm/mach-kirkwood/Kconfig"
 source "arch/arm/mach-ks8695/Kconfig"
 
 source "arch/arm/mach-lpc32xx/Kconfig"
+
+source "arch/arm/mach-multi/Kconfig"
 
 source "arch/arm/mach-msm/Kconfig"
 
@@ -2103,6 +2133,7 @@ source "drivers/cpufreq/Kconfig"
 config CPU_FREQ_IMX
 	tristate "CPUfreq driver for i.MX CPUs"
 	depends on ARCH_MXC && CPU_FREQ
+	select CPU_FREQ_TABLE
 	help
 	  This enables the CPUfreq driver for i.MX CPUs.
 
@@ -2212,7 +2243,7 @@ config FPE_NWFPE_XP
 
 config FPE_FASTFPE
 	bool "FastFPE math emulation (EXPERIMENTAL)"
-	depends on (!AEABI || OABI_COMPAT) && !CPU_32v3 && EXPERIMENTAL
+	depends on (!AEABI || OABI_COMPAT) && EXPERIMENTAL
 	---help---
 	  Say Y here to include the FAST floating point emulator in the kernel.
 	  This is an experimental much faster emulator which now also has full

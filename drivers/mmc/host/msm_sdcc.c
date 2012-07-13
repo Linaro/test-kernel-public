@@ -42,10 +42,10 @@
 #include <asm/div64.h>
 #include <asm/sizes.h>
 
-#include <mach/mmc.h>
-#include <mach/msm_iomap.h>
-#include <mach/dma.h>
-#include <mach/clk.h>
+#include <mach-msm/mmc.h>
+#include <mach-msm/msm_iomap.h>
+#include <mach-msm/dma.h>
+#include <mach-msm/clk.h>
 
 #include "msm_sdcc.h"
 
