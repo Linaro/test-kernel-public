@@ -531,6 +531,20 @@ MACHINE_START(VEXPRESS, "ARM-Versatile Express")
 	.restart	= v2m_restart,
 MACHINE_END
 
+int set_dvi_mode(int mode)
+{
+       /* mode is a value from:
+           0 = VGA
+           1 = SVGA
+           2 = XGA
+           3 = SXGA
+           4 = UXGA
+           5 = WUXGA
+       */
+       v2m_cfg_write(SYS_CFG_DVIMODE, mode);
+       return 0;
+}
+
 #if defined(CONFIG_ARCH_VEXPRESS_DT)
 
 static struct v2m_osc v2m_dt_hdlcd_osc = {
