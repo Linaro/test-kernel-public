@@ -170,7 +170,7 @@ SCRIPT_SH += perf-archive.sh
 grep-libs = $(filter -l%,$(1))
 strip-libs = $(filter-out -l%,$(1))
 
-PYTHON_EXT_SRCS := $(shell grep -v ^\# util/python-ext-sources)
+PYTHON_EXT_SRCS := $(shell grep -v ^\# util/python-ext-sources | sed 's/OUTPUT/$(OUTPUT)/g')
 PYTHON_EXT_DEPS := util/python-ext-sources util/setup.py
 
 $(OUTPUT)python/perf.so: $(PYRF_OBJS) $(PYTHON_EXT_SRCS) $(PYTHON_EXT_DEPS)
@@ -233,6 +233,7 @@ $(OUTPUT)util/pmu-flex.c: util/pmu.l
 $(OUTPUT)util/pmu-bison.c: util/pmu.y
 	$(QUIET_BISON)$(BISON) -v util/pmu.y -d -o $(OUTPUT)util/pmu-bison.c
 
+$(OUTPUT)util/evsel.o: $(OUTPUT)util/parse-events-flex.c $(OUTPUT)util/parse-events-bison.c
 $(OUTPUT)util/parse-events.o: $(OUTPUT)util/parse-events-flex.c $(OUTPUT)util/parse-events-bison.c
 $(OUTPUT)util/pmu.o: $(OUTPUT)util/pmu-flex.c $(OUTPUT)util/pmu-bison.c
 
@@ -503,6 +504,7 @@ else
 		LIB_OBJS += $(OUTPUT)ui/progress.o
 		LIB_OBJS += $(OUTPUT)ui/util.o
 		LIB_OBJS += $(OUTPUT)ui/tui/setup.o
+		LIB_OBJS += $(OUTPUT)ui/tui/util.o
 		LIB_H += ui/browser.h
 		LIB_H += ui/browsers/map.h
 		LIB_H += ui/helpline.h
@@ -522,13 +524,18 @@ else
 		msg := $(warning GTK2 not found, disables GTK2 support. Please install gtk2-devel or libgtk2.0-dev);
 		BASIC_CFLAGS += -DNO_GTK2_SUPPORT
 	else
+		ifeq ($(call try-cc,$(SOURCE_GTK2_INFOBAR),$(FLAGS_GTK2)),y)
+			BASIC_CFLAGS += -DHAVE_GTK_INFO_BAR
+		endif
 		BASIC_CFLAGS += $(shell pkg-config --cflags gtk+-2.0)
 		EXTLIBS += $(shell pkg-config --libs gtk+-2.0)
 		LIB_OBJS += $(OUTPUT)ui/gtk/browser.o
 		LIB_OBJS += $(OUTPUT)ui/gtk/setup.o
+		LIB_OBJS += $(OUTPUT)ui/gtk/util.o
 		# Make sure that it'd be included only once.
 		ifneq ($(findstring -DNO_NEWT_SUPPORT,$(BASIC_CFLAGS)),)
 			LIB_OBJS += $(OUTPUT)ui/setup.o
+			LIB_OBJS += $(OUTPUT)ui/util.o
 		endif
 	endif
 endif
@@ -573,7 +580,7 @@ else
   PYTHON_EXTBUILD     := $(OUTPUT)python_ext_build/
   PYTHON_EXTBUILD_LIB := $(PYTHON_EXTBUILD)lib/
   PYTHON_EXTBUILD_TMP := $(PYTHON_EXTBUILD)tmp/
-  export PYTHON_EXTBUILD_LIB PYTHON_EXTBUILD_TMP
+  export PYTHON_EXTBUILD_LIB PYTHON_EXTBUILD_TMP OUTPUT
 
   python-clean := rm -rf $(PYTHON_EXTBUILD) $(OUTPUT)python/perf.so
 

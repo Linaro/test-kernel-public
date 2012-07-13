@@ -23,13 +23,14 @@ cflags += getenv('CFLAGS', '').split()
 
 build_lib = getenv('PYTHON_EXTBUILD_LIB')
 build_tmp = getenv('PYTHON_EXTBUILD_TMP')
+output = getenv('OUTPUT')
 
-ext_sources = [f.strip() for f in file('util/python-ext-sources')
+ext_sources = [f.strip().replace("OUTPUT", output) for f in file('util/python-ext-sources')
 				if len(f.strip()) > 0 and f[0] != '#']
 
 perf = Extension('perf',
 		  sources = ext_sources,
-		  include_dirs = ['util/include'],
+		  include_dirs = ['util/include', 'util'],
 		  extra_compile_args = cflags,
                  )
 

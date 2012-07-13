@@ -16,4 +16,12 @@ util/xyarray.c
 util/cgroup.c
 util/debugfs.c
 util/strlist.c
+util/parse-events.c
+util/pmu.c
+util/string.c
+util/sysfs.c
 ../../lib/rbtree.c
+OUTPUT/util/parse-events-flex.c
+OUTPUT/util/parse-events-bison.c
+OUTPUT/util/pmu-flex.c
+OUTPUT/util/pmu-bison.c
