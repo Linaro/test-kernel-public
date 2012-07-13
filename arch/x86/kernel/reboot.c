@@ -435,12 +435,36 @@ static struct dmi_system_id __initdata reboot_dmi_table[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "Latitude E5420"),
 		},
 	},
+	{       /* Handle problems with rebooting on the Latitude E6220. */
+		.callback = set_pci_reboot,
+		.ident = "Dell Latitude E6220",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "Latitude E6220"),
+		},
+	},
 	{	/* Handle problems with rebooting on the Latitude E6420. */
 		.callback = set_pci_reboot,
 		.ident = "Dell Latitude E6420",
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
 			DMI_MATCH(DMI_PRODUCT_NAME, "Latitude E6420"),
+		},
+	},
+	{	/* Handle problems with rebooting on the Latitude E6520. */
+		.callback = set_pci_reboot,
+		.ident = "Dell Latitude E6520",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "Latitude E6520"),
+		},
+	},
+	{       /* Handle problems with rebooting on the OptiPlex 790. */
+		.callback = set_pci_reboot,
+		.ident = "Dell OptiPlex 790",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "OptiPlex 790"),
 		},
 	},
 	{	/* Handle problems with rebooting on the OptiPlex 990. */
