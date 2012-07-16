@@ -35,7 +35,6 @@
 
 #include <mach-vexpress/ct-ca9x4.h>
 #include <mach-vexpress/motherboard.h>
-#include <mach-vexpress/clkdev.h>
 
 #include <plat-versatile/sched_clock.h>
 
@@ -656,6 +655,8 @@ static void __init v2m_dt_init_irq(void)
 {
 	of_irq_init(vexpress_irq_match);
 }
+
+extern bool __init arch_timer_broken_for_sched_clock(void);
 
 static void __init v2m_dt_timer_init(void)
 {
