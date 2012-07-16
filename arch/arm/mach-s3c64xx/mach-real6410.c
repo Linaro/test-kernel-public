@@ -30,19 +30,19 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/map.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-modem.h>
-#include <mach/regs-srom.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/regs-gpio.h>
+#include <mach-s3c64xx/regs-modem.h>
+#include <mach-s3c64xx/regs-srom.h>
 
-#include <plat/adc.h>
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/fb.h>
-#include <plat/nand.h>
-#include <plat/regs-serial.h>
-#include <plat/ts.h>
-#include <plat/regs-fb-v4.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/ts.h>
+#include <plat-samsung/regs-fb-v4.h>
 
 #include <video/platform_lcd.h>
 

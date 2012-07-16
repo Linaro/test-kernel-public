@@ -17,7 +17,7 @@
 #include <sound/soc.h>
 #include <sound/pcm_params.h>
 
-#include <plat/audio.h>
+#include <plat-samsung/audio.h>
 #include <mach/dma.h>
 
 #include "dma.h"

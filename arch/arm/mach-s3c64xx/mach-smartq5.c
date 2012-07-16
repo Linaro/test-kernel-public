@@ -21,14 +21,14 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/map.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/regs-gpio.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/fb.h>
-#include <plat/gpio-cfg.h>
-#include <plat/regs-fb-v4.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/regs-fb-v4.h>
 
 #include "common.h"
 #include "mach-smartq.h"

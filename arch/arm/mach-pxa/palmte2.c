@@ -31,14 +31,14 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/pxa25x.h>
-#include <mach/audio.h>
-#include <mach/palmte2.h>
-#include <mach/mmc.h>
-#include <mach/pxafb.h>
-#include <mach/irda.h>
-#include <mach/udc.h>
-#include <mach/palmasoc.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/palmte2.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/palmasoc.h>
 
 #include "generic.h"
 #include "devices.h"
@@ -105,6 +105,7 @@ static struct pxamci_platform_data palmte2_mci_platform_data = {
 	.gpio_power		= GPIO_NR_PALMTE2_SD_POWER,
 };
 
+#if defined(CONFIG_KEYBOARD_GPIO) || defined(CONFIG_KEYBOARD_GPIO_MODULE)
 /******************************************************************************
  * GPIO keys
  ******************************************************************************/
@@ -132,6 +133,7 @@ static struct platform_device palmte2_pxa_keys = {
 		.platform_data = &palmte2_pxa_keys_data,
 	},
 };
+#endif
 
 /******************************************************************************
  * Backlight

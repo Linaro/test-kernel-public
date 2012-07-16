@@ -44,11 +44,11 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/board.h>
-#include <mach/at91sam9_smc.h>
-#include <mach/at91_shdwc.h>
-#include <mach/system_rev.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91sam9_smc.h>
+#include <mach-at91/at91_shdwc.h>
+#include <mach-at91/system_rev.h>
 
 #include "sam9_smc.h"
 #include "generic.h"

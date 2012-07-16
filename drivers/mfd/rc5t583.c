@@ -97,7 +97,7 @@ static int __rc5t583_set_ext_pwrreq1_control(struct device *dev,
 	en_bit = deepsleep_data[id].ds_pos_bit;
 	slot_bit = en_bit + 1;
 	ret = rc5t583_read(dev, deepsleep_data[id].reg_add, &sleepseq_val);
-	if (ret < 0) {
+	if (ret) {
 		dev_err(dev, "Error in reading reg 0x%x\n",
 				deepsleep_data[id].reg_add);
 		return ret;

@@ -21,13 +21,13 @@
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 
-#include <mach/irqs.h>
+#include <mach-mmp/irqs.h>
 
 #ifdef CONFIG_CPU_MMP2
-#include <mach/pm-mmp2.h>
+#include <mach-mmp/pm-mmp2.h>
 #endif
 #ifdef CONFIG_CPU_PXA910
-#include <mach/pm-pxa910.h>
+#include <mach-mmp/pm-pxa910.h>
 #endif
 
 #include "common.h"

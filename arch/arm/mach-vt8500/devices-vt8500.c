@@ -15,9 +15,9 @@
 
 #include <linux/platform_device.h>
 
-#include <mach/vt8500_regs.h>
-#include <mach/vt8500_irqs.h>
-#include <mach/i8042.h>
+#include <mach-vt8500/vt8500_regs.h>
+#include <mach-vt8500/vt8500_irqs.h>
+#include <mach-vt8500/i8042.h>
 #include "devices.h"
 
 void __init vt8500_set_resources(void)

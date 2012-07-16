@@ -23,7 +23,7 @@
 #include <linux/kernel.h>
 #include <linux/interrupt.h>
 
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/dma.h>
 #include <asm/io.h>
 #include <asm/hardware/iomd.h>

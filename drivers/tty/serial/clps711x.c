@@ -38,7 +38,7 @@
 #include <linux/serial.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/irq.h>
 
 #define UART_NR		2

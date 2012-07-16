@@ -27,8 +27,8 @@
 #include <linux/bitops.h>
 #include <linux/mutex.h>
 
-#include <plat/vrfb.h>
-#include <plat/sdrc.h>
+#include <plat-omap/vrfb.h>
+#include <plat-omap/sdrc.h>
 
 #ifdef DEBUG
 #define DBG(format, ...) pr_debug("VRFB: " format, ## __VA_ARGS__)

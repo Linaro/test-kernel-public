@@ -33,10 +33,16 @@
 
 #include <asm/mach/irq.h>
 
-#include <plat/pincfg.h>
-#include <plat/gpio-nomadik.h>
+#include <plat-nomadik/pincfg.h>
+#include <plat-nomadik/gpio-nomadik.h>
 
 #include "pinctrl-nomadik.h"
+
+#ifdef CONFIG_ARCH_MULTI_UX500
+#include <mach-ux500/irqs.h>
+#endif
+
+#include <asm/gpio.h>
 
 /*
  * The GPIO module in the Nomadik family of Systems-on-Chip is an

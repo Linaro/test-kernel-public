@@ -19,13 +19,13 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <mach/regs-s3c2443-clock.h>
+#include <mach-s3c24xx/regs-s3c2443-clock.h>
 
-#include <plat/clock.h>
-#include <plat/clock-clksrc.h>
-#include <plat/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/clock-clksrc.h>
+#include <plat-samsung/cpu.h>
 
-#include <plat/cpu-freq.h>
+#include <plat-samsung/cpu-freq.h>
 
 
 static int s3c2443_gate(void __iomem *reg, struct clk *clk, int enable)

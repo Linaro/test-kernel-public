@@ -12,8 +12,8 @@
 #define _MC146818RTC_H
 
 #include <asm/io.h>
-#include <linux/rtc.h>			/* get the user-level API */
 #include <asm/mc146818rtc.h>		/* register access macros */
+#include <linux/rtc.h>			/* get the user-level API */
 
 #ifdef __KERNEL__
 #include <linux/spinlock.h>		/* spinlock_t */

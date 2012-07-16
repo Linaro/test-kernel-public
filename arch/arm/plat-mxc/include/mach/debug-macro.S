@@ -10,7 +10,7 @@
  * published by the Free Software Foundation.
  *
  */
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 #ifdef CONFIG_DEBUG_IMX1_UART
 #define UART_PADDR	MX1_UART1_BASE_ADDR

@@ -20,7 +20,7 @@
 #include <sound/soc.h>
 #include <sound/pcm_params.h>
 
-#include <plat/audio.h>
+#include <plat-samsung/audio.h>
 
 #include "dma.h"
 #include "idma.h"

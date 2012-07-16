@@ -26,8 +26,8 @@
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/hardware/gic.h>
 
-#include <mach/iomap.h>
-#include <mach/powergate.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/powergate.h>
 
 #include "board.h"
 #include "clock.h"

@@ -33,7 +33,7 @@
 #include <linux/kthread.h>
 #include <linux/mfd/ucb1x00.h>
 
-#include <mach/collie.h>
+#include <mach-sa1100/collie.h>
 #include <asm/mach-types.h>
 
 

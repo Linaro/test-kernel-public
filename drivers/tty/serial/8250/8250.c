@@ -42,6 +42,11 @@
 #include <linux/sunserialcore.h>
 #endif
 
+#ifdef CONFIG_ARCH_OMAP
+#include <plat-omap/cpu.h>
+#include <plat-omap/serial.h>
+#endif
+
 #include <asm/io.h>
 #include <asm/irq.h>
 

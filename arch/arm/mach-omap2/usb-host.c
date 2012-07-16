@@ -25,10 +25,10 @@
 
 #include <asm/io.h>
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <plat/usb.h>
-#include <plat/omap_device.h>
+#include <mach-omap2/hardware.h>
+#include <mach-omap2/irqs.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/omap_device.h>
 
 #include "mux.h"
 

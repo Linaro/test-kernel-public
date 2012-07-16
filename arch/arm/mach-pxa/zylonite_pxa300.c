@@ -21,8 +21,8 @@
 #include <linux/i2c/pca953x.h>
 #include <linux/gpio.h>
 
-#include <mach/pxa300.h>
-#include <mach/zylonite.h>
+#include <mach-pxa/pxa300.h>
+#include <mach-pxa/zylonite.h>
 
 #include "generic.h"
 

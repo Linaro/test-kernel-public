@@ -43,24 +43,24 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/leds-gpio.h>
-#include <mach/regs-lcd.h>
-#include <plat/regs-serial.h>
-#include <mach/fb.h>
-#include <plat/nand.h>
-#include <plat/udc.h>
-#include <plat/iic.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/leds-gpio.h>
+#include <mach-s3c24xx/regs-lcd.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/fb.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/udc.h>
+#include <plat-samsung/iic.h>
 
-#include <plat/common-smdk.h>
-#include <plat/gpio-cfg.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/pm.h>
+#include <plat-samsung/common-smdk.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
 
 #include "common.h"
 

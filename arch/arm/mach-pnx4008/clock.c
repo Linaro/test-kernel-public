@@ -23,8 +23,8 @@
 #include <linux/io.h>
 #include <linux/clkdev.h>
 
-#include <mach/hardware.h>
-#include <mach/clock.h>
+#include <mach-pnx4008/hardware.h>
+#include <mach-pnx4008/clock.h>
 #include "clock.h"
 
 /*forward declaration*/
@@ -980,7 +980,7 @@ static int __init clk_init(void)
 			if (clk->disable && !clk->usecount)
 				clk->disable(clk);
 		}
-		pr_debug("%s: clock %s, rate %ld\n",
+		pr_debug("%s: clock %s, rate %d\n",
 			__func__, clk->name, clk->rate);
 	}
 

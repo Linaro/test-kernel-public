@@ -12,8 +12,8 @@
 #include <linux/dma-mapping.h>
 #include <linux/sys_soc.h>
 #include <linux/amba/bus.h>
-#include <plat/i2c.h>
-#include <mach/crypto-ux500.h>
+#include <plat-nomadik/i2c.h>
+#include <mach-ux500/crypto-ux500.h>
 
 struct spi_master_cntlr;
 

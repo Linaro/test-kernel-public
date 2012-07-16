@@ -15,7 +15,7 @@
 #include <linux/spinlock.h>
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-ebsa110/hardware.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 

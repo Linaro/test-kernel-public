@@ -33,8 +33,8 @@
 #include <linux/hwmon.h>
 #include <linux/hwmon-sysfs.h>
 
-#include <plat/adc.h>
-#include <plat/hwmon.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/hwmon.h>
 
 struct s3c_hwmon_attr {
 	struct sensor_device_attribute	in;

@@ -35,6 +35,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
 #include <linux/v4l2-mediabus.h>
+#include <linux/slab.h>
 #include <media/v4l2-device.h>
 
 #include "smiapp.h"

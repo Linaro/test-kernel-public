@@ -25,9 +25,9 @@
 #include <linux/videodev2.h>
 #include <linux/slab.h>
 
-#include <mach/hardware.h>
-#include <mach/mux.h>
-#include <mach/i2c.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/i2c.h>
 
 #include <linux/io.h>
 

@@ -22,12 +22,12 @@
 #include <linux/io.h>
 #include <linux/export.h>
 
-#include <mach/hardware.h>
+#include <mach-msm/hardware.h>
 #include <asm/page.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 #include <asm/mach/map.h>
 
-#include <mach/board.h>
+#include <mach-msm/board.h>
 
 #define MSM_CHIP_DEVICE(name, chip) {			      \
 		.virtual = (unsigned long) MSM_##name##_BASE, \

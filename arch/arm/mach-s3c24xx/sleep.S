@@ -26,13 +26,13 @@
 
 #include <linux/linkage.h>
 #include <asm/assembler.h>
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/map.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/regs-clock.h>
-#include <mach/regs-mem.h>
-#include <plat/regs-serial.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-clock.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <plat-samsung/regs-serial.h>
 
 /* CONFIG_DEBUG_RESUME is dangerous if your bootloader does not
  * reset the UART configuration, only enable if you really need this!

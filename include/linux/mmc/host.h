@@ -380,7 +380,12 @@ extern int mmc_resume_host(struct mmc_host *);
 extern int mmc_power_save_host(struct mmc_host *host);
 extern int mmc_power_restore_host(struct mmc_host *host);
 
+#if IS_ENABLED(CONFIG_MMC)
 extern void mmc_detect_change(struct mmc_host *, unsigned long delay);
+#else
+static inline void mmc_detect_change(struct mmc_host *host, unsigned long delay) {}
+#endif
+
 extern void mmc_request_done(struct mmc_host *, struct mmc_request *);
 
 extern int mmc_cache_ctrl(struct mmc_host *, u8);

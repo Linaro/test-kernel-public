@@ -18,13 +18,13 @@
 
 #include <asm/hardware/vic.h>
 
-#include <plat/regs-irqtype.h>
+#include <plat-samsung/regs-irqtype.h>
 
 #include <mach/map.h>
-#include <plat/cpu.h>
-#include <plat/pm.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
 
-#include <plat/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg.h>
 #include <mach/regs-gpio.h>
 
 static inline void s5p_irq_eint_mask(struct irq_data *data)

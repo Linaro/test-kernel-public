@@ -16,7 +16,7 @@
 #include <linux/irq.h>
 #include <linux/dma-mapping.h>
 
-#include <mach/pxa930.h>
+#include <mach-pxa/pxa930.h>
 
 static struct mfp_addr_map pxa930_mfp_addr_map[] __initdata = {
 

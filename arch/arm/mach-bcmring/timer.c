@@ -16,7 +16,7 @@
 #include <linux/module.h>
 #include <csp/tmrHw.h>
 
-#include <mach/timer.h>
+#include <mach-bcmring/timer.h>
 /* The core.c file initializes timers 1 and 3 as a linux clocksource. */
 /* The real time clock should probably be the real linux clocksource. */
 /* In the meantime, this file should agree with core.c as to the */

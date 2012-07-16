@@ -35,9 +35,9 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <plat/adc.h>
-#include <plat/regs-adc.h>
-#include <plat/ts.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/regs-adc.h>
+#include <plat-samsung/ts.h>
 
 #define TSC_SLEEP  (S3C2410_ADCTSC_PULL_UP_DISABLE | S3C2410_ADCTSC_XY_PST(0))
 

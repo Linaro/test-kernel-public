@@ -47,13 +47,13 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 #include <asm/mach/map.h>
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-versatile/hardware.h>
+#include <mach-versatile/platform.h>
 #include <asm/hardware/timer-sp.h>
 
-#include <plat/clcd.h>
-#include <plat/fpga-irq.h>
-#include <plat/sched_clock.h>
+#include <plat-versatile/clcd.h>
+#include <plat-versatile/fpga-irq.h>
+#include <plat-versatile/sched_clock.h>
 
 #include "core.h"
 

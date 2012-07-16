@@ -23,7 +23,7 @@
 
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-footbridge/hardware.h>
 #include <asm/hardware/dec21285.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
