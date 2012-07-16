@@ -15,8 +15,8 @@
 #include <asm/page.h>
 #include <asm/mach/map.h>
 #include <asm/system_misc.h>
-#include <mach/addr-map.h>
-#include <mach/cputype.h>
+#include <mach-mmp/addr-map.h>
+#include <mach-mmp/cputype.h>
 
 #include "common.h"
 

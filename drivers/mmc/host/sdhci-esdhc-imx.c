@@ -25,7 +25,7 @@
 #include <linux/of_device.h>
 #include <linux/of_gpio.h>
 #include <linux/pinctrl/consumer.h>
-#include <mach/esdhc.h>
+#include <mach-imx/esdhc.h>
 #include "sdhci-pltfm.h"
 #include "sdhci-esdhc.h"
 

@@ -1,7 +1,7 @@
 #include <linux/linkage.h>
 #include <asm/assembler.h>
-#include <mach/hardware.h>
-#include <mach/entry-macro.S>
+#include <mach-rpc/hardware.h>
+#include <mach-rpc/entry-macro.S>
 
 	.text
 

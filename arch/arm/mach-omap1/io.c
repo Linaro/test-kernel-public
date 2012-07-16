@@ -16,9 +16,9 @@
 #include <asm/tlb.h>
 #include <asm/mach/map.h>
 
-#include <plat/mux.h>
-#include <plat/tc.h>
-#include <plat/dma.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/dma.h>
 
 #include "iomap.h"
 #include "common.h"

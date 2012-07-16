@@ -18,9 +18,9 @@
 #include <linux/cpufreq.h>
 #include <linux/suspend.h>
 
-#include <mach/cpufreq.h>
+#include <mach-exynos/cpufreq.h>
 
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
 static struct exynos_dvfs_info *exynos_info;
 

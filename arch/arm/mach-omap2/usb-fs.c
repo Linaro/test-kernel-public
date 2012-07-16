@@ -29,8 +29,10 @@
 
 #include <asm/irq.h>
 
-#include <plat/usb.h>
-#include <plat/board.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/board.h>
 
 #include "control.h"
 #include "mux.h"

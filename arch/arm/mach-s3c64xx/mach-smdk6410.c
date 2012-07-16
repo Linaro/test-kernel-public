@@ -49,30 +49,30 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-s3c64xx/hardware.h>
+#include <mach-s3c64xx/map.h>
 
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/regs-serial.h>
-#include <mach/regs-modem.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-sys.h>
-#include <mach/regs-srom.h>
-#include <plat/ata.h>
-#include <plat/iic.h>
-#include <plat/fb.h>
-#include <plat/gpio-cfg.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c64xx/regs-modem.h>
+#include <mach-s3c64xx/regs-gpio.h>
+#include <mach-s3c64xx/regs-sys.h>
+#include <mach-s3c64xx/regs-srom.h>
+#include <plat-samsung/ata.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/gpio-cfg.h>
 
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/adc.h>
-#include <plat/ts.h>
-#include <plat/keypad.h>
-#include <plat/backlight.h>
-#include <plat/regs-fb-v4.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/ts.h>
+#include <plat-samsung/keypad.h>
+#include <plat-samsung/backlight.h>
+#include <plat-samsung/regs-fb-v4.h>
 
 #include "common.h"
 

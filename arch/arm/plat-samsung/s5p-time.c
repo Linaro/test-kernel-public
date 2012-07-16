@@ -23,9 +23,9 @@
 #include <asm/sched_clock.h>
 
 #include <mach/map.h>
-#include <plat/devs.h>
-#include <plat/regs-timer.h>
-#include <plat/s5p-time.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/regs-timer.h>
+#include <plat-samsung/s5p-time.h>
 
 static struct clk *tin_event;
 static struct clk *tin_source;

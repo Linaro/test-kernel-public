@@ -31,13 +31,13 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/pxa25x.h>
-#include <mach/audio.h>
-#include <mach/palmtc.h>
-#include <mach/mmc.h>
-#include <mach/pxafb.h>
-#include <mach/irda.h>
-#include <mach/udc.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/palmtc.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/udc.h>
 
 #include "generic.h"
 #include "devices.h"

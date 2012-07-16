@@ -15,9 +15,9 @@
 #include <video/vga.h>
 #include <asm/irq.h>
 #include <asm/mach/pci.h>
-#include <plat/pcie.h>
-#include <mach/bridge-regs.h>
-#include <plat/addr-map.h>
+#include <plat-orion/pcie.h>
+#include <mach-kirkwood/bridge-regs.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 static void kirkwood_enable_pcie_clk(const char *port)

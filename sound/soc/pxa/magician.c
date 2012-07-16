@@ -28,7 +28,7 @@
 #include <sound/soc.h>
 #include <sound/uda1380.h>
 
-#include <mach/magician.h>
+#include <mach-pxa/magician.h>
 #include <asm/mach-types.h>
 #include "../codecs/uda1380.h"
 #include "pxa2xx-i2s.h"

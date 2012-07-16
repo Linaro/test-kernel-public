@@ -14,10 +14,10 @@
 #include <linux/gpio.h>
 #include <linux/io.h>
 #include <asm/mach/arch.h>
-#include <plat/irq.h>
+#include <plat-orion/irq.h>
 #include <asm/mach/irq.h>
-#include <mach/pm.h>
-#include <mach/bridge-regs.h>
+#include <mach-dove/pm.h>
+#include <mach-dove/bridge-regs.h>
 #include "common.h"
 
 static void gpio_irq_handler(unsigned int irq, struct irq_desc *desc)

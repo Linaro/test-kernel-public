@@ -910,6 +910,7 @@ static __always_inline bool __is_kfree_rcu_offset(unsigned long offset)
 	return offset < 4096;
 }
 
+#if 0
 static __always_inline
 void __kfree_rcu(struct rcu_head *head, unsigned long offset)
 {
@@ -922,6 +923,7 @@ void __kfree_rcu(struct rcu_head *head, unsigned long offset)
 
 	kfree_call_rcu(head, (rcu_callback)offset);
 }
+#endif
 
 /*
  * Does the specified offset indicate that the corresponding rcu_head

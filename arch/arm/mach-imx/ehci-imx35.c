@@ -16,8 +16,8 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/mxc_ehci.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/mxc_ehci.h>
 
 #define USBCTRL_OTGBASE_OFFSET	0x600
 

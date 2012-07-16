@@ -8,8 +8,8 @@
 #include <linux/io.h>
 #include <linux/syscore_ops.h>
 
-#include <mach/hardware.h>
-#include <mach/smemc.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/smemc.h>
 
 #ifdef CONFIG_PM
 static unsigned long msc[2];

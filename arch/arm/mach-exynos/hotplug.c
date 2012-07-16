@@ -19,7 +19,7 @@
 #include <asm/cp15.h>
 #include <asm/smp_plat.h>
 
-#include <mach/regs-pmu.h>
+#include <mach-exynos/regs-pmu.h>
 
 extern volatile int pen_release;
 

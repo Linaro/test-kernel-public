@@ -28,10 +28,10 @@
 #include "prm44xx.h"
 
 #include <asm/cpu.h>
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 #include "powerdomain.h"
 #include "clockdomain.h"
-#include <plat/prcm.h>
+#include <plat-omap/prcm.h>
 
 #include "pm.h"
 

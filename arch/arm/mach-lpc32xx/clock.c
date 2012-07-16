@@ -94,8 +94,8 @@
 #include <linux/amba/clcd.h>
 #include <linux/clkdev.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-lpc32xx/hardware.h>
+#include <mach-lpc32xx/platform.h>
 #include "clock.h"
 #include "common.h"
 

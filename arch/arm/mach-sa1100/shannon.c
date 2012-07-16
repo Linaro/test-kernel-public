@@ -11,7 +11,7 @@
 
 #include <video/sa1100fb.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/setup.h>
 
@@ -19,9 +19,9 @@
 #include <asm/mach/flash.h>
 #include <asm/mach/map.h>
 #include <asm/mach/serial_sa1100.h>
-#include <mach/mcp.h>
-#include <mach/shannon.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/mcp.h>
+#include <mach-sa1100/shannon.h>
+#include <mach-sa1100/irqs.h>
 
 #include "generic.h"
 

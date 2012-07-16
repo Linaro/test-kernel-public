@@ -16,8 +16,8 @@
 #include <media/videobuf-dma-contig.h>
 #include <media/v4l2-device.h>
 
-#include <plat/dma.h>
-#include <plat/vrfb.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/vrfb.h>
 
 #include "omap_voutdef.h"
 #include "omap_voutlib.h"

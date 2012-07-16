@@ -40,8 +40,8 @@
 #include <linux/regulator/consumer.h>
 #include <linux/io.h>
 
-#include <mach/pxa2xx-regs.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/smemc.h>
 
 #ifdef DEBUG
 static unsigned int freq_debug;

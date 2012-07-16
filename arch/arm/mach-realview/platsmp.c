@@ -13,14 +13,14 @@
 #include <linux/smp.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-realview/hardware.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
 #include <asm/smp_scu.h>
 
-#include <mach/board-eb.h>
-#include <mach/board-pb11mp.h>
-#include <mach/board-pbx.h>
+#include <mach-realview/board-eb.h>
+#include <mach-realview/board-pb11mp.h>
+#include <mach-realview/board-pbx.h>
 
 #include "core.h"
 

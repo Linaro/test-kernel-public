@@ -30,10 +30,10 @@
 #include <crypto/des.h>
 #include <crypto/scatterwalk.h>
 
-#include <plat/ste_dma40.h>
+#include <plat-nomadik/ste_dma40.h>
 
-#include <mach/crypto-ux500.h>
-#include <mach/hardware.h>
+#include <mach-ux500/crypto-ux500.h>
+#include <mach-ux500/hardware.h>
 
 #include "cryp_p.h"
 #include "cryp.h"

@@ -26,7 +26,7 @@
 #include <sound/pcm.h>
 #include <sound/soc.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-ep93xx/hardware.h>
 #include "ep93xx-pcm.h"
 
 static int edb93xx_hw_params(struct snd_pcm_substream *substream,

@@ -31,24 +31,24 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/bast-map.h>
-#include <mach/bast-irq.h>
-#include <mach/bast-cpld.h>
+#include <mach-s3c24xx/bast-map.h>
+#include <mach-s3c24xx/bast-irq.h>
+#include <mach-s3c24xx/bast-cpld.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
 //#include <asm/debug-ll.h>
-#include <plat/regs-serial.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-mem.h>
-#include <mach/regs-lcd.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/regs-lcd.h>
 
-#include <plat/hwmon.h>
-#include <plat/nand.h>
-#include <plat/iic.h>
-#include <mach/fb.h>
+#include <plat-samsung/hwmon.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/iic.h>
+#include <mach-s3c24xx/fb.h>
 
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/nand.h>
@@ -57,12 +57,12 @@
 
 #include <linux/serial_8250.h>
 
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/cpu-freq.h>
-#include <plat/gpio-cfg.h>
-#include <plat/audio-simtec.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/cpu-freq.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/audio-simtec.h>
 
 #include "simtec.h"
 #include "common.h"

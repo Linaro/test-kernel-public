@@ -28,28 +28,28 @@
 #include <linux/io.h>
 #include <linux/mmc/host.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <mach/fb.h>
-#include <mach/leds-gpio.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-lcd.h>
+#include <mach-s3c24xx/fb.h>
+#include <mach-s3c24xx/leds-gpio.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-lcd.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
 
-#include <plat/iic.h>
-#include <plat/regs-serial.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/regs-serial.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/mci.h>
-#include <plat/s3c2410.h>
-#include <plat/udc.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/mci.h>
+#include <plat-samsung/s3c2410.h>
+#include <plat-samsung/udc.h>
 
 #include "common.h"
 

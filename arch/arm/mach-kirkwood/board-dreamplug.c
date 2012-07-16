@@ -30,9 +30,9 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
-#include <mach/kirkwood.h>
-#include <mach/bridge-regs.h>
-#include <plat/mvsdio.h>
+#include <mach-kirkwood/kirkwood.h>
+#include <mach-kirkwood/bridge-regs.h>
+#include <plat-orion/mvsdio.h>
 #include "common.h"
 #include "mpp.h"
 
