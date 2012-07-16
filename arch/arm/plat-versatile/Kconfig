@@ -1,5 +1,10 @@
 if PLAT_VERSATILE
 
+config PLAT_VERSATILE_CLOCK
+	bool
+	default y
+	depends on !COMMON_CLK
+
 config PLAT_VERSATILE_CLCD
 	bool
 
