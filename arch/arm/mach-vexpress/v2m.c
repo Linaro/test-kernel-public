@@ -72,7 +72,8 @@ static void __init v2m_sysctl_init(void __iomem *base)
 	writel(scctrl, base + SCCTRL);
 }
 
-static void __init v2m_sp804_init(void __iomem *base, unsigned int irq)
+static void __init v2m_sp804_init(void __iomem *base, unsigned int irq,
+				  int use_sched_clock)
 {
 	if (WARN_ON(!base || irq == NO_IRQ))
 		return;
@@ -80,7 +81,10 @@ static void __init v2m_sp804_init(void __iomem *base, unsigned int irq)
 	writel(0, base + TIMER_1_BASE + TIMER_CTRL);
 	writel(0, base + TIMER_2_BASE + TIMER_CTRL);
 
-	sp804_clocksource_init(base + TIMER_2_BASE, "v2m-timer1");
+	if (use_sched_clock)
+		sp804_clocksource_and_sched_clock_init(base + TIMER_2_BASE, "v2m-timer1");
+	else
+		sp804_clocksource_init(base + TIMER_2_BASE, "v2m-timer1");
 	sp804_clockevents_init(base + TIMER_1_BASE, irq, "v2m-timer0");
 }
 
@@ -437,7 +441,7 @@ static void __init v2m_timer_init(void)
 	v2m_clk_init();
 	if (ct_desc->init_clk)
 		ct_desc->init_clk();
-	v2m_sp804_init(ioremap(V2M_TIMER01, SZ_4K), IRQ_V2M_TIMER0);
+	v2m_sp804_init(ioremap(V2M_TIMER01, SZ_4K), IRQ_V2M_TIMER0, 0);
 }
 
 static struct sys_timer v2m_timer = {
@@ -655,6 +659,7 @@ static void __init v2m_dt_init_irq(void)
 
 static void __init v2m_dt_timer_init(void)
 {
+	int sp804_sched_clock = arch_timer_broken_for_sched_clock();
 	struct device_node *node;
 	const char *path;
 	int err;
@@ -669,11 +674,11 @@ static void __init v2m_dt_timer_init(void)
 	if (WARN_ON(err))
 		return;
 	node = of_find_node_by_path(path);
-	v2m_sp804_init(of_iomap(node, 0), irq_of_parse_and_map(node, 0));
+	v2m_sp804_init(of_iomap(node, 0), irq_of_parse_and_map(node, 0), sp804_sched_clock);
 	if (arch_timer_of_register() != 0)
 		twd_local_timer_of_register();
 
-	if (arch_timer_sched_clock_init() != 0)
+	if (!sp804_sched_clock && arch_timer_sched_clock_init() != 0)
 		versatile_sched_clock_init(v2m_sysreg_base + V2M_SYS_24MHZ, 24000000);
 
 	if (v2m_dt_hdlcd_osc.site) {
