@@ -176,6 +176,10 @@ struct event_format *trace_find_event(int type)
 	return pevent_find_event(pevent, type);
 }
 
+struct event_format *trace_find_event_by_name(const char *sys, const char *name)
+{
+	return pevent_find_event_by_name(pevent, sys, name);
+}
 
 void print_trace_event(int cpu, void *data, int size)
 {
