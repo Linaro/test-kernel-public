@@ -30,7 +30,7 @@
 #include <linux/spi/pxa2xx_spi.h>
 #include <linux/mtd/sharpsl.h>
 
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/irq.h>
 #include <asm/setup.h>
@@ -39,12 +39,12 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/pxa25x.h>
-#include <mach/mmc.h>
-#include <mach/udc.h>
-#include <mach/irda.h>
-#include <mach/poodle.h>
-#include <mach/pxafb.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/poodle.h>
+#include <mach-pxa/pxafb.h>
 
 #include <asm/hardware/scoop.h>
 #include <asm/hardware/locomo.h>

@@ -19,9 +19,9 @@
 #include <linux/slab.h>
 #include <linux/module.h>
 
-#include <mach/hardware.h>
-#include <mach/regs-gpio.h>
-#include <mach/leds-gpio.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/leds-gpio.h>
 
 /* our context */
 

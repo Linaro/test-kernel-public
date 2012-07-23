@@ -35,10 +35,10 @@
 #include <linux/pm.h>
 #include <linux/device.h>
 
-#include <mach/map.h>
-#include <mach/regs-clock.h>
-#include <mach/regs-ldm.h>
-#include <mach/fb.h>
+#include <mach-w90x900/map.h>
+#include <mach-w90x900/regs-clock.h>
+#include <mach-w90x900/regs-ldm.h>
+#include <mach-w90x900/fb.h>
 
 #include "nuc900fb.h"
 

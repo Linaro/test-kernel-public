@@ -15,7 +15,7 @@
 
 #include <linux/clk.h>
 
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 int omap1_clk_init(void);
 void omap1_clk_late_init(void);

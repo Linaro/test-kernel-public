@@ -17,8 +17,8 @@
 
 #include <asm/sched_clock.h>
 
-#include <mach/setup.h>
-#include <mach/hardware.h>
+#include <mach-ux500/setup.h>
+#include <mach-ux500/hardware.h>
 
 #define RATE_32K		32768
 

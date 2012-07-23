@@ -26,7 +26,7 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 
-#include <mach/dma.h>
+#include <mach-ep93xx/dma.h>
 
 #include "dmaengine.h"
 

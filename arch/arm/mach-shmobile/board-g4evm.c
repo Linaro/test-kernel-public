@@ -34,9 +34,9 @@
 #include <linux/mmc/sh_mobile_sdhi.h>
 #include <linux/gpio.h>
 #include <linux/dma-mapping.h>
-#include <mach/irqs.h>
-#include <mach/sh7377.h>
-#include <mach/common.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh7377.h>
+#include <mach-shmobile/common.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 

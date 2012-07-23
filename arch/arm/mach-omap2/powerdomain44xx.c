@@ -18,7 +18,7 @@
 #include <linux/bug.h>
 
 #include "powerdomain.h"
-#include <plat/prcm.h>
+#include <plat-omap/prcm.h>
 #include "prm2xxx_3xxx.h"
 #include "prm44xx.h"
 #include "prminst44xx.h"

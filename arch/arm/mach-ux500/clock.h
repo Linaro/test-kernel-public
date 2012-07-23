@@ -157,7 +157,7 @@ int clk_debugfs_init(void);
 static inline int clk_debugfs_init(void) { return 0; }
 #endif
 
-#ifdef CONFIG_CPU_FREQ
+#if defined(CONFIG_CPU_FREQ) && !defined(CONFIG_COMMON_CLK)
 int clk_init_smp_twd_cpufreq(void);
 #else
 static inline int clk_init_smp_twd_cpufreq(void) { return 0; }

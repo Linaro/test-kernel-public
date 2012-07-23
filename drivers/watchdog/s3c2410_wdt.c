@@ -47,7 +47,7 @@
 #undef S3C_VA_WATCHDOG
 #define S3C_VA_WATCHDOG (0)
 
-#include <plat/regs-watchdog.h>
+#include <plat-samsung/regs-watchdog.h>
 
 #define CONFIG_S3C2410_WATCHDOG_ATBOOT		(0)
 #define CONFIG_S3C2410_WATCHDOG_DEFAULT_TIME	(15)

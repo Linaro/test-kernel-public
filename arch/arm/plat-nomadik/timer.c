@@ -20,6 +20,10 @@
 #include <asm/mach/time.h>
 #include <asm/sched_clock.h>
 
+#ifdef CONFIG_ARCH_MULTI_UX500
+#include <mach-ux500/irqs.h>
+#endif
+
 /*
  * The MTU device hosts four different counters, with 4 set of
  * registers. These are register names.

@@ -28,10 +28,10 @@
 #include <linux/gpio.h>
 #include <linux/dma-mapping.h>
 #include <linux/smsc911x.h>
-#include <mach/hardware.h>
-#include <mach/r8a7779.h>
-#include <mach/common.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/hardware.h>
+#include <mach-shmobile/r8a7779.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>

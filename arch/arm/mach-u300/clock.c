@@ -27,8 +27,8 @@
 #include <linux/seq_file.h>
 #include <linux/clkdev.h>
 
-#include <mach/hardware.h>
-#include <mach/syscon.h>
+#include <mach-u300/hardware.h>
+#include <mach-u300/syscon.h>
 
 #include "clock.h"
 

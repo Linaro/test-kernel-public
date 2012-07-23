@@ -28,7 +28,7 @@
 #include <asm/plat-sffsdr/sffsdr-fpga.h>
 #endif
 
-#include <mach/edma.h>
+#include <mach-davinci/edma.h>
 
 #include "../codecs/pcm3008.h"
 #include "davinci-pcm.h"

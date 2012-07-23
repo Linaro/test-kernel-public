@@ -45,9 +45,9 @@
 #include <asm/irq.h>
 #include <asm/mach/irq.h>
 
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "common.h"
 

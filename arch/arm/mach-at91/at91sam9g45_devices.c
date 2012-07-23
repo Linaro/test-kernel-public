@@ -24,14 +24,14 @@
 #include <linux/fb.h>
 #include <video/atmel_lcdc.h>
 
-#include <mach/at91_adc.h>
-#include <mach/board.h>
-#include <mach/at91sam9g45.h>
-#include <mach/at91sam9g45_matrix.h>
-#include <mach/at91_matrix.h>
-#include <mach/at91sam9_smc.h>
-#include <mach/at_hdmac.h>
-#include <mach/atmel-mci.h>
+#include <mach-at91/at91_adc.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91sam9g45.h>
+#include <mach-at91/at91sam9g45_matrix.h>
+#include <mach-at91/at91_matrix.h>
+#include <mach-at91/at91sam9_smc.h>
+#include <mach-at91/at_hdmac.h>
+#include <mach-at91/atmel-mci.h>
 
 #include <media/atmel-isi.h>
 

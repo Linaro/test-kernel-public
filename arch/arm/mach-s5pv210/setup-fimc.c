@@ -9,8 +9,8 @@
  */
 
 #include <linux/gpio.h>
-#include <plat/gpio-cfg.h>
-#include <plat/camport.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/camport.h>
 
 int s5pv210_fimc_setup_gpio(enum s5p_camport_id id)
 {

@@ -112,6 +112,7 @@ config SND_OMAP_SOC_OMAP_ABE_TWL6040
 config SND_OMAP_SOC_OMAP_HDMI
 	tristate "SoC Audio support for Texas Instruments OMAP HDMI"
 	depends on SND_OMAP_SOC && OMAP4_DSS_HDMI && OMAP2_DSS
+	depends on BROKEN
 	select SND_OMAP_SOC_HDMI
 	select SND_SOC_OMAP_HDMI_CODEC
 	select OMAP4_DSS_HDMI_AUDIO

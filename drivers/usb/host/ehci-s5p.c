@@ -14,8 +14,8 @@
 
 #include <linux/clk.h>
 #include <linux/platform_device.h>
-#include <plat/ehci.h>
-#include <plat/usb-phy.h>
+#include <plat-samsung/ehci.h>
+#include <plat-samsung/usb-phy.h>
 
 #define EHCI_INSNREG00(base)			(base + 0x90)
 #define EHCI_INSNREG00_ENA_INCR16		(0x1 << 25)

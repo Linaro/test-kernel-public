@@ -24,14 +24,14 @@
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/pxa3xx.h>
-#include <mach/audio.h>
-#include <mach/pxafb.h>
-#include <mach/zylonite.h>
-#include <mach/mmc.h>
-#include <mach/ohci.h>
-#include <plat/pxa27x_keypad.h>
-#include <plat/pxa3xx_nand.h>
+#include <mach-pxa/pxa3xx.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/zylonite.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/ohci.h>
+#include <plat-pxa/pxa27x_keypad.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 #include "devices.h"
 #include "generic.h"

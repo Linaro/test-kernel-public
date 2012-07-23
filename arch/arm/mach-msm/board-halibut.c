@@ -21,16 +21,16 @@
 #include <linux/io.h>
 #include <linux/delay.h>
 
-#include <mach/hardware.h>
+#include <mach-msm/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/flash.h>
 #include <asm/setup.h>
 
-#include <mach/irqs.h>
-#include <mach/board.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/irqs.h>
+#include <mach-msm/board.h>
+#include <mach-msm/msm_iomap.h>
 
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>

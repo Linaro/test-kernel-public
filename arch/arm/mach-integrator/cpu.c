@@ -18,8 +18,8 @@
 #include <linux/init.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
 #include <asm/mach-types.h>
 #include <asm/hardware/icst.h>
 

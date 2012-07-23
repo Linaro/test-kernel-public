@@ -22,7 +22,7 @@
 
 #include <linux/atomic.h>
 
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
 #include "voltage.h"
 

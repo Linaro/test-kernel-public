@@ -31,20 +31,20 @@
 #include <asm/hardware/vic.h>
 #include <asm/system_misc.h>
 
-#include <mach/map.h>
-#include <mach/hardware.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/hardware.h>
+#include <mach-s3c64xx/regs-gpio.h>
 
-#include <plat/cpu.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/pm.h>
-#include <plat/gpio-cfg.h>
-#include <plat/irq-uart.h>
-#include <plat/irq-vic-timer.h>
-#include <plat/regs-irqtype.h>
-#include <plat/regs-serial.h>
-#include <plat/watchdog-reset.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/irq-uart.h>
+#include <plat-samsung/irq-vic-timer.h>
+#include <plat-samsung/regs-irqtype.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/watchdog-reset.h>
 
 #include "common.h"
 

@@ -28,11 +28,11 @@
 #include <asm/io.h>
 #include <asm/setup.h>
 
-#include <mach/board.h>
-#include <mach/irqs.h>
-#include <mach/sirc.h>
-#include <mach/vreg.h>
-#include <mach/mmc.h>
+#include <mach-msm/board.h>
+#include <mach-msm/irqs.h>
+#include <mach-msm/sirc.h>
+#include <mach-msm/vreg.h>
+#include <mach-msm/mmc.h>
 
 #include "devices.h"
 

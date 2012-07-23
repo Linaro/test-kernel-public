@@ -28,6 +28,7 @@
 #include <linux/kernel.h>
 #include <linux/slab.h>
 
+#include <plat-omap/irqs.h>
 #include "omap_l3_noc.h"
 
 /*

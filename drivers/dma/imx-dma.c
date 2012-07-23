@@ -28,8 +28,8 @@
 #include <linux/module.h>
 
 #include <asm/irq.h>
-#include <mach/dma.h>
-#include <mach/hardware.h>
+#include <mach-imx/dma.h>
+#include <mach-imx/hardware.h>
 
 #include "dmaengine.h"
 #define IMXDMA_MAX_CHAN_DESCRIPTORS	16

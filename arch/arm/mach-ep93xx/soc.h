@@ -13,7 +13,7 @@
 #ifndef _EP93XX_SOC_H
 #define _EP93XX_SOC_H
 
-#include <mach/ep93xx-regs.h>
+#include <mach-ep93xx/ep93xx-regs.h>
 
 /*
  * EP93xx Physical Memory Map:

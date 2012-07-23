@@ -18,19 +18,19 @@
  */
 #include <linux/pci.h>
 
-#include <mach/hardware.h>
+#include <mach-iop13xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach/pci.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/pci.h>
+#include <mach-iop13xx/pci.h>
 #include <asm/mach/time.h>
-#include <mach/time.h>
+#include <mach-iop13xx/time.h>
 
 extern int init_atu;
 
 static int __init
-iq81340sc_atux_map_irq(struct pci_dev *dev, u8 idsel, u8 pin)
+iq81340sc_atux_map_irq(const struct pci_dev *dev, u8 idsel, u8 pin)
 {
 	WARN_ON(idsel < 1 || idsel > 2);
 

@@ -18,10 +18,10 @@
 
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-exynos/hardware.h>
+#include <mach-exynos/map.h>
 
-#include <plat/devs.h>
+#include <plat-samsung/devs.h>
 
 #define EXYNOS_UART_RESOURCE(_series, _nr)	\
 static struct resource exynos##_series##_uart##_nr##_resource[] = {	\

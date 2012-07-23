@@ -90,7 +90,7 @@
 
 #include <asm/cputype.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 
 #include "generic.h"
 

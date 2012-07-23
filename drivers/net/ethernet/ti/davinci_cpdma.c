@@ -20,6 +20,7 @@
 #include <linux/err.h>
 #include <linux/dma-mapping.h>
 #include <linux/io.h>
+#include <linux/export.h>
 
 #include "davinci_cpdma.h"
 

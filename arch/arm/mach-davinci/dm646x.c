@@ -16,16 +16,16 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/cputype.h>
-#include <mach/edma.h>
-#include <mach/irqs.h>
-#include <mach/psc.h>
-#include <mach/mux.h>
-#include <mach/time.h>
-#include <mach/serial.h>
-#include <mach/common.h>
-#include <mach/asp.h>
-#include <mach/gpio-davinci.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/edma.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/psc.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/time.h>
+#include <mach-davinci/serial.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/asp.h>
+#include <mach-davinci/gpio-davinci.h>
 
 #include "davinci.h"
 #include "clock.h"

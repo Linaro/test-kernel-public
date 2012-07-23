@@ -32,21 +32,21 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/map.h>
-#include <mach/hardware.h>
-#include <mach/regs-clock.h>
+#include <mach-s5pc100/map.h>
+#include <mach-s5pc100/hardware.h>
+#include <mach-s5pc100/regs-clock.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/clock.h>
-#include <plat/sdhci.h>
-#include <plat/adc-core.h>
-#include <plat/ata-core.h>
-#include <plat/fb-core.h>
-#include <plat/iic-core.h>
-#include <plat/onenand-core.h>
-#include <plat/regs-serial.h>
-#include <plat/watchdog-reset.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/adc-core.h>
+#include <plat-samsung/ata-core.h>
+#include <plat-samsung/fb-core.h>
+#include <plat-samsung/iic-core.h>
+#include <plat-samsung/onenand-core.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/watchdog-reset.h>
 
 #include "common.h"
 
