@@ -8,7 +8,7 @@
 
 #include <video/sa1100fb.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/page.h>
@@ -16,13 +16,13 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/serial_sa1100.h>
-#include <mach/mcp.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/mcp.h>
+#include <mach-sa1100/irqs.h>
 
 #include "generic.h"
 
 
-#warning "include/asm/arch-sa1100/ide.h needs fixing for lart"
+//#warning "include/asm/arch-sa1100/ide.h needs fixing for lart"
 
 static struct mcp_plat_data lart_mcp_data = {
 	.mccr0		= MCCR0_ADM,

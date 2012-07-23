@@ -21,8 +21,8 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/gpio.h>
-#include <mach/r8a7740.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/r8a7740.h>
+#include <mach-shmobile/irqs.h>
 
 #define CPU_ALL_PORT(fn, pfx, sfx)					\
 	PORT_10(fn, pfx, sfx),		PORT_90(fn, pfx, sfx),		\

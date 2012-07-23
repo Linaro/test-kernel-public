@@ -33,8 +33,8 @@
 #include <linux/dma-mapping.h>
 #include <linux/mmc/mmc.h>
 
-#include <mach/mmc.h>
-#include <mach/edma.h>
+#include <mach-davinci/mmc.h>
+#include <mach-davinci/edma.h>
 
 /*
  * Register Definitions

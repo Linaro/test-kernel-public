@@ -22,7 +22,7 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/dove.h>
+#include <mach-dove/dove.h>
 
 #include "common.h"
 

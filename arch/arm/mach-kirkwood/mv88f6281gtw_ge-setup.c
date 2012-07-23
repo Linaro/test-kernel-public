@@ -27,7 +27,7 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/pci.h>
-#include <mach/kirkwood.h>
+#include <mach-kirkwood/kirkwood.h>
 #include "common.h"
 #include "mpp.h"
 

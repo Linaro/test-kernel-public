@@ -20,8 +20,8 @@
 
 #include <asm/exception.h>
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/irqs.h>
 
 #include "generic.h"
 

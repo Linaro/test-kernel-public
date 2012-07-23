@@ -90,9 +90,9 @@
 #include <linux/of.h>
 #include <linux/notifier.h>
 
-#include <plat/omap_device.h>
-#include <plat/omap_hwmod.h>
-#include <plat/clock.h>
+#include <plat-omap/omap_device.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/clock.h>
 
 /* These parameters are passed to _omap_device_{de,}activate() */
 #define USE_WAKEUP_LAT			0

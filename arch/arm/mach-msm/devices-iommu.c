@@ -19,8 +19,8 @@
 #include <linux/platform_device.h>
 #include <linux/bootmem.h>
 #include <linux/module.h>
-#include <mach/irqs.h>
-#include <mach/iommu.h>
+#include <mach-msm/irqs.h>
+#include <mach-msm/iommu.h>
 
 static struct resource msm_iommu_jpegd_resources[] = {
 	{

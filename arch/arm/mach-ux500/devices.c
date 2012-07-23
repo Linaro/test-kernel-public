@@ -11,8 +11,8 @@
 #include <linux/io.h>
 #include <linux/amba/bus.h>
 
-#include <mach/hardware.h>
-#include <mach/setup.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/setup.h>
 
 void __init amba_add_devices(struct amba_device *devs[], int num)
 {

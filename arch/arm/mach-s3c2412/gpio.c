@@ -21,10 +21,10 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/hardware.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/hardware.h>
 
-#include <plat/gpio-core.h>
+#include <plat-samsung/gpio-core.h>
 
 int s3c2412_gpio_set_sleepcfg(unsigned int pin, unsigned int state)
 {

@@ -31,8 +31,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/flash.h>
 
-#include <mach/pxa930.h>
-#include <mach/pxafb.h>
+#include <mach-pxa/pxa930.h>
+#include <mach-pxa/pxafb.h>
 
 #include "devices.h"
 #include "generic.h"

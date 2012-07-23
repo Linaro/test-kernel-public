@@ -12,7 +12,7 @@
 #include <linux/init.h>
 #include <linux/mbus.h>
 #include <linux/io.h>
-#include <plat/addr-map.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 /*
@@ -37,7 +37,7 @@
 #define WIN0_OFF(n)		(BRIDGE_VIRT_BASE + 0x0000 + ((n) << 4))
 #define WIN8_OFF(n)		(BRIDGE_VIRT_BASE + 0x0900 + (((n) - 8) << 4))
 
-static void __init __iomem *win_cfg_base(int win)
+static void __init __iomem *win_cfg_base(const struct orion_addr_map_cfg *cfg, int win)
 {
 	/*
 	 * Find the control register base address for this window.
@@ -53,7 +53,7 @@ static void __init __iomem *win_cfg_base(int win)
 /*
  * Description of the windows needed by the platform code
  */
-static struct __initdata orion_addr_map_cfg addr_map_cfg = {
+static struct orion_addr_map_cfg addr_map_cfg __initdata = {
 	.num_wins = 14,
 	.remappable_wins = 8,
 	.win_cfg_base = win_cfg_base,

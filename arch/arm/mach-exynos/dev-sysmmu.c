@@ -13,11 +13,11 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 
-#include <plat/cpu.h>
+#include <plat-samsung/cpu.h>
 
-#include <mach/map.h>
-#include <mach/irqs.h>
-#include <mach/sysmmu.h>
+#include <mach-exynos/map.h>
+#include <mach-exynos/irqs.h>
+#include <mach-exynos/sysmmu.h>
 
 static u64 exynos_sysmmu_dma_mask = DMA_BIT_MASK(32);
 

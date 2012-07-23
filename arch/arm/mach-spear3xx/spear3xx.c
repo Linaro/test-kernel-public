@@ -19,9 +19,9 @@
 #include <linux/io.h>
 #include <asm/hardware/pl080.h>
 #include <asm/hardware/vic.h>
-#include <plat/pl080.h>
-#include <mach/generic.h>
-#include <mach/spear.h>
+#include <plat-spear/pl080.h>
+#include <mach-spear3xx/generic.h>
+#include <mach-spear3xx/spear.h>
 
 /* ssp device registration */
 struct pl022_ssp_controller pl022_plat_data = {

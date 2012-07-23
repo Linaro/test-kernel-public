@@ -25,8 +25,8 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/corgi.h>
-#include <mach/audio.h>
+#include <mach-pxa/corgi.h>
+#include <mach-pxa/audio.h>
 
 #include "../codecs/wm8731.h"
 #include "pxa2xx-i2s.h"

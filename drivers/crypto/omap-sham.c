@@ -37,9 +37,9 @@
 #include <crypto/hash.h>
 #include <crypto/internal/hash.h>
 
-#include <plat/cpu.h>
-#include <plat/dma.h>
-#include <mach/irqs.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/dma.h>
+#include <mach-omap2/irqs.h>
 
 #define SHA_REG_DIGEST(x)		(0x00 + ((x) * 0x04))
 #define SHA_REG_DIN(x)			(0x1C + ((x) * 0x04))
@@ -1278,7 +1278,7 @@ static int __devexit omap_sham_remove(struct platform_device *pdev)
 
 static struct platform_driver omap_sham_driver = {
 	.probe	= omap_sham_probe,
-	.remove	= omap_sham_remove,
+	.remove	= __devexit_p(omap_sham_remove),
 	.driver	= {
 		.name	= "omap-sham",
 		.owner	= THIS_MODULE,

@@ -26,7 +26,7 @@
 
 #include <linux/dma-mapping.h>
 
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
 #include "omap_voutlib.h"
 

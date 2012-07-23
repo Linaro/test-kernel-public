@@ -16,9 +16,9 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/irq.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/irq.h>
 
 #include <asm/irq.h>
 

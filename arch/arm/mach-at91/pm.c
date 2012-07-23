@@ -25,8 +25,8 @@
 #include <asm/mach/time.h>
 #include <asm/mach/irq.h>
 
-#include <mach/at91_pmc.h>
-#include <mach/cpu.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/cpu.h>
 
 #include "generic.h"
 #include "pm.h"
@@ -35,8 +35,8 @@
  * Show the reason for the previous system reset.
  */
 
-#include <mach/at91_rstc.h>
-#include <mach/at91_shdwc.h>
+#include <mach-at91/at91_rstc.h>
+#include <mach-at91/at91_shdwc.h>
 
 static void __init show_reset_status(void)
 {
@@ -134,7 +134,9 @@ static int at91_pm_begin(suspend_state_t state)
 static int at91_pm_verify_clocks(void)
 {
 	unsigned long scsr;
+#ifdef CONFIG_AT91_PROGRAMMABLE_CLOCKS
 	int i;
+#endif
 
 	scsr = at91_pmc_read(AT91_PMC_SCSR);
 

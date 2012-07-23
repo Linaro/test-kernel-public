@@ -18,12 +18,12 @@
 #include <linux/io.h>
 #include <linux/irq.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
-#include <mach/cputype.h>
-#include <mach/addr-map.h>
-#include <mach/pm-pxa910.h>
-#include <mach/regs-icu.h>
-#include <mach/irqs.h>
+#include <mach-mmp/hardware.h>
+#include <mach-mmp/cputype.h>
+#include <mach-mmp/addr-map.h>
+#include <mach-mmp/pm-pxa910.h>
+#include <mach-mmp/regs-icu.h>
+#include <mach-mmp/irqs.h>
 
 int pxa910_set_wake(struct irq_data *data, unsigned int on)
 {

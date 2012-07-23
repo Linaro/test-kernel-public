@@ -217,7 +217,7 @@ enum ddr_pwrst {
 
 #if defined(CONFIG_UX500_SOC_DB8500)
 
-#include <mach/id.h>
+#include <mach-ux500/id.h>
 
 static inline void __init prcmu_early_init(void)
 {

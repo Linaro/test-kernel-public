@@ -23,16 +23,16 @@
 #include <linux/err.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/regs-clock.h>
+#include <mach-s3c24xx/regs-clock.h>
 
-#include <plat/cpu.h>
-#include <plat/cpu-freq-core.h>
-#include <plat/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/cpu-freq-core.h>
+#include <plat-samsung/clock.h>
 
 static struct clk *xtal;
 static struct clk *fclk;

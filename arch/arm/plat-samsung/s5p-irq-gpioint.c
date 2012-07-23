@@ -19,8 +19,8 @@
 #include <linux/slab.h>
 
 #include <mach/map.h>
-#include <plat/gpio-core.h>
-#include <plat/gpio-cfg.h>
+#include <plat-samsung/gpio-core.h>
+#include <plat-samsung/gpio-cfg.h>
 
 #include <asm/mach/irq.h>
 

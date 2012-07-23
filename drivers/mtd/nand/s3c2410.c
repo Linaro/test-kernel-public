@@ -45,8 +45,8 @@
 
 #include <asm/io.h>
 
-#include <plat/regs-nand.h>
-#include <plat/nand.h>
+#include <plat-samsung/regs-nand.h>
+#include <plat-samsung/nand.h>
 
 #ifdef CONFIG_MTD_NAND_S3C2410_HWECC
 static int hardware_ecc = 1;

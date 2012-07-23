@@ -28,9 +28,9 @@
 #include <linux/io.h>
 #include <linux/wm97xx.h>
 
-#include <mach/hardware.h>
-#include <mach/mfp.h>
-#include <mach/regs-ac97.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/mfp.h>
+#include <mach-pxa/regs-ac97.h>
 
 struct continuous {
 	u16 id;    /* codec id */

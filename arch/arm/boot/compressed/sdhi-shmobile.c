@@ -18,7 +18,7 @@
 #include <linux/mmc/mmc.h>
 #include <linux/mmc/sd.h>
 #include <linux/mmc/tmio.h>
-#include <mach/sdhi.h>
+#include <mach-shmobile/sdhi.h>
 
 #define OCR_FASTBOOT		(1<<29)
 #define OCR_HCS			(1<<30)

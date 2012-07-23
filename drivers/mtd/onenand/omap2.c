@@ -38,13 +38,14 @@
 #include <linux/regulator/consumer.h>
 
 #include <asm/mach/flash.h>
-#include <plat/gpmc.h>
-#include <plat/onenand.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/onenand.h>
 #include <asm/gpio.h>
 
-#include <plat/dma.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/cpu.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 
 #define DRIVER_NAME "omap2-onenand"
 

@@ -19,8 +19,8 @@
 #include <linux/init.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/hardware.h>
+#include <mach-sa1100/irqs.h>
 #include <asm/hardware/ssp.h>
 
 #define TIMEOUT 100000

@@ -29,7 +29,7 @@
 
 #include <asm/assembler.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 
 #include "iomap.h"
 #include "sdrc.h"

@@ -24,17 +24,17 @@
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/smp_scu.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/pll.h>
-#include <plat/regs-srom.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/pll.h>
+#include <plat-samsung/regs-srom.h>
 
-#include <mach/regs-irq.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-clock.h>
-#include <mach/regs-pmu.h>
-#include <mach/pm-core.h>
-#include <mach/pmu.h>
+#include <mach-exynos/regs-irq.h>
+#include <mach-exynos/regs-gpio.h>
+#include <mach-exynos/regs-clock.h>
+#include <mach-exynos/regs-pmu.h>
+#include <mach-exynos/pm-core.h>
+#include <mach-exynos/pmu.h>
 
 static struct sleep_save exynos4_set_clksrc[] = {
 	{ .reg = EXYNOS4_CLKSRC_MASK_TOP		, .val = 0x00000001, },

@@ -31,7 +31,7 @@
 #include <linux/notifier.h>
 #include <linux/module.h>
 
-#include <plat/mailbox.h>
+#include <plat-omap/mailbox.h>
 
 static struct omap_mbox **mboxes;
 

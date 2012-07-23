@@ -14,7 +14,7 @@
 #include <linux/io.h>
 #include <linux/clkdev.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 
 struct clkops {
 	void			(*enable)(struct clk *);

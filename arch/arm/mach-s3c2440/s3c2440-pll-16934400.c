@@ -18,8 +18,8 @@
 #include <linux/clk.h>
 #include <linux/err.h>
 
-#include <plat/cpu.h>
-#include <plat/cpu-freq-core.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/cpu-freq-core.h>
 
 static struct cpufreq_frequency_table s3c2440_plls_169344[] __initdata = {
 	{ .frequency = 78019200,	.index = PLLVAL(121, 5, 3), 	}, 	/* FVco 624.153600 */

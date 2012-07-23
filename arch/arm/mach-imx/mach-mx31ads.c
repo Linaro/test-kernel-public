@@ -27,8 +27,9 @@
 #include <asm/mach/time.h>
 #include <asm/memory.h>
 #include <asm/mach/map.h>
-#include <mach/common.h>
-#include <mach/iomux-mx3.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx3.h>
 
 #ifdef CONFIG_MACH_MX31ADS_WM1133_EV1
 #include <linux/mfd/wm8350/audio.h>

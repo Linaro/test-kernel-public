@@ -18,7 +18,8 @@
 
 #include <linux/usb/musb.h>
 
-#include <plat/gpmc.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/gpio.h>
 
 #include "mux.h"
 

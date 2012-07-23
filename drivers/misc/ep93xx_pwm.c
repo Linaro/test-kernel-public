@@ -24,7 +24,7 @@
 #include <linux/err.h>
 #include <linux/io.h>
 
-#include <mach/platform.h>
+#include <mach-ep93xx/platform.h>
 
 #define EP93XX_PWMx_TERM_COUNT	0x00
 #define EP93XX_PWMx_DUTY_CYCLE	0x04
