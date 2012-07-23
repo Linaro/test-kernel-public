@@ -36,7 +36,7 @@
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 
-#include <mach/tegra_wm8903_pdata.h>
+#include <mach-tegra/tegra_wm8903_pdata.h>
 
 #include <sound/core.h>
 #include <sound/jack.h>

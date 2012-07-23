@@ -16,9 +16,9 @@
 #include <linux/compiler.h>
 #include <linux/dma-mapping.h>
 #include <linux/platform_device.h>
-#include <mach/cns3xxx.h>
-#include <mach/irqs.h>
-#include <mach/pm.h>
+#include <mach-cns3xxx/cns3xxx.h>
+#include <mach-cns3xxx/irqs.h>
+#include <mach-cns3xxx/pm.h>
 #include "core.h"
 #include "devices.h"
 

@@ -7,8 +7,8 @@
  * Free Software Foundation.
  */
 #include <asm/sizes.h>
-#include <mach/mx28.h>
-#include <mach/devices-common.h>
+#include <mach-mxs/mx28.h>
+#include <mach-mxs/devices-common.h>
 
 #define mxs_i2c_data_entry_single(soc, _id)				\
 	{								\

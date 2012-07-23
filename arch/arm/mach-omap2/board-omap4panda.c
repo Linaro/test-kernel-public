@@ -32,17 +32,17 @@
 #include <linux/wl12xx.h>
 #include <linux/platform_data/omap-abe-twl6040.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <video/omapdss.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/usb.h>
-#include <plat/mmc.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/mmc.h>
 #include <video/omap-panel-tfp410.h>
 
 #include "hsmmc.h"

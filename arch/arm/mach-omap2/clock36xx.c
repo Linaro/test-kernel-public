@@ -22,7 +22,7 @@
 #include <linux/clk.h>
 #include <linux/io.h>
 
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 #include "clock.h"
 #include "clock36xx.h"

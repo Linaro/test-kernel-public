@@ -19,10 +19,10 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/iomux-mx51.h>
-#include <mach/3ds_debugboard.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx51.h>
+#include <mach-imx/3ds_debugboard.h>
 
 #include "devices-imx51.h"
 

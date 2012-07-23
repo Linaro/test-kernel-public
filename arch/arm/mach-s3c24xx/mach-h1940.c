@@ -41,32 +41,32 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/regs-serial.h>
-#include <mach/regs-lcd.h>
-#include <mach/regs-clock.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-lcd.h>
+#include <mach-s3c24xx/regs-clock.h>
 
-#include <mach/regs-gpio.h>
-#include <mach/gpio-fns.h>
-#include <mach/gpio-nrs.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/gpio-fns.h>
+#include <mach-s3c24xx/gpio-nrs.h>
 
-#include <mach/h1940.h>
-#include <mach/h1940-latch.h>
-#include <mach/fb.h>
-#include <plat/udc.h>
-#include <plat/iic.h>
+#include <mach-s3c24xx/h1940.h>
+#include <mach-s3c24xx/h1940-latch.h>
+#include <mach-s3c24xx/fb.h>
+#include <plat-samsung/udc.h>
+#include <plat-samsung/iic.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/pll.h>
-#include <plat/pm.h>
-#include <plat/mci.h>
-#include <plat/ts.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pll.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/mci.h>
+#include <plat-samsung/ts.h>
 
 #include <sound/uda1380.h>
 

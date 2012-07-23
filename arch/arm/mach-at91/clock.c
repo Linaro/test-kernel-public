@@ -25,9 +25,9 @@
 #include <linux/io.h>
 #include <linux/of_address.h>
 
-#include <mach/hardware.h>
-#include <mach/at91_pmc.h>
-#include <mach/cpu.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/cpu.h>
 
 #include <asm/proc-fns.h>
 

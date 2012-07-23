@@ -23,11 +23,11 @@
 #include <linux/jiffies.h>
 #include <linux/export.h>
 #include <asm/irq.h>
-#include <mach/hardware.h>
+#include <mach-iop13xx/hardware.h>
 #include <asm/sizes.h>
 #include <asm/signal.h>
 #include <asm/mach/pci.h>
-#include <mach/pci.h>
+#include <mach-iop13xx/pci.h>
 
 #define IOP13XX_PCI_DEBUG 0
 #define PRINTK(x...) ((void)(IOP13XX_PCI_DEBUG && printk(x)))
@@ -506,7 +506,7 @@ iop13xx_pci_abort(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 
 /* Scan an IOP13XX PCI bus.  nr selects which ATU we use.
  */
-struct pci_bus *iop13xx_scan_bus(int nr, struct pci_sys_data *sys)
+struct pci_bus * __devinit iop13xx_scan_bus(int nr, struct pci_sys_data *sys)
 {
 	int which_atu;
 	struct pci_bus *bus = NULL;

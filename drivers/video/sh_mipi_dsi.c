@@ -127,7 +127,7 @@ static void sh_mipi_shutdown(struct platform_device *pdev)
 	sh_mipi_dsi_enable(mipi, false);
 }
 
-static int __init sh_mipi_setup(struct sh_mipi *mipi,
+static int sh_mipi_setup(struct sh_mipi *mipi,
 				struct sh_mipi_dsi_info *pdata)
 {
 	void __iomem *base = mipi->base;

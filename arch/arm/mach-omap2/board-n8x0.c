@@ -25,14 +25,14 @@
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/menelaus.h>
-#include <mach/irqs.h>
-#include <plat/mcspi.h>
-#include <plat/onenand.h>
-#include <plat/mmc.h>
-#include <plat/serial.h>
+#include <plat-omap/menelaus.h>
+#include <mach-omap2/irqs.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/onenand.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/serial.h>
 
 #include "mux.h"
 

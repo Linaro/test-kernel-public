@@ -29,8 +29,8 @@
 #include <linux/debugfs.h>
 #include <linux/delay.h>
 
-#include <mach/msm_smd.h>
-#include <mach/system.h>
+#include <mach-msm/msm_smd.h>
+#include <mach-msm/system.h>
 
 #include "smd_private.h"
 #include "proc_comm.h"

@@ -17,7 +17,7 @@
 #include <linux/debugfs.h>
 #include <linux/list.h>
 
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 #include "smd_private.h"
 

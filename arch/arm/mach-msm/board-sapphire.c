@@ -22,14 +22,14 @@
 
 #include <linux/delay.h>
 
-#include <mach/hardware.h>
+#include <mach-msm/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/flash.h>
-#include <mach/system.h>
-#include <mach/vreg.h>
-#include <mach/board.h>
+#include <mach-msm/system.h>
+#include <mach-msm/vreg.h>
+#include <mach-msm/board.h>
 
 #include <asm/io.h>
 #include <asm/delay.h>

@@ -16,10 +16,10 @@
 
 #include <asm/mach/flash.h>
 
-#include <plat/cpu.h>
-#include <plat/nand.h>
-#include <plat/board.h>
-#include <plat/gpmc.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/nand.h>
+#include <plat-omap/board.h>
+#include <plat-omap/gpmc.h>
 
 static struct resource gpmc_nand_resource = {
 	.flags		= IORESOURCE_MEM,

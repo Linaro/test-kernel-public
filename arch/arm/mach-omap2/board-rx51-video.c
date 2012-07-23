@@ -16,10 +16,10 @@
 #include <linux/mm.h>
 #include <asm/mach-types.h>
 #include <video/omapdss.h>
-#include <plat/vram.h>
-#include <plat/mcspi.h>
+#include <plat-omap/vram.h>
+#include <plat-omap/mcspi.h>
 
-#include <mach/board-rx51.h>
+#include <mach-omap2/board-rx51.h>
 
 #include "mux.h"
 

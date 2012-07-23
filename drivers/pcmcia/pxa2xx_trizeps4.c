@@ -22,8 +22,8 @@
 #include <asm/mach-types.h>
 #include <asm/irq.h>
 
-#include <mach/pxa2xx-regs.h>
-#include <mach/trizeps4.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/trizeps4.h>
 
 #include "soc_common.h"
 

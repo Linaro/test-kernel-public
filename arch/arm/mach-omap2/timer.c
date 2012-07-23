@@ -38,13 +38,15 @@
 #include <linux/slab.h>
 
 #include <asm/mach/time.h>
-#include <plat/dmtimer.h>
+#include <plat-omap/dmtimer.h>
 #include <asm/smp_twd.h>
 #include <asm/sched_clock.h>
 #include "common.h"
-#include <plat/omap_hwmod.h>
-#include <plat/omap_device.h>
-#include <plat/omap-pm.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/omap_device.h>
+#include <plat-omap/omap-pm.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
 
 #include "powerdomain.h"
 

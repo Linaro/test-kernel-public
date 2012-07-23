@@ -56,12 +56,12 @@
 #include <linux/freezer.h>
 #include <linux/console.h>
 
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/io.h>
 #include <asm/irq.h>
 #include <asm/div64.h>
-#include <mach/bitfield.h>
-#include <mach/pxafb.h>
+#include <mach-pxa/bitfield.h>
+#include <mach-pxa/pxafb.h>
 
 /*
  * Complain if VAR is out of range.

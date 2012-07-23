@@ -11,9 +11,9 @@
 
 #include <linux/linkage.h>
 #include <asm/assembler.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 
-#include <mach/pxa2xx-regs.h>
+#include <mach-pxa/pxa2xx-regs.h>
 
 		.text
 

@@ -21,12 +21,12 @@
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/csb726.h>
-#include <mach/pxa27x.h>
-#include <mach/mmc.h>
-#include <mach/ohci.h>
-#include <mach/audio.h>
-#include <mach/smemc.h>
+#include <mach-pxa/csb726.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/smemc.h>
 
 #include "generic.h"
 #include "devices.h"

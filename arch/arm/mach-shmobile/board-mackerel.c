@@ -55,9 +55,9 @@
 #include <sound/sh_fsi.h>
 #include <sound/simple_card.h>
 
-#include <mach/common.h>
-#include <mach/irqs.h>
-#include <mach/sh7372.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh7372.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>

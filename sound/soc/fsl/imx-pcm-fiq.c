@@ -29,7 +29,7 @@
 
 #include <asm/fiq.h>
 
-#include <mach/ssi.h>
+#include <mach-imx/ssi.h>
 
 #include "imx-ssi.h"
 

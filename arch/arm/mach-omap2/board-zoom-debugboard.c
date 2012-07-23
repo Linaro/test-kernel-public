@@ -17,10 +17,11 @@
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
 
-#include <plat/gpmc.h>
-#include <plat/gpmc-smsc911x.h>
+#include <plat-omap/serial.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/gpmc-smsc911x.h>
 
-#include <mach/board-zoom.h>
+#include <mach-omap2/board-zoom.h>
 
 #define ZOOM_SMSC911X_CS	7
 #define ZOOM_SMSC911X_GPIO	158

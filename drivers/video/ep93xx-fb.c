@@ -24,7 +24,7 @@
 #include <linux/clk.h>
 #include <linux/fb.h>
 
-#include <mach/fb.h>
+#include <mach-ep93xx/fb.h>
 
 /* Vertical Frame Timing Registers */
 #define EP93XXFB_VLINES_TOTAL			0x0000	/* SW locked */

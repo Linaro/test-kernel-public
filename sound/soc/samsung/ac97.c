@@ -20,8 +20,8 @@
 #include <sound/soc.h>
 
 #include <mach/dma.h>
-#include <plat/regs-ac97.h>
-#include <plat/audio.h>
+#include <plat-samsung/regs-ac97.h>
+#include <plat-samsung/audio.h>
 
 #include "dma.h"
 

@@ -38,10 +38,10 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/board.h>
-#include <mach/at91rm9200_mc.h>
-#include <mach/at91_ramc.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91rm9200_mc.h>
+#include <mach-at91/at91_ramc.h>
 
 #include "generic.h"
 

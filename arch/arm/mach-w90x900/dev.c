@@ -33,12 +33,12 @@
 #include <asm/mach/irq.h>
 #include <asm/mach-types.h>
 
-#include <mach/regs-serial.h>
-#include <mach/nuc900_spi.h>
-#include <mach/map.h>
-#include <mach/fb.h>
-#include <mach/regs-ldm.h>
-#include <mach/w90p910_keypad.h>
+#include <mach-w90x900/regs-serial.h>
+#include <mach-w90x900/nuc900_spi.h>
+#include <mach-w90x900/map.h>
+#include <mach-w90x900/fb.h>
+#include <mach-w90x900/regs-ldm.h>
+#include <mach-w90x900/w90p910_keypad.h>
 
 #include "cpu.h"
 

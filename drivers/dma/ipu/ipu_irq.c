@@ -15,7 +15,7 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/ipu.h>
+#include <mach-imx/ipu.h>
 
 #include "ipu_intern.h"
 

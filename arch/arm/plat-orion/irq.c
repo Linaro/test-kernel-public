@@ -12,7 +12,7 @@
 #include <linux/init.h>
 #include <linux/irq.h>
 #include <linux/io.h>
-#include <plat/irq.h>
+#include <plat-orion/irq.h>
 
 void __init orion_irq_init(unsigned int irq_start, void __iomem *maskaddr)
 {

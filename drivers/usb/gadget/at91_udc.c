@@ -33,15 +33,15 @@
 #include <linux/of_gpio.h>
 
 #include <asm/byteorder.h>
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/io.h>
 #include <asm/irq.h>
 #include <asm/gpio.h>
 
-#include <mach/board.h>
-#include <mach/cpu.h>
-#include <mach/at91sam9261_matrix.h>
-#include <mach/at91_matrix.h>
+#include <mach-at91/board.h>
+#include <mach-at91/cpu.h>
+#include <mach-at91/at91sam9261_matrix.h>
+#include <mach-at91/at91_matrix.h>
 
 #include "at91_udc.h"
 

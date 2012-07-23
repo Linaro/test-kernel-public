@@ -19,7 +19,7 @@ config NET_VENDOR_TI
 if NET_VENDOR_TI
 
 config TI_DAVINCI_EMAC
-	tristate "TI DaVinci EMAC Support"
+	bool "TI DaVinci EMAC Support"
 	depends on ARM && ( ARCH_DAVINCI || ARCH_OMAP3 )
 	select TI_DAVINCI_MDIO
 	select TI_DAVINCI_CPDMA
@@ -31,7 +31,7 @@ config TI_DAVINCI_EMAC
 	  will be called davinci_emac_driver.  This is recommended.
 
 config TI_DAVINCI_MDIO
-	tristate "TI DaVinci MDIO Support"
+	bool "TI DaVinci MDIO Support"
 	depends on ARM && ( ARCH_DAVINCI || ARCH_OMAP3 )
 	select PHYLIB
 	---help---
@@ -41,7 +41,7 @@ config TI_DAVINCI_MDIO
 	  will be called davinci_mdio.  This is recommended.
 
 config TI_DAVINCI_CPDMA
-	tristate "TI DaVinci CPDMA Support"
+	bool "TI DaVinci CPDMA Support"
 	depends on ARM && ( ARCH_DAVINCI || ARCH_OMAP3 )
 	---help---
 	  This driver supports TI's DaVinci CPDMA dma engine.
@@ -50,7 +50,7 @@ config TI_DAVINCI_CPDMA
 	  will be called davinci_cpdma.  This is recommended.
 
 config TI_CPSW
-	tristate "TI CPSW Switch Support"
+	bool "TI CPSW Switch Support"
 	depends on ARM && (ARCH_DAVINCI || SOC_AM33XX)
 	select TI_DAVINCI_CPDMA
 	select TI_DAVINCI_MDIO

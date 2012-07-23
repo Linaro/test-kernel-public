@@ -31,9 +31,9 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/hardware.h>
-#include <mach/board.h>
-#include <mach/at91sam9_smc.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91sam9_smc.h>
 
 #include "sam9_smc.h"
 #include "generic.h"

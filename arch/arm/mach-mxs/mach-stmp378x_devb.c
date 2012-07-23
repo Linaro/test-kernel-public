@@ -25,8 +25,8 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 
-#include <mach/common.h>
-#include <mach/iomux-mx23.h>
+#include <mach-mxs/common.h>
+#include <mach-mxs/iomux-mx23.h>
 
 #include "devices-mx23.h"
 

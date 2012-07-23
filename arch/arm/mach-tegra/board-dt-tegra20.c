@@ -38,8 +38,8 @@
 #include <asm/mach/time.h>
 #include <asm/setup.h>
 
-#include <mach/iomap.h>
-#include <mach/irqs.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/irqs.h>
 
 #include "board.h"
 #include "board-harmony.h"
