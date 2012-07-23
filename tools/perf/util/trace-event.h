@@ -40,6 +40,7 @@ int parse_event_file(char *buf, unsigned long size, char *sys);
 
 struct pevent_record *trace_peek_data(int cpu);
 struct event_format *trace_find_event(int type);
+struct event_format *trace_find_event_by_name(const char *sys, const char *name);
 
 unsigned long long
 raw_field_value(struct event_format *event, const char *name, void *data);
