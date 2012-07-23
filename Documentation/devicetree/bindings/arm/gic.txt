@@ -88,3 +88,73 @@ Example:
 		      <0x2c006000 0x2000>;
 		interrupts = <1 9 0xf04>;
 	};
+
+* ARM Generic Interrupt Controller CPU Interfaces
+
+ARM GIC device tree nodes contain subnodes representing its CPU interfaces.
+
+The main properties required by CPU interface nodes are:
+
+- compatible	: "arm,gic-cpuif"
+- cpuif-id	: specifies the CPU IF HW identifier
+- cpu		: a phandle to the respective CPU node
+
+Example:
+
+	cpus {
+		#size-cells = <0>;
+		#address-cells = <1>;
+
+		CPU0: cpu@0x0 {
+			device_type = "cpu";
+			reg = <0x0>;
+		};
+
+		CPU1: cpu@0x1 {
+			device_type = "cpu";
+			reg = <0x1>;
+		};
+
+		CPU2: cpu@0x100 {
+			device_type = "cpu";
+			reg = <0x100>;
+		};
+
+		CPU3: cpu@0x101 {
+			device_type = "cpu";
+			reg = <0x101>;
+		};
+	};
+
+	intc: interrupt-controller@fff11000 {
+		compatible = "arm,cortex-a9-gic";
+		#interrupt-cells = <3>;
+		#address-cells = <1>;
+		interrupt-controller;
+		reg = <0xfff11000 0x1000>,
+		      <0xfff10100 0x100>;
+
+			gic-cpuif@0x0 {
+				compatible = "arm,gic-cpuif";
+				cpuif-id = <0x0>;
+				cpu = <&CPU0>;
+			};
+
+			gic-cpuif@0x1 {
+				compatible = "arm,gic-cpuif";
+				cpuif-id = <0x1>;
+				cpu = <&CPU1>;
+			};
+
+			gic-cpuif@0x2 {
+				compatible = "arm,gic-cpuif";
+				cpuif-id = <0x2>;
+				cpu = <&CPU2>;
+			};
+
+			gic-cpuif@0x3 {
+				compatible = "arm,gic-cpuif";
+				cpuif-id = <0x3>;
+				cpu = <&CPU3>;
+			};
+	};
