@@ -30,8 +30,8 @@
 #include <linux/clk.h>
 #include <linux/err.h>
 
-#include <plat/cpu.h>
-#include <plat/cpu-freq-core.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/cpu-freq-core.h>
 
 static struct cpufreq_frequency_table pll_vals_12MHz[] = {
     { .frequency = 34000000,  .index = PLLVAL(82, 2, 3),   },

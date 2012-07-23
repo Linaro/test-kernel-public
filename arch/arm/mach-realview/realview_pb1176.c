@@ -30,7 +30,7 @@
 #include <linux/mtd/partitions.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-realview/hardware.h>
 #include <asm/irq.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
@@ -44,8 +44,8 @@
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 
-#include <mach/board-pb1176.h>
-#include <mach/irqs.h>
+#include <mach-realview/board-pb1176.h>
+#include <mach-realview/irqs.h>
 
 #include "core.h"
 

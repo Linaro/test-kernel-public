@@ -17,7 +17,7 @@
 #include <linux/sched.h>
 #include <asm/irq.h>
 #include <asm/mach/irq.h>
-#include <mach/hardware.h>
+#include <mach-gemini/hardware.h>
 
 #define IRQ_SOURCE(base_addr)	(base_addr + 0x00)
 #define IRQ_MASK(base_addr)	(base_addr + 0x04)

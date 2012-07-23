@@ -22,7 +22,7 @@
 #include <sound/soc.h>
 #include <linux/clk.h>
 
-#include <mach/mfp.h>
+#include <mach-w90x900/mfp.h>
 
 #include "nuc900-audio.h"
 

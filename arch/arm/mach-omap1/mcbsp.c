@@ -19,12 +19,12 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 
-#include <plat/dma.h>
-#include <plat/mux.h>
-#include <plat/cpu.h>
-#include <plat/mcbsp.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/mcbsp.h>
 
-#include <mach/irqs.h>
+#include <mach-omap1/irqs.h>
 
 #include "iomap.h"
 

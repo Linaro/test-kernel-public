@@ -26,9 +26,9 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/map.h>
-#include <mach/bast-map.h>
-#include <mach/bast-cpld.h>
+#include <mach-s3c24xx/map.h>
+#include <mach-s3c24xx/bast-map.h>
+#include <mach-s3c24xx/bast-cpld.h>
 
 #include "simtec.h"
 

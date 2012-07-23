@@ -24,9 +24,9 @@
 #include <linux/delay.h>
 #include <linux/io.h>
 
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/iomux-mx50.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-mx50.h>
 
 #include <asm/irq.h>
 #include <asm/setup.h>

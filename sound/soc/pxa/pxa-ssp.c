@@ -31,8 +31,8 @@
 #include <sound/soc.h>
 #include <sound/pxa2xx-lib.h>
 
-#include <mach/hardware.h>
-#include <mach/dma.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/dma.h>
 
 #include "../../arm/pxa2xx-pcm.h"
 #include "pxa-ssp.h"

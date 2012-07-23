@@ -23,11 +23,11 @@
 
 #include <asm/irq.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 
-#include <mach/corgi.h>
-#include <mach/pxa2xx-regs.h>
-#include <mach/sharpsl_pm.h>
+#include <mach-pxa/corgi.h>
+#include <mach-pxa/pxa2xx-regs.h>
+#include <mach-pxa/sharpsl_pm.h>
 
 #include "generic.h"
 

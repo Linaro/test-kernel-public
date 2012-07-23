@@ -20,10 +20,10 @@
 #include <linux/module.h>
 #include <linux/irq.h>
 #include <linux/io.h>
-#include <mach/common.h>
+#include <mach-imx/common.h>
 #include <asm/mach/irq.h>
 #include <asm/exception.h>
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 #include "irq-common.h"
 

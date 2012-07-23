@@ -18,7 +18,7 @@
 #include <linux/clk.h>
 #include <linux/err.h>
 
-#include <mach/hardware.h>
+#include <mach-u300/hardware.h>
 
 /* Generic stuff */
 #include <asm/sched_clock.h>

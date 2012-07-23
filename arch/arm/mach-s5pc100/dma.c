@@ -26,14 +26,12 @@
 #include <linux/amba/pl330.h>
 
 #include <asm/irq.h>
-#include <plat/devs.h>
-#include <plat/irqs.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/irqs.h>
 
-#include <mach/map.h>
-#include <mach/irqs.h>
-#include <mach/dma.h>
-
-static u64 dma_dmamask = DMA_BIT_MASK(32);
+#include <mach-s5pc100/map.h>
+#include <mach-s5pc100/irqs.h>
+#include <mach-s5pc100/dma.h>
 
 static u8 pdma0_peri[] = {
 	DMACH_UART0_RX,

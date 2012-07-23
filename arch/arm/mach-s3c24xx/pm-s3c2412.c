@@ -21,19 +21,19 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/cacheflush.h>
 #include <asm/irq.h>
 
-#include <mach/regs-power.h>
-#include <mach/regs-gpioj.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-dsc.h>
+#include <mach-s3c24xx/regs-power.h>
+#include <mach-s3c24xx/regs-gpioj.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-dsc.h>
 
-#include <plat/cpu.h>
-#include <plat/pm.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
 
-#include <plat/s3c2412.h>
+#include <plat-samsung/s3c2412.h>
 
 extern void s3c2412_sleep_enter(void);
 

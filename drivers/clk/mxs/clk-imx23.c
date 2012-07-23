@@ -14,8 +14,8 @@
 #include <linux/err.h>
 #include <linux/init.h>
 #include <linux/io.h>
-#include <mach/common.h>
-#include <mach/mx23.h>
+#include <mach-mxs/common.h>
+#include <mach-mxs/mx23.h>
 #include "clk.h"
 
 #define DIGCTRL			MX23_IO_ADDRESS(MX23_DIGCTL_BASE_ADDR)

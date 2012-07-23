@@ -25,17 +25,17 @@
 #include <asm/setup.h>
 #include <asm/memory.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/irq.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <mach/pxa25x.h>
-#include <mach/idp.h>
-#include <mach/pxafb.h>
-#include <mach/bitfield.h>
-#include <mach/mmc.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/idp.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/bitfield.h>
+#include <mach-pxa/mmc.h>
 
 #include "generic.h"
 #include "devices.h"

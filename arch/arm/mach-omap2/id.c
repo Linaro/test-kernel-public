@@ -22,9 +22,9 @@
 #include <asm/cputype.h>
 
 #include "common.h"
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
-#include <mach/id.h>
+#include <mach-omap2/id.h>
 
 #include "control.h"
 

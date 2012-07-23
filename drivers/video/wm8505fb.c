@@ -29,7 +29,7 @@
 #include <linux/platform_device.h>
 #include <linux/wait.h>
 
-#include <mach/vt8500fb.h>
+#include <mach-vt8500/vt8500fb.h>
 
 #include "wm8505fb_regs.h"
 #include "wmt_ge_rops.h"

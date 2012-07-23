@@ -14,8 +14,8 @@
 #include <linux/of.h>
 #include <linux/err.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
 
 #include "crm-regs-imx5.h"
 #include "clk.h"

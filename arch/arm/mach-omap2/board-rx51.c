@@ -18,17 +18,17 @@
 #include <linux/gpio.h>
 #include <linux/leds.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/mcspi.h>
-#include <plat/board.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/dma.h>
-#include <plat/gpmc.h>
-#include <plat/usb.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/usb.h>
 
 #include "mux.h"
 #include "pm.h"

@@ -18,7 +18,7 @@
 #include <asm/cacheflush.h>
 #include <asm/hardware/gic.h>
 #include <asm/smp_scu.h>
-#include <mach/spear.h>
+#include <mach-spear13xx/spear.h>
 
 /*
  * control for which core is the next to come out of the secondary

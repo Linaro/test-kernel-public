@@ -30,10 +30,10 @@
 #include <linux/sh_dma.h>
 #include <linux/sh_intc.h>
 #include <linux/sh_timer.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <mach/sh73a0.h>
-#include <mach/common.h>
+#include <mach-shmobile/hardware.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh73a0.h>
+#include <mach-shmobile/common.h>
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 #include <asm/mach/arch.h>

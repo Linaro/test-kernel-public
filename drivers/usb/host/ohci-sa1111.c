@@ -13,9 +13,9 @@
  * This file is licenced under the GPL.
  */
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/mach-types.h>
-#include <mach/assabet.h>
+#include <mach-sa1100/assabet.h>
 #include <asm/hardware/sa1111.h>
 
 #ifndef CONFIG_SA1111

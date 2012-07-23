@@ -17,7 +17,7 @@
 #include <linux/delay.h>
 #include <linux/bug.h>
 
-#include <plat/prcm.h>
+#include <plat-omap/prcm.h>
 
 #include "powerdomain.h"
 #include "prm.h"

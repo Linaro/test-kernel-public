@@ -21,7 +21,7 @@
 #include <linux/io.h>
 #include <linux/export.h>
 
-#include <mach/iomap.h>
+#include <mach-tegra/iomap.h>
 
 #include "fuse.h"
 #include "apbio.h"

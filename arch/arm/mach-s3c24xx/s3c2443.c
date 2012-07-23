@@ -27,22 +27,22 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/system_misc.h>
 
-#include <mach/regs-s3c2443-clock.h>
+#include <mach-s3c24xx/regs-s3c2443-clock.h>
 
-#include <plat/gpio-core.h>
-#include <plat/gpio-cfg.h>
-#include <plat/gpio-cfg-helpers.h>
-#include <plat/s3c2443.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/fb-core.h>
-#include <plat/nand-core.h>
-#include <plat/adc-core.h>
-#include <plat/rtc-core.h>
+#include <plat-samsung/gpio-core.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg-helpers.h>
+#include <plat-samsung/s3c2443.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/fb-core.h>
+#include <plat-samsung/nand-core.h>
+#include <plat-samsung/adc-core.h>
+#include <plat-samsung/rtc-core.h>
 
 static struct map_desc s3c2443_iodesc[] __initdata = {
 	IODESC_ENT(WATCHDOG),

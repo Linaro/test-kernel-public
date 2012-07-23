@@ -27,7 +27,7 @@
 #include <linux/delay.h>
 #include <linux/irq.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-ixp4xx/hardware.h>
 #include <asm/mach/pci.h>
 
 #define SLOT0_DEVID	0

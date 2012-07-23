@@ -19,10 +19,10 @@
 #include <asm/system_misc.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/devices-common.h>
-#include <mach/iomux-v3.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/devices-common.h>
+#include <mach-imx/iomux-v3.h>
 
 static struct clk *gpc_dvfs_clk;
 

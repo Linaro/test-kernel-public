@@ -4,9 +4,9 @@
 #include <linux/slab.h>
 #include <linux/kernel.h>
 #include <linux/err.h>
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/clock.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/clock.h>
 #include "clk.h"
 
 /**

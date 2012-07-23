@@ -15,13 +15,13 @@
 #include <linux/gpio.h>
 #include <linux/export.h>
 
-#include <mach/irqs.h>
-#include <mach/map.h>
-#include <mach/dma.h>
+#include <mach-s3c64xx/irqs.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/dma.h>
 
-#include <plat/devs.h>
-#include <plat/audio.h>
-#include <plat/gpio-cfg.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/audio.h>
+#include <plat-samsung/gpio-cfg.h>
 
 static const char *rclksrc[] = {
 	[0] = "iis",

@@ -47,8 +47,8 @@
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
 
-#include <mach/ssi.h>
-#include <mach/hardware.h>
+#include <mach-imx/ssi.h>
+#include <mach-imx/hardware.h>
 
 #include "imx-ssi.h"
 

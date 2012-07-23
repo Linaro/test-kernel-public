@@ -22,7 +22,7 @@
 #include <linux/io.h>
 #include <linux/sh_clk.h>
 #include <linux/clkdev.h>
-#include <mach/common.h>
+#include <mach-shmobile/common.h>
 
 #define FRQMR   0xffc80014
 #define MSTPCR0 0xffc80030

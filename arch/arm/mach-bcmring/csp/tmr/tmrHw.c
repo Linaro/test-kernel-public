@@ -30,7 +30,7 @@
 #include <csp/stdint.h>
 
 #include <csp/tmrHw.h>
-#include <mach/csp/tmrHw_reg.h>
+#include <mach-bcmring/csp/tmrHw_reg.h>
 
 #define tmrHw_ASSERT(a)                     if (!(a)) *(char *)0 = 0
 #define tmrHw_MILLISEC_PER_SEC              (1000)

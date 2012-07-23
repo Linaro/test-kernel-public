@@ -27,8 +27,8 @@
 #include <asm/mach/pci.h>
 #include <asm/mach-types.h>
 
-#include <mach/nanoengine.h>
-#include <mach/hardware.h>
+#include <mach-sa1100/nanoengine.h>
+#include <mach-sa1100/hardware.h>
 
 static DEFINE_SPINLOCK(nano_lock);
 

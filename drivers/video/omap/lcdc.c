@@ -30,8 +30,8 @@
 #include <linux/clk.h>
 #include <linux/gfp.h>
 
-#include <mach/lcdc.h>
-#include <plat/dma.h>
+#include <mach-omap1/lcdc.h>
+#include <plat-omap/dma.h>
 
 #include <asm/mach-types.h>
 

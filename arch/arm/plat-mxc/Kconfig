@@ -10,6 +10,7 @@ choice
 
 config ARCH_IMX_V4_V5
 	bool "i.MX1, i.MX21, i.MX25, i.MX27"
+	depends on !MACH_MULTI_V6_V7
 	select AUTO_ZRELADDR if !ZBOOT_ROM
 	select ARM_PATCH_PHYS_VIRT
 	help
@@ -18,6 +19,7 @@ config ARCH_IMX_V4_V5
 
 config ARCH_IMX_V6_V7
 	bool "i.MX3, i.MX5, i.MX6"
+	depends on !MACH_MULTI_V4_V5
 	select AUTO_ZRELADDR if !ZBOOT_ROM
 	select ARM_PATCH_PHYS_VIRT
 	select MIGHT_HAVE_CACHE_L2X0
@@ -70,6 +72,7 @@ config HAVE_EPIT
 config MXC_USE_EPIT
 	bool "Use EPIT instead of GPT"
 	depends on HAVE_EPIT
+	depends on BROKEN
 	help
 	  Use EPIT as the system timer on systems that have it. Normally you
 	  don't have a reason to do so as the EPIT has the same features and
