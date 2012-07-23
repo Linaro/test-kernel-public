@@ -17,6 +17,7 @@
 #include <unistd.h>
 
 #include "parse-events.h"
+#include "trace-event.h"
 
 #include <sys/mman.h>
 
@@ -242,12 +243,29 @@ int perf_evlist__set_tracepoints_handlers(struct perf_evlist *evlist,
 					  const struct perf_evsel_str_handler *assocs,
 					  size_t nr_assocs)
 {
+	struct event_format *event;
 	struct perf_evsel *evsel;
+	char *p, *sys, *name;
 	int err;
-	size_t i;
+	size_t i, off;
 
 	for (i = 0; i < nr_assocs; i++) {
-		err = trace_event__id(assocs[i].name);
+		err = -ENOENT;
+		p = strchr(assocs[i].name, ':');
+		if (!p)
+			goto out;
+		off = p - assocs[i].name;
+		sys = malloc(off + 1);
+		if (!sys)
+			err = -ENOMEM;
+		else {
+			memcpy(sys, assocs[i].name, off);
+			sys[off] = '\0';
+			name = p + 1;
+			event = trace_find_event_by_name(sys, name);
+			err = event ? event->id : trace_event__id(assocs[i].name);
+			free(sys);
+		}
 		if (err < 0)
 			goto out;
 
