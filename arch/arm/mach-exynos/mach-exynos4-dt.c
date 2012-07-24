@@ -17,6 +17,7 @@
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>
 #include <mach/map.h>
+#include <mach/ohci.h>
 
 #include <plat/cpu.h>
 #include <plat/regs-serial.h>
@@ -26,6 +27,11 @@
 #include "common.h"
 
 static struct s5p_ehci_platdata origen_ehci_pdata = {
+	.phy_init = s5p_usb_phy_init,
+	.phy_exit = s5p_usb_phy_exit,
+};
+
+static struct exynos4_ohci_platdata origen_ohci_pdata = {
 	.phy_init = s5p_usb_phy_init,
 	.phy_exit = s5p_usb_phy_exit,
 };
@@ -72,6 +78,8 @@ static const struct of_dev_auxdata exynos4210_auxdata_lookup[] __initconst = {
 	OF_DEV_AUXDATA("arm,pl330", EXYNOS4_PA_PDMA1, "dma-pl330.1", NULL),
 	OF_DEV_AUXDATA("samsung,exynos-ehci", EXYNOS4_PA_EHCI, "s5p-ehci",
 			&origen_ehci_pdata),
+	OF_DEV_AUXDATA("samsung,exynos-ohci", EXYNOS4_PA_OHCI, "exynos-ohci",
+			&origen_ohci_pdata),
 	{},
 };
 
