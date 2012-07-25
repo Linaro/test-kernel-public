@@ -169,6 +169,7 @@ static int dma_hw_params(struct snd_pcm_substream *substream,
 		dma_info.cap = (samsung_dma_has_circular() ?
 			DMA_CYCLIC : DMA_SLAVE);
 		dma_info.client = prtd->params->client;
+		dma_info.dt_dmach_prop = prtd->params->dma_prop;
 		dma_info.direction =
 			(substream->stream == SNDRV_PCM_STREAM_PLAYBACK
 			? DMA_MEM_TO_DEV : DMA_DEV_TO_MEM);
