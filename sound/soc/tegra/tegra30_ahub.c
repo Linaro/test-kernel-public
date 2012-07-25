@@ -25,8 +25,8 @@
 #include <linux/pm_runtime.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
-#include <mach/clk.h>
-#include <mach/dma.h>
+#include <mach-tegra/clk.h>
+#include <mach-tegra/dma.h>
 #include <sound/soc.h>
 #include "tegra30_ahub.h"
 

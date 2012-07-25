@@ -31,23 +31,23 @@
 #include <asm/mach/irq.h>
 #include <asm/cacheflush.h>
 
-#include <mach/regs-irq.h>
-#include <mach/regs-pmu.h>
-#include <mach/regs-gpio.h>
-#include <mach/pmu.h>
+#include <mach-exynos/regs-irq.h>
+#include <mach-exynos/regs-pmu.h>
+#include <mach-exynos/regs-gpio.h>
+#include <mach-exynos/pmu.h>
 
-#include <plat/cpu.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/pm.h>
-#include <plat/sdhci.h>
-#include <plat/gpio-cfg.h>
-#include <plat/adc-core.h>
-#include <plat/fb-core.h>
-#include <plat/fimc-core.h>
-#include <plat/iic-core.h>
-#include <plat/tv-core.h>
-#include <plat/regs-serial.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/adc-core.h>
+#include <plat-samsung/fb-core.h>
+#include <plat-samsung/fimc-core.h>
+#include <plat-samsung/iic-core.h>
+#include <plat-samsung/tv-core.h>
+#include <plat-samsung/regs-serial.h>
 
 #include "common.h"
 #define L2_AUX_VAL 0x7C470001

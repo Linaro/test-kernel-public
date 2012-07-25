@@ -22,9 +22,9 @@
 
 #include <mach/regs-clock.h>
 
-#include <plat/clock.h>
-#include <plat/clock-clksrc.h>
-#include <plat/s5p-clock.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/clock-clksrc.h>
+#include <plat-samsung/s5p-clock.h>
 
 /* fin_apll, fin_mpll and fin_epll are all the same clock, which we call
  * clk_ext_xtal_mux.

@@ -23,9 +23,9 @@
 #include <linux/delay.h>
 #include <linux/gpio.h>
 
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/iomux-mx53.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-mx53.h>
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

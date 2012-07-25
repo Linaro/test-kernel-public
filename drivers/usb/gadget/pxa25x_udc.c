@@ -52,11 +52,11 @@
  * This driver is PXA25x only.  Grab the right register definitions.
  */
 #ifdef CONFIG_ARCH_PXA
-#include <mach/pxa25x-udc.h>
+#include <mach-pxa/pxa25x-udc.h>
 #endif
 
 #ifdef CONFIG_ARCH_LUBBOCK
-#include <mach/lubbock.h>
+#include <mach-pxa/lubbock.h>
 #endif
 
 #include <asm/mach/udc_pxa2xx.h>

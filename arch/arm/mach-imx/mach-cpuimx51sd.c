@@ -26,10 +26,10 @@
 #include <linux/spi/spi.h>
 #include <linux/can/platform/mcp251x.h>
 
-#include <mach/eukrea-baseboards.h>
-#include <mach/common.h>
-#include <mach/hardware.h>
-#include <mach/iomux-mx51.h>
+#include <mach-imx/eukrea-baseboards.h>
+#include <mach-imx/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/iomux-mx51.h>
 
 #include <asm/setup.h>
 #include <asm/mach-types.h>

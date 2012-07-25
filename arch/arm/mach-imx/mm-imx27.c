@@ -21,13 +21,13 @@
 #include <linux/mm.h>
 #include <linux/init.h>
 #include <linux/pinctrl/machine.h>
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/devices-common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/devices-common.h>
 #include <asm/pgtable.h>
 #include <asm/mach/map.h>
-#include <mach/irqs.h>
-#include <mach/iomux-v1.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/iomux-v1.h>
 
 /* MX27 memory map definition */
 static struct map_desc imx27_io_desc[] __initdata = {

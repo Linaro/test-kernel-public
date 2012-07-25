@@ -43,6 +43,7 @@ void orion5x_restart(char, const char *);
 /*
  * PCIe/PCI functions.
  */
+struct pci_dev;
 struct pci_bus;
 struct pci_sys_data;
 struct pci_dev;

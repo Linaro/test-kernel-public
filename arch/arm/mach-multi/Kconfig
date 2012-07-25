@@ -1,0 +1,144 @@
+menu "Multiple platform selection"
+	depends on ARCH_MULTIPLATFORM
+
+comment "CPU Core family selection"
+
+config ARCH_MULTI_V4
+	bool "ARMv4 based platforms (FA526, StrongARM)"
+	select ARCH_MULTI_V4_V5
+	depends on !ARCH_MULTI_V6_V7
+
+config ARCH_MULTI_V4T
+	bool "ARMv4T based platforms (ARM720T, ARM920T, ...)"
+	select ARCH_MULTI_V4_V5
+	depends on !ARCH_MULTI_V6_V7
+
+config ARCH_MULTI_V5
+	bool "ARMv5 based platforms (ARM926T, XSCALE, PJ1, ...)"
+	select ARCH_MULTI_V4_V5
+	depends on !ARCH_MULTI_V6_V7
+
+config ARCH_MULTI_V4_V5
+	bool
+
+config ARCH_MULTI_V6
+	bool "ARMv6 based platforms (ARM11, Scorpion, ...)"
+	select ARCH_MULTI_V6_V7
+
+config ARCH_MULTI_V7
+	bool "ARMv7 based platforms (Cortex-A, PJ4, Krait)"
+	default y
+	select ARCH_MULTI_V6_V7
+
+config ARCH_MULTI_V6_V7
+	bool
+
+config ARCH_MULTI_CPU_AUTO
+	def_bool !(ARCH_MULTI_V4 || ARCH_MULTI_V4T || ARCH_MULTI_V6_V7)
+	select ARCH_MULTI_V5
+
+comment "SoC family selection"
+config ARCH_MULTI_OMAP2PLUS
+	bool
+	select ARCH_OMAP
+	select ARCH_OMAP2PLUS
+        select HAVE_CLK
+        select ARCH_REQUIRE_GPIOLIB
+        select ARCH_HAS_CPUFREQ
+        select CLKSRC_MMIO
+        select GENERIC_CLOCKEVENTS
+        select ARCH_HAS_HOLES_MEMORYMODEL
+        select CLKDEV_LOOKUP
+        select GENERIC_IRQ_CHIP
+        select OMAP_DM_TIMER
+        select SERIAL_OMAP
+        select SERIAL_OMAP_CONSOLE
+        select I2C
+        select I2C_OMAP
+        select MENELAUS if ARCH_OMAP2
+        select TWL4030_CORE if ARCH_OMAP3 || ARCH_OMAP4
+        select TWL4030_POWER if ARCH_OMAP3 || ARCH_OMAP4
+	select MACH_OMAP_GENERIC
+
+config ARCH_MULTI_OMAP2
+	bool "Texas Instruments OMAP2"
+	depends on ARCH_MULTI_V6
+	select ARCH_OMAP
+	select ARCH_OMAP2PLUS
+	select ARCH_MULTI_OMAP2PLUS
+	select ARCH_OMAP2
+	select SOC_OMAP2420
+	select SOC_OMAP2430
+
+config ARCH_MULTI_OMAP3
+	bool "Texas Instruments OMAP3"
+	depends on ARCH_MULTI_V7
+	select ARCH_MULTI_OMAP2PLUS
+	select ARCH_OMAP3
+	select SOC_OMAP3430
+	select SOC_OMAPTI81XX
+	select SOC_OMAPAM33XX
+
+config ARCH_MULTI_OMAP4
+	bool "Texas Instruments OMAP4"
+	depends on ARCH_MULTI_V7
+	select ARCH_MULTI_OMAP2PLUS
+	select ARCH_OMAP4
+
+config ARCH_MULTI_UX500
+	bool "ST-Ericsson U8500"
+	depends on ARCH_MULTI_V7
+	select ARCH_U8500
+	select MACH_MOP500
+	select MACH_UX500_DT
+
+config ARCH_MULTI_IMX
+	bool
+	select ARCH_MXC
+
+config ARCH_MULTI_IMX51
+	bool "Freescale i.MX51"
+	depends on ARCH_MULTI_V7
+	select ARCH_MULTI_IMX
+	select ARCH_IMX_V6_V7
+	select MACH_IMX51_DT
+
+config ARCH_MULTI_IMX53
+	bool "Freescale i.MX53"
+	depends on ARCH_MULTI_V7
+	select ARCH_MULTI_IMX
+	select ARCH_IMX_V6_V7
+	select MACH_IMX53_DT
+
+config ARCH_MULTI_IMX6
+	bool "Freescale i.MX6Q"
+	depends on ARCH_MULTI_V7
+	select ARCH_MULTI_IMX
+	select ARCH_IMX_V6_V7
+	select SOC_IMX6Q
+
+config ARCH_MULTI_AUTOSELECT
+	def_bool y
+	depends on !ARCH_MULTI_OMAP2PLUS
+	depends on !ARCH_MULTI_UX500
+	depends on !ARCH_MXC
+	select ARCH_MULTI_VEXPRESS
+
+config ARCH_MULTI_VEXPRESS
+	bool "ARM Ltd. Versatile Express family"
+	depends on ARCH_MULTI_V7
+	select ARCH_VEXPRESS
+	select ARCH_VEXPRESS_DT
+	select ARCH_VEXPRESS_CA9X4
+	select ARCH_WANT_OPTIONAL_GPIOLIB
+	select ARM_AMBA
+	select ARM_TIMER_SP804
+	select CLKDEV_LOOKUP
+	select GENERIC_CLOCKEVENTS
+	select HAVE_CLK
+	select HAVE_PATA_PLATFORM
+	select ICST
+	select PLAT_VERSATILE
+	select PLAT_VERSATILE_CLCD
+
+endmenu

@@ -13,11 +13,12 @@
 #include <linux/leds.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 
-#include <plat/fpga.h>
+#include <plat-omap/fpga.h>
+#include <plat-omap/gpio.h>
 
 
 /* Many OMAP development platforms reuse the same "debug board"; these

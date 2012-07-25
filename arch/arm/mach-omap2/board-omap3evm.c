@@ -36,15 +36,15 @@
 #include <linux/mmc/host.h>
 #include <linux/export.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/board.h>
-#include <plat/usb.h>
+#include <plat-omap/board.h>
+#include <plat-omap/usb.h>
 #include "common.h"
-#include <plat/mcspi.h>
+#include <plat-omap/mcspi.h>
 #include <video/omapdss.h>
 #include <video/omap-panel-tfp410.h>
 
@@ -103,7 +103,7 @@ static void __init omap3_evm_get_revision(void)
 }
 
 #if defined(CONFIG_SMSC911X) || defined(CONFIG_SMSC911X_MODULE)
-#include <plat/gpmc-smsc911x.h>
+#include <plat-omap/gpmc-smsc911x.h>
 
 static struct omap_smsc911x_platform_data smsc911x_cfg = {
 	.cs             = OMAP3EVM_SMSC911X_CS,

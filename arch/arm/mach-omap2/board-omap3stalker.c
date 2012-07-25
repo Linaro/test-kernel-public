@@ -29,22 +29,22 @@
 #include <linux/i2c/twl.h>
 #include <linux/mmc/host.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/flash.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/gpmc.h>
-#include <plat/nand.h>
-#include <plat/usb.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/nand.h>
+#include <plat-omap/usb.h>
 #include <video/omapdss.h>
 #include <video/omap-panel-generic-dpi.h>
 #include <video/omap-panel-tfp410.h>
 
-#include <plat/mcspi.h>
+#include <plat-omap/mcspi.h>
 #include <linux/input/matrix_keypad.h>
 #include <linux/spi/spi.h>
 #include <linux/interrupt.h>
@@ -57,7 +57,7 @@
 #include "common-board-devices.h"
 
 #if defined(CONFIG_SMSC911X) || defined(CONFIG_SMSC911X_MODULE)
-#include <plat/gpmc-smsc911x.h>
+#include <plat-omap/gpmc-smsc911x.h>
 
 #define OMAP3STALKER_ETHR_START	0x2c000000
 #define OMAP3STALKER_ETHR_SIZE	1024

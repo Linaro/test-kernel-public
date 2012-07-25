@@ -9,8 +9,8 @@
 #include <linux/kernel.h>
 #include <asm/page.h>
 #include <asm/mach/map.h>
-#include <mach/map.h>
-#include <mach/uart.h>
+#include <mach-prima2/map.h>
+#include <mach-prima2/uart.h>
 
 void __init sirfsoc_map_lluart(void)
 {

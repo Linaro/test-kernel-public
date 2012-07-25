@@ -26,8 +26,8 @@
 #include <linux/pm_runtime.h>
 
 #include <mach/map.h>
-#include <plat/regs-fb-v4.h>
-#include <plat/fb.h>
+#include <plat-samsung/regs-fb-v4.h>
+#include <plat-samsung/fb.h>
 
 /* This driver will export a number of framebuffer interfaces depending
  * on the configuration passed in via the platform data. Each fb instance

@@ -20,7 +20,7 @@
 #include <linux/mtd/partitions.h>
 
 #include <asm/io.h>
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 
 #include <asm/mach/flash.h>
 

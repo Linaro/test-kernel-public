@@ -56,9 +56,9 @@
 #include <video/sh_mobile_lcdc.h>
 #include <video/sh_mipi_dsi.h>
 
-#include <mach/common.h>
-#include <mach/irqs.h>
-#include <mach/sh7372.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh7372.h>
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

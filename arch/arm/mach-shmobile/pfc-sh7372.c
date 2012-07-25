@@ -23,8 +23,8 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/gpio.h>
-#include <mach/irqs.h>
-#include <mach/sh7372.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh7372.h>
 
 #define CPU_ALL_PORT(fn, pfx, sfx) \
 	PORT_10(fn, pfx, sfx),		PORT_90(fn, pfx, sfx), \

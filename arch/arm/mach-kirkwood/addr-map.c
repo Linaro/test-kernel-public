@@ -12,8 +12,8 @@
 #include <linux/init.h>
 #include <linux/mbus.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
-#include <plat/addr-map.h>
+#include <mach-kirkwood/hardware.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 /*

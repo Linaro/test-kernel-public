@@ -29,7 +29,7 @@
 
 #include <linux/platform_data/at91_adc.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <video/atmel_lcdc.h>
 #include <media/soc_camera.h>
 #include <media/atmel-isi.h>
@@ -42,10 +42,10 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/board.h>
-#include <mach/at91sam9_smc.h>
-#include <mach/at91_shdwc.h>
-#include <mach/system_rev.h>
+#include <mach-at91/board.h>
+#include <mach-at91/at91sam9_smc.h>
+#include <mach-at91/at91_shdwc.h>
+#include <mach-at91/system_rev.h>
 
 #include "sam9_smc.h"
 #include "generic.h"

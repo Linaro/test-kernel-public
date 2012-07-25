@@ -17,8 +17,8 @@
 #include <linux/memblock.h>
 #include <linux/platform_device.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-u300/hardware.h>
+#include <mach-u300/platform.h>
 #include <asm/hardware/vic.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

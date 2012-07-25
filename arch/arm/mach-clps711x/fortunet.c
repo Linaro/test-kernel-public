@@ -23,7 +23,7 @@
 #include <linux/init.h>
 #include <linux/initrd.h>
 
-#include <mach/hardware.h>
+#include <mach-clps711x/hardware.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 

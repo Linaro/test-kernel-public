@@ -23,7 +23,7 @@
 
 #include <asm/mach/sharpsl_param.h>
 
-#include <mach/tosa.h>
+#include <mach-pxa/tosa.h>
 
 #define POWER_IS_ON(pwr)	((pwr) <= FB_BLANK_NORMAL)
 

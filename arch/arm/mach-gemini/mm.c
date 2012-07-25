@@ -14,7 +14,7 @@
 
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
+#include <mach-gemini/hardware.h>
 
 /* Page table mapping for I/O region */
 static struct map_desc gemini_io_desc[] __initdata = {

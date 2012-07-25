@@ -5,8 +5,8 @@
  * the terms of the GNU General Public License version 2 as published by the
  * Free Software Foundation.
  */
-#include <mach/mx53.h>
-#include <mach/devices-common.h>
+#include <mach-imx/mx53.h>
+#include <mach-imx/devices-common.h>
 
 extern const struct imx_fec_data imx53_fec_data;
 #define imx53_add_fec(pdata)   \

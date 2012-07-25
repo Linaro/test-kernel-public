@@ -30,8 +30,8 @@
 
 #include <asm/mach/irq.h>
 
-#include <mach/msm_gpiomux.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_gpiomux.h>
+#include <mach-msm/msm_iomap.h>
 
 /* Bits of interest in the GPIO_IN_OUT register.
  */

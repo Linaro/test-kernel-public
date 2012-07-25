@@ -851,7 +851,7 @@ static int doc_write(struct mtd_info *mtd, loff_t to, size_t len,
 		/* There's an implicit DoC_WaitReady() in DoC_Command */
 
 		if (DoC_is_Millennium(this)) {
-			ReadDOC(docptr, ReadPipeInit);
+			(void)ReadDOC(docptr, ReadPipeInit);
 			status = ReadDOC(docptr, LastDataRead);
 		} else {
 			dummy = ReadDOC(docptr, CDSNSlowIO);
@@ -1020,7 +1020,7 @@ static int doc_write_oob_nolock(struct mtd_info *mtd, loff_t ofs, size_t len,
 		/* DoC_WaitReady() is implicit in DoC_Command */
 
 		if (DoC_is_Millennium(this)) {
-			ReadDOC(docptr, ReadPipeInit);
+			(void)ReadDOC(docptr, ReadPipeInit);
 			status = ReadDOC(docptr, LastDataRead);
 		} else {
 			dummy = ReadDOC(docptr, CDSNSlowIO);
@@ -1045,7 +1045,7 @@ static int doc_write_oob_nolock(struct mtd_info *mtd, loff_t ofs, size_t len,
 	/* DoC_WaitReady() is implicit in DoC_Command */
 
 	if (DoC_is_Millennium(this)) {
-		ReadDOC(docptr, ReadPipeInit);
+		(void)ReadDOC(docptr, ReadPipeInit);
 		status = ReadDOC(docptr, LastDataRead);
 	} else {
 		dummy = ReadDOC(docptr, CDSNSlowIO);
@@ -1120,7 +1120,7 @@ static int doc_erase(struct mtd_info *mtd, struct erase_info *instr)
 		DoC_Command(this, NAND_CMD_STATUS, CDSN_CTRL_WP);
 
 		if (DoC_is_Millennium(this)) {
-			ReadDOC(docptr, ReadPipeInit);
+			(void)ReadDOC(docptr, ReadPipeInit);
 			status = ReadDOC(docptr, LastDataRead);
 		} else {
 			dummy = ReadDOC(docptr, CDSNSlowIO);
