@@ -70,7 +70,8 @@ struct gpio_chip;
 static inline int of_get_named_gpio_flags(struct device_node *np,
 		const char *list_name, int index, enum of_gpio_flags *flags)
 {
-	*flags = 0;
+	if (flags)
+		*flags = 0;
 	return -ENOSYS;
 }
 
