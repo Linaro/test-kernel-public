@@ -31,10 +31,11 @@
 #include <asm/hardware/timer-sp.h>
 #include <asm/hardware/sp810.h>
 
-#include <mach/ct-ca9x4.h>
-#include <mach/motherboard.h>
+#include <mach-vexpress/ct-ca9x4.h>
+#include <mach-vexpress/motherboard.h>
+#include <mach-vexpress/clkdev.h>
 
-#include <plat/sched_clock.h>
+#include <plat-versatile/sched_clock.h>
 
 #include "core.h"
 

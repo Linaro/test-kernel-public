@@ -18,10 +18,10 @@
 
 #include <linux/dma-mapping.h>
 #include <linux/clkdev.h>
-#include <mach/irqs.h>
-#include <mach/msm_iomap.h>
-#include <mach/dma.h>
-#include <mach/board.h>
+#include <mach-msm/irqs.h>
+#include <mach-msm/msm_iomap.h>
+#include <mach-msm/dma.h>
+#include <mach-msm/board.h>
 
 #include "devices.h"
 #include "smd_private.h"
@@ -31,7 +31,7 @@
 #include "clock-pcom.h"
 #include "clock-7x30.h"
 
-#include <mach/mmc.h>
+#include <mach-msm/mmc.h>
 
 static struct resource resources_uart2[] = {
 	{

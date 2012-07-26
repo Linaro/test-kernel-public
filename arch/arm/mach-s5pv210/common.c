@@ -29,21 +29,21 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/map.h>
-#include <mach/regs-clock.h>
+#include <mach-s5pv210/map.h>
+#include <mach-s5pv210/regs-clock.h>
 
-#include <plat/cpu.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/sdhci.h>
-#include <plat/adc-core.h>
-#include <plat/ata-core.h>
-#include <plat/fb-core.h>
-#include <plat/fimc-core.h>
-#include <plat/iic-core.h>
-#include <plat/keypad-core.h>
-#include <plat/tv-core.h>
-#include <plat/regs-serial.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/sdhci.h>
+#include <plat-samsung/adc-core.h>
+#include <plat-samsung/ata-core.h>
+#include <plat-samsung/fb-core.h>
+#include <plat-samsung/fimc-core.h>
+#include <plat-samsung/iic-core.h>
+#include <plat-samsung/keypad-core.h>
+#include <plat-samsung/tv-core.h>
+#include <plat-samsung/regs-serial.h>
 
 #include "common.h"
 

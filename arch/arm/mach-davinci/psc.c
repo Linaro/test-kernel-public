@@ -22,8 +22,8 @@
 #include <linux/init.h>
 #include <linux/io.h>
 
-#include <mach/cputype.h>
-#include <mach/psc.h>
+#include <mach-davinci/cputype.h>
+#include <mach-davinci/psc.h>
 
 #include "clock.h"
 

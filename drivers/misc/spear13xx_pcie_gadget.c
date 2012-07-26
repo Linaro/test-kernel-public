@@ -20,8 +20,8 @@
 #include <linux/platform_device.h>
 #include <linux/pci_regs.h>
 #include <linux/configfs.h>
-#include <mach/pcie.h>
-#include <mach/misc_regs.h>
+#include <mach-spear13xx/pcie.h>
+#include <mach-spear13xx/misc_regs.h>
 
 #define IN0_MEM_SIZE	(200 * 1024 * 1024 - 1)
 /* In current implementation address translation is done using IN0 only.

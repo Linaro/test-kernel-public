@@ -140,12 +140,12 @@
 #include <linux/bootmem.h>
 
 #include "common.h"
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 #include "clockdomain.h"
 #include "powerdomain.h"
-#include <plat/clock.h>
-#include <plat/omap_hwmod.h>
-#include <plat/prcm.h>
+#include <plat-omap/clock.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/prcm.h>
 
 #include "cm2xxx_3xxx.h"
 #include "cminst44xx.h"

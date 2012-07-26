@@ -37,17 +37,17 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/nand.h>
-#include <plat/gpmc.h>
-#include <plat/usb.h>
+#include <plat-omap/nand.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/usb.h>
 #include <video/omapdss.h>
 #include <video/omap-panel-generic-dpi.h>
 #include <video/omap-panel-tfp410.h>
-#include <plat/mcspi.h>
+#include <plat-omap/mcspi.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 
 #include "mux.h"
 #include "sdram-micron-mt46h32m32lf-6.h"
@@ -64,7 +64,7 @@
 
 #if defined(CONFIG_SMSC911X) || defined(CONFIG_SMSC911X_MODULE)
 #include <linux/smsc911x.h>
-#include <plat/gpmc-smsc911x.h>
+#include <plat-omap/gpmc-smsc911x.h>
 
 static struct omap_smsc911x_platform_data cm_t35_smsc911x_cfg = {
 	.id		= 0,

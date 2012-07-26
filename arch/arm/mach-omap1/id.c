@@ -17,9 +17,9 @@
 #include <linux/io.h>
 #include <asm/system_info.h>
 
-#include <plat/cpu.h>
+#include <plat-omap/cpu.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "common.h"
 

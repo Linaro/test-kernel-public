@@ -18,7 +18,7 @@
 #include <asm/mach-types.h>
 #include <asm/system_info.h>
 #include <asm/hardware/dec21285.h>
-#include <mach/hardware.h>
+#include <mach-footbridge/hardware.h>
 
 #define BAUD_BASE		(mem_fclk_21285/64)
 

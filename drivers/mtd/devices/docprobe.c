@@ -71,7 +71,7 @@ static unsigned long __initdata doc_locations[] = {
 	0xe8000, 0xea000, 0xec000, 0xee000,
 #endif /*  CONFIG_MTD_DOCPROBE_HIGH */
 #else
-#warning Unknown architecture for DiskOnChip. No default probe locations defined
+//#warning Unknown architecture for DiskOnChip. No default probe locations defined
 #endif
 	0xffffffff };
 
@@ -135,8 +135,8 @@ static inline int __init doccheck(void __iomem *potential, unsigned long physadr
 
 	case DOC_ChipID_DocMil:
 		/* Check for the new 2000 with Millennium ASIC */
-		ReadDOC(window, ChipID);
-		ReadDOC(window, ChipID);
+		(void)ReadDOC(window, ChipID);
+		(void)ReadDOC(window, ChipID);
 		if (ReadDOC(window, ChipID) != DOC_ChipID_DocMil)
 			ChipID = DOC_ChipID_Doc2kTSOP;
 
@@ -155,7 +155,7 @@ static inline int __init doccheck(void __iomem *potential, unsigned long physadr
 #ifndef DOC_PASSIVE_PROBE
 		/* Possibly release from power down mode */
 		for (tmp = 0; (tmp < 4); tmp++)
-			ReadDOC(window, Mplus_Power);
+			(void)ReadDOC(window, Mplus_Power);
 
 		/* Reset the DiskOnChip ASIC */
 		tmp = DOC_MODE_RESET | DOC_MODE_MDWREN | DOC_MODE_RST_LAT |

@@ -14,11 +14,11 @@
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/platform_device.h>
-#include <mach/map.h>
-#include <mach/regs-sys.h>
-#include <plat/cpu.h>
-#include <plat/regs-usb-hsotg-phy.h>
-#include <plat/usb-phy.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/regs-sys.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/regs-usb-hsotg-phy.h>
+#include <plat-samsung/usb-phy.h>
 
 static int s3c_usb_otgphy_init(struct platform_device *pdev)
 {

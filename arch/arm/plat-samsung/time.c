@@ -33,13 +33,13 @@
 
 #include <asm/irq.h>
 #include <mach/map.h>
-#include <plat/regs-timer.h>
+#include <plat-samsung/regs-timer.h>
 #include <mach/regs-irq.h>
 #include <asm/mach/time.h>
 #include <mach/tick.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
 
 static unsigned long timer_startval;
 static unsigned long timer_usec_ticks;

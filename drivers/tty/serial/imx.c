@@ -51,7 +51,8 @@
 
 #include <asm/io.h>
 #include <asm/irq.h>
-#include <mach/imx-uart.h>
+#include <mach-imx/imx-uart.h>
+#include <mach-imx/irqs.h>
 
 /* Register definitions */
 #define URXD0 0x0  /* Receiver Register */

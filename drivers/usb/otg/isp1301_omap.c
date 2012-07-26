@@ -36,8 +36,8 @@
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/usb.h>
-#include <plat/mux.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/mux.h>
 
 
 #ifndef	DEBUG
@@ -1336,7 +1336,7 @@ static int
 isp1301_set_peripheral(struct usb_otg *otg, struct usb_gadget *gadget)
 {
 	struct isp1301	*isp = container_of(otg->phy, struct isp1301, phy);
-#ifndef	CONFIG_USB_OTG
+#if !defined(CONFIG_USB_OTG) && !IS_ENABLED(CONFIG_USB_OHCI_HCD)
 	u32 l;
 #endif
 

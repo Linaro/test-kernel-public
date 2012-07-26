@@ -26,9 +26,12 @@
 #include <linux/interrupt.h>
 
 #include <asm/mach-types.h>
-#include <plat/gpmc.h>
+#include <plat-omap/gpmc.h>
 
-#include <plat/sdrc.h>
+#include <plat-omap/sdrc.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
 
 /* GPMC register offsets */
 #define GPMC_REVISION		0x00

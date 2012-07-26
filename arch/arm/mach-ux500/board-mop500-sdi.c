@@ -13,9 +13,10 @@
 #include <linux/platform_device.h>
 
 #include <asm/mach-types.h>
-#include <plat/ste_dma40.h>
-#include <mach/devices.h>
-#include <mach/hardware.h>
+#include <plat-nomadik/ste_dma40.h>
+#include <mach-ux500/devices.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/irqs.h>
 
 #include "devices-db8500.h"
 #include "board-mop500.h"

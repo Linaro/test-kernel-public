@@ -13,7 +13,7 @@
 #include <sound/pcm_params.h>
 #include <sound/pxa2xx-lib.h>
 
-#include <mach/dma.h>
+#include <mach-pxa/dma.h>
 
 #include "pxa2xx-pcm.h"
 

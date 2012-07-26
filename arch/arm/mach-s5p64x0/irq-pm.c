@@ -16,10 +16,10 @@
 #include <linux/serial_core.h>
 #include <linux/io.h>
 
-#include <plat/regs-serial.h>
-#include <plat/pm.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/pm.h>
 
-#include <mach/regs-gpio.h>
+#include <mach-s5p64x0/regs-gpio.h>
 
 static struct sleep_save irq_save[] = {
 	SAVE_ITEM(S5P64X0_EINT0CON0),

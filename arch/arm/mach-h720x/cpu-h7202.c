@@ -17,9 +17,9 @@
 #include <linux/interrupt.h>
 #include <linux/module.h>
 #include <asm/types.h>
-#include <mach/hardware.h>
+#include <mach-h720x/hardware.h>
 #include <asm/irq.h>
-#include <mach/irqs.h>
+#include <mach-h720x/irqs.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 #include <linux/device.h>

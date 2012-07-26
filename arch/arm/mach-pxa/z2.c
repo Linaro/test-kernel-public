@@ -34,13 +34,13 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/pxa27x.h>
-#include <mach/mfp-pxa27x.h>
-#include <mach/z2.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <plat/pxa27x_keypad.h>
-#include <mach/pm.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/mfp-pxa27x.h>
+#include <mach-pxa/z2.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <plat-pxa/pxa27x_keypad.h>
+#include <mach-pxa/pm.h>
 
 #include "generic.h"
 #include "devices.h"

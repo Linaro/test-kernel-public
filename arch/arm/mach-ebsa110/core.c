@@ -16,7 +16,7 @@
 #include <linux/init.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-ebsa110/hardware.h>
 #include <asm/irq.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>

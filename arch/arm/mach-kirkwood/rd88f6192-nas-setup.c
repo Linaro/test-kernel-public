@@ -18,7 +18,7 @@
 #include <linux/spi/spi.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/kirkwood.h>
+#include <mach-kirkwood/kirkwood.h>
 #include "common.h"
 
 #define RD88F6192_GPIO_USB_VBUS		10

@@ -25,11 +25,11 @@
 #include <linux/io.h>
 #include <linux/export.h>
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <mach/netx-regs.h>
+#include <mach-netx/hardware.h>
+#include <mach-netx/irqs.h>
+#include <mach-netx/netx-regs.h>
 
-#include <mach/xc.h>
+#include <mach-netx/xc.h>
 
 static DEFINE_MUTEX(xc_lock);
 

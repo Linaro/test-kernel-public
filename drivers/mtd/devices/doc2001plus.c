@@ -619,8 +619,8 @@ static int doc_read(struct mtd_info *mtd, loff_t from, size_t len,
 	*retlen = len;
 	ret = 0;
 
-	ReadDOC(docptr, Mplus_ReadPipeInit);
-	ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
+	(void)ReadDOC(docptr, Mplus_ReadPipeInit);
 
 	/* Read the data via the internal pipeline through CDSN IO
 	   register, see Pipelined Read Operations 11.3 */
@@ -871,8 +871,8 @@ static int doc_read_oob(struct mtd_info *mtd, loff_t ofs,
 		WriteDOC(0, docptr, Mplus_FlashControl);
 		DoC_WaitReady(docptr);
 
-		ReadDOC(docptr, Mplus_ReadPipeInit);
-		ReadDOC(docptr, Mplus_ReadPipeInit);
+		(void)ReadDOC(docptr, Mplus_ReadPipeInit);
+		(void)ReadDOC(docptr, Mplus_ReadPipeInit);
 		MemReadDOC(docptr, &buf[got], size - 2);
 		buf[got + size - 2] = ReadDOC(docptr, Mplus_LastDataRead);
 		buf[got + size - 1] = ReadDOC(docptr, Mplus_LastDataRead);

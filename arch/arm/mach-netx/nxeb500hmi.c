@@ -25,12 +25,12 @@
 #include <linux/amba/bus.h>
 #include <linux/amba/clcd.h>
 
-#include <mach/hardware.h>
+#include <mach-netx/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/hardware/vic.h>
-#include <mach/netx-regs.h>
-#include <mach/eth.h>
+#include <mach-netx/netx-regs.h>
+#include <mach-netx/eth.h>
 
 #include "generic.h"
 #include "fb.h"

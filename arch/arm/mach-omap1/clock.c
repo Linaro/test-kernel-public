@@ -21,13 +21,13 @@
 
 #include <asm/mach-types.h>
 
-#include <plat/cpu.h>
-#include <plat/usb.h>
-#include <plat/clock.h>
-#include <plat/sram.h>
-#include <plat/clkdev_omap.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/clock.h>
+#include <plat-omap/sram.h>
+#include <plat-omap/clkdev_omap.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "iomap.h"
 #include "clock.h"

@@ -43,11 +43,11 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/flash.h>
 
-#include <mach/pxa27x.h>
-#include <mach/mmc.h>
-#include <mach/udc.h>
-#include <mach/pxa27x-udc.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/pxa27x-udc.h>
+#include <mach-pxa/smemc.h>
 
 #include <linux/spi/spi.h>
 #include <linux/spi/pxa2xx_spi.h>

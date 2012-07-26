@@ -28,14 +28,14 @@
 #include <linux/gpio.h>
 #include <linux/smsc911x.h>
 #include <linux/videodev2.h>
-#include <mach/common.h>
+#include <mach-shmobile/common.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 #include <asm/hardware/cache-l2x0.h>
-#include <mach/r8a7740.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/r8a7740.h>
+#include <mach-shmobile/irqs.h>
 #include <video/sh_mobile_lcdc.h>
 
 /*

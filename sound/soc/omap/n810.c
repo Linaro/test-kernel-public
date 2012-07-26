@@ -29,10 +29,10 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <linux/gpio.h>
 #include <linux/module.h>
-#include <plat/mcbsp.h>
+#include <plat-omap/mcbsp.h>
 
 #include "omap-mcbsp.h"
 #include "omap-pcm.h"

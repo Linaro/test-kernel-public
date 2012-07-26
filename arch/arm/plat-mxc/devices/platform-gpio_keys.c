@@ -16,8 +16,8 @@
  * Boston, MA  02110-1301, USA.
  */
 #include <asm/sizes.h>
-#include <mach/hardware.h>
-#include <mach/devices-common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/devices-common.h>
 
 struct platform_device *__init imx_add_gpio_keys(
 		const struct gpio_keys_platform_data *pdata)

@@ -21,17 +21,17 @@
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 
-#include <mach/map.h>
-#include <mach/regs-clock.h>
+#include <mach-s5pv210/map.h>
+#include <mach-s5pv210/regs-clock.h>
 
-#include <plat/regs-serial.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/ata.h>
-#include <plat/iic.h>
-#include <plat/pm.h>
-#include <plat/s5p-time.h>
-#include <plat/mfc.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/ata.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/s5p-time.h>
+#include <plat-samsung/mfc.h>
 
 #include "common.h"
 
