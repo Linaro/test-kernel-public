@@ -20,8 +20,15 @@
 
 #include <plat/cpu.h>
 #include <plat/regs-serial.h>
+#include <plat/ehci.h>
+#include <plat/usb-phy.h>
 
 #include "common.h"
+
+static struct s5p_ehci_platdata origen_ehci_pdata = {
+	.phy_init = s5p_usb_phy_init,
+	.phy_exit = s5p_usb_phy_exit,
+};
 
 /*
  * The following lookup table is used to override device names when devices
@@ -63,6 +70,8 @@ static const struct of_dev_auxdata exynos4210_auxdata_lookup[] __initconst = {
 				"exynos4210-spi.2", NULL),
 	OF_DEV_AUXDATA("arm,pl330", EXYNOS4_PA_PDMA0, "dma-pl330.0", NULL),
 	OF_DEV_AUXDATA("arm,pl330", EXYNOS4_PA_PDMA1, "dma-pl330.1", NULL),
+	OF_DEV_AUXDATA("samsung,exynos-ehci", EXYNOS4_PA_EHCI, "s5p-ehci",
+			&origen_ehci_pdata),
 	{},
 };
 
