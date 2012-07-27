@@ -997,6 +997,7 @@ config ARCH_U8500
 
 config ARCH_VEXPRESS
 	bool
+	select ARCH_HAS_CPUFREQ
 	select ARCH_WANT_OPTIONAL_GPIOLIB
 	select ARM_AMBA
 	select ARM_TIMER_SP804
