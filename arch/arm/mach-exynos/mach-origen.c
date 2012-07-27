@@ -363,7 +363,9 @@ static struct regulator_init_data __initdata max8997_buck3_data = {
 	.constraints	= {
 		.name		= "VDD_G3D_1.1V",
 		.min_uV		= 900000,
-		.max_uV		= 1100000,
+		.max_uV		= 1200000,
+		.always_on	= 1,
+		.boot_on	= 1,
 		.valid_ops_mask	= REGULATOR_CHANGE_VOLTAGE |
 					REGULATOR_CHANGE_STATUS,
 		.state_mem	= {
@@ -820,6 +822,7 @@ static struct platform_device *origen_devices[] __initdata = {
 	&s5p_device_fimc_md,
 	&s5p_device_fimd0,
 	&s5p_device_g2d,
+	&s5p_device_g3d,
 	&s5p_device_hdmi,
 	&s5p_device_i2c_hdmiphy,
 	&s5p_device_jpeg,
