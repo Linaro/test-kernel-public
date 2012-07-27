@@ -3,6 +3,7 @@
  */
 #include <linux/device.h>
 #include <linux/amba/bus.h>
+#include <linux/amba/clcd.h>
 #include <linux/amba/mmci.h>
 #include <linux/io.h>
 #include <linux/init.h>
@@ -37,6 +38,7 @@
 #include <mach-vexpress/motherboard.h>
 #include <mach-vexpress/clkdev.h>
 
+#include <plat-versatile/clcd.h>
 #include <plat-versatile/sched_clock.h>
 
 #include "core.h"
@@ -585,6 +587,47 @@ static void __init v2m_dt_hdlcd_init(void)
 			v2m_get_master_site());
 };
 
+static struct v2m_osc v2m_dt_clcd_osc = {
+	.rate_min = 10000000,
+	.rate_max = 165000000,
+	.rate_default = 23750000,
+};
+
+static int v2m_dt_clcd_init(void)
+{
+	struct device_node *node;
+	u32 reg[2];
+	u32 osc;
+	u32 clcd_site;
+	u32 dvimode;
+
+	node = of_find_compatible_node(NULL, NULL, "arm,pl111");
+	if (!node)
+		return -ENODEV;
+
+	if (of_property_read_u32_array(node, "reg",
+			reg, ARRAY_SIZE(reg)) != 0)
+		return -EINVAL;
+
+	switch (reg[0]) {
+	case CT_CA9X4_CLCDC:
+		clcd_site = v2m_get_master_site();
+		dvimode = 2;
+		break;
+	default:
+		clcd_site = SYS_CFG_SITE_MB;
+		dvimode = 0;
+		break;
+	}
+
+	if (of_property_read_u32(node, "arm,vexpress-osc", &osc) != 0)
+		return -EINVAL;
+	v2m_dt_clcd_osc.site = clcd_site;
+	v2m_dt_clcd_osc.osc = osc;
+	v2m_cfg_write(SYS_CFG_MUXFPGA | clcd_site, clcd_site);
+	v2m_cfg_write(SYS_CFG_DVIMODE | clcd_site, dvimode);
+	return 0;
+}
 
 static struct map_desc v2m_rs1_io_desc __initdata = {
 	.virtual	= V2M_PERIPH,
@@ -645,6 +688,7 @@ void __init v2m_dt_init_early(void)
 	}
 
 	v2m_dt_hdlcd_init();
+	v2m_dt_clcd_init();
 }
 
 static  struct of_device_id vexpress_irq_match[] __initdata = {
@@ -684,6 +728,11 @@ static void __init v2m_dt_timer_init(void)
 	if (v2m_dt_hdlcd_osc.site) {
 		clk = v2m_osc_register("hdlcd", &v2m_dt_hdlcd_osc);
 		clk_register_clkdev(clk, NULL, "hdlcd");
+	}
+	if (v2m_dt_clcd_osc.site) {
+		/* core tile clcd controller for A9 */
+		clk = v2m_osc_register("10020000.clcd", &v2m_dt_clcd_osc);
+		clk_register_clkdev(clk, NULL, "10020000.clcd");
 	}
 }
 

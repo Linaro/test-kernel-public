@@ -9,6 +9,8 @@
 
 /dts-v1/;
 
+/memreserve/ 0x9f000000 0x01000000;
+
 / {
 	model = "V2P-CA9";
 	arm,hbi = <0x191>;
@@ -70,6 +72,10 @@
 		compatible = "arm,pl111", "arm,primecell";
 		reg = <0x10020000 0x1000>;
 		interrupts = <0 44 4>;
+		mode = "XVGA";
+		arm,vexpress-osc = <1>;
+		use_dma = <1>;
+		framebuffer = <0x9f000000 0x01000000>;
 	};
 
 	memory-controller@100e0000 {
