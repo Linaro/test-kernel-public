@@ -529,6 +529,9 @@ config WL127X_RFKILL
 	 Creates an rfkill entry in sysfs for power control of Bluetooth
 	 TI wl127x chips.
 	 
+config ARM_CCI
+       bool "ARM CCI driver support"
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
@@ -538,4 +541,5 @@ source "drivers/misc/lis3lv02d/Kconfig"
 source "drivers/misc/carma/Kconfig"
 source "drivers/misc/altera-stapl/Kconfig"
 source "drivers/misc/mei/Kconfig"
+source "drivers/misc/vexpress/Kconfig"
 endmenu

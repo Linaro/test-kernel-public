@@ -54,4 +54,5 @@ obj-$(CONFIG_ALTERA_STAPL)	+=altera-stapl/
 obj-$(CONFIG_INTEL_MEI)		+= mei/
 obj-$(CONFIG_WL127X_RFKILL)	+= wl127x-rfkill.o
 obj-$(CONFIG_SENSORS_AK8975)	+= akm8975.o
-
+obj-$(CONFIG_ARCH_VEXPRESS)	+= vexpress/
+obj-$(CONFIG_ARM_CCI)		+= arm-cci.o
