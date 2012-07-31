@@ -3263,14 +3263,10 @@ unlock:
 
 #ifdef CONFIG_SCHED_HMP
 	if (hmp_up_migration(new_cpu, &p->se)) {
-		cpu = hmp_select_fast_cpu(p);
-		if (cpu < nr_cpu_ids)
-			return cpu;
+		return hmp_select_fast_cpu(p);
 	}
 	if (hmp_down_migration(new_cpu, &p->se)) {
-		cpu = hmp_select_slow_cpu(p);
-		if (cpu < nr_cpu_ids)
-			return cpu;
+		return hmp_select_slow_cpu(p);
 	}
 #endif
 
@@ -5435,6 +5431,7 @@ static unsigned int hmp_up_migration(int cpu, struct sched_entity *se)
 	struct task_struct *p = task_of(se);
 	if (p->prio < hmp_up_prio && p->prio > 100
 		&& hmp_cpu_is_slow(cpu)
+		&& cpumask_intersects(&hmp_fast_cpu_mask, tsk_cpus_allowed(p))
 		&& se->avg.load_avg_ratio > hmp_up_threshold) {
 		return 1;
 	}
@@ -5446,6 +5443,7 @@ static unsigned int hmp_down_migration(int cpu, struct sched_entity *se)
 {
 	struct task_struct *p = task_of(se);
 	if (p->prio >= hmp_up_prio || (hmp_cpu_is_fast(cpu)
+		&& cpumask_intersects(&hmp_slow_cpu_mask, tsk_cpus_allowed(p))
 		&& se->avg.load_avg_ratio < hmp_down_threshold)) {
 		return 1;
 	}
