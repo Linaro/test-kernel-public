@@ -565,16 +565,24 @@ static struct v2m_osc v2m_dt_hdlcd_osc = {
 static void __init v2m_dt_hdlcd_init(void)
 {
 	struct device_node *node;
-	u32 framebuffer[2];
+	int len, na, ns;
+	const __be32 *prop;
+	phys_addr_t fb_base, fb_size;
 	u32 osc;
 
 	node = of_find_compatible_node(NULL, NULL, "arm,hdlcd");
 	if (!node)
 		return;
 
-	if (WARN_ON(of_property_read_u32_array(node, "framebuffer",
-			framebuffer, ARRAY_SIZE(framebuffer))))
+	na = of_n_addr_cells(node);
+	ns = of_n_size_cells(node);
+
+	prop = of_get_property(node, "framebuffer", &len);
+	if (WARN_ON(!prop || len < (na + ns) * sizeof(*prop)))
 		return;
+
+	fb_base = of_read_number(prop, na);
+	fb_size = of_read_number(prop + na, ns);
 
 	if (WARN_ON(of_property_read_u32(node, "arm,vexpress-osc", &osc)))
 		return;
@@ -582,7 +590,7 @@ static void __init v2m_dt_hdlcd_init(void)
 	v2m_dt_hdlcd_osc.site = v2m_get_master_site();
 	v2m_dt_hdlcd_osc.osc = osc;
 
-	if (WARN_ON(memblock_remove(framebuffer[0], framebuffer[1])))
+	if (WARN_ON(memblock_remove(fb_base, fb_size)))
 		return;
 
 	v2m_cfg_write(SYS_CFG_MUXFPGA | SYS_CFG_SITE(SYS_CFG_SITE_MB),
