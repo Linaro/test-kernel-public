@@ -26,6 +26,8 @@
 
 #include <plat/regs-timer.h>
 
+#define NUM_PWM 4
+
 struct s3c_chip {
 	struct platform_device	*pdev;
 
@@ -228,7 +230,7 @@ static int s3c_pwm_probe(struct platform_device *pdev)
 	s3c->chip.dev = &pdev->dev;
 	s3c->chip.ops = &s3c_pwm_ops;
 	s3c->chip.base = -1;
-	s3c->chip.npwm = 1;
+	s3c->chip.npwm = NUM_PWM;
 
 	s3c->clk = devm_clk_get(dev, "pwm-tin");
 	if (IS_ERR(s3c->clk)) {
