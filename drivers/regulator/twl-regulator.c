@@ -659,13 +659,6 @@ static struct regulator_ops twl6030fixed_ops = {
 	.get_status	= twl6030reg_get_status,
 };
 
-static struct regulator_ops twl6030_fixed_resource = {
-	.enable		= twl6030reg_enable,
-	.disable	= twl6030reg_disable,
-	.is_enabled	= twl6030reg_is_enabled,
-	.get_status	= twl6030reg_get_status,
-};
-
 /*
  * SMPS status and control
  */
@@ -967,19 +960,6 @@ static struct twlreg_info TWLFIXED_INFO_##label = { \
 		}, \
 	}
 
-#define TWL6030_FIXED_RESOURCE(label, offset, turnon_delay) \
-static struct twlreg_info TWLRES_INFO_##label = { \
-	.base = offset, \
-	.desc = { \
-		.name = #label, \
-		.id = TWL6030_REG_##label, \
-		.ops = &twl6030_fixed_resource, \
-		.type = REGULATOR_VOLTAGE, \
-		.owner = THIS_MODULE, \
-		.enable_time = turnon_delay, \
-		}, \
-	}
-
 #define TWL6025_ADJUSTABLE_SMPS(label, offset) \
 static struct twlreg_info TWLSMPS_INFO_##label = { \
 	.base = offset, \
@@ -1048,7 +1028,6 @@ TWL6030_FIXED_LDO(VDAC, 0x64, 1800, 0);
 TWL6030_FIXED_LDO(VUSB, 0x70, 3300, 0);
 TWL6030_FIXED_LDO(V1V8, 0x16, 1800, 0);
 TWL6030_FIXED_LDO(V2V1, 0x1c, 2100, 0);
-TWL6030_FIXED_RESOURCE(CLK32KG, 0x8C, 0);
 TWL6025_ADJUSTABLE_SMPS(SMPS3, 0x34);
 TWL6025_ADJUSTABLE_SMPS(SMPS4, 0x10);
 TWL6025_ADJUSTABLE_SMPS(VIO, 0x16);
