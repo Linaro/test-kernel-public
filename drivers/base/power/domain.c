@@ -1323,7 +1323,7 @@ int __pm_genpd_add_device(struct generic_pm_domain *genpd, struct device *dev,
 		}
 
 	ret = dev_pm_get_subsys_data(dev);
-	if (ret)
+	if (ret < 0)
 		goto out;
 
 	genpd->device_count++;
@@ -1358,7 +1358,7 @@ int __pm_genpd_add_device(struct generic_pm_domain *genpd, struct device *dev,
 	if (gpd_data != gpd_data_new)
 		__pm_genpd_free_dev_data(dev, gpd_data_new);
 
-	return ret;
+	return (ret < 0) ? : 0;
 }
 
 /**
