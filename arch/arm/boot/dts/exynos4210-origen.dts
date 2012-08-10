@@ -239,6 +239,13 @@
 					regulator-always-on;
 				};
 
+				ldo17_reg: LDO17 {
+					regulator-name = "vmmc";
+					regulator-min-microvolt = <3300000>;
+					regulator-max-microvolt = <3300000>;
+					regulator-always-on;
+				};
+
 				buck7_reg: BUCK7 {
 					regulator-name = "VDD_LCD_3.3V";
 					regulator-min-microvolt = <3300000>;
