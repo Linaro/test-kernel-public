@@ -10,7 +10,7 @@
  * warranty of any kind, whether express or implied.
  */
 
-#include <mach/armada-370-xp.h>
+#include <mach-mvebu/armada-370-xp.h>
 
 #define UART_THR ((volatile unsigned char *)(ARMADA_370_XP_REGS_PHYS_BASE\
 								+ 0x12000))

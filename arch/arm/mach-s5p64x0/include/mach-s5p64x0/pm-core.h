@@ -12,7 +12,7 @@
  * published by the Free Software Foundation.
  */
 
-#include <mach/regs-gpio.h>
+#include <mach-s5p64x0/regs-gpio.h>
 
 static inline void s3c_pm_debug_init_uart(void)
 {

@@ -8,7 +8,7 @@
  * warranty of any kind, whether express or implied.
  */
 
-#include <mach/bridge-regs.h>
+#include <mach-orion5x/bridge-regs.h>
 
 	.macro  get_irqnr_preamble, base, tmp
 	ldr	\base, =MAIN_IRQ_CAUSE

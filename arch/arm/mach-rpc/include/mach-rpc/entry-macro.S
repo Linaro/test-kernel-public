@@ -1,4 +1,4 @@
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/hardware/entry-macro-iomd.S>
 
 	.equ	ioc_base_high, IOC_BASE & 0xff000000

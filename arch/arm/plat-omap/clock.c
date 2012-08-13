@@ -22,7 +22,7 @@
 #include <linux/cpufreq.h>
 #include <linux/io.h>
 
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 static LIST_HEAD(clocks);
 static DEFINE_MUTEX(clocks_mutex);

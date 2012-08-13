@@ -26,8 +26,8 @@
 
 #include <linux/serial_reg.h>
 
-#include <mach/iomap.h>
-#include <mach/irammap.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/irammap.h>
 
 		.macro  addruart, rp, rv, tmp
 		adr	\rp, 99f		@ actual addr of 99f

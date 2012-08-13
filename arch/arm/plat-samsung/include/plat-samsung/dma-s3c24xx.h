@@ -10,7 +10,7 @@
  * published by the Free Software Foundation.
 */
 
-#include <plat/dma-core.h>
+#include <plat-samsung/dma-core.h>
 
 extern struct bus_type dma_subsys;
 extern struct s3c2410_dma_chan s3c2410_chans[S3C_DMA_CHANNELS];

@@ -18,7 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <mach/mxs.h>
+#include <mach-mxs/mxs.h>
 
 #define MXS_ICOLL_VBASE		MXS_IO_ADDRESS(MXS_ICOLL_BASE_ADDR)
 #define HW_ICOLL_STAT_OFFSET	0x70

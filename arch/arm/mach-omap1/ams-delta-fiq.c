@@ -19,11 +19,11 @@
 #include <linux/module.h>
 #include <linux/io.h>
 
-#include <plat/board-ams-delta.h>
+#include <plat-omap/board-ams-delta.h>
 
 #include <asm/fiq.h>
 
-#include <mach/ams-delta-fiq.h>
+#include <mach-omap1/ams-delta-fiq.h>
 
 static struct fiq_handler fh = {
 	.name	= "ams-delta-fiq"

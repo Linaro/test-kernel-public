@@ -9,7 +9,7 @@
 #ifndef __ASM_ARCH_IRQS_H
 #define __ASM_ARCH_IRQS_H __FILE__
 
-#include <plat/irqs.h>
+#include <plat-samsung/irqs.h>
 
 /* VIC0: system, DMA, timer */
 #define IRQ_EINT16_31		S5P_IRQ_VIC0(16)

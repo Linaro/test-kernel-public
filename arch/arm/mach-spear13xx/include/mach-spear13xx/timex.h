@@ -14,6 +14,6 @@
 #ifndef __MACH_TIMEX_H
 #define __MACH_TIMEX_H
 
-#include <plat/timex.h>
+#include <plat-spear/timex.h>
 
 #endif /* __MACH_TIMEX_H */

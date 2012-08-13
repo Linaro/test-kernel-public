@@ -23,8 +23,8 @@
 #define ARCH_NR_GPIOS	(256 + CONFIG_S3C24XX_GPIO_EXTRA)
 #endif
 
-#include <mach/gpio-nrs.h>
-#include <mach/gpio-fns.h>
+#include <mach-s3c24xx/gpio-nrs.h>
+#include <mach-s3c24xx/gpio-fns.h>
 
 #ifdef CONFIG_CPU_S3C244X
 #define S3C_GPIO_END	(S3C2410_GPJ(0) + 32)

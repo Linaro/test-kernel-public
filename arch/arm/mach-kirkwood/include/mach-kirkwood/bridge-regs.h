@@ -11,7 +11,7 @@
 #ifndef __ASM_ARCH_BRIDGE_REGS_H
 #define __ASM_ARCH_BRIDGE_REGS_H
 
-#include <mach/kirkwood.h>
+#include <mach-kirkwood/kirkwood.h>
 
 #define CPU_CONFIG		(BRIDGE_VIRT_BASE | 0x0100)
 #define CPU_CONFIG_ERROR_PROP	0x00000004

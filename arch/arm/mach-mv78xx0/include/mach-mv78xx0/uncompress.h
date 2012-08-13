@@ -7,7 +7,7 @@
  */
 
 #include <linux/serial_reg.h>
-#include <mach/mv78xx0.h>
+#include <mach-mv78xx0/mv78xx0.h>
 
 #define SERIAL_BASE	((unsigned char *)UART0_PHYS_BASE)
 

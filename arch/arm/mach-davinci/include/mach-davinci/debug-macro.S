@@ -18,7 +18,7 @@
 
 #include <linux/serial_reg.h>
 
-#include <mach/serial.h>
+#include <mach-davinci/serial.h>
 
 #define UART_SHIFT	2
 

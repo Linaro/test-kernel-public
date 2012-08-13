@@ -23,8 +23,8 @@
 #include <linux/io.h>
 #endif
 #include <asm/mach-types.h>
-#include <mach/digctl.h>
-#include <mach/hardware.h>
+#include <mach-mxs/digctl.h>
+#include <mach-mxs/hardware.h>
 
 /*
  * IO addresses common to MXS-based

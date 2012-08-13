@@ -7,8 +7,8 @@
  * License version 2. This program is licensed "as is" without any
  * warranty of any kind, whether express or implied.
  */
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-footbridge/hardware.h>
+#include <mach-footbridge/irqs.h>
 #include <asm/hardware/dec21285.h>
 
 		.equ	dc21285_high, ARMCSR_BASE & 0xff000000

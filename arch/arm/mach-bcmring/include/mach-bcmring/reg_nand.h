@@ -31,7 +31,7 @@
 
 /* ---- Include Files ---------------------------------------------------- */
 #include <csp/reg.h>
-#include <mach/reg_umi.h>
+#include <mach-bcmring/reg_umi.h>
 
 /* ---- Constants and Types ---------------------------------------------- */
 

@@ -9,7 +9,7 @@
  */
 
 #include <linux/serial_reg.h>
-#include <mach/orion5x.h>
+#include <mach-orion5x/orion5x.h>
 
 #define SERIAL_BASE	((unsigned char *)UART0_PHYS_BASE)
 

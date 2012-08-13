@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_REGS_MCT_H
 #define __ASM_ARCH_REGS_MCT_H __FILE__
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 #define EXYNOS4_MCTREG(x)		(S5P_VA_SYSTIMER + (x))
 

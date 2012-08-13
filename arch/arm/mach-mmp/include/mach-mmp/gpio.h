@@ -3,6 +3,6 @@
 
 #include <asm-generic/gpio.h>
 
-#include <mach/cputype.h>
+#include <mach-mmp/cputype.h>
 
 #endif /* __ASM_MACH_GPIO_H */

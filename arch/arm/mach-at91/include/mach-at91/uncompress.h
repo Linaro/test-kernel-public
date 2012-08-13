@@ -24,10 +24,10 @@
 
 #include <linux/io.h>
 #include <linux/atmel_serial.h>
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 
-#include <mach/at91_dbgu.h>
-#include <mach/cpu.h>
+#include <mach-at91/at91_dbgu.h>
+#include <mach-at91/cpu.h>
 
 void __iomem *at91_uart;
 

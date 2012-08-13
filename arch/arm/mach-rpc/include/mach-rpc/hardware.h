@@ -12,7 +12,7 @@
 #ifndef __ASM_ARCH_HARDWARE_H
 #define __ASM_ARCH_HARDWARE_H
 
-#include <mach/memory.h>
+#include <mach-rpc/memory.h>
 
 /*
  * What hardware must be present

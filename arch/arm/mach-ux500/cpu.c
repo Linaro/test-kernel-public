@@ -21,9 +21,9 @@
 #include <asm/hardware/gic.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/setup.h>
-#include <mach/devices.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/setup.h>
+#include <mach-ux500/devices.h>
 
 #include "clock.h"
 

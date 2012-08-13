@@ -6,7 +6,7 @@
  * published by the Free Software Foundation.
 */
 
-#include <mach/bridge-regs.h>
+#include <mach-kirkwood/bridge-regs.h>
 
 	.macro	addruart, rp, rv, tmp
 	ldr	\rp, =KIRKWOOD_REGS_PHYS_BASE

@@ -32,7 +32,7 @@ extern unsigned int exynos_result_of_asv;
 
 #include <mach/regs-clock.h>
 
-#include <plat/map-s5p.h>
+#include <plat-samsung/map-s5p.h>
 
 #define MAX_SAFEVOLT	1200000 /* 1.2V */
 

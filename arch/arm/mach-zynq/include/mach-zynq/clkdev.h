@@ -17,7 +17,7 @@
 #ifndef __MACH_CLKDEV_H__
 #define __MACH_CLKDEV_H__
 
-#include <plat/clock.h>
+#include <plat-versatile/clock.h>
 
 struct clk {
 	unsigned long		rate;

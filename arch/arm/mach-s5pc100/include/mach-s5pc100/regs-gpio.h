@@ -9,7 +9,7 @@
 #ifndef __ASM_MACH_S5PC100_REGS_GPIO_H
 #define __ASM_MACH_S5PC100_REGS_GPIO_H __FILE__
 
-#include <mach/map.h>
+#include <mach-s5pc100/map.h>
 
 #define S5PC100EINT30CON		(S5P_VA_GPIO + 0xE00)
 #define S5P_EINT_CON(x)			(S5PC100EINT30CON + ((x) * 0x4))

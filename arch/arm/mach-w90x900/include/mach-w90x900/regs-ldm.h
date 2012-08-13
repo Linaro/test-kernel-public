@@ -19,7 +19,7 @@
 #ifndef __ASM_ARM_W90X900_REGS_LDM_H
 #define __ASM_ARM_W90X900_REGS_LDM_H
 
-#include <mach/map.h>
+#include <mach-w90x900/map.h>
 
 /* Display Controller Control/Status Register */
 #define REG_LCM_DCCS			(0x00)

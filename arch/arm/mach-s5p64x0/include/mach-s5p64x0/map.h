@@ -13,8 +13,8 @@
 #ifndef __ASM_ARCH_MAP_H
 #define __ASM_ARCH_MAP_H __FILE__
 
-#include <plat/map-base.h>
-#include <plat/map-s5p.h>
+#include <plat-samsung/map-base.h>
+#include <plat-samsung/map-s5p.h>
 
 #define S5P64X0_PA_SDRAM	0x20000000
 

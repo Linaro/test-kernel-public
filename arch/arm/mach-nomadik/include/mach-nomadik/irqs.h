@@ -20,7 +20,7 @@
 #ifndef __ASM_ARCH_IRQS_H
 #define __ASM_ARCH_IRQS_H
 
-#include <mach/hardware.h>
+#include <mach-nomadik/hardware.h>
 
 #define IRQ_VIC_START		1	/* first VIC interrupt is 1 */
 

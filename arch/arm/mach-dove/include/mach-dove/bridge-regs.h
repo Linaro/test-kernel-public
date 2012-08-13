@@ -11,7 +11,7 @@
 #ifndef __ASM_ARCH_BRIDGE_REGS_H
 #define __ASM_ARCH_BRIDGE_REGS_H
 
-#include <mach/dove.h>
+#include <mach-dove/dove.h>
 
 #define CPU_CONFIG		(BRIDGE_VIRT_BASE | 0x0000)
 

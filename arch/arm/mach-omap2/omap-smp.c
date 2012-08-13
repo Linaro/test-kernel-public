@@ -24,9 +24,9 @@
 #include <asm/hardware/gic.h>
 #include <asm/smp_scu.h>
 
-#include <mach/hardware.h>
-#include <mach/omap-secure.h>
-#include <mach/omap-wakeupgen.h>
+#include <mach-omap2/hardware.h>
+#include <mach-omap2/omap-secure.h>
+#include <mach-omap2/omap-wakeupgen.h>
 #include <asm/cputype.h>
 
 #include "iomap.h"

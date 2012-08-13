@@ -9,7 +9,7 @@
 #ifndef __ASM_ARCH_BRIDGE_REGS_H
 #define __ASM_ARCH_BRIDGE_REGS_H
 
-#include <mach/mv78xx0.h>
+#include <mach-mv78xx0/mv78xx0.h>
 
 #define CPU_CONTROL		(BRIDGE_VIRT_BASE | 0x0104)
 #define L2_WRITETHROUGH		0x00020000

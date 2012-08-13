@@ -21,7 +21,7 @@
 #ifndef __ASM_ARCH_VR1000MAP_H
 #define __ASM_ARCH_VR1000MAP_H
 
-#include <mach/bast-map.h>
+#include <mach-s3c24xx/bast-map.h>
 
 #define VR1000_IOADDR(x) BAST_IOADDR(x)
 

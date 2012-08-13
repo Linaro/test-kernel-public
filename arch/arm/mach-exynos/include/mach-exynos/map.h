@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_MAP_H
 #define __ASM_ARCH_MAP_H __FILE__
 
-#include <plat/map-base.h>
+#include <plat-samsung/map-base.h>
 
 /*
  * EXYNOS4 UART offset is 0x10000 but the older S5P SoCs are 0x400.
@@ -21,7 +21,7 @@
  */
 #define S3C_UART_OFFSET			(0x10000)
 
-#include <plat/map-s5p.h>
+#include <plat-samsung/map-s5p.h>
 
 #define EXYNOS4_PA_SYSRAM0		0x02025000
 #define EXYNOS4_PA_SYSRAM1		0x02020000

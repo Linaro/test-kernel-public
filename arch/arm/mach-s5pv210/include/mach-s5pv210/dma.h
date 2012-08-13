@@ -21,6 +21,6 @@
 #define __MACH_DMA_H
 
 /* This platform uses the common DMA API driver for PL330 */
-#include <plat/dma-pl330.h>
+#include <plat-samsung/dma-pl330.h>
 
 #endif /* __MACH_DMA_H */

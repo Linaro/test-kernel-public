@@ -11,8 +11,8 @@
  *
 */
 
-#include <mach/hardware.h>
-#include <mach/at91_dbgu.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/at91_dbgu.h>
 
 #if defined(CONFIG_AT91_DEBUG_LL_DBGU0)
 #define AT91_DBGU AT91_BASE_DBGU0

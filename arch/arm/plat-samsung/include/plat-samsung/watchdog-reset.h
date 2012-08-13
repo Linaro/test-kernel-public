@@ -10,8 +10,8 @@
  * published by the Free Software Foundation.
 */
 
-#include <plat/clock.h>
-#include <plat/regs-watchdog.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/regs-watchdog.h>
 #include <mach/map.h>
 
 #include <linux/clk.h>

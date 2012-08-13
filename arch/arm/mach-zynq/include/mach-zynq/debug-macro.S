@@ -14,8 +14,8 @@
  * GNU General Public License for more details.
  */
 
-#include <mach/zynq_soc.h>
-#include <mach/uart.h>
+#include <mach-zynq/zynq_soc.h>
+#include <mach-zynq/uart.h>
 
 		.macro	addruart, rp, rv, tmp
 		ldr	\rp, =LL_UART_PADDR	@ physical

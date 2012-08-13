@@ -9,8 +9,8 @@
  *
  */
 
-#include <mach/hardware.h>
-#include <mach/regs-irq.h>
+#include <mach-w90x900/hardware.h>
+#include <mach-w90x900/regs-irq.h>
 
 	.macro  get_irqnr_preamble, base, tmp
 	.endm

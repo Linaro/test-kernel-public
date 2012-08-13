@@ -17,7 +17,7 @@
 
 #include <mach/hardware.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 
 
 /* Many OMAP development platforms reuse the same "debug board"; these

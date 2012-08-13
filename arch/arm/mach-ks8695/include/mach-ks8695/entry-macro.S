@@ -11,8 +11,8 @@
  * warranty of any kind, whether express or implied.
 */
 
-#include <mach/hardware.h>
-#include <mach/regs-irq.h>
+#include <mach-ks8695/hardware.h>
+#include <mach-ks8695/regs-irq.h>
 
 	.macro  get_irqnr_preamble, base, tmp
 		ldr	\base, =KS8695_IRQ_VA			@ Base address of interrupt controller

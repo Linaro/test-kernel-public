@@ -24,9 +24,9 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/map.h>
-#include <mach/bast-map.h>
-#include <mach/bast-irq.h>
+#include <mach-s3c24xx/map.h>
+#include <mach-s3c24xx/bast-map.h>
+#include <mach-s3c24xx/bast-irq.h>
 
 /* IDE ports */
 

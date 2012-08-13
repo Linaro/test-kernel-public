@@ -13,7 +13,7 @@
 
 #include <linux/sh_clk.h>
 #include <linux/pm_domain.h>
-#include <mach/pm-rmobile.h>
+#include <mach-shmobile/pm-rmobile.h>
 
 /*
  * Pin Function Controller:

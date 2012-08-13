@@ -11,7 +11,7 @@
 * license other than the GPL, without Broadcom's express prior written
 * consent.
 *****************************************************************************/
-#include <mach/csp/mm_addr.h>
+#include <mach-bcmring/csp/mm_addr.h>
 
 #define BCMRING_UART_0_DR (*(volatile unsigned int *)MM_ADDR_IO_UARTA)
 #define BCMRING_UART_0_FR (*(volatile unsigned int *)(MM_ADDR_IO_UARTA + 0x18))

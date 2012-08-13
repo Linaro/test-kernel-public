@@ -19,8 +19,8 @@
 
 #include <csp/errno.h>
 #include <csp/reg.h>
-#include <mach/csp/chipcHw_reg.h>
-#include <mach/csp/chipcHw_def.h>
+#include <mach-bcmring/csp/chipcHw_reg.h>
+#include <mach-bcmring/csp/chipcHw_def.h>
 
 /* ---- Private Constants and Types --------------------------------------- */
 typedef enum {

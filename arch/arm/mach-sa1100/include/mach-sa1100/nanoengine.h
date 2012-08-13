@@ -14,7 +14,7 @@
 #ifndef __ASM_ARCH_NANOENGINE_H
 #define __ASM_ARCH_NANOENGINE_H
 
-#include <mach/irqs.h>
+#include <mach-sa1100/irqs.h>
 
 #define GPIO_PC_READY0	11 /* ready for socket 0 (active high)*/
 #define GPIO_PC_READY1	12 /* ready for socket 1 (active high) */

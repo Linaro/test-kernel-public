@@ -31,7 +31,7 @@
 
 /* ---- Include Files ---------------------------------------------------- */
 #include <csp/reg.h>
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 /* ---- Constants and Types ---------------------------------------------- */
 

@@ -12,7 +12,7 @@
 #ifndef __MACH_GPIO_H__
 #define __MACH_GPIO_H__
 
-#include <mach/irqs.h>
+#include <mach-gemini/irqs.h>
 
 #define gpio_to_irq(x)	((x) + GPIO_IRQ_BASE)
 #define irq_to_gpio(x)	((x) - GPIO_IRQ_BASE)

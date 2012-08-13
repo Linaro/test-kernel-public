@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_REGS_GPIO_H
 #define __ASM_ARCH_REGS_GPIO_H __FILE__
 
-#include <mach/map.h>
+#include <mach-s5p64x0/map.h>
 
 /* Base addresses for each of the banks */
 

@@ -17,7 +17,7 @@
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 
-#include <plat/fpga.h>
+#include <plat-omap/fpga.h>
 
 
 /* Many OMAP development platforms reuse the same "debug board"; these

@@ -19,6 +19,6 @@
 #define __ASM_ARCH_HARDWARE_H
 
 #include <asm/sizes.h>
-#include <mach/map.h>
+#include <mach-w90x900/map.h>
 
 #endif /* __ASM_ARCH_HARDWARE_H */

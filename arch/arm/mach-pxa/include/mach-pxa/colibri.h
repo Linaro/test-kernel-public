@@ -2,7 +2,7 @@
 #define _COLIBRI_H_
 
 #include <net/ax88796.h>
-#include <mach/mfp.h>
+#include <mach-pxa/mfp.h>
 
 /*
  * base board glue for PXA270 module

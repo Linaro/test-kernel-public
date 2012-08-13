@@ -11,4 +11,4 @@
  * warranty of any kind, whether express or implied.
  */
 
-#include <plat/debug-macro.S>
+#include <plat-spear/debug-macro.S>

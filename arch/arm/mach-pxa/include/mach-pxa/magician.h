@@ -13,7 +13,7 @@
 #define _MAGICIAN_H_
 
 #include <linux/gpio.h>
-#include <mach/irqs.h>
+#include <mach-pxa/irqs.h>
 
 /*
  * PXA GPIOs

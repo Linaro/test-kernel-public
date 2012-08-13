@@ -29,7 +29,7 @@
 /* ---- Include Files ---------------------------------------------------- */
 #include <csp/stdint.h>
 #include <csp/reg.h>
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 /* ---- Public Constants and Types --------------------------------------- */
 

@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_REGS_MEM_H
 #define __ASM_ARCH_REGS_MEM_H __FILE__
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 #define S5P_DMC0_MEMCON_OFFSET		0x04
 

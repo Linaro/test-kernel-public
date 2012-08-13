@@ -26,9 +26,9 @@
 #include <asm/localtimer.h>
 #include <asm/sched_clock.h>
 
-#include <mach/msm_iomap.h>
-#include <mach/cpu.h>
-#include <mach/board.h>
+#include <mach-msm/msm_iomap.h>
+#include <mach-msm/cpu.h>
+#include <mach-msm/board.h>
 
 #define TIMER_MATCH_VAL         0x0000
 #define TIMER_COUNT_VAL         0x0004

@@ -18,7 +18,7 @@
 
 #include <asm/barrier.h>
 #include <asm/processor.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 #define UART_CSR      (*(volatile uint32_t *)(MSM_DEBUG_UART_PHYS + 0x08))
 #define UART_TF       (*(volatile uint32_t *)(MSM_DEBUG_UART_PHYS + 0x0c))

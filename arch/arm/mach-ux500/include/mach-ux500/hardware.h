@@ -30,7 +30,7 @@
 /* Used by some plat-nomadik code */
 #define io_p2v(n)		__io_address(n)
 
-#include <mach/db8500-regs.h>
+#include <mach-ux500/db8500-regs.h>
 
 #define MSP_TX_RX_REG_OFFSET	0
 #define CRYP1_RX_REG_OFFSET	0x10
@@ -39,7 +39,7 @@
 
 #ifndef __ASSEMBLY__
 
-#include <mach/id.h>
+#include <mach-ux500/id.h>
 extern void __iomem *_PRCMU_BASE;
 
 #define ARRAY_AND_SIZE(x)	(x), ARRAY_SIZE(x)

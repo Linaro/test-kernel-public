@@ -19,7 +19,7 @@
 #ifndef __MACH_IOMUX_MX53_H__
 #define __MACH_IOMUX_MX53_H__
 
-#include <mach/iomux-v3.h>
+#include <mach-imx/iomux-v3.h>
 
 /* These 2 defines are for pins that may not have a mux register, but could
  * have a pad setting register, and vice-versa. */

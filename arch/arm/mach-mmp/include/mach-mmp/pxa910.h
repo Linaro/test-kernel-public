@@ -8,8 +8,8 @@ extern void __init pxa910_init_irq(void);
 
 #include <linux/i2c.h>
 #include <linux/i2c/pxa-i2c.h>
-#include <mach/devices.h>
-#include <plat/pxa3xx_nand.h>
+#include <mach-mmp/devices.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 extern struct pxa_device_desc pxa910_device_uart1;
 extern struct pxa_device_desc pxa910_device_uart2;

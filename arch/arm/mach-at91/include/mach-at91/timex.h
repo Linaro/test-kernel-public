@@ -21,7 +21,7 @@
 #ifndef __ASM_ARCH_TIMEX_H
 #define __ASM_ARCH_TIMEX_H
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 
 #ifdef CONFIG_ARCH_AT91X40
 

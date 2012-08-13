@@ -20,8 +20,8 @@
 #include <linux/delay.h>
 #include <linux/of_address.h>
 
-#include <mach/regs-pmu.h>
-#include <plat/devs.h>
+#include <mach-exynos/regs-pmu.h>
+#include <plat-samsung/devs.h>
 
 /*
  * Exynos specific wrapper around the generic power domain

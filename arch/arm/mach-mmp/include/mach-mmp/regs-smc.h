@@ -11,7 +11,7 @@
 #ifndef __ASM_MACH_REGS_SMC_H
 #define __ASM_MACH_REGS_SMC_H
 
-#include <mach/addr-map.h>
+#include <mach-mmp/addr-map.h>
 
 #define SMC_VIRT_BASE		(AXI_VIRT_BASE + 0x83800)
 #define SMC_REG(x)		(SMC_VIRT_BASE + (x))

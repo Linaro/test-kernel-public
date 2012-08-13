@@ -24,8 +24,8 @@
 #include <asm/io.h>
 #include <asm/sizes.h>
 
-#include <plat/mux.h>
-#include <plat/tc.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/tc.h>
 
 
 /* NOTE:  don't expect this to support many I/O cards.  The 16xx chips have

@@ -8,7 +8,7 @@
  * Debugging macro include header.
  * Author: Linus Walleij <linus.walleij@stericsson.com>
  */
-#include <mach/hardware.h>
+#include <mach-u300/hardware.h>
 
 	.macro	addruart, rp, rv, tmp
 	/* If we move the address using MMU, use this. */

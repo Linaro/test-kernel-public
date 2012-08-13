@@ -11,7 +11,7 @@
 #ifndef __ASM_MACH_REGS_APBC_H
 #define __ASM_MACH_REGS_APBC_H
 
-#include <mach/addr-map.h>
+#include <mach-mmp/addr-map.h>
 
 /*
  * APB clock register offsets for PXA168

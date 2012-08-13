@@ -16,6 +16,6 @@
 #ifndef __ASM_ARCH_HARDWARE_H
 #define __ASM_ARCH_HARDWARE_H
 
-#include <mach/picoxcell_soc.h>
+#include <mach-picoxcell/picoxcell_soc.h>
 
 #endif

@@ -14,6 +14,6 @@
 #ifndef __MACH_UNCOMPRESS_H
 #define __MACH_UNCOMPRESS_H
 
-#include <plat/uncompress.h>
+#include <plat-spear/uncompress.h>
 
 #endif	/* __MACH_UNCOMPRESS_H */

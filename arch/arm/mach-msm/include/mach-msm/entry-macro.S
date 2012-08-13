@@ -17,7 +17,7 @@
  */
 
 #if !defined(CONFIG_ARM_GIC)
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 	.macro	get_irqnr_preamble, base, tmp
 	@ enable imprecise aborts

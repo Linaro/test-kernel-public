@@ -9,8 +9,8 @@
  * accesses to the 8250.
  */
 #include <linux/serial_reg.h>
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-picoxcell/hardware.h>
+#include <mach-picoxcell/map.h>
 
 #define UART_SHIFT 2
 

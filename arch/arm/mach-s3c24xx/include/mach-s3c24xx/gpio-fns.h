@@ -1,1 +1,1 @@
-#include <plat/gpio-fns.h>
+#include <plat-samsung/gpio-fns.h>

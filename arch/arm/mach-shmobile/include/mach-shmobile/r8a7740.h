@@ -19,7 +19,7 @@
 #ifndef __ASM_R8A7740_H__
 #define __ASM_R8A7740_H__
 
-#include <mach/pm-rmobile.h>
+#include <mach-shmobile/pm-rmobile.h>
 
 /*
  * MD_CKx pin

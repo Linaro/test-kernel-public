@@ -22,11 +22,11 @@
 #ifndef __ASM_ARCH_IRQS_H
 #define __ASM_ARCH_IRQS_H
 
-#include <mach/irqs-eb.h>
-#include <mach/irqs-pb11mp.h>
-#include <mach/irqs-pb1176.h>
-#include <mach/irqs-pba8.h>
-#include <mach/irqs-pbx.h>
+#include <mach-realview/irqs-eb.h>
+#include <mach-realview/irqs-pb11mp.h>
+#include <mach-realview/irqs-pb1176.h>
+#include <mach-realview/irqs-pba8.h>
+#include <mach-realview/irqs-pbx.h>
 
 #define IRQ_LOCALTIMER		29
 #define IRQ_LOCALWDOG		30

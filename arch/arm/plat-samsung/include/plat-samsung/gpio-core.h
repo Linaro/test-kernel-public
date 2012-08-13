@@ -101,7 +101,7 @@ static inline struct samsung_gpio_chip *samsung_gpiolib_getchip(unsigned int chi
 #else
 /* machine specific code should provide samsung_gpiolib_getchip */
 
-#include <mach/gpio-track.h>
+#include <mach-s3c24xx/gpio-track.h>
 
 static inline void s3c_gpiolib_track(struct samsung_gpio_chip *chip) { }
 #endif

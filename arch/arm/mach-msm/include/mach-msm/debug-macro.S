@@ -15,8 +15,8 @@
  *
  */
 
-#include <mach/hardware.h>
-#include <mach/msm_iomap.h>
+#include <mach-msm/hardware.h>
+#include <mach-msm/msm_iomap.h>
 
 	.macro	addruart, rp, rv, tmp
 #ifdef MSM_DEBUG_UART_PHYS

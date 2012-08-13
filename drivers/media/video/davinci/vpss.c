@@ -25,7 +25,7 @@
 #include <linux/spinlock.h>
 #include <linux/compiler.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-davinci/hardware.h>
 #include <media/davinci/vpss.h>
 
 MODULE_LICENSE("GPL");

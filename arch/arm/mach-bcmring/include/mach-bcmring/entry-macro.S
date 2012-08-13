@@ -17,9 +17,9 @@
  * Low-level IRQ helper macros for BCMRing-based platforms
  *
  */
-#include <mach/irqs.h>
-#include <mach/hardware.h>
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/irqs.h>
+#include <mach-bcmring/hardware.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 		.macro	get_irqnr_and_base, irqnr, irqstat, base, tmp
 		ldr	\base, =(MM_IO_BASE_INTC0)

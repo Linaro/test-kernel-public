@@ -18,7 +18,7 @@
 #include <linux/spinlock.h>
 
 #include "virt-dma.h"
-#include <plat/dma.h>
+#include <plat-omap/dma.h>
 
 struct omap_dmadev {
 	struct dma_device ddev;

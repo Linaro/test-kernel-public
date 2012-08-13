@@ -4,8 +4,8 @@
 #ifndef __ASM_ARCH_DAVINCI_ASP_H
 #define __ASM_ARCH_DAVINCI_ASP_H
 
-#include <mach/irqs.h>
-#include <mach/edma.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/edma.h>
 
 /* Bases of dm644x and dm355 register banks */
 #define DAVINCI_ASP0_BASE	0x01E02000

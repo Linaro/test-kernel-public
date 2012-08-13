@@ -13,7 +13,7 @@
 #ifndef __ASM_ARCH_UNCOMPRESS_H
 #define __ASM_ARCH_UNCOMPRESS_H
 
-#include <mach/map.h>
+#include <mach-s5p64x0/map.h>
 
 /*
  * cannot use commonly <plat/uncompress.h>
@@ -33,8 +33,8 @@ static void arch_detect_cpu(void);
 
 /* defines for UART registers */
 
-#include <plat/regs-serial.h>
-#include <plat/regs-watchdog.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/regs-watchdog.h>
 
 /* working in physical space... */
 #undef S3C2410_WDOGREG

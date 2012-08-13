@@ -33,7 +33,7 @@ void msm_sirc_exit_sleep(void);
 
 #if defined(CONFIG_ARCH_MSM_SCORPION)
 
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 /*
  * Secondary interrupt controller interrupts

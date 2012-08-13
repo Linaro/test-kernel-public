@@ -5,7 +5,7 @@
 #ifndef __ASM_ARCH_HARDWARE_H
 #define __ASM_ARCH_HARDWARE_H
 
-#include <mach/platform.h>
+#include <mach-ep93xx/platform.h>
 
 /*
  * The EP93xx has two external crystal oscillators.  To generate the

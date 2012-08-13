@@ -23,9 +23,9 @@
 #ifndef CHIPCHW_REG_H
 #define CHIPCHW_REG_H
 
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/csp/mm_io.h>
 #include <csp/reg.h>
-#include <mach/csp/ddrcReg.h>
+#include <mach-bcmring/csp/ddrcReg.h>
 
 #define chipcHw_BASE_ADDRESS    MM_IO_BASE_CHIPC
 

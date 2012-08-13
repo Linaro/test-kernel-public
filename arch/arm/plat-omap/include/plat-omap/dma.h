@@ -533,7 +533,7 @@ extern int omap_dma_chain_status(int chain_id);
 #endif
 
 #if defined(CONFIG_ARCH_OMAP1) && defined(CONFIG_FB_OMAP)
-#include <mach/lcd_dma.h>
+#include <mach-omap1/lcd_dma.h>
 #else
 static inline int omap_lcd_dma_running(void)
 {

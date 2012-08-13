@@ -13,8 +13,8 @@
 #ifndef __ASM_ARCH_REGS_GPIO_H
 #define __ASM_ARCH_REGS_GPIO_H __FILE__
 
-#include <mach/map.h>
-#include <mach/irqs.h>
+#include <mach-exynos/map.h>
+#include <mach-exynos/irqs.h>
 
 #define EINT_REG_NR(x)			(EINT_OFFSET(x) >> 3)
 #define EINT_CON(b, x)			(b + 0xE00 + (EINT_REG_NR(x) * 4))

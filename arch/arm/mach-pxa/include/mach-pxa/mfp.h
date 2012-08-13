@@ -16,6 +16,6 @@
 #ifndef __ASM_ARCH_MFP_H
 #define __ASM_ARCH_MFP_H
 
-#include <plat/mfp.h>
+#include <plat-pxa/mfp.h>
 
 #endif /* __ASM_ARCH_MFP_H */

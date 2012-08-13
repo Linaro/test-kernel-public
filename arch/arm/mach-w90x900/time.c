@@ -30,8 +30,8 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 
-#include <mach/map.h>
-#include <mach/regs-timer.h>
+#include <mach-w90x900/map.h>
+#include <mach-w90x900/regs-timer.h>
 
 #include "nuc9xx.h"
 

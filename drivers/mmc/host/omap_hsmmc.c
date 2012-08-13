@@ -40,9 +40,9 @@
 #include <linux/regulator/consumer.h>
 #include <linux/pm_runtime.h>
 #include <mach/hardware.h>
-#include <plat/board.h>
-#include <plat/mmc.h>
-#include <plat/cpu.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/cpu.h>
 
 /* OMAP HSMMC Host Controller Registers */
 #define OMAP_HSMMC_SYSCONFIG	0x0010

@@ -9,7 +9,7 @@
  * your option) any later version.
  */
 
-#include <mach/ep93xx-regs.h>
+#include <mach-ep93xx/ep93xx-regs.h>
 
 static unsigned char __raw_readb(unsigned int ptr)
 {

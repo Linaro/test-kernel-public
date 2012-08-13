@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
-#include <mach/hardware.h>
+#include <mach-gemini/hardware.h>
 
 	.macro	addruart, rp, rv, tmp
 	ldr	\rp, =GEMINI_UART_BASE			@ physical

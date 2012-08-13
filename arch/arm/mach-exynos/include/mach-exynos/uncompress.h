@@ -14,11 +14,11 @@
 
 #include <asm/mach-types.h>
 
-#include <mach/map.h>
+#include <mach-exynos/map.h>
 
 volatile u8 *uart_base;
 
-#include <plat/uncompress.h>
+#include <plat-samsung/uncompress.h>
 
 static unsigned int __raw_readl(unsigned int ptr)
 {

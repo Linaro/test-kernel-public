@@ -36,13 +36,13 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/common.h>
-#include <mach/serial.h>
-#include <mach/i2c.h>
-#include <mach/nand.h>
-#include <mach/clock.h>
-#include <mach/cdce949.h>
-#include <mach/aemif.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/serial.h>
+#include <mach-davinci/i2c.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/clock.h>
+#include <mach-davinci/cdce949.h>
+#include <mach-davinci/aemif.h>
 
 #include "davinci.h"
 #include "clock.h"

@@ -19,7 +19,7 @@
 #ifndef __LPC32XX_COMMON_H
 #define __LPC32XX_COMMON_H
 
-#include <mach/board.h>
+#include <mach-lpc32xx/board.h>
 #include <linux/platform_device.h>
 
 /*

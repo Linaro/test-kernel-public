@@ -23,11 +23,11 @@
 #include <mach/map.h>
 #include <asm/irq.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
 
-#include <plat/regs-timer.h>
-#include <plat/pwm-clock.h>
+#include <plat-samsung/regs-timer.h>
+#include <plat-samsung/pwm-clock.h>
 
 /* Each of the timers 0 through 5 go through the following
  * clock tree, with the inputs depending on the timers.

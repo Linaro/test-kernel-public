@@ -17,8 +17,8 @@
 
 #include <linux/io.h>
 #include <asm/processor.h>
-#include <mach/zynq_soc.h>
-#include <mach/uart.h>
+#include <mach-zynq/zynq_soc.h>
+#include <mach-zynq/uart.h>
 
 void arch_decomp_setup(void)
 {

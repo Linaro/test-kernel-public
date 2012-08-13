@@ -9,7 +9,7 @@
 #ifndef __ASM_ARCH_IO_H
 #define __ASM_ARCH_IO_H
 
-#include <mach/orion5x.h>
+#include <mach-orion5x/orion5x.h>
 #include <asm/sizes.h>
 
 #define IO_SPACE_LIMIT		SZ_2M

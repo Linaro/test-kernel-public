@@ -11,7 +11,7 @@
  * published by the Free Software Foundation.
 */
 
-#include <mach/armada-370-xp.h>
+#include <mach-mvebu/armada-370-xp.h>
 
 	.macro	addruart, rp, rv, tmp
 	ldr	\rp, =ARMADA_370_XP_REGS_PHYS_BASE

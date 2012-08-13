@@ -15,7 +15,7 @@
 #define __ASM_ARCH_UNCOMPRESS_H
 
 #include <linux/io.h>
-#include <mach/regs-uart.h>
+#include <mach-ks8695/regs-uart.h>
 
 static void putc(char c)
 {

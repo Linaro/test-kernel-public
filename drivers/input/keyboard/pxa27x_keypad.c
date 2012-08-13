@@ -32,7 +32,7 @@
 #include <asm/mach/map.h>
 
 #include <mach/hardware.h>
-#include <plat/pxa27x_keypad.h>
+#include <plat-pxa/pxa27x_keypad.h>
 /*
  * Keypad Controller registers
  */

@@ -21,7 +21,7 @@
 
 #include <asm/setup.h>
 #include <asm/io.h>
-#include <mach/hardware.h>
+#include <mach-nomadik/hardware.h>
 
 /* we need the constants in amba/serial.h, but it refers to amba_device */
 struct amba_device;

@@ -18,7 +18,7 @@
 #ifndef __ASM_ARCH_PM_CORE_H
 #define __ASM_ARCH_PM_CORE_H __FILE__
 
-#include <mach/regs-pmu.h>
+#include <mach-exynos/regs-pmu.h>
 
 static inline void s3c_pm_debug_init_uart(void)
 {

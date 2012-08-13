@@ -16,9 +16,9 @@
 #include <linux/io.h>
 #include <linux/pwm_backlight.h>
 
-#include <plat/devs.h>
-#include <plat/gpio-cfg.h>
-#include <plat/backlight.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/backlight.h>
 
 static int samsung_bl_init(struct device *dev)
 {

@@ -18,7 +18,7 @@
 #define __ASM_ARCH_MSM_BOARD_H
 
 #include <linux/types.h>
-#include <mach/mmc.h>
+#include <mach-msm/mmc.h>
 
 /* platform device data structures */
 

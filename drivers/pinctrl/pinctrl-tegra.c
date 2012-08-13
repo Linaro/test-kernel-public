@@ -30,7 +30,7 @@
 #include <linux/pinctrl/pinconf.h>
 #include <linux/slab.h>
 
-#include <mach/pinconf-tegra.h>
+#include <mach-tegra/pinconf-tegra.h>
 
 #include "core.h"
 #include "pinctrl-tegra.h"

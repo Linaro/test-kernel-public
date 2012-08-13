@@ -14,6 +14,6 @@
 #ifndef __MACH_GPIO_H
 #define __MACH_GPIO_H
 
-#include <plat/gpio.h>
+#include <plat-spear/gpio.h>
 
 #endif /* __MACH_GPIO_H */

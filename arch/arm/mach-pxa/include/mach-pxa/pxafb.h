@@ -13,7 +13,7 @@
  */
 
 #include <linux/fb.h>
-#include <mach/regs-lcd.h>
+#include <mach-pxa/regs-lcd.h>
 
 /*
  * Supported LCD connections

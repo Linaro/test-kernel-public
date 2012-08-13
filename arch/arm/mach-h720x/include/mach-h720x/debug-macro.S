@@ -11,7 +11,7 @@
  *
 */
 
-#include <mach/hardware.h>
+#include <mach-h720x/hardware.h>
 
 		.equ    io_virt, IO_VIRT
 		.equ    io_phys, IO_PHYS

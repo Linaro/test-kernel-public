@@ -37,9 +37,9 @@
 #include <linux/delay.h>
 
 #include <mach/hardware.h>
-#include <plat/dma.h>
+#include <plat-omap/dma.h>
 
-#include <plat/tc.h>
+#include <plat-omap/tc.h>
 
 /*
  * MAX_LOGICAL_DMA_CH_COUNT: the maximum number of logical DMA

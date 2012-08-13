@@ -10,6 +10,6 @@
 #define __MACH_HARDWARE_H__
 
 #include <asm/sizes.h>
-#include <mach/map.h>
+#include <mach-prima2/map.h>
 
 #endif
