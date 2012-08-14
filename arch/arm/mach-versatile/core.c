@@ -49,6 +49,7 @@
 #include <asm/mach/map.h>
 #include <mach-versatile/hardware.h>
 #include <mach-versatile/platform.h>
+#include <mach-versatile/irqs.h>
 #include <asm/hardware/timer-sp.h>
 
 #include <plat-versatile/clcd.h>
@@ -302,6 +303,7 @@ static struct platform_device char_lcd_device = {
 	.resource       =       char_lcd_resources,
 };
 
+#ifndef CONFIG_COMMON_CLK
 /*
  * Clock handling
  */
@@ -393,6 +395,7 @@ static struct clk_lookup lookups[] = {
 		.clk		= &sp804_clk,
 	},
 };
+#endif
 
 /*
  * CLCD support.
@@ -744,8 +747,10 @@ void __init versatile_init_early(void)
 {
 	void __iomem *sys = __io_address(VERSATILE_SYS_BASE);
 
+#ifndef CONFIG_COMMON_CLK
 	osc4_clk.vcoreg	= sys + VERSATILE_SYS_OSCCLCD_OFFSET;
 	clkdev_add_table(lookups, ARRAY_SIZE(lookups));
+#endif
 
 	versatile_sched_clock_init(sys + VERSATILE_SYS_24MHz_OFFSET, 24000000);
 }
