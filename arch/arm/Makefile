@@ -221,6 +221,7 @@ machine-$(CONFIG_ARCH_MULTI_OMAP2PLUS)	+= omap2
 machine-$(CONFIG_ARCH_MULTI_UX500)	+= ux500
 machine-$(CONFIG_ARCH_MULTI_IMX)	+= imx
 machine-$(CONFIG_ARCH_MULTI_MXS)	+= mxs
+machine-$(CONFIG_ARCH_MULTI_VERSATILE)	+= versatile
 plat-$(CONFIG_PLAT_VERSATILE)		+= versatile
 plat-$(CONFIG_ARCH_MULTI_OMAP2PLUS)	+= omap
 plat-$(CONFIG_ARCH_MULTI_UX500)		+= nomadik
