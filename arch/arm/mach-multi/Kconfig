@@ -135,6 +135,11 @@ config ARCH_MULTI_IMX6
 	select ARCH_IMX_V6_V7
 	select SOC_IMX6Q
 
+config ARCH_MULTI_MXS
+	bool "Freescale MXS"
+	depends on ARCH_MULTI_V5
+	select ARCH_MXS
+
 config ARCH_MULTI_VERSATILE
 	bool "ARM Ltd Versatile"
 	depends on ARCH_MULTI_V5

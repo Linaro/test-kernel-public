@@ -460,16 +460,9 @@ config ARCH_MXC_CHOICE
 	help
 	  Support for Freescale MXC/iMX-based family of processors
 
-config ARCH_MXS
+config ARCH_MXS_CHOICE
 	bool "Freescale MXS-based"
-	select GENERIC_CLOCKEVENTS
-	select ARCH_REQUIRE_GPIOLIB
-	select CLKDEV_LOOKUP
-	select CLKSRC_MMIO
-	select COMMON_CLK
-	select HAVE_CLK_PREPARE
-	select PINCTRL
-	select USE_OF
+	select ARCH_MXS
 	help
 	  Support for Freescale MXS-based family of processors
 
@@ -1015,6 +1008,17 @@ config ARCH_MXC
 	select GENERIC_IRQ_CHIP
 	select MULTI_IRQ_HANDLER
 	select SPARSE_IRQ
+	select USE_OF
+
+config ARCH_MXS
+	bool
+	select GENERIC_CLOCKEVENTS
+	select ARCH_REQUIRE_GPIOLIB
+	select CLKDEV_LOOKUP
+	select CLKSRC_MMIO
+	select COMMON_CLK
+	select HAVE_CLK_PREPARE
+	select PINCTRL
 	select USE_OF
 
 config ARCH_U8500
