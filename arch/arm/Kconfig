@@ -318,21 +318,10 @@ config ARCH_REALVIEW
 	help
 	  This enables support for ARM Ltd RealView boards.
 
-config ARCH_VERSATILE
+config ARCH_VERSATILE_CHOICE
 	bool "ARM Ltd. Versatile family"
-	select ARM_AMBA
-	select ARM_VIC
-	select CLKDEV_LOOKUP
+	select ARCH_VERSATILE
 	select HAVE_MACH_CLKDEV
-	select ICST
-	select GENERIC_CLOCKEVENTS
-	select ARCH_WANT_OPTIONAL_GPIOLIB
-	select NEED_MACH_IO_H if PCI
-	select PLAT_VERSATILE
-	select PLAT_VERSATILE_CLOCK
-	select PLAT_VERSATILE_CLCD
-	select PLAT_VERSATILE_FPGA_IRQ
-	select ARM_TIMER_SP804
 	help
 	  This enables support for ARM Ltd Versatile board.
 
@@ -1038,6 +1027,21 @@ config ARCH_U8500
 	select ARCH_HAS_CPUFREQ
 	select HAVE_SMP
 	select MIGHT_HAVE_CACHE_L2X0
+
+config ARCH_VERSATILE
+	bool
+	select ARM_AMBA
+	select ARM_VIC
+	select CLKDEV_LOOKUP
+	select ICST
+	select GENERIC_CLOCKEVENTS
+	select ARCH_WANT_OPTIONAL_GPIOLIB
+	select NEED_MACH_IO_H if PCI
+	select PLAT_VERSATILE
+	select PLAT_VERSATILE_CLOCK
+	select PLAT_VERSATILE_CLCD
+	select PLAT_VERSATILE_FPGA_IRQ
+	select ARM_TIMER_SP804
 
 config ARCH_VEXPRESS
 	bool

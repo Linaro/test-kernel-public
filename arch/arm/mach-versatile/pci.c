@@ -23,6 +23,7 @@
 #include <linux/io.h>
 
 #include <mach-versatile/hardware.h>
+#include <mach-versatile/irqs.h>
 #include <asm/irq.h>
 #include <asm/mach/pci.h>
 
