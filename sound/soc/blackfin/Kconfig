@@ -24,7 +24,7 @@ config SND_SOC_BFIN_EVAL_ADAU1701
 	depends on SND_BF5XX_I2S
 	select SND_BF5XX_SOC_I2S
 	select SND_SOC_ADAU1701
-	select I2C
+	depends on I2C
 	help
 	  Say Y if you want to add support for the Analog Devices EVAL-ADAU1701MINIZ
 	  board connected to one of the Blackfin evaluation boards like the

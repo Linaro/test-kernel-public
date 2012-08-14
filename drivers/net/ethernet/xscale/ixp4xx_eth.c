@@ -36,9 +36,9 @@
 #include <linux/ptp_classify.h>
 #include <linux/slab.h>
 #include <linux/module.h>
-#include <mach/ixp46x_ts.h>
-#include <mach/npe.h>
-#include <mach/qmgr.h>
+#include <mach-ixp4xx/ixp46x_ts.h>
+#include <mach-ixp4xx/npe.h>
+#include <mach-ixp4xx/qmgr.h>
 
 #define DEBUG_DESC		0
 #define DEBUG_RX		0
@@ -1003,6 +1003,7 @@ static int ixp4xx_nway_reset(struct net_device *dev)
 }
 
 int ixp46x_phc_index = -1;
+EXPORT_SYMBOL_GPL(ixp46x_phc_index);
 
 static int ixp4xx_get_ts_info(struct net_device *dev,
 			      struct ethtool_ts_info *info)

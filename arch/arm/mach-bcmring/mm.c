@@ -17,8 +17,8 @@
 #include <asm/page.h>
 #include <asm/mach/map.h>
 
-#include <mach/hardware.h>
-#include <mach/csp/mm_io.h>
+#include <mach-bcmring/hardware.h>
+#include <mach-bcmring/csp/mm_io.h>
 
 #define IO_DESC(va, sz) { .virtual = va, \
 	.pfn = __phys_to_pfn(HW_IO_VIRT_TO_PHYS(va)), \

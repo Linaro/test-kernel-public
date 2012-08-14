@@ -36,23 +36,23 @@
 #include <linux/platform_data/clk-integrator.h>
 #include <video/vga.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
 #include <asm/hardware/arm_timer.h>
 #include <asm/setup.h>
 #include <asm/param.h>		/* HZ */
 #include <asm/mach-types.h>
 #include <asm/sched_clock.h>
 
-#include <mach/lm.h>
-#include <mach/irqs.h>
+#include <mach-integrator/lm.h>
+#include <mach-integrator/irqs.h>
 
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 
-#include <plat/fpga-irq.h>
+#include <plat-versatile/fpga-irq.h>
 
 #include "common.h"
 
@@ -456,7 +456,7 @@ static void __init ap_init_timer(void)
 
 	clk = clk_get_sys("ap_timer", NULL);
 	BUG_ON(IS_ERR(clk));
-	clk_enable(clk);
+	clk_prepare_enable(clk);
 	rate = clk_get_rate(clk);
 
 	writel(0, TIMER0_VA_BASE + TIMER_CTRL);

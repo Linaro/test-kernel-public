@@ -17,8 +17,8 @@
 
 #include <asm/mach/time.h>
 #include <asm/sched_clock.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
+#include <mach-sa1100/hardware.h>
+#include <mach-sa1100/irqs.h>
 
 static u32 notrace sa1100_read_sched_clock(void)
 {

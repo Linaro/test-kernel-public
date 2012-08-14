@@ -17,7 +17,7 @@
 #include <asm/mach/irq.h>
 #include <asm/hardware/gic.h>
 #include <asm/hardware/cache-l2x0.h>
-#include <mach/cns3xxx.h>
+#include <mach-cns3xxx/cns3xxx.h>
 #include "core.h"
 
 static struct map_desc cns3xxx_io_desc[] __initdata = {

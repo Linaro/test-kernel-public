@@ -32,8 +32,9 @@
 #include <sound/initval.h>
 #include <sound/soc.h>
 
-#include <plat/dma.h>
-#include <plat/mcbsp.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/mcbsp.h>
+#include <plat-omap/cpu.h>
 #include "mcbsp.h"
 #include "omap-mcbsp.h"
 #include "omap-pcm.h"
@@ -820,3 +821,4 @@ module_platform_driver(asoc_mcbsp_driver);
 MODULE_AUTHOR("Jarkko Nikula <jarkko.nikula@bitmer.com>");
 MODULE_DESCRIPTION("OMAP I2S SoC Interface");
 MODULE_LICENSE("GPL");
+MODULE_ALIAS("platform:omap-mcbsp");

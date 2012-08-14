@@ -21,7 +21,7 @@
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 #include <sound/soc.h>
-#include <mach/sram.h>
+#include <mach-pxa/sram.h>
 #include <sound/dmaengine_pcm.h>
 
 struct mmp_dma_data {

@@ -46,13 +46,13 @@
 #include <mach/hardware.h>
 #include <asm/irq.h>
 
-#include <plat/cpu-freq.h>
+#include <plat-samsung/cpu-freq.h>
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
 
 #include <linux/serial_core.h>
-#include <plat/regs-serial.h> /* for s3c24xx_uart_devs */
+#include <plat-samsung/regs-serial.h> /* for s3c24xx_uart_devs */
 
 /* clock information */
 

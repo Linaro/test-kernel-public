@@ -39,10 +39,10 @@
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/pm_runtime.h>
-#include <mach/hardware.h>
-#include <plat/board.h>
-#include <plat/mmc.h>
-#include <plat/cpu.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/board.h>
+#include <plat-omap/mmc.h>
+#include <plat-omap/cpu.h>
 
 /* OMAP HSMMC Host Controller Registers */
 #define OMAP_HSMMC_SYSCONFIG	0x0010
@@ -1782,7 +1782,7 @@ static int __devinit omap_hsmmc_probe(struct platform_device *pdev)
 	if (match) {
 		pdata = of_get_hsmmc_pdata(&pdev->dev);
 		if (match->data) {
-			u16 *offsetp = match->data;
+			const u16 *offsetp = match->data;
 			pdata->reg_offset = *offsetp;
 		}
 	}

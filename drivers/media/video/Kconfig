@@ -1124,6 +1124,7 @@ config MX1_VIDEO
 config VIDEO_MX1
 	tristate "i.MX1/i.MXL CMOS Sensor Interface driver"
 	depends on VIDEO_DEV && ARCH_MX1 && SOC_CAMERA
+	depends on BROKEN
 	select FIQ
 	select VIDEOBUF_DMA_CONTIG
 	select MX1_VIDEO

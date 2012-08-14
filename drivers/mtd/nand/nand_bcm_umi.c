@@ -13,7 +13,7 @@
 *****************************************************************************/
 
 /* ---- Include Files ---------------------------------------------------- */
-#include <mach/reg_umi.h>
+#include <mach-bcmring/reg_umi.h>
 #include "nand_bcm_umi.h"
 #ifdef BOOT0_BUILD
 #include <uart.h>

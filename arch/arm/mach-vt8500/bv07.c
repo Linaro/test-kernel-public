@@ -23,7 +23,7 @@
 
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/restart.h>
+#include <mach-vt8500/restart.h>
 
 #include "devices.h"
 

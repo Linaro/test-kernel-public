@@ -33,8 +33,8 @@
 #include <linux/gpio-fan.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/kirkwood.h>
-#include <mach/leds-ns2.h>
+#include <mach-kirkwood/kirkwood.h>
+#include <mach-kirkwood/leds-ns2.h>
 #include "common.h"
 #include "mpp.h"
 #include "lacie_v2-common.h"

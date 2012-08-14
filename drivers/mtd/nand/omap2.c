@@ -27,9 +27,9 @@
 #include <linux/bch.h>
 #endif
 
-#include <plat/dma.h>
-#include <plat/gpmc.h>
-#include <plat/nand.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/nand.h>
 
 #define	DRIVER_NAME	"omap2-nand"
 #define	OMAP_NAND_TIMEOUT_MS	5000
@@ -1245,7 +1245,6 @@ static int __devinit omap_nand_probe(struct platform_device *pdev)
 			goto out_release_mem_region;
 		} else {
 			struct dma_slave_config cfg;
-			int rc;
 
 			memset(&cfg, 0, sizeof(cfg));
 			cfg.src_addr = info->phys_base;
@@ -1254,10 +1253,10 @@ static int __devinit omap_nand_probe(struct platform_device *pdev)
 			cfg.dst_addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 			cfg.src_maxburst = 16;
 			cfg.dst_maxburst = 16;
-			rc = dmaengine_slave_config(info->dma, &cfg);
-			if (rc) {
+			err = dmaengine_slave_config(info->dma, &cfg);
+			if (err) {
 				dev_err(&pdev->dev, "DMA engine slave config failed: %d\n",
-					rc);
+					err);
 				goto out_release_mem_region;
 			}
 			info->nand.read_buf   = omap_read_buf_dma_pref;

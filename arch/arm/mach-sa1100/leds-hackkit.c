@@ -10,8 +10,9 @@
  * as cpu led, the green one is used as timer led.
  */
 #include <linux/init.h>
+#include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/leds.h>
 
 #include "leds.h"

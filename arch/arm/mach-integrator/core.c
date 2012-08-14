@@ -11,6 +11,7 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/device.h>
+#include <linux/export.h>
 #include <linux/spinlock.h>
 #include <linux/interrupt.h>
 #include <linux/irq.h>
@@ -22,10 +23,10 @@
 #include <linux/amba/serial.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/platform.h>
-#include <mach/cm.h>
-#include <mach/irqs.h>
+#include <mach-integrator/hardware.h>
+#include <mach-integrator/platform.h>
+#include <mach-integrator/cm.h>
+#include <mach-integrator/irqs.h>
 
 #include <asm/leds.h>
 #include <asm/mach-types.h>

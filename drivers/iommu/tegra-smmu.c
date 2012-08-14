@@ -36,9 +36,9 @@
 #include <asm/page.h>
 #include <asm/cacheflush.h>
 
-#include <mach/iomap.h>
-#include <mach/smmu.h>
-#include <mach/tegra-ahb.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/smmu.h>
+#include <mach-tegra/tegra-ahb.h>
 
 /* bitmap of the page sizes currently supported */
 #define SMMU_IOMMU_PGSIZES	(SZ_4K)
@@ -799,14 +799,14 @@ static void smmu_iommu_detach_dev(struct iommu_domain *domain,
 			goto out;
 		}
 	}
-	dev_err(smmu->dev, "Couldn't find %s\n", dev_name(c->dev));
+	dev_err(smmu->dev, "Couldn't find %s\n", dev_name(dev));
 out:
 	spin_unlock(&as->client_lock);
 }
 
 static int smmu_iommu_domain_init(struct iommu_domain *domain)
 {
-	int i, err = -ENODEV;
+	int i, err = -EAGAIN;
 	unsigned long flags;
 	struct smmu_as *as;
 	struct smmu_device *smmu = smmu_handle;
@@ -814,11 +814,14 @@ static int smmu_iommu_domain_init(struct iommu_domain *domain)
 	/* Look for a free AS with lock held */
 	for  (i = 0; i < smmu->num_as; i++) {
 		as = &smmu->as[i];
-		if (!as->pdir_page) {
-			err = alloc_pdir(as);
-			if (!err)
-				goto found;
-		}
+
+		if (as->pdir_page)
+			continue;
+
+		err = alloc_pdir(as);
+		if (!err)
+			goto found;
+
 		if (err != -EAGAIN)
 			break;
 	}

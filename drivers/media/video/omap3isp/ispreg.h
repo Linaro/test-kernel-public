@@ -27,7 +27,7 @@
 #ifndef OMAP3_ISP_REG_H
 #define OMAP3_ISP_REG_H
 
-#include <plat/omap34xx.h>
+#include <plat-omap/omap34xx.h>
 
 
 #define CM_CAM_MCLK_HZ			172800000	/* Hz */

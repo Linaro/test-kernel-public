@@ -45,9 +45,9 @@
 #include <linux/types.h>
 
 #include <linux/io.h>
-#include <mach/board.h>
-#include <mach/platform.h>
-#include <mach/hardware.h>
+#include <mach-lpc32xx/board.h>
+#include <mach-lpc32xx/platform.h>
+#include <mach-lpc32xx/hardware.h>
 
 #define MODNAME "lpc-eth"
 #define DRV_VERSION "1.00"
@@ -346,28 +346,15 @@ static phy_interface_t lpc_phy_interface_mode(struct device *dev)
 						   "phy-mode", NULL);
 		if (mode && !strcmp(mode, "mii"))
 			return PHY_INTERFACE_MODE_MII;
-		return PHY_INTERFACE_MODE_RMII;
 	}
-
-	/* non-DT */
-#ifdef CONFIG_ARCH_LPC32XX_MII_SUPPORT
-	return PHY_INTERFACE_MODE_MII;
-#else
 	return PHY_INTERFACE_MODE_RMII;
-#endif
 }
 
 static bool use_iram_for_net(struct device *dev)
 {
 	if (dev && dev->of_node)
 		return of_property_read_bool(dev->of_node, "use-iram");
-
-	/* non-DT */
-#ifdef CONFIG_ARCH_LPC32XX_IRAM_FOR_NET
-	return true;
-#else
 	return false;
-#endif
 }
 
 /* Receive Status information word */

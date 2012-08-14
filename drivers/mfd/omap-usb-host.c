@@ -26,8 +26,9 @@
 #include <linux/dma-mapping.h>
 #include <linux/spinlock.h>
 #include <linux/gpio.h>
-#include <plat/cpu.h>
-#include <plat/usb.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/usb.h>
+#include <plat-omap/cpu.h>
 #include <linux/pm_runtime.h>
 
 #define USBHS_DRIVER_NAME	"usbhs_omap"

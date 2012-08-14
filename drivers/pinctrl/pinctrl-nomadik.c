@@ -33,10 +33,16 @@
 
 #include <asm/mach/irq.h>
 
-#include <plat/pincfg.h>
-#include <plat/gpio-nomadik.h>
+#include <plat-nomadik/pincfg.h>
+#include <plat-nomadik/gpio-nomadik.h>
 
 #include "pinctrl-nomadik.h"
+
+#ifdef CONFIG_ARCH_MULTI_UX500
+#include <mach-ux500/irqs.h>
+#endif
+
+#include <asm/gpio.h>
 
 /*
  * The GPIO module in the Nomadik family of Systems-on-Chip is an
@@ -1731,7 +1737,6 @@ static int __devinit nmk_pinctrl_probe(struct platform_device *pdev)
 	for (i = 0; i < npct->soc->gpio_num_ranges; i++) {
 		if (!nmk_gpio_chips[i]) {
 			dev_warn(&pdev->dev, "GPIO chip %d not registered yet\n", i);
-			devm_kfree(&pdev->dev, npct);
 			return -EPROBE_DEFER;
 		}
 		npct->soc->gpio_ranges[i].gc = &nmk_gpio_chips[i]->chip;

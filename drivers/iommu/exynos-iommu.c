@@ -29,7 +29,7 @@
 #include <asm/cacheflush.h>
 #include <asm/pgtable.h>
 
-#include <mach/sysmmu.h>
+#include <mach-exynos/sysmmu.h>
 
 /* We does not consider super section mapping (16MB) */
 #define SECT_ORDER 20
@@ -732,9 +732,9 @@ static int exynos_iommu_domain_init(struct iommu_domain *domain)
 	spin_lock_init(&priv->pgtablelock);
 	INIT_LIST_HEAD(&priv->clients);
 
-	dom->geometry.aperture_start = 0;
-	dom->geometry.aperture_end   = ~0UL;
-	dom->geometry.force_aperture = true;
+	domain->geometry.aperture_start = 0;
+	domain->geometry.aperture_end   = ~0UL;
+	domain->geometry.force_aperture = true;
 
 	domain->priv = priv;
 	return 0;

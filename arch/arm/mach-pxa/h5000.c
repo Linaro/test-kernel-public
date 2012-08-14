@@ -30,10 +30,10 @@
 #include <asm/mach/map.h>
 #include <asm/irq.h>
 
-#include <mach/pxa25x.h>
-#include <mach/h5000.h>
-#include <mach/udc.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/h5000.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/smemc.h>
 
 #include "generic.h"
 
