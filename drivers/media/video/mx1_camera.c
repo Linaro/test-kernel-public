@@ -41,7 +41,7 @@
 
 #include <asm/dma.h>
 #include <asm/fiq.h>
-#include <mach-imx/dma-mx1-mx2.h>
+#include <mach-imx/dma.h>
 #include <mach-imx/hardware.h>
 #include <mach-imx/irqs.h>
 #include <mach-imx/mx1_camera.h>

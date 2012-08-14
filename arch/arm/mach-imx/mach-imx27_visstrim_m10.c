@@ -42,6 +42,7 @@
 #include <mach-imx/common.h>
 #include <mach-imx/hardware.h>
 #include <mach-imx/iomux-mx27.h>
+#include <mach-imx/irqs.h>
 
 #include "devices-imx27.h"
 
