@@ -135,6 +135,18 @@ config ARCH_MULTI_IMX6
 	select ARCH_IMX_V6_V7
 	select SOC_IMX6Q
 
+config ARCH_MULTI_IMX1
+	bool "Freescale i.MX1"
+	depends on ARCH_MULTI_V4
+	select ARCH_MULTI_IMX
+	select ARCH_MX1ADS
+
+config ARCH_MULTI_IMX2
+	bool "Freescale i.MX2"
+	depends on ARCH_MULTI_V5
+	select ARCH_MULTI_IMX
+	select MACH_IMX27_DT
+
 config ARCH_MULTI_MXS
 	bool "Freescale MXS"
 	depends on ARCH_MULTI_V5
