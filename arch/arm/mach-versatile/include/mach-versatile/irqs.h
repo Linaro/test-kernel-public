@@ -131,4 +131,6 @@
 #define IRQ_GPIO3_START		(IRQ_GPIO2_END + 1)
 #define IRQ_GPIO3_END		(IRQ_GPIO3_START + 31)
 
+#ifndef CONFIG_SPARSE_IRQ
 #define NR_IRQS			(IRQ_GPIO3_END + 1)
+#endif
