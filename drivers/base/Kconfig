@@ -192,8 +192,8 @@ config DMA_SHARED_BUFFER
 	  driver.
 
 config CMA
-	bool "Contiguous Memory Allocator"
-	depends on HAVE_DMA_CONTIGUOUS && HAVE_MEMBLOCK
+	bool "Contiguous Memory Allocator (EXPERIMENTAL)"
+	depends on HAVE_DMA_CONTIGUOUS && HAVE_MEMBLOCK && EXPERIMENTAL
 	select MIGRATION
 	select MEMORY_ISOLATION
 	help

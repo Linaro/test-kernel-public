@@ -262,7 +262,6 @@ config ARCH_MULTIPLATFORM
 	select SPARSE_IRQ
 	select MULTI_IRQ_HANDLER
 	select AUTO_ZRELADDR
-	select ARM_PATCH_PHYS_VIRT
 	depends on MMU
 
 config ARCH_SOCFPGA

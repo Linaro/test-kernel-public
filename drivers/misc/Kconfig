@@ -63,7 +63,6 @@ config ATMEL_PWM
 config AB8500_PWM
 	bool "AB8500 PWM support"
 	depends on AB8500_CORE && ARCH_U8500
-	depends on !TWL6030_PWM && !MXC_PWM
 	select HAVE_PWM
 	depends on !PWM
 	help

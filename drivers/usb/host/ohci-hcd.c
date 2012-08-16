@@ -1129,7 +1129,7 @@ MODULE_LICENSE ("GPL");
 	!defined(PS3_SYSTEM_BUS_DRIVER) && \
 	!defined(SM501_OHCI_DRIVER) && \
 	!defined(TMIO_OHCI_DRIVER)
-#warning "missing bus glue for ohci-hcd"
+#error "missing bus glue for ohci-hcd"
 #endif
 
 static int __init ohci_hcd_mod_init(void)

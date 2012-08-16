@@ -1342,7 +1342,7 @@ MODULE_LICENSE ("GPL");
 #if !defined(PCI_DRIVER) && !defined(PLATFORM_DRIVER) && \
     !defined(PS3_SYSTEM_BUS_DRIVER) && !defined(OF_PLATFORM_DRIVER) && \
     !defined(XILINX_OF_PLATFORM_DRIVER)
-#warning "missing bus glue for ehci-hcd"
+#error "missing bus glue for ehci-hcd"
 #endif
 
 static int __init ehci_hcd_init(void)
