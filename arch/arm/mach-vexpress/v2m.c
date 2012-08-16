@@ -6,6 +6,7 @@
 #include <linux/amba/mmci.h>
 #include <linux/io.h>
 #include <linux/init.h>
+#include <linux/memblock.h>
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
 #include <linux/of_irq.h>
@@ -539,7 +540,63 @@ MACHINE_START(VEXPRESS, "ARM-Versatile Express")
 	.restart	= v2m_restart,
 MACHINE_END
 
+int set_dvi_mode(int mode)
+{
+       /* mode is a value from:
+           0 = VGA
+           1 = SVGA
+           2 = XGA
+           3 = SXGA
+           4 = UXGA
+           5 = WUXGA
+       */
+       v2m_cfg_write(SYS_CFG_DVIMODE, mode);
+       return 0;
+}
+
 #if defined(CONFIG_ARCH_VEXPRESS_DT)
+
+static struct v2m_osc v2m_dt_hdlcd_osc = {
+	.rate_min = 10000000,
+	.rate_max = 165000000,
+	.rate_default = 23750000,
+};
+
+static void __init v2m_dt_hdlcd_init(void)
+{
+	struct device_node *node;
+	int len, na, ns;
+	const __be32 *prop;
+	phys_addr_t fb_base, fb_size;
+	u32 osc;
+
+	node = of_find_compatible_node(NULL, NULL, "arm,hdlcd");
+	if (!node)
+		return;
+
+	na = of_n_addr_cells(node);
+	ns = of_n_size_cells(node);
+
+	prop = of_get_property(node, "framebuffer", &len);
+	if (WARN_ON(!prop || len < (na + ns) * sizeof(*prop)))
+		return;
+
+	fb_base = of_read_number(prop, na);
+	fb_size = of_read_number(prop + na, ns);
+
+	if (WARN_ON(of_property_read_u32(node, "arm,vexpress-osc", &osc)))
+		return;
+
+	v2m_dt_hdlcd_osc.site = v2m_get_master_site();
+	v2m_dt_hdlcd_osc.osc = osc;
+
+	if (WARN_ON(memblock_remove(fb_base, fb_size)))
+		return;
+
+	v2m_cfg_write(SYS_CFG_MUXFPGA | SYS_CFG_SITE(SYS_CFG_SITE_MB),
+			v2m_get_master_site());
+};
+
 
 static struct map_desc v2m_rs1_io_desc __initdata = {
 	.virtual	= V2M_PERIPH,
@@ -598,6 +655,8 @@ void __init v2m_dt_init_early(void)
 			pr_warning("vexpress: DT HBI (%x) is not matching "
 					"hardware (%x)!\n", dt_hbi, hbi);
 	}
+
+	v2m_dt_hdlcd_init();
 }
 
 static  struct of_device_id vexpress_irq_match[] __initdata = {
@@ -615,6 +674,7 @@ static void __init v2m_dt_timer_init(void)
 	struct device_node *node;
 	const char *path;
 	int err;
+	struct clk *clk;
 
 	node = of_find_compatible_node(NULL, NULL, "arm,sp810");
 	v2m_sysctl_init(of_iomap(node, 0));
@@ -631,6 +691,11 @@ static void __init v2m_dt_timer_init(void)
 
 	if (arch_timer_sched_clock_init() != 0)
 		versatile_sched_clock_init(v2m_sysreg_base + V2M_SYS_24MHZ, 24000000);
+
+	if (v2m_dt_hdlcd_osc.site) {
+		clk = v2m_osc_register("hdlcd", &v2m_dt_hdlcd_osc);
+		clk_register_clkdev(clk, NULL, "hdlcd");
+	}
 }
 
 static struct sys_timer v2m_dt_timer = {
