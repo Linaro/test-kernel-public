@@ -1,0 +1,51 @@
+* Samsung's SDHCI Controller device tree bindings
+
+Samsung's SDHCI controller is used as a connectivity interface with external
+MMC, SD and eMMC storage mediums. This file documents differences between the
+core mmc properties described by mmc.txt and the properties used by the
+Samsung implmentation of the SDHCI controller.
+
+Required SoC Specific Properties:
+- compatible: should be one of the following
+  - "samsung,s3c6410-sdhci": For controllers compatible with s3c6410 sdhci
+    controller.
+  - "samsung,exynos4210-sdhci": For controllers compatible with Exynos4 sdhci
+    controller.
+
+Required Board Specific Properties:
+- gpios: Should specify the gpios used for clock, command and data lines. The
+  gpio specifier format depends on the gpio controller.
+
+Optional Board Specific Properties:
+- One of the following properties for card detect type.
+  - samsung,sdhci-cd-internal: Card detect line from the card slot  is
+    connected to the card detect pad of the sdhci controller. A gpio is
+    used for this connection (with possible pin function settings).
+  - samsung,sdhci-cd-gpio: A gpio line (with possible pin function settings)
+    is used a card detect line. This gpio line is not connected to card detect
+    pad of the sdhci controller.
+  - samsung,sdhci-cd-none: There is no card detect line. Polling is used to
+    detect the presence of the card. (DEFAULT, if no card detect property
+    is specified).
+  - samsung,sdhci-cd-permanent: There is no card detect line. The card is
+    permanently connected to the sdhci controller.
+
+Example:
+	sdhci@12530000 {
+		compatible = "samsung,exynos4210-sdhci";
+		reg = <0x12530000 0x100>;
+		interrupts = <<0 75 0>;
+		bus-width = <4>;
+		samsung,sdhci-cd-internal;
+		cd-gpios = <&gpk2 2 2 3 3>;
+		gpios = <&gpk2 0 2 0 3>,  /* clock line */
+			<&gpk2 1 2 0 3>,  /* command line */
+			<&gpk2 3 2 3 3>,  /* data line 0 */
+			<&gpk2 4 2 3 3>,  /* data line 1 */
+			<&gpk2 5 2 3 3>,  /* data line 2 */
+			<&gpk2 6 2 3 3>;  /* data line 3 */
+	};
+
+	Note: This example shows both SoC specific and board specific properties
+	in a single device node. The properties can be actually be seperated
+	into SoC specific node and board specific node.
