@@ -30,12 +30,12 @@
 #include <asm/smp_plat.h>
 #include <asm/cpu.h>
 
-#include <plat/clock.h>
-#include <plat/omap-pm.h>
-#include <plat/common.h>
-#include <plat/omap_device.h>
+#include <plat-omap/clock.h>
+#include <plat-omap/omap-pm.h>
+#include <plat-omap/common.h>
+#include <plat-omap/omap_device.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 
 /* OPP tolerance in percentage */
 #define	OPP_TOLERANCE	4

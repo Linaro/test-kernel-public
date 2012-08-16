@@ -41,6 +41,7 @@
 #include <linux/dmi.h>
 #include <linux/acpi.h>
 #include <linux/io.h>
+#include <linux/slab.h>
 
 
 /* PIIX4 SMBus address offsets */

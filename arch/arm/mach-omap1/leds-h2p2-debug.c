@@ -15,11 +15,11 @@
 #include <linux/sched.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 
-#include <plat/fpga.h>
+#include <plat-omap/fpga.h>
 
 #include "leds.h"
 

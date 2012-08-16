@@ -22,9 +22,9 @@
 #include <linux/err.h>
 #include <linux/of.h>
 
-#include <mach/hardware.h>
-#include <mach/mx31.h>
-#include <mach/common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/mx31.h>
+#include <mach-imx/common.h>
 
 #include "clk.h"
 #include "crmregs-imx3.h"

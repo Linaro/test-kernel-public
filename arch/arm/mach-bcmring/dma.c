@@ -31,11 +31,11 @@
 #include <linux/proc_fs.h>
 #include <linux/slab.h>
 
-#include <mach/timer.h>
+#include <mach-bcmring/timer.h>
 
 #include <linux/pfn.h>
 #include <linux/atomic.h>
-#include <mach/dma.h>
+#include <mach-bcmring/dma.h>
 
 /* ---- Public Variables ------------------------------------------------- */
 

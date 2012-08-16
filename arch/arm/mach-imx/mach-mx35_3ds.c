@@ -43,10 +43,10 @@
 #include <asm/mach/map.h>
 #include <asm/memblock.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/iomux-mx35.h>
-#include <mach/3ds_debugboard.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx35.h>
+#include <mach-imx/3ds_debugboard.h>
 #include <video/platform_lcd.h>
 
 #include <media/soc_camera.h>

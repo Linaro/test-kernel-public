@@ -22,14 +22,14 @@
 
 #include <asm/mach-types.h>  /* for machine_is_* */
 
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/clkdev_omap.h>
-#include <plat/board.h>
-#include <plat/sram.h>	/* for omap_sram_reprogram_clock() */
+#include <plat-omap/clock.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/clkdev_omap.h>
+#include <plat-omap/board.h>
+#include <plat-omap/sram.h>	/* for omap_sram_reprogram_clock() */
 
-#include <mach/hardware.h>
-#include <mach/usb.h>   /* for OTG_BASE */
+#include <mach-omap1/hardware.h>
+#include <mach-omap1/usb.h>   /* for OTG_BASE */
 
 #include "iomap.h"
 #include "clock.h"

@@ -20,8 +20,8 @@
 #include <linux/sched.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/jornada720.h>
+#include <mach-sa1100/hardware.h>
+#include <mach-sa1100/jornada720.h>
 #include <asm/hardware/ssp.h>
 
 static DEFINE_SPINLOCK(jornada_ssp_lock);

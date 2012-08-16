@@ -12,7 +12,7 @@
 
 #include <asm/assembler.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "iomap.h"
 

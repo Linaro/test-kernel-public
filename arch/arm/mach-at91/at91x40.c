@@ -17,10 +17,10 @@
 #include <asm/proc-fns.h>
 #include <asm/system_misc.h>
 #include <asm/mach/arch.h>
-#include <mach/at91x40.h>
-#include <mach/at91_aic.h>
-#include <mach/at91_st.h>
-#include <mach/timex.h>
+#include <mach-at91/at91x40.h>
+#include <mach-at91/at91_aic.h>
+#include <mach-at91/at91_st.h>
+#include <mach-at91/timex.h>
 #include "generic.h"
 
 /*

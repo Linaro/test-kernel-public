@@ -33,10 +33,16 @@
 
 #include <asm/mach/irq.h>
 
-#include <plat/pincfg.h>
-#include <plat/gpio-nomadik.h>
+#include <plat-nomadik/pincfg.h>
+#include <plat-nomadik/gpio-nomadik.h>
 
 #include "pinctrl-nomadik.h"
+
+#ifdef CONFIG_ARCH_MULTI_UX500
+#include <mach-ux500/irqs.h>
+#endif
+
+#include <asm/gpio.h>
 
 /*
  * The GPIO module in the Nomadik family of Systems-on-Chip is an
@@ -1409,7 +1415,7 @@ static int nmk_pmx_enable(struct pinctrl_dev *pctldev, unsigned function,
 	struct nmk_pinctrl *npct = pinctrl_dev_get_drvdata(pctldev);
 	const struct nmk_pingroup *g;
 	static unsigned int slpm[NUM_BANKS];
-	unsigned long flags;
+	unsigned long uninitialized_var(flags);
 	bool glitch;
 	int ret = -EINVAL;
 	int i;

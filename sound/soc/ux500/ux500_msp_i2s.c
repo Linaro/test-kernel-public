@@ -18,8 +18,8 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 
-#include <mach/hardware.h>
-#include <mach/board-mop500-msp.h>
+#include <mach-ux500/hardware.h>
+#include <mach-ux500/board-mop500-msp.h>
 
 #include <sound/soc.h>
 

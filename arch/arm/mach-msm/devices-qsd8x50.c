@@ -18,16 +18,16 @@
 #include <linux/clkdev.h>
 #include <linux/dma-mapping.h>
 
-#include <mach/irqs.h>
-#include <mach/msm_iomap.h>
-#include <mach/dma.h>
-#include <mach/board.h>
+#include <mach-msm/irqs.h>
+#include <mach-msm/msm_iomap.h>
+#include <mach-msm/dma.h>
+#include <mach-msm/board.h>
 
 #include "devices.h"
 
 #include <asm/mach/flash.h>
 
-#include <mach/mmc.h>
+#include <mach-msm/mmc.h>
 #include "clock-pcom.h"
 
 static struct resource resources_uart3[] = {

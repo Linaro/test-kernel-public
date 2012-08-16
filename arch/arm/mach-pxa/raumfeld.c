@@ -48,11 +48,11 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/pxa300.h>
-#include <mach/ohci.h>
-#include <mach/pxafb.h>
-#include <mach/mmc.h>
-#include <plat/pxa3xx_nand.h>
+#include <mach-pxa/pxa300.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/mmc.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 #include "generic.h"
 #include "devices.h"

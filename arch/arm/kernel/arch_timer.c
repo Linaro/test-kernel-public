@@ -14,6 +14,7 @@
 #include <linux/device.h>
 #include <linux/smp.h>
 #include <linux/cpu.h>
+#include <linux/export.h>
 #include <linux/jiffies.h>
 #include <linux/clockchips.h>
 #include <linux/interrupt.h>
@@ -232,6 +233,7 @@ int read_current_timer(unsigned long *timer_val)
 	*timer_val = arch_counter_get_cntpct();
 	return 0;
 }
+EXPORT_SYMBOL_GPL(read_current_timer);
 
 static struct clocksource clocksource_counter = {
 	.name	= "arch_sys_counter",

@@ -22,11 +22,11 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/irq.h>
 
-#include <mach/pxa300.h>
-#include <mach/colibri.h>
-#include <mach/ohci.h>
-#include <mach/pxafb.h>
-#include <mach/audio.h>
+#include <mach-pxa/pxa300.h>
+#include <mach-pxa/colibri.h>
+#include <mach-pxa/ohci.h>
+#include <mach-pxa/pxafb.h>
+#include <mach-pxa/audio.h>
 
 #include "generic.h"
 #include "devices.h"
