@@ -1409,7 +1409,7 @@ static int nmk_pmx_enable(struct pinctrl_dev *pctldev, unsigned function,
 	struct nmk_pinctrl *npct = pinctrl_dev_get_drvdata(pctldev);
 	const struct nmk_pingroup *g;
 	static unsigned int slpm[NUM_BANKS];
-	unsigned long flags;
+	unsigned long uninitialized_var(flags);
 	bool glitch;
 	int ret = -EINVAL;
 	int i;
