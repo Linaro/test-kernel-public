@@ -30,10 +30,12 @@
 	};
 
 	sdhci@12530000 {
-		samsung,sdhci-bus-width = <4>;
-		linux,mmc_cap_4_bit_data;
+		compatible = "samsung,exynos4210-sdhci";
+		reg = <0x12530000 0x100>;
+		interrupts = <0 75 0>;
+		bus-width = <4>;
 		samsung,sdhci-cd-internal;
-		gpio-cd = <&gpk2 2 2 3 3>;
+		cd-gpios = <&gpk2 2 2 3 3>;
 		gpios = <&gpk2 0 2 0 3>,
 			<&gpk2 1 2 0 3>,
 			<&gpk2 3 2 3 3>,
@@ -43,10 +45,12 @@
 	};
 
 	sdhci@12510000 {
-		samsung,sdhci-bus-width = <4>;
-		linux,mmc_cap_4_bit_data;
+		compatible = "samsung,exynos4210-sdhci";
+		reg = <0x12510000 0x100>;
+		interrupts = <0 73 0>;
+		bus-width = <4>;
 		samsung,sdhci-cd-internal;
-		gpio-cd = <&gpk0 2 2 3 3>;
+		cd-gpios = <&gpk0 2 2 3 3>;
 		gpios = <&gpk0 0 2 0 3>,
 			<&gpk0 1 2 0 3>,
 			<&gpk0 3 2 3 3>,
