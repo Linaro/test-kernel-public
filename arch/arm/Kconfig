@@ -262,6 +262,7 @@ config ARCH_MULTIPLATFORM
 	select SPARSE_IRQ
 	select MULTI_IRQ_HANDLER
 	select AUTO_ZRELADDR
+	select ARM_PATCH_PHYS_VIRT
 	depends on MMU
 
 config ARCH_SOCFPGA
@@ -2337,7 +2338,7 @@ config FPE_NWFPE_XP
 
 config FPE_FASTFPE
 	bool "FastFPE math emulation (EXPERIMENTAL)"
-	depends on (!AEABI || OABI_COMPAT) && !CPU_32v3 && EXPERIMENTAL
+	depends on (!AEABI || OABI_COMPAT) && EXPERIMENTAL
 	---help---
 	  Say Y here to include the FAST floating point emulator in the kernel.
 	  This is an experimental much faster emulator which now also has full

@@ -679,7 +679,7 @@ static int pktgen_if_show(struct seq_file *seq, void *v)
 	/* not really stopped, more like last-running-at */
 	stopped = pkt_dev->running ? ktime_now() : pkt_dev->stopped_at;
 	idle = pkt_dev->idle_acc;
-	do_div(idle, NSEC_PER_USEC);
+	__do_div_asm(idle, NSEC_PER_USEC);
 
 	seq_printf(seq,
 		   "Current:\n     pkts-sofar: %llu  errors: %llu\n",
