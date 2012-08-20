@@ -10,7 +10,7 @@
 #include <linux/init.h>
 #include <linux/mutex.h>
 
-#include <mach/hardware.h>
+#include <mach-footbridge/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/uaccess.h>
 #include <asm/therm.h>

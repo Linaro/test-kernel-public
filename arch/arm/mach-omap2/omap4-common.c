@@ -24,13 +24,13 @@
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 
-#include <plat/irqs.h>
-#include <plat/sram.h>
-#include <plat/omap-secure.h>
-#include <plat/mmc.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/sram.h>
+#include <plat-omap/omap-secure.h>
+#include <plat-omap/mmc.h>
 
-#include <mach/hardware.h>
-#include <mach/omap-wakeupgen.h>
+#include <mach-omap2/hardware.h>
+#include <mach-omap2/omap-wakeupgen.h>
 
 #include "common.h"
 #include "hsmmc.h"

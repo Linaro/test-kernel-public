@@ -20,8 +20,8 @@
 #include <linux/mtd/nand.h>
 #include <linux/mtd/partitions.h>
 
-#include <mach/hardware.h>
-#include <mach/ts72xx.h>
+#include <mach-ep93xx/hardware.h>
+#include <mach-ep93xx/ts72xx.h>
 
 #include <asm/hardware/vic.h>
 #include <asm/mach-types.h>

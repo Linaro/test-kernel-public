@@ -29,7 +29,7 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-ebsa110/hardware.h>
 
 #define TX_BUFFERS 15
 #define RX_BUFFERS 25

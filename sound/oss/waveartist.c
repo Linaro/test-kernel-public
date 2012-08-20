@@ -47,7 +47,7 @@
 #include "waveartist.h"
 
 #ifdef CONFIG_ARM
-#include <mach/hardware.h>
+#include <mach-footbridge/hardware.h>
 #include <asm/mach-types.h>
 #endif
 

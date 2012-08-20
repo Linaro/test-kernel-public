@@ -32,15 +32,15 @@
 
 #include <asm/mach-types.h>
 
-#include <mach/reg_nand.h>
-#include <mach/reg_umi.h>
+#include <mach-bcmring/reg_nand.h>
+#include <mach-bcmring/reg_umi.h>
 
 #include "nand_bcm_umi.h"
 
-#include <mach/memory_settings.h>
+#include <mach-bcmring/memory_settings.h>
 
 #define USE_DMA 1
-#include <mach/dma.h>
+#include <mach-bcmring/dma.h>
 #include <linux/dma-mapping.h>
 #include <linux/completion.h>
 

@@ -19,12 +19,12 @@
 #include <linux/io.h>
 #include <linux/syscore_ops.h>
 
-#include <mach/hardware.h>
-#include <mach/pxa3xx-regs.h>
-#include <mach/pxa930.h>
-#include <mach/reset.h>
-#include <mach/pm.h>
-#include <mach/dma.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/pxa3xx-regs.h>
+#include <mach-pxa/pxa930.h>
+#include <mach-pxa/reset.h>
+#include <mach-pxa/pm.h>
+#include <mach-pxa/dma.h>
 
 #include "generic.h"
 #include "devices.h"
