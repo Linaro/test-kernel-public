@@ -334,14 +334,6 @@ static inline void lockup_detector_init(void)
 }
 #endif
 
-#if defined(CONFIG_LOCKUP_DETECTOR) && defined(CONFIG_SUSPEND)
-void lockup_detector_bootcpu_resume(void);
-#else
-static inline void lockup_detector_bootcpu_resume(void)
-{
-}
-#endif
-
 #ifdef CONFIG_DETECT_HUNG_TASK
 extern unsigned int  sysctl_hung_task_panic;
 extern unsigned long sysctl_hung_task_check_count;
@@ -1114,6 +1106,7 @@ struct sched_class {
 
 #ifdef CONFIG_SMP
 	int  (*select_task_rq)(struct task_struct *p, int sd_flag, int flags);
+	void (*migrate_task_rq)(struct task_struct *p, int next_cpu);
 
 	void (*pre_schedule) (struct rq *this_rq, struct task_struct *task);
 	void (*post_schedule) (struct rq *this_rq);
@@ -1146,6 +1139,15 @@ struct sched_class {
 
 struct load_weight {
 	unsigned long weight, inv_weight;
+};
+
+struct sched_avg {
+	u32 runnable_avg_sum, runnable_avg_period;
+	u64 last_runnable_update;
+	s64 decay_count;
+	unsigned long load_avg_contrib;
+	unsigned long load_avg_ratio;
+	u32 usage_avg_sum;
 };
 
 #ifdef CONFIG_SCHEDSTATS
@@ -1207,6 +1209,15 @@ struct sched_entity {
 	struct cfs_rq		*cfs_rq;
 	/* rq "owned" by this entity/group: */
 	struct cfs_rq		*my_q;
+#endif
+/*
+ * Load-tracking only depends on SMP, FAIR_GROUP_SCHED dependency below may be
+ * removed when useful for applications beyond shares distribution (e.g.
+ * load-balance).
+ */
+#if defined(CONFIG_SMP) && defined(CONFIG_FAIR_GROUP_SCHED)
+	/* Per-entity load-tracking */
+	struct sched_avg	avg;
 #endif
 };
 
