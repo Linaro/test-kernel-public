@@ -25,8 +25,8 @@
 #include <asm/irq.h>
 #include <asm/mach/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/regs-irq.h>
+#include <mach-w90x900/hardware.h>
+#include <mach-w90x900/regs-irq.h>
 
 #include "nuc9xx.h"
 

@@ -27,14 +27,14 @@
 
 #include <asm/irq.h>
 
-#include <mach/map.h>
-#include <mach/irqs.h>
-#include <mach/regs-clock.h>
-#include <mach/dma.h>
+#include <mach-s5p64x0/map.h>
+#include <mach-s5p64x0/irqs.h>
+#include <mach-s5p64x0/regs-clock.h>
+#include <mach-s5p64x0/dma.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/irqs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/irqs.h>
 
 static u8 s5p6440_pdma_peri[] = {
 	DMACH_UART0_RX,

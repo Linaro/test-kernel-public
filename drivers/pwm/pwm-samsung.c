@@ -24,7 +24,7 @@
 
 #include <mach/map.h>
 
-#include <plat/regs-timer.h>
+#include <plat-samsung/regs-timer.h>
 
 struct s3c_chip {
 	struct platform_device	*pdev;

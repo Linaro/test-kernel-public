@@ -16,7 +16,7 @@
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-#include <plat/dsp.h>
+#include <plat-omap/dsp.h>
 
 #include <linux/types.h>
 /*  ----------------------------------- Host OS */

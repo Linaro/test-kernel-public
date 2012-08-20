@@ -23,7 +23,8 @@
 #include <linux/phy.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
-#include <mach/common.h>
+#include <mach-mxs/common.h>
+#include <mach-mxs/irqs.h>
 
 static struct fb_videomode mx23evk_video_modes[] = {
 	{

@@ -27,15 +27,15 @@
 #include <linux/power/isp1704_charger.h>
 #include <asm/system_info.h>
 
-#include <plat/mcspi.h>
-#include <plat/board.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <plat/dma.h>
-#include <plat/gpmc.h>
-#include <plat/onenand.h>
-#include <plat/gpmc-smc91x.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/gpmc.h>
+#include <plat-omap/onenand.h>
+#include <plat-omap/gpmc-smc91x.h>
 
-#include <mach/board-rx51.h>
+#include <mach-omap2/board-rx51.h>
 
 #include <sound/tlv320aic3x.h>
 #include <sound/tpa6130a2-plat.h>

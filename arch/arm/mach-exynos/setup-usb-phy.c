@@ -14,10 +14,10 @@
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/platform_device.h>
-#include <mach/regs-pmu.h>
-#include <mach/regs-usb-phy.h>
-#include <plat/cpu.h>
-#include <plat/usb-phy.h>
+#include <mach-exynos/regs-pmu.h>
+#include <mach-exynos/regs-usb-phy.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/usb-phy.h>
 
 static atomic_t host_usage;
 

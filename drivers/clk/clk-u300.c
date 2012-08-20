@@ -11,7 +11,7 @@
 #include <linux/io.h>
 #include <linux/clk-provider.h>
 #include <linux/spinlock.h>
-#include <mach/syscon.h>
+#include <mach-u300/syscon.h>
 
 /*
  * The clocking hierarchy currently looks like this.

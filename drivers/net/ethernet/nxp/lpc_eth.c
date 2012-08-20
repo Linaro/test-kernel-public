@@ -45,9 +45,9 @@
 #include <linux/types.h>
 
 #include <linux/io.h>
-#include <mach/board.h>
-#include <mach/platform.h>
-#include <mach/hardware.h>
+#include <mach-lpc32xx/board.h>
+#include <mach-lpc32xx/platform.h>
+#include <mach-lpc32xx/hardware.h>
 
 #define MODNAME "lpc-eth"
 #define DRV_VERSION "1.00"

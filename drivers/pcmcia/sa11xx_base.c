@@ -39,7 +39,7 @@
 #include <linux/io.h>
 #include <linux/slab.h>
 
-#include <mach/hardware.h>
+#include <mach-sa1100/hardware.h>
 #include <asm/irq.h>
 
 #include "soc_common.h"

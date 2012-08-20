@@ -14,10 +14,10 @@
 #include <linux/gpio.h>
 #include <linux/io.h>
 #include <asm/mach/arch.h>
-#include <plat/irq.h>
+#include <plat-orion/irq.h>
 #include <asm/mach/irq.h>
-#include <mach/pm.h>
-#include <mach/bridge-regs.h>
+#include <mach-dove/pm.h>
+#include <mach-dove/bridge-regs.h>
 #include "common.h"
 
 static void pmu_irq_mask(struct irq_data *d)

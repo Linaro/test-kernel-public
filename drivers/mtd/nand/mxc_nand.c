@@ -36,8 +36,8 @@
 #include <linux/of_mtd.h>
 
 #include <asm/mach/flash.h>
-#include <mach/mxc_nand.h>
-#include <mach/hardware.h>
+#include <mach-imx/mxc_nand.h>
+#include <mach-imx/hardware.h>
 
 #define DRIVER_NAME "mxc_nand"
 

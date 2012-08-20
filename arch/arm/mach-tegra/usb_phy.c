@@ -30,9 +30,9 @@
 #include <linux/usb/otg.h>
 #include <linux/usb/ulpi.h>
 #include <asm/mach-types.h>
-#include <mach/gpio-tegra.h>
-#include <mach/usb_phy.h>
-#include <mach/iomap.h>
+#include <mach-tegra/gpio-tegra.h>
+#include <mach-tegra/usb_phy.h>
+#include <mach-tegra/iomap.h>
 
 #define ULPI_VIEWPORT		0x170
 

@@ -31,8 +31,8 @@
 #include <linux/mtd/partitions.h>
 #include <linux/io.h>
 #include <linux/slab.h>
-#include <mach/nand.h>
-#include <mach/fsmc.h>
+#include <mach-nomadik/nand.h>
+#include <mach-nomadik/fsmc.h>
 
 #include <mtd/mtd-abi.h>
 

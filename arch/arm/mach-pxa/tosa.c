@@ -40,17 +40,17 @@
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 
-#include <mach/pxa25x.h>
-#include <mach/reset.h>
-#include <mach/irda.h>
-#include <mach/mmc.h>
-#include <mach/udc.h>
-#include <mach/tosa_bt.h>
-#include <mach/audio.h>
-#include <mach/smemc.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/reset.h>
+#include <mach-pxa/irda.h>
+#include <mach-pxa/mmc.h>
+#include <mach-pxa/udc.h>
+#include <mach-pxa/tosa_bt.h>
+#include <mach-pxa/audio.h>
+#include <mach-pxa/smemc.h>
 
 #include <asm/mach/arch.h>
-#include <mach/tosa.h>
+#include <mach-pxa/tosa.h>
 
 #include <asm/hardware/scoop.h>
 #include <asm/mach/sharpsl_param.h>
