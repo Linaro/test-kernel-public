@@ -548,12 +548,30 @@ int phy_start_interrupts(struct phy_device *phydev);
 void phy_print_status(struct phy_device *phydev);
 void phy_device_free(struct phy_device *phydev);
 
+#if IS_ENABLED(CONFIG_PHYLIB)
 int phy_register_fixup(const char *bus_id, u32 phy_uid, u32 phy_uid_mask,
 		int (*run)(struct phy_device *));
 int phy_register_fixup_for_id(const char *bus_id,
 		int (*run)(struct phy_device *));
 int phy_register_fixup_for_uid(u32 phy_uid, u32 phy_uid_mask,
 		int (*run)(struct phy_device *));
+#else
+static inline int phy_register_fixup(const char *bus_id, u32 phy_uid, u32 phy_uid_mask,
+		int (*run)(struct phy_device *))
+{
+	return 0;
+}
+static inline int phy_register_fixup_for_id(const char *bus_id,
+		int (*run)(struct phy_device *))
+{
+	return 0;
+}
+static inline int phy_register_fixup_for_uid(u32 phy_uid, u32 phy_uid_mask,
+		int (*run)(struct phy_device *))
+{
+	return 0;
+}
+#endif
 int phy_scan_fixups(struct phy_device *phydev);
 
 int phy_init_eee(struct phy_device *phydev, bool clk_stop_enable);
