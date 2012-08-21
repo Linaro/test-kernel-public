@@ -25,8 +25,8 @@
 #include <linux/kernel.h>
 #include <linux/platform_device.h>
 
-#include <mach/dma.h>
-#include <mach/hardware.h>
+#include <mach-ep93xx/dma.h>
+#include <mach-ep93xx/hardware.h>
 
 #include "soc.h"
 

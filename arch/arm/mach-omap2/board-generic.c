@@ -16,11 +16,11 @@
 #include <linux/of_platform.h>
 #include <linux/irqdomain.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach/arch.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
 #include "common-board-devices.h"
 

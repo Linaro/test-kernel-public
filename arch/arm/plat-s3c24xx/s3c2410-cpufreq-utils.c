@@ -16,11 +16,11 @@
 #include <linux/cpufreq.h>
 #include <linux/io.h>
 
-#include <mach/map.h>
-#include <mach/regs-mem.h>
-#include <mach/regs-clock.h>
+#include <mach-s3c24xx/map.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/regs-clock.h>
 
-#include <plat/cpu-freq-core.h>
+#include <plat-samsung/cpu-freq-core.h>
 
 /**
  * s3c2410_cpufreq_setrefresh - set SDRAM refresh value

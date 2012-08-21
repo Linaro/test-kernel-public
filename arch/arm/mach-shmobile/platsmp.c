@@ -19,8 +19,8 @@
 #include <linux/of.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>
-#include <mach/common.h>
-#include <mach/emev2.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/emev2.h>
 
 #ifdef CONFIG_ARCH_SH73A0
 #define is_sh73a0() (machine_is_ag5evm() || machine_is_kota2() || \

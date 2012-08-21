@@ -19,8 +19,8 @@
 
 #include <asm/system_misc.h>
 
-#include <plat/omap-pm.h>
-#include <plat/omap_device.h>
+#include <plat-omap/omap-pm.h>
+#include <plat-omap/omap_device.h>
 #include "common.h"
 
 #include "prcm-common.h"

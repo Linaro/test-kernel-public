@@ -49,15 +49,15 @@
 #include <asm/mach/time.h>
 #include <asm/mach/irq.h>
 
-#include <plat/cpu.h>
-#include <plat/clock.h>
-#include <plat/sram.h>
-#include <plat/tc.h>
-#include <plat/mux.h>
-#include <plat/dma.h>
-#include <plat/dmtimer.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/clock.h>
+#include <plat-omap/sram.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/dmtimer.h>
 
-#include <mach/irqs.h>
+#include <mach-omap1/irqs.h>
 
 #include "iomap.h"
 #include "pm.h"

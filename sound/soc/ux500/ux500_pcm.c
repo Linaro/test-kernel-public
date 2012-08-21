@@ -19,7 +19,7 @@
 #include <linux/dmaengine.h>
 #include <linux/slab.h>
 
-#include <plat/ste_dma40.h>
+#include <plat-nomadik/ste_dma40.h>
 
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>

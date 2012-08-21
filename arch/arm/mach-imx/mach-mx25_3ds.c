@@ -31,15 +31,15 @@
 #include <linux/platform_device.h>
 #include <linux/usb/otg.h>
 
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 #include <asm/memory.h>
 #include <asm/mach/map.h>
-#include <mach/common.h>
-#include <mach/mx25.h>
-#include <mach/iomux-mx25.h>
+#include <mach-imx/common.h>
+#include <mach-imx/mx25.h>
+#include <mach-imx/iomux-mx25.h>
 
 #include "devices-imx25.h"
 

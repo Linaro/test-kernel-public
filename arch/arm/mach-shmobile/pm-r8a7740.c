@@ -9,7 +9,7 @@
  * for more details.
  */
 #include <linux/console.h>
-#include <mach/pm-rmobile.h>
+#include <mach-shmobile/pm-rmobile.h>
 
 #ifdef CONFIG_PM
 static int r8a7740_pd_a4s_suspend(void)

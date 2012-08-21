@@ -60,6 +60,7 @@ config RADIO_MAXIRADIO
 config RADIO_SHARK
 	tristate "Griffin radioSHARK USB radio receiver"
 	depends on USB && SND
+	depends on LEDS_CLASS
 	---help---
 	  Choose Y here if you have this radio receiver.
 
@@ -77,6 +78,7 @@ config RADIO_SHARK
 config RADIO_SHARK2
 	tristate "Griffin radioSHARK2 USB radio receiver"
 	depends on USB
+	depends on LEDS_CLASS
 	---help---
 	  Choose Y here if you have this radio receiver.
 

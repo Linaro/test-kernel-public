@@ -62,6 +62,7 @@
 struct egalax_ts {
 	struct i2c_client		*client;
 	struct input_dev		*input_dev;
+	int				gpio;
 };
 
 static irqreturn_t egalax_ts_interrupt(int irq, void *dev_id)
@@ -122,7 +123,8 @@ static irqreturn_t egalax_ts_interrupt(int irq, void *dev_id)
 /* wake up controller by an falling edge of interrupt gpio.  */
 static int egalax_wake_up_device(struct i2c_client *client)
 {
-	int gpio = irq_to_gpio(client->irq);
+	struct egalax_ts *ts = i2c_get_clientdata(client);
+	int gpio = ts->gpio;
 	int ret;
 
 	ret = gpio_request(gpio, "egalax_irq");
@@ -179,6 +181,7 @@ static int __devinit egalax_ts_probe(struct i2c_client *client,
 
 	ts->client = client;
 	ts->input_dev = input_dev;
+	ts->gpio = of_get_gpio(client->dev.of_node, 0);
 
 	/* controller may be in sleep, wake it up. */
 	egalax_wake_up_device(client);

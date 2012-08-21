@@ -14,11 +14,11 @@
 
 #include <linux/init.h>
 
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/leds.h>
 
-#include <mach/pxa25x.h>
-#include <mach/idp.h>
+#include <mach-pxa/pxa25x.h>
+#include <mach-pxa/idp.h>
 
 #include "leds.h"
 

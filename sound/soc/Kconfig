@@ -7,6 +7,7 @@ menuconfig SND_SOC
 	select SND_PCM
 	select AC97_BUS if SND_SOC_AC97_BUS
 	select SND_JACK if INPUT=y || INPUT=SND
+	depends on I2C || !I2C
 	select REGMAP_I2C if I2C
 	select REGMAP_SPI if SPI_MASTER
 	---help---
@@ -26,7 +27,7 @@ config SND_SOC_AC97_BUS
 	bool
 
 config SND_SOC_DMAENGINE_PCM
-	bool
+	tristate
 
 # All the supported SoCs
 source "sound/soc/atmel/Kconfig"

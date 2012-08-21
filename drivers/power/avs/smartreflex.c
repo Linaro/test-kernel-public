@@ -26,6 +26,7 @@
 #include <linux/slab.h>
 #include <linux/pm_runtime.h>
 #include <linux/power/smartreflex.h>
+#include <plat-omap/cpu.h>
 
 #define SMARTREFLEX_NAME_LEN	16
 #define NVALUE_NAME_LEN		40

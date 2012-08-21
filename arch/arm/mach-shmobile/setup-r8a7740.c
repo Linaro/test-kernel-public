@@ -28,11 +28,11 @@
 #include <linux/sh_dma.h>
 #include <linux/sh_timer.h>
 #include <linux/dma-mapping.h>
-#include <mach/dma-register.h>
-#include <mach/r8a7740.h>
-#include <mach/pm-rmobile.h>
-#include <mach/common.h>
-#include <mach/irqs.h>
+#include <mach-shmobile/dma-register.h>
+#include <mach-shmobile/r8a7740.h>
+#include <mach-shmobile/pm-rmobile.h>
+#include <mach-shmobile/common.h>
+#include <mach-shmobile/irqs.h>
 #include <asm/mach-types.h>
 #include <asm/mach/map.h>
 #include <asm/mach/arch.h>

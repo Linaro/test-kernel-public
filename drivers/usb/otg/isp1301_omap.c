@@ -36,7 +36,7 @@
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/mux.h>
+#include <plat-omap/mux.h>
 
 #include <mach/usb.h>
 

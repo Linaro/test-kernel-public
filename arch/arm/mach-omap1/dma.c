@@ -25,9 +25,9 @@
 #include <linux/device.h>
 #include <linux/io.h>
 
-#include <plat/dma.h>
-#include <plat/tc.h>
-#include <plat/irqs.h>
+#include <plat-omap/dma.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/irqs.h>
 
 #define OMAP1_DMA_BASE			(0xfffed800)
 #define OMAP1_LOGICAL_DMA_CH_COUNT	17

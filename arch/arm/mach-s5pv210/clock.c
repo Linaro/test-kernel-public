@@ -20,15 +20,15 @@
 #include <linux/device.h>
 #include <linux/io.h>
 
-#include <mach/map.h>
+#include <mach-s5pv210/map.h>
 
-#include <plat/cpu-freq.h>
-#include <mach/regs-clock.h>
-#include <plat/clock.h>
-#include <plat/cpu.h>
-#include <plat/pll.h>
-#include <plat/s5p-clock.h>
-#include <plat/clock-clksrc.h>
+#include <plat-samsung/cpu-freq.h>
+#include <mach-s5pv210/regs-clock.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pll.h>
+#include <plat-samsung/s5p-clock.h>
+#include <plat-samsung/clock-clksrc.h>
 
 #include "common.h"
 

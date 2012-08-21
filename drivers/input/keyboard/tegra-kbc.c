@@ -29,8 +29,8 @@
 #include <linux/of.h>
 #include <linux/clk.h>
 #include <linux/slab.h>
-#include <mach/clk.h>
-#include <mach/kbc.h>
+#include <mach-tegra/clk.h>
+#include <mach-tegra/kbc.h>
 
 #define KBC_MAX_DEBOUNCE_CNT	0x3ffu
 

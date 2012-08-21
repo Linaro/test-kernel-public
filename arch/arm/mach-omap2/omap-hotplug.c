@@ -20,7 +20,7 @@
 #include <linux/io.h>
 
 #include <asm/cacheflush.h>
-#include <mach/omap-wakeupgen.h>
+#include <mach-omap2/omap-wakeupgen.h>
 
 #include "common.h"
 

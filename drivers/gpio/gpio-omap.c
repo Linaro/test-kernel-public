@@ -26,11 +26,14 @@
 #include <linux/of_device.h>
 #include <linux/irqdomain.h>
 
-#include <mach/hardware.h>
-#include <asm/irq.h>
-#include <mach/irqs.h>
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
 #include <asm/gpio.h>
 #include <asm/mach/irq.h>
+
+#include <plat-omap/hardware.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/gpio.h>
 
 #define OFF_MODE	1
 
@@ -1058,7 +1061,7 @@ static int __devinit omap_gpio_probe(struct platform_device *pdev)
 	struct device *dev = &pdev->dev;
 	struct device_node *node = dev->of_node;
 	const struct of_device_id *match;
-	struct omap_gpio_platform_data *pdata;
+	const struct omap_gpio_platform_data *pdata;
 	struct resource *res;
 	struct gpio_bank *bank;
 	int ret = 0;
@@ -1440,19 +1443,19 @@ static struct omap_gpio_reg_offs omap4_gpio_regs = {
 	.fallingdetect =	OMAP4_GPIO_FALLINGDETECT,
 };
 
-static struct omap_gpio_platform_data omap2_pdata = {
+const static struct omap_gpio_platform_data omap2_pdata = {
 	.regs = &omap2_gpio_regs,
 	.bank_width = 32,
 	.dbck_flag = false,
 };
 
-static struct omap_gpio_platform_data omap3_pdata = {
+const static struct omap_gpio_platform_data omap3_pdata = {
 	.regs = &omap2_gpio_regs,
 	.bank_width = 32,
 	.dbck_flag = true,
 };
 
-static struct omap_gpio_platform_data omap4_pdata = {
+const static struct omap_gpio_platform_data omap4_pdata = {
 	.regs = &omap4_gpio_regs,
 	.bank_width = 32,
 	.dbck_flag = true,

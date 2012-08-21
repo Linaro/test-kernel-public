@@ -21,7 +21,7 @@
 #include <linux/clk.h>
 #include <linux/err.h>
 
-#include <mach/hardware.h>
+#include <mach-omap2/hardware.h>
 
 #include "iomap.h"
 
