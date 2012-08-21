@@ -838,7 +838,7 @@ static struct clksrc_sources exynos4_clkset_mout_audss = {
 
 static struct clksrc_clk exynos4_clk_mout_audss = {
 	.clk		= {
-		.name		= "busclk",
+		.name		= "i2s_opclk0",
 	},
 	.sources	= &exynos4_clkset_mout_audss,
 	.reg_src	= { .reg = EXYNOS4_CLKSRC_AUDSS, .shift = 0, .size = 1 },
