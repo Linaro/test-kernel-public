@@ -433,8 +433,17 @@ static struct snd_soc_platform_driver samsung_asoc_platform = {
 	.pcm_free	= dma_free_dma_buffers,
 };
 
+static u64 asoc_dma_mask = DMA_BIT_MASK(32);
+
 static int __devinit samsung_asoc_platform_probe(struct platform_device *pdev)
 {
+	int ret;
+
+	if (!pdev->dev.dma_mask)
+		pdev->dev.dma_mask = &asoc_dma_mask;
+	if (!pdev->dev.coherent_dma_mask)
+		pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+
 	return snd_soc_register_platform(&pdev->dev, &samsung_asoc_platform);
 }
 
@@ -444,10 +453,17 @@ static int __devexit samsung_asoc_platform_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static const struct of_device_id asoc_dma_of_match[] = {
+	{ .compatible = "samsung,audio-dma", },
+	{ }
+};
+MODULE_DEVICE_TABLE(of, asoc_dma_of_match);
+
 static struct platform_driver asoc_dma_driver = {
 	.driver = {
 		.name = "samsung-audio",
 		.owner = THIS_MODULE,
+		.of_match_table = asoc_dma_of_match,
 	},
 
 	.probe = samsung_asoc_platform_probe,
