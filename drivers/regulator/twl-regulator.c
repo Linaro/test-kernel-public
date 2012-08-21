@@ -19,7 +19,7 @@
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
 #include <linux/i2c/twl.h>
-
+#include <linux/slab.h>
 
 /*
  * The TWL4030/TW5030/TPS659x0/TWL6030 family chips include power management, a
@@ -659,13 +659,6 @@ static struct regulator_ops twl6030fixed_ops = {
 	.get_status	= twl6030reg_get_status,
 };
 
-static struct regulator_ops twl6030_fixed_resource = {
-	.enable		= twl6030reg_enable,
-	.disable	= twl6030reg_disable,
-	.is_enabled	= twl6030reg_is_enabled,
-	.get_status	= twl6030reg_get_status,
-};
-
 /*
  * SMPS status and control
  */
@@ -876,7 +869,7 @@ static struct regulator_ops twlsmps_ops = {
 			0x0, TWL6030, twl6030fixed_ops)
 
 #define TWL4030_ADJUSTABLE_LDO(label, offset, num, turnon_delay, remap_conf) \
-static struct twlreg_info TWL4030_INFO_##label = { \
+static const struct twlreg_info TWL4030_INFO_##label = { \
 	.base = offset, \
 	.id = num, \
 	.table_len = ARRAY_SIZE(label##_VSEL_table), \
@@ -894,7 +887,7 @@ static struct twlreg_info TWL4030_INFO_##label = { \
 	}
 
 #define TWL4030_ADJUSTABLE_SMPS(label, offset, num, turnon_delay, remap_conf) \
-static struct twlreg_info TWL4030_INFO_##label = { \
+static const struct twlreg_info TWL4030_INFO_##label = { \
 	.base = offset, \
 	.id = num, \
 	.remap = remap_conf, \
@@ -909,7 +902,7 @@ static struct twlreg_info TWL4030_INFO_##label = { \
 	}
 
 #define TWL6030_ADJUSTABLE_SMPS(label) \
-static struct twlreg_info TWL6030_INFO_##label = { \
+static const struct twlreg_info TWL6030_INFO_##label = { \
 	.desc = { \
 		.name = #label, \
 		.id = TWL6030_REG_##label, \
@@ -920,7 +913,7 @@ static struct twlreg_info TWL6030_INFO_##label = { \
 	}
 
 #define TWL6030_ADJUSTABLE_LDO(label, offset, min_mVolts, max_mVolts) \
-static struct twlreg_info TWL6030_INFO_##label = { \
+static const struct twlreg_info TWL6030_INFO_##label = { \
 	.base = offset, \
 	.min_mV = min_mVolts, \
 	.max_mV = max_mVolts, \
@@ -935,7 +928,7 @@ static struct twlreg_info TWL6030_INFO_##label = { \
 	}
 
 #define TWL6025_ADJUSTABLE_LDO(label, offset, min_mVolts, max_mVolts) \
-static struct twlreg_info TWL6025_INFO_##label = { \
+static const struct twlreg_info TWL6025_INFO_##label = { \
 	.base = offset, \
 	.min_mV = min_mVolts, \
 	.max_mV = max_mVolts, \
@@ -951,7 +944,7 @@ static struct twlreg_info TWL6025_INFO_##label = { \
 
 #define TWL_FIXED_LDO(label, offset, mVolts, num, turnon_delay, remap_conf, \
 		family, operations) \
-static struct twlreg_info TWLFIXED_INFO_##label = { \
+static const struct twlreg_info TWLFIXED_INFO_##label = { \
 	.base = offset, \
 	.id = num, \
 	.min_mV = mVolts, \
@@ -967,21 +960,8 @@ static struct twlreg_info TWLFIXED_INFO_##label = { \
 		}, \
 	}
 
-#define TWL6030_FIXED_RESOURCE(label, offset, turnon_delay) \
-static struct twlreg_info TWLRES_INFO_##label = { \
-	.base = offset, \
-	.desc = { \
-		.name = #label, \
-		.id = TWL6030_REG_##label, \
-		.ops = &twl6030_fixed_resource, \
-		.type = REGULATOR_VOLTAGE, \
-		.owner = THIS_MODULE, \
-		.enable_time = turnon_delay, \
-		}, \
-	}
-
 #define TWL6025_ADJUSTABLE_SMPS(label, offset) \
-static struct twlreg_info TWLSMPS_INFO_##label = { \
+static const struct twlreg_info TWLSMPS_INFO_##label = { \
 	.base = offset, \
 	.min_mV = 600, \
 	.max_mV = 2100, \
@@ -1048,7 +1028,6 @@ TWL6030_FIXED_LDO(VDAC, 0x64, 1800, 0);
 TWL6030_FIXED_LDO(VUSB, 0x70, 3300, 0);
 TWL6030_FIXED_LDO(V1V8, 0x16, 1800, 0);
 TWL6030_FIXED_LDO(V2V1, 0x1c, 2100, 0);
-TWL6030_FIXED_RESOURCE(CLK32KG, 0x8C, 0);
 TWL6025_ADJUSTABLE_SMPS(SMPS3, 0x34);
 TWL6025_ADJUSTABLE_SMPS(SMPS4, 0x10);
 TWL6025_ADJUSTABLE_SMPS(VIO, 0x16);
@@ -1139,6 +1118,7 @@ static int __devinit twlreg_probe(struct platform_device *pdev)
 {
 	int				i, id;
 	struct twlreg_info		*info;
+	const struct twlreg_info	*template;
 	struct regulator_init_data	*initdata;
 	struct regulation_constraints	*c;
 	struct regulator_dev		*rdev;
@@ -1148,17 +1128,17 @@ static int __devinit twlreg_probe(struct platform_device *pdev)
 
 	match = of_match_device(twl_of_match, &pdev->dev);
 	if (match) {
-		info = match->data;
-		id = info->desc.id;
+		template = match->data;
+		id = template->desc.id;
 		initdata = of_get_regulator_init_data(&pdev->dev,
 						      pdev->dev.of_node);
 		drvdata = NULL;
 	} else {
 		id = pdev->id;
 		initdata = pdev->dev.platform_data;
-		for (i = 0, info = NULL; i < ARRAY_SIZE(twl_of_match); i++) {
-			info = twl_of_match[i].data;
-			if (info && info->desc.id == id)
+		for (i = 0, template = NULL; i < ARRAY_SIZE(twl_of_match); i++) {
+			template = twl_of_match[i].data;
+			if (template && template->desc.id == id)
 				break;
 		}
 		if (i == ARRAY_SIZE(twl_of_match))
@@ -1169,11 +1149,15 @@ static int __devinit twlreg_probe(struct platform_device *pdev)
 			return -EINVAL;
 	}
 
-	if (!info)
+	if (!template)
 		return -ENODEV;
 
 	if (!initdata)
 		return -EINVAL;
+
+	info = kmemdup(template, sizeof (*info), GFP_KERNEL);
+	if (!info)
+		return -ENOMEM;
 
 	if (drvdata) {
 		/* copy the driver data into regulator data */
@@ -1235,6 +1219,7 @@ static int __devinit twlreg_probe(struct platform_device *pdev)
 	if (IS_ERR(rdev)) {
 		dev_err(&pdev->dev, "can't register %s, %ld\n",
 				info->desc.name, PTR_ERR(rdev));
+		kfree(info);
 		return PTR_ERR(rdev);
 	}
 	platform_set_drvdata(pdev, rdev);
@@ -1256,7 +1241,11 @@ static int __devinit twlreg_probe(struct platform_device *pdev)
 
 static int __devexit twlreg_remove(struct platform_device *pdev)
 {
-	regulator_unregister(platform_get_drvdata(pdev));
+	struct regulator_dev *rdev = platform_get_drvdata(pdev);
+	struct twlreg_info *info = rdev->reg_data;
+
+	regulator_unregister(rdev);
+	kfree(info);
 	return 0;
 }
 
