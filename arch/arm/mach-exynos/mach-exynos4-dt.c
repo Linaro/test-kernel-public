@@ -97,6 +97,9 @@ static const struct of_dev_auxdata exynos4210_auxdata_lookup[] __initconst = {
 			&origen_ehci_pdata),
 	OF_DEV_AUXDATA("samsung,exynos-ohci", EXYNOS4_PA_OHCI, "exynos-ohci",
 			&origen_ohci_pdata),
+	OF_DEV_AUXDATA("samsung,samsung-i2s", EXYNOS4_PA_I2S0,
+						"samsung-i2s.0", NULL),
+	OF_DEV_AUXDATA("samsung,audio-dma", 0, "samsung-audio", NULL),
 	{},
 };
 
