@@ -360,4 +360,24 @@
 		vusb_a-supply = <&ldo3_reg>;
 		vusb_d-supply = <&ldo3_reg>;
 	};
+
+	i2s_0: i2s@03830000 {
+		gpios = <&gpz 0 2 0 0>,
+			<&gpz 1 2 0 0>,
+			<&gpz 2 2 0 0>,
+			<&gpz 3 2 0 0>,
+			<&gpz 4 2 0 0>,
+			<&gpz 5 2 0 0>,
+			<&gpz 6 2 0 0>;
+			idma-addr = <0x03000000>;
+	};
+
+	asoc_dma {
+		compatible = "samsung,audio-dma";
+	};
+
+	origen_audio {
+		compatible = "samsung,origen_audio";
+	};
+
 };
