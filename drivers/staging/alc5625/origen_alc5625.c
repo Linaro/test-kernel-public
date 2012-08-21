@@ -202,10 +202,17 @@ static int __devexit origen_audio_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static const struct of_device_id origen_audio_of_match[] = {
+	{ .compatible = "samsung,origen_audio", },
+	{ }
+};
+MODULE_DEVICE_TABLE(of, origen_audio_of_match);
+
 static struct platform_driver origen_audio_driver = {
 	.driver		= {
 		.name	= "origen-audio",
 		.owner	= THIS_MODULE,
+		.of_match_table = origen_audio_of_match,
 	},
 	.probe		= origen_audio_probe,
 	.remove		= __devexit_p(origen_audio_remove),
