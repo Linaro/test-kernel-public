@@ -72,7 +72,6 @@ static struct cpuidle_state tc2_cpuidle_set[] __initdata = {
 							CPUIDLE_FLAG_COUPLED,
 		.name			= "C1",
 		.desc			= "ARM power down",
-		.disabled		= 1,
 	},
 };
 
@@ -226,6 +225,10 @@ int __init tc2_idle_init(void)
 		pr_info("TC2 CPUidle not registered because no SPC found\n");
 		return -ENODEV;
 	}
+
+	/* Enable idle by default for all possible clusters */
+	for (i = 0; i < NR_CLUSTERS; i++)
+		cpumask_set_cpu(i, &cluster_mask);
 
 	drv->state_count = (sizeof(tc2_cpuidle_set) /
 				       sizeof(struct cpuidle_state));
