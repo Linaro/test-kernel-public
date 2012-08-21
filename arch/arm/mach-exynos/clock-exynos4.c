@@ -1400,6 +1400,7 @@ static struct clk_lookup exynos4_clk_lookup[] = {
 	CLKDEV_INIT("exynos4210-spi.0", "spi_busclk0", &exynos4_clk_sclk_spi0.clk),
 	CLKDEV_INIT("exynos4210-spi.1", "spi_busclk0", &exynos4_clk_sclk_spi1.clk),
 	CLKDEV_INIT("exynos4210-spi.2", "spi_busclk0", &exynos4_clk_sclk_spi2.clk),
+	CLKDEV_INIT("samsung-i2s.0", "i2s_opclk0", &exynos4_clk_mout_audss.clk),
 };
 
 static int xtal_rate;
