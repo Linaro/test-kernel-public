@@ -1,6 +1,7 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/init.h>
+#include <linux/of_irq.h>
 #include <linux/pm.h>
 #include <linux/i2c.h>
 #include <linux/platform_device.h>
@@ -374,6 +375,12 @@ static const struct i2c_device_id unidisplay_ts_i2c_id[] = {
 };
 MODULE_DEVICE_TABLE(i2c, unidisplay_ts_i2c_id);
 
+static const struct of_device_id unidisplay_ts_of_match[] = {
+	{ .compatible = "pixcir,unidisplay-ts", },
+	{ }
+};
+MODULE_DEVICE_TABLE(of, unidisplay_ts_of_match);
+
 static struct i2c_driver unidisplay_ts_i2c_driver = {
 	.driver = {
 		.name	=	"Unidisplay Touch Driver",
@@ -381,6 +388,7 @@ static struct i2c_driver unidisplay_ts_i2c_driver = {
 #ifdef CONFIG_PM
 		.pm	=	&unidisplay_ts_pm,
 #endif
+		.of_match_table = unidisplay_ts_of_match,
 	},
 	.probe		=	unidisplay_ts_probe,
 	.remove		=	unidisplay_ts_remove,
