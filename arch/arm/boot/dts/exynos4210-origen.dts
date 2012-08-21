@@ -243,6 +243,13 @@
 					regulator-always-on;
 				};
 
+				ldo11_reg: LDO11 {
+					regulator-name = "VDD_AUD_3V";
+					regulator-min-microvolt = <3000000>;
+					regulator-max-microvolt	= <3000000>;
+					regulator-always-on;
+				};
+
 				ldo17_reg: LDO17 {
 					regulator-name = "vmmc";
 					regulator-min-microvolt = <3300000>;
@@ -261,7 +268,18 @@
 	};
 
 	i2c@13870000 {
-		status = "disabled";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		samsung,i2c-sda-delay = <100>;
+		samsung,i2c-max-bus-freq = <20000>;
+		gpios = <&gpd1 2 2 3 0>,
+			<&gpd1 3 2 3 0>;
+
+		codec: alc5625@1e {
+			compatible = "realtek,alc5625";
+			reg = <0x1e>;
+		};
+
 	};
 
 	i2c@13880000 {
