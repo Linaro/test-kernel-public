@@ -265,6 +265,13 @@
 				};
 			};
 		};
+
+		unidisplay_ts@41 {
+			compatible = "pixcir,unidisplay-ts";
+			interrupt-parent = <&wakeup_eint>;
+			reg = <0x41>;
+			interrupts = <25 0>;
+		};
 	};
 
 	i2c@13870000 {
