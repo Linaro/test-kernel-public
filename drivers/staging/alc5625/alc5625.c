@@ -2252,10 +2252,17 @@ static const struct i2c_device_id alc5625_i2c_id[] = {
 };
 MODULE_DEVICE_TABLE(i2c, alc5625_i2c_id);
 
+static const struct of_device_id alc5625_of_match[] = {
+	{ .compatible = "realtek,alc5625", },
+	{ }
+};
+MODULE_DEVICE_TABLE(of, alc5625_of_match);
+
 static struct i2c_driver alc5625_i2c_driver = {
 	.driver = {
 		.name = "alc5625-codec",
 		.owner = THIS_MODULE,
+		.of_match_table	= alc5625_of_match,
 	},
 	.probe		= alc5625_i2c_probe,
 	.remove		= __devexit_p(alc5625_i2c_remove),
