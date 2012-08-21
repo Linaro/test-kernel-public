@@ -25,6 +25,10 @@
 	compatible = "samsung,exynos4210";
 	interrupt-parent = <&gic>;
 
+	aliases {
+		i2s0 = &i2s_0;
+	};
+
 	gic:interrupt-controller@10490000 {
 		compatible = "arm,cortex-a9-gic";
 		#interrupt-cells = <3>;
@@ -442,5 +446,16 @@
 		compatible = "samsung,exynos-ohci", "usb-ohci";
 		reg = <0x12590000 0x100>;
 		interrupts = <0 70 0>;
+	};
+
+	i2s_0: i2s@03830000 {
+		compatible = "samsung,samsung-i2s";
+		reg = <0x03830000 0x100>;
+		tx-dma-channel-secondary = <&pdma0 10>;
+		tx-dma-channel = <&pdma0 12>;
+		rx-dma-channel = <&pdma0 11>;
+		supports-6ch;
+		supports-rstclr;
+		supports-secdai;
 	};
 };
