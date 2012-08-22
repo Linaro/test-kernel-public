@@ -26,6 +26,11 @@
 #include <linux/platform_data/s3c-hsotg.h>
 #include <linux/ath6kl.h>
 #include <linux/delay.h>
+#include <linux/videodev2.h>
+
+#include <media/s5k4ecgx.h>
+#include <media/s5p_fimc.h>
+#include <media/v4l2-mediabus.h>
 
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>
@@ -46,6 +51,7 @@
 #include <plat-samsung/fb.h>
 #include <plat-samsung/mfc.h>
 #include <plat-samsung/hdmi.h>
+#include <plat-samsung/camport.h>
 
 #include <mach-exynos/ohci.h>
 #include <mach-exynos/map.h>
@@ -596,6 +602,33 @@ struct ath6kl_platform_data origen_wlan_data  __initdata = {
 	.setup_power = origen_wifi_set_detect,
 };
 
+#ifdef CONFIG_VIDEO_S5K4ECGX
+static int origen_camera_power(int enable);
+static struct s5k4ecgx_platform_data s5k4ecgx_plat = {
+	.set_power = origen_camera_power,
+};
+
+static struct i2c_board_info s5k4ecgx_board_info = {
+	I2C_BOARD_INFO("S5K4ECGX", 0x5A >> 1),
+	.platform_data = &s5k4ecgx_plat,
+};
+
+static struct s5p_fimc_isp_info s5k4ecgx_camera_sensors[] = {
+	{
+		.flags		= V4L2_MBUS_PCLK_SAMPLE_RISING |
+						V4L2_MBUS_VSYNC_ACTIVE_LOW,
+		.bus_type	= FIMC_ITU_601,
+		.board_info	= &s5k4ecgx_board_info,
+		.clk_frequency	= 24000000UL,
+		.i2c_bus_num	= 0,
+	},
+};
+
+static struct s5p_platform_fimc fimc_md_platdata = {
+	.isp_info	= s5k4ecgx_camera_sensors,
+	.num_clients	= ARRAY_SIZE(s5k4ecgx_camera_sensors),
+};
+#endif
 
 /* USB EHCI */
 static struct s5p_ehci_platdata origen_ehci_pdata;
@@ -898,6 +931,61 @@ static void __init origen_power_init(void)
 	s3c_gpio_setpull(EXYNOS4_GPX0(4), S3C_GPIO_PULL_NONE);
 }
 
+#ifdef CONFIG_VIDEO_S5K4ECGX
+#define ORIGEN_GPIO_CAM_RESET	EXYNOS4_GPE1(4)
+#define ORIGEN_GPIO_CAM_PWDN	EXYNOS4_GPE1(0)
+#define ORIGEN_GPIO_CAM_2V8	EXYNOS4_GPE1(1)
+#define ORIGEN_GPIO_CAM_1V8	EXYNOS4_GPE1(2)
+struct gpio cam_gpio[] = {
+	{ORIGEN_GPIO_CAM_RESET, GPIOF_DIR_OUT, "reset"},
+	{ORIGEN_GPIO_CAM_PWDN, GPIOF_DIR_OUT, "power down"},
+	{ORIGEN_GPIO_CAM_2V8, GPIOF_DIR_OUT, "2v8"},
+	{ORIGEN_GPIO_CAM_1V8, GPIOF_DIR_OUT, "1v8"},
+};
+
+static void __init origen_camera_init(void)
+{
+	int ret;
+
+	ret = gpio_request_array(cam_gpio,
+			sizeof(cam_gpio) / sizeof(struct gpio));
+	if (ret) {
+		pr_err("%s: Could not request the gpio for camera\n", __func__);
+		return;
+	}
+
+	s3c_gpio_cfgpin(ORIGEN_GPIO_CAM_RESET, S3C_GPIO_OUTPUT);
+	s3c_gpio_cfgpin(ORIGEN_GPIO_CAM_PWDN, S3C_GPIO_OUTPUT);
+	s3c_gpio_cfgpin(ORIGEN_GPIO_CAM_2V8, S3C_GPIO_OUTPUT);
+	s3c_gpio_cfgpin(ORIGEN_GPIO_CAM_1V8, S3C_GPIO_OUTPUT);
+
+	if (exynos4_fimc_setup_gpio(S5P_CAMPORT_A)) {
+		pr_err("%s: Camera port A setup failed\n", __func__);
+		return;
+	}
+}
+
+static int origen_camera_power(int enable)
+{
+	if (enable) {
+		gpio_set_value(ORIGEN_GPIO_CAM_2V8, 1);
+		gpio_set_value(ORIGEN_GPIO_CAM_1V8, 1);
+		udelay(10);
+		gpio_set_value(ORIGEN_GPIO_CAM_PWDN, 0);
+		udelay(15);
+		gpio_set_value(ORIGEN_GPIO_CAM_RESET, 1);
+		udelay(60);
+	} else {
+		gpio_set_value(ORIGEN_GPIO_CAM_RESET, 0);
+		udelay(50);
+		gpio_set_value(ORIGEN_GPIO_CAM_PWDN, 1);
+		gpio_set_value(ORIGEN_GPIO_CAM_2V8, 0);
+		gpio_set_value(ORIGEN_GPIO_CAM_1V8, 0);
+	}
+	return 0;
+}
+#endif
+
 static void __init origen_reserve(void)
 {
 	s5p_mfc_reserve_mem(0x43000000, 32 << 20, 0x51000000, 32 << 20);
@@ -944,6 +1032,11 @@ static void __init origen_machine_init(void)
 	origen_bt_setup();
 
 	ath6kl_set_platform_data(&origen_wlan_data);
+#ifdef CONFIG_VIDEO_S5K4ECGX
+	s3c_set_platdata(&fimc_md_platdata, sizeof(fimc_md_platdata),
+							&s5p_device_fimc_md);
+	origen_camera_init();
+#endif
 }
 
 MACHINE_START(ORIGEN, "ORIGEN")
