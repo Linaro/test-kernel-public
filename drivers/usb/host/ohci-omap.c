@@ -24,8 +24,8 @@
 #include <asm/io.h>
 #include <asm/mach-types.h>
 
-#include <plat/mux.h>
-#include <plat/fpga.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/fpga.h>
 
 #include <mach/hardware.h>
 #include <mach/irqs.h>

@@ -13,7 +13,7 @@
 
 #include <linux/bug.h>
 #include <linux/types.h>
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 #include <linux/kernel.h>
 
 static struct cpu_op mx51_cpu_op[] = {

@@ -38,9 +38,9 @@
 #include <linux/videodev2.h>
 #include <sound/sh_fsi.h>
 #include <sound/simple_card.h>
-#include <mach/irqs.h>
-#include <mach/sh73a0.h>
-#include <mach/common.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh73a0.h>
+#include <mach-shmobile/common.h>
 #include <asm/hardware/cache-l2x0.h>
 #include <asm/hardware/gic.h>
 #include <asm/mach-types.h>

@@ -18,8 +18,8 @@
 #include <linux/dmaengine.h>
 #include <linux/platform_device.h>
 #include <linux/device.h>
-#include <mach/regs-icu.h>
-#include <mach/sram.h>
+#include <mach-mmp/regs-icu.h>
+#include <mach-mmp/sram.h>
 
 #include "dmaengine.h"
 

@@ -11,10 +11,10 @@
 #include <linux/pinctrl/machine.h>
 
 #include <asm/mach-types.h>
-#include <plat/pincfg.h>
-#include <plat/gpio-nomadik.h>
+#include <plat-nomadik/pincfg.h>
+#include <plat-nomadik/gpio-nomadik.h>
 
-#include <mach/hardware.h>
+#include <mach-ux500/hardware.h>
 
 #include "pins-db8500.h"
 #include "board-mop500.h"

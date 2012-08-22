@@ -27,8 +27,8 @@
 #include <linux/of_gpio.h>
 #include <linux/pm_runtime.h>
 
-#include <mach/usb_phy.h>
-#include <mach/iomap.h>
+#include <mach-tegra/usb_phy.h>
+#include <mach-tegra/iomap.h>
 
 #define TEGRA_USB_DMA_ALIGN 32
 

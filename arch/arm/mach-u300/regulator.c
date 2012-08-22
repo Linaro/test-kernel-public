@@ -13,8 +13,8 @@
 #include <linux/regulator/consumer.h>
 /* Those are just for writing in syscon */
 #include <linux/io.h>
-#include <mach/hardware.h>
-#include <mach/syscon.h>
+#include <mach-u300/hardware.h>
+#include <mach-u300/syscon.h>
 
 /*
  * Regulators that power the board and chip and which are

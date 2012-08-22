@@ -24,9 +24,9 @@
 #include <linux/interrupt.h>
 #include <linux/slab.h>
 
-#include <plat/common.h>
-#include <plat/prcm.h>
-#include <plat/irqs.h>
+#include <plat-omap/common.h>
+#include <plat-omap/prcm.h>
+#include <plat-omap/irqs.h>
 
 #include "prm2xxx_3xxx.h"
 #include "prm44xx.h"

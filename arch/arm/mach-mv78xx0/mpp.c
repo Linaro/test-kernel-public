@@ -11,8 +11,8 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/io.h>
-#include <plat/mpp.h>
-#include <mach/hardware.h>
+#include <plat-orion/mpp.h>
+#include <mach-mv78xx0/hardware.h>
 #include "common.h"
 #include "mpp.h"
 

@@ -20,7 +20,7 @@
 #include <linux/io.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
-#include <mach/npe.h>
+#include <mach-ixp4xx/npe.h>
 
 #define DEBUG_MSG			0
 #define DEBUG_FW			0

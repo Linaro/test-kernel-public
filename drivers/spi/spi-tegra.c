@@ -32,7 +32,7 @@
 #include <linux/spi/spi.h>
 #include <linux/dmaengine.h>
 
-#include <mach/dma.h>
+#include <mach-tegra/dma.h>
 
 #define SLINK_COMMAND		0x000
 #define   SLINK_BIT_LENGTH(x)		(((x) & 0x1f) << 0)

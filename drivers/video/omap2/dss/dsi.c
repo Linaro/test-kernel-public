@@ -41,7 +41,7 @@
 
 #include <video/omapdss.h>
 #include <video/mipi_display.h>
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 #include "dss.h"
 #include "dss_features.h"

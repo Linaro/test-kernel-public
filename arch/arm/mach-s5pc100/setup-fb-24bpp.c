@@ -15,9 +15,9 @@
 #include <linux/fb.h>
 #include <linux/gpio.h>
 
-#include <mach/map.h>
-#include <plat/fb.h>
-#include <plat/gpio-cfg.h>
+#include <mach-s5pc100/map.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/gpio-cfg.h>
 
 #define DISR_OFFSET	0x7008
 

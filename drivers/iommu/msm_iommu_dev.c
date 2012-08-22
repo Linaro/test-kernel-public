@@ -27,9 +27,9 @@
 #include <linux/err.h>
 #include <linux/slab.h>
 
-#include <mach/iommu_hw-8xxx.h>
-#include <mach/iommu.h>
-#include <mach/clk.h>
+#include <mach-msm/iommu_hw-8xxx.h>
+#include <mach-msm/iommu.h>
+#include <mach-msm/clk.h>
 
 struct iommu_ctx_iter_data {
 	/* input */

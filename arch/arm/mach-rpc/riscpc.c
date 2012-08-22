@@ -23,7 +23,7 @@
 
 #include <asm/elf.h>
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-rpc/hardware.h>
 #include <asm/hardware/iomd.h>
 #include <asm/page.h>
 #include <asm/domain.h>
