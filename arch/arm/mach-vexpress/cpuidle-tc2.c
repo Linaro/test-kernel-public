@@ -226,6 +226,10 @@ int __init tc2_idle_init(void)
 		return -ENODEV;
 	}
 
+	/* Enable idle by default for all possible clusters */
+	for (i = 0; i < NR_CLUSTERS; i++)
+		cpumask_set_cpu(i, &cluster_mask);
+
 	drv->state_count = (sizeof(tc2_cpuidle_set) /
 				       sizeof(struct cpuidle_state));
 
