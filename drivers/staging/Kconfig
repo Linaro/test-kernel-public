@@ -132,6 +132,8 @@ source "drivers/staging/ramster/Kconfig"
 
 source "drivers/staging/ozwpan/Kconfig"
 
+source "drivers/staging/alc5625/Kconfig"
+
 source "drivers/staging/thermal_framework/Kconfig"
 
 source "drivers/staging/omapdce/Kconfig"
