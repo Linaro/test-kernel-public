@@ -243,6 +243,13 @@
 					regulator-always-on;
 				};
 
+				ldo11_reg: LDO11 {
+					regulator-name = "VDD_AUD_3V";
+					regulator-min-microvolt = <3000000>;
+					regulator-max-microvolt	= <3000000>;
+					regulator-always-on;
+				};
+
 				ldo17_reg: LDO17 {
 					regulator-name = "vmmc";
 					regulator-min-microvolt = <3300000>;
