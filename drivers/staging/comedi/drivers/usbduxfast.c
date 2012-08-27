@@ -63,6 +63,7 @@
 /*
  * constants for "firmware" upload and download
  */
+#define FIRMWARE		"usbduxfast_firmware.bin"
 #define USBDUXFASTSUB_FIRMWARE	0xA0
 #define VENDOR_DIR_IN		0xC0
 #define VENDOR_DIR_OUT		0x40
