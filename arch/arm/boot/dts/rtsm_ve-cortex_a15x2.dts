@@ -13,8 +13,8 @@
 	model = "RTSM_VE_CortexA15x2";
 	compatible = "arm,rtsm_ve,cortex_a15x2", "arm,vexpress";
 	interrupt-parent = <&gic>;
-	#address-cells = <1>;
-	#size-cells = <1>;
+	#address-cells = <2>;
+	#size-cells = <2>;
 
 	chosen { };
 
@@ -44,7 +44,7 @@
 
 	memory@80000000 {
 		device_type = "memory";
-		reg = <0x80000000 0x80000000>;
+		reg = <0 0x80000000 0 0x80000000>;
 	};
 
 	gic: interrupt-controller@2c001000 {
@@ -52,10 +52,10 @@
 		#interrupt-cells = <3>;
 		#address-cells = <0>;
 		interrupt-controller;
-		reg = <0x2c001000 0x1000>,
-		      <0x2c002000 0x1000>,
-		      <0x2c004000 0x2000>,
-		      <0x2c006000 0x2000>;
+		reg = <0 0x2c001000 0 0x1000>,
+		      <0 0x2c002000 0 0x1000>,
+		      <0 0x2c004000 0 0x2000>,
+		      <0 0x2c006000 0 0x2000>;
 		interrupts = <1 9 0xf04>;
 	};
 
@@ -69,20 +69,20 @@
 
 	clcd@1c1f0000 {
 		compatible = "arm,pl111", "arm,primecell";
-		reg = <0x1c1f0000 0x1000>;
+		reg = <0 0x1c1f0000 0 0x1000>;
 		mode = "VGA";
 		arm,vexpress-osc = <1>;
 		use_dma = <0>;
-		framebuffer = <0x18000000 0x01000000>;
+		framebuffer = <0 0x18000000 0 0x01000000>;
 	};
 
 	motherboard {
-		ranges = <0 0 0x08000000 0x04000000>,
-			 <1 0 0x14000000 0x04000000>,
-			 <2 0 0x18000000 0x04000000>,
-			 <3 0 0x1c000000 0x04000000>,
-			 <4 0 0x0c000000 0x04000000>,
-			 <5 0 0x10000000 0x04000000>;
+		ranges = <0 0 0 0x08000000 0x04000000>,
+			 <1 0 0 0x14000000 0x04000000>,
+			 <2 0 0 0x18000000 0x04000000>,
+			 <3 0 0 0x1c000000 0x04000000>,
+			 <4 0 0 0x0c000000 0x04000000>,
+			 <5 0 0 0x10000000 0x04000000>;
 
 		interrupt-map-mask = <0 0 63>;
 		interrupt-map = <0 0  0 &gic 0  0 4>,
