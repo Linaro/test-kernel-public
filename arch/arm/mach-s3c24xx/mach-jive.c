@@ -31,15 +31,15 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <plat/regs-serial.h>
-#include <plat/nand.h>
-#include <plat/iic.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/iic.h>
 
-#include <mach/regs-power.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-mem.h>
-#include <mach/regs-lcd.h>
-#include <mach/fb.h>
+#include <mach-s3c24xx/regs-power.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/regs-lcd.h>
+#include <mach-s3c24xx/fb.h>
 
 #include <asm/mach-types.h>
 
@@ -48,13 +48,13 @@
 #include <linux/mtd/nand_ecc.h>
 #include <linux/mtd/partitions.h>
 
-#include <plat/s3c2412.h>
-#include <plat/gpio-cfg.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/pm.h>
-#include <plat/udc.h>
+#include <plat-samsung/s3c2412.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/pm.h>
+#include <plat-samsung/udc.h>
 
 static struct map_desc jive_iodesc[] __initdata = {
 };

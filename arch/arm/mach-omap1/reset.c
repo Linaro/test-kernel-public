@@ -4,9 +4,9 @@
 #include <linux/kernel.h>
 #include <linux/io.h>
 
-#include <plat/prcm.h>
+#include <plat-omap/prcm.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 
 #include "common.h"
 

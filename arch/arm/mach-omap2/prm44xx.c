@@ -17,9 +17,9 @@
 #include <linux/err.h>
 #include <linux/io.h>
 
-#include <plat/cpu.h>
-#include <plat/irqs.h>
-#include <plat/prcm.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/irqs.h>
+#include <plat-omap/prcm.h>
 
 #include "iomap.h"
 #include "common.h"

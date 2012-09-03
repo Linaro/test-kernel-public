@@ -10,8 +10,8 @@
 #include <linux/gpio.h>
 #include <linux/kernel.h>
 #include <linux/irq.h>
-#include <mach/bridge-regs.h>
-#include <plat/irq.h>
+#include <mach-kirkwood/bridge-regs.h>
+#include <plat-orion/irq.h>
 
 static int __initdata gpio0_irqs[4] = {
 	IRQ_KIRKWOOD_GPIO_LOW_0_7,

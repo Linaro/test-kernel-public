@@ -19,11 +19,11 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/irqs.h>
-#include <mach/hardware.h>
-#include <mach/mfp.h>
-#include <mach/mfp-pxa930.h>
-#include <mach/pxa95x.h>
+#include <mach-pxa/irqs.h>
+#include <mach-pxa/hardware.h>
+#include <mach-pxa/mfp.h>
+#include <mach-pxa/mfp-pxa930.h>
+#include <mach-pxa/pxa95x.h>
 
 #include "generic.h"
 

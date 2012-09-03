@@ -17,15 +17,15 @@
 #include <linux/device.h>
 #include <linux/io.h>
 
-#include <mach/bast-map.h>
-#include <mach/bast-irq.h>
-#include <mach/bast-cpld.h>
+#include <mach-s3c24xx/bast-map.h>
+#include <mach-s3c24xx/bast-irq.h>
+#include <mach-s3c24xx/bast-cpld.h>
 
-#include <mach/hardware.h>
-#include <mach/regs-gpio.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/regs-gpio.h>
 
-#include <plat/audio-simtec.h>
-#include <plat/devs.h>
+#include <plat-samsung/audio-simtec.h>
+#include <plat-samsung/devs.h>
 
 #include "simtec.h"
 

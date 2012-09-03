@@ -17,10 +17,10 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 #include <asm/system_misc.h>
-#include <mach/at91sam9263.h>
-#include <mach/at91_aic.h>
-#include <mach/at91_pmc.h>
-#include <mach/at91_rstc.h>
+#include <mach-at91/at91sam9263.h>
+#include <mach-at91/at91_aic.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/at91_rstc.h>
 
 #include "soc.h"
 #include "generic.h"

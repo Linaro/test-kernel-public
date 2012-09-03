@@ -25,9 +25,9 @@
 #include <linux/platform_device.h>
 #include <linux/io.h>
 
-#include <mach/at91_twi.h>
-#include <mach/board.h>
-#include <mach/cpu.h>
+#include <mach-at91/at91_twi.h>
+#include <mach-at91/board.h>
+#include <mach-at91/cpu.h>
 
 #define TWI_CLOCK		100000		/* Hz. max 400 Kbits/sec */
 

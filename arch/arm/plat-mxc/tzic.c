@@ -21,9 +21,9 @@
 #include <asm/mach/irq.h>
 #include <asm/exception.h>
 
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/irqs.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/irqs.h>
 
 #include "irq-common.h"
 

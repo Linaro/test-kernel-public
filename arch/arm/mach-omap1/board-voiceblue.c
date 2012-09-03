@@ -31,14 +31,14 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/board-voiceblue.h>
-#include <plat/flash.h>
-#include <plat/mux.h>
-#include <plat/tc.h>
-#include <plat/board.h>
+#include <plat-omap/board-voiceblue.h>
+#include <plat-omap/flash.h>
+#include <plat-omap/mux.h>
+#include <plat-omap/tc.h>
+#include <plat-omap/board.h>
 
-#include <mach/hardware.h>
-#include <mach/usb.h>
+#include <mach-omap1/hardware.h>
+#include <mach-omap1/usb.h>
 
 #include "common.h"
 

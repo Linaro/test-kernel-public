@@ -1,7 +1,7 @@
 
 #include <linux/module.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 unsigned int __mxc_cpu_type;
 EXPORT_SYMBOL(__mxc_cpu_type);

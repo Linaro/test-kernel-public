@@ -18,7 +18,7 @@
 #include <sound/soc.h>
 
 #include <asm/mach-types.h>
-#include <mach/hardware.h>
+#include <mach-ep93xx/hardware.h>
 
 #include "../codecs/tlv320aic23.h"
 #include "ep93xx-pcm.h"

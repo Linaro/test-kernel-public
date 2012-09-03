@@ -18,8 +18,8 @@
 #include <linux/errno.h>
 #include <linux/io.h>
 #include <linux/spinlock.h>
-#include <mach/msm_iomap.h>
-#include <mach/system.h>
+#include <mach-msm/msm_iomap.h>
+#include <mach-msm/system.h>
 
 #include "proc_comm.h"
 

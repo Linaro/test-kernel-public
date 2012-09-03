@@ -39,13 +39,13 @@
 #include <linux/usb/gpio_vbus.h>
 #include <linux/i2c/pxa-i2c.h>
 
-#include <mach/hardware.h>
+#include <mach-pxa/hardware.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/pxa27x.h>
-#include <mach/hx4700.h>
-#include <mach/irda.h>
+#include <mach-pxa/pxa27x.h>
+#include <mach-pxa/hx4700.h>
+#include <mach-pxa/irda.h>
 
 #include <sound/ak4641.h>
 #include <video/platform_lcd.h>
