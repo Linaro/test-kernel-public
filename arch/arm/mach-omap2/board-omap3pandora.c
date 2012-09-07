@@ -40,13 +40,13 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
 
-#include <plat/board.h>
+#include <plat-omap/board.h>
 #include "common.h"
-#include <mach/hardware.h>
-#include <plat/mcspi.h>
-#include <plat/usb.h>
+#include <mach-omap2/hardware.h>
+#include <plat-omap/mcspi.h>
+#include <plat-omap/usb.h>
 #include <video/omapdss.h>
-#include <plat/nand.h>
+#include <plat-omap/nand.h>
 
 #include "mux.h"
 #include "sdram-micron-mt46h32m32lf-6.h"

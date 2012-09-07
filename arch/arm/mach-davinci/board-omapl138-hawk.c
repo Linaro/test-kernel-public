@@ -17,9 +17,9 @@
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 
-#include <mach/cp_intc.h>
-#include <mach/da8xx.h>
-#include <mach/mux.h>
+#include <mach-davinci/cp_intc.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/mux.h>
 
 #define HAWKBOARD_PHY_ID		"davinci_mdio-0:07"
 #define DA850_HAWK_MMCSD_CD_PIN		GPIO_TO_PIN(3, 12)

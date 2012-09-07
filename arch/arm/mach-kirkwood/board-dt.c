@@ -17,8 +17,8 @@
 #include <linux/kexec.h>
 #include <asm/mach/arch.h>
 #include <asm/mach/map.h>
-#include <mach/bridge-regs.h>
-#include <plat/irq.h>
+#include <mach-kirkwood/bridge-regs.h>
+#include <plat-orion/irq.h>
 #include "common.h"
 
 static struct of_device_id kirkwood_dt_match_table[] __initdata = {

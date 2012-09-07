@@ -33,7 +33,7 @@
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>
 
-#include <mach/iomap.h>
+#include <mach-tegra/iomap.h>
 
 #include "board.h"
 #include "clock.h"

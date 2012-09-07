@@ -17,7 +17,7 @@
 #include <linux/slab.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
-#include <mach/map.h>
+#include <mach-prima2/map.h>
 #include <asm/sched_clock.h>
 #include <asm/mach/time.h>
 

@@ -32,6 +32,7 @@
 #include <linux/slab.h>
 #include <linux/basic_mmio_gpio.h>
 #include <linux/module.h>
+#include <mach-mxs/irqs.h>
 
 #define MXS_SET		0x4
 #define MXS_CLR		0x8

@@ -31,9 +31,9 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 
-#include <mach/common.h>
-#include <mach/digctl.h>
-#include <mach/iomux-mx28.h>
+#include <mach-mxs/common.h>
+#include <mach-mxs/digctl.h>
+#include <mach-mxs/iomux-mx28.h>
 
 #include "devices-mx28.h"
 
@@ -232,8 +232,10 @@ static void __init apx4devkit_init(void)
 	 * Register fixup for the Micrel KS8031 PHY clock
 	 * (shares same ID with KS8051)
 	 */
+#if IS_BUILTIN(CONFIG_PHYLIB)
 	phy_register_fixup_for_uid(PHY_ID_KS8051, MICREL_PHY_ID_MASK,
 			apx4devkit_phy_fixup);
+#endif
 
 	apx4devkit_fec_phy_clk_enable();
 	mx28_add_fec(0, &mx28_fec_pdata);

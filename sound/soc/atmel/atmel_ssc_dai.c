@@ -42,7 +42,7 @@
 #include <sound/initval.h>
 #include <sound/soc.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 
 #include "atmel-pcm.h"
 #include "atmel_ssc_dai.h"

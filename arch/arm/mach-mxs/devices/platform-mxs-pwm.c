@@ -7,7 +7,7 @@
  * Free Software Foundation.
  */
 #include <asm/sizes.h>
-#include <mach/devices-common.h>
+#include <mach-mxs/devices-common.h>
 
 struct platform_device *__init mxs_add_mxs_pwm(resource_size_t iobase, int id)
 {

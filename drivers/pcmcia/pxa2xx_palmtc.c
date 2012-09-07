@@ -18,7 +18,7 @@
 #include <linux/delay.h>
 
 #include <asm/mach-types.h>
-#include <mach/palmtc.h>
+#include <mach-pxa/palmtc.h>
 #include "soc_common.h"
 
 static struct gpio palmtc_pcmcia_gpios[] = {

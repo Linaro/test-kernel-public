@@ -6,7 +6,7 @@
  * the terms of the GNU General Public License version 2 as published by the
  * Free Software Foundation.
  */
-#include <mach/devices-common.h>
+#include <mach-imx/devices-common.h>
 
 struct platform_device __init __maybe_unused *imx_add_imx_dma(void)
 {

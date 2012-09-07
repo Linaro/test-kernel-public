@@ -27,9 +27,9 @@
 #include <linux/err.h>
 #include <linux/platform_device.h>
 
-#include <plat/omap_hwmod.h>
-#include <plat/omap_device.h>
-#include <plat/hdq1w.h>
+#include <plat-omap/omap_hwmod.h>
+#include <plat-omap/omap_device.h>
+#include <plat-omap/hdq1w.h>
 
 #include "common.h"
 

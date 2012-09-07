@@ -25,7 +25,7 @@
 #include <linux/io.h>
 
 #include <asm/mach/time.h>
-#include <mach/zynq_soc.h>
+#include <mach-zynq/zynq_soc.h>
 #include "common.h"
 
 #define IRQ_TIMERCOUNTER0	42

@@ -27,13 +27,13 @@
 #include <linux/of.h>
 
 #include <asm/irq.h>
-#include <plat/devs.h>
-#include <plat/irqs.h>
-#include <plat/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/irqs.h>
+#include <plat-samsung/cpu.h>
 
-#include <mach/map.h>
-#include <mach/irqs.h>
-#include <mach/dma.h>
+#include <mach-exynos/map.h>
+#include <mach-exynos/irqs.h>
+#include <mach-exynos/dma.h>
 
 static u8 exynos4210_pdma0_peri[] = {
 	DMACH_PCM0_RX,

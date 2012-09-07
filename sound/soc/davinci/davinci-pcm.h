@@ -12,8 +12,8 @@
 #ifndef _DAVINCI_PCM_H
 #define _DAVINCI_PCM_H
 
-#include <mach/edma.h>
-#include <mach/asp.h>
+#include <mach-davinci/edma.h>
+#include <mach-davinci/asp.h>
 
 
 struct davinci_pcm_dma_params {

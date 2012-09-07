@@ -37,10 +37,10 @@
 #include <asm/mach/time.h>
 #include <asm/mach/map.h>
 
-#include <mach/eukrea-baseboards.h>
-#include <mach/hardware.h>
-#include <mach/common.h>
-#include <mach/iomux-mx35.h>
+#include <mach-imx/eukrea-baseboards.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
+#include <mach-imx/iomux-mx35.h>
 
 #include "devices-imx35.h"
 
