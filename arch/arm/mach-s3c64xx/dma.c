@@ -24,11 +24,11 @@
 #include <linux/err.h>
 #include <linux/io.h>
 
-#include <mach/dma.h>
-#include <mach/map.h>
-#include <mach/irqs.h>
+#include <mach-s3c64xx/dma.h>
+#include <mach-s3c64xx/map.h>
+#include <mach-s3c64xx/irqs.h>
 
-#include <mach/regs-sys.h>
+#include <mach-s3c64xx/regs-sys.h>
 
 #include <asm/hardware/pl080.h>
 

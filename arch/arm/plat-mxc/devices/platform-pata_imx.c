@@ -3,8 +3,8 @@
  * the terms of the GNU General Public License version 2 as published by the
  * Free Software Foundation.
  */
-#include <mach/hardware.h>
-#include <mach/devices-common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/devices-common.h>
 
 #define imx_pata_imx_data_entry_single(soc, _size)			\
 	{								\

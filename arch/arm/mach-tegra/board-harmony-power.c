@@ -26,7 +26,7 @@
 
 #include <asm/mach-types.h>
 
-#include <mach/irqs.h>
+#include <mach-tegra/irqs.h>
 
 #include "board-harmony.h"
 

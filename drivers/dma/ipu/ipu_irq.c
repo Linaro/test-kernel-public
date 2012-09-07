@@ -16,7 +16,7 @@
 #include <linux/io.h>
 #include <linux/module.h>
 
-#include <mach/ipu.h>
+#include <mach-imx/ipu.h>
 
 #include "ipu_intern.h"
 

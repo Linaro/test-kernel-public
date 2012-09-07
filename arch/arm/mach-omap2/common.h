@@ -28,7 +28,7 @@
 
 #include <linux/delay.h>
 #include <linux/i2c/twl.h>
-#include <plat/common.h>
+#include <plat-omap/common.h>
 #include <asm/proc-fns.h>
 
 #ifdef CONFIG_SOC_OMAP2420

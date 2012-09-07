@@ -15,7 +15,7 @@
  */
 #include <linux/kernel.h>
 #include <linux/init.h>
-#include <mach/common.h>
+#include <mach-shmobile/common.h>
 
 void __init shmobile_init_late(void)
 {

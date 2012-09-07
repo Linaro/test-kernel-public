@@ -23,11 +23,11 @@
 #include <linux/irq.h>
 #include <linux/io.h>
 
-#include <mach/dma.h>
+#include <mach-s3c24xx/dma.h>
 
-#include <mach/regs-sdi.h>
+#include <mach-s3c24xx/regs-sdi.h>
 
-#include <plat/mci.h>
+#include <plat-samsung/mci.h>
 
 #include "s3cmci.h"
 

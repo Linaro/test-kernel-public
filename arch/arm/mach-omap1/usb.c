@@ -26,9 +26,9 @@
 
 #include <asm/irq.h>
 
-#include <plat/mux.h>
+#include <plat-omap/mux.h>
 
-#include <mach/usb.h>
+#include <mach-omap1/usb.h>
 
 #include "common.h"
 

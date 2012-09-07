@@ -33,7 +33,7 @@
 #include <linux/err.h>
 #include <linux/slab.h>
 
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/irq.h>
 #include <asm/setup.h>
 
@@ -42,7 +42,7 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/map.h>
 
-#include <mach/at91_aic.h>
+#include <mach-at91/at91_aic.h>
 
 void __iomem *at91_aic_base;
 static struct irq_domain *at91_aic_domain;

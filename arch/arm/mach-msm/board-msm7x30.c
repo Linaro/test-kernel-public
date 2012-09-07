@@ -30,11 +30,11 @@
 #include <asm/memory.h>
 #include <asm/setup.h>
 
-#include <mach/board.h>
-#include <mach/msm_iomap.h>
-#include <mach/dma.h>
+#include <mach-msm/board.h>
+#include <mach-msm/msm_iomap.h>
+#include <mach-msm/dma.h>
 
-#include <mach/vreg.h>
+#include <mach-msm/vreg.h>
 #include "devices.h"
 #include "gpiomux.h"
 #include "proc_comm.h"

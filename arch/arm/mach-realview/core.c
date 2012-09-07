@@ -33,7 +33,7 @@
 #include <linux/clkdev.h>
 #include <linux/mtd/physmap.h>
 
-#include <mach/hardware.h>
+#include <mach-realview/hardware.h>
 #include <asm/irq.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
@@ -46,12 +46,12 @@
 
 #include <asm/hardware/gic.h>
 
-#include <mach/platform.h>
-#include <mach/irqs.h>
+#include <mach-realview/platform.h>
+#include <mach-realview/irqs.h>
 #include <asm/hardware/timer-sp.h>
 
-#include <plat/clcd.h>
-#include <plat/sched_clock.h>
+#include <plat-versatile/clcd.h>
+#include <plat-versatile/sched_clock.h>
 
 #include "core.h"
 

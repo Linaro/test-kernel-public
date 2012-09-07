@@ -28,8 +28,8 @@
 #include <linux/platform_device.h>
 #include <linux/ata_platform.h>
 
-#include <mach/at91sam9_smc.h>
-#include <mach/board.h>
+#include <mach-at91/at91sam9_smc.h>
+#include <mach-at91/board.h>
 #include <asm/gpio.h>
 
 #define DRV_NAME		"pata_at91"
