@@ -12,7 +12,7 @@
 #include <linux/init.h>
 #include <linux/mbus.h>
 #include <linux/io.h>
-#include <plat/addr-map.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 /*

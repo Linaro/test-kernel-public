@@ -31,7 +31,7 @@
 
 #include <mach/hardware.h>
 #include <asm/irq.h>
-#include <plat/regs-rtc.h>
+#include <plat-samsung/regs-rtc.h>
 
 enum s3c_cpu_type {
 	TYPE_S3C2410,

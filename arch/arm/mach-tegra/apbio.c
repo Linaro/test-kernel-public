@@ -15,7 +15,7 @@
 
 #include <linux/kernel.h>
 #include <linux/io.h>
-#include <mach/iomap.h>
+#include <mach-tegra/iomap.h>
 #include <linux/of.h>
 #include <linux/dmaengine.h>
 #include <linux/dma-mapping.h>
@@ -24,7 +24,7 @@
 #include <linux/sched.h>
 #include <linux/mutex.h>
 
-#include <mach/dma.h>
+#include <mach-tegra/dma.h>
 
 #include "apbio.h"
 

@@ -29,8 +29,8 @@
 
 #include <asm/fiq.h>
 
-#include <mach/irqs.h>
-#include <mach/ssi.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/ssi.h>
 
 #include "imx-ssi.h"
 

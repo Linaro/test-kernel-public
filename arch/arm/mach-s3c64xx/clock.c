@@ -20,18 +20,18 @@
 #include <linux/err.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-s3c64xx/hardware.h>
+#include <mach-s3c64xx/map.h>
 
-#include <mach/regs-sys.h>
-#include <mach/regs-clock.h>
+#include <mach-s3c64xx/regs-sys.h>
+#include <mach-s3c64xx/regs-clock.h>
 
-#include <plat/cpu.h>
-#include <plat/devs.h>
-#include <plat/cpu-freq.h>
-#include <plat/clock.h>
-#include <plat/clock-clksrc.h>
-#include <plat/pll.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu-freq.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/clock-clksrc.h>
+#include <plat-samsung/pll.h>
 
 /* fin_apll, fin_mpll and fin_epll are all the same clock, which we call
  * ext_xtal_mux for want of an actual name from the manual.

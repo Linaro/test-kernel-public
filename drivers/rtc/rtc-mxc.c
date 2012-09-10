@@ -17,7 +17,7 @@
 #include <linux/platform_device.h>
 #include <linux/clk.h>
 
-#include <mach/hardware.h>
+#include <mach-imx/hardware.h>
 
 #define RTC_INPUT_CLK_32768HZ	(0x00 << 5)
 #define RTC_INPUT_CLK_32000HZ	(0x01 << 5)

@@ -34,26 +34,26 @@
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <mach/hardware.h>
-#include <mach/map.h>
-#include <mach/regs-clock.h>
-#include <mach/i2c.h>
-#include <mach/regs-gpio.h>
+#include <mach-s5p64x0/hardware.h>
+#include <mach-s5p64x0/map.h>
+#include <mach-s5p64x0/regs-clock.h>
+#include <mach-s5p64x0/i2c.h>
+#include <mach-s5p64x0/regs-gpio.h>
 
-#include <plat/regs-serial.h>
-#include <plat/gpio-cfg.h>
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/iic.h>
-#include <plat/pll.h>
-#include <plat/adc.h>
-#include <plat/ts.h>
-#include <plat/s5p-time.h>
-#include <plat/backlight.h>
-#include <plat/fb.h>
-#include <plat/regs-fb.h>
-#include <plat/sdhci.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/pll.h>
+#include <plat-samsung/adc.h>
+#include <plat-samsung/ts.h>
+#include <plat-samsung/s5p-time.h>
+#include <plat-samsung/backlight.h>
+#include <plat-samsung/fb.h>
+#include <plat-samsung/regs-fb.h>
+#include <plat-samsung/sdhci.h>
 
 #include "common.h"
 

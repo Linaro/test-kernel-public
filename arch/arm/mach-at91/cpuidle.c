@@ -21,7 +21,7 @@
 #include <linux/export.h>
 #include <asm/proc-fns.h>
 #include <asm/cpuidle.h>
-#include <mach/cpu.h>
+#include <mach-at91/cpu.h>
 
 #include "pm.h"
 

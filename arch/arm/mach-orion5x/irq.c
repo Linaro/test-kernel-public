@@ -12,8 +12,8 @@
 #include <linux/gpio.h>
 #include <linux/kernel.h>
 #include <linux/irq.h>
-#include <mach/bridge-regs.h>
-#include <plat/irq.h>
+#include <mach-orion5x/bridge-regs.h>
+#include <plat-orion/irq.h>
 
 static int __initdata gpio0_irqs[4] = {
 	IRQ_ORION5X_GPIO_0_7,

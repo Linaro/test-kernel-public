@@ -33,11 +33,11 @@
 #include <linux/sh_timer.h>
 #include <linux/pm_domain.h>
 #include <linux/dma-mapping.h>
-#include <mach/dma-register.h>
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <mach/sh7372.h>
-#include <mach/common.h>
+#include <mach-shmobile/dma-register.h>
+#include <mach-shmobile/hardware.h>
+#include <mach-shmobile/irqs.h>
+#include <mach-shmobile/sh7372.h>
+#include <mach-shmobile/common.h>
 #include <asm/mach/map.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

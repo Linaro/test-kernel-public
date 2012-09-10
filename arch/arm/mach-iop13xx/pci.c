@@ -23,11 +23,11 @@
 #include <linux/jiffies.h>
 #include <linux/export.h>
 #include <asm/irq.h>
-#include <mach/hardware.h>
+#include <mach-iop13xx/hardware.h>
 #include <asm/sizes.h>
 #include <asm/signal.h>
 #include <asm/mach/pci.h>
-#include <mach/pci.h>
+#include <mach-iop13xx/pci.h>
 
 #define IOP13XX_PCI_DEBUG 0
 #define PRINTK(x...) ((void)(IOP13XX_PCI_DEBUG && printk(x)))

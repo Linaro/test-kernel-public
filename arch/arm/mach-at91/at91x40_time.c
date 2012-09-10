@@ -24,9 +24,9 @@
 #include <linux/irq.h>
 #include <linux/time.h>
 #include <linux/io.h>
-#include <mach/hardware.h>
+#include <mach-at91/hardware.h>
 #include <asm/mach/time.h>
-#include <mach/at91_tc.h>
+#include <mach-at91/at91_tc.h>
 
 #define at91_tc_read(field) \
 	__raw_readl(AT91_TC + field)
