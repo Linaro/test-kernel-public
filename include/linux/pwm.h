@@ -124,6 +124,7 @@ struct pwm_device *pwm_request_from_chip(struct pwm_chip *chip,
 
 struct pwm_device *pwm_get(struct device *dev, const char *consumer);
 void pwm_put(struct pwm_device *pwm);
+#endif
 
 struct pwm_lookup {
 	struct list_head list;
@@ -141,8 +142,10 @@ struct pwm_lookup {
 		.con_id = _con_id,			\
 	}
 
+#ifdef CONFIG_PWM
 void pwm_add_table(struct pwm_lookup *table, size_t num);
-
+#else
+static void pwm_add_table(struct pwm_lookup *table, size_t num) {}
 #endif
 
 #endif /* __LINUX_PWM_H */
