@@ -325,6 +325,16 @@ static const struct of_device_id arch_timer_of_match[] __initconst = {
 	{},
 };
 
+bool __init arch_timer_broken_for_sched_clock(void)
+{
+	u32 broken = false;
+	struct device_node *np;
+	np = of_find_matching_node(NULL, arch_timer_of_match);
+	if (np)
+		of_property_read_u32(np, "broken-for-sched-clock", &broken);
+	return broken;
+}
+
 int __init arch_timer_of_register(void)
 {
 	struct device_node *np;
