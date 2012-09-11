@@ -28,20 +28,20 @@
 #include <asm/mach/map.h>
 #include <asm/mach/irq.h>
 
-#include <mach/anubis-map.h>
-#include <mach/anubis-irq.h>
-#include <mach/anubis-cpld.h>
+#include <mach-s3c24xx/anubis-map.h>
+#include <mach-s3c24xx/anubis-irq.h>
+#include <mach-s3c24xx/anubis-cpld.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/regs-serial.h>
-#include <mach/regs-gpio.h>
-#include <mach/regs-mem.h>
-#include <mach/regs-lcd.h>
-#include <plat/nand.h>
-#include <plat/iic.h>
+#include <plat-samsung/regs-serial.h>
+#include <mach-s3c24xx/regs-gpio.h>
+#include <mach-s3c24xx/regs-mem.h>
+#include <mach-s3c24xx/regs-lcd.h>
+#include <plat-samsung/nand.h>
+#include <plat-samsung/iic.h>
 
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/nand.h>
@@ -50,10 +50,10 @@
 
 #include <net/ax88796.h>
 
-#include <plat/clock.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
-#include <plat/audio-simtec.h>
+#include <plat-samsung/clock.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/audio-simtec.h>
 
 #include "simtec.h"
 #include "common.h"

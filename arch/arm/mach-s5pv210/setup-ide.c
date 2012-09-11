@@ -13,7 +13,7 @@
 #include <linux/kernel.h>
 #include <linux/gpio.h>
 
-#include <plat/gpio-cfg.h>
+#include <plat-samsung/gpio-cfg.h>
 
 static void s5pv210_ide_cfg_gpios(unsigned int base, unsigned int nr)
 {

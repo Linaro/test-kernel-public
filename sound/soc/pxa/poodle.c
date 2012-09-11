@@ -26,8 +26,8 @@
 
 #include <asm/mach-types.h>
 #include <asm/hardware/locomo.h>
-#include <mach/poodle.h>
-#include <mach/audio.h>
+#include <mach-pxa/poodle.h>
+#include <mach-pxa/audio.h>
 
 #include "../codecs/wm8731.h"
 #include "pxa2xx-i2s.h"

@@ -34,9 +34,9 @@
 
 #include <asm/irq.h>
 
-#include <mach/hardware.h>
-#include <mach/irqs.h>
-#include <mach/keyscan.h>
+#include <mach-davinci/hardware.h>
+#include <mach-davinci/irqs.h>
+#include <mach-davinci/keyscan.h>
 
 /* Key scan registers */
 #define DAVINCI_KEYSCAN_KEYCTRL		0x0000

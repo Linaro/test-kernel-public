@@ -4,7 +4,7 @@
 #ifndef __ARCH_ARM_MACH_MSM_BOARD_TROUT_H
 #define __ARCH_ARM_MACH_MSM_BOARD_TROUT_H
 
-#include <mach/board.h>
+#include <mach-msm/board.h>
 
 #define MSM_SMI_BASE		0x00000000
 #define MSM_SMI_SIZE		0x00800000
@@ -41,7 +41,7 @@
 #endif
 
 #define DECLARE_MSM_IOMAP
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 #define TROUT_4_BALL_UP_0     1
 #define TROUT_4_BALL_LEFT_0   18

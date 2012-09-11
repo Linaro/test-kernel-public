@@ -22,7 +22,7 @@
 #include <linux/cpufreq.h>
 #include <linux/io.h>
 
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 
 static LIST_HEAD(clocks);
 static DEFINE_MUTEX(clocks_mutex);
@@ -30,6 +30,7 @@ static DEFINE_SPINLOCK(clockfw_lock);
 
 static struct clk_functions *arch_clock;
 
+#ifndef CONFIG_ARCH_MULTIPLATFORM
 /*
  * Standard clock functions defined in include/linux/clk.h
  */
@@ -167,6 +168,7 @@ struct clk *clk_get_parent(struct clk *clk)
 	return clk->parent;
 }
 EXPORT_SYMBOL(clk_get_parent);
+#endif
 
 /*
  * OMAP specific clock functions shared between omap1 and omap2
@@ -264,6 +266,7 @@ void clk_preinit(struct clk *clk)
 	INIT_LIST_HEAD(&clk->children);
 }
 
+#ifndef CONFIG_ARCH_MULTIPLATFORM
 int clk_register(struct clk *clk)
 {
 	if (clk == NULL || IS_ERR(clk))
@@ -301,6 +304,7 @@ void clk_unregister(struct clk *clk)
 	mutex_unlock(&clocks_mutex);
 }
 EXPORT_SYMBOL(clk_unregister);
+#endif
 
 void clk_enable_init_clocks(void)
 {

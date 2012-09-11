@@ -16,9 +16,9 @@
 #include <linux/module.h>
 #include <linux/interrupt.h>
 
-#include <plat/cpu.h>
-#include <plat/irqs.h>
-#include <plat/pm.h>
+#include <plat-samsung/cpu.h>
+#include <plat-samsung/irqs.h>
+#include <plat-samsung/pm.h>
 #include <mach/map.h>
 
 #include <mach/regs-gpio.h>

@@ -13,9 +13,9 @@
  */
 
 #include <linux/linkage.h>
-#include <mach/hardware.h>
-#include <mach/at91_pmc.h>
-#include <mach/at91_ramc.h>
+#include <mach-at91/hardware.h>
+#include <mach-at91/at91_pmc.h>
+#include <mach-at91/at91_ramc.h>
 
 
 #ifdef CONFIG_SOC_AT91SAM9263

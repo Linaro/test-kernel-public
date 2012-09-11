@@ -25,7 +25,7 @@
 #include <linux/io.h>
 #include <linux/clk.h>
 #include <linux/err.h>
-#include <mach/hardware.h>
+#include <mach-davinci/hardware.h>
 
 #include "vpif.h"
 

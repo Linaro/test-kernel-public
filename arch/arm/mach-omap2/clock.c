@@ -25,10 +25,10 @@
 #include <trace/events/power.h>
 
 #include <asm/cpu.h>
-#include <plat/clock.h>
+#include <plat-omap/clock.h>
 #include "clockdomain.h"
-#include <plat/cpu.h>
-#include <plat/prcm.h>
+#include <plat-omap/cpu.h>
+#include <plat-omap/prcm.h>
 
 #include "clock.h"
 #include "cm2xxx_3xxx.h"

@@ -31,7 +31,7 @@
 #include <linux/interrupt.h>
 #include <linux/uaccess.h>
 #include <linux/irq.h>
-#include <mach/hardware.h>
+#include <mach-footbridge/hardware.h>
 
 #include <asm/mach-types.h>
 #include <asm/system_info.h>

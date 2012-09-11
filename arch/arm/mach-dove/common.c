@@ -23,14 +23,14 @@
 #include <asm/mach/map.h>
 #include <asm/mach/time.h>
 #include <asm/mach/pci.h>
-#include <mach/dove.h>
-#include <mach/bridge-regs.h>
+#include <mach-dove/dove.h>
+#include <mach-dove/bridge-regs.h>
 #include <asm/mach/arch.h>
 #include <linux/irq.h>
-#include <plat/time.h>
-#include <plat/ehci-orion.h>
-#include <plat/common.h>
-#include <plat/addr-map.h>
+#include <plat-orion/time.h>
+#include <plat-orion/ehci-orion.h>
+#include <plat-orion/common.h>
+#include <plat-orion/addr-map.h>
 #include "common.h"
 
 static int get_tclk(void);

@@ -30,8 +30,8 @@
 #include <asm/hardware/gic.h>
 #include <asm/hardware/cache-l2x0.h>
 
-#include <mach/zynq_soc.h>
-#include <mach/clkdev.h>
+#include <mach-zynq/zynq_soc.h>
+#include <mach-zynq/clkdev.h>
 #include "common.h"
 
 static struct of_device_id zynq_of_bus_ids[] __initdata = {

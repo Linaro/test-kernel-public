@@ -6,8 +6,8 @@
  * the terms of the GNU General Public License version 2 as published by the
  * Free Software Foundation.
  */
-#include <mach/hardware.h>
-#include <mach/devices-common.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/devices-common.h>
 
 #define imx_imx_uart_3irq_data_entry(soc, _id, _hwid, _size)		\
 	[_id] = {							\

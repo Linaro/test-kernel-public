@@ -48,7 +48,7 @@
 #include <asm/irq.h>
 #include <asm/sched_clock.h>
 
-#include <mach/hardware.h>
+#include <mach-omap1/hardware.h>
 #include <asm/mach/irq.h>
 #include <asm/mach/time.h>
 

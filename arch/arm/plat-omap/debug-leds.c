@@ -13,11 +13,12 @@
 #include <linux/leds.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <plat-omap/hardware.h>
 #include <asm/leds.h>
 #include <asm/mach-types.h>
 
-#include <plat/fpga.h>
+#include <plat-omap/fpga.h>
+#include <plat-omap/gpio.h>
 
 
 /* Many OMAP development platforms reuse the same "debug board"; these
@@ -61,6 +62,7 @@ static u16				led_state, hw_led_state;
 #define GPIO_IDLE		GPIO_LED_GREEN
 #define GPIO_TIMER		GPIO_LED_RED
 
+#ifdef CONFIG_LEDS
 static void h2p2_dbg_leds_event(led_event_t evt)
 {
 	unsigned long flags;
@@ -178,6 +180,7 @@ static void h2p2_dbg_leds_event(led_event_t evt)
 done:
 	spin_unlock_irqrestore(&lock, flags);
 }
+#endif
 
 /*-------------------------------------------------------------------------*/
 

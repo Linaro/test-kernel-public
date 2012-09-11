@@ -15,7 +15,7 @@
 #include <linux/mv643xx_eth.h>
 #include <linux/ethtool.h>
 #include <linux/i2c.h>
-#include <mach/mv78xx0.h>
+#include <mach-mv78xx0/mv78xx0.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
 #include "common.h"
