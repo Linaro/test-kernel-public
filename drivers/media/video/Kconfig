@@ -50,6 +50,13 @@ config VIDEOBUF2_CORE
 config VIDEOBUF2_MEMOPS
 	tristate
 
+config VIDEOBUF2_FB
+	depends on VIDEOBUF2_CORE
+	select FB_CFB_FILLRECT
+	select FB_CFB_COPYAREA
+	select FB_CFB_IMAGEBLIT
+	tristate
+
 config VIDEOBUF2_DMA_CONTIG
 	select VIDEOBUF2_CORE
 	select VIDEOBUF2_MEMOPS
@@ -387,6 +394,44 @@ config VIDEO_VPX3220
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called vpx3220.
+
+config VIDEO_S5K4ECGX
+        tristate "S5K4ECGX Camera Sensor"
+        depends on I2C && VIDEO_V4L2
+        ---help---
+                This driver supports S5K4ECGX SoC camera module
+
+config VIDEO_S5K4ECGX_FLASHLIGHT
+        bool "S5K4ECGX flashlight support"
+        depends on VIDEO_S5K4ECGX
+        ---help---
+          Enable flash light support in S5K4ECGX camera driver
+
+config VIDEO_S5K4ECGX_DEBUG
+        bool "S5K4ECGX Camera Sensor Debugging"
+        depends on VIDEO_S5K4ECGX
+        ---help---
+          Enable extra debug messages for S5K4ECGX camera driver
+
+config VIDEO_S5K4ECGX_V_1_0
+        bool "S5K4ECGX Camera Sensor Version 1.0 Support"
+        depends on VIDEO_S5K4ECGX
+        ---help---
+          Enabled support for Rev 1.0 sensor
+
+config VIDEO_S5K4ECGX_V_1_1
+        bool "S5K4ECGX Camera Sensor Version 1.1 Support"
+        depends on VIDEO_S5K4ECGX
+        ---help---
+          Enabled support for Rev 1.1 sensor
+
+config VIDEO_S5K4ECGX_SLSI_4EC
+        bool "SLSI-4EC. S5K4ECGX based Camera module from SLSI"
+        depends on VIDEO_S5K4ECGX_V_1_1
+        ---help---
+          This module have sensor rev 1.1.
+          but, init seq. of herring have some problems with this
+          module.
 
 comment "Video and audio decoders"
 
