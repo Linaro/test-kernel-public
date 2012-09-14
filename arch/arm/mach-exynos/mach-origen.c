@@ -100,6 +100,8 @@ static struct regulator_consumer_supply __initdata ldo3_consumer[] = {
 	REGULATOR_SUPPLY("vdd11", "s5p-mipi-csis.0"), /* MIPI */
 	REGULATOR_SUPPLY("vdd", "exynos4-hdmi"), /* HDMI */
 	REGULATOR_SUPPLY("vdd_pll", "exynos4-hdmi"), /* HDMI */
+	REGULATOR_SUPPLY("vusb_d", "s3c-hsotg"), /* OTG */
+	REGULATOR_SUPPLY("vusb_a", "s3c-hsotg"), /* OTG */
 };
 static struct regulator_consumer_supply __initdata ldo6_consumer[] = {
 	REGULATOR_SUPPLY("vdd18", "s5p-mipi-csis.0"), /* MIPI */
