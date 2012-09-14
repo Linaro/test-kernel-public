@@ -23,6 +23,7 @@
 #include <plat/fb.h>
 #include <linux/lcd.h>
 #include <plat/devs.h>
+#include <linux/platform_data/s3c-hsotg.h>
 
 #include <asm/mach/arch.h>
 #include <asm/hardware/gic.h>
@@ -42,6 +43,11 @@ static struct s5p_ehci_platdata origen_ehci_pdata = {
 };
 
 static struct exynos4_ohci_platdata origen_ohci_pdata = {
+	.phy_init = s5p_usb_phy_init,
+	.phy_exit = s5p_usb_phy_exit,
+};
+
+static struct s3c_hsotg_plat origen_hsotg_pdata = {
 	.phy_init = s5p_usb_phy_init,
 	.phy_exit = s5p_usb_phy_exit,
 };
@@ -101,6 +107,8 @@ static const struct of_dev_auxdata exynos4210_auxdata_lookup[] __initconst = {
 			&origen_ehci_pdata),
 	OF_DEV_AUXDATA("samsung,exynos-ohci", EXYNOS4_PA_OHCI, "exynos-ohci",
 			&origen_ohci_pdata),
+	OF_DEV_AUXDATA("samsung,exynos-hsotg", EXYNOS4_PA_HSOTG, "s3c-hsotg",
+			&origen_hsotg_pdata),
 	OF_DEV_AUXDATA("samsung,exynos4210-fimd", EXYNOS4_PA_FIMD0,
 			"exynos4-fb.0", NULL),
 	{},
