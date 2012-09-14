@@ -4246,7 +4246,7 @@ static void raid_devel_stats(struct dm_target *ti, char *result,
 }
 
 static int raid_status(struct dm_target *ti, status_type_t type,
-		       char *result, unsigned maxlen)
+		       unsigned status_flags, char *result, unsigned maxlen)
 {
 	unsigned p, sz = 0;
 	char buf[BDEVNAME_SIZE];
