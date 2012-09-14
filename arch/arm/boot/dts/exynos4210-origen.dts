@@ -350,4 +350,9 @@
 		reg = <0x10023CE0 0x10>;
 		samsung,exynos4210-pd_off;
 	};
+
+	usb@12480000 {
+		vusb_a-supply = <&ldo3_reg>;
+		vusb_d-supply = <&ldo3_reg>;
+	};
 };
