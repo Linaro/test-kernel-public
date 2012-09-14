@@ -220,6 +220,7 @@
 					regulator-name = "VMIPI_1.1V";
 					regulator-min-microvolt = <1100000>;
 					regulator-max-microvolt = <1100000>;
+					regulator-always-on;
 				};
 
 				ldo4_reg: LDO4 {
