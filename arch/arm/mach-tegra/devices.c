@@ -516,7 +516,7 @@ static struct resource tegra_pmu_resources[] = {
 
 struct platform_device tegra_pmu_device = {
 	.name		= "arm-pmu",
-	.id		= ARM_PMU_DEVICE_CPU,
+	.id		= -1,
 	.num_resources	= ARRAY_SIZE(tegra_pmu_resources),
 	.resource	= tegra_pmu_resources,
 };

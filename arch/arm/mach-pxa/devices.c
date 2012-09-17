@@ -42,7 +42,7 @@ static struct resource pxa_resource_pmu = {
 
 struct platform_device pxa_device_pmu = {
 	.name		= "arm-pmu",
-	.id		= ARM_PMU_DEVICE_CPU,
+	.id		= -1,
 	.resource	= &pxa_resource_pmu,
 	.num_resources	= 1,
 };
