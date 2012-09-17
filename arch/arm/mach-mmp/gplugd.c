@@ -14,9 +14,9 @@
 #include <asm/mach/arch.h>
 #include <asm/mach-types.h>
 
-#include <mach/irqs.h>
-#include <mach/pxa168.h>
-#include <mach/mfp-pxa168.h>
+#include <mach-mmp/irqs.h>
+#include <mach-mmp/pxa168.h>
+#include <mach-mmp/mfp-pxa168.h>
 
 #include "common.h"
 

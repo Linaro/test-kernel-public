@@ -23,7 +23,7 @@
 #include <linux/types.h>
 #include <linux/platform_device.h>
 #include <linux/delay.h>
-#include <plat/voltage.h>
+#include <plat-omap/voltage.h>
 
 /*
  * Different Smartreflex IPs version. The v1 is the 65nm version used in

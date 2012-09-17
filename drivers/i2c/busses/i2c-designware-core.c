@@ -34,6 +34,7 @@
 #include <linux/io.h>
 #include <linux/pm_runtime.h>
 #include <linux/delay.h>
+#include <linux/module.h>
 #include "i2c-designware-core.h"
 
 /*

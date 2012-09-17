@@ -22,10 +22,10 @@
 
 #include <linux/linkage.h>
 #include <asm/assembler.h>
-#include <mach/hardware.h>
-#include <mach/map.h>
+#include <mach-s3c24xx/hardware.h>
+#include <mach-s3c24xx/map.h>
 
-#include <mach/regs-irq.h>
+#include <mach-s3c24xx/regs-irq.h>
 
 	.text
 

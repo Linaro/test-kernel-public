@@ -21,7 +21,7 @@
 #include <linux/list.h>
 #include <linux/io.h>
 
-#include <mach/msm_iomap.h>
+#include <mach-msm/msm_iomap.h>
 
 struct smem_heap_info {
 	unsigned initialized;

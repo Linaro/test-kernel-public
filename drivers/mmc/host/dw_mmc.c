@@ -11,7 +11,6 @@
  * (at your option) any later version.
  */
 
-#include <linux/blkdev.h>
 #include <linux/clk.h>
 #include <linux/debugfs.h>
 #include <linux/device.h>
@@ -1767,7 +1766,7 @@ static void dw_mci_work_routine_card(struct work_struct *work)
 	}
 }
 
-static int __init dw_mci_init_slot(struct dw_mci *host, unsigned int id)
+static int __devinit dw_mci_init_slot(struct dw_mci *host, unsigned int id)
 {
 	struct mmc_host *mmc;
 	struct dw_mci_slot *slot;
@@ -1942,7 +1941,7 @@ static bool mci_wait_reset(struct device *dev, struct dw_mci *host)
 	return false;
 }
 
-int dw_mci_probe(struct dw_mci *host)
+int __devinit dw_mci_probe(struct dw_mci *host)
 {
 	int width, i, ret = 0;
 	u32 fifo_size;

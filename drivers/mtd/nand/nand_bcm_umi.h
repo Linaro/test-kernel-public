@@ -15,8 +15,8 @@
 #define NAND_BCM_UMI_H
 
 /* ---- Include Files ---------------------------------------------------- */
-#include <mach/reg_umi.h>
-#include <mach/reg_nand.h>
+#include <mach-bcmring/reg_umi.h>
+#include <mach-bcmring/reg_nand.h>
 #include <cfg_global.h>
 
 /* ---- Constants and Types ---------------------------------------------- */

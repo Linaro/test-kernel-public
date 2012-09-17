@@ -26,7 +26,8 @@
 #include <linux/amba/mmci.h>
 #include <linux/io.h>
 
-#include <mach/hardware.h>
+#include <mach-versatile/hardware.h>
+#include <mach-versatile/irqs.h>
 #include <asm/hardware/vic.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>

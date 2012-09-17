@@ -23,12 +23,12 @@
 #include <asm/io.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>
-#include <mach/common.h>
-#include <mach/cp_intc.h>
-#include <mach/da8xx.h>
-#include <mach/nand.h>
-#include <mach/mux.h>
-#include <mach/spi.h>
+#include <mach-davinci/common.h>
+#include <mach-davinci/cp_intc.h>
+#include <mach-davinci/da8xx.h>
+#include <mach-davinci/nand.h>
+#include <mach-davinci/mux.h>
+#include <mach-davinci/spi.h>
 
 #define MITYOMAPL138_PHY_ID		""
 

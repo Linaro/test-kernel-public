@@ -36,9 +36,9 @@
 #include <asm/page.h>
 #include <asm/cacheflush.h>
 
-#include <mach/iomap.h>
-#include <mach/smmu.h>
-#include <mach/tegra-ahb.h>
+#include <mach-tegra/iomap.h>
+#include <mach-tegra/smmu.h>
+#include <mach-tegra/tegra-ahb.h>
 
 /* bitmap of the page sizes currently supported */
 #define SMMU_IOMMU_PGSIZES	(SZ_4K)

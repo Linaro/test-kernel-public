@@ -24,7 +24,7 @@
 #include <linux/slab.h>
 
 #include <mach/dma.h>
-#include <plat/pxa3xx_nand.h>
+#include <plat-pxa/pxa3xx_nand.h>
 
 #define	CHIP_DELAY_TIMEOUT	(2 * HZ/10)
 #define NAND_STOP_DELAY		(2 * HZ/50)

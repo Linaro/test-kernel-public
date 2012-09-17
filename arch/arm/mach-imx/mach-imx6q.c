@@ -33,9 +33,10 @@
 #include <asm/mach/arch.h>
 #include <asm/mach/time.h>
 #include <asm/system_misc.h>
-#include <mach/common.h>
-#include <mach/cpuidle.h>
-#include <mach/hardware.h>
+#include <mach-imx/irqs.h>
+#include <mach-imx/common.h>
+#include <mach-imx/cpuidle.h>
+#include <mach-imx/hardware.h>
 
 
 void imx6q_restart(char mode, const char *cmd)
@@ -68,6 +69,7 @@ soft:
 	soft_restart(0);
 }
 
+#ifdef CONFIG_PHYLIB
 /* For imx6q sabrelite board: set KSZ9021RN RGMII pad skew */
 static int ksz9021rn_phy_fixup(struct phy_device *phydev)
 {
@@ -84,6 +86,7 @@ static int ksz9021rn_phy_fixup(struct phy_device *phydev)
 
 	return 0;
 }
+#endif
 
 static void __init imx6q_sabrelite_cko1_setup(void)
 {

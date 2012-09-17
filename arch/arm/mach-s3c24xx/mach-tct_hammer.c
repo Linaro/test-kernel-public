@@ -40,14 +40,14 @@
 #include <asm/mach/irq.h>
 #include <asm/mach/flash.h>
 
-#include <mach/hardware.h>
+#include <mach-s3c24xx/hardware.h>
 #include <asm/irq.h>
 #include <asm/mach-types.h>
 
-#include <plat/regs-serial.h>
-#include <plat/iic.h>
-#include <plat/devs.h>
-#include <plat/cpu.h>
+#include <plat-samsung/regs-serial.h>
+#include <plat-samsung/iic.h>
+#include <plat-samsung/devs.h>
+#include <plat-samsung/cpu.h>
 
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>

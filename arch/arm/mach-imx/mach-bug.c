@@ -19,9 +19,9 @@
 #include <linux/init.h>
 #include <linux/platform_device.h>
 
-#include <mach/iomux-mx3.h>
-#include <mach/hardware.h>
-#include <mach/common.h>
+#include <mach-imx/iomux-mx3.h>
+#include <mach-imx/hardware.h>
+#include <mach-imx/common.h>
 
 #include <asm/mach/time.h>
 #include <asm/mach/arch.h>

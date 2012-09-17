@@ -22,7 +22,7 @@
 #include <linux/module.h>
 #include <linux/spinlock.h>
 #include <linux/genalloc.h>
-#include <mach/iram.h>
+#include <mach-imx/iram.h>
 
 static unsigned long iram_phys_base;
 static void __iomem *iram_virt_base;

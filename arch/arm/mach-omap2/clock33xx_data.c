@@ -17,8 +17,8 @@
 #include <linux/kernel.h>
 #include <linux/list.h>
 #include <linux/clk.h>
-#include <plat/clkdev_omap.h>
-#include <plat/am33xx.h>
+#include <plat-omap/clkdev_omap.h>
+#include <plat-omap/am33xx.h>
 
 #include "iomap.h"
 #include "control.h"

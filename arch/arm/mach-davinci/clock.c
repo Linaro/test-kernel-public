@@ -20,11 +20,11 @@
 #include <linux/io.h>
 #include <linux/delay.h>
 
-#include <mach/hardware.h>
+#include <mach-davinci/hardware.h>
 
-#include <mach/clock.h>
-#include <mach/psc.h>
-#include <mach/cputype.h>
+#include <mach-davinci/clock.h>
+#include <mach-davinci/psc.h>
+#include <mach-davinci/cputype.h>
 #include "clock.h"
 
 static LIST_HEAD(clocks);

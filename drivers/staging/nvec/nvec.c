@@ -38,8 +38,8 @@
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
 
-#include <mach/clk.h>
-#include <mach/iomap.h>
+#include <mach-tegra/clk.h>
+#include <mach-tegra/iomap.h>
 
 #include "nvec.h"
 

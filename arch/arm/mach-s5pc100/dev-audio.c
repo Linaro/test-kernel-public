@@ -12,12 +12,12 @@
 #include <linux/dma-mapping.h>
 #include <linux/gpio.h>
 
-#include <plat/gpio-cfg.h>
-#include <plat/audio.h>
+#include <plat-samsung/gpio-cfg.h>
+#include <plat-samsung/audio.h>
 
-#include <mach/map.h>
-#include <mach/dma.h>
-#include <mach/irqs.h>
+#include <mach-s5pc100/map.h>
+#include <mach-s5pc100/dma.h>
+#include <mach-s5pc100/irqs.h>
 
 static int s5pc100_cfg_i2s(struct platform_device *pdev)
 {
