@@ -26,8 +26,7 @@
 #include <linux/delay.h>
 #include <linux/videodev2.h>
 
-#include <media/m5mols.h>
-#include <media/s5k6aa.h>
+#include <media/s5k4ecgx.h>
 #include <media/s5p_fimc.h>
 #include <media/v4l2-mediabus.h>
 
@@ -600,7 +599,6 @@ struct ath6kl_platform_data origen_wlan_data  __initdata = {
 };
 
 #ifdef CONFIG_VIDEO_S5K4ECGX
-#include <media/s5k4ecgx.h>
 static int origen_camera_power(int enable);
 static struct s5k4ecgx_platform_data s5k4ecgx_plat = {
 	.set_power = origen_camera_power,
@@ -610,7 +608,6 @@ static struct i2c_board_info  s5k4ecgx_board_info = {
 	I2C_BOARD_INFO("S5K4ECGX", 0x5A >> 1),
 	.platform_data = &s5k4ecgx_plat,
 };
-#endif
 
 static struct s5p_fimc_isp_info s5k4ecgx_camera_sensors[] = {
 	{
@@ -627,6 +624,7 @@ static struct s5p_platform_fimc fimc_md_platdata = {
 	.isp_info	= s5k4ecgx_camera_sensors,
 	.num_clients	= ARRAY_SIZE(s5k4ecgx_camera_sensors),
 };
+#endif
 
 
 
@@ -896,6 +894,7 @@ static void __init origen_power_init(void)
 	s3c_gpio_setpull(EXYNOS4_GPX0(4), S3C_GPIO_PULL_NONE);
 }
 
+#ifdef CONFIG_VIDEO_S5K4ECGX
 #define ORIGEN_GPIO_CAM_RESET	EXYNOS4_GPE1(4)
 #define ORIGEN_GPIO_CAM_PWDN	EXYNOS4_GPE1(0)
 #define ORIGEN_GPIO_CAM_2V8	EXYNOS4_GPE1(1)
@@ -948,6 +947,7 @@ static int origen_camera_power(int enable)
 	}
 	return 0;
 }
+#endif
 
 static void __init origen_reserve(void)
 {
@@ -990,10 +990,11 @@ static void __init origen_machine_init(void)
 	origen_bt_setup();
 
 	ath6kl_set_platform_data(&origen_wlan_data);
-
+#ifdef CONFIG_VIDEO_S5K4ECGX
 	s3c_set_platdata(&fimc_md_platdata, sizeof(fimc_md_platdata),
 							&s5p_device_fimc_md);
 	origen_camera_init();
+#endif
 }
 
 MACHINE_START(ORIGEN, "ORIGEN")
