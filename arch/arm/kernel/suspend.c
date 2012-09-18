@@ -17,16 +17,29 @@ extern void cpu_resume_mmu(void);
  */
 void __cpu_suspend_save(u32 *ptr, u32 ptrsz, u32 sp, u32 *save_ptr)
 {
+	u32 *ctx = ptr;
+
 	*save_ptr = virt_to_phys(ptr);
 
 	/* This must correspond to the LDM in cpu_resume() assembly */
-	*ptr++ = virt_to_phys(idmap_pgd);
-	*ptr++ = sp;
-	*ptr++ = virt_to_phys(cpu_do_resume);
+	*ctx++ = virt_to_phys(idmap_pgd);
+	*ctx++ = sp;
+	*ctx++ = virt_to_phys(cpu_do_resume);
 
-	cpu_do_suspend(ptr);
+	cpu_do_suspend(ctx);
 
-	flush_cache_all();
+	flush_dcache_level(flush_cache_level_cpu());
+	/*
+	 * flush_dcache_level does not guarantee that
+	 * save_ptr and ptr are cleaned to main memory,
+	 * just up to the required cache level.
+	 * Since the context pointer and context itself
+	 * are to be retrieved with the MMU off that
+	 * data must be cleaned from all cache levels
+	 * to main memory using "area" cache primitives.
+	 */
+	__cpuc_flush_dcache_area(ptr, ptrsz);
+	__cpuc_flush_dcache_area(save_ptr, sizeof(*save_ptr));
 	outer_clean_range(*save_ptr, *save_ptr + ptrsz);
 	outer_clean_range(virt_to_phys(save_ptr),
 			  virt_to_phys(save_ptr) + sizeof(*save_ptr));
