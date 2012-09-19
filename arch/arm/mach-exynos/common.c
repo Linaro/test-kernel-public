@@ -53,6 +53,12 @@
 #define L2_AUX_VAL 0x7C470001
 #define L2_AUX_MASK 0xC200ffff
 
+#ifdef CONFIG_PM
+extern int s3c_irq_wake(struct irq_data *data, unsigned int state);
+#else
+#define s3c_irq_wake NULL
+#endif
+
 static const char name_exynos4210[] = "EXYNOS4210";
 static const char name_exynos4212[] = "EXYNOS4212";
 static const char name_exynos4412[] = "EXYNOS4412";
@@ -64,6 +70,8 @@ static void exynos4_init_clocks(int xtal);
 static void exynos5_init_clocks(int xtal);
 static void exynos_init_uarts(struct s3c2410_uartcfg *cfg, int no);
 static int exynos_init(void);
+static int exynos_init_irq_eint(struct device_node *np,
+				struct device_node *parent);
 
 static struct cpu_table cpu_ids[] __initdata = {
 	{
@@ -187,6 +195,11 @@ static struct map_desc exynos4_iodesc[] __initdata = {
 		.virtual	= (unsigned long)S5P_VA_DMC1,
 		.pfn		= __phys_to_pfn(EXYNOS4_PA_DMC1),
 		.length		= SZ_64K,
+		.type		= MT_DEVICE,
+	}, {
+		.virtual	= (unsigned long)S5P_VA_AUDSS,
+		.pfn		= __phys_to_pfn(EXYNOS4_PA_AUDSS),
+		.length		= SZ_4K,
 		.type		= MT_DEVICE,
 	}, {
 		.virtual	= (unsigned long)S3C_VA_USB_HSPHY,
@@ -603,6 +616,8 @@ static const struct of_device_id exynos4_dt_irq_match[] = {
 	{ .compatible = "arm,cortex-a9-gic", .data = gic_of_init, },
 	{ .compatible = "samsung,exynos4210-combiner",
 			.data = combiner_of_init, },
+	{ .compatible = "samsung,exynos4210-wakeup-eint",
+			.data = exynos_init_irq_eint, },
 	{},
 };
 #endif
@@ -620,8 +635,10 @@ void __init exynos4_init_irq(void)
 		of_irq_init(exynos4_dt_irq_match);
 #endif
 
-	if (!of_have_populated_dt())
+	if (!of_have_populated_dt()) {
 		combiner_init(S5P_VA_COMBINER_BASE, NULL);
+		exynos_init_irq_eint(NULL, NULL);
+	}
 
 	/*
 	 * The parameters of s5p_init_irq() are for VIC init.
@@ -629,13 +646,37 @@ void __init exynos4_init_irq(void)
 	 * uses GIC instead of VIC.
 	 */
 	s5p_init_irq(NULL, 0);
+#ifdef CONFIG_PM
+	irq_get_chip(IRQ_RTC_ALARM)->irq_set_wake = s3c_irq_wake;
+#endif
 }
 
 void __init exynos5_init_irq(void)
 {
+	int irq;
+	struct device_node *np;
+
 #ifdef CONFIG_OF
 	of_irq_init(exynos4_dt_irq_match);
 #endif
+	/*
+	 * The Exynos5 wakeup interrupt controller has two-interrupt parents,
+	 * gic and combiner. Hence, a interrupt nexus node is used to translate
+	 * interrupt specifers for the interrupts which wakeup interrupt
+	 * controller deliver to the gic and combiner.
+	 *
+	 * When using a interrupt nexus node (which is child node of the wakeup
+	 * controller node), the interrupt parent of the wakeup controller node
+	 * is set as the nexus node and the nexus node does not have a
+	 * 'interrupt-controller' property. Hence, the of_irq_init function
+	 * will not be able to invoke the intializer function for wakeup
+	 * interrupt controller. So call the initiazer explicitly here.
+	 */
+	np = of_find_compatible_node(NULL, NULL,
+					"samsung,exynos5210-wakeup-eint");
+	if (np)
+		exynos_init_irq_eint(np, NULL);
+
 	/*
 	 * The parameters of s5p_init_irq() are for VIC init.
 	 * Theses parameters should be NULL and 0 because EXYNOS4
@@ -742,6 +783,9 @@ static DEFINE_SPINLOCK(eint_lock);
 
 static unsigned int eint0_15_data[16];
 
+#define EXYNOS_EINT_NR 32
+static struct irq_domain *irq_domain;
+
 static inline int exynos4_irq_to_gpio(unsigned int irq)
 {
 	if (irq < IRQ_EINT(0))
@@ -832,9 +876,9 @@ static inline void exynos_irq_eint_mask(struct irq_data *data)
 	u32 mask;
 
 	spin_lock(&eint_lock);
-	mask = __raw_readl(EINT_MASK(exynos_eint_base, data->irq));
-	mask |= EINT_OFFSET_BIT(data->irq);
-	__raw_writel(mask, EINT_MASK(exynos_eint_base, data->irq));
+	mask = __raw_readl(EINT_MASK(exynos_eint_base, data->hwirq));
+	mask |= EINT_OFFSET_BIT(data->hwirq);
+	__raw_writel(mask, EINT_MASK(exynos_eint_base, data->hwirq));
 	spin_unlock(&eint_lock);
 }
 
@@ -843,16 +887,16 @@ static void exynos_irq_eint_unmask(struct irq_data *data)
 	u32 mask;
 
 	spin_lock(&eint_lock);
-	mask = __raw_readl(EINT_MASK(exynos_eint_base, data->irq));
-	mask &= ~(EINT_OFFSET_BIT(data->irq));
-	__raw_writel(mask, EINT_MASK(exynos_eint_base, data->irq));
+	mask = __raw_readl(EINT_MASK(exynos_eint_base, data->hwirq));
+	mask &= ~(EINT_OFFSET_BIT(data->hwirq));
+	__raw_writel(mask, EINT_MASK(exynos_eint_base, data->hwirq));
 	spin_unlock(&eint_lock);
 }
 
 static inline void exynos_irq_eint_ack(struct irq_data *data)
 {
-	__raw_writel(EINT_OFFSET_BIT(data->irq),
-		     EINT_PEND(exynos_eint_base, data->irq));
+	__raw_writel(EINT_OFFSET_BIT(data->hwirq),
+		     EINT_PEND(exynos_eint_base, data->hwirq));
 }
 
 static void exynos_irq_eint_maskack(struct irq_data *data)
@@ -863,7 +907,7 @@ static void exynos_irq_eint_maskack(struct irq_data *data)
 
 static int exynos_irq_eint_set_type(struct irq_data *data, unsigned int type)
 {
-	int offs = EINT_OFFSET(data->irq);
+	int offs = data->hwirq;
 	int shift;
 	u32 ctrl, mask;
 	u32 newvalue = 0;
@@ -898,10 +942,10 @@ static int exynos_irq_eint_set_type(struct irq_data *data, unsigned int type)
 	mask = 0x7 << shift;
 
 	spin_lock(&eint_lock);
-	ctrl = __raw_readl(EINT_CON(exynos_eint_base, data->irq));
+	ctrl = __raw_readl(EINT_CON(exynos_eint_base, data->hwirq));
 	ctrl &= ~mask;
 	ctrl |= newvalue << shift;
-	__raw_writel(ctrl, EINT_CON(exynos_eint_base, data->irq));
+	__raw_writel(ctrl, EINT_CON(exynos_eint_base, data->hwirq));
 	spin_unlock(&eint_lock);
 
 	if (soc_is_exynos5250())
@@ -945,7 +989,7 @@ static inline void exynos_irq_demux_eint(unsigned int start)
 
 	while (status) {
 		irq = fls(status) - 1;
-		generic_handle_irq(irq + start);
+		generic_handle_irq(irq_find_mapping(irq_domain, irq + start));
 		status &= ~(1 << irq);
 	}
 }
@@ -954,8 +998,8 @@ static void exynos_irq_demux_eint16_31(unsigned int irq, struct irq_desc *desc)
 {
 	struct irq_chip *chip = irq_get_chip(irq);
 	chained_irq_enter(chip, desc);
-	exynos_irq_demux_eint(IRQ_EINT(16));
-	exynos_irq_demux_eint(IRQ_EINT(24));
+	exynos_irq_demux_eint(16);
+	exynos_irq_demux_eint(24);
 	chained_irq_exit(chip, desc);
 }
 
@@ -963,6 +1007,7 @@ static void exynos_irq_eint0_15(unsigned int irq, struct irq_desc *desc)
 {
 	u32 *irq_data = irq_get_handler_data(irq);
 	struct irq_chip *chip = irq_get_chip(irq);
+	int eint_irq;
 
 	chained_irq_enter(chip, desc);
 	chip->irq_mask(&desc->irq_data);
@@ -970,50 +1015,94 @@ static void exynos_irq_eint0_15(unsigned int irq, struct irq_desc *desc)
 	if (chip->irq_ack)
 		chip->irq_ack(&desc->irq_data);
 
-	generic_handle_irq(*irq_data);
+	eint_irq = irq_find_mapping(irq_domain, *irq_data);
+	generic_handle_irq(eint_irq);
 
 	chip->irq_unmask(&desc->irq_data);
 	chained_irq_exit(chip, desc);
 }
 
-static int __init exynos_init_irq_eint(void)
+static int exynos_eint_irq_domain_map(struct irq_domain *d, unsigned int irq,
+					irq_hw_number_t hw)
 {
-	int irq;
+	irq_set_chip_and_handler(irq, &exynos_irq_eint, handle_level_irq);
+	set_irq_flags(irq, IRQF_VALID);
+	return 0;
+}
 
-	if (soc_is_exynos5250())
-		exynos_eint_base = ioremap(EXYNOS5_PA_GPIO1, SZ_4K);
-	else
-		exynos_eint_base = ioremap(EXYNOS4_PA_GPIO2, SZ_4K);
+static struct irq_domain_ops exynos_eint_irq_domain_ops = {
+	.map = exynos_eint_irq_domain_map,
+};
 
-	if (exynos_eint_base == NULL) {
-		pr_err("unable to ioremap for EINT base address\n");
-		return -ENOMEM;
-	}
+static int __init exynos_init_irq_eint(struct device_node *np,
+					struct device_node *parent)
+{
+	int irq, *src_int, irq_base, irq_eint;
+	unsigned int paddr;
 
-	for (irq = 0 ; irq <= 31 ; irq++) {
-		irq_set_chip_and_handler(IRQ_EINT(irq), &exynos_irq_eint,
-					 handle_level_irq);
-		set_irq_flags(IRQ_EINT(irq), IRQF_VALID);
-	}
+#ifdef CONFIG_PINCTRL_SAMSUNG
+	/*
+	 * The Samsung pinctrl driver provides an integrated gpio/pinmux/pinconf
+	 * functionality along with support for external gpio and wakeup
+	 * interrupts. If the samsung pinctrl driver is enabled and includes
+	 * the wakeup interrupt support, then the setting up external wakeup
+	 * interrupts here can be skipped. This check here is temporary to
+	 * allow exynos4 platforms that do not use Samsung pinctrl driver to
+	 * co-exist with platforms that do. When all of the Samsung Exynos4
+	 * platforms switch over to using the pinctrl driver, the wakeup
+	 * interrupt support code here can be completely removed.
+	 */
+	struct device_node *pctrl_np, *wkup_np;
+	const char *pctrl_compat = "samsung,pinctrl-exynos4210";
+	const char *wkup_compat = "samsung,exynos4210-wakeup-eint";
 
-	irq_set_chained_handler(EXYNOS_IRQ_EINT16_31, exynos_irq_demux_eint16_31);
-
-	for (irq = 0 ; irq <= 15 ; irq++) {
-		eint0_15_data[irq] = IRQ_EINT(irq);
-
-		if (soc_is_exynos5250()) {
-			irq_set_handler_data(exynos5_eint0_15_src_int[irq],
-					     &eint0_15_data[irq]);
-			irq_set_chained_handler(exynos5_eint0_15_src_int[irq],
-						exynos_irq_eint0_15);
-		} else {
-			irq_set_handler_data(exynos4_eint0_15_src_int[irq],
-					     &eint0_15_data[irq]);
-			irq_set_chained_handler(exynos4_eint0_15_src_int[irq],
-						exynos_irq_eint0_15);
+	for_each_compatible_node(pctrl_np, NULL, pctrl_compat) {
+		if (of_device_is_available(pctrl_np)) {
+			wkup_np = of_find_compatible_node(pctrl_np, NULL,
+							wkup_compat);
+			if (wkup_np)
+				return -ENODEV;
 		}
+	}
+#endif
+
+	if (!np) {
+		paddr = soc_is_exynos5250() ? EXYNOS5_PA_GPIO1 :
+						EXYNOS4_PA_GPIO2;
+		exynos_eint_base = ioremap(paddr, SZ_4K);
+	} else {
+		exynos_eint_base = of_iomap(np, 0);
+	}
+	if (!exynos_eint_base) {
+		pr_err("unable to ioremap for EINT base address\n");
+		return -ENXIO;
+	}
+
+	irq_base = irq_alloc_descs(IRQ_EINT(0), 1, EXYNOS_EINT_NR, 0);
+	if (IS_ERR_VALUE(irq_base)) {
+		irq_base = IRQ_EINT(0);
+		pr_warning("%s: irq desc alloc failed. Continuing with %d as "
+				"linux irq base\n", __func__, irq_base);
+	}
+
+	irq_domain = irq_domain_add_legacy(np, EXYNOS_EINT_NR, irq_base, 0,
+					 &exynos_eint_irq_domain_ops, NULL);
+	if (WARN_ON(!irq_domain)) {
+		pr_warning("%s: irq domain init failed\n", __func__);
+		return 0;
+	}
+
+	irq_eint = np ? irq_of_parse_and_map(np, 16) : EXYNOS_IRQ_EINT16_31;
+	irq_set_chained_handler(irq_eint, exynos_irq_demux_eint16_31);
+
+	for (irq = 0 ; irq <= 15; irq++) {
+		eint0_15_data[irq] = irq;
+		src_int = soc_is_exynos5250() ? exynos5_eint0_15_src_int :
+						exynos4_eint0_15_src_int;
+		irq_eint = np ? irq_of_parse_and_map(np, irq) : src_int[irq];
+		irq_set_handler_data(irq_eint, &eint0_15_data[irq]);
+		irq_set_chained_handler(irq_eint, exynos_irq_eint0_15);
 	}
 
 	return 0;
 }
-arch_initcall(exynos_init_irq_eint);
