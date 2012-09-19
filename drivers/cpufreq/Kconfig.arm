@@ -76,3 +76,12 @@ config ARM_EXYNOS5250_CPUFREQ
 	help
 	  This adds the CPUFreq driver for Samsung EXYNOS5250
 	  SoC.
+
+config ARM_VEXPRESS_BL_CPUFREQ
+	tristate "CPUfreq driver for ARM Vexpress big.LITTLE CPUs"
+	depends on ARCH_VEXPRESS && CPU_FREQ
+	help
+	  This enables the CPUfreq driver for ARM Vexpress big.LITTLE
+	  platform.
+
+	  If in doubt, say N.

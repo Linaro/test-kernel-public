@@ -3,9 +3,11 @@
  */
 #include <linux/device.h>
 #include <linux/amba/bus.h>
+#include <linux/amba/clcd.h>
 #include <linux/amba/mmci.h>
 #include <linux/io.h>
 #include <linux/init.h>
+#include <linux/memblock.h>
 #include <linux/of_address.h>
 #include <linux/of_fdt.h>
 #include <linux/of_irq.h>
@@ -37,6 +39,7 @@
 #include <mach-vexpress/ct-ca9x4.h>
 #include <mach-vexpress/motherboard.h>
 
+#include <plat-versatile/clcd.h>
 #include <plat-versatile/sched_clock.h>
 
 #include "core.h"
@@ -72,7 +75,8 @@ static void __init v2m_sysctl_init(void __iomem *base)
 	writel(scctrl, base + SCCTRL);
 }
 
-static void __init v2m_sp804_init(void __iomem *base, unsigned int irq)
+static void __init v2m_sp804_init(void __iomem *base, unsigned int irq,
+				  int use_sched_clock)
 {
 	if (WARN_ON(!base || irq == NO_IRQ))
 		return;
@@ -80,7 +84,10 @@ static void __init v2m_sp804_init(void __iomem *base, unsigned int irq)
 	writel(0, base + TIMER_1_BASE + TIMER_CTRL);
 	writel(0, base + TIMER_2_BASE + TIMER_CTRL);
 
-	sp804_clocksource_init(base + TIMER_2_BASE, "v2m-timer1");
+	if (use_sched_clock)
+		sp804_clocksource_and_sched_clock_init(base + TIMER_2_BASE, "v2m-timer1");
+	else
+		sp804_clocksource_init(base + TIMER_2_BASE, "v2m-timer1");
 	sp804_clockevents_init(base + TIMER_1_BASE, irq, "v2m-timer0");
 }
 
@@ -440,7 +447,7 @@ static void __init v2m_timer_init(void)
 {
 	v2m_sysctl_init(ioremap(V2M_SYSCTL, SZ_4K));
 	v2m_clk_init();
-	v2m_sp804_init(ioremap(V2M_TIMER01, SZ_4K), IRQ_V2M_TIMER0);
+	v2m_sp804_init(ioremap(V2M_TIMER01, SZ_4K), IRQ_V2M_TIMER0, 0);
 }
 
 static struct sys_timer v2m_timer = {
@@ -539,7 +546,110 @@ MACHINE_START(VEXPRESS, "ARM-Versatile Express")
 	.restart	= v2m_restart,
 MACHINE_END
 
+int set_dvi_mode(int mode)
+{
+       /* mode is a value from:
+           0 = VGA
+           1 = SVGA
+           2 = XGA
+           3 = SXGA
+           4 = UXGA
+           5 = WUXGA
+       */
+       v2m_cfg_write(SYS_CFG_DVIMODE, mode);
+       return 0;
+}
+
 #if defined(CONFIG_ARCH_VEXPRESS_DT)
+
+static struct v2m_osc v2m_dt_hdlcd_osc = {
+	.rate_min = 10000000,
+	.rate_max = 165000000,
+	.rate_default = 23750000,
+};
+
+static void __init v2m_dt_hdlcd_init(void)
+{
+	struct device_node *node;
+	int len, na, ns;
+	const __be32 *prop;
+	phys_addr_t fb_base, fb_size;
+	u32 osc;
+
+	node = of_find_compatible_node(NULL, NULL, "arm,hdlcd");
+	if (!node)
+		return;
+
+	na = of_n_addr_cells(node);
+	ns = of_n_size_cells(node);
+
+	prop = of_get_property(node, "framebuffer", &len);
+	if (WARN_ON(!prop || len < (na + ns) * sizeof(*prop)))
+		return;
+
+	fb_base = of_read_number(prop, na);
+	fb_size = of_read_number(prop + na, ns);
+
+	if (WARN_ON(of_property_read_u32(node, "arm,vexpress-osc", &osc)))
+		return;
+
+	v2m_dt_hdlcd_osc.site = v2m_get_master_site();
+	v2m_dt_hdlcd_osc.osc = osc;
+
+	if (WARN_ON(memblock_remove(fb_base, fb_size)))
+		return;
+
+	v2m_cfg_write(SYS_CFG_MUXFPGA | SYS_CFG_SITE(SYS_CFG_SITE_MB),
+			v2m_get_master_site());
+};
+
+static struct v2m_osc v2m_dt_clcd_osc = {
+	.rate_min = 10000000,
+	.rate_max = 165000000,
+	.rate_default = 23750000,
+};
+
+static int v2m_dt_clcd_init(void)
+{
+	struct device_node *node;
+	u32 osc;
+	u32 clcd_site;
+	u32 dvimode;
+	const __be32 *prop;
+	int len, na, ns;
+	phys_addr_t reg_base;
+
+	node = of_find_compatible_node(NULL, NULL, "arm,pl111");
+	if (!node)
+		return -ENODEV;
+
+	na = of_n_addr_cells(node);
+	ns = of_n_size_cells(node);
+
+	prop = of_get_property(node, "reg", &len);
+	if (WARN_ON(!prop || len < (na + ns) * sizeof(*prop)))
+		return -EINVAL;
+	reg_base = of_read_number(prop, na);
+
+	switch (reg_base) {
+	case CT_CA9X4_CLCDC:
+		clcd_site = v2m_get_master_site();
+		dvimode = 2;
+		break;
+	default:
+		clcd_site = SYS_CFG_SITE_MB;
+		dvimode = 0;
+		break;
+	}
+
+	if (of_property_read_u32(node, "arm,vexpress-osc", &osc) != 0)
+		return -EINVAL;
+	v2m_dt_clcd_osc.site = clcd_site;
+	v2m_dt_clcd_osc.osc = osc;
+	v2m_cfg_write(SYS_CFG_MUXFPGA | clcd_site, clcd_site);
+	v2m_cfg_write(SYS_CFG_DVIMODE | clcd_site, dvimode);
+	return 0;
+}
 
 static struct map_desc v2m_rs1_io_desc __initdata = {
 	.virtual	= V2M_PERIPH,
@@ -598,6 +708,9 @@ void __init v2m_dt_init_early(void)
 			pr_warning("vexpress: DT HBI (%x) is not matching "
 					"hardware (%x)!\n", dt_hbi, hbi);
 	}
+
+	v2m_dt_hdlcd_init();
+	v2m_dt_clcd_init();
 }
 
 static  struct of_device_id vexpress_irq_match[] __initdata = {
@@ -612,9 +725,11 @@ static void __init v2m_dt_init_irq(void)
 
 static void __init v2m_dt_timer_init(void)
 {
+	int sp804_sched_clock = arch_timer_broken_for_sched_clock();
 	struct device_node *node;
 	const char *path;
 	int err;
+	struct clk *clk;
 
 	node = of_find_compatible_node(NULL, NULL, "arm,sp810");
 	v2m_sysctl_init(of_iomap(node, 0));
@@ -625,12 +740,22 @@ static void __init v2m_dt_timer_init(void)
 	if (WARN_ON(err))
 		return;
 	node = of_find_node_by_path(path);
-	v2m_sp804_init(of_iomap(node, 0), irq_of_parse_and_map(node, 0));
+	v2m_sp804_init(of_iomap(node, 0), irq_of_parse_and_map(node, 0), sp804_sched_clock);
 	if (arch_timer_of_register() != 0)
 		twd_local_timer_of_register();
 
-	if (arch_timer_sched_clock_init() != 0)
+	if (!sp804_sched_clock && arch_timer_sched_clock_init() != 0)
 		versatile_sched_clock_init(v2m_sysreg_base + V2M_SYS_24MHZ, 24000000);
+
+	if (v2m_dt_hdlcd_osc.site) {
+		clk = v2m_osc_register("hdlcd", &v2m_dt_hdlcd_osc);
+		clk_register_clkdev(clk, NULL, "hdlcd");
+	}
+	if (v2m_dt_clcd_osc.site) {
+		/* core tile clcd controller for A9 */
+		clk = v2m_osc_register("10020000.clcd", &v2m_dt_clcd_osc);
+		clk_register_clkdev(clk, NULL, "10020000.clcd");
+	}
 }
 
 static struct sys_timer v2m_dt_timer = {
