@@ -1,20 +1,17 @@
 /*
- * ARM Ltd. Versatile Express
+ * ARM Ltd. Fast Models
  *
- * CoreTile Express A5x2
- * Cortex-A5 MPCore (V2P-CA5s)
+ * Versatile Express (VE) system model
+ * ARMCortexA9MPx2CT
  *
- * HBI-0225B
+ * RTSM_VE_Cortex_A9x2.lisa
  */
 
 /dts-v1/;
 
-/memreserve/ 0xbf000000 0x01000000;
-
 / {
-	model = "V2P-CA5s";
-	arm,hbi = <0x225>;
-	compatible = "arm,vexpress,v2p-ca5s", "arm,vexpress";
+	model = "RTSM_VE_CortexA9x2";
+	compatible = "arm,rtsm_ve,cortex_a9x2", "arm,vexpress";
 	interrupt-parent = <&gic>;
 	#address-cells = <1>;
 	#size-cells = <1>;
@@ -26,8 +23,6 @@
 		serial1 = &v2m_serial1;
 		serial2 = &v2m_serial2;
 		serial3 = &v2m_serial3;
-		i2c0 = &v2m_i2c_dvi;
-		i2c1 = &v2m_i2c_pcie;
 	};
 
 	cpus {
@@ -36,64 +31,41 @@
 
 		cpu@0 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a5";
+			compatible = "arm,cortex-a9";
 			reg = <0>;
-			next-level-cache = <&L2>;
 		};
 
 		cpu@1 {
 			device_type = "cpu";
-			compatible = "arm,cortex-a5";
+			compatible = "arm,cortex-a9";
 			reg = <1>;
-			next-level-cache = <&L2>;
 		};
 	};
 
 	memory@80000000 {
 		device_type = "memory";
-		reg = <0x80000000 0x40000000>;
-	};
-
-	hdlcd@2a110000 {
-		compatible = "arm,hdlcd";
-		reg = <0x2a110000 0x1000>;
-		interrupts = <0 85 4>;
-		mode = "640x480-16@60";
-		arm,vexpress-osc = <3>;
-		framebuffer = <0xbf000000 0x01000000>;
-	};
-
-	memory-controller@2a150000 {
-		compatible = "arm,pl341", "arm,primecell";
-		reg = <0x2a150000 0x1000>;
-	};
-
-	memory-controller@2a190000 {
-		compatible = "arm,pl354", "arm,primecell";
-		reg = <0x2a190000 0x1000>;
-		interrupts = <0 86 4>,
-			     <0 87 4>;
+		reg = <0x80000000 0x80000000>;
 	};
 
 	scu@2c000000 {
-		compatible = "arm,cortex-a5-scu";
+		compatible = "arm,cortex-a9-scu";
 		reg = <0x2c000000 0x58>;
 	};
 
 	timer@2c000600 {
-		compatible = "arm,cortex-a5-twd-timer";
+		compatible = "arm,cortex-a9-twd-timer";
 		reg = <0x2c000600 0x20>;
-		interrupts = <1 13 0x304>;
+		interrupts = <1 13 0xf04>;
 	};
 
 	watchdog@2c000620 {
-		compatible = "arm,cortex-a5-twd-wdt";
+		compatible = "arm,cortex-a9-twd-wdt";
 		reg = <0x2c000620 0x20>;
-		interrupts = <1 14 0x304>;
+		interrupts = <1 14 0xf04>;
 	};
 
 	gic: interrupt-controller@2c001000 {
-		compatible = "arm,cortex-a5-gic", "arm,cortex-a9-gic";
+		compatible = "arm,cortex-a9-gic";
 		#interrupt-cells = <3>;
 		#address-cells = <0>;
 		interrupt-controller;
@@ -101,17 +73,13 @@
 		      <0x2c000100 0x100>;
 	};
 
-	L2: cache-controller@2c0f0000 {
-		compatible = "arm,pl310-cache";
-		reg = <0x2c0f0000 0x1000>;
-		interrupts = <0 84 4>;
-		cache-level = <2>;
-	};
-
-	pmu {
-		compatible = "arm,cortex-a5-pmu", "arm,cortex-a9-pmu";
-		interrupts = <0 68 4>,
-			     <0 69 4>;
+	clcd@1c1f0000 {
+		compatible = "arm,pl111", "arm,primecell";
+		reg = <0x1c1f0000 0x1000>;
+		mode = "VGA";
+		arm,vexpress-osc = <1>;
+		use_dma = <0>;
+		framebuffer = <0x18000000 0x01000000>;
 	};
 
 	motherboard {
@@ -169,4 +137,4 @@
 	};
 };
 
-/include/ "vexpress-v2m-rs1.dtsi"
+/include/ "rtsm_ve-motherboard.dtsi"

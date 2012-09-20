@@ -1,0 +1,42 @@
+* ARM CPUs binding description
+
+The device tree allows to describe the layout of CPUs in a system through
+the "cpus" node, which in turn contains a number of subnodes (ie "cpu")
+defining properties for every cpu.
+
+Bindings for CPU nodes follow the ePAPR standard, available from:
+
+http://devicetree.org
+
+For the ARM architecture every CPU node must contain the following property:
+
+- reg : property defining the CPU MPIDR[23:0] register bits
+
+Every cpu node is required to set its device_type to "cpu".
+
+Example:
+
+	cpus {
+		#size-cells = <0>;
+		#address-cells = <1>;
+
+		CPU0: cpu@0x0 {
+			device_type = "cpu";
+			reg = <0x0>;
+		};
+
+		CPU1: cpu@0x1 {
+			device_type = "cpu";
+			reg = <0x1>;
+		};
+
+		CPU2: cpu@0x100 {
+			device_type = "cpu";
+			reg = <0x100>;
+		};
+
+		CPU3: cpu@0x101 {
+			device_type = "cpu";
+			reg = <0x101>;
+		};
+	};
