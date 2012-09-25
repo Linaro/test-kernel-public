@@ -21,10 +21,9 @@ config SND_BF5XX_SOC_SSM2602
 
 config SND_SOC_BFIN_EVAL_ADAU1701
 	tristate "Support for the EVAL-ADAU1701MINIZ board on Blackfin eval boards"
-	depends on SND_BF5XX_I2S
+	depends on SND_BF5XX_I2S && I2C
 	select SND_BF5XX_SOC_I2S
 	select SND_SOC_ADAU1701
-	select I2C
 	help
 	  Say Y if you want to add support for the Analog Devices EVAL-ADAU1701MINIZ
 	  board connected to one of the Blackfin evaluation boards like the
