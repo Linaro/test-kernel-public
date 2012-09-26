@@ -1,20 +1,17 @@
 /*
- * ARM Ltd. Versatile Express
+ * ARM Ltd. Fast Models
  *
- * CoreTile Express A15x2 (version with Test Chip 1)
- * Cortex-A15 MPCore (V2P-CA15)
+ * Versatile Express (VE) system model
+ * ARMCortexA15x2CT
  *
- * HBI-0237A
+ * RTSM_VE_Cortex_A15x2.lisa
  */
 
 /dts-v1/;
 
-/memreserve/ 0xbf000000 0x01000000;
-
 / {
-	model = "V2P-CA15";
-	arm,hbi = <0x237>;
-	compatible = "arm,vexpress,v2p-ca15,tc1", "arm,vexpress,v2p-ca15", "arm,vexpress";
+	model = "RTSM_VE_CortexA15x2";
+	compatible = "arm,rtsm_ve,cortex_a15x2", "arm,vexpress";
 	interrupt-parent = <&gic>;
 	#address-cells = <2>;
 	#size-cells = <2>;
@@ -26,8 +23,6 @@
 		serial1 = &v2m_serial1;
 		serial2 = &v2m_serial2;
 		serial3 = &v2m_serial3;
-		i2c0 = &v2m_i2c_dvi;
-		i2c1 = &v2m_i2c_pcie;
 	};
 
 	cpus {
@@ -49,27 +44,7 @@
 
 	memory@80000000 {
 		device_type = "memory";
-		reg = <0 0x80000000 0 0x40000000>;
-	};
-
-	hdlcd@2b000000 {
-		compatible = "arm,hdlcd";
-		reg = <0 0x2b000000 0 0x1000>;
-		interrupts = <0 85 4>;
-		mode = "1024x768-16@60";
-		arm,vexpress-osc = <5>;
-		framebuffer = <0 0xff000000 0 0x01000000>;
-	};
-
-	memory-controller@2b0a0000 {
-		compatible = "arm,pl341", "arm,primecell";
-		reg = <0 0x2b0a0000 0 0x1000>;
-	};
-
-	wdt@2b060000 {
-		compatible = "arm,sp805", "arm,primecell";
-		reg = <0 0x2b060000 0 0x1000>;
-		interrupts = <98>;
+		reg = <0 0x80000000 0 0x80000000>;
 	};
 
 	gic: interrupt-controller@2c001000 {
@@ -84,23 +59,6 @@
 		interrupts = <1 9 0xf04>;
 	};
 
-	memory-controller@7ffd0000 {
-		compatible = "arm,pl354", "arm,primecell";
-		reg = <0 0x7ffd0000 0 0x1000>;
-		interrupts = <0 86 4>,
-			     <0 87 4>;
-	};
-
-	dma@7ffb0000 {
-		compatible = "arm,pl330", "arm,primecell";
-		reg = <0 0x7ffb0000 0 0x1000>;
-		interrupts = <0 92 4>,
-			     <0 88 4>,
-			     <0 89 4>,
-			     <0 90 4>,
-			     <0 91 4>;
-	};
-
 	timer {
 		compatible = "arm,armv7-timer";
 		interrupts = <1 13 0xf08>,
@@ -109,10 +67,13 @@
 			     <1 10 0xf08>;
 	};
 
-	pmu {
-		compatible = "arm,cortex-a15-pmu", "arm,cortex-a9-pmu";
-		interrupts = <0 68 4>,
-			     <0 69 4>;
+	clcd@1c1f0000 {
+		compatible = "arm,pl111", "arm,primecell";
+		reg = <0 0x1c1f0000 0 0x1000>;
+		mode = "VGA";
+		arm,vexpress-osc = <1>;
+		use_dma = <0>;
+		framebuffer = <0 0x18000000 0 0x01000000>;
 	};
 
 	motherboard {
@@ -170,4 +131,4 @@
 	};
 };
 
-/include/ "vexpress-v2m-rs1.dtsi"
+/include/ "rtsm_ve-motherboard.dtsi"

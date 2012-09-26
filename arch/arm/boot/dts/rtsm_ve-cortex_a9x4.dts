@@ -1,20 +1,17 @@
 /*
- * ARM Ltd. Versatile Express
+ * ARM Ltd. Fast Models
  *
- * CoreTile Express A9x4
- * Cortex-A9 MPCore (V2P-CA9)
+ * Versatile Express (VE) system model
+ * ARMCortexA9MPx4CT
  *
- * HBI-0191B
+ * RTSM_VE_Cortex_A9x4.lisa
  */
 
 /dts-v1/;
 
-/memreserve/ 0x9f000000 0x01000000;
-
 / {
-	model = "V2P-CA9";
-	arm,hbi = <0x191>;
-	compatible = "arm,vexpress,v2p-ca9", "arm,vexpress";
+	model = "RTSM_VE_CortexA9x4";
+	compatible = "arm,rtsm_ve,cortex_a9x4", "arm,vexpress";
 	interrupt-parent = <&gic>;
 	#address-cells = <1>;
 	#size-cells = <1>;
@@ -26,8 +23,6 @@
 		serial1 = &v2m_serial1;
 		serial2 = &v2m_serial2;
 		serial3 = &v2m_serial3;
-		i2c0 = &v2m_i2c_dvi;
-		i2c1 = &v2m_i2c_pcie;
 	};
 
 	cpus {
@@ -38,120 +33,74 @@
 			device_type = "cpu";
 			compatible = "arm,cortex-a9";
 			reg = <0>;
-			next-level-cache = <&L2>;
 		};
 
 		cpu@1 {
 			device_type = "cpu";
 			compatible = "arm,cortex-a9";
 			reg = <1>;
-			next-level-cache = <&L2>;
 		};
 
 		cpu@2 {
 			device_type = "cpu";
 			compatible = "arm,cortex-a9";
 			reg = <2>;
-			next-level-cache = <&L2>;
 		};
 
 		cpu@3 {
 			device_type = "cpu";
 			compatible = "arm,cortex-a9";
 			reg = <3>;
-			next-level-cache = <&L2>;
 		};
 	};
 
-	memory@60000000 {
+	memory@80000000 {
 		device_type = "memory";
-		reg = <0x60000000 0x40000000>;
+		reg = <0x80000000 0x80000000>;
 	};
 
-	clcd@10020000 {
-		compatible = "arm,pl111", "arm,primecell";
-		reg = <0x10020000 0x1000>;
-		interrupts = <0 44 4>;
-		mode = "XVGA";
-		arm,vexpress-osc = <1>;
-		use_dma = <1>;
-		framebuffer = <0x9f000000 0x01000000>;
-	};
-
-	memory-controller@100e0000 {
-		compatible = "arm,pl341", "arm,primecell";
-		reg = <0x100e0000 0x1000>;
-	};
-
-	memory-controller@100e1000 {
-		compatible = "arm,pl354", "arm,primecell";
-		reg = <0x100e1000 0x1000>;
-		interrupts = <0 45 4>,
-			     <0 46 4>;
-	};
-
-	timer@100e4000 {
-		compatible = "arm,sp804", "arm,primecell";
-		reg = <0x100e4000 0x1000>;
-		interrupts = <0 48 4>,
-			     <0 49 4>;
-	};
-
-	watchdog@100e5000 {
-		compatible = "arm,sp805", "arm,primecell";
-		reg = <0x100e5000 0x1000>;
-		interrupts = <0 51 4>;
-	};
-
-	scu@1e000000 {
+	scu@2c000000 {
 		compatible = "arm,cortex-a9-scu";
-		reg = <0x1e000000 0x58>;
+		reg = <0x2c000000 0x58>;
 	};
 
-	timer@1e000600 {
+	timer@2c000600 {
 		compatible = "arm,cortex-a9-twd-timer";
-		reg = <0x1e000600 0x20>;
+		reg = <0x2c000600 0x20>;
 		interrupts = <1 13 0xf04>;
 	};
 
-	watchdog@1e000620 {
+	watchdog@2c000620 {
 		compatible = "arm,cortex-a9-twd-wdt";
-		reg = <0x1e000620 0x20>;
+		reg = <0x2c000620 0x20>;
 		interrupts = <1 14 0xf04>;
 	};
 
-	gic: interrupt-controller@1e001000 {
+	gic: interrupt-controller@2c001000 {
 		compatible = "arm,cortex-a9-gic";
 		#interrupt-cells = <3>;
 		#address-cells = <0>;
 		interrupt-controller;
-		reg = <0x1e001000 0x1000>,
-		      <0x1e000100 0x100>;
+		reg = <0x2c001000 0x1000>,
+		      <0x2c000100 0x100>;
 	};
 
-	L2: cache-controller@1e00a000 {
-		compatible = "arm,pl310-cache";
-		reg = <0x1e00a000 0x1000>;
-		interrupts = <0 43 4>;
-		cache-level = <2>;
-		arm,data-latency = <1 1 1>;
-		arm,tag-latency = <1 1 1>;
-	};
-
-	pmu {
-		compatible = "arm,cortex-a9-pmu";
-		interrupts = <0 60 4>,
-			     <0 61 4>,
-			     <0 62 4>,
-			     <0 63 4>;
+	clcd@1c1f0000 {
+		compatible = "arm,pl111", "arm,primecell";
+		reg = <0x1c1f0000 0x1000>;
+		mode = "VGA";
+		arm,vexpress-osc = <1>;
+		use_dma = <0>;
+		framebuffer = <0x18000000 0x01000000>;
 	};
 
 	motherboard {
-		ranges = <0 0 0x40000000 0x04000000>,
-			 <1 0 0x44000000 0x04000000>,
-			 <2 0 0x48000000 0x04000000>,
-			 <3 0 0x4c000000 0x04000000>,
-			 <7 0 0x10000000 0x00020000>;
+		ranges = <0 0 0x08000000 0x04000000>,
+			 <1 0 0x14000000 0x04000000>,
+			 <2 0 0x18000000 0x04000000>,
+			 <3 0 0x1c000000 0x04000000>,
+			 <4 0 0x0c000000 0x04000000>,
+			 <5 0 0x10000000 0x04000000>;
 
 		interrupt-map-mask = <0 0 63>;
 		interrupt-map = <0 0  0 &gic 0  0 4>,
@@ -200,4 +149,4 @@
 	};
 };
 
-/include/ "vexpress-v2m.dtsi"
+/include/ "rtsm_ve-motherboard.dtsi"
