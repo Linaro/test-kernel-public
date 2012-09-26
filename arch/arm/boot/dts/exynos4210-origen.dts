@@ -263,6 +263,13 @@
 					regulator-always-on;
 				};
 
+				buck1_reg: BUCK1 {
+					regulator-name = "vdd_arm";
+					regulator-min-microvolt = <950000>;
+					regulator-max-microvolt = <1350000>;
+					regulator-always-on;
+				};
+
 				buck7_reg: BUCK7 {
 					regulator-name = "VDD_LCD_3.3V";
 					regulator-min-microvolt = <3300000>;
