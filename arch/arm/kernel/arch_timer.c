@@ -19,6 +19,7 @@
 #include <linux/interrupt.h>
 #include <linux/of_irq.h>
 #include <linux/io.h>
+#include <linux/export.h>
 
 #include <asm/cputype.h>
 #include <asm/localtimer.h>
@@ -232,6 +233,7 @@ int read_current_timer(unsigned long *timer_val)
 	*timer_val = arch_counter_get_cntpct();
 	return 0;
 }
+EXPORT_SYMBOL(read_current_timer);
 
 static struct clocksource clocksource_counter = {
 	.name	= "arch_sys_counter",
