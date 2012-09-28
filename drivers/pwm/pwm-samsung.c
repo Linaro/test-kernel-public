@@ -26,6 +26,8 @@
 
 #include <plat-samsung/regs-timer.h>
 
+#define NUM_PWM 4
+
 struct s3c_chip {
 	struct platform_device	*pdev;
 
@@ -37,7 +39,6 @@ struct s3c_chip {
 	unsigned int		 duty_ns;
 
 	unsigned char		 tcon_base;
-	unsigned char		 pwm_id;
 	struct pwm_chip		 chip;
 };
 
@@ -136,8 +137,8 @@ static int s3c_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm,
 	/* The TCMP and TCNT can be read without a lock, they're not
 	 * shared between the timers. */
 
-	tcmp = __raw_readl(S3C2410_TCMPB(s3c->pwm_id));
-	tcnt = __raw_readl(S3C2410_TCNTB(s3c->pwm_id));
+	tcmp = __raw_readl(S3C2410_TCMPB(pwm->hwpwm));
+	tcnt = __raw_readl(S3C2410_TCNTB(pwm->hwpwm));
 
 	period = NS_IN_HZ / period_ns;
 
@@ -180,8 +181,8 @@ static int s3c_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm,
 
 	local_irq_save(flags);
 
-	__raw_writel(tcmp, S3C2410_TCMPB(s3c->pwm_id));
-	__raw_writel(tcnt, S3C2410_TCNTB(s3c->pwm_id));
+	__raw_writel(tcmp, S3C2410_TCMPB(pwm->hwpwm));
+	__raw_writel(tcnt, S3C2410_TCNTB(pwm->hwpwm));
 
 	tcon = __raw_readl(S3C2410_TCON);
 	tcon |= pwm_tcon_manulupdate(s3c);
@@ -228,7 +229,7 @@ static int s3c_pwm_probe(struct platform_device *pdev)
 	s3c->chip.dev = &pdev->dev;
 	s3c->chip.ops = &s3c_pwm_ops;
 	s3c->chip.base = -1;
-	s3c->chip.npwm = 1;
+	s3c->chip.npwm = NUM_PWM;
 
 	s3c->clk = devm_clk_get(dev, "pwm-tin");
 	if (IS_ERR(s3c->clk)) {
