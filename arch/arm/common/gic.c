@@ -755,7 +755,7 @@ void __init gic_init_bases(unsigned int gic_nr, int irq_start,
 
 		for_each_possible_cpu(cpu) {
 			unsigned long offset =
-				percpu_offset * cpuif_logical_map(cpu);
+				percpu_offset * cpu_logical_map(cpu);
 			*per_cpu_ptr(gic->dist_base.percpu_base, cpu) = dist_base + offset;
 			*per_cpu_ptr(gic->cpu_base.percpu_base, cpu) = cpu_base + offset;
 		}
